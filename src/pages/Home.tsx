@@ -52,7 +52,7 @@ export const Home: React.FC = () => {
 
             <p className={styles.heroSub}>
               Full-stack web developer specialising in performant, accessible, and
-              beautifully crafted web applications — from backend architecture to
+              beautifully crafted websites for local businesses — from backend architecture to
               pixel-perfect frontends.
             </p>
 
@@ -184,6 +184,19 @@ export const Home: React.FC = () => {
 
           <div className={styles.serviceGrid}>
             {[
+                {
+                icon: (
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <circle cx="11" cy="11" r="7"/>
+                    <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+                    <line x1="8" y1="11" x2="14" y2="11"/>
+                    <line x1="8" y1="8" x2="11" y2="8"/>
+                    <line x1="8" y1="14" x2="13" y2="14"/>
+                  </svg>
+                ),
+                title: 'Local SEO Optimized',
+                desc: 'Optimized for local search visibility, helping businesses attract nearby customers.',
+              },
               {
                 icon: (
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -204,15 +217,6 @@ export const Home: React.FC = () => {
                 ),
                 title: 'Backend Development',
                 desc: 'Scalable Node.js services, Next.js and React Router APIs, with dependable database design.',
-              },
-              {
-                icon: (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  </svg>
-                ),
-                title: 'DevOps & Deployment',
-                desc: 'CI/CD pipelines, Dockerised environments, and cloud deployments on AWS, Vercel, and Railway.',
               },
               {
                 icon: (
