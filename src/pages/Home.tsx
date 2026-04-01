@@ -70,9 +70,11 @@ export const Home: React.FC = () => {
 
             {/* Tech ticker */}
             <div className={styles.ticker}>
-              {[...skills, ...skills].map((s, i) => (
-                <span key={i} className={styles.tickerItem}>{s}</span>
-              ))}
+                <div className={ styles.tickerInner }>
+                    {[...skills, ...skills].map((s, i) => (
+                        <span key={i} className={styles.tickerItem}>{s}</span>
+                    ))}
+                </div>
             </div>
           </div>
 
