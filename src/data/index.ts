@@ -1,8 +1,11 @@
-import type { Project, GreetingCard, SupportArticle } from '../types'
+import type { Project, GreetingCard, SupportArticle } from '../types';
+import hairDesignsImg from '../assets/hair-designs-website.png';
+import bernieBearsImg from '../assets/the-bernie-bears-website.png';
+import techGeekImg from '../assets/tech-geek-website.png';
 
 // ── Projects ───────────────────────────────────────────────
 export const projects: Project[] = [
-  {
+  /*{
     id: 'proj-01',
     title: 'NexaFlow Dashboard',
     description: 'A real-time analytics dashboard for SaaS metrics with live charting, team collaboration, and custom report builders.',
@@ -66,6 +69,39 @@ export const projects: Project[] = [
     imageUrl: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&q=80',
     featured: false,
     year: 2022,
+  },*/
+  {
+    id: 'proj-07',
+    title: 'Hair Designs',
+    description: 'A website for a local business of hair designers and licensed cosmetologists.',
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
+    liveUrl: 'https://hairdesigns.netlify.app/',
+    githubUrl: 'https://github.com/z4nta0/hair-designs',
+    imageUrl: hairDesignsImg,
+    featured: true,
+    year: 2026,
+  },
+  {
+    id: 'proj-08',
+    title: 'The Bernie Bears',
+    description: 'A website for a social media influencer about two abdorable Bernese Mountain dogs.',
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
+    liveUrl: 'https://theberniebears.netlify.app/',
+    githubUrl: 'https://github.com/z4nta0/the-bernie-bears',
+    imageUrl: bernieBearsImg,
+    featured: true,
+    year: 2026,
+  },
+  {
+    id: 'proj-08',
+    title: 'Tech Geek',
+    description: 'A website for helping local businesses get online in order to reach larger audiences and grow their reach.',
+    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
+    liveUrl: 'https://techgeekdev.netlify.app/',
+    githubUrl: 'https://github.com/z4nta0/techgeek',
+    imageUrl: techGeekImg,
+    featured: true,
+    year: 2026,
   },
 ]
 

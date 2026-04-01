@@ -7,10 +7,10 @@ import { projects } from '../data'
 import styles from './Home.module.css'
 
 const stats = [
-  { value: '6+', label: 'Years Experience' },
-  { value: '40+', label: 'Projects Shipped' },
+  { value: '8+', label: 'Years Experience' },
+  { value: '20+', label: 'Projects Shipped' },
   { value: '12+', label: 'Happy Clients' },
-  { value: '99%', label: 'Client Satisfaction' },
+  { value: '100%', label: 'Client Satisfaction' },
 ]
 
 const skills = [
@@ -178,7 +178,7 @@ export const Home: React.FC = () => {
           <SectionHeader
             label="What I Do"
             title="End-to-End Development"
-            subtitle="From database schema to deployed UI — I handle the full picture."
+            subtitle="From backend architecture to frontend UI — I handle the full picture."
             align="center"
           />
 
@@ -202,8 +202,8 @@ export const Home: React.FC = () => {
                     <path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>
                   </svg>
                 ),
-                title: 'Backend & APIs',
-                desc: 'Scalable Node.js services, RESTful and GraphQL APIs, with rock-solid database design.',
+                title: 'Backend Development',
+                desc: 'Scalable Node.js services, Next.js and React Router APIs, with dependable database design.',
               },
               {
                 icon: (
