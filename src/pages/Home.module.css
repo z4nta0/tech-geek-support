@@ -13,7 +13,7 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 1fr;
   gap: var(--sp-10);
   align-items: center;
   padding-top: var(--sp-9);
@@ -68,6 +68,7 @@
   flex-direction: column;
   gap: var(--sp-5);
   animation: fadeUp 600ms var(--ease-out) both;
+  min-width: 0;
 }
 
 .heroLabel {
@@ -124,7 +125,6 @@
   font-size: 1.05rem;
   line-height: 1.75;
   color: var(--ink-mid);
-  max-width: 500px;
 }
 
 .heroCtas {
@@ -181,6 +181,7 @@
   gap: var(--sp-3);
   overflow: hidden;
   mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  min-width: 0;
 }
 
 .tickerItem {
@@ -273,7 +274,7 @@
 
 .floatingBadge {
   position: absolute;
-  bottom: -20px;
+  bottom: -33px;
   left: -24px;
   background: var(--white);
   border: 1px solid var(--ivory-dark);
@@ -530,12 +531,17 @@
 
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .heroInner    { grid-template-columns: 1fr; gap: var(--sp-8); padding-top: var(--sp-8); }
+  .heroInner    { grid-template-columns: 3fr 1fr; gap: var(--sp-8); padding-top: var(--sp-8); }
   .heroVisual   { display: none; }
   .statsGrid    { grid-template-columns: repeat(2, 1fr); }
   .serviceGrid  { grid-template-columns: repeat(2, 1fr); }
   .projectsGrid { grid-template-columns: repeat(2, 1fr); }
   .ctaInner     { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 768px) {
+  .heroInner    { grid-template-columns: 1fr; gap: var(--sp-8); }
+  .heroVisual   { display: none; }
 }
 
 @media (max-width: 640px) {

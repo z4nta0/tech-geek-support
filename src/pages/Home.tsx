@@ -87,13 +87,13 @@ export const Home: React.FC = () => {
               </div>
               <pre className={styles.code}>
                 <code>{`const developer = {
-  name: "Your Name",
+  name: "Scot Walton",
   role: "Full Stack Dev",
   stack: [
-    "React",
-    "TypeScript",
     "Node.js",
-    "PostgreSQL",
+    "TypeScript",
+    "React",
+    "Next.js",
   ],
   available: true,
   passion: "Building things
