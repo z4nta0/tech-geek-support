@@ -5,6 +5,10 @@
   right: 0;
   z-index: 100;
   height: var(--nav-height);
+    background: rgba(245, 240, 232, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ivory-dark);
   transition: background var(--duration-base) var(--ease-out),
               box-shadow var(--duration-base) var(--ease-out),
               border-color var(--duration-base) var(--ease-out);

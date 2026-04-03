@@ -173,11 +173,11 @@ export const greetingCards: GreetingCard[] = [
 export const supportArticles: SupportArticle[] = [
   {
     id: 'art-01',
-    title: 'How to Fix "Cannot find module" Errors in Node.js',
-    slug: 'fix-cannot-find-module-nodejs',
-    summary: 'A complete walkthrough of the most common causes and fixes for module resolution errors in Node.js projects.',
-    category: 'Node.js',
-    tags: ['Node.js', 'Debugging', 'Modules', 'npm'],
+    title: 'How to Take a Screenshot on Windows',
+    slug: 'how-to-take-screenshot-windows',
+    summary: 'A complete walkthrough of how to take a screenshot in Microsoft\'s Windows OS.',
+    category: 'Windows',
+    tags: ['Microsoft', 'Windows', 'Screenshot'],
     publishedAt: '2024-11-15',
     readingTime: 8,
     coverImage: 'https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?w=800&q=80',
@@ -190,12 +190,12 @@ export const supportArticles: SupportArticle[] = [
   },
   {
     id: 'art-02',
-    title: 'Setting Up ESLint + Prettier in a Vite + React + TypeScript Project',
-    slug: 'eslint-prettier-vite-react-ts',
-    summary: 'Step-by-step guide to configuring linting and formatting so your entire team writes consistent code.',
-    category: 'Tooling',
-    tags: ['ESLint', 'Prettier', 'Vite', 'TypeScript'],
-    publishedAt: '2024-10-02',
+    title: 'How to Change iPhone Wallpaper',
+    slug: 'how-to-change-iphone-wallpaper',
+    summary: 'Step-by-step guide to change the wallpaper on an Apple iPhone.',
+    category: 'iPhone',
+    tags: ['Apple', 'iPhone', 'Smnartphone'],
+    publishedAt: '2025-10-02',
     readingTime: 12,
     coverImage: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
     content: [
@@ -204,12 +204,12 @@ export const supportArticles: SupportArticle[] = [
   },
   {
     id: 'art-03',
-    title: 'React useEffect: When, Why, and How to Use It Correctly',
-    slug: 'react-useeffect-guide',
-    summary: 'Understanding the dependency array, cleanup functions, and common pitfalls that lead to infinite re-render loops.',
-    category: 'React',
-    tags: ['React', 'Hooks', 'useEffect', 'TypeScript'],
-    publishedAt: '2024-08-20',
+    title: 'How to Do a Factory Reset on Android',
+    slug: 'how-to-factory-reset-android',
+    summary: 'Step-by-step guide to perform a factory reset on an Android device.',
+    category: 'Android',
+    tags: ['Android', 'Factory Reset', 'Smartphone'],
+    publishedAt: '2023-08-20',
     readingTime: 10,
     coverImage: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80',
     content: [
@@ -218,4 +218,4 @@ export const supportArticles: SupportArticle[] = [
   },
 ]
 
-export const supportCategories = ['All', 'React', 'Node.js', 'TypeScript', 'Tooling', 'CSS', 'Databases', 'DevOps', 'Performance']
+export const supportCategories = ['Windows', 'Mac', 'Android', 'iPhone', 'iPad', 'Linux', 'AI', 'Javascript', 'HTML', 'CSS']

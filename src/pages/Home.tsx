@@ -7,9 +7,9 @@ import { projects } from '../data'
 import styles from './Home.module.css'
 
 const stats = [
-  { value: '8+', label: 'Years Experience' },
-  { value: '20+', label: 'Projects Shipped' },
-  { value: '12+', label: 'Happy Clients' },
+  { value: '10+', label: 'Years Experience' },
+  { value: '8+', label: 'Projects Shipped' },
+  { value: '5+', label: 'Happy Clients' },
   { value: '100%', label: 'Client Satisfaction' },
 ]
 
@@ -89,7 +89,7 @@ export const Home: React.FC = () => {
               </div>
               <pre className={styles.code}>
                 <code>{`const developer = {
-  name: "Scot Walton",
+  name: "Tech Geek",
   role: "Full Stack Dev",
   stack: [
     "Node.js",

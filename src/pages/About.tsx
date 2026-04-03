@@ -6,17 +6,20 @@ import { SectionHeader } from '../components/SectionHeader'
 import styles from './About.module.css'
 
 const skills = {
-  'Frontend': ['React', 'TypeScript', 'Next.js', 'Vite', 'CSS / Sass', 'Tailwind', 'Framer Motion', 'WebGL / Three.js'],
-  'Backend':  ['Node.js', 'Express', 'GraphQL', 'REST APIs', 'Auth / JWT', 'WebSockets'],
-  'Data':     ['PostgreSQL', 'MongoDB', 'Redis', 'Prisma', 'Drizzle', 'Elasticsearch'],
-  'DevOps':   ['Docker', 'AWS', 'Vercel', 'Railway', 'GitHub Actions', 'Nginx'],
+  'Frontend': ['React', 'TypeScript', 'Next.js', 'Vite', 'CSS / Sass', 'Tailwind', 'Greensocks', 'React Router'],
+  'Backend':  ['Node.js', 'Express', 'GraphQL', 'REST APIs', 'PHP'],
+  'Data':     ['PostgreSQL', 'MongoDB', 'Redis', 'Prisma', 'MySQL', 'Elasticsearch'],
+  'DevOps':   ['Apache', 'AWS', 'Netlify', 'GitHub Actions', 'Nginx'],
 }
 
 const timeline = [
-  { year: '2024', title: 'Senior Full Stack Developer', org: 'Freelance', desc: 'Building products end-to-end for clients across fintech, SaaS, and e-commerce.' },
-  { year: '2022', title: 'Full Stack Developer', org: 'Tech Startup', desc: 'Led frontend architecture for a B2B analytics platform used by 10k+ users.' },
-  { year: '2020', title: 'Junior Developer', org: 'Web Agency', desc: 'Built bespoke CMS-driven websites and React SPAs for agency clients.' },
-  { year: '2018', title: 'BSc Computer Science', org: 'University', desc: 'First-class honours. Dissertation on performant rendering in browser-based 3D environments.' },
+  { year: '2026', title: 'Web Veteran', org: 'Freelance', desc: 'With the rise of AI it is no longer a constraint to design websites and I can focus on just coding, rapidly increasing the rate at which I could deliver solutions.' },
+  { year: '2018', title: 'Web App Developer', org: 'Self', desc: 'A personal web app that generated a todo list using randomly generated tasks using Node.js, Express and a MongoDB backend.' },
+  { year: '2015', title: 'Full Stack Developer', org: 'Freelance', desc: 'My first real website, for a local church with some simple social features that taught me all about backend architecture using Apache, PHP and MySql.' },
+  { year: '2014', title: 'Tech Veteran', org: 'Self', desc: 'My first fully custom built computer, allowing me to explore advanced hardware configurations and performance optimizations.' },
+  { year: '2013', title: 'Web Newbie', org: 'Self', desc: 'My first foray into coding, starting with developing websites using simple HTML and CSS.' },
+  { year: '2007', title: 'Tech Tinkerer', org: 'Self', desc: 'My first experiments with changing and upgrading my computer hardware, setting the stage for building my own custom computers.' },
+  { year: '2004', title: 'Tech Newbie', org: 'Self', desc: 'I purchased my first personally owned computer, sparking my passion for technology.' },
 ]
 
 export const About: React.FC = () => (
@@ -41,11 +44,10 @@ export const About: React.FC = () => (
             engineering discipline and creative curiosity.
           </p>
           <p className={styles.body}>
-            Based in the Pacific Northwest, I've spent the last six years turning
-            complex problems into elegant software. Whether that's a high-performance
-            API serving millions of requests, a React component library used by a
-            team of twenty, or a tiny interactive greeting card that makes someone
-            smile — I bring the same level of care to all of it.
+            Based in the American Midwest, I've spent the last ten plus years turning
+            my coding curiosity into a deep understanding of web development. Whether
+            that's a side project for myself, fun websites for friends and family, or
+            websites for local businesses — I bring the same level of care to all of it.
           </p>
           <div className={styles.ctaRow}>
             <Link to="/contact" className={styles.ctaPrimary}>Work With Me</Link>
@@ -78,11 +80,11 @@ export const About: React.FC = () => (
 
           {/* Floating facts */}
           <div className={`${styles.floatCard} ${styles.floatTop}`}>
-            <span className={styles.floatNum}>6+</span>
+            <span className={styles.floatNum}>10+</span>
             <span className={styles.floatLabel}>Years coding</span>
           </div>
           <div className={`${styles.floatCard} ${styles.floatBottom}`}>
-            <span className={styles.floatNum}>40+</span>
+            <span className={styles.floatNum}>8+</span>
             <span className={styles.floatLabel}>Projects shipped</span>
           </div>
         </div>

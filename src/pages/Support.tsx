@@ -43,13 +43,13 @@ export const Support: React.FC = () => {
             <span className={styles.accent}>Problem?</span>
           </h1>
           <p className={styles.heroSub}>
-            Submit your question and I'll create a detailed article — complete with
-            videos, screenshots, and working code — to help you solve it.
+            Submit your question and I'll create a detailed article complete with
+            videos, screenshots, and a simple explanatory fix with absolutely no jargon included.
           </p>
           <div className={styles.heroStats}>
             {[
               { v: supportArticles.length.toString(), l: 'Articles Published' },
-              { v: '48h',  l: 'Average Response' },
+              { v: '24h',  l: 'Average Response' },
               { v: '100%', l: 'Free Forever' },
             ].map(({ v, l }) => (
               <div key={l} className={styles.heroStat}>
@@ -186,7 +186,7 @@ export const Support: React.FC = () => {
                   'Your OS and runtime versions',
                   'What you\'ve already tried',
                   'A minimal reproducible example',
-                  'Relevant code snippets',
+                  'Screenshots of the issue',
                 ].map(item => (
                   <li key={item} className={styles.sidebarListItem}>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="3">
@@ -208,7 +208,7 @@ export const Support: React.FC = () => {
           <SectionHeader
             label="Knowledge Base"
             title="Published Articles"
-            subtitle="Browse all resolved questions — each one a detailed walkthrough with examples."
+            subtitle="Browse all resolved questions, each one a detailed walkthrough with examples."
           />
 
           {/* Category filter */}
