@@ -18,7 +18,6 @@
 // ─────────────────────────────────────────────────────────────
 
 export const EMAILJS_CONFIG = {
-  PUBLIC_KEY:          import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
   SERVICE_ID:          import.meta.env.VITE_EMAILJS_SERVICE_ID,
   CONTACT_TEMPLATE_ID: import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE_ID,
   SUPPORT_TEMPLATE_ID: import.meta.env.VITE_EMAILJS_SUPPORT_TEMPLATE_ID,

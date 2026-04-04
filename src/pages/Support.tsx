@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-//import emailjs from '@emailjs/browser'
+import emailjs from '@emailjs/browser'
 import { Link } from 'react-router-dom'
 import { SectionHeader } from '../components/SectionHeader'
 import { Tag } from '../components/Tag'
 import { GeoBg } from '../components/GeoBg'
-//import { EMAILJS_CONFIG } from '../lib/emailjs'
+import { EMAILJS_CONFIG } from '../lib/emailjs'
 import { supportArticles, supportCategories } from '../data'
 import styles from './Support.module.css'
 
@@ -31,7 +31,7 @@ export const Support: React.FC = () => {
     setError(null)
  
     try {
-        await fetch('../../netlify/functions/send-email', {
+        /*await fetch('../../netlify/functions/send-email', {
             method: 'POST',
             body: JSON.stringify({
                 templateType: 'support',
@@ -41,7 +41,7 @@ export const Support: React.FC = () => {
                 question:   formData.question,
                 to_email:   'contact@techgeek.support',
             })
-        });/*
+        });*/
       await emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,
         EMAILJS_CONFIG.SUPPORT_TEMPLATE_ID,
@@ -52,8 +52,7 @@ export const Support: React.FC = () => {
           question:   formData.question,
           to_email:   'contact@techgeek.support',
         },
-        EMAILJS_CONFIG.PUBLIC_KEY
-      )*/
+      )
       setSubmitted(true)
     } catch (err) {
       console.error('EmailJS error:', err)
