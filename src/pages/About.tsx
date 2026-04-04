@@ -4,6 +4,7 @@ import { GeoBg } from '../components/GeoBg'
 import { Tag } from '../components/Tag'
 import { SectionHeader } from '../components/SectionHeader'
 import styles from './About.module.css'
+import selfPortrait from '../assets/self-portrait.jpg'
 
 const skills = {
   'Frontend': ['React', 'TypeScript', 'Next.js', 'Vite', 'CSS / Sass', 'Tailwind', 'Greensocks', 'React Router'],
@@ -72,7 +73,7 @@ export const About: React.FC = () => (
               </svg>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
+              src={selfPortrait}
               alt="Developer portrait"
               className={styles.portrait}
             />

@@ -79,18 +79,18 @@ export const Contact: React.FC = () => {
                       <option>Freelance Work</option>
                       <option>Custom Greeting Card</option>
                       <option>Tech Support</option>
-                      <option>General Enquiry</option>
+                      <option>General Inquiry</option>
                     </select>
                   </div>
                   <div className={styles.field}>
                     <label htmlFor="c-budget" className={styles.label}>Project Budget</label>
                     <select id="c-budget" name="budget" className={styles.select} value={form.budget} onChange={handleChange}>
                       <option value="">Select a range…</option>
-                      <option>Under $1,000</option>
-                      <option>$1,000 – $5,000</option>
-                      <option>$5,000 – $15,000</option>
-                      <option>$15,000 – $50,000</option>
-                      <option>$50,000+</option>
+                      <option>Under $100</option>
+                      <option>$100 – $250</option>
+                      <option>$250 – $500</option>
+                      <option>$500 – $1,000</option>
+                      <option>$1,000+</option>
                     </select>
                   </div>
                 </div>
@@ -125,8 +125,8 @@ export const Contact: React.FC = () => {
                       </svg>
                     ),
                     label: 'Email',
-                    value: 'hello@techgeek.support',
-                    href: 'mailto:hello@techgeek.support',
+                    value: 'contact@techgeek.support',
+                    href: 'mailto:contact@techgeek.support',
                   },
                   {
                     icon: (
@@ -146,7 +146,7 @@ export const Contact: React.FC = () => {
                     ),
                     label: 'LinkedIn',
                     value: 'linkedin.com/in/techgeeksupport',
-                    href: 'https://linkedin.com',
+                    href: 'https://www.linkedin.com/in/gary-s-walton-654739400/',
                   },
                 ].map(({ icon, label, value, href }) => (
                   <a key={label} href={href} target="_blank" rel="noreferrer" className={styles.contactItem}>
@@ -166,7 +166,7 @@ export const Contact: React.FC = () => {
                 <span className={styles.statusDot} />
                 <div>
                   <span className={styles.statusText}>Available for new projects</span>
-                  <span className={styles.statusSub}>Earliest start: Q2 2025</span>
+                  <span className={styles.statusSub}>Earliest start: Anytime</span>
                 </div>
               </div>
             </div>
