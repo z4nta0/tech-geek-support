@@ -22,6 +22,7 @@ exports.handler = async (event) => {
     service_id: process.env.EMAILJS_SERVICE_ID,
     template_id: selectedTemplate, // Use the mapped ID
     user_id: process.env.EMAILJS_PUBLIC_KEY,
+    accessToken: process.env.EMAILJS_PRIVATE_KEY,
     template_params: {
       from_name: from_name,
       from_email: from_email,
