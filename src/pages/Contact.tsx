@@ -136,7 +136,7 @@ export const Contact: React.FC = () => {
                     ),
                     label: 'GitHub',
                     value: 'github.com/techgeeksupport',
-                    href: 'https://github.com',
+                    href: 'https://github.com/z4nta0',
                   },
                   {
                     icon: (
