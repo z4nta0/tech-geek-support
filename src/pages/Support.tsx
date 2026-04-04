@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { Link } from 'react-router-dom'
 import { SectionHeader } from '../components/SectionHeader'
 import { Tag } from '../components/Tag'
 import { GeoBg } from '../components/GeoBg'
+import { EMAILJS_CONFIG } from '../lib/emailjs'
 import { supportArticles, supportCategories } from '../data'
 import styles from './Support.module.css'
 
@@ -12,6 +14,8 @@ export const Support: React.FC = () => {
     name: '', email: '', category: '', question: ''
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const filtered = category === 'All'
     ? supportArticles
@@ -21,10 +25,31 @@ export const Support: React.FC = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In production: POST to your API
-    setSubmitted(true)
+    setLoading(true)
+    setError(null)
+ 
+    try {
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.SUPPORT_TEMPLATE_ID,
+        {
+          from_name:  formData.name,
+          from_email: formData.email,
+          category:   formData.category,
+          question:   formData.question,
+          to_email:   'contact@techgeek.support',
+        },
+        EMAILJS_CONFIG.PUBLIC_KEY
+      )
+      setSubmitted(true)
+    } catch (err) {
+      console.error('EmailJS error:', err)
+      setError('Something went wrong. Please try again or email contact@techgeek.support directly.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -149,12 +174,19 @@ export const Support: React.FC = () => {
                     required
                   />
                 </div>
-                <button type="submit" className={styles.submitBtn}>
-                  Submit Question
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="22" y1="2" x2="11" y2="13"/>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                  </svg>
+
+                {error && (
+                  <p className={styles.errorMsg}>{error}</p>
+                )}
+
+                <button type="submit" className={styles.submitBtn} disabled={loading}>
+                  {loading ? 'Submitting…' : 'Submit Question'}
+                  {!loading && (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <line x1="22" y1="2" x2="11" y2="13"/>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                  )}
                 </button>
               </form>
             )}
