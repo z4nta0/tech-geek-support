@@ -38,6 +38,10 @@ exports.handler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
+
+    const resultText = await response.text(); 
+    console.log("EmailJS Response:", resultText); // Check this in Netlify Function Logs
+
     
     return response.ok 
       ? { statusCode: 200, body: "Sent!" } 
