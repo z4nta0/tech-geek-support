@@ -1,18 +1,45 @@
 import React, { useState } from 'react'
 import { GeoBg } from '../components/GeoBg'
+import emailjs from '@emailjs/browser'
 import styles from './Contact.module.css'
+import { EMAILJS_CONFIG } from '../lib/emailjs'
 
 export const Contact: React.FC = () => {
   const [form, setForm] = useState({ name: '', email: '', subject: '', budget: '', message: '' })
-  const [sent, setSent] = useState(false)
+  const [sent, setSent] = useState(false);
+    const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSent(true)
+    setLoading(true)
+    setError(null)
+ 
+    try {
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.CONTACT_TEMPLATE_ID,
+        {
+          from_name:  form.name,
+          from_email: form.email,
+          subject:    form.subject,
+          budget:     form.budget || 'Not specified',
+          message:    form.message,
+          to_email:   'contact@techgeek.support',
+        },
+        EMAILJS_CONFIG.PUBLIC_KEY
+      )
+      setSent(true)
+    } catch (err) {
+      console.error('EmailJS error:', err)
+      setError('Something went wrong. Please try again or email contact@techgeek.support directly.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -95,17 +122,23 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
 
+                {error && (
+                  <p className={styles.errorMsg}>{error}</p>
+                )}
+
                 <div className={styles.field}>
                   <label htmlFor="c-message" className={styles.label}>Message</label>
                   <textarea id="c-message" name="message" className={styles.textarea} rows={6} placeholder="Tell me about your project…" value={form.message} onChange={handleChange} required />
                 </div>
 
-                <button type="submit" className={styles.submitBtn}>
-                  Send Message
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="22" y1="2" x2="11" y2="13"/>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                  </svg>
+                <button type="submit" className={styles.submitBtn} disabled={loading}>
+                  {loading ? 'Sending…' : 'Send Message'}
+                  {!loading && (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <line x1="22" y1="2" x2="11" y2="13"/>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                  )}
                 </button>
               </form>
             )}
