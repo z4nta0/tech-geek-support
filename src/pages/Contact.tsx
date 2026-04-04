@@ -20,7 +20,7 @@ export const Contact: React.FC = () => {
     setError(null)
  
     try {
-        await fetch('../../netlify/functions/send-email', {
+        await fetch('../../.netlify/functions/send-email', {
             method: 'POST',
             body: JSON.stringify({
                 templateType: 'contact',
