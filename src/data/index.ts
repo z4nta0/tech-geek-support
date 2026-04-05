@@ -97,7 +97,7 @@ export const projects: Project[] = [
     title: 'Tech Geek',
     description: 'A website for helping local businesses get online in order to reach larger audiences and grow their reach.',
     tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
-    liveUrl: 'https://techgeekdev.netlify.app/',
+    liveUrl: 'https://techgeek.support/',
     githubUrl: 'https://github.com/z4nta0/techgeek',
     imageUrl: techGeekImg,
     featured: true,

@@ -15,8 +15,8 @@ const skills = {
 
 const timeline = [
   { year: '2026', title: 'Web Veteran', org: 'Freelance', desc: 'With the rise of AI it is no longer a constraint to design websites and I can focus on just coding, rapidly increasing the rate at which I could deliver solutions.' },
-  { year: '2018', title: 'Web App Developer', org: 'Self', desc: 'A personal web app that generated a todo list using randomly generated tasks using Node.js, Express and a MongoDB backend.' },
-  { year: '2015', title: 'Full Stack Developer', org: 'Freelance', desc: 'My first real website, for a local church with some simple social features that taught me all about backend architecture using Apache, PHP and MySql.' },
+  { year: '2018', title: 'Web App Developer', org: 'Self', desc: 'A personal web app that creates a todo list using randomly generated tasks with a Node.js, Express.js and MongoDB backend.' },
+  { year: '2015', title: 'Full Stack Developer', org: 'Freelance', desc: 'My first real website, it was for a local church with some simple social features that taught me all about backend architecture using Apache, PHP and MySql.' },
   { year: '2014', title: 'Tech Veteran', org: 'Self', desc: 'My first fully custom built computer, allowing me to explore advanced hardware configurations and performance optimizations.' },
   { year: '2013', title: 'Web Newbie', org: 'Self', desc: 'My first foray into coding, starting with developing websites using simple HTML and CSS.' },
   { year: '2007', title: 'Tech Tinkerer', org: 'Self', desc: 'My first experiments with changing and upgrading my computer hardware, setting the stage for building my own custom computers.' },
