@@ -86,7 +86,7 @@ export const projects: Project[] = [
     title: 'The Bernie Bears',
     description: 'A website for a social media influencer about two abdorable Bernese Mountain dogs.',
     tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
-    liveUrl: 'https://theberniebears.netlify.app/',
+    liveUrl: 'https://theberniebears.dog/',
     githubUrl: 'https://github.com/z4nta0/the-bernie-bears',
     imageUrl: bernieBearsImg,
     featured: true,
