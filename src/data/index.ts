@@ -159,13 +159,13 @@ export const greetingCards: GreetingCard[] = [
   },
   {
     id: 'card-06',
-    title: 'Morse Code Anniversary',
-    occasion: 'Anniversary',
-    description: 'A card that encodes your message in animated morse code dots and dashes with a romantic reveal.',
-    previewUrl: 'https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=600&q=80',
-    liveUrl: 'https://example.com',
-    tags: ['Animation', 'JavaScript', 'Audio API'],
-    year: 2022,
+    title: 'Mother\'s Day',
+    occasion: 'Holiday',
+    description: 'A card that celebrates mothers with a heartfelt message and beautiful animations.',
+    previewUrl: './pages/MothersDayCard.tsx',
+    liveUrl: '/mothersdaycard',
+    tags: ['Animation', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Mother\'s Day'],
+    year: 2026,
   },
 ]
 
