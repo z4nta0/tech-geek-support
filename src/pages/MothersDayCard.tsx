@@ -1,5 +1,6 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import gsap from 'gsap';
+import styles from './MothersDayCard.module.css';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -29,7 +30,7 @@ const TEXT_SCREENS: TextScreen[] = [
   { id: 'ts-7',  text: 'So it is our responsibility to make the most of this one day.', fontSize: '44px', cursorHeight: '42px' },
   { id: 'ts-8',  text: "You are loved (even when we don't show it)." },
   { id: 'ts-9',  text: "And you are appreciated (even when we don't give it)." },
-  { id: 'ts-10', text: 'So please never get discouraged, because we NEED you in our lives.', fontSize: '44px', cursorHeight: '42px' },
+  { id: 'ts-10', text: 'So please never get discouraged, because we need you in our lives.', fontSize: '44px', cursorHeight: '42px' },
   { id: 'ts-11', text: 'On behalf of the rest of us...' },
 ];
 
@@ -267,6 +268,18 @@ export default function MothersDayCard() {
     runSequence();
   }, [runSequence]);
 
+  const [isFullscreen, setIsFullscreen] = useState(true);
+
+  function toggleFullscreen() {
+    if (isFullscreen === true) {
+      document.body.style.overflow = 'auto';
+      setIsFullscreen(false);
+    } else {
+      document.body.style.overflow = 'hidden';
+      setIsFullscreen(true);
+    }
+  }
+
   // ── Render ───────────────────────────────────────────────────────────────
 
   return (
@@ -274,17 +287,12 @@ export default function MothersDayCard() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Caveat:wght@700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #f9e8ec; }
+        body { background: #f9e8ec; overflow: hidden; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         .mdc-cursor.blinking { animation: blink 0.6s linear infinite; }
       `}</style>
 
-      <div
-        style={{
-          width: '100vw', height: '100vh', overflow: 'hidden',
-          background: '#f9e8ec', position: 'relative',
-        }}
-      >
+      <div id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
 
         {/* ── Illustration placeholders ── */}
         {ILLUS_LABELS.map((label, i) => (
@@ -398,20 +406,35 @@ export default function MothersDayCard() {
           </div>
         </div>
 
-      </div>
+        <div id='butConDiv' className={ styles.buttonContainerDiv } >
 
-      {/* Replay button */}
-      <button
-        onClick={runSequence}
-        style={{
-          position: 'fixed', bottom: '24px', left: '50%', transform: 'translateX(-50%)',
-          padding: '8px 28px', fontSize: '13px', letterSpacing: '0.08em',
-          cursor: 'pointer', borderRadius: '20px', border: '1px solid #c08060',
-          background: '#fdeee4', color: '#a05040', fontFamily: 'sans-serif',
-        }}
-      >
-        Replay
-      </button>
+            {/* Replay button */}
+            <button id='repAniBut'
+                onClick={runSequence}
+                style={{
+                padding: '8px 28px', fontSize: '13px', letterSpacing: '0.08em', marginRight: '12px',
+                cursor: 'pointer', borderRadius: '20px', border: '1px solid #c08060',
+                background: '#fdeee4', color: '#a05040', fontFamily: 'sans-serif', width: '180px',
+                }}
+            >
+                Replay
+            </button>
+
+            {/* Fullscreen button */}
+            <button id='fulScrBut'
+                onClick={() => toggleFullscreen()}
+                style={{
+                padding: '8px 28px', fontSize: '13px', letterSpacing: '0.08em', marginLeft: '12px',
+                cursor: 'pointer', borderRadius: '20px', border: '1px solid #c08060',
+                background: '#fdeee4', color: '#a05040', fontFamily: 'sans-serif', width: '180px',
+                }}
+            >
+                Toggle Fullscreen
+            </button>
+
+        </div>
+
+      </div>
     </>
   );
 }

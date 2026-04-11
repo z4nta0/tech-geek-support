@@ -1,0 +1,48 @@
+
+.mainContainerDiv {
+
+    overflow: hidden;
+    background: #f9e8ec;
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+}
+
+
+
+.enterFullscreen {
+
+    z-index: 999;
+
+}
+
+
+
+.exitFullscreen {
+
+    z-index: 0;
+
+}
+
+
+
+.buttonContainerDiv {
+
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    opacity: 0.1;
+    transform: translateX(-50%);
+    z-index: 99999;
+
+}
+
+
+
+.buttonContainerDiv:hover {
+
+    opacity: 1;
+
+}
