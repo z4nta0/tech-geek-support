@@ -1,6 +1,13 @@
 import { useEffect, useRef, useCallback, useState } from 'react';
 import gsap from 'gsap';
 import styles from './MothersDayCard.module.css';
+import { useGSAP } from '@gsap/react';
+import { SplitText } from 'gsap/SplitText';
+import { TextPlugin } from 'gsap/all';
+
+
+
+gsap.registerPlugin(TextPlugin, SplitText, useGSAP);
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -264,9 +271,346 @@ export default function MothersDayCard() {
     );
   }, [reset, runTextScreen, runIllus, runFinalScene]);
 
+  /*
   useEffect(() => {
     runSequence();
   }, [runSequence]);
+*/
+
+  useGSAP(() => {
+
+    //reset();
+
+
+
+    const gsaTimIns : GSAPTimeline  = gsap.timeline({ reverse: true });
+
+    const wrapper = document.getElementById('wrapper') as HTMLSpanElement;
+    const cursor = document.getElementById('cursor') as HTMLSpanElement;
+
+    //const typSplIns : SplitText = TextPlugin.create( '.typewriter', { type : 'chars' } );
+
+
+/*
+    gsaTimIns.from( typSplIns.chars, {
+
+        //text : "Thank you mothers!",
+        duration  : 2,
+        x         : 10,
+        autoAlpha : 0,
+        stagger   : 0.05,
+
+    });
+*/
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "Thank you, mothers!",
+        duration: 2, 
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+/*
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+*/
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "For everything that you do for us...",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "Especially the little things...",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "Even more importantly, the many things that we'll never even know about...",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "You will never receive the full appreciation that you have rightfully earned.",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "And you definitely deserve more than one day of celebration.",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "So it is our responsibility to make the most of this one day.",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "You are loved (even when we don't show it).",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "And you are appreciated (even when we don't give it).",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "So please never get discouraged, because we need you in our lives.",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    gsaTimIns.to(wrapper, {
+        delay: 0.5,
+        opacity: 0,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.remove('cursor-blink');
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'none'
+    });
+
+    cursor.classList.add('cursor-blink');
+
+    gsaTimIns.to('.typewriter', {
+        text : "On behalf of the rest of us...",
+        duration: 2, 
+        //slow then speeds up easing
+        ease: 'none',
+        onComplete: () => runFinalScene(),
+    });
+
+    //gsaTimIns.to(runFinalScene());
+
+  }, []);
 
   const [isFullscreen, setIsFullscreen] = useState(true);
 
@@ -293,9 +637,11 @@ export default function MothersDayCard() {
       `}</style>
 
       <div id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
-
+<div id='wrapper' className={ styles.wrapper }>
+  <p><span id="typewriter" className={ `${ styles.typewriter }  typewriter` }></span><span id='cursor' className={ `${ styles.cursor }   cursor-blink` }>|</span></p>
+</div>
         {/* ── Illustration placeholders ── */}
-        {ILLUS_LABELS.map((label, i) => (
+        {/*ILLUS_LABELS.map((label, i) => (
           <svg
             key={label}
             ref={el => { illusRefs.current[`illus-${i + 1}`] = el; }}
@@ -313,7 +659,7 @@ export default function MothersDayCard() {
         ))}
 
         {/* ── Text screens ── */}
-        {TEXT_SCREENS.map(s => (
+        {/*TEXT_SCREENS.map(s => (
           <div
             key={s.id}
             ref={el => { screenRefs.current[s.id] = el; }}

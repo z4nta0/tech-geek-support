@@ -1,4 +1,20 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Caveat:wght@700&display=swap');
+
+@font-face { /** This standard selector contains a custom font family along with its source and allows web developers to use custom fonts not installed on a user's computer. */
+
+    font-family : 'Great Vibes';                                         /** This value was chosen to be used as the font family for the custom .hackedH1 and .hackedParagraph selectors. */
+    src         : url( 'https://fonts.googleapis.com/css2?family=Great+Vibes' ); /** This value was chosen to be used in order to host the font file locally. */
+
+}
+
+@font-face { /** This standard selector contains a custom font family along with its source and allows web developers to use custom fonts not installed on a user's computer. */
+
+    font-family : 'Caveat';                                         /** This value was chosen to be used as the font family for the custom .hackedH1 and .hackedParagraph selectors. */
+    src         : url( 'https://fonts.googleapis.com/css2?family=Caveat:wght@700' ); /** This value was chosen to be used in order to host the font file locally. */
+
+}
+
 .mainContainerDiv {
 
     overflow: hidden;
@@ -46,3 +62,43 @@
     opacity: 1;
 
 }
+
+
+
+
+
+html, body {
+  width:100%;
+  height:100%;
+  color:#000;
+  margin:0;
+  font-size:19px;
+}
+.wrapper {
+  width:70%;
+  height:100%;
+  position: relative;
+    transform: translate(33%, 33%);
+}
+.typewriter {
+    font-family: 'Great Vibes';
+    font-size: 48px;
+    color: #8b2a3a;
+    text-align: center;
+    line-height: 1.3;
+}
+p {
+    font-family: 'Great Vibes';
+  font-size:40px;
+}
+.cursor {
+  font-size: 48px;
+  display: inline-block;
+    width: 3px;
+    height: 48px;
+    color: #8b2a3a;
+    margin-left: 4px;
+}
+
+
+
