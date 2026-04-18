@@ -75,7 +75,7 @@ export const projects: Project[] = [
     title: 'Hair Designs',
     description: 'A website for a local business of hair designers and licensed cosmetologists.',
     tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
-    liveUrl: 'https://hairdesigns.netlify.app/',
+    liveUrl: 'https://hairdesigns.hair/',
     githubUrl: 'https://github.com/z4nta0/hair-designs',
     imageUrl: hairDesignsImg,
     featured: true,

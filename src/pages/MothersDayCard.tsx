@@ -1,13 +1,15 @@
-import { useEffect, useRef, useCallback, useState } from 'react';
+import { useRef, useCallback, useState } from 'react';
 import gsap from 'gsap';
 import styles from './MothersDayCard.module.css';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
+import { GSDevTools } from "gsap/GSDevTools";
+//import { useEffect } from 'react';
 
 
 
-gsap.registerPlugin(TextPlugin, SplitText, useGSAP);
+gsap.registerPlugin(TextPlugin, SplitText, useGSAP, GSDevTools);
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -132,15 +134,15 @@ export default function MothersDayCard() {
     const cursorEl = cursorRefs.current[screen.id];
     if (!screenEl || !typedEl || !cursorEl) { onDone(); return; }
 
-    gsap.to(screenEl, { opacity: 1, duration: FADE, ease: 'none', delay: 0.05, onComplete: () => {
+    gsap.to(screenEl, { opacity: 1, duration: FADE, ease: 'power1.in', delay: 0.05, onComplete: () => {
       cursorEl.style.opacity = '1';
       cursorEl.classList.add('blinking');
       typeEl(typedEl, screen.text, () => {
         setTimeout(() => {
           cursorEl.classList.remove('blinking');
-          gsap.to(cursorEl, { opacity: 0, duration: 0.4, ease: 'none', onComplete: () => {
+          gsap.to(cursorEl, { opacity: 0, duration: 0.4, ease: 'power1.in', onComplete: () => {
             setTimeout(() => {
-              gsap.to(screenEl, { opacity: 0, duration: FADE, ease: 'none', onComplete: onDone });
+              gsap.to(screenEl, { opacity: 0, duration: FADE, ease: 'power1.in', onComplete: onDone });
             }, 400);
           }});
         }, 600);
@@ -283,31 +285,18 @@ export default function MothersDayCard() {
 
 
 
-    const gsaTimIns : GSAPTimeline  = gsap.timeline({ reverse: true });
+    const gsaTimIns : GSAPTimeline  = gsap.timeline();
 
     const wrapper = document.getElementById('wrapper') as HTMLSpanElement;
     const cursor = document.getElementById('cursor') as HTMLSpanElement;
 
     //const typSplIns : SplitText = TextPlugin.create( '.typewriter', { type : 'chars' } );
 
-
-/*
-    gsaTimIns.from( typSplIns.chars, {
-
-        //text : "Thank you mothers!",
-        duration  : 2,
-        x         : 10,
-        autoAlpha : 0,
-        stagger   : 0.05,
-
-    });
-*/
-
     gsaTimIns.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.add('cursor-blink');
@@ -324,26 +313,18 @@ export default function MothersDayCard() {
         opacity: 0,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.remove('cursor-blink');
 
     gsaTimIns.set('.typewriter', { text: '' });
-/*
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 2, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
-*/
 
     gsaTimIns.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.add('cursor-blink');
@@ -352,7 +333,7 @@ export default function MothersDayCard() {
         text : "For everything that you do for us...",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     gsaTimIns.to(wrapper, {
@@ -360,7 +341,7 @@ export default function MothersDayCard() {
         opacity: 0,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.remove('cursor-blink');
@@ -371,7 +352,7 @@ export default function MothersDayCard() {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.add('cursor-blink');
@@ -380,7 +361,7 @@ export default function MothersDayCard() {
         text : "Especially the little things...",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     gsaTimIns.to(wrapper, {
@@ -388,7 +369,7 @@ export default function MothersDayCard() {
         opacity: 0,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.remove('cursor-blink');
@@ -399,7 +380,7 @@ export default function MothersDayCard() {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.add('cursor-blink');
@@ -408,7 +389,7 @@ export default function MothersDayCard() {
         text : "Even more importantly, the many things that we'll never even know about...",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     gsaTimIns.to(wrapper, {
@@ -416,7 +397,7 @@ export default function MothersDayCard() {
         opacity: 0,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.remove('cursor-blink');
@@ -427,7 +408,7 @@ export default function MothersDayCard() {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in'
     });
 
     cursor.classList.add('cursor-blink');
@@ -436,167 +417,187 @@ export default function MothersDayCard() {
         text : "You will never receive the full appreciation that you have rightfully earned.",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in',
+        repeat: 1,
+        yoyo: true,
+        repeatDelay: 0.5,
     });
 
-    gsaTimIns.to(wrapper, {
-        delay: 0.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     delay: 0.5,
+    //     opacity: 0,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.remove('cursor-blink');
+    // cursor.classList.remove('cursor-blink');
 
-    gsaTimIns.set('.typewriter', { text: '' });
+    // gsaTimIns.set('.typewriter', { text: '' });
 
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     opacity: 1,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.add('cursor-blink');
+    //cursor.classList.add('cursor-blink');
 
     gsaTimIns.to('.typewriter', {
         text : "And you definitely deserve more than one day of celebration.",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in',
+        repeat: 1,
+        yoyo: true,
+        repeatDelay: 0.5,
     });
 
-    gsaTimIns.to(wrapper, {
-        delay: 0.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     delay: 0.5,
+    //     opacity: 0,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.remove('cursor-blink');
+    // cursor.classList.remove('cursor-blink');
 
-    gsaTimIns.set('.typewriter', { text: '' });
+    // gsaTimIns.set('.typewriter', { text: '' });
 
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     opacity: 1,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.add('cursor-blink');
+    // cursor.classList.add('cursor-blink');
 
     gsaTimIns.to('.typewriter', {
         text : "So it is our responsibility to make the most of this one day.",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in',
+        repeat: 1,
+        yoyo: true,
+        repeatDelay: 0.5,
     });
 
-    gsaTimIns.to(wrapper, {
-        delay: 0.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     delay: 0.5,
+    //     opacity: 0,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.remove('cursor-blink');
+    // cursor.classList.remove('cursor-blink');
 
-    gsaTimIns.set('.typewriter', { text: '' });
+    // gsaTimIns.set('.typewriter', { text: '' });
 
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     opacity: 1,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.add('cursor-blink');
+    // cursor.classList.add('cursor-blink');
 
     gsaTimIns.to('.typewriter', {
         text : "You are loved (even when we don't show it).",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in',
+        repeat: 1,
+        yoyo: true,
+        repeatDelay: 0.5,
     });
 
-    gsaTimIns.to(wrapper, {
-        delay: 0.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     delay: 0.5,
+    //     opacity: 0,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.remove('cursor-blink');
+    // cursor.classList.remove('cursor-blink');
 
-    gsaTimIns.set('.typewriter', { text: '' });
+    // gsaTimIns.set('.typewriter', { text: '' });
 
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     opacity: 1,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.add('cursor-blink');
+    // cursor.classList.add('cursor-blink');
 
     gsaTimIns.to('.typewriter', {
         text : "And you are appreciated (even when we don't give it).",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in',
+        repeat: 1,
+        yoyo: true,
+        repeatDelay: 0.5,
     });
 
-    gsaTimIns.to(wrapper, {
-        delay: 0.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     delay: 0.5,
+    //     opacity: 0,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.remove('cursor-blink');
+    // cursor.classList.remove('cursor-blink');
 
-    gsaTimIns.set('.typewriter', { text: '' });
+    // gsaTimIns.set('.typewriter', { text: '' });
 
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     opacity: 1,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.add('cursor-blink');
+    // cursor.classList.add('cursor-blink');
 
     gsaTimIns.to('.typewriter', {
         text : "So please never get discouraged, because we need you in our lives.",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none'
+        ease: 'power1.in',
+        repeat: 1,
+        yoyo: true,
+        repeatDelay: 0.5,
     });
 
-    gsaTimIns.to(wrapper, {
-        delay: 0.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     delay: 0.5,
+    //     opacity: 0,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
 
-    cursor.classList.remove('cursor-blink');
+    // cursor.classList.remove('cursor-blink');
 
-    gsaTimIns.set('.typewriter', { text: '' });
+    // gsaTimIns.set('.typewriter', { text: '' });
 
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'none'
-    });
+    // gsaTimIns.to(wrapper, {
+    //     opacity: 1,
+    //     duration: 1, 
+    //     //slow then speeds up easing
+    //     ease: 'power1.in'
+    // });
+
+    //gsaTimIns.add('test');
 
     cursor.classList.add('cursor-blink');
 
@@ -604,11 +605,15 @@ export default function MothersDayCard() {
         text : "On behalf of the rest of us...",
         duration: 2, 
         //slow then speeds up easing
-        ease: 'none',
+        ease: 'power1.in',
+        repeat: 1,
+        yoyo: true,
         onComplete: () => runFinalScene(),
     });
 
-    //gsaTimIns.to(runFinalScene());
+    //gsaTimIns.play('test');
+
+    //GSDevTools.create();
 
   }, []);
 
