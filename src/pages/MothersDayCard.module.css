@@ -65,6 +65,49 @@
 
 
 
+.videoContainer {
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.videos {
+    visibility: hidden;
+    scale: 0;
+    position: relative;
+    left: 0;
+}
+
+
+
+.videos:nth-child(1) {
+    top: 85vh;
+}
+
+
+
+.videos:nth-child(2) {
+    top: 30vh;
+}
+
+
+
+.videos:nth-child(3) {
+    top: -25vh;
+}
+
+
+
+.videos:nth-child(4) {
+    top: -85vh;
+}
+
+
+
 
 
 html, body {

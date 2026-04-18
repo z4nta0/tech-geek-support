@@ -6,6 +6,10 @@ import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
 import { GSDevTools } from "gsap/GSDevTools";
 //import { useEffect } from 'react';
+import thankYouIllus from '../assets/mothers-day-thank-you.mp4';
+import tasksIllus from '../assets/mothers-day-tasks.mp4';
+import littleThingsIllus from '../assets/mothers-day-little-things.mp4';
+import unnoticedThingsIllus from '../assets/mothers-day-unnoticed-things.mp4';
 
 
 
@@ -289,6 +293,10 @@ export default function MothersDayCard() {
 
     const wrapper = document.getElementById('wrapper') as HTMLSpanElement;
     const cursor = document.getElementById('cursor') as HTMLSpanElement;
+    const thankYouVideo = document.getElementById('thankYouVideo') as HTMLVideoElement;
+    const tasksVideo = document.getElementById('tasksVideo') as HTMLVideoElement;
+    const littleThingsVideo = document.getElementById('littleThingsVideo') as HTMLVideoElement;
+    const unnoticedThingsVideo = document.getElementById('unnoticedThingsVideo') as HTMLVideoElement;
 
     //const typSplIns : SplitText = TextPlugin.create( '.typewriter', { type : 'chars' } );
 
@@ -320,6 +328,27 @@ export default function MothersDayCard() {
 
     gsaTimIns.set('.typewriter', { text: '' });
 
+    gsaTimIns.to(thankYouVideo, {
+        autoAlpha: 1,
+        scale: 1,
+        transformOrigin: '50% 50%',
+        //slow then speeds up easing
+        ease: 'power1.in',
+        duration: 1,
+        onComplete: () => thankYouVideo.play(),
+    });
+
+    gsaTimIns.add( () => {}, '+=8' );
+
+    gsaTimIns.to(thankYouVideo, {
+        autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        //slow then speeds up easing
+        ease: 'power1.in',
+        duration: 1,
+    });
+
     gsaTimIns.to(wrapper, {
         opacity: 1,
         duration: 1, 
@@ -347,6 +376,29 @@ export default function MothersDayCard() {
     cursor.classList.remove('cursor-blink');
 
     gsaTimIns.set('.typewriter', { text: '' });
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(tasksVideo, {
+        autoAlpha: 1,
+        scale: 1,
+        transformOrigin: '50% 50%',
+        //slow then speeds up easing
+        ease: 'power1.in',
+        duration: 1,
+        onComplete: () => tasksVideo.play(),
+    });
+
+    gsaTimIns.add( () => {}, '+=11' );
+
+    gsaTimIns.to(tasksVideo, {
+        autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        //slow then speeds up easing
+        ease: 'power1.in',
+        duration: 1,
+    });
 
     gsaTimIns.to(wrapper, {
         opacity: 1,
@@ -376,6 +428,29 @@ export default function MothersDayCard() {
 
     gsaTimIns.set('.typewriter', { text: '' });
 
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(littleThingsVideo, {
+        autoAlpha: 1,
+        scale: 1,
+        transformOrigin: '50% 50%',
+        //slow then speeds up easing
+        ease: 'power1.in',
+        duration: 1,
+        onComplete: () => littleThingsVideo.play(),
+    });
+
+    gsaTimIns.add( () => {}, '+=15' );
+
+    gsaTimIns.to(littleThingsVideo, {
+        autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        //slow then speeds up easing
+        ease: 'power1.in',
+        duration: 1,
+    });
+
     gsaTimIns.to(wrapper, {
         opacity: 1,
         duration: 1, 
@@ -403,6 +478,29 @@ export default function MothersDayCard() {
     cursor.classList.remove('cursor-blink');
 
     gsaTimIns.set('.typewriter', { text: '' });
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(unnoticedThingsVideo, {
+        autoAlpha: 1,
+        scale: 1,
+        transformOrigin: '50% 50%',
+        //slow then speeds up easing
+        ease: 'power1.in',
+        duration: 1,
+        onComplete: () => unnoticedThingsVideo.play(),
+    });
+
+    gsaTimIns.add( () => {}, '+=15' );
+
+    gsaTimIns.to(unnoticedThingsVideo, {
+        autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        //slow then speeds up easing
+        ease: 'power1.in',
+        duration: 1,
+    });
 
     gsaTimIns.to(wrapper, {
         opacity: 1,
@@ -597,7 +695,7 @@ export default function MothersDayCard() {
     //     ease: 'power1.in'
     // });
 
-    //gsaTimIns.add('test');
+    //saTimIns.play('test');
 
     cursor.classList.add('cursor-blink');
 
@@ -608,6 +706,7 @@ export default function MothersDayCard() {
         ease: 'power1.in',
         repeat: 1,
         yoyo: true,
+        repeatDelay: 0.5,
         onComplete: () => runFinalScene(),
     });
 
@@ -644,6 +743,20 @@ export default function MothersDayCard() {
       <div id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
 <div id='wrapper' className={ styles.wrapper }>
   <p><span id="typewriter" className={ `${ styles.typewriter }  typewriter` }></span><span id='cursor' className={ `${ styles.cursor }   cursor-blink` }>|</span></p>
+</div>
+<div className={ styles.videoContainer }>
+        <video id='thankYouVideo' className={ styles.videos } muted playsInline>
+            <source src={thankYouIllus} type="video/mp4" />
+        </video>
+        <video id='tasksVideo' className={ styles.videos } muted playsInline>
+            <source src={tasksIllus} type="video/mp4" />
+        </video>
+        <video id='littleThingsVideo' className={ styles.videos } muted playsInline>
+            <source src={littleThingsIllus} type="video/mp4" />
+        </video>
+        <video id='unnoticedThingsVideo' className={ styles.videos } muted playsInline>
+            <source src={unnoticedThingsIllus} type="video/mp4" />
+        </video>
 </div>
         {/* ── Illustration placeholders ── */}
         {/*ILLUS_LABELS.map((label, i) => (
