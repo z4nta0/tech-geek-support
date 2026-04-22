@@ -2,6 +2,7 @@ import type { Project, GreetingCard, SupportArticle } from '../types';
 import hairDesignsImg from '../assets/hair-designs-website.png';
 import bernieBearsImg from '../assets/the-bernie-bears-website.png';
 import techGeekImg from '../assets/tech-geek-website.png';
+import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
 
 // ── Projects ───────────────────────────────────────────────
 export const projects: Project[] = [
@@ -107,8 +108,18 @@ export const projects: Project[] = [
 
 // ── Greeting Cards ─────────────────────────────────────────
 export const greetingCards: GreetingCard[] = [
-  {
+    {
     id: 'card-01',
+    title: 'Mother\'s Day',
+    occasion: 'Holiday',
+    description: 'A card that celebrates mothers with a heartfelt message and beautiful animations.',
+    previewUrl: mothersDayCardPreview,
+    liveUrl: '/mothersdaycard',
+    tags: ['Animation', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Mother\'s Day'],
+    year: 2026,
+  },
+  {
+    id: 'card-02',
     title: 'Starfield Birthday',
     occasion: 'Birthday',
     description: 'An animated starfield with a personalised message that flies in on a comet trail.',
@@ -118,7 +129,7 @@ export const greetingCards: GreetingCard[] = [
     year: 2024,
   },
   {
-    id: 'card-02',
+    id: 'card-03',
     title: 'Origami Holiday',
     occasion: 'Christmas',
     description: 'Step-by-step CSS origami crane that folds itself to reveal a holiday greeting.',
@@ -128,7 +139,7 @@ export const greetingCards: GreetingCard[] = [
     year: 2024,
   },
   {
-    id: 'card-03',
+    id: 'card-04',
     title: 'Geometric Valentine',
     occasion: "Valentine's Day",
     description: 'Mathematical rose curve drawn with WebGL, with particle hearts on hover.',
@@ -138,7 +149,7 @@ export const greetingCards: GreetingCard[] = [
     year: 2023,
   },
   {
-    id: 'card-04',
+    id: 'card-05',
     title: 'Pixel Celebration',
     occasion: 'Congratulations',
     description: 'Retro pixel art fireworks that spell out a custom congratulations message.',
@@ -148,7 +159,7 @@ export const greetingCards: GreetingCard[] = [
     year: 2023,
   },
   {
-    id: 'card-05',
+    id: 'card-06',
     title: 'Aurora Thank You',
     occasion: 'Thank You',
     description: 'Shader-powered aurora borealis background with elegantly typeset thank-you note.',
@@ -156,16 +167,6 @@ export const greetingCards: GreetingCard[] = [
     liveUrl: 'https://example.com',
     tags: ['GLSL', 'Shaders', 'CSS'],
     year: 2022,
-  },
-  {
-    id: 'card-06',
-    title: 'Mother\'s Day',
-    occasion: 'Holiday',
-    description: 'A card that celebrates mothers with a heartfelt message and beautiful animations.',
-    previewUrl: './pages/MothersDayCard.tsx',
-    liveUrl: '/mothersdaycard',
-    tags: ['Animation', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Mother\'s Day'],
-    year: 2026,
   },
 ]
 

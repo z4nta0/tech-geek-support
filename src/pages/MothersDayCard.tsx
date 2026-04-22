@@ -5,24 +5,16 @@ import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
 import { GSDevTools } from "gsap/GSDevTools";
-//import { useEffect } from 'react';
+import { useEffect } from 'react';
 import thankYouIllus from '../assets/mothers-day-thank-you.mp4';
 import tasksIllus from '../assets/mothers-day-tasks.mp4';
 import littleThingsIllus from '../assets/mothers-day-little-things.mp4';
 import unnoticedThingsIllus from '../assets/mothers-day-unnoticed-things.mp4';
 
 
-
 gsap.registerPlugin(TextPlugin, SplitText, useGSAP, GSDevTools);
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-
-interface TextScreen {
-  id: string;
-  text: string;
-  fontSize?: string;
-  cursorHeight?: string;
-}
 
 interface HeartDef {
   id: string;
@@ -33,26 +25,6 @@ interface HeartDef {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const TEXT_SCREENS: TextScreen[] = [
-  { id: 'ts-1',  text: 'Thank you, mothers!' },
-  { id: 'ts-2',  text: 'For everything that you do for us...' },
-  { id: 'ts-3',  text: 'Especially the little things...' },
-  { id: 'ts-4',  text: "Even more importantly, the many things that we'll never even know about...", fontSize: '48px', cursorHeight: '46px' },
-  { id: 'ts-5',  text: 'You will never receive the full appreciation that you have rightfully earned.', fontSize: '44px', cursorHeight: '42px' },
-  { id: 'ts-6',  text: 'And you definitely deserve more than one day of celebration.', fontSize: '44px', cursorHeight: '42px' },
-  { id: 'ts-7',  text: 'So it is our responsibility to make the most of this one day.', fontSize: '44px', cursorHeight: '42px' },
-  { id: 'ts-8',  text: "You are loved (even when we don't show it)." },
-  { id: 'ts-9',  text: "And you are appreciated (even when we don't give it)." },
-  { id: 'ts-10', text: 'So please never get discouraged, because we need you in our lives.', fontSize: '44px', cursorHeight: '42px' },
-  { id: 'ts-11', text: 'On behalf of the rest of us...' },
-];
-
-const ILLUS_LABELS: string[] = [
-  'thank_you_illustration',
-  'mothers_tasks_illustration',
-  'little_things_illustration',
-  'unnoticed_things_illustration',
-];
 
 const HEART_DEFS: HeartDef[] = [
   { id: 'h1',  fill: '#E05070', strokeWidth: '2.665', d: 'M52 47.9669C52 39.4373 49.1568 33.7509 43.4704 30.9077C34.9408 28.0645 30.676 30.9077 30.676 39.4373C30.676 47.9669 37.784 57.2073 52 67.1585C66.216 57.2073 73.324 47.9669 73.324 39.4373C73.324 30.9077 69.0592 28.0645 60.5296 30.9077C54.8432 33.7509 52 39.4373 52 47.9669Z' },
@@ -86,22 +58,13 @@ const HEART_DEFS: HeartDef[] = [
 
 ];
 
-const FADE      = 1;
 const ZOOM_DUR  = 1;
-const TYPE_SPEED = 85;
 const WORD_SPEED = 80;
+//const heartIds = ['h1','h2','h3','h4','h5','h6','h7','h8','h9','h10','h11','h12'];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function MothersDayCard() {
-
-  // Refs for text screen elements
-  const screenRefs  = useRef<Record<string, HTMLDivElement | null>>({});
-  const typedRefs   = useRef<Record<string, HTMLSpanElement | null>>({});
-  const cursorRefs  = useRef<Record<string, HTMLSpanElement | null>>({});
-
-  // Refs for illustration screens
-  const illusRefs   = useRef<Record<string, SVGSVGElement | null>>({});
 
   // Refs for final screen
   const finalRef    = useRef<HTMLDivElement | null>(null);
@@ -111,16 +74,6 @@ export default function MothersDayCard() {
   const heartRefs   = useRef<Record<string, SVGPathElement | null>>({});
 
   // ── Helpers ──────────────────────────────────────────────────────────────
-
-  const typeEl = useCallback((el: HTMLSpanElement, text: string, onDone: () => void): void => {
-    let i = 0;
-    const next = () => {
-      el.textContent = text.slice(0, i);
-      if (i++ <= text.length) setTimeout(next, TYPE_SPEED);
-      else onDone();
-    };
-    next();
-  }, []);
 
   const typeWord = useCallback((el: HTMLSpanElement, text: string, onDone: () => void): void => {
     let i = 0;
@@ -132,40 +85,6 @@ export default function MothersDayCard() {
     next();
   }, []);
 
-  const runTextScreen = useCallback((screen: TextScreen, onDone: () => void): void => {
-    const screenEl = screenRefs.current[screen.id];
-    const typedEl  = typedRefs.current[screen.id];
-    const cursorEl = cursorRefs.current[screen.id];
-    if (!screenEl || !typedEl || !cursorEl) { onDone(); return; }
-
-    gsap.to(screenEl, { opacity: 1, duration: FADE, ease: 'power1.in', delay: 0.05, onComplete: () => {
-      cursorEl.style.opacity = '1';
-      cursorEl.classList.add('blinking');
-      typeEl(typedEl, screen.text, () => {
-        setTimeout(() => {
-          cursorEl.classList.remove('blinking');
-          gsap.to(cursorEl, { opacity: 0, duration: 0.4, ease: 'power1.in', onComplete: () => {
-            setTimeout(() => {
-              gsap.to(screenEl, { opacity: 0, duration: FADE, ease: 'power1.in', onComplete: onDone });
-            }, 400);
-          }});
-        }, 600);
-      });
-    }});
-  }, [typeEl]);
-
-  const runIllus = useCallback((id: string, onDone: () => void): void => {
-    const el = illusRefs.current[id];
-    if (!el) { onDone(); return; }
-    gsap.to(el, { opacity: 1, scale: 1, duration: ZOOM_DUR, ease: 'power2.out', transformOrigin: '50% 50%', onComplete: () => {
-      setTimeout(() => {
-        gsap.to(el, { opacity: 0, scale: 1.08, duration: ZOOM_DUR, ease: 'power2.in', transformOrigin: '50% 50%', onComplete: () => {
-          gsap.set(el, { scale: 1.08 });
-          onDone();
-        }});
-      }, 1500);
-    }});
-  }, []);
 
   const drawHearts = useCallback((onDone: () => void): void => {
     let delay = 0;
@@ -218,70 +137,8 @@ export default function MothersDayCard() {
     }});
   }, [typeWord, drawHearts, pulseHearts]);
 
-  const reset = useCallback((): void => {
-    // Kill all tweens
-    TEXT_SCREENS.forEach(s => {
-      const screenEl = screenRefs.current[s.id];
-      const cursorEl = cursorRefs.current[s.id];
-      const typedEl  = typedRefs.current[s.id];
-      if (screenEl) gsap.set(screenEl, { opacity: 0 });
-      if (cursorEl) { gsap.set(cursorEl, { opacity: 0 }); cursorEl.classList.remove('blinking'); }
-      if (typedEl)  typedEl.textContent = '';
-    });
-    ILLUS_LABELS.forEach((_, i) => {
-      const el = illusRefs.current[`illus-${i + 1}`];
-      if (el) gsap.set(el, { opacity: 0, scale: 1.08, transformOrigin: '50% 50%' });
-    });
-    if (finalRef.current) gsap.set(finalRef.current, { opacity: 0 });
-    if (typedHappy.current)   typedHappy.current.textContent   = '';
-    if (typedMothers.current) typedMothers.current.textContent = '';
-    if (typedDay.current)     typedDay.current.textContent     = '';
-    HEART_DEFS.forEach(({ id }) => {
-      const el = heartRefs.current[id];
-      if (el) { gsap.killTweensOf(el); gsap.set(el, { opacity: 0, scale: 1, transformOrigin: '50% 50%' }); }
-    });
-  }, []);
 
-  const runSequence = useCallback((): void => {
-    reset();
-    runTextScreen(TEXT_SCREENS[0], () =>
-      runIllus('illus-1', () =>
-        runTextScreen(TEXT_SCREENS[1], () =>
-          runIllus('illus-2', () =>
-            runTextScreen(TEXT_SCREENS[2], () =>
-              runIllus('illus-3', () =>
-                runTextScreen(TEXT_SCREENS[3], () =>
-                  runIllus('illus-4', () =>
-                    runTextScreen(TEXT_SCREENS[4], () =>
-                      runTextScreen(TEXT_SCREENS[5], () =>
-                        runTextScreen(TEXT_SCREENS[6], () =>
-                          runTextScreen(TEXT_SCREENS[7], () =>
-                            runTextScreen(TEXT_SCREENS[8], () =>
-                              runTextScreen(TEXT_SCREENS[9], () =>
-                                runTextScreen(TEXT_SCREENS[10], () =>
-                                  runFinalScene()
-                                )
-                              )
-                            )
-                          )
-                        )
-                      )
-                    )
-                  )
-                )
-              )
-            )
-          )
-        )
-      )
-    );
-  }, [reset, runTextScreen, runIllus, runFinalScene]);
-
-  /*
-  useEffect(() => {
-    runSequence();
-  }, [runSequence]);
-*/
+let gsaTimIns : GSAPTimeline;
 
   useGSAP(() => {
 
@@ -289,7 +146,24 @@ export default function MothersDayCard() {
 
 
 
-    const gsaTimIns : GSAPTimeline  = gsap.timeline();
+    const texArr = [
+        "Thank you, mothers!",
+        "For everything that you do for us...",
+        "Especially the little things...",
+        "Even more importantly, the many things that we'll never even know about...",
+        "A mother's love is a special thing indeed!",
+        "We will never be able to fully understand the sacrifices that you make for us.",
+        "And you definitely deserve more than one day of celebration.",
+        "So it is our responsibility to make the most of this one day.",
+        "You are loved (even when we don't show it).",
+        "And you are appreciated (even when we don't give it).",
+        "So please never get discouraged, because we need you in our lives.",
+        "On behalf of the rest of us..."
+    ];
+
+
+
+    gsaTimIns  = gsap.timeline( { paused: true } );
 
     const wrapper = document.getElementById('wrapper') as HTMLSpanElement;
     const cursor = document.getElementById('cursor') as HTMLSpanElement;
@@ -297,8 +171,15 @@ export default function MothersDayCard() {
     const tasksVideo = document.getElementById('tasksVideo') as HTMLVideoElement;
     const littleThingsVideo = document.getElementById('littleThingsVideo') as HTMLVideoElement;
     const unnoticedThingsVideo = document.getElementById('unnoticedThingsVideo') as HTMLVideoElement;
+    const heartPath = document.getElementById('heartPath') as SVGSVGElement | HTMLElement;
+    const thankYouSVG = document.getElementById('thankYouSVG') as SVGAElement | HTMLElement;
+    //const thankYouImage = document.getElementById('thankYouImage') as HTMLImageElement | HTMLElement;
 
     //const typSplIns : SplitText = TextPlugin.create( '.typewriter', { type : 'chars' } );
+
+
+
+    gsap.set(wrapper, { opacity: 0, visibility: 'visible' });
 
     gsaTimIns.to(wrapper, {
         opacity: 1,
@@ -310,16 +191,18 @@ export default function MothersDayCard() {
     cursor.classList.add('cursor-blink');
 
     gsaTimIns.to('.typewriter', {
-        text : "Thank you, mothers!",
-        duration: 2, 
+        text : texArr[0],
+        duration: (texArr[0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
+    //gsaTimIns.pause('test');
+
     gsaTimIns.to(wrapper, {
-        delay: 0.5,
+        delay: 1.5,
         opacity: 0,
-        duration: 1, 
+        duration: 1,
         //slow then speeds up easing
         ease: 'power1.in'
     });
@@ -328,26 +211,50 @@ export default function MothersDayCard() {
 
     gsaTimIns.set('.typewriter', { text: '' });
 
-    gsaTimIns.to(thankYouVideo, {
-        autoAlpha: 1,
-        scale: 1,
-        transformOrigin: '50% 50%',
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1, 
         //slow then speeds up easing
         ease: 'power1.in',
-        duration: 1,
+        onComplete: () => {
+
+            thankYouVideo.style.visibility = 'inherit';
+            thankYouVideo.style.opacity = '1';
+
+        },
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
         onComplete: () => thankYouVideo.play(),
+        
     });
 
     gsaTimIns.add( () => {}, '+=8' );
 
-    gsaTimIns.to(thankYouVideo, {
-        autoAlpha: 0,
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
+        duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        duration: 1,
+        onComplete: () => {
+
+            thankYouVideo.style.visibility = 'hidden';
+            thankYouVideo.style.opacity = '0';
+
+        },
     });
+
+    //gsaTimIns.pause('test');
 
     gsaTimIns.to(wrapper, {
         opacity: 1,
@@ -359,14 +266,14 @@ export default function MothersDayCard() {
     cursor.classList.add('cursor-blink');
 
     gsaTimIns.to('.typewriter', {
-        text : "For everything that you do for us...",
-        duration: 2, 
+        text : texArr[1],
+        duration: (texArr[1].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in'
     });
 
     gsaTimIns.to(wrapper, {
-        delay: 0.5,
+        delay: 1.5,
         opacity: 0,
         duration: 1, 
         //slow then speeds up easing
@@ -379,25 +286,45 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(tasksVideo, {
-        autoAlpha: 1,
-        scale: 1,
-        transformOrigin: '50% 50%',
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1, 
         //slow then speeds up easing
         ease: 'power1.in',
-        duration: 1,
-        onComplete: () => tasksVideo.play(),
+        onComplete: () => {
+
+            tasksVideo.style.visibility = 'inherit';
+            tasksVideo.style.opacity = '1';
+
+        },
     });
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => tasksVideo.play(),
+        
+    });
+
+    //gsaTimIns.pause('test');
 
     gsaTimIns.add( () => {}, '+=11' );
 
-    gsaTimIns.to(tasksVideo, {
-        autoAlpha: 0,
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
+        duration: 2, 
         //slow then speeds up easing
         ease: 'power1.in',
-        duration: 1,
+        onComplete: () => {
+
+            tasksVideo.style.visibility = 'hidden';
+            tasksVideo.style.opacity = '0';
+
+        },
     });
 
     gsaTimIns.to(wrapper, {
@@ -410,14 +337,14 @@ export default function MothersDayCard() {
     cursor.classList.add('cursor-blink');
 
     gsaTimIns.to('.typewriter', {
-        text : "Especially the little things...",
-        duration: 2, 
+        text : texArr[2],
+        duration: (texArr[2].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in'
     });
 
     gsaTimIns.to(wrapper, {
-        delay: 0.5,
+        delay: 1.5,
         opacity: 0,
         duration: 1, 
         //slow then speeds up easing
@@ -430,25 +357,43 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(littleThingsVideo, {
-        autoAlpha: 1,
-        scale: 1,
-        transformOrigin: '50% 50%',
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1, 
         //slow then speeds up easing
         ease: 'power1.in',
-        duration: 1,
+        onComplete: () => {
+
+            littleThingsVideo.style.visibility = 'inherit';
+            littleThingsVideo.style.opacity = '1';
+
+        },
+    });
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
         onComplete: () => littleThingsVideo.play(),
+        
     });
 
     gsaTimIns.add( () => {}, '+=15' );
 
-    gsaTimIns.to(littleThingsVideo, {
-        autoAlpha: 0,
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
+        duration: 2, 
         //slow then speeds up easing
         ease: 'power1.in',
-        duration: 1,
+        onComplete: () => {
+
+            littleThingsVideo.style.visibility = 'hidden';
+            littleThingsVideo.style.opacity = '0';
+
+        },
     });
 
     gsaTimIns.to(wrapper, {
@@ -460,15 +405,17 @@ export default function MothersDayCard() {
 
     cursor.classList.add('cursor-blink');
 
+    //gsaTimIns.play('test');
+
     gsaTimIns.to('.typewriter', {
-        text : "Even more importantly, the many things that we'll never even know about...",
-        duration: 2, 
+        text : texArr[3],
+        duration: (texArr[3].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in'
     });
 
     gsaTimIns.to(wrapper, {
-        delay: 0.5,
+        delay: 1.5,
         opacity: 0,
         duration: 1, 
         //slow then speeds up easing
@@ -481,25 +428,45 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(unnoticedThingsVideo, {
-        autoAlpha: 1,
-        scale: 1,
-        transformOrigin: '50% 50%',
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1, 
         //slow then speeds up easing
         ease: 'power1.in',
-        duration: 1,
-        onComplete: () => unnoticedThingsVideo.play(),
+        onComplete: () => {
+
+            unnoticedThingsVideo.style.visibility = 'inherit';
+            unnoticedThingsVideo.style.opacity = '1';
+
+        },
     });
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => unnoticedThingsVideo.play(),
+        
+    });
+
+    //gsaTimIns.pause('test');
 
     gsaTimIns.add( () => {}, '+=15' );
 
-    gsaTimIns.to(unnoticedThingsVideo, {
-        autoAlpha: 0,
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
+        duration: 2, 
         //slow then speeds up easing
         ease: 'power1.in',
-        duration: 1,
+        onComplete: () => {
+
+            unnoticedThingsVideo.style.visibility = 'hidden';
+            unnoticedThingsVideo.style.opacity = '0';
+
+        },
     });
 
     gsaTimIns.to(wrapper, {
@@ -511,204 +478,110 @@ export default function MothersDayCard() {
 
     cursor.classList.add('cursor-blink');
 
+    //gsaTimIns.play('test');
+
     gsaTimIns.to('.typewriter', {
-        text : "You will never receive the full appreciation that you have rightfully earned.",
-        duration: 2, 
+        text : texArr[4],
+        duration: (texArr[4].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in',
         repeat: 1,
         yoyo: true,
-        repeatDelay: 0.5,
+        yoyEase: 'none',
+        repeatDelay: 1.5,
     });
 
-    // gsaTimIns.to(wrapper, {
-    //     delay: 0.5,
-    //     opacity: 0,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.remove('cursor-blink');
-
-    // gsaTimIns.set('.typewriter', { text: '' });
-
-    // gsaTimIns.to(wrapper, {
-    //     opacity: 1,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    //cursor.classList.add('cursor-blink');
+    gsaTimIns.set('.typewriter', { text: '' });
 
     gsaTimIns.to('.typewriter', {
-        text : "And you definitely deserve more than one day of celebration.",
-        duration: 2, 
+        text : texArr[5],
+        duration: (texArr[5].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in',
         repeat: 1,
         yoyo: true,
-        repeatDelay: 0.5,
+        yoyEase: 'none',
+        repeatDelay: 1.5,
     });
 
-    // gsaTimIns.to(wrapper, {
-    //     delay: 0.5,
-    //     opacity: 0,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.remove('cursor-blink');
-
-    // gsaTimIns.set('.typewriter', { text: '' });
-
-    // gsaTimIns.to(wrapper, {
-    //     opacity: 1,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.add('cursor-blink');
+    gsaTimIns.set('.typewriter', { text: '' });
 
     gsaTimIns.to('.typewriter', {
-        text : "So it is our responsibility to make the most of this one day.",
-        duration: 2, 
+        text : texArr[6],
+        duration: (texArr[6].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in',
         repeat: 1,
         yoyo: true,
-        repeatDelay: 0.5,
+        yoyEase: 'none',
+        repeatDelay: 1.5,
     });
 
-    // gsaTimIns.to(wrapper, {
-    //     delay: 0.5,
-    //     opacity: 0,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.remove('cursor-blink');
-
-    // gsaTimIns.set('.typewriter', { text: '' });
-
-    // gsaTimIns.to(wrapper, {
-    //     opacity: 1,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.add('cursor-blink');
+    gsaTimIns.set('.typewriter', { text: '' });
 
     gsaTimIns.to('.typewriter', {
-        text : "You are loved (even when we don't show it).",
-        duration: 2, 
+        text : texArr[7],
+        duration: (texArr[7].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in',
         repeat: 1,
         yoyo: true,
-        repeatDelay: 0.5,
+        yoyEase: 'none',
+        repeatDelay: 1.5,
     });
 
-    // gsaTimIns.to(wrapper, {
-    //     delay: 0.5,
-    //     opacity: 0,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.remove('cursor-blink');
-
-    // gsaTimIns.set('.typewriter', { text: '' });
-
-    // gsaTimIns.to(wrapper, {
-    //     opacity: 1,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.add('cursor-blink');
+    gsaTimIns.set('.typewriter', { text: '' });
 
     gsaTimIns.to('.typewriter', {
-        text : "And you are appreciated (even when we don't give it).",
-        duration: 2, 
+        text : texArr[8],
+        duration: (texArr[8].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in',
         repeat: 1,
         yoyo: true,
-        repeatDelay: 0.5,
+        yoyEase: 'none',
+        repeatDelay: 1.5,
     });
 
-    // gsaTimIns.to(wrapper, {
-    //     delay: 0.5,
-    //     opacity: 0,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.remove('cursor-blink');
-
-    // gsaTimIns.set('.typewriter', { text: '' });
-
-    // gsaTimIns.to(wrapper, {
-    //     opacity: 1,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.add('cursor-blink');
+    gsaTimIns.set('.typewriter', { text: '' });
 
     gsaTimIns.to('.typewriter', {
-        text : "So please never get discouraged, because we need you in our lives.",
-        duration: 2, 
+        text : texArr[9],
+        duration: (texArr[9].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in',
         repeat: 1,
         yoyo: true,
-        repeatDelay: 0.5,
+        yoyEase: 'none',
+        repeatDelay: 1.5,
     });
 
-    // gsaTimIns.to(wrapper, {
-    //     delay: 0.5,
-    //     opacity: 0,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    // cursor.classList.remove('cursor-blink');
-
-    // gsaTimIns.set('.typewriter', { text: '' });
-
-    // gsaTimIns.to(wrapper, {
-    //     opacity: 1,
-    //     duration: 1, 
-    //     //slow then speeds up easing
-    //     ease: 'power1.in'
-    // });
-
-    //saTimIns.play('test');
-
-    cursor.classList.add('cursor-blink');
+    gsaTimIns.set('.typewriter', { text: '' });
 
     gsaTimIns.to('.typewriter', {
-        text : "On behalf of the rest of us...",
-        duration: 2, 
+        text : texArr[10],
+        duration: (texArr[9].length * 1) / 15,
         //slow then speeds up easing
         ease: 'power1.in',
         repeat: 1,
         yoyo: true,
-        repeatDelay: 0.5,
-        onComplete: () => runFinalScene(),
+        yoyEase: 'none',
+        repeatDelay: 1.5,
     });
+
+    gsaTimIns.set('.typewriter', { text: '' });
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to('.typewriter', {
+        text : texArr[11],
+        duration: (texArr[10].length * 1) / 15,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => gsap.delayedCall(1.5, runFinalScene),
+    });
+
+    gsaTimIns.set('.typewriter', { text: '' });
 
     //gsaTimIns.play('test');
 
@@ -719,14 +592,88 @@ export default function MothersDayCard() {
   const [isFullscreen, setIsFullscreen] = useState(true);
 
   function toggleFullscreen() {
+
+    const maiConDiv = document.getElementById('maiConDiv') as HTMLDivElement;
+
     if (isFullscreen === true) {
-      document.body.style.overflow = 'auto';
-      setIsFullscreen(false);
+
+        maiConDiv.style.overflow = 'auto';
+        maiConDiv.style.position = 'relative';
+
+        document.body.style.overflow = 'auto';
+
+
+
+        setIsFullscreen(false);
+
     } else {
-      document.body.style.overflow = 'hidden';
-      setIsFullscreen(true);
+
+        maiConDiv.style.overflow = 'hidden';
+        maiConDiv.style.position = 'fixed';
+
+        document.body.style.overflow = 'hidden';
+
+
+
+        setIsFullscreen(true);
+
     }
+
   }
+
+
+
+function resetTimeline() {
+
+    gsap.set('#final-screen', { opacity: 0 });
+
+    const typedIds = ['typed-happy','typed-mothers','typed-day'];
+    
+    for (const word of typedIds) {
+
+        const typeWord : HTMLElement | null = document.getElementById(word);
+        if (typeWord !== null) typeWord.textContent = '';
+
+    };
+
+    for (const heart of HEART_DEFS) {
+
+        gsap.set(`#${heart.id}`, { opacity: 0, scale: 1, transformOrigin: '50% 50%' });
+
+    };
+
+
+
+    const finalScene = document.getElementById('finalScene');
+    if (finalScene !== null) finalScene.style.visibility = 'hidden';
+
+
+    gsaTimIns.restart();
+
+};
+
+
+
+  useEffect(() => {
+
+    const orientationType = screen.orientation.type;
+    console.log("Current orientation:", orientationType);
+
+    if (orientationType.includes('portrait')) {
+
+        alert('For the best experience, please view this card in landscape mode by rotating your device.');
+
+        gsaTimIns.restart();
+
+    }
+
+    else {
+
+        gsaTimIns.restart();
+
+    }
+
+  }, []);
 
   // ── Render ───────────────────────────────────────────────────────────────
 
@@ -741,83 +688,95 @@ export default function MothersDayCard() {
       `}</style>
 
       <div id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
-<div id='wrapper' className={ styles.wrapper }>
-  <p><span id="typewriter" className={ `${ styles.typewriter }  typewriter` }></span><span id='cursor' className={ `${ styles.cursor }   cursor-blink` }>|</span></p>
-</div>
-<div className={ styles.videoContainer }>
-        <video id='thankYouVideo' className={ styles.videos } muted playsInline>
-            <source src={thankYouIllus} type="video/mp4" />
-        </video>
-        <video id='tasksVideo' className={ styles.videos } muted playsInline>
-            <source src={tasksIllus} type="video/mp4" />
-        </video>
-        <video id='littleThingsVideo' className={ styles.videos } muted playsInline>
-            <source src={littleThingsIllus} type="video/mp4" />
-        </video>
-        <video id='unnoticedThingsVideo' className={ styles.videos } muted playsInline>
-            <source src={unnoticedThingsIllus} type="video/mp4" />
-        </video>
-</div>
-        {/* ── Illustration placeholders ── */}
-        {/*ILLUS_LABELS.map((label, i) => (
-          <svg
-            key={label}
-            ref={el => { illusRefs.current[`illus-${i + 1}`] = el; }}
-            viewBox="0 0 700 420"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ position: 'absolute', inset: 0, opacity: 0, zIndex: 1, width: '100%', height: '100%' }}
-          >
-            <rect width="700" height="420" fill="#f9e8ec" />
-            <rect x="100" y="60" width="500" height="300" rx="16" fill="none" stroke="#c8a0b0" strokeWidth="2.5" strokeDasharray="12 7" />
-            <line x1="100" y1="60" x2="600" y2="360" stroke="#c8a0b0" strokeWidth="1.5" opacity="0.4" />
-            <line x1="600" y1="60" x2="100" y2="360" stroke="#c8a0b0" strokeWidth="1.5" opacity="0.4" />
-            <text fontFamily="Georgia, serif" fontSize="18" fill="#b07888" textAnchor="middle" x="350" y="195">Illustration</text>
-            <text fontFamily="Georgia, serif" fontSize="14" fill="#c0a0a8" textAnchor="middle" x="350" y="225">[ {label} ]</text>
-          </svg>
-        ))}
 
-        {/* ── Text screens ── */}
-        {/*TEXT_SCREENS.map(s => (
-          <div
-            key={s.id}
-            ref={el => { screenRefs.current[s.id] = el; }}
-            style={{
-              position: 'absolute', inset: 0, display: 'flex',
-              alignItems: 'center', justifyContent: 'center',
-              background: '#f9e8ec', opacity: 0, zIndex: 2,
-            }}
-          >
-            <div
-              style={{
-                fontFamily: "'Great Vibes', cursive",
-                fontSize: s.fontSize ?? '64px',
-                color: '#8b2a3a',
-                textAlign: 'center',
-                lineHeight: 1.3,
-                padding: '0 48px',
-                userSelect: 'none',
-              }}
-            >
-              <span ref={el => { typedRefs.current[s.id] = el; }} />
-              <span
-                ref={el => { cursorRefs.current[s.id] = el; }}
-                className="mdc-cursor"
-                style={{
-                  display: 'inline-block',
-                  width: '3px',
-                  height: s.cursorHeight ?? '60px',
-                  background: '#8b2a3a',
-                  marginLeft: '4px',
-                  verticalAlign: 'middle',
-                  opacity: 0,
-                }}
-              />
-            </div>
-          </div>
-        ))}
+
+        <div id='wrapper' className={ styles.wrapper }>
+
+
+            <p><span id="typewriter" className={ `${ styles.typewriter }  typewriter` }></span><span id='cursor' className={ `${ styles.cursor }   cursor-blink` }>|</span></p>
+
+
+        </div>
+
+
+
+        <div className={ styles.videoContainer }>
+
+
+            <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+
+
+                <defs>
+
+
+                    <clipPath id="heartClip">
+
+
+                        <path id="heartPath" className={ styles.heartPath } fillRule="evenodd" clipRule="evenodd" d="M 862.896 270 C 845.516 270 825.881 271.831 807.096 278.226 C 693.938 315.183 657.57 436.031 689.543 535.636 L 689.684 536.061 L 689.825 536.456 C 707.459 585.977 735.855 630.937 772.785 667.891 L 772.98 668.086 L 773.205 668.311 C 825.856 718.791 883.181 762.822 945.238 801.02 L 959.828 810 L 974.503 801.19 C 1036.7 763.832 1095.13 718.596 1147.13 668.511 L 1147.3 668.371 L 1147.47 668.201 C 1184.71 631.157 1213.1 585.892 1230.48 536.341 L 1230.62 535.916 L 1230.76 535.496 C 1262.11 436.115 1225.92 315.129 1113.55 278.705 C 1095.15 272.593 1076.17 270 1057.61 270 C 1015.86 270 984.954 287.494 960.023 305.298 C 935.262 287.606 904.167 270 862.896 270 Z"></path>
+
+
+                    </clipPath>
+
+                </defs>
+
+
+
+                <foreignObject width="1920" height="1080">
+
+
+                    <div className={ styles.videoContainer }>
+
+
+                        <video id='thankYouVideo' className={ styles.videos } muted playsInline style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }}>
+
+                            <source src={thankYouIllus} type="video/mp4" />
+
+                        </video>
+
+
+
+                        <video id='tasksVideo' className={ styles.videos } muted playsInline style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }}>
+
+                            <source src={tasksIllus} type="video/mp4" />
+
+                        </video>
+
+
+
+                        <video id='littleThingsVideo' className={ styles.videos } muted playsInline style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }}>
+
+                            <source src={littleThingsIllus} type="video/mp4" />
+
+                        </video>
+
+
+
+                        <video id='unnoticedThingsVideo' className={ styles.videos } muted playsInline style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }}>
+
+                            <source src={unnoticedThingsIllus} type="video/mp4" />
+
+                        </video>
+
+
+                    </div>
+
+
+                </foreignObject>
+
+
+
+                {/* <rect width="1920" height="1080" style="stroke: rgb(0, 0, 0); fill: rgb(249, 232, 236); clip-path: url(#clip-0);"></rect> */}
+
+
+            </svg>
+
+
+        </div>
+
+
 
         {/* ── Final illustration screen ── */}
-        <div
+        <div id='finalScene'
           ref={finalRef}
           style={{
             position: 'absolute', inset: 0, opacity: 0, zIndex: 3,
@@ -826,13 +785,14 @@ export default function MothersDayCard() {
           }}
         >
           {/* Hearts SVG */}
-          <svg
+          <svg id='heartsSVG'
             viewBox="0 0 700 420"
             xmlns="http://www.w3.org/2000/svg"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }}
           >
             {HEART_DEFS.map(h => (
               <path
+                id={h.id}
                 key={h.id}
                 ref={el => { heartRefs.current[h.id] = el; }}
                 d={h.d}
@@ -845,7 +805,7 @@ export default function MothersDayCard() {
           </svg>
 
           {/* Happy Mother's Day text */}
-          <div
+          <div id='hmdTextDiv'
             style={{
               position: 'absolute', inset: 0, display: 'flex',
               flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
@@ -864,7 +824,7 @@ export default function MothersDayCard() {
                   whiteSpace: 'nowrap',
                 }}
               >
-                <span ref={i === 0 ? typedHappy : i === 1 ? typedMothers : typedDay} />
+                <span id={`typed-${word.replaceAll("'", "").toLowerCase()}`} ref={i === 0 ? typedHappy : i === 1 ? typedMothers : typedDay} />
               </div>
             ))}
           </div>
@@ -874,7 +834,7 @@ export default function MothersDayCard() {
 
             {/* Replay button */}
             <button id='repAniBut'
-                onClick={runSequence}
+                onClick={resetTimeline}
                 style={{
                 padding: '8px 28px', fontSize: '13px', letterSpacing: '0.08em', marginRight: '12px',
                 cursor: 'pointer', borderRadius: '20px', border: '1px solid #c08060',
