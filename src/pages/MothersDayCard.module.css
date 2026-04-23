@@ -252,7 +252,7 @@ p {
     visibility: hidden;
     opacity: 0;
     object-fit: cover;
-    scale: 0.99;
+    height: 99%;
 
 }
 
