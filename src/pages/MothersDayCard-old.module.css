@@ -147,6 +147,15 @@ html, body {
 
 
 
+.videoContainer > * {
+
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+
+}
+
+
+
 .wrapper {
 
     width:100%;

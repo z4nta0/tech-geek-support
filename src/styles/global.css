@@ -235,3 +235,6 @@ ul, ol { list-style: none; }
 
 
 
+:root {
+    --scale-x: scaleX(0);
+}

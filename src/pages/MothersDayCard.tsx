@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import gsap from 'gsap';
 import styles from './MothersDayCard.module.css';
 import { useGSAP } from '@gsap/react';
@@ -6,10 +6,21 @@ import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
 import { GSDevTools } from "gsap/GSDevTools";
 import { useEffect } from 'react';
-import thankYouIllus from '../assets/mothers-day-thank-you.mp4';
-import tasksIllus from '../assets/mothers-day-tasks.mp4';
-import littleThingsIllus from '../assets/mothers-day-little-things.mp4';
-import unnoticedThingsIllus from '../assets/mothers-day-unnoticed-things.mp4';
+import appreciateYouImg from '../assets/mothers-day-card/appreciate-you.png';
+import celebrationImg from '../assets/mothers-day-card/celebration.png';
+import everythingYouDoImg from '../assets/mothers-day-card/everything-you-do.png';
+import extraImage1Img from '../assets/mothers-day-card/extra-image-1.png';
+import extraImage2Img from '../assets/mothers-day-card/extra-image-2.png';
+import littleThingsImg from '../assets/mothers-day-card/little-things.png';
+import loveYouImg from '../assets/mothers-day-card/love-you.png';
+import mothersLoveImg from '../assets/mothers-day-card/mothers-love.png';
+import needYouImg from '../assets/mothers-day-card/need-you.png';
+import ourResponsibilityImg from '../assets/mothers-day-card/our-responsibility.png';
+import ourWorldImg from '../assets/mothers-day-card/our-world.png';
+import thankYouImg from '../assets/mothers-day-card/thank-you.png';
+import useWinSiz from '../hooks/useWinSiz.ts';     /** This import is the custom React hook that will provide the current window viewport dimensions and will also be used to trigger the useEffect hook on window resize events, as well as altering certain animation settings based on how small or big its dimensions are. */
+import { type WinSizObj } from '../hooks/useWinSiz.ts'; /** This import is the custom type definition for the custom state variable that is generated from the custom useWinSiz React Hook and stores the current viewport dimensions. */
+
 
 
 gsap.registerPlugin(TextPlugin, SplitText, useGSAP, GSDevTools);
@@ -167,49 +178,55 @@ const HEART_DEFS_PORTRAIT: HeartDef[] = [
 
 export default function MothersDayCard() {
 
-  // Refs for final screen
-  const finalRef    = useRef<HTMLDivElement | null>(null);
-  const heartRefs   = useRef<Record<string, SVGPathElement | null>>({});
+
+    /** Window Height Number                   = This custom variable stores the current window viewport height and will trigger a rerender via the {@link useEffect} hook when the window is resized and its value changes in order to recalculate the snowfall and the pixelated transition animation parameters. */
+    /** Window Width Number                    = This custom variable stores the current window viewport width and will trigger a rerender via the {@link useEffect} hook when the window is resized and its value changes in order to recalculate the snowfall and the pixelated transition animation parameters. */
+    const { winHeiNum, winWidNum } : WinSizObj = useWinSiz();
 
 
 
-let gsaTimIns : GSAPTimeline;
+ let gsaTimIns : GSAPTimeline;
 
-  useGSAP(() => {
+   useGSAP(() => {
 
 
     const texArr = [
-        "Thank you, mothers!",
-        "For everything that you do for us...",
-        "Especially the little things...",
-        "Even more importantly, the many things that we'll never even know about...",
-        "A mother's love is a special thing indeed!",
-        "We will never be able to fully understand the sacrifices that you make for us.",
-        "And you definitely deserve more than one day of celebration.",
-        "So it is our responsibility to make the most of this one day.",
-        "You are loved (even when we don't show it).",
-        "And you are appreciated (even when we don't give it).",
-        "So please never get discouraged, because we need you in our lives.",
-        "On behalf of the rest of us..."
+        ["Thank you, ", "mothers", "!"],
+        ["For ", "everything that you do", " for us."],
+        ["Especially the ", "little things", "."],
+        ["To the world you are a mother, but to us you are ", "our world", "."],
+        ["A mother's love is a ", "special thing", " indeed!"],
+        ["You definitely deserve more than one day of ", "celebration" ,"."],
+        ["So it is ", "our responsibility" ," to make the most of this one day."],
+        ["You are ", "loved", " (even when we don't show it)."],
+        ["And you are ", "appreciated", " (even when we don't give it)."],
+        ["So please never get discouraged, because we ", "need you", " in our lives."],
+        ["On behalf of the rest of us..."],
+        ["Happy Mother's Day!"],
     ];
 
 
 
-    gsaTimIns  = gsap.timeline( { paused: true } );
+     gsaTimIns = gsap.timeline();
 
     const wrapper = document.getElementById('wrapper') as HTMLSpanElement;
+    const typewriter1 = document.getElementById('typewriter1') as HTMLSpanElement;
+    const typewriter2 = document.getElementById('typewriter2') as HTMLSpanElement;
+    const typewriter3 = document.getElementById('typewriter3') as HTMLSpanElement;
     const cursor = document.getElementById('cursor') as HTMLSpanElement;
-    const thankYouVideo = document.getElementById('thankYouVideo') as HTMLVideoElement;
-    const tasksVideo = document.getElementById('tasksVideo') as HTMLVideoElement;
-    const littleThingsVideo = document.getElementById('littleThingsVideo') as HTMLVideoElement;
-    const unnoticedThingsVideo = document.getElementById('unnoticedThingsVideo') as HTMLVideoElement;
-    const heartPath = document.getElementById('heartPath') as SVGSVGElement | HTMLElement;
     const thankYouSVG = document.getElementById('thankYouSVG') as SVGAElement | HTMLElement;
-    const finalScene = document.getElementById('finalScene') as HTMLSpanElement | HTMLElement;
-    const finSceTex1 = document.getElementById('finSceTex1') as HTMLSpanElement | HTMLElement;
-    const finSceTex2 = document.getElementById('finSceTex2') as HTMLSpanElement | HTMLElement;
-    const finSceTex3 = document.getElementById('finSceTex3') as HTMLSpanElement | HTMLElement;
-    const heartPaths = document.getElementsByClassName('heartPaths') as HTMLCollectionOf<SVGPathElement>;
+    const heartPath = document.getElementById('heartPath') as SVGSVGElement | HTMLElement;
+    const thankYou = document.getElementById('thankYouImg') as HTMLImageElement;
+    const everythingYouDo = document.getElementById('everythingYouDoImg') as HTMLImageElement;
+    const littleThings = document.getElementById('littleThingsImg') as HTMLImageElement;
+    const ourWorld = document.getElementById('ourWorldImg') as HTMLImageElement;
+    const mothersLove = document.getElementById('mothersLoveImg') as HTMLImageElement;
+    const celebration = document.getElementById('celebrationImg') as HTMLImageElement;
+    const ourResponsibility = document.getElementById('ourResponsibilityImg') as HTMLImageElement;
+    const loveYou = document.getElementById('loveYouImg') as HTMLImageElement;
+    const appreciateYou = document.getElementById('appreciateYouImg') as HTMLImageElement;
+    const needYou = document.getElementById('needYouImg') as HTMLImageElement;
+    const masonryGrid = document.getElementById('masonryGrid') as HTMLElement;
 
 
 
@@ -223,17 +240,1046 @@ let gsaTimIns : GSAPTimeline;
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to('.typewriter', {
-        text : texArr[0],
-        duration: (texArr[0].length * 1) / 15,
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[0][0], delimiter: '' },
+        duration: (texArr[0][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[0][1], delimiter: '' },
+        duration: (texArr[0][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[0][2], delimiter: '' },
+        duration: (texArr[0][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            thankYou.style.visibility = 'inherit';
+            thankYou.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            thankYou.style.visibility = 'hidden';
+            thankYou.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[1][0], delimiter: '' },
+        duration: (texArr[1][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[1][1], delimiter: '' },
+        duration: (texArr[1][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[1][2], delimiter: '' },
+        duration: (texArr[1][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            everythingYouDo.style.visibility = 'inherit';
+            everythingYouDo.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            everythingYouDo.style.visibility = 'hidden';
+            everythingYouDo.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[2][0], delimiter: '' },
+        duration: (texArr[2][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[2][1], delimiter: '' },
+        duration: (texArr[2][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[2][2], delimiter: '' },
+        duration: (texArr[2][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            littleThings.style.visibility = 'inherit';
+            littleThings.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            littleThings.style.visibility = 'hidden';
+            littleThings.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[3][0], delimiter: '' },
+        duration: (texArr[3][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[3][1], delimiter: '' },
+        duration: (texArr[3][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[3][2], delimiter: '' },
+        duration: (texArr[3][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            ourWorld.style.visibility = 'inherit';
+            ourWorld.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            ourWorld.style.visibility = 'hidden';
+            ourWorld.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[4][0], delimiter: '' },
+        duration: (texArr[4][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[4][1], delimiter: '' },
+        duration: (texArr[4][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[4][2], delimiter: '' },
+        duration: (texArr[4][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            mothersLove.style.visibility = 'inherit';
+            mothersLove.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            mothersLove.style.visibility = 'hidden';
+            mothersLove.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[5][0], delimiter: '' },
+        duration: (texArr[5][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[5][1], delimiter: '' },
+        duration: (texArr[5][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[5][2], delimiter: '' },
+        duration: (texArr[5][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            celebration.style.visibility = 'inherit';
+            celebration.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            celebration.style.visibility = 'hidden';
+            celebration.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[6][0], delimiter: '' },
+        duration: (texArr[6][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[6][1], delimiter: '' },
+        duration: (texArr[6][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[6][2], delimiter: '' },
+        duration: (texArr[6][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            ourResponsibility.style.visibility = 'inherit';
+            ourResponsibility.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            ourResponsibility.style.visibility = 'hidden';
+            ourResponsibility.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[7][0], delimiter: '' },
+        duration: (texArr[7][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[7][1], delimiter: '' },
+        duration: (texArr[7][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[7][2], delimiter: '' },
+        duration: (texArr[7][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            loveYou.style.visibility = 'inherit';
+            loveYou.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            loveYou.style.visibility = 'hidden';
+            loveYou.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[8][0], delimiter: '' },
+        duration: (texArr[8][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[8][1], delimiter: '' },
+        duration: (texArr[8][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[8][2], delimiter: '' },
+        duration: (texArr[8][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            appreciateYou.style.visibility = 'inherit';
+            appreciateYou.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            appreciateYou.style.visibility = 'hidden';
+            appreciateYou.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[9][0], delimiter: '' },
+        duration: (texArr[9][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter2, {
+        text : { value: texArr[9][1], delimiter: '' },
+        duration: (texArr[9][1].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+    gsaTimIns.to(typewriter3, {
+        text : { value: texArr[9][2], delimiter: '' },
+        duration: (texArr[9][2].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+    });
+
+     gsaTimIns.to(typewriter2, {
+        '--scale-x': 1,
+        duration: 0.3,
+        //slow then speeds up easing
+        ease :  'power1.inOut',
+    });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        delay: 1.5,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.to(thankYouSVG, {
+        autoAlpha: 1,
+        duration: 0.1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            needYou.style.visibility = 'inherit';
+            needYou.style.opacity = '1';
+
+        },
+    }, '<');
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(heartPath, {
+        scale: 5,
+        transformOrigin: '50% 50%',
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        
+    }, '>');
+
+    gsaTimIns.to(heartPath, {
+        //autoAlpha: 0,
+        scale: 0,
+        transformOrigin: '50% 50%',
+        delay: 1.5,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            needYou.style.visibility = 'hidden';
+            needYou.style.opacity = '0';
+            thankYouSVG.style.visibility = 'hidden';
+            thankYouSVG.style.opacity = '0';
+
+        },
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.set(typewriter2, { text: '' });
+    gsaTimIns.set(typewriter3, { text: '' });
+    gsaTimIns.set(wrapper, { scale: 1 });
+    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.add('cursor-blink'),
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[10][0], delimiter: '' },
+        duration: (texArr[10][0].length * 1) / 15,
+        //slow then speeds up easing
+        ease :  'none',
+        repeat: 1,
+        yoyo: true,
+        yoyoEase: 'none',
+        repeatDelay: 1.5,
+    });
+
+    //gsaTimIns.play('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 0,
+        duration: 1,
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => cursor.classList.remove('cursor-blink'),
+    });
+
+    gsaTimIns.set(typewriter1, { text: '' });
+
+    //gsaTimIns.pause('test');
+
+    gsaTimIns.to(wrapper, {
+        opacity: 1,
+        duration: 1, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () => {
+
+            typewriter1.style.display = 'inline-block';
+
+            cursor.classList.add('cursor-blink');
+
+        },
+    });
+
+    gsaTimIns.to(typewriter1, {
+        text : { value: texArr[11][0], delimiter: '' },
+        duration: (texArr[11][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
-        delay: 1.5,
+    gsaTimIns.to(cursor, {
         opacity: 0,
         duration: 1,
         //slow then speeds up easing
@@ -241,445 +1287,83 @@ let gsaTimIns : GSAPTimeline;
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.set('.typewriter', { text: '' });
+    const scale = winWidNum <= 1400 && winWidNum > 1000 ? 2 : winWidNum <= 1000 ? 1.1 : 3;
 
-    //gsaTimIns.play('test');
-
-    gsaTimIns.to(thankYouSVG, {
-        autoAlpha: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => {
-
-            thankYouVideo.style.visibility = 'inherit';
-            thankYouVideo.style.opacity = '1';
-
-        },
-    });
-
-    //gsaTimIns.pause('test');
-
-    gsaTimIns.to(heartPath, {
-        scale: 5,
-        transformOrigin: '50% 50%',
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => thankYouVideo.play(),
-        
-    });
-
-    gsaTimIns.add( () => {}, '+=8' );
-
-    gsaTimIns.to(heartPath, {
-        //autoAlpha: 0,
-        scale: 0,
+    gsaTimIns.to(typewriter1, {
+        scale: scale,
         transformOrigin: '50% 50%',
         duration: 1,
         //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => {
-
-            thankYouVideo.style.visibility = 'hidden';
-            thankYouVideo.style.opacity = '0';
-
-        },
+        ease :  'back',
     });
 
-    //gsaTimIns.pause('test');
-
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => cursor.classList.add('cursor-blink'),
-    });
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[1],
-        duration: (texArr[1].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-    });
-
-    gsaTimIns.to(wrapper, {
-        delay: 1.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    //gsaTimIns.play('test');
-
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.to(masonryGrid, {
         autoAlpha: 1, 
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => {
-
-            tasksVideo.style.visibility = 'inherit';
-            tasksVideo.style.opacity = '1';
-
-        },
-    });
-
-    gsaTimIns.to(heartPath, {
-        scale: 5,
-        transformOrigin: '50% 50%',
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => tasksVideo.play(),
-        
-    });
-
-    //gsaTimIns.pause('test');
-
-    gsaTimIns.add( () => {}, '+=11' );
-
-    gsaTimIns.to(heartPath, {
-        //autoAlpha: 0,
-        scale: 0,
-        transformOrigin: '50% 50%',
-        duration: 2, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => {
-
-            tasksVideo.style.visibility = 'hidden';
-            tasksVideo.style.opacity = '0';
-
-        },
-    });
-
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => cursor.classList.add('cursor-blink'),
-    });
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[2],
-        duration: (texArr[2].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-    });
-
-    gsaTimIns.to(wrapper, {
-        delay: 1.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    //gsaTimIns.play('test');
-
-    gsaTimIns.to(thankYouSVG, {
-        autoAlpha: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => {
-
-            littleThingsVideo.style.visibility = 'inherit';
-            littleThingsVideo.style.opacity = '1';
-
-        },
-    });
-
-    gsaTimIns.to(heartPath, {
-        scale: 5,
-        transformOrigin: '50% 50%',
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => littleThingsVideo.play(),
-        
-    });
-
-    gsaTimIns.add( () => {}, '+=15' );
-
-    gsaTimIns.to(heartPath, {
-        //autoAlpha: 0,
-        scale: 0,
-        transformOrigin: '50% 50%',
-        duration: 2, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => {
-
-            littleThingsVideo.style.visibility = 'hidden';
-            littleThingsVideo.style.opacity = '0';
-
-        },
-    });
-
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => cursor.classList.add('cursor-blink'),
-    });
-
-    //gsaTimIns.play('test');
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[3],
-        duration: (texArr[3].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-    });
-
-    gsaTimIns.to(wrapper, {
-        delay: 1.5,
-        opacity: 0,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    //gsaTimIns.play('test');
-
-    gsaTimIns.to(thankYouSVG, {
-        autoAlpha: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => {
-
-            unnoticedThingsVideo.style.visibility = 'inherit';
-            unnoticedThingsVideo.style.opacity = '1';
-
-        },
-    });
-
-    gsaTimIns.to(heartPath, {
-        scale: 5,
-        transformOrigin: '50% 50%',
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => unnoticedThingsVideo.play(),
-        
-    });
-
-    //gsaTimIns.pause('test');
-
-    gsaTimIns.add( () => {}, '+=15' );
-
-    gsaTimIns.to(heartPath, {
-        //autoAlpha: 0,
-        scale: 0,
-        transformOrigin: '50% 50%',
-        duration: 2, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => {
-
-            unnoticedThingsVideo.style.visibility = 'hidden';
-            unnoticedThingsVideo.style.opacity = '0';
-
-        },
-    });
-
-    gsaTimIns.to(wrapper, {
-        opacity: 1,
-        duration: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        onComplete: () => cursor.classList.add('cursor-blink'),
-    });
-
-    //gsaTimIns.play('test');
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[4],
-        duration: (texArr[4].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-        repeat: 1,
-        yoyo: true,
-        yoyEase: 'none',
-        repeatDelay: 1.5,
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[5],
-        duration: (texArr[5].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-        repeat: 1,
-        yoyo: true,
-        yoyEase: 'none',
-        repeatDelay: 1.5,
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[6],
-        duration: (texArr[6].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-        repeat: 1,
-        yoyo: true,
-        yoyEase: 'none',
-        repeatDelay: 1.5,
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[7],
-        duration: (texArr[7].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-        repeat: 1,
-        yoyo: true,
-        yoyEase: 'none',
-        repeatDelay: 1.5,
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[8],
-        duration: (texArr[8].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-        repeat: 1,
-        yoyo: true,
-        yoyEase: 'none',
-        repeatDelay: 1.5,
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[9],
-        duration: (texArr[9].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-        repeat: 1,
-        yoyo: true,
-        yoyEase: 'none',
-        repeatDelay: 1.5,
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[10],
-        duration: (texArr[9].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-        repeat: 1,
-        yoyo: true,
-        yoyEase: 'none',
-        repeatDelay: 1.5,
-    });
-
-    gsaTimIns.set('.typewriter', { text: '' });
-
-    //gsaTimIns.play('test');
-
-    gsaTimIns.to('.typewriter', {
-        text : texArr[11],
-        duration: (texArr[10].length * 1) / 15,
-        //slow then speeds up easing
-        ease: 'power1.in',
-    });
-
-    gsaTimIns.to(wrapper, {
-        autoAlpha: 0, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        delay: 1.5,
-        duration: 1,
-        onComplete: () => {
-            
-            cursor.classList.remove('cursor-blink');
-            gsaTimIns.set('.typewriter', { text: '' });
-        
-        },
-    });
-
-    //gsaTimIns.play('test');
-
-    gsaTimIns.to(finalScene, {
-        autoAlpha: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        duration: 0.1,
-    });
-
-    gsaTimIns.to(finSceTex1, {
-        text : 'Happy',
-        duration: 1,
-        //slow then speeds up easing
-        ease: 'power1.in',
-    });
-
-    gsaTimIns.to(finSceTex2, {
-        text : 'Mother\'s',
-        duration: 1,
-        //slow then speeds up easing
-        ease: 'power1.in',
-    });
-
-    gsaTimIns.to(finSceTex3, {
-        text : 'Day!',
-        duration: 1,
-        //slow then speeds up easing
-        ease: 'power1.in',
-    });
-
-    gsaTimIns.to(heartPaths, {
-        autoAlpha: 1, 
-        //slow then speeds up easing
-        ease: 'power1.in',
-        duration: 0.1,
-        stagger : {
-            each: 0.2,
-            onComplete: function( this: gsap.core.Tween ) {
-
-                const target = this.targets()[0] as SVGPathElement;
-                const idx = HEART_DEFS.findIndex(h => h.id === target.id);
-
-                gsap.to(target, {
-                    scale: 1.15, transformOrigin: '50% 50%',
-                    duration: 0.9 + idx * 0.05, ease: 'sine.inOut',
-                    yoyo: true, repeat: -1, delay: idx * 0.18,
-                });
-
-            },
-        },
-    });
+    }, '<');
 
     //gsaTimIns.play('test');
 
     //GSDevTools.create();
 
-  }, []);
 
-  const [isFullscreen, setIsFullscreen] = useState(true);
+    
+    // const svgContainer = document.getElementById('svgContainer') as SVGAElement | HTMLElement;
+    // const cell1 = document.getElementById('cell1') as HTMLElement;
+    // const cell2 = document.getElementById('cell2') as HTMLElement;
+    // const cell3 = document.getElementById('cell3') as HTMLElement;
+    // const cell4 = document.getElementById('cell4') as HTMLElement;
+    // const cell5 = document.getElementById('cell5') as HTMLElement;
+    // const cell6 = document.getElementById('cell6') as HTMLElement;
+    // const cell7 = document.getElementById('cell7') as HTMLElement;
+    // const cell8 = document.getElementById('cell8') as HTMLElement;
+    // const cell9 = document.getElementById('cell9') as HTMLElement;
+    // const cell10 = document.getElementById('cell10') as HTMLElement;
+    // const cell11 = document.getElementById('cell11') as HTMLElement;
+    // const cell12 = document.getElementById('cell12') as HTMLElement;
 
-  function toggleFullscreen() {
+
+
+    // const imgOne = document.getElementById('imgOne') as HTMLElement;
+    // const imgTwo = document.getElementById('imgTwo') as HTMLElement;
+    // const imgThr = document.getElementById('imgThr') as HTMLElement;
+    // const imgFou = document.getElementById('imgFou') as HTMLElement;
+    // const imgFiv = document.getElementById('imgFiv') as HTMLElement;
+    // const imgSix = document.getElementById('imgSix') as HTMLElement;
+    // const imgSev = document.getElementById('imgSev') as HTMLElement;
+    // const imgEig = document.getElementById('imgEig') as HTMLElement;
+    // const imgNin = document.getElementById('imgNin') as HTMLElement;
+    // const imgTen = document.getElementById('imgTen') as HTMLElement;
+    // const imgEle = document.getElementById('imgEle') as HTMLElement;
+    // const imgTwe = document.getElementById('imgTwe') as HTMLElement;
+
+
+
+
+    //gsap.set(svgContainer, { opacity: 1, visibility: 'visible' });
+
+
+
+    // gsaTimIns.from(imgOne, {
+    //     clipPath: "inset(0% 0% 100% 0%)",
+    //     duration: 1.5,
+    //     ease: "power2.inOut"
+    // });
+
+    // gsap.to(cell1, {
+    //     clipPath: "shape(from 50% 91%,line to 90% 50%,arc to 50% 9% of 1%,arc to 10% 50% of 1%)",
+    //     transformOrigin: '50% 50%',
+    //     duration: 1,
+    //     ease: "power2.inOut"
+    // });
+
+
+   }, []);
+
+   const [isFullscreen, setIsFullscreen] = useState(true);
+
+   function toggleFullscreen() {
 
     const maiConDiv = document.getElementById('maiConDiv') as HTMLDivElement;
 
@@ -728,7 +1412,7 @@ let gsaTimIns : GSAPTimeline;
 
 
 
-        gsaTimIns.restart();
+        //gsaTimIns.restart();
 
     };
 
@@ -736,23 +1420,40 @@ let gsaTimIns : GSAPTimeline;
 
   useEffect(() => {
 
-    const orientationType = screen.orientation.type;
+    // const orientationType = screen.orientation.type;
 
 
 
-    if (orientationType.includes('portrait')) {
+    // if (orientationType.includes('portrait')) {
 
-        alert('For the best experience, please view this card in landscape mode by rotating your device.');
+    //     alert('For the best experience, please view this card in landscape mode by rotating your device.');
 
-        gsaTimIns.restart();//.seek("test"); ;
+    //     gsaTimIns.restart();//.seek("test"); ;
 
-    }
+    // }
 
-    else {
+    // else {
 
-        gsaTimIns.restart();//.seek("test"); ;
+    //     gsaTimIns.restart();//.seek("test"); ;
 
-    }
+    // }
+
+//     const images = document.getElementsByClassName('images') as HTMLCollectionOf<HTMLImageElement>;
+
+//     for (const img of images) {
+
+//         img.onload = () => {
+
+//             const width = img.parentElement?.offsetWidth;
+//             const height = img.parentElement?.offsetHeight;
+// console.log(width, height)
+//             const resizedDataUrl = resizeImage(img, width, height); // Resize to 800x600 (adjust as needed)
+
+//             img.src = resizedDataUrl;
+
+//         }
+
+//     }
 
   }, []);
 
@@ -760,6 +1461,106 @@ let gsaTimIns : GSAPTimeline;
 
   return (
     <>
+
+    <style>{`
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+  --scale-x: 0;
+    background: #fff;
+    padding: 24px;
+    min-height: 100vh;
+  }
+
+  .grid {
+    display: grid;
+    position: fixed;
+    top: 0;
+    left: 0;
+    gap: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1.4fr 1fr 1fr 1.5fr 1fr 1fr 1.5fr;
+    width: calc(100vw - 24px);
+    height: calc(100vh - 24px);
+    background: #f9e8ec;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+    opacity: 0;
+    margin: 12px;
+  }
+
+  #cell111 {
+  clip-path: shape(from 50% 91%,line to 90% 50%,arc to 50% 9% of 1%,arc to 10% 50% of 1%);
+  }
+
+  .cell {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));;
+    grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));;
+    place-items: center;
+    place-content: center;
+    overflow: hidden;
+  }
+
+  .images {
+  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  
+
+  /* Column 1: 3 cells stacked */
+  .c1r1 { grid-column: 1; grid-row: 1 / 2; }
+  .c1r2 { grid-column: 1; grid-row: 2 / 6; }
+  .c1r3 { grid-column: 1; grid-row: 6 / 8; }
+
+
+
+  /* Column 2: tall top, then two below */
+  .c2r1 { grid-column: 2; grid-row: 1 / 3; }
+  .c2r2 { grid-column: 2; grid-row: 3 / 5; }
+  .c2r3 { grid-column: 2; grid-row: 5 / 8; }
+
+  /* Column 3: tall top, then two below */
+  .c3r1 { grid-column: 3; grid-row: 1 / 4; }
+  .c3r2 { grid-column: 3; grid-row: 4 / 6; }
+  .c3r3 { grid-column: 3; grid-row: 6 / 8 ; }
+
+  /* Column 4: small top, tall middle, small bottom */
+  .c4r1 { grid-column: 4; grid-row: 1 / 3; }
+  .c4r2 { grid-column: 4; grid-row: 3 / 7; }
+  .c4r3 { grid-column: 4; grid-row: 7 / 8; }
+
+  /* Tablet: 2 columns */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(6, 140px);
+    }
+    .cell {
+      grid-column: auto !important;
+      grid-row: auto !important;
+    }
+  }
+
+  /* Mobile: 1 column */
+  @media (max-width: 480px) {
+    .grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(12, 120px);
+    }
+  }`}
+</style>
+
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Caveat:wght@700&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -770,11 +1571,12 @@ let gsaTimIns : GSAPTimeline;
 
       <div id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
 
+        
 
         <div id='wrapper' className={ styles.wrapper }>
 
 
-            <p><span id="typewriter" className={ `${ styles.typewriter }  typewriter` }></span><span id='cursor' className={ `${ styles.cursor }   cursor-blink` }>|</span></p>
+            <p><span id="typewriter1" className={ `${ styles.typewriter }  typewriter` }></span><span id="typewriter2" className={ `${ styles.typewriter }  typewriter` }></span><span id="typewriter3" className={ `${ styles.typewriter }  typewriter` }></span><span id='cursor' className={ `${ styles.cursor }   cursor-blink` }>|</span></p>
 
 
         </div>
@@ -808,35 +1610,43 @@ let gsaTimIns : GSAPTimeline;
                     <div className={ styles.videoContainer }>
 
 
-                        <video id='thankYouVideo' className={ styles.videos } muted playsInline style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }}>
-
-                            <source src={thankYouIllus} type="video/mp4" />
-
-                        </video>
+                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <video id='tasksVideo' className={ styles.videos } muted playsInline style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }}>
-
-                            <source src={tasksIllus} type="video/mp4" />
-
-                        </video>
+                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <video id='littleThingsVideo' className={ styles.videos } muted playsInline style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }}>
-
-                            <source src={littleThingsIllus} type="video/mp4" />
-
-                        </video>
+                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <video id='unnoticedThingsVideo' className={ styles.videos } muted playsInline style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }}>
+                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
 
-                            <source src={unnoticedThingsIllus} type="video/mp4" />
 
-                        </video>
+
+                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
 
 
                     </div>
@@ -856,61 +1666,141 @@ let gsaTimIns : GSAPTimeline;
 
 
 
-        {/* ── Final illustration screen ── */}
-        <div id='finalScene'
-          ref={finalRef}
-          style={{
-            position: 'absolute', inset: 0, opacity: 0, zIndex: 3,
-            background: '#f9e8ec', display: 'flex',
-            alignItems: 'center', justifyContent: 'center',
-          }}
-        >
+        <div id="masonryGrid" className="grid">
 
 
-            {/* Hearts SVG */}
-            <svg id='heartsSVG'
-                viewBox={ orientationType.includes('landscape') ? "0 0 700 420" : "0 0 412 915" }
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }}
-            >
-                {HEART_DEFS.map(h => (
-                    <path
-                    id={h.id}
-                    className={h.class}
-                    key={h.id}
-                    ref={el => { heartRefs.current[h.id] = el; }}
-                    d={h.d}
-                    fill={h.fill}
-                    stroke="#c03050"
-                    strokeWidth={h.strokeWidth}
-                    opacity="0"
-                    />
-                ))}
-            </svg>
+                    <div className="cell c1r1">
+
+
+                        <img id='imgOne' className='c1r1Img images' src={ ourResponsibilityImg } />
+
+
+                    </div>
 
 
 
-            <div id="fstConDiv" style={{ zIndex: 3 }}>
+                    <div className="cell c2r1" >
 
 
-                <p id="finSceTex1" className={ styles.finalSceneText }></p>
-                <p id="finSceTex2" className={ styles.finalSceneText }></p>
-                <p id="finSceTex3" className={ styles.finalSceneText }></p>
+                        <img id='imgOne' className='c2r1Img images' src={ littleThingsImg }  />
 
 
-            </div>
+                    </div>
 
 
-        </div>
+
+                    <div className="cell c3r1">
+
+
+                        <img id='imgOne' className='c3r1Img images' src={ needYouImg }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c4r1">
+
+
+                        <img id='imgOne' className='c4r1Img images' src={ loveYouImg }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c1r2">
+
+
+                        <img id='imgOne' className='c1r2Img images' src={ mothersLoveImg }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c2r2">
+
+
+                        <img id='imgOne' className='c2r2Img images' src={ extraImage2Img }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c3r2">
+
+
+                        <img id='imgOne' className='c3r2Img images' src={ extraImage1Img }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c4r2">
+
+
+                        <img id='imgOne' className='c4r2Img images' src={ ourWorldImg }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c1r3">
+
+
+                        <img id='imgOne' className='c1r3Img images' src={ celebrationImg }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c2r3">
+
+
+                        <img id='imgOne' className='c2r3Img images' src={ everythingYouDoImg }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c3r3">
+
+
+                        <img id='imgOne' className='c3r3Img images' src={ thankYouImg }  />
+
+
+                    </div>
+
+
+
+                    <div className="cell c4r3">
+
+
+                        <img id='imgOne' className='c4r3Img images' src={ appreciateYouImg }  />
+
+
+                    </div>
+
+
+      </div>
+
+
 
         <div id='butConDiv' className={ styles.buttonContainerDiv } >
 
-            {/* Replay button */}
+
             <button id='repAniBut' className={ styles.animationButtons } onClick={resetTimeline} >
                 Replay
             </button>
 
-            {/* Fullscreen button */}
+
+
             <button id='fulScrBut' className={ styles.animationButtons } onClick={() => toggleFullscreen()} >
                 Toggle Fullscreen
             </button>
