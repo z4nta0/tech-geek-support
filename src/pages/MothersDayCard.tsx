@@ -1403,22 +1403,7 @@ console.log('winHeiNum: ', winHeiNum);
 
     function resetTimeline() {
 
-        const finalScene = document.getElementById('finalScene') as HTMLSpanElement | HTMLElement;
-
-        finalScene.style.visibility = 'hidden';
-        finalScene.style.opacity = '0';
-
-
-
-        for (const heart of HEART_DEFS) {
-
-            gsap.set(`#${heart.id}`, { opacity: 0, scale: 1, transformOrigin: '50% 50%' });
-
-        };
-
-
-
-        //gsaTimIns.restart();
+        gsaTimIns.restart();
 
     };
 
