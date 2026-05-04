@@ -1607,7 +1607,7 @@ console.log('winHeiNum: ', winHeiNum);
         <div className={ styles.videoContainer }>
 
 
-            <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920">
+            <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
 
 
                 <defs>
