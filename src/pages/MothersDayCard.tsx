@@ -305,6 +305,8 @@ export default function MothersDayCard() {
         
     }, '>');
 
+    //gsaTimIns.pause('test');
+
     gsaTimIns.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
@@ -1197,6 +1199,8 @@ export default function MothersDayCard() {
         
     }, '>');
 
+    //gsaTimIns.pause('test');
+
     gsaTimIns.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
@@ -1263,9 +1267,9 @@ export default function MothersDayCard() {
         ease: 'power1.in',
         onComplete: () => {
 
-            typewriter1.style.display = 'inline-block';
-
             cursor.classList.add('cursor-blink');
+
+            typewriter1.style.display = 'inline-block';
 
         },
     });
@@ -1287,7 +1291,8 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    const scale = winWidNum <= 1400 && winWidNum > 1000 ? 2 : winWidNum <= 1000 ? 1.1 : 3;
+
+    const scale = winWidNum <= 1400 && winWidNum > 1000 ? 2 : winWidNum <= 1000 ? 1.2 : 3;
 
     gsaTimIns.to(typewriter1, {
         scale: scale,
@@ -1522,8 +1527,6 @@ export default function MothersDayCard() {
   .c1r2 { grid-column: 1; grid-row: 2 / 6; }
   .c1r3 { grid-column: 1; grid-row: 6 / 8; }
 
-
-
   /* Column 2: tall top, then two below */
   .c2r1 { grid-column: 2; grid-row: 1 / 3; }
   .c2r2 { grid-column: 2; grid-row: 3 / 5; }
@@ -1541,22 +1544,40 @@ export default function MothersDayCard() {
 
   /* Tablet: 2 columns */
   @media (max-width: 768px) {
+
     .grid {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(6, 140px);
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1.4fr 1fr 1fr 1.5fr 1fr 1fr 1.5fr;
     }
-    .cell {
-      grid-column: auto !important;
-      grid-row: auto !important;
-    }
+
   }
 
   /* Mobile: 1 column */
   @media (max-width: 480px) {
+
     .grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(12, 120px);
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1.4fr 1fr 1fr 1.5fr 1fr 1fr 1.5fr 1.3fr;
     }
+
+    /* Column 1: 3 cells stacked */
+    .c1r1 { grid-column: 1; grid-row: 1 / 3; }
+    .c1r2 { grid-column: 1; grid-row: 3 / 6; }
+    .c1r3 { grid-column: 1; grid-row: 6 / 8; }
+    .c4r1 { grid-column: 1; grid-row: 8 / 9; }
+
+    /* Column 2: tall top, then two below */
+    .c2r1 { grid-column: 2; grid-row: 1 / 4; }
+    .c2r2 { grid-column: 2; grid-row: 4 / 5; }
+    .c2r3 { grid-column: 2; grid-row: 5 / 7; }
+    .c4r2 { grid-column: 2; grid-row: 7 / 9; }
+
+    /* Column 3: tall top, then two below */
+    .c3r1 { grid-column: 3; grid-row: 1 / 2; }
+    .c3r2 { grid-column: 3; grid-row: 2 / 6; }
+    .c3r3 { grid-column: 3; grid-row: 6 / 8 ; }
+    .c4r3 { grid-column: 3; grid-row: 8 / 9; }
+    
   }`}
 </style>
 
@@ -1586,7 +1607,7 @@ export default function MothersDayCard() {
         <div className={ styles.videoContainer }>
 
 
-            <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+            <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920">
 
 
                 <defs>
@@ -1604,7 +1625,7 @@ export default function MothersDayCard() {
 
 
 
-                <foreignObject width="1920" height="1080">
+                <foreignObject width="100%" height="100%">
 
 
                     <div className={ styles.videoContainer }>
