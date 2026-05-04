@@ -182,7 +182,7 @@ export default function MothersDayCard() {
     /** Window Height Number                   = This custom variable stores the current window viewport height and will trigger a rerender via the {@link useEffect} hook when the window is resized and its value changes in order to recalculate the snowfall and the pixelated transition animation parameters. */
     /** Window Width Number                    = This custom variable stores the current window viewport width and will trigger a rerender via the {@link useEffect} hook when the window is resized and its value changes in order to recalculate the snowfall and the pixelated transition animation parameters. */
     const { winHeiNum, winWidNum } : WinSizObj = useWinSiz();
-
+console.log('winHeiNum: ', winHeiNum);
 
 
  let gsaTimIns : GSAPTimeline;
