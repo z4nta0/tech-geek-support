@@ -1270,6 +1270,7 @@ console.log('winHeiNum: ', winHeiNum);
             cursor.classList.add('cursor-blink');
 
             typewriter1.style.display = 'inline-block';
+            typewriter1.style.padding = '0 29px';
 
         },
     });
