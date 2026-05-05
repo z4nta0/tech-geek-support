@@ -33,7 +33,8 @@ export default function MothersDayCard() {
     /** Window Height Number                   = This custom variable stores the current window viewport height and will trigger a rerender via the {@link useEffect} hook when the window is resized and its value changes in order to recalculate the snowfall and the pixelated transition animation parameters. */
     /** Window Width Number                    = This custom variable stores the current window viewport width and will trigger a rerender via the {@link useEffect} hook when the window is resized and its value changes in order to recalculate the snowfall and the pixelated transition animation parameters. */
     const { winHeiNum, winWidNum } : WinSizObj = useWinSiz();
-console.log('winHeiNum: ', winHeiNum);
+
+    const [isLandscape, setIsLandscape] = useState(true);
 
 
  let gsaTimIns : GSAPTimeline;
@@ -79,6 +80,8 @@ console.log('winHeiNum: ', winHeiNum);
     const needYou = document.getElementById('needYouImg') as HTMLImageElement;
     const masonryGrid = document.getElementById('masonryGrid') as HTMLElement;
 
+    const imgScale = isLandscape === true ? 5 : 65;
+
 
 
     gsap.set(wrapper, { opacity: 0, visibility: 'visible' });
@@ -97,6 +100,8 @@ console.log('winHeiNum: ', winHeiNum);
         //slow then speeds up easing
         ease :  'none',
     });
+
+    //gsaTimIns.pause('test');
 
     gsaTimIns.to(typewriter2, {
         text : { value: texArr[0][1], delimiter: '' },
@@ -148,7 +153,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -248,7 +253,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -349,7 +354,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -448,7 +453,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -547,7 +552,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -646,7 +651,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -745,7 +750,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -844,7 +849,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -943,7 +948,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -1042,7 +1047,7 @@ console.log('winHeiNum: ', winHeiNum);
     //gsaTimIns.play('test');
 
     gsaTimIns.to(heartPath, {
-        scale: 5,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -1165,58 +1170,7 @@ console.log('winHeiNum: ', winHeiNum);
     //GSDevTools.create();
 
 
-    
-    // const svgContainer = document.getElementById('svgContainer') as SVGAElement | HTMLElement;
-    // const cell1 = document.getElementById('cell1') as HTMLElement;
-    // const cell2 = document.getElementById('cell2') as HTMLElement;
-    // const cell3 = document.getElementById('cell3') as HTMLElement;
-    // const cell4 = document.getElementById('cell4') as HTMLElement;
-    // const cell5 = document.getElementById('cell5') as HTMLElement;
-    // const cell6 = document.getElementById('cell6') as HTMLElement;
-    // const cell7 = document.getElementById('cell7') as HTMLElement;
-    // const cell8 = document.getElementById('cell8') as HTMLElement;
-    // const cell9 = document.getElementById('cell9') as HTMLElement;
-    // const cell10 = document.getElementById('cell10') as HTMLElement;
-    // const cell11 = document.getElementById('cell11') as HTMLElement;
-    // const cell12 = document.getElementById('cell12') as HTMLElement;
-
-
-
-    // const imgOne = document.getElementById('imgOne') as HTMLElement;
-    // const imgTwo = document.getElementById('imgTwo') as HTMLElement;
-    // const imgThr = document.getElementById('imgThr') as HTMLElement;
-    // const imgFou = document.getElementById('imgFou') as HTMLElement;
-    // const imgFiv = document.getElementById('imgFiv') as HTMLElement;
-    // const imgSix = document.getElementById('imgSix') as HTMLElement;
-    // const imgSev = document.getElementById('imgSev') as HTMLElement;
-    // const imgEig = document.getElementById('imgEig') as HTMLElement;
-    // const imgNin = document.getElementById('imgNin') as HTMLElement;
-    // const imgTen = document.getElementById('imgTen') as HTMLElement;
-    // const imgEle = document.getElementById('imgEle') as HTMLElement;
-    // const imgTwe = document.getElementById('imgTwe') as HTMLElement;
-
-
-
-
-    //gsap.set(svgContainer, { opacity: 1, visibility: 'visible' });
-
-
-
-    // gsaTimIns.from(imgOne, {
-    //     clipPath: "inset(0% 0% 100% 0%)",
-    //     duration: 1.5,
-    //     ease: "power2.inOut"
-    // });
-
-    // gsap.to(cell1, {
-    //     clipPath: "shape(from 50% 91%,line to 90% 50%,arc to 50% 9% of 1%,arc to 10% 50% of 1%)",
-    //     transformOrigin: '50% 50%',
-    //     duration: 1,
-    //     ease: "power2.inOut"
-    // });
-
-
-   }, []);
+   }, [isLandscape]);
 
    const [isFullscreen, setIsFullscreen] = useState(true);
 
@@ -1260,28 +1214,53 @@ console.log('winHeiNum: ', winHeiNum);
 
 
 
-  useEffect(() => {
+    useEffect(() => {
 
-    const orientationType = screen.orientation.type;
-
-
-
-    if (orientationType.includes('portrait')) {
-
-        alert('For the best experience, please view this card in landscape mode by rotating your device.');
-
-        gsaTimIns.restart();//.seek("test"); ;
-
-    }
-
-    else {
-
-        gsaTimIns.restart();//.seek("test"); ;
-
-    }
+        const orientationType = screen.orientation.type;
 
 
-  }, []);
+
+        if (orientationType.includes('portrait')) {
+
+            setIsLandscape(false);
+
+        }
+
+        else {
+
+            setIsLandscape(true);
+
+        }
+
+
+    }, [winHeiNum, winWidNum]);
+
+
+
+    useEffect(() => {
+
+        const orientationType = screen.orientation.type;
+
+
+
+        if (orientationType.includes('portrait')) {
+
+            alert('For the best experience, please view this card in landscape mode by rotating your device.');
+
+
+
+            gsaTimIns.restart();//.seek("test"); ;
+
+        }
+
+        else {
+
+            gsaTimIns.restart();//.seek("test"); ;
+
+        }
+
+
+    }, []);
 
   // ── Render ───────────────────────────────────────────────────────────────
 
@@ -1426,8 +1405,7 @@ console.log('winHeiNum: ', winHeiNum);
 
 
         <div className={ styles.videoContainer }>
-
-
+{/* 
             <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
 
 
@@ -1497,11 +1475,150 @@ console.log('winHeiNum: ', winHeiNum);
                 </foreignObject>
 
 
+            </svg> */}
 
-                {/* <rect width="1920" height="1080" style="stroke: rgb(0, 0, 0); fill: rgb(249, 232, 236); clip-path: url(#clip-0);"></rect> */}
+
+            { isLandscape === true ? <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+
+
+                <defs>
+
+
+                    <clipPath id="heartClip">
+
+
+                        <path id="heartPath" className={ styles.heartPath } fillRule="evenodd" clipRule="evenodd" d="M 862.896 270 C 845.516 270 825.881 271.831 807.096 278.226 C 693.938 315.183 657.57 436.031 689.543 535.636 L 689.684 536.061 L 689.825 536.456 C 707.459 585.977 735.855 630.937 772.785 667.891 L 772.98 668.086 L 773.205 668.311 C 825.856 718.791 883.181 762.822 945.238 801.02 L 959.828 810 L 974.503 801.19 C 1036.7 763.832 1095.13 718.596 1147.13 668.511 L 1147.3 668.371 L 1147.47 668.201 C 1184.71 631.157 1213.1 585.892 1230.48 536.341 L 1230.62 535.916 L 1230.76 535.496 C 1262.11 436.115 1225.92 315.129 1113.55 278.705 C 1095.15 272.593 1076.17 270 1057.61 270 C 1015.86 270 984.954 287.494 960.023 305.298 C 935.262 287.606 904.167 270 862.896 270 Z"></path>
+
+
+                    </clipPath>
+
+                </defs>
+
+
+
+                <foreignObject width="100%" height="100%">
+
+
+                    <div className={ styles.videoContainer }>
+
+
+                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+
+
+                    </div>
+
+
+                </foreignObject>
 
 
             </svg>
+
+
+
+            : <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 409 901">
+
+
+                <defs>
+
+
+                    <clipPath id="heartClip">
+
+
+                        <path id="heartPath" className={ styles.heartPath } fillRule="evenodd" clipRule="evenodd" d="M 201.052 440.915 C 200.436 440.915 199.738 440.98 199.072 441.207 C 195.054 442.519 193.764 446.809 194.899 450.345 L 194.904 450.36 L 194.908 450.374 C 195.535 452.132 196.542 453.727 197.854 455.04 L 197.86 455.047 L 197.869 455.055 C 199.738 456.847 201.772 458.41 203.975 459.766 L 204.494 460.085 L 205.014 459.772 C 207.223 458.446 209.296 456.84 211.143 455.062 L 211.149 455.057 L 211.154 455.051 C 212.477 453.736 213.484 452.129 214.102 450.37 L 214.106 450.355 L 214.111 450.34 C 215.225 446.812 213.94 442.517 209.951 441.224 C 209.298 441.007 208.623 440.915 207.964 440.915 C 206.483 440.915 205.386 441.535 204.501 442.168 C 203.621 441.54 202.518 440.915 201.052 440.915 Z"></path>
+
+
+                    </clipPath>
+
+
+                </defs>
+  
+                <foreignObject width="100%" height="100%">
+
+
+                    <div className={ styles.videoContainer }>
+
+
+                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+
+                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+
+
+                    </div>
+
+
+                </foreignObject>
+
+            </svg> }
 
 
         </div>
