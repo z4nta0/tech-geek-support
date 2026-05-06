@@ -181,6 +181,8 @@ export default function MothersDayCard() {
         },
     });
 
+    //gsaTimIns.pause('test');
+
     gsaTimIns.set(typewriter1, { text: '' });
     gsaTimIns.set(typewriter2, { text: '' });
     gsaTimIns.set(typewriter3, { text: '' });
@@ -1249,13 +1251,15 @@ export default function MothersDayCard() {
 
 
 
-            gsaTimIns.restart();//.seek("test"); ;
+            gsaTimIns.restart();
+            //gsaTimIns.seek("test");
 
         }
 
         else {
 
-            gsaTimIns.restart();//.seek("test"); ;
+            gsaTimIns.restart();
+            //gsaTimIns.seek("test"); 
 
         }
 
@@ -1551,7 +1555,7 @@ export default function MothersDayCard() {
 
 
 
-            : <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 409 901">
+            : <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 409 911">
 
 
                 <defs>
@@ -1574,43 +1578,43 @@ export default function MothersDayCard() {
                     <div className={ styles.videoContainer }>
 
 
-                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '409px', height: '901px', clipPath: 'url(#heartClip)' }} />
+                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
                     </div>
