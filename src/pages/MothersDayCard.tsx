@@ -1165,7 +1165,21 @@ export default function MothersDayCard() {
         autoAlpha: 1, 
         //slow then speeds up easing
         ease: 'power1.in',
+        onComplete: () => {
+
+            wrapper.style.height = '0';
+
+            alert('You may click on any of the images to expand them.');
+
+        },
     }, '<');
+
+    gsaTimIns.to(wrapper, {
+        height: 0, 
+        //slow then speeds up easing
+        ease: 'power1.in',
+        onComplete: () =>alert('You may click on any of the images to expand them.'),
+    }, '>');
 
     //gsaTimIns.play('test');
 
@@ -1266,6 +1280,42 @@ export default function MothersDayCard() {
 
     }, []);
 
+
+
+    const handleOnClick = (evt : React.MouseEvent<HTMLImageElement>) => {
+
+        const target = evt.target as HTMLImageElement;
+
+        if (target.style.position === 'fixed') {
+
+            target.style.position = 'relative';
+            target.style.left = 'initial';
+            target.style.top = 'initial';
+            target.style.width = '100%';
+            target.style.height = '100%';
+            target.style.objectFit = 'cover';
+            target.style.objectPosition = 'initial';
+            target.style.zIndex = 'initial';
+
+            return;
+
+        }
+
+        else {
+
+            target.style.position = 'fixed';
+            target.style.left = '0';
+            target.style.top = '0';
+            target.style.width = '100vw';
+            target.style.height = '100vh';
+            target.style.objectFit = 'cover';
+            target.style.objectPosition = 'center';
+            target.style.zIndex = '9999999999999';
+
+        }
+
+    }
+
   // ── Render ───────────────────────────────────────────────────────────────
 
   return (
@@ -1322,6 +1372,7 @@ export default function MothersDayCard() {
     object-position: center;
     max-width: 100%;
     max-height: 100%;
+    cursor: pointer;
   }
 
   
@@ -1409,77 +1460,6 @@ export default function MothersDayCard() {
 
 
         <div className={ styles.videoContainer }>
-{/* 
-            <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
-
-
-                <defs>
-
-
-                    <clipPath id="heartClip">
-
-
-                        <path id="heartPath" className={ styles.heartPath } fillRule="evenodd" clipRule="evenodd" d="M 862.896 270 C 845.516 270 825.881 271.831 807.096 278.226 C 693.938 315.183 657.57 436.031 689.543 535.636 L 689.684 536.061 L 689.825 536.456 C 707.459 585.977 735.855 630.937 772.785 667.891 L 772.98 668.086 L 773.205 668.311 C 825.856 718.791 883.181 762.822 945.238 801.02 L 959.828 810 L 974.503 801.19 C 1036.7 763.832 1095.13 718.596 1147.13 668.511 L 1147.3 668.371 L 1147.47 668.201 C 1184.71 631.157 1213.1 585.892 1230.48 536.341 L 1230.62 535.916 L 1230.76 535.496 C 1262.11 436.115 1225.92 315.129 1113.55 278.705 C 1095.15 272.593 1076.17 270 1057.61 270 C 1015.86 270 984.954 287.494 960.023 305.298 C 935.262 287.606 904.167 270 862.896 270 Z"></path>
-
-
-                    </clipPath>
-
-                </defs>
-
-
-
-                <foreignObject width="100%" height="100%">
-
-
-                    <div className={ styles.videoContainer }>
-
-
-                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
-
-
-                    </div>
-
-
-                </foreignObject>
-
-
-            </svg> */}
 
 
             { isLandscape === true ? <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
@@ -1635,7 +1615,7 @@ export default function MothersDayCard() {
                     <div className="cell c1r1">
 
 
-                        <img id='imgOne' className='c1r1Img images' src={ ourResponsibilityImg } />
+                        <img id='imgOne' className='c1r1Img images' src={ ourResponsibilityImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1645,7 +1625,7 @@ export default function MothersDayCard() {
                     <div className="cell c2r1" >
 
 
-                        <img id='imgOne' className='c2r1Img images' src={ littleThingsImg }  />
+                        <img id='imgOne' className='c2r1Img images' src={ littleThingsImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1655,7 +1635,7 @@ export default function MothersDayCard() {
                     <div className="cell c3r1">
 
 
-                        <img id='imgOne' className='c3r1Img images' src={ needYouImg }  />
+                        <img id='imgOne' className='c3r1Img images' src={ needYouImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1665,7 +1645,7 @@ export default function MothersDayCard() {
                     <div className="cell c4r1">
 
 
-                        <img id='imgOne' className='c4r1Img images' src={ loveYouImg }  />
+                        <img id='imgOne' className='c4r1Img images' src={ loveYouImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1675,7 +1655,7 @@ export default function MothersDayCard() {
                     <div className="cell c1r2">
 
 
-                        <img id='imgOne' className='c1r2Img images' src={ mothersLoveImg }  />
+                        <img id='imgOne' className='c1r2Img images' src={ mothersLoveImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1685,7 +1665,7 @@ export default function MothersDayCard() {
                     <div className="cell c2r2">
 
 
-                        <img id='imgOne' className='c2r2Img images' src={ extraImage2Img }  />
+                        <img id='imgOne' className='c2r2Img images' src={ extraImage2Img } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1695,7 +1675,7 @@ export default function MothersDayCard() {
                     <div className="cell c3r2">
 
 
-                        <img id='imgOne' className='c3r2Img images' src={ extraImage1Img }  />
+                        <img id='imgOne' className='c3r2Img images' src={ extraImage1Img } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1705,7 +1685,7 @@ export default function MothersDayCard() {
                     <div className="cell c4r2">
 
 
-                        <img id='imgOne' className='c4r2Img images' src={ ourWorldImg }  />
+                        <img id='imgOne' className='c4r2Img images' src={ ourWorldImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1715,7 +1695,7 @@ export default function MothersDayCard() {
                     <div className="cell c1r3">
 
 
-                        <img id='imgOne' className='c1r3Img images' src={ celebrationImg }  />
+                        <img id='imgOne' className='c1r3Img images' src={ celebrationImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1725,7 +1705,7 @@ export default function MothersDayCard() {
                     <div className="cell c2r3">
 
 
-                        <img id='imgOne' className='c2r3Img images' src={ everythingYouDoImg }  />
+                        <img id='imgOne' className='c2r3Img images' src={ everythingYouDoImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1735,7 +1715,7 @@ export default function MothersDayCard() {
                     <div className="cell c3r3">
 
 
-                        <img id='imgOne' className='c3r3Img images' src={ thankYouImg }  />
+                        <img id='imgOne' className='c3r3Img images' src={ thankYouImg } onClick={ handleOnClick } data-img-name="thankYouImg" />
 
 
                     </div>
@@ -1745,7 +1725,7 @@ export default function MothersDayCard() {
                     <div className="cell c4r3">
 
 
-                        <img id='imgOne' className='c4r3Img images' src={ appreciateYouImg }  />
+                        <img id='imgOne' className='c4r3Img images' src={ appreciateYouImg } onClick={ handleOnClick } />
 
 
                     </div>
