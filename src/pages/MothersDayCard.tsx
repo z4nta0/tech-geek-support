@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import styles from './MothersDayCard.module.css';
 import { useGSAP } from '@gsap/react';
@@ -34,20 +34,32 @@ export default function MothersDayCard() {
     /** Window Width Number                    = This custom variable stores the current window viewport width and will trigger a rerender via the {@link useEffect} hook when the window is resized and its value changes in order to recalculate the snowfall and the pixelated transition animation parameters. */
     const { winHeiNum, winWidNum } : WinSizObj = useWinSiz();
 
-    const [isLandscape, setIsLandscape] = useState(true);
 
 
- let gsaTimIns : GSAPTimeline;
+    const [isLandscape, setIsLandscape] : [boolean|null, Function] = useState(null);
+
+
+
+    const imgScale = useRef(5);
+
+
+    const gsaTimIns = useRef<GSAPTimeline>(null);
+
+
+
+    const container = useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLDivElement>;
+
+
 
    useGSAP(() => {
 
 
     const texArr = [
         ["Thank you, ", "mothers", "!"],
-        ["For ", "everything that you do", " for us."],
+        ["For ", "everything", "that you do for us."],
         ["Especially the ", "little things", "."],
         ["To the world you are a mother, but to us you are ", "our world", "."],
-        ["A mother's love is a ", "special thing", " indeed!"],
+        ["A mother's love is a ", "special", "thing indeed!"],
         ["You definitely deserve more than one day of ", "celebration" ,"."],
         ["So it is ", "our responsibility" ," to make the most of this one day."],
         ["You are ", "loved", " (even when we don't show it)."],
@@ -59,7 +71,9 @@ export default function MothersDayCard() {
 
 
 
-     gsaTimIns = gsap.timeline();
+    gsaTimIns.current = gsap.timeline();
+
+
 
     const wrapper = document.getElementById('wrapper') as HTMLSpanElement;
     const typewriter1 = document.getElementById('typewriter1') as HTMLSpanElement;
@@ -80,13 +94,17 @@ export default function MothersDayCard() {
     const needYou = document.getElementById('needYouImg') as HTMLImageElement;
     const masonryGrid = document.getElementById('masonryGrid') as HTMLElement;
 
-    const imgScale = isLandscape === true ? 5 : 65;
 
 
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+
+console.log(thankYou.offsetHeight, thankYou.offsetWidth);
 
     gsap.set(wrapper, { opacity: 0, visibility: 'visible' });
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -94,7 +112,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[0][0], delimiter: '' },
         duration: (texArr[0][0].length * 1) / 15,
         //slow then speeds up easing
@@ -103,21 +121,21 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[0][1], delimiter: '' },
         duration: (texArr[0][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[0][2], delimiter: '' },
         duration: (texArr[0][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -126,7 +144,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -137,7 +155,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -152,8 +170,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -163,7 +181,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -175,6 +193,7 @@ export default function MothersDayCard() {
 
             thankYou.style.visibility = 'hidden';
             thankYou.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
@@ -183,14 +202,14 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -198,28 +217,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[1][0], delimiter: '' },
         duration: (texArr[1][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[1][1], delimiter: '' },
         duration: (texArr[1][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[1][2], delimiter: '' },
         duration: (texArr[1][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -228,7 +247,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -239,7 +258,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -254,8 +273,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -265,7 +284,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -277,21 +296,22 @@ export default function MothersDayCard() {
 
             everythingYouDo.style.visibility = 'hidden';
             everythingYouDo.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -299,28 +319,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[2][0], delimiter: '' },
         duration: (texArr[2][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[2][1], delimiter: '' },
         duration: (texArr[2][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[2][2], delimiter: '' },
         duration: (texArr[2][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -329,7 +349,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -340,7 +360,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -355,8 +375,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -364,7 +384,7 @@ export default function MothersDayCard() {
         
     }, '>');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -376,21 +396,22 @@ export default function MothersDayCard() {
 
             littleThings.style.visibility = 'hidden';
             littleThings.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -398,28 +419,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[3][0], delimiter: '' },
         duration: (texArr[3][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[3][1], delimiter: '' },
         duration: (texArr[3][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[3][2], delimiter: '' },
         duration: (texArr[3][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -428,7 +449,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -439,7 +460,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -454,8 +475,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -463,7 +484,7 @@ export default function MothersDayCard() {
         
     }, '>');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -475,21 +496,22 @@ export default function MothersDayCard() {
 
             ourWorld.style.visibility = 'hidden';
             ourWorld.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -497,28 +519,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[4][0], delimiter: '' },
         duration: (texArr[4][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[4][1], delimiter: '' },
         duration: (texArr[4][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[4][2], delimiter: '' },
         duration: (texArr[4][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -527,7 +549,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -538,7 +560,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -553,8 +575,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -562,7 +584,7 @@ export default function MothersDayCard() {
         
     }, '>');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -574,21 +596,22 @@ export default function MothersDayCard() {
 
             mothersLove.style.visibility = 'hidden';
             mothersLove.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -596,28 +619,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[5][0], delimiter: '' },
         duration: (texArr[5][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[5][1], delimiter: '' },
         duration: (texArr[5][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[5][2], delimiter: '' },
         duration: (texArr[5][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -626,7 +649,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -637,7 +660,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -652,8 +675,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -661,7 +684,7 @@ export default function MothersDayCard() {
         
     }, '>');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -673,21 +696,22 @@ export default function MothersDayCard() {
 
             celebration.style.visibility = 'hidden';
             celebration.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -695,28 +719,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[6][0], delimiter: '' },
         duration: (texArr[6][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[6][1], delimiter: '' },
         duration: (texArr[6][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[6][2], delimiter: '' },
         duration: (texArr[6][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -725,7 +749,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -736,7 +760,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -751,8 +775,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -760,7 +784,7 @@ export default function MothersDayCard() {
         
     }, '>');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -772,21 +796,22 @@ export default function MothersDayCard() {
 
             ourResponsibility.style.visibility = 'hidden';
             ourResponsibility.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -794,28 +819,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[7][0], delimiter: '' },
         duration: (texArr[7][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[7][1], delimiter: '' },
         duration: (texArr[7][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[7][2], delimiter: '' },
         duration: (texArr[7][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -824,7 +849,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -835,7 +860,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -850,8 +875,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -859,7 +884,7 @@ export default function MothersDayCard() {
         
     }, '>');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -871,21 +896,22 @@ export default function MothersDayCard() {
 
             loveYou.style.visibility = 'hidden';
             loveYou.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -893,28 +919,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[8][0], delimiter: '' },
         duration: (texArr[8][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[8][1], delimiter: '' },
         duration: (texArr[8][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[8][2], delimiter: '' },
         duration: (texArr[8][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -923,7 +949,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -934,7 +960,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -949,8 +975,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -958,7 +984,7 @@ export default function MothersDayCard() {
         
     }, '>');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -970,21 +996,22 @@ export default function MothersDayCard() {
 
             appreciateYou.style.visibility = 'hidden';
             appreciateYou.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -992,28 +1019,28 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[9][0], delimiter: '' },
         duration: (texArr[9][0].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter2, {
+    gsaTimIns.current.to(typewriter2, {
         text : { value: texArr[9][1], delimiter: '' },
         duration: (texArr[9][1].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-    gsaTimIns.to(typewriter3, {
+    gsaTimIns.current.to(typewriter3, {
         text : { value: texArr[9][2], delimiter: '' },
         duration: (texArr[9][2].length * 1) / 15,
         //slow then speeds up easing
         ease :  'none',
     });
 
-     gsaTimIns.to(typewriter2, {
+     gsaTimIns.current.to(typewriter2, {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -1022,7 +1049,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         delay: 1.5,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -1033,7 +1060,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.to(thankYouSVG, {
+    gsaTimIns.current.to(thankYouSVG, {
         autoAlpha: 1,
         duration: 0.1,
         //slow then speeds up easing
@@ -1048,8 +1075,8 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(heartPath, {
-        scale: imgScale,
+    gsaTimIns.current.to(heartPath, {
+        scale: imgScale.current,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -1059,7 +1086,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(heartPath, {
+    gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
         transformOrigin: '50% 50%',
@@ -1071,21 +1098,22 @@ export default function MothersDayCard() {
 
             needYou.style.visibility = 'hidden';
             needYou.style.opacity = '0';
+
             thankYouSVG.style.visibility = 'hidden';
             thankYouSVG.style.opacity = '0';
 
         },
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
-    gsaTimIns.set(typewriter2, { text: '' });
-    gsaTimIns.set(typewriter3, { text: '' });
-    gsaTimIns.set(wrapper, { scale: 1 });
-    gsaTimIns.set(typewriter2, { clearProps: "--scale-x" });
+    gsaTimIns.current.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter2, { text: '' });
+    gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(wrapper, { scale: 1 });
+    gsaTimIns.current.set(typewriter2, { clearProps: "--scale-x" });
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -1093,7 +1121,7 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.add('cursor-blink'),
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[10][0], delimiter: '' },
         duration: (texArr[10][0].length * 1) / 15,
         //slow then speeds up easing
@@ -1106,7 +1134,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.play('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 0,
         duration: 1,
         //slow then speeds up easing
@@ -1114,11 +1142,11 @@ export default function MothersDayCard() {
         onComplete: () => cursor.classList.remove('cursor-blink'),
     });
 
-    gsaTimIns.set(typewriter1, { text: '' });
+    gsaTimIns.current.set(typewriter1, { text: '' });
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         opacity: 1,
         duration: 1, 
         //slow then speeds up easing
@@ -1133,7 +1161,7 @@ export default function MothersDayCard() {
         },
     });
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         text : { value: texArr[11][0], delimiter: '' },
         duration: (texArr[11][0].length * 1) / 15,
         //slow then speeds up easing
@@ -1142,7 +1170,7 @@ export default function MothersDayCard() {
 
     //gsaTimIns.pause('test');
 
-    gsaTimIns.to(cursor, {
+    gsaTimIns.current.to(cursor, {
         opacity: 0,
         duration: 1,
         //slow then speeds up easing
@@ -1153,7 +1181,7 @@ export default function MothersDayCard() {
 
     const scale = winWidNum <= 1400 && winWidNum > 1000 ? 2 : winWidNum <= 1000 ? 1.2 : 3;
 
-    gsaTimIns.to(typewriter1, {
+    gsaTimIns.current.to(typewriter1, {
         scale: scale,
         transformOrigin: '50% 50%',
         duration: 1,
@@ -1161,20 +1189,14 @@ export default function MothersDayCard() {
         ease :  'back',
     });
 
-    gsaTimIns.to(masonryGrid, {
+    gsaTimIns.current.to(masonryGrid, {
         autoAlpha: 1, 
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => {
-
-            wrapper.style.height = '0';
-
-            alert('You may click on any of the images to expand them.');
-
-        },
+        onComplete: () => wrapper.style.height = '0',
     }, '<');
 
-    gsaTimIns.to(wrapper, {
+    gsaTimIns.current.to(wrapper, {
         height: 0, 
         //slow then speeds up easing
         ease: 'power1.in',
@@ -1186,7 +1208,14 @@ export default function MothersDayCard() {
     //GSDevTools.create();
 
 
-   }, [isLandscape]);
+
+
+    return () => {if (gsaTimIns.current) gsaTimIns.current.kill()};
+
+
+   });
+
+
 
    const [isFullscreen, setIsFullscreen] = useState(true);
 
@@ -1224,7 +1253,11 @@ export default function MothersDayCard() {
 
     function resetTimeline() {
 
-        gsaTimIns.restart();
+        if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
+
+            gsaTimIns.current.invalidate().restart();
+
+        }
 
     };
 
@@ -1238,11 +1271,19 @@ export default function MothersDayCard() {
 
         if (orientationType.includes('portrait')) {
 
+            imgScale.current = 65;
+
+
+
             setIsLandscape(false);
 
         }
 
         else {
+
+            imgScale.current = 5;
+
+
 
             setIsLandscape(true);
 
@@ -1265,15 +1306,23 @@ export default function MothersDayCard() {
 
 
 
-            gsaTimIns.restart();
-            //gsaTimIns.seek("test");
+            if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
+
+                gsaTimIns.current.invalidate().restart();
+                //gsaTimIns.current.seek("test");
+
+            }
 
         }
 
         else {
 
-            gsaTimIns.restart();
-            //gsaTimIns.seek("test"); 
+            if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
+
+                gsaTimIns.current.invalidate().restart();
+                //gsaTimIns.current.seek("test");
+
+            }
 
         }
 
@@ -1445,7 +1494,7 @@ export default function MothersDayCard() {
         .mdc-cursor.blinking { animation: blink 0.6s linear infinite; }
       `}</style>
 
-      <div id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
+      <div ref={ container } id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
 
         
 
