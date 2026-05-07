@@ -100,7 +100,7 @@ export default function MothersDayCard() {
     gsaTimIns.current.set(typewriter2, { text: '' });
     gsaTimIns.current.set(typewriter3, { text: '' });
 
-console.log(thankYou.offsetHeight, thankYou.offsetWidth);
+
 
     gsap.set(wrapper, { opacity: 0, visibility: 'visible' });
 
