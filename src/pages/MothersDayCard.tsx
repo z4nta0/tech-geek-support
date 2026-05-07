@@ -1173,7 +1173,7 @@ export default function MothersDayCard() {
 
     gsaTimIns.current.set(typewriter1, { text: '' });
 
-    //gsaTimIns.pause('test');
+    //gsaTimIns.current.play('test');
 
     gsaTimIns.current.to(wrapper, {
         opacity: 1,
@@ -1197,7 +1197,7 @@ export default function MothersDayCard() {
         ease :  'none',
     });
 
-    //gsaTimIns.pause('test');
+    //gsaTimIns.current.play('test');
 
     gsaTimIns.current.to(cursor, {
         opacity: 0,
@@ -1398,6 +1398,8 @@ export default function MothersDayCard() {
             target.style.objectPosition = 'initial';
             target.style.zIndex = 'initial';
 
+
+
             return;
 
         }
@@ -1414,6 +1416,8 @@ export default function MothersDayCard() {
             target.style.objectFit = 'cover';
             target.style.objectPosition = 'center';
             target.style.zIndex = '9999999999999';
+
+
 
             return;
 
@@ -1452,10 +1456,6 @@ export default function MothersDayCard() {
     visibility: hidden;
     opacity: 0;
     margin: 12px;
-  }
-
-  #cell111 {
-  clip-path: shape(from 50% 91%,line to 90% 50%,arc to 50% 9% of 1%,arc to 10% 50% of 1%);
   }
 
   .cell {
@@ -1556,7 +1556,6 @@ export default function MothersDayCard() {
 
         <div id='wrapper' className={ styles.wrapper }>
 
-
             <p><span id="typewriter1" className={ `${ styles.typewriter }  typewriter` }></span><span id="typewriter2" className={ `${ styles.typewriter }  typewriter` }></span><span id="typewriter3" className={ `${ styles.typewriter }  typewriter` }></span><span id='cursor' className={ `${ styles.cursor }   cursor-blink` }>|</span></p>
 
 
@@ -1597,7 +1596,7 @@ export default function MothersDayCard() {
                     <div className={ styles.videoContainer }>
 
 
-                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='thankYouImg' src={ thankYouImg } className={ `${styles.videos} ` } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
