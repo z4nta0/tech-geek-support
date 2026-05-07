@@ -1173,7 +1173,7 @@ export default function MothersDayCard() {
 
     gsaTimIns.current.set(typewriter1, { text: '' });
 
-    //gsaTimIns.current.play('test');
+    gsaTimIns.current.play('test');
 
     gsaTimIns.current.to(wrapper, {
         opacity: 1,
@@ -1218,11 +1218,25 @@ export default function MothersDayCard() {
         ease :  'back',
     });
 
+    gsaTimIns.current.set(".images", { clipPath: "inset(0 100% 0 0)" });
+
     gsaTimIns.current.to(masonryGrid, {
-        autoAlpha: 1, 
+        autoAlpha: 1,
+        duration: 0.1,
         //slow then speeds up easing
         ease: 'power1.in',
     }, '<');
+
+    gsaTimIns.current.to(".images", {
+        clipPath: "inset(0 0% 0 0)",
+        duration: 1.5,
+        ease: "power2.out",
+        stagger: {
+            each: 0.1,
+            from: "random",
+            ease: "power2.inOut"
+        }
+    });
 
     gsaTimIns.current.to(wrapper, {
         height: 0, 
@@ -1245,6 +1259,7 @@ export default function MothersDayCard() {
    function toggleFullscreen() {
 
     const maiConDiv = document.getElementById('maiConDiv') as HTMLDivElement;
+    const masonryGrid = document.getElementById('masonryGrid') as HTMLDivElement;
 
     if (isFullscreen === true) {
 
@@ -1252,6 +1267,8 @@ export default function MothersDayCard() {
         maiConDiv.style.position = 'relative';
 
         document.body.style.overflow = 'auto';
+
+        masonryGrid.style.position = 'relative';
 
 
 
@@ -1263,6 +1280,8 @@ export default function MothersDayCard() {
         maiConDiv.style.position = 'fixed';
 
         document.body.style.overflow = 'hidden';
+
+        masonryGrid.style.position = 'fixed';
 
 
 
@@ -1352,8 +1371,8 @@ export default function MothersDayCard() {
 
             if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
-                gsaTimIns.current.invalidate().restart();
-                //gsaTimIns.current.seek("test");
+                //gsaTimIns.current.invalidate().restart();
+                gsaTimIns.current.seek("test");
 
             }
 
@@ -1368,8 +1387,8 @@ export default function MothersDayCard() {
 
             if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
-                gsaTimIns.current.invalidate().restart();
-                //gsaTimIns.current.seek("test");
+                //gsaTimIns.current.invalidate().restart();
+                gsaTimIns.current.seek("test");
 
             }
 
@@ -1735,7 +1754,7 @@ export default function MothersDayCard() {
                     <div className="cell c2r1" >
 
 
-                        <img id='imgOne' className='c2r1Img images' src={ littleThingsImg } onClick={ handleOnClick } />
+                        <img id='imgTwo' className='c2r1Img images' src={ littleThingsImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1745,7 +1764,7 @@ export default function MothersDayCard() {
                     <div className="cell c3r1">
 
 
-                        <img id='imgOne' className='c3r1Img images' src={ needYouImg } onClick={ handleOnClick } />
+                        <img id='imgThree' className='c3r1Img images' src={ needYouImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1755,7 +1774,7 @@ export default function MothersDayCard() {
                     <div className="cell c4r1">
 
 
-                        <img id='imgOne' className='c4r1Img images' src={ loveYouImg } onClick={ handleOnClick } />
+                        <img id='imgFour' className='c4r1Img images' src={ loveYouImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1765,7 +1784,7 @@ export default function MothersDayCard() {
                     <div className="cell c1r2">
 
 
-                        <img id='imgOne' className='c1r2Img images' src={ mothersLoveImg } onClick={ handleOnClick } />
+                        <img id='imgFive' className='c1r2Img images' src={ mothersLoveImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1775,7 +1794,7 @@ export default function MothersDayCard() {
                     <div className="cell c2r2">
 
 
-                        <img id='imgOne' className='c2r2Img images' src={ extraImage2Img } onClick={ handleOnClick } />
+                        <img id='imgSix' className='c2r2Img images' src={ extraImage2Img } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1785,7 +1804,7 @@ export default function MothersDayCard() {
                     <div className="cell c3r2">
 
 
-                        <img id='imgOne' className='c3r2Img images' src={ extraImage1Img } onClick={ handleOnClick } />
+                        <img id='imgSeven' className='c3r2Img images' src={ extraImage1Img } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1795,7 +1814,7 @@ export default function MothersDayCard() {
                     <div className="cell c4r2">
 
 
-                        <img id='imgOne' className='c4r2Img images' src={ ourWorldImg } onClick={ handleOnClick } />
+                        <img id='imgEight' className='c4r2Img images' src={ ourWorldImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1805,7 +1824,7 @@ export default function MothersDayCard() {
                     <div className="cell c1r3">
 
 
-                        <img id='imgOne' className='c1r3Img images' src={ celebrationImg } onClick={ handleOnClick } />
+                        <img id='imgNine' className='c1r3Img images' src={ celebrationImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1815,7 +1834,7 @@ export default function MothersDayCard() {
                     <div className="cell c2r3">
 
 
-                        <img id='imgOne' className='c2r3Img images' src={ everythingYouDoImg } onClick={ handleOnClick } />
+                        <img id='imgTen' className='c2r3Img images' src={ everythingYouDoImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1825,7 +1844,7 @@ export default function MothersDayCard() {
                     <div className="cell c3r3">
 
 
-                        <img id='imgOne' className='c3r3Img images' src={ thankYouImg } onClick={ handleOnClick } data-img-name="thankYouImg" />
+                        <img id='imgEleven' className='c3r3Img images' src={ thankYouImg } onClick={ handleOnClick } data-img-name="thankYouImg" />
 
 
                     </div>
@@ -1835,7 +1854,7 @@ export default function MothersDayCard() {
                     <div className="cell c4r3">
 
 
-                        <img id='imgOne' className='c4r3Img images' src={ appreciateYouImg } onClick={ handleOnClick } />
+                        <img id='imgTwelve' className='c4r3Img images' src={ appreciateYouImg } onClick={ handleOnClick } />
 
 
                     </div>
