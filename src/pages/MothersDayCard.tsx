@@ -36,7 +36,7 @@ export default function MothersDayCard() {
 
 
 
-    const [isLandscape, setIsLandscape] : [boolean|null, Function] = useState(null);
+    const [isLandscape, setIsLandscape] : [boolean|null, Function] = useState(true);
 
 
 
@@ -56,10 +56,10 @@ export default function MothersDayCard() {
 
     const texArr = [
         ["Thank you, ", "mothers", "!"],
-        ["For ", "everything", "that you do for us."],
+        ["For ", "everything", " that you do for us."],
         ["Especially the ", "little things", "."],
         ["To the world you are a mother, but to us you are ", "our world", "."],
-        ["A mother's love is a ", "special", "thing indeed!"],
+        ["A mother's love is a ", "special", " thing indeed!"],
         ["You definitely deserve more than one day of ", "celebration" ,"."],
         ["So it is ", "our responsibility" ," to make the most of this one day."],
         ["You are ", "loved", " (even when we don't show it)."],
@@ -71,7 +71,7 @@ export default function MothersDayCard() {
 
 
 
-    gsaTimIns.current = gsap.timeline();
+    gsaTimIns.current = gsap.timeline().clear();
 
 
 
@@ -96,13 +96,27 @@ export default function MothersDayCard() {
 
 
 
+    gsaTimIns.current.set(wrapper, { height: '100%', scale: 1, opacity: 1, visibility: 'visible' });
     gsaTimIns.current.set(typewriter1, { text: '' });
     gsaTimIns.current.set(typewriter2, { text: '' });
     gsaTimIns.current.set(typewriter3, { text: '' });
+    gsaTimIns.current.set(cursor, { opacity: 1 });
+
+    gsaTimIns.current.set(thankYouSVG, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(thankYou, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(everythingYouDo, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(littleThings, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(ourWorld, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(mothersLove, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(celebration, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(ourResponsibility, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(loveYou, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(appreciateYou, { visibility: 'hidden', opacity: 0 });
+    gsaTimIns.current.set(needYou, { visibility: 'hidden', opacity: 0 });
+
+    gsaTimIns.current.set(masonryGrid, { visibility: 'hidden', opacity: 0 });
 
 
-
-    gsap.set(wrapper, { opacity: 0, visibility: 'visible' });
 
     gsaTimIns.current.to(wrapper, {
         opacity: 1,
@@ -199,6 +213,7 @@ export default function MothersDayCard() {
 
         },
     });
+
 
     //gsaTimIns.pause('test');
 
@@ -384,6 +399,8 @@ export default function MothersDayCard() {
         
     }, '>');
 
+    //gsaTimIns.pause('test');
+
     gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
@@ -483,6 +500,8 @@ export default function MothersDayCard() {
         ease: 'power1.in',
         
     }, '>');
+
+    //gsaTimIns.pause('test');
 
     gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
@@ -584,6 +603,8 @@ export default function MothersDayCard() {
         
     }, '>');
 
+    //gsaTimIns.pause('test');
+
     gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
@@ -683,6 +704,8 @@ export default function MothersDayCard() {
         ease: 'power1.in',
         
     }, '>');
+
+    //gsaTimIns.pause('test');
 
     gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
@@ -784,6 +807,8 @@ export default function MothersDayCard() {
         
     }, '>');
 
+    //gsaTimIns.pause('test');
+
     gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
@@ -884,6 +909,8 @@ export default function MothersDayCard() {
         
     }, '>');
 
+    //gsaTimIns.pause('test');
+
     gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
         scale: 0,
@@ -983,6 +1010,8 @@ export default function MothersDayCard() {
         ease: 'power1.in',
         
     }, '>');
+
+    //gsaTimIns.pause('test');
 
     gsaTimIns.current.to(heartPath, {
         //autoAlpha: 0,
@@ -1193,7 +1222,6 @@ export default function MothersDayCard() {
         autoAlpha: 1, 
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => wrapper.style.height = '0',
     }, '<');
 
     gsaTimIns.current.to(wrapper, {
@@ -1208,12 +1236,7 @@ export default function MothersDayCard() {
     //GSDevTools.create();
 
 
-
-
-    return () => {if (gsaTimIns.current) gsaTimIns.current.kill()};
-
-
-   });
+   }, []);
 
 
 
@@ -1252,6 +1275,23 @@ export default function MothersDayCard() {
 
 
     function resetTimeline() {
+
+
+        const typewriter1 = document.getElementById('typewriter1') as HTMLSpanElement;
+        const typewriter2 = document.getElementById('typewriter2') as HTMLSpanElement;
+        const typewriter3 = document.getElementById('typewriter3') as HTMLSpanElement;
+        const heartPath = document.getElementById('heartPath') as SVGSVGElement | HTMLElement;
+
+
+
+        typewriter1.style.display = 'inline';
+        typewriter1.style.padding = '0 0';
+        typewriter1.style.transform = 'scale(1)';
+        typewriter2.style.transform = 'scale(1)';
+        typewriter3.style.transform = 'scale(1)';
+        heartPath.style.transform = 'scale(0)';
+
+
 
         if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
@@ -1306,6 +1346,10 @@ export default function MothersDayCard() {
 
 
 
+            setIsLandscape(false);
+
+
+
             if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
                 gsaTimIns.current.invalidate().restart();
@@ -1316,6 +1360,11 @@ export default function MothersDayCard() {
         }
 
         else {
+
+
+            setIsLandscape(true);
+
+
 
             if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
@@ -1511,7 +1560,7 @@ export default function MothersDayCard() {
         <div className={ styles.videoContainer }>
 
 
-            { isLandscape === true ? <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+            <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox={ isLandscape === true ? "0 0 1920 1080" : "0 0 409 911" }>
 
 
                 <defs>
@@ -1520,10 +1569,16 @@ export default function MothersDayCard() {
                     <clipPath id="heartClip">
 
 
-                        <path id="heartPath" className={ styles.heartPath } fillRule="evenodd" clipRule="evenodd" d="M 862.896 270 C 845.516 270 825.881 271.831 807.096 278.226 C 693.938 315.183 657.57 436.031 689.543 535.636 L 689.684 536.061 L 689.825 536.456 C 707.459 585.977 735.855 630.937 772.785 667.891 L 772.98 668.086 L 773.205 668.311 C 825.856 718.791 883.181 762.822 945.238 801.02 L 959.828 810 L 974.503 801.19 C 1036.7 763.832 1095.13 718.596 1147.13 668.511 L 1147.3 668.371 L 1147.47 668.201 C 1184.71 631.157 1213.1 585.892 1230.48 536.341 L 1230.62 535.916 L 1230.76 535.496 C 1262.11 436.115 1225.92 315.129 1113.55 278.705 C 1095.15 272.593 1076.17 270 1057.61 270 C 1015.86 270 984.954 287.494 960.023 305.298 C 935.262 287.606 904.167 270 862.896 270 Z"></path>
+                        <path id="heartPath" className={ styles.heartPath } fillRule="evenodd" clipRule="evenodd"
+                            d={ isLandscape === true
+                                ? "M 862.896 270 C 845.516 270 825.881 271.831 807.096 278.226 C 693.938 315.183 657.57 436.031 689.543 535.636 L 689.684 536.061 L 689.825 536.456 C 707.459 585.977 735.855 630.937 772.785 667.891 L 772.98 668.086 L 773.205 668.311 C 825.856 718.791 883.181 762.822 945.238 801.02 L 959.828 810 L 974.503 801.19 C 1036.7 763.832 1095.13 718.596 1147.13 668.511 L 1147.3 668.371 L 1147.47 668.201 C 1184.71 631.157 1213.1 585.892 1230.48 536.341 L 1230.62 535.916 L 1230.76 535.496 C 1262.11 436.115 1225.92 315.129 1113.55 278.705 C 1095.15 272.593 1076.17 270 1057.61 270 C 1015.86 270 984.954 287.494 960.023 305.298 C 935.262 287.606 904.167 270 862.896 270 Z"
+                                : "M 201.052 440.915 C 200.436 440.915 199.738 440.98 199.072 441.207 C 195.054 442.519 193.764 446.809 194.899 450.345 L 194.904 450.36 L 194.908 450.374 C 195.535 452.132 196.542 453.727 197.854 455.04 L 197.86 455.047 L 197.869 455.055 C 199.738 456.847 201.772 458.41 203.975 459.766 L 204.494 460.085 L 205.014 459.772 C 207.223 458.446 209.296 456.84 211.143 455.062 L 211.149 455.057 L 211.154 455.051 C 212.477 453.736 213.484 452.129 214.102 450.37 L 214.106 450.355 L 214.111 450.34 C 215.225 446.812 213.94 442.517 209.951 441.224 C 209.298 441.007 208.623 440.915 207.964 440.915 C 206.483 440.915 205.386 441.535 204.501 442.168 C 203.621 441.54 202.518 440.915 201.052 440.915 Z"
+                            }
+                        ></path>
 
 
                     </clipPath>
+
 
                 </defs>
 
@@ -1535,43 +1590,43 @@ export default function MothersDayCard() {
                     <div className={ styles.videoContainer }>
 
 
-                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' }} />
+                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
                     </div>
@@ -1584,74 +1639,74 @@ export default function MothersDayCard() {
 
 
 
-            : <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 409 911">
+            {/*: <svg id='thankYouSVG' className={ styles.thankYouSVG } style={{ visibility: 'hidden', opacity: 0 }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 409 911">
 
 
-                <defs>
+            //     <defs>
 
 
-                    <clipPath id="heartClip">
+            //         <clipPath id="heartClip">
 
 
-                        <path id="heartPath" className={ styles.heartPath } fillRule="evenodd" clipRule="evenodd" d="M 201.052 440.915 C 200.436 440.915 199.738 440.98 199.072 441.207 C 195.054 442.519 193.764 446.809 194.899 450.345 L 194.904 450.36 L 194.908 450.374 C 195.535 452.132 196.542 453.727 197.854 455.04 L 197.86 455.047 L 197.869 455.055 C 199.738 456.847 201.772 458.41 203.975 459.766 L 204.494 460.085 L 205.014 459.772 C 207.223 458.446 209.296 456.84 211.143 455.062 L 211.149 455.057 L 211.154 455.051 C 212.477 453.736 213.484 452.129 214.102 450.37 L 214.106 450.355 L 214.111 450.34 C 215.225 446.812 213.94 442.517 209.951 441.224 C 209.298 441.007 208.623 440.915 207.964 440.915 C 206.483 440.915 205.386 441.535 204.501 442.168 C 203.621 441.54 202.518 440.915 201.052 440.915 Z"></path>
+            //             <path id="heartPath" className={ styles.heartPath } fillRule="evenodd" clipRule="evenodd" d="M 201.052 440.915 C 200.436 440.915 199.738 440.98 199.072 441.207 C 195.054 442.519 193.764 446.809 194.899 450.345 L 194.904 450.36 L 194.908 450.374 C 195.535 452.132 196.542 453.727 197.854 455.04 L 197.86 455.047 L 197.869 455.055 C 199.738 456.847 201.772 458.41 203.975 459.766 L 204.494 460.085 L 205.014 459.772 C 207.223 458.446 209.296 456.84 211.143 455.062 L 211.149 455.057 L 211.154 455.051 C 212.477 453.736 213.484 452.129 214.102 450.37 L 214.106 450.355 L 214.111 450.34 C 215.225 446.812 213.94 442.517 209.951 441.224 C 209.298 441.007 208.623 440.915 207.964 440.915 C 206.483 440.915 205.386 441.535 204.501 442.168 C 203.621 441.54 202.518 440.915 201.052 440.915 Z"></path>
 
 
-                    </clipPath>
+            //         </clipPath>
 
 
-                </defs>
+            //     </defs>
   
-                <foreignObject width="100%" height="100%">
+            //     <foreignObject width="100%" height="100%">
 
 
-                    <div className={ styles.videoContainer }>
+            //         <div className={ styles.videoContainer }>
 
 
-                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
-
-
-
-                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
 
-                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
+            //             <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
-                    </div>
+
+            //             <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={{ width: '409px', height: '911px', clipPath: 'url(#heartClip)' }} />
 
 
-                </foreignObject>
+            //         </div>
 
-            </svg> }
+
+            //     </foreignObject>
+
+             </svg> */}
 
 
         </div>
