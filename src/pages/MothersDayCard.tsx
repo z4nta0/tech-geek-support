@@ -1383,8 +1383,11 @@ export default function MothersDayCard() {
     const handleOnClick = (evt : React.MouseEvent<HTMLImageElement>) => {
 
         const target = evt.target as HTMLImageElement;
+        const wrapper = document.getElementById('wrapper') as HTMLSpanElement;
 
         if (target.style.position === 'fixed') {
+
+            wrapper.style.zIndex = '99';
 
             target.style.position = 'relative';
             target.style.left = 'initial';
@@ -1401,6 +1404,8 @@ export default function MothersDayCard() {
 
         else {
 
+            wrapper.style.zIndex = '-1';
+
             target.style.position = 'fixed';
             target.style.left = '0';
             target.style.top = '0';
@@ -1409,6 +1414,8 @@ export default function MothersDayCard() {
             target.style.objectFit = 'cover';
             target.style.objectPosition = 'center';
             target.style.zIndex = '9999999999999';
+
+            return;
 
         }
 
