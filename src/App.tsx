@@ -9,7 +9,7 @@ import { Support } from './pages/Support'
 import { About } from './pages/About'
 import { Contact } from './pages/Contact'
 import { NotFound } from './pages/NotFound'
-import MothersDayCard from './pages/MothersDayCard'
+import MothersDayCardWrapper from './pages/MothersDayCardWrapper.tsx';
 
 const App: React.FC = () => {
   const location = useLocation()
@@ -22,7 +22,7 @@ const App: React.FC = () => {
           <Route path="/"        element={<Home />}    />
           <Route path="/work"    element={<Work />}    />
           <Route path="/cards"   element={<Cards />}   />
-          <Route path="/mothersdaycard" element={<MothersDayCard />} />
+          <Route path="/mothersdaycard" element={<MothersDayCardWrapper />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about"   element={<About />}   />
           <Route path="/contact" element={<Contact />} />
