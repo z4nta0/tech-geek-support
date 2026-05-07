@@ -40,7 +40,7 @@ export default function MothersDayCard() {
 
 
 
-    const imgScale = useRef(5);
+    const pathScale = useRef(5);
 
 
     const gsaTimIns = useRef<GSAPTimeline>(null);
@@ -93,6 +93,8 @@ export default function MothersDayCard() {
     const appreciateYou = document.getElementById('appreciateYouImg') as HTMLImageElement;
     const needYou = document.getElementById('needYouImg') as HTMLImageElement;
     const masonryGrid = document.getElementById('masonryGrid') as HTMLElement;
+
+    const imgScale = screen.orientation.type.includes('landscape') ? 5 : 65;
 
 
 
@@ -185,7 +187,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -289,7 +291,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -391,7 +393,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -493,7 +495,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -595,7 +597,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -697,7 +699,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -799,7 +801,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -901,7 +903,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -1003,7 +1005,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -1105,7 +1107,7 @@ export default function MothersDayCard() {
     //gsaTimIns.play('test');
 
     gsaTimIns.current.to(heartPath, {
-        scale: imgScale.current,
+        scale: imgScale,
         transformOrigin: '50% 50%',
         duration: 1, 
         //slow then speeds up easing
@@ -1330,7 +1332,7 @@ export default function MothersDayCard() {
 
         if (orientationType.includes('portrait')) {
 
-            imgScale.current = 65;
+            pathScale.current = 65;
 
 
 
@@ -1340,7 +1342,7 @@ export default function MothersDayCard() {
 
         else {
 
-            imgScale.current = 5;
+            pathScale.current = 5;
 
 
 
