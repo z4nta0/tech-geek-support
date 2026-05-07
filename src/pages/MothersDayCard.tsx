@@ -1173,7 +1173,7 @@ export default function MothersDayCard() {
 
     gsaTimIns.current.set(typewriter1, { text: '' });
 
-    gsaTimIns.current.play('test');
+    //gsaTimIns.current.play('test');
 
     gsaTimIns.current.to(wrapper, {
         opacity: 1,
@@ -1371,8 +1371,8 @@ export default function MothersDayCard() {
 
             if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
-                //gsaTimIns.current.invalidate().restart();
-                gsaTimIns.current.seek("test");
+                gsaTimIns.current.invalidate().restart();
+                //gsaTimIns.current.seek("test");
 
             }
 
@@ -1387,8 +1387,8 @@ export default function MothersDayCard() {
 
             if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
-                //gsaTimIns.current.invalidate().restart();
-                gsaTimIns.current.seek("test");
+                gsaTimIns.current.invalidate().restart();
+                //gsaTimIns.current.seek("test");
 
             }
 
