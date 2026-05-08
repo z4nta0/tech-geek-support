@@ -319,6 +319,7 @@ p {
 
     font-family: 'Great Vibes';
     font-size:40px;
+    pointer-events: none;
 
 }
 
