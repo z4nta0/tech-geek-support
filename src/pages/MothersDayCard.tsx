@@ -1451,126 +1451,6 @@ export default function MothersDayCard() {
   return (
     <>
 
-    <style>{`
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-  --scale-x: 0;
-    background: #fff;
-    padding: 24px;
-    min-height: 100vh;
-  }
-
-  .grid {
-    display: grid;
-    position: fixed;
-    top: 0;
-    left: 0;
-    gap: 12px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1.4fr 1fr 1fr 1.5fr 1fr 1fr 1.5fr;
-    width: calc(100vw - 24px);
-    height: calc(100vh - 24px);
-    background: #f9e8ec;
-    margin: 0;
-    padding: 0;
-    visibility: hidden;
-    opacity: 0;
-    margin: 12px;
-  }
-
-  .cell {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));;
-    grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));;
-    place-items: center;
-    place-content: center;
-    overflow: hidden;
-  }
-
-  .images {
-  display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    max-width: 100%;
-    max-height: 100%;
-    cursor: pointer;
-  }
-
-  
-
-  /* Column 1: 3 cells stacked */
-  .c1r1 { grid-column: 1; grid-row: 1 / 2; }
-  .c1r2 { grid-column: 1; grid-row: 2 / 6; }
-  .c1r3 { grid-column: 1; grid-row: 6 / 8; }
-
-  /* Column 2: tall top, then two below */
-  .c2r1 { grid-column: 2; grid-row: 1 / 3; }
-  .c2r2 { grid-column: 2; grid-row: 3 / 5; }
-  .c2r3 { grid-column: 2; grid-row: 5 / 8; }
-
-  /* Column 3: tall top, then two below */
-  .c3r1 { grid-column: 3; grid-row: 1 / 4; }
-  .c3r2 { grid-column: 3; grid-row: 4 / 6; }
-  .c3r3 { grid-column: 3; grid-row: 6 / 8 ; }
-
-  /* Column 4: small top, tall middle, small bottom */
-  .c4r1 { grid-column: 4; grid-row: 1 / 3; }
-  .c4r2 { grid-column: 4; grid-row: 3 / 7; }
-  .c4r3 { grid-column: 4; grid-row: 7 / 8; }
-
-  /* Tablet: 2 columns */
-  @media (max-width: 768px) {
-
-    .grid {
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: 1.4fr 1fr 1fr 1.5fr 1fr 1fr 1.5fr;
-    }
-
-  }
-
-  /* Mobile: 1 column */
-  @media (max-width: 480px) {
-
-    .grid {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 1.4fr 1fr 1fr 1.5fr 1fr 1fr 1.5fr 1.3fr;
-    }
-
-    /* Column 1: 3 cells stacked */
-    .c1r1 { grid-column: 1; grid-row: 1 / 3; }
-    .c1r2 { grid-column: 1; grid-row: 3 / 6; }
-    .c1r3 { grid-column: 1; grid-row: 6 / 8; }
-    .c4r1 { grid-column: 1; grid-row: 8 / 9; }
-
-    /* Column 2: tall top, then two below */
-    .c2r1 { grid-column: 2; grid-row: 1 / 4; }
-    .c2r2 { grid-column: 2; grid-row: 4 / 5; }
-    .c2r3 { grid-column: 2; grid-row: 5 / 7; }
-    .c4r2 { grid-column: 2; grid-row: 7 / 9; }
-
-    /* Column 3: tall top, then two below */
-    .c3r1 { grid-column: 3; grid-row: 1 / 2; }
-    .c3r2 { grid-column: 3; grid-row: 2 / 6; }
-    .c3r3 { grid-column: 3; grid-row: 6 / 8 ; }
-    .c4r3 { grid-column: 3; grid-row: 8 / 9; }
-    
-  }`}
-</style>
-
-
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Caveat:wght@700&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #f9e8ec; overflow: hidden; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .mdc-cursor.blinking { animation: blink 0.6s linear infinite; }
-      `}</style>
-
       <div ref={ container } id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
 
         
@@ -1617,7 +1497,7 @@ export default function MothersDayCard() {
                     <div className={ styles.videoContainer }>
 
 
-                        <img id='thankYouImg' src={ thankYouImg } className={ `${styles.videos} ` } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='thankYouImg' src={ thankYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
@@ -1740,123 +1620,123 @@ export default function MothersDayCard() {
 
 
 
-        <div id="masonryGrid" className="grid">
+        <div id="masonryGrid" className={ styles.grid }>
 
 
-                    <div className="cell c1r1">
+                    <div className={ `${ styles.cell}  ${ styles.c1r1 }` }>
 
 
-                        <img id='imgOne' className='c1r1Img images' src={ ourResponsibilityImg } onClick={ handleOnClick } />
-
-
-                    </div>
-
-
-
-                    <div className="cell c2r1" >
-
-
-                        <img id='imgTwo' className='c2r1Img images' src={ littleThingsImg } onClick={ handleOnClick } />
+                        <img id='imgOne' className={ `${ styles.c1r1Img }  ${styles.images }` } src={ ourResponsibilityImg } onClick={ handleOnClick } />
 
 
                     </div>
 
 
 
-                    <div className="cell c3r1">
+                    <div className={ `${ styles.cell}  ${ styles.c2r1 }` }>
 
 
-                        <img id='imgThree' className='c3r1Img images' src={ needYouImg } onClick={ handleOnClick } />
-
-
-                    </div>
-
-
-
-                    <div className="cell c4r1">
-
-
-                        <img id='imgFour' className='c4r1Img images' src={ loveYouImg } onClick={ handleOnClick } />
+                        <img id='imgTwo' className={ `${ styles.c2r1Img }  ${styles.images }` } src={ littleThingsImg } onClick={ handleOnClick } />
 
 
                     </div>
 
 
 
-                    <div className="cell c1r2">
+                    <div className={ `${ styles.cell}  ${ styles.c3r1 }` }>
 
 
-                        <img id='imgFive' className='c1r2Img images' src={ mothersLoveImg } onClick={ handleOnClick } />
-
-
-                    </div>
-
-
-
-                    <div className="cell c2r2">
-
-
-                        <img id='imgSix' className='c2r2Img images' src={ extraImage2Img } onClick={ handleOnClick } />
+                        <img id='imgThree' className={ `${ styles.c3r1Img }  ${styles.images }` } src={ needYouImg } onClick={ handleOnClick } />
 
 
                     </div>
 
 
 
-                    <div className="cell c3r2">
+                    <div className={ `${ styles.cell}  ${ styles.c4r1 }` }>
 
 
-                        <img id='imgSeven' className='c3r2Img images' src={ extraImage1Img } onClick={ handleOnClick } />
-
-
-                    </div>
-
-
-
-                    <div className="cell c4r2">
-
-
-                        <img id='imgEight' className='c4r2Img images' src={ ourWorldImg } onClick={ handleOnClick } />
+                        <img id='imgFour' className={ `${ styles.c4r1Img }  ${styles.images }` } src={ loveYouImg } onClick={ handleOnClick } />
 
 
                     </div>
 
 
 
-                    <div className="cell c1r3">
+                    <div className={ `${ styles.cell}  ${ styles.c1r2 }` }>
 
 
-                        <img id='imgNine' className='c1r3Img images' src={ celebrationImg } onClick={ handleOnClick } />
-
-
-                    </div>
-
-
-
-                    <div className="cell c2r3">
-
-
-                        <img id='imgTen' className='c2r3Img images' src={ everythingYouDoImg } onClick={ handleOnClick } />
+                        <img id='imgFive' className={ `${ styles.c1r2Img }  ${styles.images }` } src={ mothersLoveImg } onClick={ handleOnClick } />
 
 
                     </div>
 
 
 
-                    <div className="cell c3r3">
+                    <div className={ `${ styles.cell}  ${ styles.c2r2 }` }>
 
 
-                        <img id='imgEleven' className='c3r3Img images' src={ thankYouImg } onClick={ handleOnClick } data-img-name="thankYouImg" />
+                        <img id='imgSix' className={ `${ styles.c2r2Img }  ${styles.images }` } src={ extraImage2Img } onClick={ handleOnClick } />
 
 
                     </div>
 
 
 
-                    <div className="cell c4r3">
+                    <div className={ `${ styles.cell}  ${ styles.c3r2 }` }>
 
 
-                        <img id='imgTwelve' className='c4r3Img images' src={ appreciateYouImg } onClick={ handleOnClick } />
+                        <img id='imgSeven' className={ `${ styles.c3r2Img }  ${styles.images }` } src={ extraImage1Img } onClick={ handleOnClick } />
+
+
+                    </div>
+
+
+
+                    <div className={ `${ styles.cell}  ${ styles.c4r2 }` }>
+
+
+                        <img id='imgEight' className={ `${ styles.c4r2Img }  ${styles.images }` } src={ ourWorldImg } onClick={ handleOnClick } />
+
+
+                    </div>
+
+
+
+                    <div className={ `${ styles.cell}  ${ styles.c1r3 }` }>
+
+
+                        <img id='imgNine' className={ `${ styles.c1r3Img }  ${styles.images }` } src={ celebrationImg } onClick={ handleOnClick } />
+
+
+                    </div>
+
+
+
+                    <div className={ `${ styles.cell}  ${ styles.c2r3 }` }>
+
+
+                        <img id='imgTen' className={ `${ styles.c2r3Img }  ${styles.images }` } src={ everythingYouDoImg } onClick={ handleOnClick } />
+
+
+                    </div>
+
+
+
+                    <div className={ `${ styles.cell}  ${ styles.c3r3 }` }>
+
+
+                        <img id='imgEleven' className={ `${ styles.c3r3Img }  ${styles.images }` } src={ thankYouImg } onClick={ handleOnClick } data-img-name="thankYouImg" />
+
+
+                    </div>
+
+
+
+                    <div className={ `${ styles.cell}  ${ styles.c4r3 }` }>
+
+
+                        <img id='imgTwelve' className={ `${ styles.c4r3Img }  ${styles.images }` } src={ appreciateYouImg } onClick={ handleOnClick } />
 
 
                     </div>
