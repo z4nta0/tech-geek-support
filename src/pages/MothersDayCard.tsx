@@ -41,10 +41,6 @@ export default function MothersDayCard() {
 
 
 
-    const pathScale = useRef(5);
-
-
-
     const wakeLock = useRef(null) as React.MutableRefObject<WakeLockSentinel | null>;
 
 
@@ -1435,19 +1431,11 @@ export default function MothersDayCard() {
 
         if (orientationType.includes('portrait')) {
 
-            pathScale.current = 65;
-
-
-
             setIsLandscape(false);
 
         }
 
         else {
-
-            pathScale.current = 5;
-
-
 
             setIsLandscape(true);
 
