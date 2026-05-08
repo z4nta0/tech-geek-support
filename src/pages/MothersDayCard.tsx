@@ -20,6 +20,7 @@ import ourWorldImg from '../assets/mothers-day-card/our-world.png';
 import thankYouImg from '../assets/mothers-day-card/thank-you.png';
 import useWinSiz from '../hooks/useWinSiz.ts';     /** This import is the custom React hook that will provide the current window viewport dimensions and will also be used to trigger the useEffect hook on window resize events, as well as altering certain animation settings based on how small or big its dimensions are. */
 import { type WinSizObj } from '../hooks/useWinSiz.ts'; /** This import is the custom type definition for the custom state variable that is generated from the custom useWinSiz React Hook and stores the current viewport dimensions. */
+import type { ErrorResponse } from 'react-router-dom';
 
 
 
@@ -41,6 +42,10 @@ export default function MothersDayCard() {
 
 
     const pathScale = useRef(5);
+
+
+
+    const wakeLock = useRef(null) as React.MutableRefObject<WakeLockSentinel | null>;
 
 
     const gsaTimIns = useRef<GSAPTimeline>(null);
@@ -1307,7 +1312,10 @@ export default function MothersDayCard() {
         height: 0, 
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () =>alert('You may click on any of the images to expand them.'),
+        onComplete: () => {
+            alert('You may click on any of the images to expand them.');
+            releaseWakeLock();
+        },
     }, '>');
 
     //gsaTimIns.play('test');
@@ -1384,6 +1392,38 @@ export default function MothersDayCard() {
         }
 
     };
+
+
+
+
+    const releaseWakeLock = () => {
+        if (wakeLock.current !== null) {
+            wakeLock.current.release();
+            wakeLock.current = null;
+            //console.log('Screen Wake Lock released');
+        }
+    };
+
+
+
+
+    const requestWakeLock = async () => {
+        try {
+            // Request a screen wake lock
+            wakeLock.current = await navigator.wakeLock.request('screen');
+            //console.log('Screen Wake Lock is active');
+        } catch (err : any | unknown)
+         {
+            // The request can fail if the device is in low-power mode
+            console.error(`${err.name}, ${err.message}`);
+        }
+    };
+
+
+
+    useEffect(function setWakeLock () {
+        requestWakeLock();
+    }, []);
 
 
 
