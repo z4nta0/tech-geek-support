@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import styles from './HappyBirthdayCard.module.css';
+import { useLocation } from "react-router-dom";
 
 const COLORS = ["#FF6B6B","#FFD93D","#6BCB77","#4D96FF","#FF6FCF","#FF9A3C","#A78BFA","#34D399"];
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -10,6 +11,18 @@ interface Piece { x:number; y:number; vx:number; vy:number; color:string; size:n
 interface BalloonData { el:SVGGElement; x:number; speed:number; sway:number; swaySpeed:number; phase:number; }
 
 export default function HappyBirthdayCard() {
+
+
+    /** Search                                 = This custom variable stores the search property that is returned from the standard React Router useLocation hook and represents the query parameters in the URL. */
+    const { search } : { search : string }     = useLocation();
+    /** Search Parameters Instance             = This custom variable stores the standard Web API class instance of URLSearchParams that uses the previously defined {@link search} variable and provides methods for interacting with the query parameters. */
+    const seaParIns  : URLSearchParams         = new URLSearchParams( search );
+    /** Name Parameter String                  = This custom variable stores the name query parameter (or null) which will be used to customize the Christmas Card component's h1 element that is inside of the {@link chrCarJsx}, and it is acquired using the get method on the previously defined {@link seaParIns} URLSearchParams class instance. */
+    const namParStr  : string                  = seaParIns.get( 'name' );
+
+
+
+
   const cardRef    = useRef<HTMLDivElement>(null);
   const canvasRef  = useRef<HTMLCanvasElement>(null);
   const svgRef     = useRef<SVGSVGElement>(null);
@@ -262,10 +275,13 @@ export default function HappyBirthdayCard() {
           <div style={{ textAlign:"center", marginBottom:8 }}>
             <div ref={titleTopRef} className={ styles.luckiestGuyFont } style={{ fontSize:48, fontWeight:700, color:"#fff", lineHeight:1.1, textShadow:"0 2px 20px rgba(255,180,0,0.5)" }}>
               🎉 Happy
-            </div>
+            </div> {/* namParStr */}
             <div ref={titleMainRef} className={ styles.luckiestGuyFont } style={{ fontSize:62, fontWeight:800, background:"linear-gradient(90deg,#FFD93D,#FF6B6B,#A78BFA,#4D96FF,#6BCB77)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", letterSpacing:1 }}>
-              Birthday!
+              { namParStr === null ? `Birthday!` : 'Birthday,'}
             </div>
+            { namParStr !== null ? <div ref={titleMainRef} className={ styles.luckiestGuyFont } style={{ fontSize:62, fontWeight:800, background:"linear-gradient(90deg,#FFD93D,#FF6B6B,#A78BFA,#4D96FF,#6BCB77)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", letterSpacing:1 }}>
+              { `${ namParStr }!` }
+            </div> : null }
           </div>
 
           <p ref={subtitleRef} className={ styles.mysteryQuestFont } style={{ color:"rgba(255,255,255,0.85)", fontSize:16, textAlign:"center", marginBottom:24, maxWidth:300, lineHeight:1.6 }}>
