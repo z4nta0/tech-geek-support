@@ -20,7 +20,6 @@ import ourWorldImg from '../assets/mothers-day-card/our-world.png';
 import thankYouImg from '../assets/mothers-day-card/thank-you.png';
 import useWinSiz from '../hooks/useWinSiz.ts';     /** This import is the custom React hook that will provide the current window viewport dimensions and will also be used to trigger the useEffect hook on window resize events, as well as altering certain animation settings based on how small or big its dimensions are. */
 import { type WinSizObj } from '../hooks/useWinSiz.ts'; /** This import is the custom type definition for the custom state variable that is generated from the custom useWinSiz React Hook and stores the current viewport dimensions. */
-import type { ErrorResponse } from 'react-router-dom';
 
 
 
