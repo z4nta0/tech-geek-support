@@ -1626,7 +1626,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c1r1 }` }>
 
 
-                        <img id='imgOne' className={ `${ styles.c1r1Img }  ${styles.images }` } src={ ourResponsibilityImg } onClick={ handleOnClick } />
+                        <img id='imgOne' className={ `${ styles.c1r1Img }  ${styles.images }  images` } src={ ourResponsibilityImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1636,7 +1636,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c2r1 }` }>
 
 
-                        <img id='imgTwo' className={ `${ styles.c2r1Img }  ${styles.images }` } src={ littleThingsImg } onClick={ handleOnClick } />
+                        <img id='imgTwo' className={ `${ styles.c2r1Img }  ${styles.images }  images` } src={ littleThingsImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1646,7 +1646,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c3r1 }` }>
 
 
-                        <img id='imgThree' className={ `${ styles.c3r1Img }  ${styles.images }` } src={ needYouImg } onClick={ handleOnClick } />
+                        <img id='imgThree' className={ `${ styles.c3r1Img }  ${styles.images }  images` } src={ needYouImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1656,7 +1656,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c4r1 }` }>
 
 
-                        <img id='imgFour' className={ `${ styles.c4r1Img }  ${styles.images }` } src={ loveYouImg } onClick={ handleOnClick } />
+                        <img id='imgFour' className={ `${ styles.c4r1Img }  ${styles.images }  images` } src={ loveYouImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1666,7 +1666,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c1r2 }` }>
 
 
-                        <img id='imgFive' className={ `${ styles.c1r2Img }  ${styles.images }` } src={ mothersLoveImg } onClick={ handleOnClick } />
+                        <img id='imgFive' className={ `${ styles.c1r2Img }  ${styles.images }  images` } src={ mothersLoveImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1676,7 +1676,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c2r2 }` }>
 
 
-                        <img id='imgSix' className={ `${ styles.c2r2Img }  ${styles.images }` } src={ extraImage2Img } onClick={ handleOnClick } />
+                        <img id='imgSix' className={ `${ styles.c2r2Img }  ${styles.images }  images` } src={ extraImage2Img } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1686,7 +1686,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c3r2 }` }>
 
 
-                        <img id='imgSeven' className={ `${ styles.c3r2Img }  ${styles.images }` } src={ extraImage1Img } onClick={ handleOnClick } />
+                        <img id='imgSeven' className={ `${ styles.c3r2Img }  ${styles.images }  images` } src={ extraImage1Img } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1696,7 +1696,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c4r2 }` }>
 
 
-                        <img id='imgEight' className={ `${ styles.c4r2Img }  ${styles.images }` } src={ ourWorldImg } onClick={ handleOnClick } />
+                        <img id='imgEight' className={ `${ styles.c4r2Img }  ${styles.images }  images` } src={ ourWorldImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1706,7 +1706,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c1r3 }` }>
 
 
-                        <img id='imgNine' className={ `${ styles.c1r3Img }  ${styles.images }` } src={ celebrationImg } onClick={ handleOnClick } />
+                        <img id='imgNine' className={ `${ styles.c1r3Img }  ${styles.images }  images` } src={ celebrationImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1716,7 +1716,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c2r3 }` }>
 
 
-                        <img id='imgTen' className={ `${ styles.c2r3Img }  ${styles.images }` } src={ everythingYouDoImg } onClick={ handleOnClick } />
+                        <img id='imgTen' className={ `${ styles.c2r3Img }  ${styles.images }  images` } src={ everythingYouDoImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1726,7 +1726,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c3r3 }` }>
 
 
-                        <img id='imgEleven' className={ `${ styles.c3r3Img }  ${styles.images }` } src={ thankYouImg } onClick={ handleOnClick } data-img-name="thankYouImg" />
+                        <img id='imgEleven' className={ `${ styles.c3r3Img }  ${styles.images }  images` } src={ thankYouImg } onClick={ handleOnClick } data-img-name="thankYouImg" />
 
 
                     </div>
@@ -1736,7 +1736,7 @@ export default function MothersDayCard() {
                     <div className={ `${ styles.cell}  ${ styles.c4r3 }` }>
 
 
-                        <img id='imgTwelve' className={ `${ styles.c4r3Img }  ${styles.images }` } src={ appreciateYouImg } onClick={ handleOnClick } />
+                        <img id='imgTwelve' className={ `${ styles.c4r3Img }  ${styles.images }  images` } src={ appreciateYouImg } onClick={ handleOnClick } />
 
 
                     </div>
