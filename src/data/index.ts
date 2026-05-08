@@ -120,12 +120,12 @@ export const greetingCards: GreetingCard[] = [
   },
   {
     id: 'card-02',
-    title: 'Starfield Birthday',
+    title: 'Happy Birthday',
     occasion: 'Birthday',
-    description: 'An animated starfield with a personalised message that flies in on a comet trail.',
+    description: 'An animated Happy Birthday card with confetti, ballons and a message.',
     previewUrl: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=600&q=80',
-    liveUrl: 'https://example.com',
-    tags: ['Canvas', 'Animation', 'JavaScript'],
+    liveUrl: '/happybirthdaycard',
+    tags: ['Canvas', 'Animation', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Birthday'],
     year: 2024,
   },
   {
