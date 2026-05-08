@@ -9,8 +9,8 @@ function MothersDayCardWrapper() {
 
   useEffect(() => {
     const handleResize = () => setRemountKey(prev => prev + 1);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    screen.orientation.addEventListener("change", handleResize);
+    return () => screen.orientation.removeEventListener('change', handleResize);
   }, []);
 
   // When remountKey changes, the Parent AND all its children will remount
