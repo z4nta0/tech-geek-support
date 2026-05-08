@@ -55,7 +55,7 @@ export default function MothersDayCard() {
 
 
     const texArr = [
-        ["Thank you, ", "mothers", "!"],
+        ["To all of the mothers out there, ", "thank you", "!"],
         ["For ", "everything", " that you do for us."],
         ["Especially the ", "little things", "."],
         ["To the world you are a mother, but to us you are ", "our world", "."],
@@ -1238,7 +1238,7 @@ export default function MothersDayCard() {
 
     gsaTimIns.current.set(typewriter1, { text: '' });
 
-    //gsaTimIns.current.play('test');
+    gsaTimIns.current.play('test');
 
     gsaTimIns.current.to(wrapper, {
         opacity: 1,
@@ -1273,7 +1273,7 @@ export default function MothersDayCard() {
     });
 
 
-    const scale = winWidNum <= 1400 && winWidNum > 1000 ? 2 : winWidNum <= 1000 ? 1.2 : 3;
+    const scale = winWidNum <= 1300 && winWidNum > 900 ? 2 : winWidNum <= 900 && winWidNum > 700 ? 1.5 : winWidNum <= 700 ? 1.25 : 3;
 
     gsaTimIns.current.to(typewriter1, {
         scale: scale,
@@ -1463,8 +1463,8 @@ export default function MothersDayCard() {
 
             if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
-                gsaTimIns.current.invalidate().restart();
-                //gsaTimIns.current.seek("test");
+                //gsaTimIns.current.invalidate().restart();
+                gsaTimIns.current.seek("test");
 
             }
 
@@ -1479,8 +1479,8 @@ export default function MothersDayCard() {
 
             if (gsaTimIns.current !== undefined && gsaTimIns.current !== null) {
 
-                gsaTimIns.current.invalidate().restart();
-                //gsaTimIns.current.seek("test");
+                //gsaTimIns.current.invalidate().restart();
+                gsaTimIns.current.seek("test");
 
             }
 
