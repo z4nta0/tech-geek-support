@@ -8,41 +8,6 @@
 
 
 
-html, body {
-  width:100%;
-  height:100%;
-  color:#000;
-  margin:0;
-  font-size:19px;
-}
-
-
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-
-
-body {
-
-    --scale-x: 0;
-
-    background: #f9e8ec;
-    overflow: hidden;
-    padding: 24px;
-    min-height: 100vh;
-
-}
-
-
-
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-
-
-.mdc-cursor.blinking { animation: blink 0.6s linear infinite; }
-
-
-
 .grid {
     display: grid;
     position: fixed;

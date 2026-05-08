@@ -96,6 +96,9 @@ export default function MothersDayCard() {
 
     const imgScale = screen.orientation.type.includes('landscape') ? 5 : 65;
 
+    document.documentElement.style.setProperty('--scale-x', '0');
+
+
 
 
     gsaTimIns.current.set(wrapper, { height: '100%', scale: 1, opacity: 1, visibility: 'visible' });
@@ -151,7 +154,7 @@ export default function MothersDayCard() {
         ease :  'none',
     });
 
-    gsaTimIns.current.to(typewriter2, {
+    gsaTimIns.current.to(':root', {
         '--scale-x': 1,
         duration: 0.3,
         //slow then speeds up easing
@@ -168,7 +171,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -272,7 +281,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -374,7 +389,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -476,7 +497,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -578,7 +605,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -680,7 +713,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -782,7 +821,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -884,7 +929,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -986,7 +1037,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -1088,7 +1145,13 @@ export default function MothersDayCard() {
         duration: 1,
         //slow then speeds up easing
         ease: 'power1.in',
-        onComplete: () => cursor.classList.remove('cursor-blink'),
+        onComplete: () => {
+
+            cursor.classList.remove('cursor-blink');
+
+            document.documentElement.style.setProperty('--scale-x', '0');
+
+        },
     });
 
     gsaTimIns.current.to(thankYouSVG, {
@@ -1449,7 +1512,10 @@ export default function MothersDayCard() {
   // ── Render ───────────────────────────────────────────────────────────────
 
   return (
+
+
     <>
+
 
       <div ref={ container } id='maiConDiv' className={` ${ styles.mainContainerDiv } ${ isFullscreen ? styles.enterFullscreen : styles.exitFullscreen }` } >
 
