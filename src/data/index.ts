@@ -3,6 +3,7 @@ import hairDesignsImg from '../assets/hair-designs-website.png';
 import bernieBearsImg from '../assets/the-bernie-bears-website.png';
 import techGeekImg from '../assets/tech-geek-website.png';
 import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
+import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.png';
 
 // ── Projects ───────────────────────────────────────────────
 export const projects: Project[] = [
@@ -120,12 +121,12 @@ export const greetingCards: GreetingCard[] = [
   },
   {
     id: 'card-02',
-    title: 'Starfield Birthday',
+    title: 'Happy Birthday',
     occasion: 'Birthday',
-    description: 'An animated starfield with a personalised message that flies in on a comet trail.',
-    previewUrl: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=600&q=80',
-    liveUrl: 'https://example.com',
-    tags: ['Canvas', 'Animation', 'JavaScript'],
+    description: 'An animated Happy Birthday card with confetti, ballons and a message.',
+    previewUrl: happyBirthdayCardPreview,
+    liveUrl: '/happybirthdaycard',
+    tags: ['Canvas', 'Animation', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Birthday'],
     year: 2024,
   },
   {
