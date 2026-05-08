@@ -193,6 +193,7 @@ export default function HappyBirthdayCard() {
             maiConDiv.style.position = 'relative';
             maiConDiv.style.width = '100%';
             maiConDiv.style.paddingTop = '72px';
+            maiConDiv.style.zIndex = '9';
 
             document.body.style.overflow = 'auto';
 
@@ -206,6 +207,7 @@ export default function HappyBirthdayCard() {
             maiConDiv.style.position = 'fixed';
             maiConDiv.style.width = '100vw';
             maiConDiv.style.paddingTop = '0';
+            maiConDiv.style.zIndex = '999';
 
             document.body.style.overflow = 'hidden';
 
