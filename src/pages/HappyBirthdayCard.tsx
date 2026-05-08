@@ -18,7 +18,7 @@ export default function HappyBirthdayCard() {
     /** Search Parameters Instance             = This custom variable stores the standard Web API class instance of URLSearchParams that uses the previously defined {@link search} variable and provides methods for interacting with the query parameters. */
     const seaParIns  : URLSearchParams         = new URLSearchParams( search );
     /** Name Parameter String                  = This custom variable stores the name query parameter (or null) which will be used to customize the Christmas Card component's h1 element that is inside of the {@link chrCarJsx}, and it is acquired using the get method on the previously defined {@link seaParIns} URLSearchParams class instance. */
-    const namParStr  : string                  = seaParIns.get( 'name' );
+    const namParStr  : string | null           = seaParIns.get( 'name' );
 
 
 
