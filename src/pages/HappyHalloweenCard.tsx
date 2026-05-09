@@ -333,7 +333,7 @@ const HalloweenCard: React.FC = () => {
 
   return (
     <div id='maiConDiv' style={{
-      position: "relative", width: "100vw", height: "100vh", overflow: "hidden",
+      position: "fixed", top: 0, left: 0, zIndex: 999, width: "100vw", height: "100vh", overflow: "hidden",
       background: "linear-gradient(to bottom, #0a0015 0%, #1a0533 45%, #2d0d52 70%, #1a0a00 100%)",
       fontFamily: "'Segoe UI', sans-serif",
     }}>
