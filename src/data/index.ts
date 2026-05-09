@@ -2,79 +2,15 @@ import type { Project, GreetingCard, SupportArticle } from '../types';
 import hairDesignsImg from '../assets/hair-designs-website.png';
 import bernieBearsImg from '../assets/the-bernie-bears-website.png';
 import techGeekImg from '../assets/tech-geek-website.png';
+import tonysToppersImg from '../assets/tonys-toppers-website.png';
 import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
 import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.png';
 import fourthOfJulyCardPreview from '../assets/fourth-of-july-card-preview-image.png';
 
 // ── Projects ───────────────────────────────────────────────
 export const projects: Project[] = [
-  /*{
+  {
     id: 'proj-01',
-    title: 'NexaFlow Dashboard',
-    description: 'A real-time analytics dashboard for SaaS metrics with live charting, team collaboration, and custom report builders.',
-    tags: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'WebSockets'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    featured: true,
-    year: 2024,
-  },
-  {
-    id: 'proj-02',
-    title: 'Arboretum CMS',
-    description: 'A headless content management system with markdown support, media library, and multi-tenant architecture.',
-    tags: ['Next.js', 'TypeScript', 'Prisma', 'S3', 'Redis'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-    imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14431b9?w=800&q=80',
-    featured: true,
-    year: 2024,
-  },
-  {
-    id: 'proj-03',
-    title: 'Cartographer API',
-    description: 'A geospatial REST API serving map tile overlays and route calculations for logistics applications.',
-    tags: ['Node.js', 'Express', 'PostGIS', 'Docker', 'Mapbox GL'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-    imageUrl: 'https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80',
-    featured: false,
-    year: 2023,
-  },
-  {
-    id: 'proj-04',
-    title: 'Threadcount E-Commerce',
-    description: 'Full-stack e-commerce platform with Stripe payments, inventory management, and a custom storefront builder.',
-    tags: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-    imageUrl: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=800&q=80',
-    featured: false,
-    year: 2023,
-  },
-  {
-    id: 'proj-05',
-    title: 'Polaris Design System',
-    description: 'An open-source React component library with 60+ accessible components, Storybook docs, and theming support.',
-    tags: ['React', 'TypeScript', 'Storybook', 'Radix UI', 'CSS Modules'],
-    githubUrl: 'https://github.com',
-    imageUrl: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
-    featured: true,
-    year: 2023,
-  },
-  {
-    id: 'proj-06',
-    title: 'Quorum Forum',
-    description: 'A community discussion platform with threaded replies, voting, badges, and full-text search.',
-    tags: ['Vue.js', 'Node.js', 'Elasticsearch', 'PostgreSQL'],
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com',
-    imageUrl: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=800&q=80',
-    featured: false,
-    year: 2022,
-  },*/
-  {
-    id: 'proj-07',
     title: 'Hair Designs',
     description: 'A website for a local business of hair designers and licensed cosmetologists.',
     tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
@@ -85,7 +21,7 @@ export const projects: Project[] = [
     year: 2026,
   },
   {
-    id: 'proj-08',
+    id: 'proj-02',
     title: 'The Bernie Bears',
     description: 'A website for a social media influencer about two abdorable Bernese Mountain dogs.',
     tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
@@ -96,13 +32,24 @@ export const projects: Project[] = [
     year: 2026,
   },
   {
-    id: 'proj-08',
+    id: 'proj-03',
     title: 'Tech Geek',
     description: 'A website for helping local businesses get online in order to reach larger audiences and grow their reach.',
     tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
     liveUrl: 'https://techgeek.support/',
     githubUrl: 'https://github.com/z4nta0/techgeek',
     imageUrl: techGeekImg,
+    featured: true,
+    year: 2026,
+  },
+  {
+    id: 'proj-04',
+    title: 'Tony\'s Toppers',
+    description: 'A website for helping local businesses get online in order to reach larger audiences and grow their reach.',
+    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
+    liveUrl: 'https://tonys-toppers.netlify.app/',
+    githubUrl: 'https://github.com/z4nta0/tonys-toppers',
+    imageUrl: tonysToppersImg,
     featured: true,
     year: 2026,
   },
