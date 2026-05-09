@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import styles from './HappyThanksgivingCard.module.css';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface LeafConfig {
@@ -184,6 +185,22 @@ export default function ThanksgivingCard() {
   const containerRef = useRef<HTMLDivElement>(null);
   const leavesRef = useRef<HTMLDivElement>(null);
 
+
+  const [ resetBoolean, setResetBoolean ] = useState(false);
+
+    function resetTimeline() {
+
+
+        setResetBoolean(true);
+
+        setTimeout(() => {
+            setResetBoolean(false);
+        }, 100);
+
+    };
+
+
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
@@ -252,14 +269,56 @@ export default function ThanksgivingCard() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [resetBoolean]);
+
+  const [isFullscreen, setIsFullscreen] = useState(true);
+    
+      function toggleFullscreen() {
+  
+          const maiConDiv = document.getElementById('maiConDiv') as HTMLDivElement;
+  
+          if (isFullscreen === true) {
+  
+              maiConDiv.style.overflow = 'auto';
+              maiConDiv.style.position = 'relative';
+              maiConDiv.style.width = '100%';
+              maiConDiv.style.paddingTop = '72px';
+              maiConDiv.style.zIndex = '9';
+  
+              document.body.style.overflow = 'auto';
+  
+  
+  
+              setIsFullscreen(false);
+  
+          } else {
+  
+              maiConDiv.style.overflow = 'hidden';
+              maiConDiv.style.position = 'fixed';
+              maiConDiv.style.width = '100vw';
+              maiConDiv.style.paddingTop = '0';
+              maiConDiv.style.zIndex = '999';
+  
+              document.body.style.overflow = 'hidden';
+  
+  
+  
+              setIsFullscreen(true);
+  
+          }
+  
+      };
 
   return (
     <div
+      id='maiConDiv'
       ref={containerRef}
       style={{
-        position: "relative",
-        width: "100%",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 999,
+        width: "100vw",
         minHeight: "100vh",
         background: "linear-gradient(160deg, #3B1F0A 0%, #7B3A10 35%, #C4621D 70%, #E8A040 100%)",
         overflow: "hidden",
@@ -340,6 +399,21 @@ export default function ThanksgivingCard() {
           </span>
         </p>
       </div>
+
+      <div id='butConDiv' className={ styles.buttonContainerDiv } >
+
+
+            <button id='repAniBut' className={ styles.animationButtons } onClick={() => resetTimeline()} >
+                Replay
+            </button>
+
+
+
+            <button id='fulScrBut' className={ styles.animationButtons } onClick={() => toggleFullscreen()} >
+                Toggle Fullscreen
+            </button>
+
+        </div>
     </div>
   );
 }
