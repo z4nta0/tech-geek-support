@@ -351,6 +351,7 @@ export default function ThanksgivingCard() {
         {/* Title */}
         <h1
           id="title-text"
+          className={ styles.peraltaFont }
           style={{
             opacity: 0,
             color: "#FFF3CC",
@@ -379,6 +380,7 @@ export default function ThanksgivingCard() {
         {/* Message */}
         <p
           id="msg-text"
+          className={ styles.cookieFont }
           style={{
             opacity: 0,
             color: "#FDECC8",
