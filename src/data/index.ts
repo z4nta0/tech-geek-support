@@ -4,6 +4,7 @@ import bernieBearsImg from '../assets/the-bernie-bears-website.png';
 import techGeekImg from '../assets/tech-geek-website.png';
 import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
 import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.png';
+import fourthOfJulyCardPreview from '../assets/fourth-of-july-card-preview-image.png';
 
 // ── Projects ───────────────────────────────────────────────
 export const projects: Project[] = [
@@ -134,7 +135,7 @@ export const greetingCards: GreetingCard[] = [
     title: 'Fourth of July',
     occasion: 'Holiday',
     description: 'Independence Day celebration with fireworks and patriotic animations.',
-    previewUrl: 'https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=600&q=80',
+    previewUrl: fourthOfJulyCardPreview,
     liveUrl: '/fourthofjulycard',
     tags: ['Animation', 'SVG', 'Javascript', 'Typescript', 'GSAP', 'React', 'Fourth of July'],
     year: 2026,
