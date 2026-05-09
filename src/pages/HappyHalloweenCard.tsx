@@ -3,8 +3,9 @@
 // Install: npm install gsap react react-dom
 // For types: npm install -D @types/react @types/react-dom typescript
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import styles from './HappyHalloweenCard.module.css';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -216,9 +217,50 @@ const useTitle = (ref: React.RefObject<HTMLHeadingElement>) => {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 const HalloweenCard: React.FC = () => {
+
+    function resetTimeline() {
+
+
+        // Kill all active GSAP tweens on tracked elements
+    if (masterTlRef.current) masterTlRef.current.kill();
+    gsap.killTweensOf(titleRef.current?.querySelectorAll("span") ?? []);
+    gsap.killTweensOf(moonRef.current);
+
+    // Reset title letters
+    if (titleRef.current) {
+      const chars = titleRef.current.querySelectorAll("span");
+      gsap.set(chars, { y: -60, opacity: 0, rotation: 0, color: "#ff6b00" });
+    }
+
+    // Reset moon
+    if (moonRef.current) gsap.set(moonRef.current, { y: 0 });
+
+    // Re-run title animation
+    if (titleRef.current) {
+      const chars = titleRef.current.querySelectorAll("span");
+      const tl = gsap.timeline();
+      masterTlRef.current = tl;
+      tl.to(chars, {
+        y: 0, opacity: 1, rotation: 0, duration: 0.7,
+        stagger: 0.06, ease: "back.out(1.8)", delay: 0.4,
+      }).to(chars, {
+        color: "#ffe066", duration: 1.2, yoyo: true, repeat: -1,
+        stagger: { each: 0.1, repeat: -1, yoyo: true },
+        ease: "sine.inOut", delay: 0,
+      });
+    }
+
+    // Re-run moon animation
+    if (moonRef.current) {
+      gsap.to(moonRef.current, { y: -10, duration: 4, yoyo: true, repeat: -1, ease: "sine.inOut" });
+    }
+
+    };
+
   const lightningRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
   const titleRef     = useRef<HTMLHeadingElement>(null) as React.RefObject<HTMLHeadingElement>;
   const moonRef      = useRef<SVGSVGElement>(null) as React.RefObject<SVGSVGElement>;
+  const masterTlRef  = useRef<gsap.core.Timeline | null>(null) as React.MutableRefObject<gsap.core.Timeline | null>;
 
   useLightning(lightningRef);
   useTitle(titleRef);
@@ -259,8 +301,38 @@ const HalloweenCard: React.FC = () => {
     delay: Math.random() * 3, size: Math.random() * 1.8 + 0.5,
   }));
 
+  const [isFullscreen, setIsFullscreen] = useState(true);
+  
+     function toggleFullscreen() {
+  
+      const maiConDiv = document.getElementById('maiConDiv') as HTMLDivElement;
+  
+      if (isFullscreen === true) {
+  
+          maiConDiv.style.position = 'relative';
+          maiConDiv.style.zIndex = '9';
+  
+  
+  
+          setIsFullscreen(false);
+  
+      } else {
+  
+          maiConDiv.style.position = 'fixed';
+          maiConDiv.style.width = '100vw';
+          maiConDiv.style.height = '100vh';
+          maiConDiv.style.zIndex = '999';
+  
+  
+  
+          setIsFullscreen(true);
+  
+      }
+  
+    }
+
   return (
-    <div style={{
+    <div id='maiConDiv' style={{
       position: "relative", width: "100vw", height: "100vh", overflow: "hidden",
       background: "linear-gradient(to bottom, #0a0015 0%, #1a0533 45%, #2d0d52 70%, #1a0a00 100%)",
       fontFamily: "'Segoe UI', sans-serif",
@@ -304,8 +376,8 @@ const HalloweenCard: React.FC = () => {
         transform: "translate(-50%, -50%)",
         textAlign: "center", zIndex: 10,
       }}>
-        <h1 ref={titleRef} style={{
-          fontSize: "clamp(2rem, 7vw, 5rem)", fontWeight: 900, letterSpacing: "0.04em",
+        <h1 className={ styles.butchermanFont } ref={titleRef} style={{
+          fontSize: "clamp(3rem, 8vw, 6rem)", fontWeight: 900, letterSpacing: "0.04em",
           color: "#ff6b00", textShadow: "0 0 30px #ff6b00aa, 0 4px 0 #1a0533",
           margin: 0, lineHeight: 1.2,
         }}>
@@ -319,7 +391,7 @@ const HalloweenCard: React.FC = () => {
             </div>
           ))}
         </h1>
-        <p style={{
+        <p className={ styles.barriecitoFont } style={{
           color: "#ffe066", fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
           marginTop: "1rem", opacity: 0.85, letterSpacing: "0.12em",
           textShadow: "0 0 12px #ff8c00",
@@ -346,6 +418,22 @@ const HalloweenCard: React.FC = () => {
         position: "fixed", inset: 0, background: "#c8d8ff",
         opacity: 0, pointerEvents: "none", zIndex: 30,
       }} />
+
+      <div id='butConDiv' className={ styles.buttonContainerDiv } >
+
+
+            <button id='repAniBut' className={ styles.animationButtons } onClick={resetTimeline} >
+                Replay
+            </button>
+
+
+
+            <button id='fulScrBut' className={ styles.animationButtons } onClick={() => toggleFullscreen()} >
+                Toggle Fullscreen
+            </button>
+
+        </div>
+
     </div>
   );
 };
