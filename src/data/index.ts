@@ -7,6 +7,7 @@ import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png'
 import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.png';
 import fourthOfJulyCardPreview from '../assets/fourth-of-july-card-preview-image.png';
 import happyHalloweenCardPreview from '../assets/happy-halloween-card-preview-image.png';
+import happyThanksgivingCardPreview from '../assets/happy-thanksgiving-card-preview-image.png';
 
 // ── Projects ───────────────────────────────────────────────
 export const projects: Project[] = [
@@ -100,23 +101,13 @@ export const greetingCards: GreetingCard[] = [
   },
   {
     id: 'card-05',
-    title: 'Pixel Celebration',
-    occasion: 'Congratulations',
-    description: 'Retro pixel art fireworks that spell out a custom congratulations message.',
-    previewUrl: 'https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=600&q=80',
-    liveUrl: 'https://example.com',
-    tags: ['Canvas', 'Pixel Art', 'Audio'],
-    year: 2023,
-  },
-  {
-    id: 'card-06',
-    title: 'Aurora Thank You',
-    occasion: 'Thank You',
-    description: 'Shader-powered aurora borealis background with elegantly typeset thank-you note.',
-    previewUrl: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=600&q=80',
-    liveUrl: 'https://example.com',
-    tags: ['GLSL', 'Shaders', 'CSS'],
-    year: 2022,
+    title: 'Happy Thanksgiving',
+    occasion: 'Thanksgiving',
+    description: 'An animated Happy Thanksgiving card with festive animations and effects.',
+    previewUrl: happyThanksgivingCardPreview,
+    liveUrl: '/happythanksgivingcard',
+    tags: ['Animation', 'SVG', 'Javascript', 'Typescript', 'GSAP', 'React', 'Thanksgiving'],
+    year: 2026,
   },
 ]
 
