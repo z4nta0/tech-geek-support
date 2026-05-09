@@ -13,6 +13,7 @@ import MothersDayCardWrapper from './pages/MothersDayCardWrapper.tsx';
 import HappyBirthdayCard from './pages/HappyBirthdayCard.tsx';
 import FourthOfJulyCard from './pages/FourthOfJulyCard.tsx';
 import HappyHalloweenCard from './pages/HappyHalloweenCard.tsx';
+import HappyThanksgivingCard from './pages/HappyThanksgivingCard.tsx';
 
 const App: React.FC = () => {
   const location = useLocation()
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           <Route path="/happybirthdaycard" element={<HappyBirthdayCard />} />
           <Route path="/fourthofjulycard" element={<FourthOfJulyCard />} />
           <Route path="/happyhalloweencard" element={<HappyHalloweenCard />} />
+          <Route path="/happythanksgivingcard" element={<HappyThanksgivingCard />} />
           <Route path="/support" element={<Support />} />
           <Route path="/about"   element={<About />}   />
           <Route path="/contact" element={<Contact />} />
