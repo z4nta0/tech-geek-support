@@ -6,6 +6,7 @@ import tonysToppersImg from '../assets/tonys-toppers-website.png';
 import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
 import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.png';
 import fourthOfJulyCardPreview from '../assets/fourth-of-july-card-preview-image.png';
+import happyHalloweenCardPreview from '../assets/happy-halloween-card-preview-image.png';
 
 // ── Projects ───────────────────────────────────────────────
 export const projects: Project[] = [
@@ -89,13 +90,13 @@ export const greetingCards: GreetingCard[] = [
   },
   {
     id: 'card-04',
-    title: 'Geometric Valentine',
-    occasion: "Valentine's Day",
-    description: 'Mathematical rose curve drawn with WebGL, with particle hearts on hover.',
-    previewUrl: 'https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=600&q=80',
-    liveUrl: 'https://example.com',
-    tags: ['WebGL', 'Math', 'Particles'],
-    year: 2023,
+    title: 'Happy Halloween',
+    occasion: "Halloween",
+    description: 'An animated Happy Halloween card with spooky animations and effects.',
+    previewUrl: happyHalloweenCardPreview,
+    liveUrl: '/happyhalloweencard',
+    tags: ['Animation', 'SVG', 'Javascript', 'Typescript', 'GSAP', 'React', 'Halloween'],
+    year: 2026,
   },
   {
     id: 'card-05',
