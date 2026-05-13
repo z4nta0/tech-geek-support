@@ -1,8 +1,9 @@
 import type { Project, GreetingCard, SupportArticle } from '../types';
 import hairDesignsImg from '../assets/hair-designs-website.png';
 import bernieBearsImg from '../assets/the-bernie-bears-website.png';
-import techGeekImg from '../assets/tech-geek-website.png';
 import tonysToppersImg from '../assets/tonys-toppers-website.png';
+import reeseRoofingImg from '../assets/reese-roofing-website.png';
+import techGeekImg from '../assets/tech-geek-website.png';
 import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
 import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.png';
 import fourthOfJulyCardPreview from '../assets/fourth-of-july-card-preview-image.png';
@@ -36,7 +37,7 @@ export const projects: Project[] = [
   {
     id: 'proj-03',
     title: 'Tony\'s Toppers',
-    description: 'A website for helping local businesses get online in order to reach larger audiences and grow their reach.',
+    description: 'A website for a young man with down syndrome who sells hand made crafts.',
     tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
     liveUrl: 'https://tonystoppers.com/',
     githubUrl: 'https://github.com/z4nta0/tonys-toppers',
@@ -46,6 +47,17 @@ export const projects: Project[] = [
   },
   {
     id: 'proj-04',
+    title: 'Reese Roofing',
+    description: 'A website for a local roofing businesses based in the Lawrence, Kansas area.',
+    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
+    liveUrl: 'https://reese-roofing.netlify.app//',
+    githubUrl: 'https://github.com/z4nta0/reese-roofing',
+    imageUrl: reeseRoofingImg,
+    featured: true,
+    year: 2026,
+  },
+  {
+    id: 'proj-05',
     title: 'Tech Geek',
     description: 'A website for helping local businesses get online in order to reach larger audiences and grow their reach.',
     tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
