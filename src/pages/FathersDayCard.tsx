@@ -55,18 +55,18 @@ export default function FathersDayCard() {
 
 
     const texArr = [
-        ["To all of the mothers out there, ", "thank you", "!"],
+        ["To all of the fathers out there, ", "thank you", "!"],
         ["For ", "everything", " that you do for us."],
         ["Especially the ", "little things", "."],
-        ["To the world you are a mother, but to us you are ", "our world", "."],
-        ["A mother's love is a ", "special", " thing indeed!"],
-        ["You definitely deserve more than one day of ", "celebration" ,"."],
-        ["So it is ", "our responsibility" ," to make the most of this one day."],
+        ["You play such an ", "important role", " in our lives."],
+        ["What fathers ", "sacrifice", " for us goes beyond words!"],
+        ["And that ", "most definitely" ," deserves a day of celebration."],
+        ["So it is ", "our responsibility" ," to let you know that..."],
         ["You are ", "loved", " (even when we don't show it)."],
-        ["And you are ", "appreciated", " (even when we don't give it)."],
-        ["So please never get discouraged, because we ", "need you", " in our lives."],
+        ["And your sacrifices are ", "appreciated", " (even when we don't give it)."],
+        ["So please never forget that we ", "need you", " in our lives."],
         ["On behalf of the rest of us..."],
-        ["Happy Mother's Day!"],
+        ["Happy Father's Day!"],
     ];
 
 
