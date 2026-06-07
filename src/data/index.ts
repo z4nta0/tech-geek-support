@@ -2,6 +2,7 @@ import type { Project, GreetingCard, SupportArticle } from '../types';
 import hairDesignsImg from '../assets/hair-designs-website.png';
 import bernieBearsImg from '../assets/the-bernie-bears-website.png';
 import tonysToppersImg from '../assets/tonys-toppers-website.png';
+import sealAndShieldImg from '../assets/seal-and-shield-website.png';
 import reeseRoofingImg from '../assets/reese-roofing-website.png';
 import techGeekImg from '../assets/tech-geek-website.png';
 import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
@@ -38,7 +39,7 @@ export const projects: Project[] = [
     id: 'proj-03',
     title: 'Tony\'s Toppers',
     description: 'A website for a young man with down syndrome who sells hand made crafts.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
     liveUrl: 'https://tonystoppers.com/',
     githubUrl: 'https://github.com/z4nta0/tonys-toppers',
     imageUrl: tonysToppersImg,
@@ -47,20 +48,31 @@ export const projects: Project[] = [
   },
   {
     id: 'proj-04',
+    title: 'Seal and Shield',
+    description: 'A website for a local roofing businesses based in the Lawrence, Kansas area.',
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
+    liveUrl: 'https://sealandshieldroof.com/',
+    githubUrl: 'https://github.com/z4nta0/seal-and-shield',
+    imageUrl: sealAndShieldImg,
+    featured: true,
+    year: 2026,
+  },
+  {
+    id: 'proj-05',
     title: 'Reese Roofing',
     description: 'A website for a local roofing businesses based in the Lawrence, Kansas area.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
-    liveUrl: 'https://reese-roofing.netlify.app//',
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
+    liveUrl: 'https://reese-roofing.netlify.app/',
     githubUrl: 'https://github.com/z4nta0/reese-roofing',
     imageUrl: reeseRoofingImg,
     featured: true,
     year: 2026,
   },
   {
-    id: 'proj-05',
+    id: 'proj-06',
     title: 'Tech Geek',
     description: 'A website for helping local businesses get online in order to reach larger audiences and grow their reach.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
     liveUrl: 'https://techgeek.support/',
     githubUrl: 'https://github.com/z4nta0/techgeek',
     imageUrl: techGeekImg,
