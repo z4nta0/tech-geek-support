@@ -52,18 +52,31 @@ export default function FathersDayCard() {
 
 
    useGSAP(() => {
-
+/*
+life skills
+riding a bike
+teaching responsibility
+work ethic
+solving problems
+safety net - car breaks down, etc...
+pride and reassurance
+dad jokes
+sharing passions, hobbies, etc...
+building or sharing traditions
+role model - wife, family, community
+emotional growth
+*/
 
     const texArr = [
         ["To all of the fathers out there, ", "thank you", "!"],
         ["For ", "everything", " that you do for us."],
         ["Especially the ", "little things", "."],
         ["You play such an ", "important role", " in our lives."],
-        ["What fathers ", "sacrifice", " for us goes beyond words!"],
-        ["And that ", "most definitely" ," deserves a day of celebration."],
+        ["What fathers ", "provide for us", " goes beyond words!"],
+        ["And gets passed down ", "through the generations" ,"."],
         ["So it is ", "our responsibility" ," to let you know that..."],
         ["You are ", "loved", " (even when we don't show it)."],
-        ["And your sacrifices are ", "appreciated", " (even when we don't give it)."],
+        ["And what you do for us is ", "appreciated", " (even when we don't give it)."],
         ["So please never forget that we ", "need you", " in our lives."],
         ["On behalf of the rest of us..."],
         ["Happy Father's Day!"],
