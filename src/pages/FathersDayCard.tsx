@@ -6,18 +6,18 @@ import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
 import { GSDevTools } from "gsap/GSDevTools";
 import { useEffect } from 'react';
-import appreciateYouImg from '../assets/mothers-day-card/appreciate-you.png';
-import celebrationImg from '../assets/mothers-day-card/celebration.png';
-import everythingYouDoImg from '../assets/mothers-day-card/everything-you-do.png';
-import extraImage1Img from '../assets/mothers-day-card/extra-image-1.png';
-import extraImage2Img from '../assets/mothers-day-card/extra-image-2.png';
-import littleThingsImg from '../assets/mothers-day-card/little-things.png';
-import loveYouImg from '../assets/mothers-day-card/love-you.png';
-import mothersLoveImg from '../assets/mothers-day-card/mothers-love.png';
-import needYouImg from '../assets/mothers-day-card/need-you.png';
-import ourResponsibilityImg from '../assets/mothers-day-card/our-responsibility.png';
-import ourWorldImg from '../assets/mothers-day-card/our-world.png';
-import thankYouImg from '../assets/mothers-day-card/thank-you.png';
+import appreciateImg from '../assets/fathers-day-card/appreciate.png';
+import throughTheGenerationsImg from '../assets/fathers-day-card/through-the-generations.png';
+import everythingImg from '../assets/fathers-day-card/everything.png';
+import extra1Img from '../assets/fathers-day-card/extra-1.png';
+import extra2Img from '../assets/fathers-day-card/extra-2.png';
+import littleThingsImg from '../assets/fathers-day-card/little-things.png';
+import loveYouImg from '../assets/fathers-day-card/love-you.png';
+import importantRoleImg from '../assets/fathers-day-card/important-role.png';
+import needYouImg from '../assets/fathers-day-card/need-you.png';
+import specialDayImg from '../assets/fathers-day-card/special-day.png';
+import provideForUsImg from '../assets/fathers-day-card/provide-for-us.png';
+import thankYouImg from '../assets/fathers-day-card/thank-you.png';
 import useWinSiz from '../hooks/useWinSiz.ts';     /** This import is the custom React hook that will provide the current window viewport dimensions and will also be used to trigger the useEffect hook on window resize events, as well as altering certain animation settings based on how small or big its dimensions are. */
 import { type WinSizObj } from '../hooks/useWinSiz.ts'; /** This import is the custom type definition for the custom state variable that is generated from the custom useWinSiz React Hook and stores the current viewport dimensions. */
 
@@ -1608,7 +1608,7 @@ emotional growth
 
 
 
-                        <img id='everythingYouDoImg' src={ everythingYouDoImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='everythingYouDoImg' src={ everythingImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
@@ -1616,19 +1616,19 @@ emotional growth
 
 
 
-                        <img id='ourWorldImg' src={ ourWorldImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='ourWorldImg' src={ importantRoleImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='mothersLoveImg' src={ mothersLoveImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='mothersLoveImg' src={ provideForUsImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='celebrationImg' src={ celebrationImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='celebrationImg' src={ throughTheGenerationsImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='ourResponsibilityImg' src={ ourResponsibilityImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='ourResponsibilityImg' src={ specialDayImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
@@ -1636,7 +1636,7 @@ emotional growth
 
 
 
-                        <img id='appreciateYouImg' src={ appreciateYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='appreciateYouImg' src={ appreciateImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
