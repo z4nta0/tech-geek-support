@@ -2,6 +2,7 @@ import type { Project, GreetingCard, SupportArticle } from '../types';
 import hairDesignsImg from '../assets/hair-designs-website.png';
 import bernieBearsImg from '../assets/the-bernie-bears-website.png';
 import tonysToppersImg from '../assets/tonys-toppers-website.png';
+import sealAndShieldImg from '../assets/seal-and-shield-website.png';
 import reeseRoofingImg from '../assets/reese-roofing-website.png';
 import techGeekImg from '../assets/tech-geek-website.png';
 import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
@@ -38,7 +39,7 @@ export const projects: Project[] = [
     id: 'proj-03',
     title: 'Tony\'s Toppers',
     description: 'A website for a young man with down syndrome who sells hand made crafts.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
     liveUrl: 'https://tonystoppers.com/',
     githubUrl: 'https://github.com/z4nta0/tonys-toppers',
     imageUrl: tonysToppersImg,
@@ -47,20 +48,31 @@ export const projects: Project[] = [
   },
   {
     id: 'proj-04',
+    title: 'Seal and Shield',
+    description: 'A website for a local roofing businesses based in the Lawrence, Kansas area.',
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
+    liveUrl: 'https://sealandshieldroof.com/',
+    githubUrl: 'https://github.com/z4nta0/seal-and-shield',
+    imageUrl: sealAndShieldImg,
+    featured: true,
+    year: 2026,
+  },
+  {
+    id: 'proj-05',
     title: 'Reese Roofing',
     description: 'A website for a local roofing businesses based in the Lawrence, Kansas area.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
-    liveUrl: 'https://reese-roofing.netlify.app//',
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
+    liveUrl: 'https://reese-roofing.netlify.app/',
     githubUrl: 'https://github.com/z4nta0/reese-roofing',
     imageUrl: reeseRoofingImg,
     featured: true,
     year: 2026,
   },
   {
-    id: 'proj-05',
+    id: 'proj-06',
     title: 'Tech Geek',
     description: 'A website for helping local businesses get online in order to reach larger audiences and grow their reach.',
-    tags: ['React', 'TypeScript', 'Node.js', 'Next.js', 'Vite'],
+    tags: ['React', 'TypeScript', 'Node.js', 'React Router', 'Vite'],
     liveUrl: 'https://techgeek.support/',
     githubUrl: 'https://github.com/z4nta0/techgeek',
     imageUrl: techGeekImg,
@@ -73,6 +85,16 @@ export const projects: Project[] = [
 export const greetingCards: GreetingCard[] = [
     {
     id: 'card-01',
+    title: 'Happy Birthday',
+    occasion: 'Birthday',
+    description: 'An animated Happy Birthday card with confetti, ballons and a message.',
+    previewUrl: happyBirthdayCardPreview,
+    liveUrl: '/happybirthdaycard',
+    tags: ['Animation', 'Canvas', 'SVG', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Birthday'],
+    year: 2026,
+  },
+    {
+    id: 'card-02',
     title: 'Mother\'s Day',
     occasion: 'Holiday',
     description: 'A card that celebrates mothers with a heartfelt message and beautiful animations.',
@@ -82,17 +104,17 @@ export const greetingCards: GreetingCard[] = [
     year: 2026,
   },
   {
-    id: 'card-02',
-    title: 'Happy Birthday',
-    occasion: 'Birthday',
-    description: 'An animated Happy Birthday card with confetti, ballons and a message.',
-    previewUrl: happyBirthdayCardPreview,
-    liveUrl: '/happybirthdaycard',
-    tags: ['Animation', 'Canvas', 'SVG', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Birthday'],
+    id: 'card-03',
+    title: 'Father\'s Day',
+    occasion: 'Holiday',
+    description: 'A card that celebrates fathers with a heartfelt message and beautiful animations.',
+    previewUrl: mothersDayCardPreview,
+    liveUrl: '/fathersdaycard',
+    tags: ['Animation', 'SVG', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Father\'s Day'],
     year: 2026,
   },
   {
-    id: 'card-03',
+    id: 'card-04',
     title: 'Fourth of July',
     occasion: 'Holiday',
     description: 'Independence Day celebration with fireworks and patriotic animations.',
@@ -102,7 +124,7 @@ export const greetingCards: GreetingCard[] = [
     year: 2026,
   },
   {
-    id: 'card-04',
+    id: 'card-05',
     title: 'Happy Halloween',
     occasion: "Halloween",
     description: 'An animated Happy Halloween card with spooky animations and effects.',
@@ -112,7 +134,7 @@ export const greetingCards: GreetingCard[] = [
     year: 2026,
   },
   {
-    id: 'card-05',
+    id: 'card-06',
     title: 'Happy Thanksgiving',
     occasion: 'Thanksgiving',
     description: 'An animated Happy Thanksgiving card with festive animations and effects.',
