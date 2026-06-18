@@ -109,7 +109,7 @@ export const greetingCards: GreetingCard[] = [
     occasion: 'Holiday',
     description: 'A card that celebrates fathers with a heartfelt message and beautiful animations.',
     previewUrl: mothersDayCardPreview,
-    liveUrl: '/mothersdaycard',
+    liveUrl: '/fathersdaycard',
     tags: ['Animation', 'SVG', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Father\'s Day'],
     year: 2026,
   },
