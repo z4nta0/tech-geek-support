@@ -6,6 +6,7 @@ import sealAndShieldImg from '../assets/seal-and-shield-website.png';
 import reeseRoofingImg from '../assets/reese-roofing-website.png';
 import techGeekImg from '../assets/tech-geek-website.png';
 import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
+import fathersDayCardPreview from '../assets/fathers-day-card-preview-image.png';
 import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.png';
 import fourthOfJulyCardPreview from '../assets/fourth-of-july-card-preview-image.png';
 import happyHalloweenCardPreview from '../assets/happy-halloween-card-preview-image.png';
@@ -108,7 +109,7 @@ export const greetingCards: GreetingCard[] = [
     title: 'Father\'s Day',
     occasion: 'Holiday',
     description: 'A card that celebrates fathers with a heartfelt message and beautiful animations.',
-    previewUrl: mothersDayCardPreview,
+    previewUrl: fathersDayCardPreview,
     liveUrl: '/fathersdaycard',
     tags: ['Animation', 'SVG', 'JavaScript', 'Typescript', 'GSAP', 'React', 'Father\'s Day'],
     year: 2026,
