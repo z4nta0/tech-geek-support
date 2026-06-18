@@ -1733,7 +1733,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c1r1 }` }>
 
 
-                        <img id='imgOne' className={ `${ styles.c1r1Img }  ${styles.images }  images` } src={ ourResponsibilityImg } onClick={ handleOnClick } />
+                        <img id='imgOne' className={ `${ styles.c1r1Img }  ${styles.images }  images` } src={ specialDayImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1773,7 +1773,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c1r2 }` }>
 
 
-                        <img id='imgFive' className={ `${ styles.c1r2Img }  ${styles.images }  images` } src={ mothersLoveImg } onClick={ handleOnClick } />
+                        <img id='imgFive' className={ `${ styles.c1r2Img }  ${styles.images }  images` } src={ importantRoleImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1783,7 +1783,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c2r2 }` }>
 
 
-                        <img id='imgSix' className={ `${ styles.c2r2Img }  ${styles.images }  images` } src={ extraImage2Img } onClick={ handleOnClick } />
+                        <img id='imgSix' className={ `${ styles.c2r2Img }  ${styles.images }  images` } src={ extra2Img } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1793,7 +1793,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c3r2 }` }>
 
 
-                        <img id='imgSeven' className={ `${ styles.c3r2Img }  ${styles.images }  images` } src={ extraImage1Img } onClick={ handleOnClick } />
+                        <img id='imgSeven' className={ `${ styles.c3r2Img }  ${styles.images }  images` } src={ extra1Img } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1803,7 +1803,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c4r2 }` }>
 
 
-                        <img id='imgEight' className={ `${ styles.c4r2Img }  ${styles.images }  images` } src={ ourWorldImg } onClick={ handleOnClick } />
+                        <img id='imgEight' className={ `${ styles.c4r2Img }  ${styles.images }  images` } src={ provideForUsImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1813,7 +1813,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c1r3 }` }>
 
 
-                        <img id='imgNine' className={ `${ styles.c1r3Img }  ${styles.images }  images` } src={ celebrationImg } onClick={ handleOnClick } />
+                        <img id='imgNine' className={ `${ styles.c1r3Img }  ${styles.images }  images` } src={ throughTheGenerationsImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1823,7 +1823,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c2r3 }` }>
 
 
-                        <img id='imgTen' className={ `${ styles.c2r3Img }  ${styles.images }  images` } src={ everythingYouDoImg } onClick={ handleOnClick } />
+                        <img id='imgTen' className={ `${ styles.c2r3Img }  ${styles.images }  images` } src={ everythingImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1843,7 +1843,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c4r3 }` }>
 
 
-                        <img id='imgTwelve' className={ `${ styles.c4r3Img }  ${styles.images }  images` } src={ appreciateYouImg } onClick={ handleOnClick } />
+                        <img id='imgTwelve' className={ `${ styles.c4r3Img }  ${styles.images }  images` } src={ appreciateImg } onClick={ handleOnClick } />
 
 
                     </div>
