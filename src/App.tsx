@@ -11,6 +11,7 @@ import { Contact } from './pages/Contact'
 import { NotFound } from './pages/NotFound'
 import MothersDayCardWrapper from './pages/MothersDayCardWrapper.tsx';
 import FathersDayCardWrapper from './pages/FathersDayCardWrapper.tsx';
+import FathersDayCardWrapperSpecial from './pages/FathersDayCardWrapperSpecial.tsx';
 import HappyBirthdayCard from './pages/HappyBirthdayCard.tsx';
 import FourthOfJulyCard from './pages/FourthOfJulyCard.tsx';
 import HappyHalloweenCard from './pages/HappyHalloweenCard.tsx';
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           <Route path="/cards"   element={<Cards />}   />
           <Route path="/mothersdaycard" element={<MothersDayCardWrapper />} />
           <Route path="/fathersdaycard" element={<FathersDayCardWrapper />} />
+          <Route path="/fathersdaycardspecial" element={<FathersDayCardWrapperSpecial />} />
           <Route path="/happybirthdaycard" element={<HappyBirthdayCard />} />
           <Route path="/fourthofjulycard" element={<FourthOfJulyCard />} />
           <Route path="/happyhalloweencard" element={<HappyHalloweenCard />} />
