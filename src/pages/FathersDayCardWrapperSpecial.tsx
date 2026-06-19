@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import FathersDayCard from "./FathersDayCard.tsx";
+import FathersDayCardSpecial from "./FathersDayCardSpecial.tsx";
 
 
 
 // Entry point or Root component
-function FathersDayCardWrapper() {
+function FathersDayCardWrapperSpecial() {
   const [remountKey, setRemountKey] = useState(0);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function FathersDayCardWrapper() {
   }, []);
 
   // When remountKey changes, the Parent AND all its children will remount
-  return <FathersDayCard key={remountKey} />;
+  return <FathersDayCardSpecial key={remountKey} />;
 }
 
-export default FathersDayCardWrapper;
+export default FathersDayCardWrapperSpecial;

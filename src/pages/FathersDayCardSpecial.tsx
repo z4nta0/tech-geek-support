@@ -27,7 +27,7 @@ gsap.registerPlugin(TextPlugin, SplitText, useGSAP, GSDevTools);
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function FathersDayCard() {
+export default function FathersDayCardSpecial() {
 
 
     /** Window Height Number                   = This custom variable stores the current window viewport height and will trigger a rerender via the {@link useEffect} hook when the window is resized and its value changes in order to recalculate the snowfall and the pixelated transition animation parameters. */
