@@ -6,18 +6,18 @@ import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
 import { GSDevTools } from "gsap/GSDevTools";
 import { useEffect } from 'react';
-import appreciateImg from '../assets/fathers-day-card/appreciate.png';
-import throughTheGenerationsImg from '../assets/fathers-day-card/through-the-generations.png';
-import everythingImg from '../assets/fathers-day-card/everything.png';
-import extra1Img from '../assets/fathers-day-card/extra-1.png';
-import extra2Img from '../assets/fathers-day-card/extra-2.png';
-import littleThingsImg from '../assets/fathers-day-card/little-things.png';
-import loveYouImg from '../assets/fathers-day-card/love-you.png';
-import importantRoleImg from '../assets/fathers-day-card/important-role.png';
-import needYouImg from '../assets/fathers-day-card/need-you.png';
-import specialDayImg from '../assets/fathers-day-card/special-day.png';
-import provideForUsImg from '../assets/fathers-day-card/provide-for-us.png';
-import thankYouImg from '../assets/fathers-day-card/thank-you.png';
+import appreciateImg from '../assets/fdc-special/appreciate.png';
+import throughTheSimianOffspringImg from '../assets/fdc-special/through-the-simian-offspring.png';
+import monkeyingAroundImg from '../assets/fdc-special/monkeying-around.png';
+import extra1Img from '../assets/fdc-special/extra-1.png';
+import extra2Img from '../assets/fdc-special/extra-2.png';
+import fecesFlingingImg from '../assets/fdc-special/feces-flinging.png';
+import loveImg from '../assets/fdc-special/love.png';
+import simianRoleImg from '../assets/fdc-special/simian-role.png';
+import needYourImg from '../assets/fdc-special/need-your.png';
+import specialDayImg from '../assets/fdc-special/special-day.png';
+import provideForUsImg from '../assets/fdc-special/provide-for-us.png';
+import thankYouImg from '../assets/fdc-special/thank-you.png';
 import useWinSiz from '../hooks/useWinSiz.ts';     /** This import is the custom React hook that will provide the current window viewport dimensions and will also be used to trigger the useEffect hook on window resize events, as well as altering certain animation settings based on how small or big its dimensions are. */
 import { type WinSizObj } from '../hooks/useWinSiz.ts'; /** This import is the custom type definition for the custom state variable that is generated from the custom useWinSiz React Hook and stores the current viewport dimensions. */
 
@@ -68,18 +68,18 @@ emotional growth
 */
 
     const texArr = [
-        ["To all of the fathers out there, ", "thank you", "!"],
-        ["For ", "everything", " that you do for us."],
-        ["Especially the ", "little things", "."],
-        ["You play such an ", "important role", " in our lives."],
-        ["What fathers ", "provide for us", " goes beyond words!"],
-        ["And gets passed down ", "through the generations" ,"."],
-        ["So on this ", "special day" ," we take great delight in celebrating you."],
-        ["We do ", "love you", " always and unconditionally."],
-        ["We do ", "appreciate", " all that you do."],
-        ["And we will always ", "need you", " in our lives."],
-        ["On behalf of the rest of us..."],
-        ["Happy Father's Day!"],
+        ["To all of the simian fathers out there, ", "thank you", "!"],
+        ["For all of the ", "monkeying around", " that you do for us."],
+        ["Especially the ", "feces flinging", "."],
+        ["You play such an ", "simian role", " in our lives."],
+        ["What simian fathers ", "provide for us", " goes beyond sign language!"],
+        ["And gets passed down ", "through the simian offspring" ,"."],
+        ["So on this ", "special day" ," we celebrate our simian alphas."],
+        ["We do ", "love", " that you always protect us from the jungle."],
+        ["We do ", "appreciate", " all the allogrooming you do."],
+        ["And we will always ", "need your", " threat displays in our lives."],
+        ["On behalf of the rest of our troop..."],
+        ["Happy Simian Father's Day!"],
     ];
 
 
@@ -1608,15 +1608,15 @@ emotional growth
 
 
 
-                        <img id='everythingYouDoImg' src={ everythingImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='everythingYouDoImg' src={ monkeyingAroundImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='littleThingsImg' src={ littleThingsImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='littleThingsImg' src={ fecesFlingingImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
-                        <img id='ourWorldImg' src={ importantRoleImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='ourWorldImg' src={ simianRoleImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
@@ -1624,7 +1624,7 @@ emotional growth
 
 
 
-                        <img id='celebrationImg' src={ throughTheGenerationsImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='celebrationImg' src={ throughTheSimianOffspringImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
@@ -1632,7 +1632,7 @@ emotional growth
 
 
 
-                        <img id='loveYouImg' src={ loveYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='loveYouImg' src={ loveImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
 
@@ -1640,7 +1640,7 @@ emotional growth
 
 
 
-                        <img id='needYouImg' src={ needYouImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
+                        <img id='needYouImg' src={ needYourImg } className={ styles.videos } style={ isLandscape === true ? { width: '1920px', height: '1080px', clipPath: 'url(#heartClip)' } : { width: '409px', height: '911px', clipPath: 'url(#heartClip)' } } />
 
 
                     </div>
@@ -1743,7 +1743,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c2r1 }` }>
 
 
-                        <img id='imgTwo' className={ `${ styles.c2r1Img }  ${styles.images }  images` } src={ littleThingsImg } onClick={ handleOnClick } />
+                        <img id='imgTwo' className={ `${ styles.c2r1Img }  ${styles.images }  images` } src={ fecesFlingingImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1753,7 +1753,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c3r1 }` }>
 
 
-                        <img id='imgThree' className={ `${ styles.c3r1Img }  ${styles.images }  images` } src={ needYouImg } onClick={ handleOnClick } />
+                        <img id='imgThree' className={ `${ styles.c3r1Img }  ${styles.images }  images` } src={ needYourImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1763,7 +1763,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c4r1 }` }>
 
 
-                        <img id='imgFour' className={ `${ styles.c4r1Img }  ${styles.images }  images` } src={ loveYouImg } onClick={ handleOnClick } />
+                        <img id='imgFour' className={ `${ styles.c4r1Img }  ${styles.images }  images` } src={ loveImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1773,7 +1773,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c1r2 }` }>
 
 
-                        <img id='imgFive' className={ `${ styles.c1r2Img }  ${styles.images }  images` } src={ importantRoleImg } onClick={ handleOnClick } />
+                        <img id='imgFive' className={ `${ styles.c1r2Img }  ${styles.images }  images` } src={ simianRoleImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1813,7 +1813,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c1r3 }` }>
 
 
-                        <img id='imgNine' className={ `${ styles.c1r3Img }  ${styles.images }  images` } src={ throughTheGenerationsImg } onClick={ handleOnClick } />
+                        <img id='imgNine' className={ `${ styles.c1r3Img }  ${styles.images }  images` } src={ throughTheSimianOffspringImg } onClick={ handleOnClick } />
 
 
                     </div>
@@ -1823,7 +1823,7 @@ emotional growth
                     <div className={ `${ styles.cell}  ${ styles.c2r3 }` }>
 
 
-                        <img id='imgTen' className={ `${ styles.c2r3Img }  ${styles.images }  images` } src={ everythingImg } onClick={ handleOnClick } />
+                        <img id='imgTen' className={ `${ styles.c2r3Img }  ${styles.images }  images` } src={ monkeyingAroundImg } onClick={ handleOnClick } />
 
 
                     </div>
