@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import gsap from 'gsap';
-import styles from './FathersDayCard.module.css';
+import styles from './FathersDayCardSpecial.module.css';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
@@ -68,16 +68,16 @@ emotional growth
 */
 
     const texArr = [
-        ["To all of the simian fathers out there, ", "thank you", "!"],
+        ["To all of the ", "simian fathers", " out there, thank you!"],
         ["For all of the ", "monkeying around", " that you do for us."],
         ["Especially the ", "feces flinging", "."],
-        ["You play such an ", "simian role", " in our lives."],
-        ["What simian fathers ", "provide for us", " goes beyond sign language!"],
-        ["And gets passed down ", "through the simian offspring" ,"."],
-        ["So on this ", "special day" ," we celebrate our simian alphas."],
-        ["We do ", "love", " that you always protect us from the jungle."],
-        ["We do ", "appreciate", " all the allogrooming you do."],
-        ["And we will always ", "need your", " threat displays in our lives."],
+        ["You play such a ", "simian role", " in our lives."],
+        ["What simian fathers provide for us goes beyond ", "sign language", "!"],
+        ["And gets passed down through the ", "simian offspring" ,"."],
+        ["So on this special day we celebrate our ", "simian alphas", "."],
+        ["We do love that you always ", "protect us from the jungle", "."],
+        ["We do appreciate all of the ", "allogrooming", " you do."],
+        ["And we will always need your ", "long calls", " in our lives."],
         ["On behalf of the rest of our troop..."],
         ["Happy Simian Father's Day!"],
     ];
@@ -1287,7 +1287,7 @@ emotional growth
 
 
 
-    const scale = winWidNum <= 1300 && winWidNum > 900 ? 2 : winWidNum <= 900 && winWidNum > 700 ? 1.5 : winWidNum <= 700 ? 1.25 : 3;
+    const scale = winWidNum <= 1300 && winWidNum > 900 ? 1.4 : winWidNum <= 900 && winWidNum > 700 ? 1 : winWidNum <= 700 ? 1 : 2;
 
     gsaTimIns.current.to(typewriter1, {
         scale: scale,
