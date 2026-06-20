@@ -1287,7 +1287,7 @@ emotional growth
 
 
 
-    const scale = winWidNum <= 1300 && winWidNum > 900 ? 2 : winWidNum <= 900 && winWidNum > 700 ? 1.5 : winWidNum <= 700 ? 1.25 : 3;
+    const scale = winWidNum <= 1300 && winWidNum > 900 ? 1.8 : winWidNum <= 900 && winWidNum > 700 ? 1.4 : winWidNum <= 700 ? 1.1 : 2;
 
     gsaTimIns.current.to(typewriter1, {
         scale: scale,

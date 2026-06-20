@@ -172,6 +172,9 @@
     opacity: 0.1;
     transform: translateX(-50%);
     z-index: 999;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
 
 }
 
@@ -218,7 +221,7 @@
 
 
 
-@media (orientation: portrait) {
+/* @media (orientation: portrait) {
 
     .animationButtons:nth-child(1) {
 
@@ -234,7 +237,7 @@
 
     }
 
-}
+} */
 
 
 .cells {

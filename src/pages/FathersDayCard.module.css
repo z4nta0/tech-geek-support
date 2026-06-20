@@ -1,8 +1,8 @@
 
 @font-face { /** This standard selector contains a custom font family along with its source and allows web developers to use custom fonts not installed on a user's computer. */
 
-    font-family : 'Great Vibes';                                         /** This value was chosen to be used as the font family for the custom .hackedH1 and .hackedParagraph selectors. */
-    src         : url( '../assets/fonts/GreatVibes-Regular.ttf' ); /** This value was chosen to be used in order to host the font file locally. */
+    font-family : 'Permanent Marker';                                         /** This value was chosen to be used as the font family for the custom .hackedH1 and .hackedParagraph selectors. */
+    src         : url( '../assets/fonts/PermanentMarker-Regular.ttf' ); /** This value was chosen to be used in order to host the font file locally. */
 
 }
 
@@ -172,6 +172,9 @@
     opacity: 0.1;
     transform: translateX(-50%);
     z-index: 999;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
 
 }
 
@@ -218,7 +221,7 @@
 
 
 
-@media (orientation: portrait) {
+/* @media (orientation: portrait) {
 
     .animationButtons:nth-child(1) {
 
@@ -234,7 +237,7 @@
 
     }
 
-}
+} */
 
 
 .cells {
@@ -268,7 +271,7 @@
 .typewriter {
 
     position: relative;
-    font-family: 'Great Vibes';
+    font-family: 'Permanent Marker';
     font-size: 48px;
     color: #192A55;
     text-align: center;
@@ -298,7 +301,7 @@
 
     content: '';
     position: absolute;
-    bottom: 15px;
+    bottom: 7px;
     left: 0;
     /* background-image: url('../assets/mothers-day-card/swish.svg');
     background-size: 100% 100%;
@@ -306,7 +309,7 @@
     /* border: 1px solid #8b2a3a; */
     background-color: #192A55;
     width: 100%;
-    height: 1.618px;
+    height: 2.618px;
     transform-origin: left center;
     scale: var( --scale-x ) 1;
     z-index: -1;
@@ -317,7 +320,7 @@
 
 p {
 
-    font-family: 'Great Vibes';
+    font-family: 'Permanent Marker';
     font-size:40px;
     pointer-events: none;
 
