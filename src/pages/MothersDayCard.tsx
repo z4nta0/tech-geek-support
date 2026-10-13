@@ -6,18 +6,18 @@ import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
 import { GSDevTools } from "gsap/GSDevTools";
 import { useEffect } from 'react';
-import appreciateYouImg from '../assets/mothers-day-card/appreciate-you.png';
-import celebrationImg from '../assets/mothers-day-card/celebration.png';
-import everythingYouDoImg from '../assets/mothers-day-card/everything-you-do.png';
-import extraImage1Img from '../assets/mothers-day-card/extra-image-1.png';
-import extraImage2Img from '../assets/mothers-day-card/extra-image-2.png';
-import littleThingsImg from '../assets/mothers-day-card/little-things.png';
-import loveYouImg from '../assets/mothers-day-card/love-you.png';
-import mothersLoveImg from '../assets/mothers-day-card/mothers-love.png';
-import needYouImg from '../assets/mothers-day-card/need-you.png';
-import ourResponsibilityImg from '../assets/mothers-day-card/our-responsibility.png';
-import ourWorldImg from '../assets/mothers-day-card/our-world.png';
-import thankYouImg from '../assets/mothers-day-card/thank-you.png';
+import appreciateYouImg from '../assets/mothers-day-card/appreciate-you.webp';
+import celebrationImg from '../assets/mothers-day-card/celebration.webp';
+import everythingYouDoImg from '../assets/mothers-day-card/everything-you-do.webp';
+import extraImage1Img from '../assets/mothers-day-card/extra-image-1.webp';
+import extraImage2Img from '../assets/mothers-day-card/extra-image-2.webp';
+import littleThingsImg from '../assets/mothers-day-card/little-things.webp';
+import loveYouImg from '../assets/mothers-day-card/love-you.webp';
+import mothersLoveImg from '../assets/mothers-day-card/mothers-love.webp';
+import needYouImg from '../assets/mothers-day-card/need-you.webp';
+import ourResponsibilityImg from '../assets/mothers-day-card/our-responsibility.webp';
+import ourWorldImg from '../assets/mothers-day-card/our-world.webp';
+import thankYouImg from '../assets/mothers-day-card/thank-you.webp';
 import useWinSiz from '../hooks/useWinSiz.ts';     /** This import is the custom React hook that will provide the current window viewport dimensions and will also be used to trigger the useEffect hook on window resize events, as well as altering certain animation settings based on how small or big its dimensions are. */
 import { type WinSizObj } from '../hooks/useWinSiz.ts'; /** This import is the custom type definition for the custom state variable that is generated from the custom useWinSiz React Hook and stores the current viewport dimensions. */
 

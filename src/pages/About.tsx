@@ -4,7 +4,7 @@ import { GeoBg } from '../components/GeoBg'
 import { Tag } from '../components/Tag'
 import { SectionHeader } from '../components/SectionHeader'
 import styles from './About.module.css'
-import selfPortrait from '../assets/self-portrait.jpg'
+import selfPortrait from '../assets/self-portrait.webp'
 
 const skills = {
   'Frontend': ['React', 'TypeScript', 'Next.js', 'Vite', 'CSS / Sass', 'Tailwind', 'Greensocks', 'React Router'],

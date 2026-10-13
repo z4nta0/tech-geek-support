@@ -1,17 +1,17 @@
 import type { Project, GreetingCard, SupportArticle } from '../types';
-import easeMyLifeImg from '../assets/ease-my-life-website.png';
-import hairDesignsImg from '../assets/hair-designs-website.png';
-import bernieBearsImg from '../assets/the-bernie-bears-website.png';
-import tonysToppersImg from '../assets/tonys-toppers-website.png';
-import sealAndShieldImg from '../assets/seal-and-shield-website.png';
-import reeseRoofingImg from '../assets/reese-roofing-website.png';
-import techGeekImg from '../assets/tech-geek-website.png';
-import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.png';
-import fathersDayCardPreview from '../assets/fathers-day-card-preview-image.png';
-import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.png';
-import fourthOfJulyCardPreview from '../assets/fourth-of-july-card-preview-image.png';
-import happyHalloweenCardPreview from '../assets/happy-halloween-card-preview-image.png';
-import happyThanksgivingCardPreview from '../assets/happy-thanksgiving-card-preview-image.png';
+import easeMyLifeImg from '../assets/ease-my-life-website.webp';
+import hairDesignsImg from '../assets/hair-designs-website.webp';
+import bernieBearsImg from '../assets/the-bernie-bears-website.webp';
+import tonysToppersImg from '../assets/tonys-toppers-website.webp';
+import sealAndShieldImg from '../assets/seal-and-shield-website.webp';
+import reeseRoofingImg from '../assets/reese-roofing-website.webp';
+import techGeekImg from '../assets/tech-geek-website.webp';
+import mothersDayCardPreview from '../assets/mothers-day-card-preview-image.webp';
+import fathersDayCardPreview from '../assets/fathers-day-card-preview-image.webp';
+import happyBirthdayCardPreview from '../assets/happy-birthday-card-preview-image.webp';
+import fourthOfJulyCardPreview from '../assets/fourth-of-july-card-preview-image.webp';
+import happyHalloweenCardPreview from '../assets/happy-halloween-card-preview-image.webp';
+import happyThanksgivingCardPreview from '../assets/happy-thanksgiving-card-preview-image.webp';
 
 // ── Projects ───────────────────────────────────────────────
 export const projects: Project[] = [

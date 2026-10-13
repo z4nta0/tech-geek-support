@@ -6,18 +6,18 @@ import { SplitText } from 'gsap/SplitText';
 import { TextPlugin } from 'gsap/all';
 import { GSDevTools } from "gsap/GSDevTools";
 import { useEffect } from 'react';
-import appreciateImg from '../assets/fathers-day-card/appreciate.png';
-import throughTheGenerationsImg from '../assets/fathers-day-card/through-the-generations.png';
-import everythingImg from '../assets/fathers-day-card/everything.png';
-import extra1Img from '../assets/fathers-day-card/extra-1.png';
-import extra2Img from '../assets/fathers-day-card/extra-2.png';
-import littleThingsImg from '../assets/fathers-day-card/little-things.png';
-import loveYouImg from '../assets/fathers-day-card/love-you.png';
-import importantRoleImg from '../assets/fathers-day-card/important-role.png';
-import needYouImg from '../assets/fathers-day-card/need-you.png';
-import specialDayImg from '../assets/fathers-day-card/special-day.png';
-import provideForUsImg from '../assets/fathers-day-card/provide-for-us.png';
-import thankYouImg from '../assets/fathers-day-card/thank-you.png';
+import appreciateImg from '../assets/fathers-day-card/appreciate.webp';
+import throughTheGenerationsImg from '../assets/fathers-day-card/through-the-generations.webp';
+import everythingImg from '../assets/fathers-day-card/everything.webp';
+import extra1Img from '../assets/fathers-day-card/extra-1.webp';
+import extra2Img from '../assets/fathers-day-card/extra-2.webp';
+import littleThingsImg from '../assets/fathers-day-card/little-things.webp';
+import loveYouImg from '../assets/fathers-day-card/love-you.webp';
+import importantRoleImg from '../assets/fathers-day-card/important-role.webp';
+import needYouImg from '../assets/fathers-day-card/need-you.webp';
+import specialDayImg from '../assets/fathers-day-card/special-day.webp';
+import provideForUsImg from '../assets/fathers-day-card/provide-for-us.webp';
+import thankYouImg from '../assets/fathers-day-card/thank-you.webp';
 import useWinSiz from '../hooks/useWinSiz.ts';     /** This import is the custom React hook that will provide the current window viewport dimensions and will also be used to trigger the useEffect hook on window resize events, as well as altering certain animation settings based on how small or big its dimensions are. */
 import { type WinSizObj } from '../hooks/useWinSiz.ts'; /** This import is the custom type definition for the custom state variable that is generated from the custom useWinSiz React Hook and stores the current viewport dimensions. */
 
