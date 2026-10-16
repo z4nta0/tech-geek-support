@@ -6,7 +6,7 @@
 import cssModObj from './home.module.css'; // What: CSS Module Object. Why: Home's hero, topic tiles, and steps are styled in its own module. How: This maps each class name in home.module.css to its hashed module class.
 
 
-import { Link        } from 'react-router';               // What: Link. Why: The hero's buttons and the topic tiles move to other pages without a full page load. How: This renders those links.
+import { Link        } from 'react-router';              // What: Link. Why: The hero's buttons and the topic tiles move to other pages without a full page load. How: This renders those links.
 import { SigRinCom   } from '../../ui/signal-rings.tsx'; // What: Signal Rings Component. Why: The hero carries the site's motif. How: The hero sets it beside the pitch.
 import { TOP_REC_ARR } from '../../ui/topics.ts';        // What: Topic Record Array. Why: The topic tiles list every help topic. How: The page renders one tile per row.
 

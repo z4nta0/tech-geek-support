@@ -65,7 +65,7 @@
 
 
 	animation-delay : calc( var( --dur-ani-bas ) * 2 ); /* Duration Animation Base ~= 157.8ms */
-	opacity         : var( --cdn-pow-008-rec );          /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.140 */
+	opacity         : var( --cdn-pow-008-rec );         /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.140 */
 
 
 }
@@ -133,7 +133,7 @@
 
 
 	animation        : spaOraPatEnterPop var( --dur-ani-p03 ) var( --mot-ove-eas ) calc( var( --dur-ani-bas ) * 3 ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ), Duration Animation Base ~= 157.8ms */
-	fill             : var( --acc-mai-col );                                                                               /* Accent Main Color = #F26419 */
+	fill             : var( --acc-mai-col );                                                                              /* Accent Main Color = #F26419 */
 	transform-box    : fill-box;
 	transform-origin : 50% 50%;
 

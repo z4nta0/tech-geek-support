@@ -414,11 +414,11 @@
 .topTilAnc { /* What: Topic Tile Anchor. Why: Each tile is a soft, friendly button into a topic. How: This draws an ivory tile that fills its grid cell, stacks its icon, name, and hint, and eases its lift, press, and focus. */
 
 
-	background     : var( --bac-pag-col );                     /* Background Page Color = #F5F0E8 */
-	border-radius  : var( --rad-bor-lar );                     /* Radius Border Large ~= 14.572px */
+	background     : var( --bac-pag-col );                      /* Background Page Color = #F5F0E8 */
+	border-radius  : var( --rad-bor-lar );                      /* Radius Border Large ~= 14.572px */
 	display        : flex;
 	flex-direction : column;
-	gap            : var( --spa-ver-m03 );                     /* Spacing Vertical Base Minus 3 ~= 6.268px */
+	gap            : var( --spa-ver-m03 );                      /* Spacing Vertical Base Minus 3 ~= 6.268px */
 	height         : 100%;
 	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 	position       : relative;
