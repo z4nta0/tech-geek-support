@@ -1,0 +1,204 @@
+
+
+
+/**
+ * not-found.module.css = Not Found Module
+ *
+ * @summary
+ * Styles for NotFouCom: one centered column below the bar, the signal rings
+ * at a modest size above a small teal Error 404 label, the heading, a
+ * reassuring line, and the three buttons in a centered row. The page fades
+ * up as it opens, and every transition holds still under reduced motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region notFouSec */
+
+.notFouSec { /* What: Not Found Section. Why: The message sits centered on the page, clear of the bar, and fades up as it opens. How: This stacks and centers its parts in a capped column, padded by the bar's height plus the hero gap above and a large step below. */
+
+
+	align-items    : center;
+	animation      : global( contentEnterFadeUp ) var( --dur-ani-p03 ) var( --mot-dec-eas ) both;                   /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-bas );                                                                          /* Spacing Vertical Base ~= 14.572px */
+	margin         : 0 auto;
+	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );                                                           /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	padding        : calc( var( --nav-bar-hei ) + var( --her-gap-pad ) ) var( --gut-sid-pad ) var( --spa-ver-p07 ); /* Navigation Bar Height ~= 78.751px, Hero Gap Padding, about 59.447px - 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
+	text-align     : center;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Not Found Section. Why: Someone who asked for less motion shouldn't see the page slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.notFouSec { /* What: Motionless Not Found Section. Why: The page should simply be there. How: This turns the entrance off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.notRinSvg { /* What: Not Found Rings SVG. Why: The rings greet the visitor without crowding the message. How: This caps them at about 243px wide, a little apart from the text below. */
+
+
+	margin-bottom : var( --spa-ver-m02 );                /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	max-width     : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.517px */
+
+
+}
+
+.notCodPar { /* What: Not Found Code Paragraph. Why: The error number reads as a small label, not a shout. How: This sets it in teal mono capitals. */
+
+
+	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	text-transform : uppercase;
+
+
+}
+
+.notTitHea { /* What: Not Found Title Heading. Why: The heading says what happened, calmly. How: This sets it in the main text color between the base plus 4 and plus 6 sizes. */
+
+
+	color     : var( --tex-mai-col );                                     /* Text Main Color = #1A1A2E */
+	font-size : clamp( var( --fon-siz-p04 ), 5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
+
+
+}
+
+.notTexPar { /* What: Not Found Text Paragraph. Why: The reassurance reads a step larger, a comfortable length. How: This sets it at the base plus 2 size, capped at the paragraph measure. */
+
+
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+
+/* #region notActDiv */
+
+.notActDiv { /* What: Not Found Actions Div. Why: The three ways onward sit together in the center. How: This lines them up in a centered row that wraps, a little apart from the text. */
+
+
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	justify-content : center;
+	padding-top     : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+}
+
+.butPriAnc { /* What: Button Primary Anchor. Why: Asking is the main way onward. How: This sets an orange button in mono capitals, easing its color, lift, press, and focus. */
+
+
+	align-items    : center;
+	background     : var( --acc-mai-col );                      /* Accent Main Color = #F26419 */
+	border-radius  : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.572px */
+	color          : var( --tex-acc-col );                      /* Text Accent Color = #1A1A2E */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butPriAnc:hover { /* What: Hovered Button Primary Anchor. Why: A button should respond to the pointer. How: This darkens its orange and lifts it 2px. */
+
+
+	background : var( --acc-hov-col );                            /* Accent Hover Color ~= #e45700 */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.butPriAnc:active { /* What: Pressed Button Primary Anchor. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Primary Anchor. Why: Someone who asked for less motion shouldn't see the button glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butPriAnc { /* What: Motionless Button Primary Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.butSecAnc { /* What: Button Secondary Anchor. Why: The other ways onward sit back from the main one. How: This sets an outlined button in mono capitals, easing its border, color, lift, press, and focus. */
+
+
+	align-items    : center;
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xsm );                            /* Radius Border Extra Small ~= 3.572px */
+	color          : var( --tex-mai-col );                            /* Text Main Color = #1A1A2E */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 );       /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : border-color var( --dur-tra-bas ), color var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butSecAnc:hover { /* What: Hovered Button Secondary Anchor. Why: A button should respond to the pointer. How: This turns its border teal and its text dark teal and lifts it 2px. */
+
+
+	border-color : var( --act-mai-col );                            /* Accent-Tertiary Main Color = #2A9D8F */
+	color        : var( --act-dar-col );                            /* Accent-Tertiary Dark Color ~= #007063 */
+	transform    : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.butSecAnc:active { /* What: Pressed Button Secondary Anchor. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Secondary Anchor. Why: Someone who asked for less motion shouldn't see the button glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butSecAnc { /* What: Motionless Button Secondary Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion notActDiv */
+
+/* #endregion notFouSec */
+
+
