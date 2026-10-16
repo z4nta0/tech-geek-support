@@ -57,6 +57,26 @@ SEO (never the demo treatment), and free.
   booked sessions), which the user may add once they know they have the
   time.
 
+## Theme
+Decided by the user 2026-10-16, mixing the three directions offered:
+- **Hero**: "Calm Signal": the pitch beside the signal rings
+  (`ui/signal-rings.tsx`), a speech bubble at the center of soft teal rings
+  that ripple out once as the page opens, with an orange sparkle that pops
+  in after them.
+- **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
+  border inset from the edge and a hint line under each topic, carrying
+  "Friendly Conversation"'s small speech-bubble icon.
+- **How it works**: "Calm Signal"'s three white step cards, chosen to match
+  the hero.
+- **Colors**: the family's palette, plus one role this site adds, the teal
+  accent family: `--act-mai-col` (#2A9D8F, for drawings, dots, and fills,
+  never buttons or links, which stay orange; about 2.9:1 on the ivory, so
+  never text), `--act-dar-col` (about #007063, its text and icon shade), and
+  `--act-tin-col` (#D3EEE9). The names match TechGeek.cards' berry role.
+- **Type**: the family's three faces; leads and article text read a step
+  larger than the family's body size (the base plus 2, about 19.3px), since
+  many readers here are older or nervous about technology.
+
 ## Articles
 Decided by the user 2026-10-16; the workflow is still being refined.
 - **Research first**: an AI agent finds the problems everyday people actually

@@ -1,0 +1,671 @@
+
+
+
+/**
+ * home.module.css = Home Module
+ *
+ * @summary
+ * Styles for HomPagCom. The hero sits on the ivory with the pitch beside the
+ * signal rings, its last heading word in teal and a warm italic note under
+ * the buttons. The topic tiles sit on a white band, each a soft ivory tile
+ * with a dashed, stitched border just inside its edge, a teal speech bubble,
+ * its topic, and a muted hint, four, three, or two across so every row stays
+ * even. The three step cards follow on the ivory. The page fades up as it
+ * opens, every control eases its hover, press, and focus, and every
+ * animation and transition holds still under reduced motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region pagEntDiv */
+
+.pagEntDiv { /* What: Page Enter Div. Why: The page fades up into view as it opens, like every page. How: This plays the shared page entrance. */
+
+
+	animation : global( contentEnterFadeUp ) var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Page Enter Div. Why: Someone who asked for less motion shouldn't see the page slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.pagEntDiv { /* What: Motionless Page Enter Div. Why: The page should simply be there. How: This turns the entrance off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region homHerSec */
+
+.homHerSec { /* What: Home Hero Section. Why: The hero opens the page below the bar with room to breathe. How: This pads it by the bar's height plus the hero gap above and a large step below. */
+
+
+	padding-bottom : var( --spa-ver-p07 );                                /* Spacing Vertical Base Plus 7 ~= 104.323px */
+	padding-top    : calc( var( --nav-bar-hei ) + var( --her-gap-pad ) ); /* Navigation Bar Height ~= 78.751px, Hero Gap Padding, about 59.447px - 138.199px */
+
+
+}
+
+
+/* #region herInnDiv */
+
+.herInnDiv { /* What: Hero Inner Div. Why: The text and the rings sit side by side on wide screens. How: This lays them out in two columns in the site's centered column, the text's a little wider. */
+
+
+	align-items           : center;
+	display               : grid;
+	gap                   : var( --spa-ver-p04 ) var( --spa-hor-p05 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 5 ~= 59.447px */
+	grid-template-columns : 3fr 2fr;
+	margin                : 0 auto;
+	max-width             : var( --con-max-wid );                      /* Container Maximum Width ~= 1,449.365px */
+	padding               : 0 var( --gut-sid-pad );                    /* Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Hero Inner Div. Why: Two columns are too tight on phones and small tablets. How: This applies at 768px and below. */
+
+
+	.herInnDiv { /* What: Stacked Hero Inner Div. Why: The rings sit under the pitch on a narrow screen. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region herTexDiv */
+
+.herTexDiv { /* What: Hero Text Div. Why: The pitch reads as one left-aligned column. How: This stacks its parts with even gaps. */
+
+
+	align-items    : flex-start;
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+
+
+}
+
+
+/* #region herEyePar */
+
+.herEyePar { /* What: Hero Eyebrow Paragraph. Why: The label reads as a small teal caption with its dot. How: This lines up the dot and the words in teal mono capitals. */
+
+
+	align-items    : center;
+	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	gap            : var( --spa-hor-m02 );                   /* Spacing Horizontal Base Minus 2 ~= 8.304px */
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	text-transform : uppercase;
+
+
+}
+
+.herDotSpa { /* What: Hero Dot Span. Why: A small teal dot leads the label, echoing the rings. How: This draws a teal circle. */
+
+
+	background    : var( --act-mai-col );                /* Accent-Tertiary Main Color = #2A9D8F */
+	border-radius : 50%;
+	height        : calc( var( --ver-rhy-m02 ) * 1rem ); /* Vertical Rhythm Base Minus 2 ~= 8.304px */
+	width         : calc( var( --ver-rhy-m02 ) * 1rem ); /* Vertical Rhythm Base Minus 2 ~= 8.304px */
+
+
+}
+
+/* #endregion herEyePar */
+
+
+/* #region herTitHea */
+
+.herTitHea { /* What: Hero Title Heading. Why: The heading is the page's loudest line. How: This sets it in the main text color at the shared h1 size. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+
+.herAccSpa { /* What: Hero Accent Span. Why: The last word is the promise, so it carries the site's own color. How: This colors it dark teal. */
+
+
+	color : var( --act-dar-col ); /* Accent-Tertiary Dark Color ~= #007063 */
+
+
+}
+
+/* #endregion herTitHea */
+
+
+.herLeaPar { /* What: Hero Lead Paragraph. Why: The lead reads a step larger than body text, easy on every eye. How: This sets it at the base plus 2 size, capped at the paragraph measure. */
+
+
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+
+/* #region herActDiv */
+
+.herActDiv { /* What: Hero Actions Div. Why: The two buttons sit side by side and wrap on a narrow phone. How: This lines them up in a wrapping row, a little apart from the lead. */
+
+
+	display     : flex;
+	flex-wrap   : wrap;
+	gap         : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	padding-top : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+}
+
+.butPriAnc { /* What: Button Primary Anchor. Why: The main action stands out. How: This sets an orange button in mono capitals, easing its color, lift, press, and focus. */
+
+
+	align-items    : center;
+	background     : var( --acc-mai-col );                      /* Accent Main Color = #F26419 */
+	border-radius  : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.572px */
+	color          : var( --tex-acc-col );                      /* Text Accent Color = #1A1A2E */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butPriAnc:hover { /* What: Hovered Button Primary Anchor. Why: A button should respond to the pointer. How: This darkens its orange and lifts it 2px. */
+
+
+	background : var( --acc-hov-col );                            /* Accent Hover Color ~= #e45700 */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.butPriAnc:active { /* What: Pressed Button Primary Anchor. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Primary Anchor. Why: Someone who asked for less motion shouldn't see the button glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butPriAnc { /* What: Motionless Button Primary Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.butSecAnc { /* What: Button Secondary Anchor. Why: The second way onward sits back from the first. How: This sets an outlined button in mono capitals, easing its border, color, lift, press, and focus. */
+
+
+	align-items    : center;
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xsm );                            /* Radius Border Extra Small ~= 3.572px */
+	color          : var( --tex-mai-col );                            /* Text Main Color = #1A1A2E */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 );       /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : border-color var( --dur-tra-bas ), color var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butSecAnc:hover { /* What: Hovered Button Secondary Anchor. Why: A button should respond to the pointer. How: This turns its border teal and its text dark teal and lifts it 2px. */
+
+
+	border-color : var( --act-mai-col );                            /* Accent-Tertiary Main Color = #2A9D8F */
+	color        : var( --act-dar-col );                            /* Accent-Tertiary Dark Color ~= #007063 */
+	transform    : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.butSecAnc:active { /* What: Pressed Button Secondary Anchor. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Secondary Anchor. Why: Someone who asked for less motion shouldn't see the button glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butSecAnc { /* What: Motionless Button Secondary Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion herActDiv */
+
+
+.herNotPar { /* What: Hero Note Paragraph. Why: The reassurance reads as a warm aside rather than another claim. How: This sets it in the italic accent face, a step larger than body text, in the muted color. */
+
+
+	color       : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	font-family : var( --fon-fam-acc ); /* Font Family Accent = 'Lora', serif */
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	font-style  : italic;
+
+
+}
+
+/* #endregion herTexDiv */
+
+
+
+.herRinSvg { /* What: Hero Rings SVG. Why: The rings fill their column without growing past a comfortable size. How: This centers them and caps their width at about 426px. */
+
+
+	justify-self : center;
+	max-width    : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.601px */
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Hero Rings SVG. Why: Under the pitch on a phone, full-size rings would push the topics far down. How: This applies at 768px and below. */
+
+
+	.herRinSvg { /* What: Smaller Hero Rings SVG. Why: The rings stay a pleasant accent rather than a whole screen. How: This caps their width at about 321px. */
+
+
+		max-width : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.277px */
+
+
+	}
+
+
+}
+
+/* #endregion herInnDiv */
+
+/* #endregion homHerSec */
+
+
+
+/* #region homTopSec */
+
+.homTopSec { /* What: Home Topic Section. Why: The topics stand apart from the hero on a white band. How: This sets the surface color, hairline borders above and below, and roomy padding. */
+
+
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #FFFFFF */
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	padding       : var( --spa-ver-p07 ) 0;                          /* Spacing Vertical Base Plus 7 ~= 104.323px */
+
+
+}
+
+
+/* #region secInnDiv */
+
+.secInnDiv { /* What: Section Inner Div. Why: Every section's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
+
+
+	margin    : 0 auto;
+	max-width : var( --con-max-wid );   /* Container Maximum Width ~= 1,449.365px */
+	padding   : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names each section above its heading. How: This sets it in teal mono capitals. */
+
+
+	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	margin-bottom  : var( --spa-ver-m02 );                   /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	text-transform : uppercase;
+
+
+}
+
+.secTitHea { /* What: Section Title Heading. Why: Each section's heading reads in the main text color at the shared h2 size. How: This sets its color. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+
+
+
+/* #region topGriUno */
+
+.topGriUno { /* What: Topic Grid Unordered. Why: Twelve tiles sit in an even grid. How: This lays them out four across below the heading, with no list markers. */
+
+
+	display               : grid;
+	gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	grid-template-columns : repeat( 4, 1fr );
+	list-style            : none;
+	margin                : var( --spa-ver-p04 ) 0 0;                  /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding               : 0;
+
+
+}
+@media ( max-width : 1024px ) { /* What: Tablet Topic Grid Unordered. Why: Four tiles across crowd their hints on a tablet. How: This applies at 1,024px and below. */
+
+
+	.topGriUno { /* What: Three-Column Topic Grid Unordered. Why: Three divides the twelve tiles evenly. How: This sets three columns. */
+
+
+		grid-template-columns : repeat( 3, 1fr );
+
+
+	}
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Topic Grid Unordered. Why: Three tiles across are too narrow for their names on a phone. How: This applies at 768px and below. */
+
+
+	.topGriUno { /* What: Two-Column Topic Grid Unordered. Why: Two divides the twelve tiles evenly and keeps the list short. How: This sets two columns that may shrink below their longest word, so a long topic name wraps rather than widening the page. */
+
+
+		grid-template-columns : repeat( 2, minmax( 0, 1fr ) );
+
+
+	}
+
+
+}
+
+
+/* #region topTilAnc */
+
+.topTilAnc { /* What: Topic Tile Anchor. Why: Each tile is a soft, friendly button into a topic. How: This draws an ivory tile that fills its grid cell, stacks its icon, name, and hint, and eases its lift, press, and focus. */
+
+
+	background     : var( --bac-pag-col );                     /* Background Page Color = #F5F0E8 */
+	border-radius  : var( --rad-bor-lar );                     /* Radius Border Large ~= 14.572px */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m03 );                     /* Spacing Vertical Base Minus 3 ~= 6.268px */
+	height         : 100%;
+	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	position       : relative;
+	transition     : transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+
+
+}
+.topTilAnc::before { /* What: Topic Tile Anchor Stitching. Why: A dashed line just inside the edge makes the tile look hand-stitched, the theme's touch of fun. How: This draws a dashed border inset from the tile's edge, easing its color, without touching the outline the focus ring uses. */
+
+
+	border         : var( --bor-wid-lar ) dashed var( --bor-mai-col ); /* Border Width Large ~= 2.035px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-sma );                             /* Radius Border Small ~= 8.304px */
+	content        : '';
+	inset          : var( --spa-ver-m02 ) var( --spa-hor-m02 );        /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Minus 2 ~= 8.304px */
+	pointer-events : none;
+	position       : absolute;
+	transition     : border-color var( --dur-tra-bas );                /* Duration Transition Base ~= 157.8ms */
+
+
+}
+.topTilAnc:hover { /* What: Hovered Topic Tile Anchor. Why: A tile should answer the pointer. How: This lifts it about 3px. */
+
+
+	transform : translateY( calc( var( --spa-ver-m06 ) * -1 ) ); /* Spacing Vertical Base Minus 6 ~= -2.696px */
+
+
+}
+.topTilAnc:hover::before { /* What: Hovered Topic Tile Anchor Stitching. Why: The stitching brightens as the tile lifts. How: This turns the dashed line teal. */
+
+
+	border-color : var( --act-mai-col ); /* Accent-Tertiary Main Color = #2A9D8F */
+
+
+}
+.topTilAnc:active { /* What: Pressed Topic Tile Anchor. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Topic Tile Anchor. Why: Two tiles across leave a phone's tile little room inside its padding. How: This applies at 640px and below. */
+
+
+	.topTilAnc { /* What: Snug Topic Tile Anchor. Why: The name and hint need the room more than the padding does. How: This pads the tile by the p01 steps instead. */
+
+
+		padding : var( --spa-ver-p01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+
+
+	}
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Topic Tile Anchor. Why: Someone who asked for less motion shouldn't see the tile glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.topTilAnc,
+	.topTilAnc::before { /* What: Motionless Topic Tile Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the tile's and its stitching's transitions off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.topIcoSvg { /* What: Topic Icon SVG. Why: The speech bubble marks the tile, drawn in a teal dark enough to read on the ivory. How: This sizes it at about 25.6px and strokes it dark teal with rounded joins. */
+
+
+	height          : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+	stroke          : var( --act-dar-col );                /* Accent-Tertiary Dark Color ~= #007063 */
+	stroke-linejoin : round;
+	stroke-width    : 2;                                   /* What: Icon Stroke Width. Why: The bubble's line should read clearly at its small size. How: This is 2 units of the 24-unit drawing space. */
+	width           : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+
+
+}
+
+.topNamSpa { /* What: Topic Name Span. Why: The topic's name is the tile's main line. How: This sets it bold in the main text color at the base plus 2 size. */
+
+
+	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	font-weight : 700;
+	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Topic Name Span. Why: "Understanding" is too wide for a phone's tile at the base plus 2 size. How: This applies at 640px and below. */
+
+
+	.topNamSpa { /* What: Smaller Topic Name Span. Why: Every topic's longest word should fit its tile on a 320px screen. How: This sets the name at the base plus 1 size. */
+
+
+		font-size : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+
+
+	}
+
+
+}
+
+.topHinSpa { /* What: Topic Hint Span. Why: The hint is a quieter second line. How: This sets it in muted mono at the base plus 1 size. */
+
+
+	color       : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+
+
+}
+
+/* #endregion topTilAnc */
+
+/* #endregion topGriUno */
+
+/* #endregion secInnDiv */
+
+/* #endregion homTopSec */
+
+
+
+/* #region homSteSec */
+
+.homSteSec { /* What: Home Steps Section. Why: The steps get room above and below. How: This pads the section top and bottom. */
+
+
+	padding : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
+
+
+}
+
+
+/* #region secInnDiv */
+
+/* What: Section Inner Div Pointer. Why: This section's centered column, eyebrow, and heading share their rules with the topic section's. How: Their rules sit in the homTopSec region above. */
+
+
+
+/* #region steLisOrd */
+
+.steLisOrd { /* What: Step List Ordered. Why: The three steps sit in a row of equal cards. How: This lays them out three across below the heading, with no list markers. */
+
+
+	display               : grid;
+	gap                   : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	grid-template-columns : repeat( 3, 1fr );
+	list-style            : none;
+	margin                : var( --spa-ver-p04 ) 0 0;                  /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding               : 0;
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Step List Ordered. Why: Three cards across are too narrow on phones and small tablets. How: This applies at 768px and below. */
+
+
+	.steLisOrd { /* What: Stacked Step List Ordered. Why: The steps read top to bottom on a narrow screen. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region steIteIte */
+
+.steIteIte { /* What: Step Item Item. Why: Each step is a white card that lifts on hover. How: This draws the card with a quiet border, stacks its parts, and eases its lift and border. */
+
+
+	background     : var( --bac-sur-col );                                                                   /* Background Surface Color = #FFFFFF */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                        /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xla );                                                                   /* Radius Border Extra Large ~= 19.304px */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m01 );                                                                   /* Spacing Vertical Base Minus 1 = 11px */
+	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );                                              /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	transition     : border-color var( --dur-tra-bas ), translate var( --dur-tra-bas ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.steIteIte:hover { /* What: Hovered Step Item Item. Why: Cards answer the pointer like the rest of the family's cards. How: This turns the border teal and lifts the card about 3px. */
+
+
+	border-color : var( --act-mai-col );                /* Accent-Tertiary Main Color = #2A9D8F */
+	translate    : 0 calc( var( --spa-ver-m06 ) * -1 ); /* Spacing Vertical Base Minus 6 ~= -2.696px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Step Item Item. Why: Someone who asked for less motion shouldn't see the card glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.steIteIte { /* What: Motionless Step Item Item. Why: The hover look should simply switch, the lift still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.steLabSpa { /* What: Step Label Span. Why: A small teal label numbers each step. How: This sets it in teal mono capitals. */
+
+
+	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	text-transform : uppercase;
+
+
+}
+
+.steTitHea { /* What: Step Title Heading. Why: The step's name reads in the main text color. How: This sets its color at the shared h3 size. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+
+.steDesPar { /* What: Step Description Paragraph. Why: The step's line stays a comfortable length. How: This caps it at the paragraph measure. */
+
+
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+/* #endregion steIteIte */
+
+/* #endregion steLisOrd */
+
+/* #endregion secInnDiv */
+
+/* #endregion homSteSec */
+
+/* #endregion pagEntDiv */
+
+
