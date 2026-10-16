@@ -87,6 +87,31 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   notes (why the problem was chosen, where it was found, the official sources
   its steps were checked against, and media suggestions), which are never
   published. The starter set is one article per topic.
+- **Published articles are Markdown** (decided by the user 2026-10-16), one
+  folder per article, `src/articles/<slug>/`, holding `article.md` and the
+  optimized photos it uses, so everything for one article sits together; the
+  folder's name is the article's address (`/articles/<slug>`). Photo
+  originals live outside the site in `design/articles/<slug>/`, per the
+  Images rule. Once a draft is reviewed, its article moves to
+  `src/articles/` and its research notes stay in `research/articles/`, so
+  the two never drift apart as copies.
+- **Markdown formatting** (decided by the user 2026-10-16): article files are
+  content, formatted like JSON and the plain-text config files rather than
+  code. The front matter starts on line 1, the file ends with exactly one
+  newline, the front matter's keys are alphabetical (`published`, `summary`,
+  `title`, `topic`, and `updated` when an article is revised), each paragraph
+  or list item sits on one unwrapped line so an edit stays small in a diff,
+  and the Copy rules apply. No What/Why/How comments, since it's content.
+  `topic` is the topic's identifier from `ui/topics.ts` (`internet-wi-fi`),
+  and `summary` is 100 to 125 characters, as it's the search description.
+- **Supported Markdown**: the site reads articles with its own small parser
+  (`utils/markdown.ts`), never a library and never raw HTML: `##` and `###`
+  headings, paragraphs, numbered steps (`1.`), bullet lists (`-`), tips
+  (`> **Tip:** ...`), a photo or video alone on its line (`![alt
+  text](photo.webp "Optional caption")`, a `.mp4` making it a video), and
+  inside a line **bold**, *italic*, and `[links](/articles/...)`. An HTML
+  comment (`<!-- Image: what it should show -->`) is skipped, which keeps a
+  reminder of a photo still to add without showing anything.
 
 ## Build plan
 On the `rebuild` branch, following the sister sites.

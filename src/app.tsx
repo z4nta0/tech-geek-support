@@ -4,7 +4,8 @@
 // #region Imports
 
 import { AboPagCom    } from './pages/about/about.tsx';          // What: About Page Component. Why: The About route shows who answers the questions. How: The about route renders it.
-import { ArtPagCom    } from './pages/articles/articles.tsx';    // What: Articles Page Component. Why: The Articles route lists every help article. How: The articles route renders it.
+import { ArtLisCom    } from './pages/articles/articles.tsx';    // What: Article List Component. Why: The Articles route lists every help article. How: The articles route renders it.
+import { ArtPagCom    } from './pages/article/article.tsx';      // What: Article Page Component. Why: Each article has its own address. How: The article route renders it.
 import { ConPagCom    } from './pages/contact/contact.tsx';      // What: Contact Page Component. Why: The Contact route shows the question form. How: The contact route renders it.
 import { HomPagCom    } from './pages/home/home.tsx';            // What: Home Page Component. Why: The site's root address is its home page. How: The home route renders it.
 import { NavBarCom    } from 'techgeek-design/ui/nav.tsx';       // What: Navigation Bar Component. Why: Every page starts with the TechGeek family's shared bar. How: This renders above the routes.
@@ -145,9 +146,16 @@ function AppRooCom () : JSX.Element {
 
 
 					<Route
-						element={ <ArtPagCom /> }
+						element={ <ArtLisCom /> }
 						path='/articles'
-					/>{ /* What: Articles Route. Why: The help articles have their own page. How: This renders ArtPagCom at /articles. */ }
+					/>{ /* What: Articles Route. Why: The help articles have their own page. How: This renders ArtLisCom at /articles. */ }
+
+
+
+					<Route
+						element={ <ArtPagCom /> }
+						path='/articles/:slug'
+					/>{ /* What: Article Route. Why: Each article has its own address. How: This renders ArtPagCom at /articles/ and the article's slug. */ }
 
 
 

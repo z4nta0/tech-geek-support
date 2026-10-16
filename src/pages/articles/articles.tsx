@@ -3,6 +3,17 @@
 
 // #region Imports
 
+import cssModObj from './articles.module.css'; // What: CSS Module Object. Why: The Articles page's hero, filter, and list are styled in its own module. How: This maps each class name in articles.module.css to its hashed module class.
+
+
+import { ART_REC_ARR     } from '../../ui/articles.ts';                   // What: Article Record Array. Why: The page lists every article. How: The page filters and renders it.
+import { Link            } from 'react-router';                           // What: Link. Why: Each article and the question form open without a full page load. How: This renders those links.
+import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // What: Topic Record Array. Why: The filter offers every topic. How: The page renders one button per topic.
+import { TopTagCom       } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: Each listed article shows its topic. How: The page renders one tag per article.
+import { usePagDesFun    } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
+import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: The chosen topic lives in the address, so a link can open the page already filtered. How: The page reads and sets the topic parameter through it.
+
+
 import type { JSX } from 'react'; // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.
 
 // #endregion Imports
@@ -10,11 +21,16 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 
 
 /**
- * articles.tsx = Articles Page
+ * articles.tsx = Articles
  *
  * @summary
- * The Articles page, a placeholder that renders its heading and one line until the
- * page is built.
+ * The help center: a short hero, a row of topic buttons that filter the
+ * list, a line saying how many articles show, and the articles one per row,
+ * newest first. The chosen topic lives in the address (/articles?topic=mac),
+ * so Home's topic tiles and any shared link open the page already filtered,
+ * and choosing a topic replaces the address rather than adding to the
+ * history, so Back still leaves the page. A topic with no articles yet
+ * invites the visitor to ask instead.
  *
  * Sections:
  *  - Components
@@ -28,44 +44,215 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 
 // #region Components
 
-// #region ArtPagCom
+// #region ArtLisCom
 
 /**
- * ArtPagCom = Articles Page Component
+ * ArtLisCom = Article List Component
  *
  * @summary
- * Renders the Articles page's placeholder: its heading and one line
- * of text, until the real page replaces it.
+ * Renders the Articles page with its own title, description, and canonical
+ * address, which leaves out the topic so every filtered view counts as one
+ * page. The topic comes from the address's topic parameter, and one that
+ * isn't a real topic shows every article. Pressing a topic's button puts it
+ * in the address, replacing the current entry; pressing All Topics removes
+ * it. The count line is a polite live region, so a screen reader announces
+ * the new count after each choice.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props - This component does not use any props.
  *
- * @returns The placeholder section.
+ * @returns The page's title, canonical link, and wrapper div.
  *
  * @example
  * ```tsx
- * ArtPagCom() // => <ArtPagCom />
+ * ArtLisCom() // => <ArtLisCom />
  * ```
  *
 */
 
-function ArtPagCom () : JSX.Element {
+function ArtLisCom () : JSX.Element {
+
+
+	usePagDesFun( 'Free, step-by-step help articles for phones, computers, Wi-Fi, smart homes, scams, and more, written in plain words.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
+
+
+
+	const [ seaParObj, setSeaParObj ] = useSearchParams(); // What: Search Parameters Object And Setter. Why: The chosen topic lives in the address. How: This reads the address's parameters and sets new ones.
+
+	const rawTopStr = seaParObj.get( 'topic' ) ?? ''; // What: Raw Topic String. Why: The address may name a topic, or nothing. How: This reads the topic parameter, or an empty string.
+	const topRecObj = TOP_REC_ARR.find( ( topCurObj ) => topCurObj.ideStr === rawTopStr );                                                                      // What: Topic Record Object. Why: Only a real topic filters the list. How: This finds the topic the address names, or nothing.
+	const shoArtArr = topRecObj ? ART_REC_ARR.filter( ( artRecObj ) => artRecObj.topStr === topRecObj.ideStr ) : ART_REC_ARR;                                   // What: Shown Article Array. Why: The list shows only the chosen topic's articles. How: This filters the catalog by the topic, or keeps every article when none is chosen.
+	const couTexStr = `Showing ${ shoArtArr.length } ${ shoArtArr.length === 1 ? 'article' : 'articles' }${ topRecObj ? ` about ${ topRecObj.labStr }` : '' }`; // What: Count Text String. Why: The visitor should know how many articles match. How: This counts them, in the right singular or plural, naming the topic when one is chosen.
 
 
 
 	return (
 
 
-		<section>{ /* What: Placeholder Section Element. Why: The page needs a body until it's built. How: This holds its heading and line. */ }
+		<>{ /* What: Articles Fragment. Why: The page's title, canonical link, and content render side by side. How: This groups them without adding an element. */ }
 
 
-			<h1>Help Articles</h1>{ /* What: Placeholder Heading Element. Why: Every page has one main heading. How: This names the page. */ }
+			<title>Free Tech Help Articles | TechGeek.support</title>{ /* What: Page Title Element. Why: A visitor's tab, history, and search listings should name the page. How: React 19 moves this title into the document head while the page is shown. */ }
 
-			<p>Step-by-step help articles, written in plain words.</p>{ /* What: Placeholder Paragraph Element. Why: The page says what it will hold. How: This is one line of text. */ }
+			<link
+				href='https://techgeek.support/articles'
+				rel='canonical'
+			/>{ /* What: Canonical Link Element. Why: Every filtered view of the list should count as one page. How: React 19 moves this link into the head, giving the address without its topic. */ }
 
 
-		</section>
+
+			<div className={ cssModObj.pagEntDiv }>{ /* What: Page Enter Div Element. Why: The page fades up into view as it opens. How: This wraps every section and plays the shared entrance. */ }
+
+
+				<section className={ cssModObj.artHerSec }>{ /* What: Articles Hero Section Element. Why: The page opens by saying what it holds and how to use it. How: This holds the eyebrow, heading, and lead. */ }
+
+
+					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The hero's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
+
+
+						<p className={ cssModObj.secEyePar }>Help articles</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the page. How: This shows it in teal mono capitals. */ }
+
+						<h1 className={ cssModObj.herTitHea }>Step-by-step help, in plain words</h1>{ /* What: Hero Title Heading Element. Why: The heading promises help a visitor can follow. How: This shows the page's h1. */ }
+
+						<p className={ cssModObj.herLeaPar }>Pick a topic to narrow the list. Don't see your problem? <Link className={ cssModObj.herAskAnc } to='/contact'>Ask me</Link>, and I'll answer you directly within 24 hours.</p>{ /* What: Hero Lead Paragraph Element. Why: The lead explains the filter and offers a way out when nothing fits. How: This shows the lead with a link to the question form. */ }
+
+
+					</div>
+
+
+				</section>
+
+
+
+				<section className={ cssModObj.artLisSec }>{ /* What: Articles List Section Element. Why: The filter and the list belong together. How: This holds the topic buttons, the count, and the articles. */ }
+
+
+					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The list sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
+
+
+						<div
+							className={ cssModObj.filRowDiv }
+
+							aria-label='Filter articles by topic'
+							role='group'
+						>{ /* What: Filter Row Div Element. Why: The topic buttons read as one set of choices. How: This groups them under a label for screen readers, wrapping onto more lines as needed. */ }
+
+
+							<button
+								className={ cssModObj.filPilBut }
+
+								type='button'
+
+								aria-pressed={ !topRecObj }
+
+								onClick={ () => setSeaParObj( {}, { replace : true } ) } // What: All Topics Click. Why: Choosing All should show every article without adding a history entry. How: This clears the address's parameters, replacing the current entry.
+							>All topics</button>{ /* What: All Topics Button Element. Why: A visitor can go back to every article. How: This clears the filter, marked pressed when no topic is chosen. */ }
+
+							{ TOP_REC_ARR.map( ( topCurObj ) => ( // What: Topic Button Map Call. Why: Every topic gets a filter button. How: This renders one button per topic.
+
+
+								<button
+									key={ topCurObj.ideStr }
+
+									className={ cssModObj.filPilBut }
+
+									type='button'
+
+									aria-pressed={ topCurObj.ideStr === topRecObj?.ideStr }
+
+									onClick={ () => setSeaParObj( { topic : topCurObj.ideStr }, { replace : true } ) } // What: Topic Click. Why: Choosing a topic should filter the list and keep the choice shareable, without adding a history entry. How: This puts the topic in the address, replacing the current entry.
+								>{ topCurObj.labStr }</button> // What: Topic Button Element. Why: A visitor narrows the list to one topic. How: This shows the topic's name, marked pressed while it's chosen.
+
+
+							))}
+
+
+						</div>
+
+						<p
+							className={ cssModObj.couTexPar }
+
+							aria-live='polite'
+						>{ couTexStr }</p>{ /* What: Count Text Paragraph Element. Why: The visitor should see, and hear, how many articles match. How: This shows the count, which a screen reader announces after each change. */ }
+
+
+
+						{ shoArtArr.length > 0 ? ( // What: Article List Check. Why: A topic may have no articles yet. How: This shows the list when there are articles, and an invitation to ask otherwise.
+
+
+							<ul className={ cssModObj.artLisUno }>{ /* What: Article List Unordered Element. Why: The articles read as a list, one per row. How: This stacks them with even gaps. */ }
+
+
+								{ shoArtArr.map( ( artRecObj ) => ( // What: Article Map Call. Why: Every matching article gets a row. How: This renders one list item per article.
+
+
+									<li key={ artRecObj.ideStr }>{ /* What: Article Item Element. Why: Each article is one item in the list. How: This holds the article's card. */ }
+
+
+										<Link
+											className={ cssModObj.artCarAnc }
+
+											to={ `/articles/${ artRecObj.ideStr }` }
+										>{ /* What: Article Card Anchor Element. Why: The whole card opens the article. How: This draws a white card with the topic, title, summary, and reading time, lifting on hover. */ }
+
+
+											<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }
+
+
+
+											<h2 className={ cssModObj.artTitHea }>{ artRecObj.titStr }</h2>{ /* What: Article Title Heading Element. Why: The title is the card's main line. How: This shows it as an h2 under the page's h1. */ }
+
+											<p className={ cssModObj.artSumPar }>{ artRecObj.sumStr }</p>{ /* What: Article Summary Paragraph Element. Why: A line says what the article covers. How: This shows the article's summary. */ }
+
+											<span className={ cssModObj.artMetSpa }>{ `${ artRecObj.minNum } min read` }<span className={ cssModObj.artArrSpa } aria-hidden='true'>→</span></span>{ /* What: Article Meta Span Element. Why: A reader can see how long it takes, and an arrow invites a click. How: This shows the reading time with an arrow that nudges on hover, hidden from screen readers. */ }
+
+
+										</Link>
+
+
+									</li>
+
+
+								))}
+
+
+							</ul>
+
+
+						) : ( // What: Empty Topic Branch. Why: A topic with no articles yet still deserves a way forward. How: This shows an invitation to ask instead.
+
+
+							<div className={ cssModObj.empMesDiv }>{ /* What: Empty Message Div Element. Why: The invitation reads as one calm block. How: This holds the message and the button. */ }
+
+
+								<p className={ cssModObj.empMesPar }>No articles about this yet, but I'm happy to help directly. Ask your question, and I'll reply within 24 hours.</p>{ /* What: Empty Message Paragraph Element. Why: An empty list shouldn't feel like a dead end. How: This offers to answer directly. */ }
+
+
+
+								<Link
+									className={ cssModObj.butPriAnc }
+
+									to='/contact'
+								>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the way forward when no article fits. How: This routes to the question form as an orange button. */ }
+
+
+							</div>
+
+
+						) }
+
+
+					</div>
+
+
+				</section>
+
+
+			</div>
+
+
+		</>
 
 
 	);
@@ -73,7 +260,7 @@ function ArtPagCom () : JSX.Element {
 
 }
 
-// #endregion ArtPagCom
+// #endregion ArtLisCom
 
 // #endregion Components
 
@@ -81,7 +268,7 @@ function ArtPagCom () : JSX.Element {
 
 // #region Exports
 
-export { ArtPagCom }; // What: Named Exports. Why: app.tsx routes to this page. How: This exports ArtPagCom.
+export { ArtLisCom }; // What: Named Exports. Why: The router's articles route renders the page. How: This exports ArtLisCom.
 
 // #endregion Exports
 
