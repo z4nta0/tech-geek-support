@@ -1,0 +1,546 @@
+
+
+
+/**
+ * about.module.css = About Module
+ *
+ * @summary
+ * Styles for AboPagCom. The hero sets the introduction beside the portrait,
+ * which sits in a white-bordered frame over a pale teal circle, echoing the
+ * signal rings. The promises follow as three ivory cards on a white band,
+ * the story as a narrow timeline whose milestones sit as teal dots on a thin
+ * teal line, and the closing panel on pale teal. The page fades up as it
+ * opens, and every transition holds still under reduced motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region pagEntDiv */
+
+.pagEntDiv { /* What: Page Enter Div. Why: The page fades up into view as it opens, like every page. How: This plays the shared page entrance. */
+
+
+	animation : global( contentEnterFadeUp ) var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Page Enter Div. Why: Someone who asked for less motion shouldn't see the page slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.pagEntDiv { /* What: Motionless Page Enter Div. Why: The page should simply be there. How: This turns the entrance off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region aboHerSec */
+
+.aboHerSec { /* What: About Hero Section. Why: The hero opens the page below the bar, and the portrait's circle may reach past a phone's edge. How: This pads it by the bar's height plus the hero gap above and a large step below, clipping anything that spills sideways. */
+
+
+	overflow-x     : clip;
+	padding-bottom : var( --spa-ver-p07 );                                /* Spacing Vertical Base Plus 7 ~= 104.323px */
+	padding-top    : calc( var( --nav-bar-hei ) + var( --her-gap-pad ) ); /* Navigation Bar Height ~= 78.751px, Hero Gap Padding, about 59.447px - 138.199px */
+
+
+}
+
+
+/* #region herInnDiv */
+
+.herInnDiv { /* What: Hero Inner Div. Why: The introduction and the portrait sit side by side on wide screens. How: This lays them out in two columns in the site's centered column, the text's wider. */
+
+
+	align-items           : center;
+	display               : grid;
+	gap                   : var( --spa-ver-p04 ) var( --spa-hor-p05 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 5 ~= 59.447px */
+	grid-template-columns : 3fr 2fr;
+	margin                : 0 auto;
+	max-width             : var( --con-max-wid );                      /* Container Maximum Width ~= 1,449.365px */
+	padding               : 0 var( --gut-sid-pad );                    /* Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Hero Inner Div. Why: Two columns are too tight on phones and small tablets. How: This applies at 768px and below. */
+
+
+	.herInnDiv { /* What: Stacked Hero Inner Div. Why: The portrait sits under the introduction on a narrow screen. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region herTexDiv */
+
+.herTexDiv { /* What: Hero Text Div. Why: The introduction reads as one column. How: This stacks its parts with even gaps. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+
+
+}
+
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names each section above its heading. How: This sets it in teal mono capitals. */
+
+
+	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	margin-bottom  : var( --spa-ver-m02 );                   /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	text-transform : uppercase;
+
+
+}
+
+.herTitHea { /* What: Hero Title Heading. Why: The greeting is the page's loudest line. How: This sets it in the main text color at the shared h1 size. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+
+.herLeaPar { /* What: Hero Lead Paragraph. Why: Who answers is the page's key fact, so it reads larger and darker. How: This sets it in the main text color at the base plus 2 size, capped at the paragraph measure. */
+
+
+	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+.herTexPar { /* What: Hero Text Paragraph. Why: The reason for the site reads as a comfortable paragraph. How: This sets it at the base plus 2 size, capped at the paragraph measure. */
+
+
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+/* #endregion herTexDiv */
+
+
+
+/* #region porFraDiv */
+
+.porFraDiv { /* What: Portrait Frame Div. Why: The portrait sits over a pale teal circle, the rings' color, without growing past a comfortable size. How: This centers a capped frame, positions the circle against it, and starts a stacking context so the circle sits behind the photo but in front of the page. */
+
+
+	isolation    : isolate;
+	justify-self : center;
+	max-width    : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.277px */
+	position     : relative;
+	width        : 100%;
+
+
+}
+.porFraDiv::before { /* What: Portrait Frame Circle. Why: A soft teal circle behind the photo ties it to the site's motif. How: This draws a pale teal circle reaching past the photo's top right corner, behind it. */
+
+
+	aspect-ratio  : 1;
+	background    : var( --act-tin-col ); /* Accent-Tertiary Tint Color = #D3EEE9 */
+	border-radius : 50%;
+	content       : '';
+	position      : absolute;
+	right         : -14%;
+	top           : -10%;
+	width         : 80%;
+	z-index       : -1;                   /* What: Behind The Photo. Why: The circle is a backdrop. How: This sets it one layer below the frame's content. */
+
+
+}
+
+.porPhoIma { /* What: Portrait Photo Image. Why: The photo reads as a framed picture. How: This fills the frame's width, rounds its corners, and borders it in white with a medium shadow. */
+
+
+	border        : var( --bor-wid-xla ) solid var( --bac-sur-col ); /* Border Width Extra Large ~= 3.572px, Background Surface Color = #FFFFFF */
+	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
+	box-shadow    : var( --ele-med-sha );                            /* Elevation Medium Shadow, about 0 4.7px 14.6px plus 0 1.5px 3.6px -1.2px */
+	display       : block;
+	height        : auto;
+	width         : 100%;
+
+
+}
+
+/* #endregion porFraDiv */
+
+/* #endregion herInnDiv */
+
+/* #endregion aboHerSec */
+
+
+
+/* #region aboProSec */
+
+.aboProSec { /* What: About Promises Section. Why: The promises stand apart on a white band. How: This sets the surface color, hairline borders above and below, and roomy padding. */
+
+
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #FFFFFF */
+	border-bottom : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-top    : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	padding       : var( --spa-ver-p07 ) 0;                          /* Spacing Vertical Base Plus 7 ~= 104.323px */
+
+
+}
+
+
+/* #region secInnDiv */
+
+.secInnDiv { /* What: Section Inner Div. Why: Every section's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
+
+
+	margin    : 0 auto;
+	max-width : var( --con-max-wid );   /* Container Maximum Width ~= 1,449.365px */
+	padding   : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+
+.secTitHea { /* What: Section Title Heading. Why: Each section's heading reads in the main text color at the shared h2 size. How: This sets its color. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+
+
+
+/* #region proGriUno */
+
+.proGriUno { /* What: Promise Grid Unordered. Why: The three promises sit side by side as equal cards. How: This lays them out three across below the heading, with no list markers. */
+
+
+	display               : grid;
+	gap                   : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	grid-template-columns : repeat( 3, 1fr );
+	list-style            : none;
+	margin                : var( --spa-ver-p04 ) 0 0;                  /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding               : 0;
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Promise Grid Unordered. Why: Three cards across are too narrow on phones and small tablets. How: This applies at 768px and below. */
+
+
+	.proGriUno { /* What: Stacked Promise Grid Unordered. Why: The promises read top to bottom on a narrow screen. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region proIteIte */
+
+.proIteIte { /* What: Promise Item Item. Why: Each promise is an ivory card that lifts on hover, like the family's other cards. How: This draws the card, stacks its parts, and eases its border and lift. */
+
+
+	background     : var( --bac-pag-col );                                                                   /* Background Page Color = #F5F0E8 */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                        /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xla );                                                                   /* Radius Border Extra Large ~= 19.304px */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m01 );                                                                   /* Spacing Vertical Base Minus 1 = 11px */
+	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );                                              /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	transition     : border-color var( --dur-tra-bas ), translate var( --dur-tra-bas ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.proIteIte:hover { /* What: Hovered Promise Item Item. Why: Cards answer the pointer like the rest of the family's cards. How: This turns the border teal and lifts the card about 3px. */
+
+
+	border-color : var( --act-mai-col );                /* Accent-Tertiary Main Color = #2A9D8F */
+	translate    : 0 calc( var( --spa-ver-m06 ) * -1 ); /* Spacing Vertical Base Minus 6 ~= -2.696px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Promise Item Item. Why: Someone who asked for less motion shouldn't see the card glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.proIteIte { /* What: Motionless Promise Item Item. Why: The hover look should simply switch, the lift still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.proTitHea { /* What: Promise Title Heading. Why: The promise's name reads in the main text color. How: This sets its color at the shared h3 size. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+
+.proDesPar { /* What: Promise Description Paragraph. Why: The promise's sentence stays a comfortable length. How: This caps it at the paragraph measure. */
+
+
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+/* #endregion proIteIte */
+
+/* #endregion proGriUno */
+
+/* #endregion secInnDiv */
+
+/* #endregion aboProSec */
+
+
+
+/* #region aboStoSec */
+
+.aboStoSec { /* What: About Story Section. Why: The story gets room above and below. How: This pads the section top and bottom. */
+
+
+	padding : var( --spa-ver-p07 ) 0; /* Spacing Vertical Base Plus 7 ~= 104.323px */
+
+
+}
+
+
+/* #region stoInnDiv */
+
+.stoInnDiv { /* What: Story Inner Div. Why: A timeline reads best in a narrow column. How: This caps it at about 747px and centers it with the side gutter. */
+
+
+	margin    : 0 auto;
+	max-width : calc( var( --ver-rhy-p14 ) * 1rem ); /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	padding   : 0 var( --gut-sid-pad );              /* Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+
+/* What: Section Eyebrow And Title Pointer. Why: The story's eyebrow and heading share their rules with the other sections'. How: Their rules sit in the herTexDiv and aboProSec regions above. */
+
+
+
+/* #region stoLisOrd */
+
+.stoLisOrd { /* What: Story List Ordered. Why: The milestones run down a thin teal line. How: This stacks them with even gaps, draws the line along the left, and drops the list markers. */
+
+
+	border-left    : var( --bor-wid-lar ) solid var( --act-tin-col ); /* Border Width Large ~= 2.035px, Accent-Tertiary Tint Color = #D3EEE9 */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-p03 );                            /* Spacing Vertical Base Plus 3 ~= 33.876px */
+	list-style     : none;
+	margin         : var( --spa-ver-p04 ) 0 0;                        /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding        : 0;
+
+
+}
+
+
+/* #region stoIteIte */
+
+.stoIteIte { /* What: Story Item Item. Why: Each milestone sits beside the line with a dot on it. How: This leaves room past the line and positions the dot against the item. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m03 ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
+	padding-left   : var( --spa-hor-p03 ); /* Spacing Horizontal Base Plus 3 ~= 33.876px */
+	position       : relative;
+
+
+}
+.stoIteIte::before { /* What: Story Item Dot. Why: Each milestone is a point on the line, the rings' teal in miniature. How: This draws a teal dot ringed in ivory, centered on the line beside the year. */
+
+
+	background    : var( --act-mai-col );                                                /* Accent-Tertiary Main Color = #2A9D8F */
+	border        : var( --bor-wid-xla ) solid var( --bac-pag-col );                     /* Border Width Extra Large ~= 3.572px, Background Page Color = #F5F0E8 */
+	border-radius : 50%;
+	content       : '';
+	height        : calc( var( --ver-rhy-bas ) * 1rem );                                 /* Vertical Rhythm Base ~= 14.572px */
+	left          : calc( var( --ver-rhy-bas ) * 1rem / -2 - var( --bor-wid-lar ) / 2 ); /* Vertical Rhythm Base ~= 14.572px, Border Width Large ~= 2.035px */ /* What: Line Centering. Why: The dot should sit centered on the line. How: This moves it left by half its own width plus half the line's. */
+	position      : absolute;
+	top           : var( --spa-ver-m05 );                                                /* Spacing Vertical Base Minus 5 ~= 3.572px */
+	width         : calc( var( --ver-rhy-bas ) * 1rem );                                 /* Vertical Rhythm Base ~= 14.572px */
+
+
+}
+
+.stoYeaSpa { /* What: Story Year Span. Why: The year marks the milestone. How: This sets it in dark teal mono. */
+
+
+	color       : var( --act-dar-col ); /* Accent-Tertiary Dark Color ~= #007063 */
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight : 500;
+
+
+}
+
+.stoDesPar { /* What: Story Description Paragraph. Why: The milestone's sentence reads a step larger. How: This sets it at the base plus 2 size, capped at the paragraph measure. */
+
+
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+/* #endregion stoIteIte */
+
+/* #endregion stoLisOrd */
+
+/* #endregion stoInnDiv */
+
+/* #endregion aboStoSec */
+
+
+
+/* #region aboClaSec */
+
+.aboClaSec { /* What: About Closing Section. Why: The closing panel gets room below before the footer. How: This pads the section's bottom. */
+
+
+	padding-bottom : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
+
+
+}
+
+
+/* #region secInnDiv */
+
+/* What: Section Inner Div Pointer. Why: This section's centered column shares its rule with the promises section's. How: Its rule sits in the aboProSec region above. */
+
+
+/* #region cloPanDiv */
+
+.cloPanDiv { /* What: Closing Panel Div. Why: Privacy and the invitation read together as one calm panel. How: This draws a pale teal panel with roomy padding, stacking its heading, text, and button. */
+
+
+	align-items    : flex-start;
+	background     : var( --act-tin-col );                      /* Accent-Tertiary Tint Color = #D3EEE9 */
+	border-radius  : var( --rad-bor-xla );                      /* Radius Border Extra Large ~= 19.304px */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-bas );                      /* Spacing Vertical Base ~= 14.572px */
+	padding        : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Closing Panel Div. Why: Roomy padding squeezes the panel's text on a phone. How: This applies at 640px and below. */
+
+
+	.cloPanDiv { /* What: Snug Closing Panel Div. Why: The text needs the width more than the padding does. How: This pads the panel by the p02 steps instead. */
+
+
+		padding : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+
+
+	}
+
+
+}
+
+.cloTitHea { /* What: Closing Title Heading. Why: The panel's heading reads clearly without the full h2 size. How: This sets it in the main text color at the base plus 4 size. */
+
+
+	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size : var( --fon-siz-p04 ); /* Font Size Base Plus 4 ~= 33.876px */
+
+
+}
+
+.cloTexPar { /* What: Closing Text Paragraph. Why: The privacy promise reads a step larger, in the main text color. How: This sets it at the base plus 2 size, capped at the paragraph measure. */
+
+
+	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+.butPriAnc { /* What: Button Primary Anchor. Why: Asking is where the page leads. How: This sets an orange button in mono capitals, easing its color, lift, press, and focus. */
+
+
+	align-items    : center;
+	background     : var( --acc-mai-col );                      /* Accent Main Color = #F26419 */
+	border-radius  : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.572px */
+	color          : var( --tex-acc-col );                      /* Text Accent Color = #1A1A2E */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butPriAnc:hover { /* What: Hovered Button Primary Anchor. Why: A button should respond to the pointer. How: This darkens its orange and lifts it 2px. */
+
+
+	background : var( --acc-hov-col );                            /* Accent Hover Color ~= #e45700 */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.butPriAnc:active { /* What: Pressed Button Primary Anchor. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Primary Anchor. Why: Someone who asked for less motion shouldn't see the button glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butPriAnc { /* What: Motionless Button Primary Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion cloPanDiv */
+
+/* #endregion secInnDiv */
+
+/* #endregion aboClaSec */
+
+/* #endregion pagEntDiv */
+
+
