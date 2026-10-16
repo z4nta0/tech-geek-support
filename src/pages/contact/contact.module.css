@@ -1,0 +1,811 @@
+
+
+
+/**
+ * contact.module.css = Contact Module
+ *
+ * @summary
+ * Styles for ConPagCom. A short hero introduces the page, then the question
+ * form sits in a white card beside a sidebar of what to expect, stacking
+ * under it below 1,024px. The fields are large and roomy, their text a step
+ * above the family's body size, each glowing pale teal with a dark teal
+ * border while focused. A failed send shows a pale red panel above the
+ * button, and a sent question swaps the form for a thank-you whose check
+ * pops in. The sidebar's cards are white, and the safety promise sits on
+ * pale teal. The page fades up as it opens, and every animation and
+ * transition holds still under reduced motion.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region pagEntDiv */
+
+.pagEntDiv { /* What: Page Enter Div. Why: The page fades up into view as it opens, like every page. How: This plays the shared page entrance. */
+
+
+	animation : global( contentEnterFadeUp ) var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Page Enter Div. Why: Someone who asked for less motion shouldn't see the page slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.pagEntDiv { /* What: Motionless Page Enter Div. Why: The page should simply be there. How: This turns the entrance off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+
+/* #region conHerSec */
+
+.conHerSec { /* What: Contact Hero Section. Why: The hero opens the page below the bar. How: This pads it by the bar's height plus the hero gap above and a medium step below. */
+
+
+	padding-bottom : var( --spa-ver-p04 );                                /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding-top    : calc( var( --nav-bar-hei ) + var( --her-gap-pad ) ); /* Navigation Bar Height ~= 78.751px, Hero Gap Padding, about 59.447px - 138.199px */
+
+
+}
+
+
+/* #region secInnDiv */
+
+.secInnDiv { /* What: Section Inner Div. Why: The hero's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
+
+
+	margin    : 0 auto;
+	max-width : var( --con-max-wid );   /* Container Maximum Width ~= 1,449.365px */
+	padding   : 0 var( --gut-sid-pad ); /* Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names the page above its heading. How: This sets it in teal mono capitals. */
+
+
+	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
+	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	margin-bottom  : var( --spa-ver-m02 );                   /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	text-transform : uppercase;
+
+
+}
+
+.herTitHea { /* What: Hero Title Heading. Why: The heading makes the invitation without shouting. How: This sets it in the main text color between the base plus 4 and plus 6 sizes. */
+
+
+	color     : var( --tex-mai-col );                                     /* Text Main Color = #1A1A2E */
+	font-size : clamp( var( --fon-siz-p04 ), 5vw, var( --fon-siz-p06 ) ); /* Font Size Base Plus 4 ~= 33.876px, Font Size Base Plus 6 ~= 59.447px */
+
+
+}
+
+.herLeaPar { /* What: Hero Lead Paragraph. Why: The lead reads a step larger than body text. How: This sets it at the base plus 2 size, capped at the paragraph measure, a little below the heading. */
+
+
+	font-size  : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	margin-top : var( --spa-ver-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	max-width  : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+/* #endregion secInnDiv */
+
+/* #endregion conHerSec */
+
+
+
+/* #region conBodSec */
+
+.conBodSec { /* What: Contact Body Section. Why: The form gets room below before the footer. How: This pads the section's bottom. */
+
+
+	padding-bottom : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
+
+
+}
+
+
+/* #region conGriDiv */
+
+.conGriDiv { /* What: Contact Grid Div. Why: The form and the sidebar sit side by side in the site's centered column, the form wider. How: This lays out two columns, capped and centered with the side gutter. */
+
+
+	align-items           : start;
+	display               : grid;
+	gap                   : var( --spa-ver-p03 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	grid-template-columns : 3fr 2fr;
+	margin                : 0 auto;
+	max-width             : var( --con-max-wid );                      /* Container Maximum Width ~= 1,449.365px */
+	padding               : 0 var( --gut-sid-pad );                    /* Gutter Side Padding, about 19.304px - 44.876px */
+
+
+}
+@media ( max-width : 1024px ) { /* What: Tablet Contact Grid Div. Why: Side by side, the form's fields get too narrow on a tablet. How: This applies at 1,024px and below. */
+
+
+	.conGriDiv { /* What: Stacked Contact Grid Div. Why: The form comes first, with what to expect below it. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region forWraDiv */
+
+.forWraDiv { /* What: Form Wrap Div. Why: The form and its thank-you sit on one white card. How: This draws the card with a quiet border and roomy padding. */
+
+
+	background    : var( --bac-sur-col );                            /* Background Surface Color = #FFFFFF */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
+	padding       : var( --spa-ver-p03 ) var( --spa-hor-p03 );       /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Form Wrap Div. Why: Roomy padding squeezes the fields on a phone. How: This applies at 640px and below. */
+
+
+	.forWraDiv { /* What: Snug Form Wrap Div. Why: The fields need the width more than the card's padding does. How: This pads the card by the p01 steps instead. */
+
+
+		padding : var( --spa-ver-p01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+
+
+	}
+
+
+}
+
+
+/* #region sucStaDiv */
+
+.sucStaDiv { /* What: Success State Div. Why: The thank-you should arrive gently in the form's place. How: This stacks its parts and fades it up with the shared entrance. */
+
+
+	align-items    : flex-start;
+	animation      : global( contentEnterFadeUp ) var( --dur-ani-p03 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-bas );                                                        /* Spacing Vertical Base ~= 14.572px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Success State Div. Why: Someone who asked for less motion shouldn't see the thank-you slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.sucStaDiv { /* What: Motionless Success State Div. Why: The thank-you should simply be there. How: This turns the entrance off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.sucCheSvg { /* What: Success Check SVG. Why: The check is the thank-you's flourish, popping in once. How: This sizes it at about 59px, strokes it teal, and pops it in with the gentle overshoot. */
+
+
+	animation       : sucCheSvgSentPop var( --dur-ani-p03 ) var( --mot-ove-eas ) var( --dur-ani-bas ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ), Duration Animation Base ~= 157.8ms */
+	height          : calc( var( --ver-rhy-p05 ) * 1rem );                                                  /* Vertical Rhythm Base Plus 5 ~= 59.447px */
+	stroke          : var( --act-dar-col );                                                                 /* Accent-Tertiary Dark Color ~= #007063 */
+	stroke-linecap  : round;
+	stroke-linejoin : round;
+	stroke-width    : 1.5;                                                                                  /* What: Check Stroke Width. Why: The check reads as a light, friendly line. How: This is 1.5 units of the 24-unit drawing space. */
+	width           : calc( var( --ver-rhy-p05 ) * 1rem );                                                  /* Vertical Rhythm Base Plus 5 ~= 59.447px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Success Check SVG. Why: Someone who asked for less motion shouldn't see the check pop. How: This applies only when the reduced-motion preference is set. */
+
+
+	.sucCheSvg { /* What: Motionless Success Check SVG. Why: The check should simply be there. How: This turns the pop off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+@keyframes sucCheSvgSentPop { /* What: Success Check SVG Sent Pop. Why: The check arrives with a small celebration once the question is sent. How: This grows it from half its size as it fades in. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : scale( 0.5 );
+
+
+	}
+
+
+}
+
+.sucTitHea { /* What: Success Title Heading. Why: The thank-you's heading reads clearly without the full h2 size, and lands clear of the fixed bar when it takes focus. How: This sets it in the main text color at the base plus 4 size, keeping room above it when it scrolls into view. */
+
+
+	color             : var( --tex-mai-col );                                    /* Text Main Color = #1A1A2E */
+	font-size         : var( --fon-siz-p04 );                                    /* Font Size Base Plus 4 ~= 33.876px */
+	scroll-margin-top : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) * 2 ); /* Navigation Bar Height ~= 78.751px, Spacing Vertical Base Plus 5 ~= 59.447px */ /* What: Bar Clearance. Why: The heading should land below the fixed bar with the check above it in view. How: This keeps the bar's height plus twice the p05 step, room for the check, above the heading. */
+
+
+}
+.sucTitHea:focus { /* What: Focused Success Title Heading. Why: The heading is focused by script, never by a visitor, so a focus ring on it would read as a stray box. How: This drops the outline, since the heading isn't a control. */
+
+
+	outline : none;
+
+
+}
+
+.sucTexPar { /* What: Success Text Paragraph. Why: The next steps read a step larger. How: This sets them at the base plus 2 size, capped at the paragraph measure. */
+
+
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+
+/* #region sucActDiv */
+
+.sucActDiv { /* What: Success Actions Div. Why: The two ways onward sit side by side and wrap on a narrow phone. How: This lines them up in a wrapping row, a little apart from the text. */
+
+
+	display     : flex;
+	flex-wrap   : wrap;
+	gap         : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	padding-top : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+}
+
+.butSecBut { /* What: Button Secondary Button. Why: Asking another question is the quieter of the two ways onward. How: This sets an outlined button in mono capitals, easing its border, color, lift, press, and focus. */
+
+
+	align-items    : center;
+	background     : transparent;
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xsm );                            /* Radius Border Extra Small ~= 3.572px */
+	color          : var( --tex-mai-col );                            /* Text Main Color = #1A1A2E */
+	cursor         : pointer;
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec );                            /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 );       /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : border-color var( --dur-tra-bas ), color var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butSecBut:hover { /* What: Hovered Button Secondary Button. Why: A button should respond to the pointer. How: This turns its border teal and its text dark teal and lifts it 2px. */
+
+
+	border-color : var( --act-mai-col );                            /* Accent-Tertiary Main Color = #2A9D8F */
+	color        : var( --act-dar-col );                            /* Accent-Tertiary Dark Color ~= #007063 */
+	transform    : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.butSecBut:active { /* What: Pressed Button Secondary Button. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Secondary Button. Why: Someone who asked for less motion shouldn't see the button glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butSecBut { /* What: Motionless Button Secondary Button. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.butPriAnc { /* What: Button Primary Anchor. Why: Browsing the articles is the thank-you's main way onward. How: This sets an orange button in mono capitals, easing its color, lift, press, and focus. */
+
+
+	align-items    : center;
+	background     : var( --acc-mai-col );                      /* Accent Main Color = #F26419 */
+	border-radius  : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.572px */
+	color          : var( --tex-acc-col );                      /* Text Accent Color = #1A1A2E */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.butPriAnc:hover { /* What: Hovered Button Primary Anchor. Why: A button should respond to the pointer. How: This darkens its orange and lifts it 2px. */
+
+
+	background : var( --acc-hov-col );                            /* Accent Hover Color ~= #e45700 */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.butPriAnc:active { /* What: Pressed Button Primary Anchor. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Button Primary Anchor. Why: Someone who asked for less motion shouldn't see the button glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.butPriAnc { /* What: Motionless Button Primary Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion sucActDiv */
+
+/* #endregion sucStaDiv */
+
+
+
+/* #region queForFor */
+
+.queForFor { /* What: Question Form Form. Why: The fields stack with room between them. How: This stacks them with even gaps. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+}
+
+.forHonPar { /* What: Form Honeypot Paragraph. Why: Bots should find and fill the honeypot while people never see it, and some bots skip fields hidden with display none. How: This moves it off screen into a 1px box instead, the same as TechGeek.dev's. */
+
+
+	height   : 1px;
+	left     : -9999px;
+	overflow : hidden;
+	position : absolute;
+	width    : 1px;
+
+
+}
+
+
+/* #region forRowDiv */
+
+.forRowDiv { /* What: Form Row Div. Why: The name and email fields share a row on wide screens. How: This sets them in two equal columns. */
+
+
+	display               : grid;
+	gap                   : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	grid-template-columns : repeat( 2, minmax( 0, 1fr ) );
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Form Row Div. Why: Two fields side by side are too narrow on a phone. How: This applies at 640px and below. */
+
+
+	.forRowDiv { /* What: Stacked Form Row Div. Why: Each field takes the full width. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region forFieDiv */
+
+.forFieDiv { /* What: Form Field Div. Why: Each field's label, hint, and control read as one. How: This stacks them with a small gap. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+
+
+}
+
+
+/* #region fieLabLab */
+
+.fieLabLab { /* What: Field Label Label. Why: A label should be easy to read and plainly tied to its field. How: This sets it in the main text color, semibold, at the base plus 2 size. */
+
+
+	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	font-weight : 600;
+
+
+}
+
+.fieOptSpa { /* What: Field Optional Span. Why: The optional note is quieter than the label it follows. How: This sets it in the muted color at normal weight. */
+
+
+	color       : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	font-weight : 400;
+
+
+}
+
+/* #endregion fieLabLab */
+
+
+.fieHinPar { /* What: Field Hint Paragraph. Why: The hint is a quiet helper under the label. How: This sets it in the muted color, capped at the small text measure. */
+
+
+	color     : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	max-width : var( --tex-wid-sma ); /* Text Width Small ~= 22.047em */
+
+
+}
+
+.forConInp,
+.forConSel,
+.forConTex { /* What: Form Control Fields. Why: The inputs, the menu, and the box share one large, friendly look. How: This sets them full width on the ivory with a quiet border, rounded corners, and text at the base plus 2 size, easing their focus border and glow. */
+
+
+	background    : var( --bac-pag-col );                                               /* Background Page Color = #F5F0E8 */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col );                    /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius : var( --rad-bor-sma );                                               /* Radius Border Small ~= 8.304px */
+	color         : var( --tex-mai-col );                                               /* Text Main Color = #1A1A2E */
+	font-family   : var( --fon-fam-mai );                                               /* Font Family Main = 'Syne', sans-serif */
+	font-size     : var( --fon-siz-p02 );                                               /* Font Size Base Plus 2 ~= 19.304px */
+	padding       : var( --spa-ver-m01 ) var( --spa-hor-bas );                          /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
+	transition    : border-color var( --dur-tra-bas ), box-shadow var( --dur-tra-bas ); /* Duration Transition Base ~= 157.8ms */ /* What: Focus Glow Transition. Why: The glow is a spread around the field's rounded edge, which no transform or opacity change can draw. How: This eases the box shadow, a paint-only change on one field. */
+	width         : 100%;
+
+
+}
+.forConInp:focus,
+.forConSel:focus,
+.forConTex:focus { /* What: Focused Form Control Fields. Why: A visitor has to see which field they're typing in. How: This draws a dark teal border and a pale teal glow, over a transparent outline. */
+
+
+	border-color : var( --act-dar-col );                            /* Accent-Tertiary Dark Color ~= #007063 */
+	box-shadow   : 0 0 0 var( --bor-wid-xla ) var( --act-tin-col ); /* Border Width Extra Large ~= 3.572px, Accent-Tertiary Tint Color = #D3EEE9 */
+	outline      : var( --bor-wid-bas ) solid transparent;          /* Border Width Base ~= 1.160px */ /* What: Transparent Outline. Why: Forced colors mode drops the glow and recolors the border, which would leave a focused field unmarked. How: Forced colors mode paints this transparent outline in its own color, while it stays invisible otherwise. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Form Control Fields. Why: Someone who asked for less motion shouldn't see the glow fade in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.forConInp,
+	.forConSel,
+	.forConTex { /* What: Motionless Form Control Fields. Why: The focus look should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.forConSel { /* What: Form Control Select. Why: The menu draws its own arrow in the site's style. How: This removes the native arrow and draws a muted chevron at the right, making room for it. */
+
+
+	appearance          : none;
+	background-image    : url( 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23646482" stroke-width="2.5"%3E%3Cpolyline points="6 9 12 15 18 9"/%3E%3C/svg%3E' ); /* What: Chevron Image. Why: The menu needs an arrow that matches the site. How: This draws a muted chevron as a small SVG written into the stylesheet, which the security policy allows as a data image. */
+	background-position : right var( --spa-hor-bas ) center; /* Spacing Horizontal Base ~= 14.572px */
+	background-repeat   : no-repeat;
+	cursor              : pointer;
+	padding-right       : var( --spa-hor-p04 );              /* Spacing Horizontal Base Plus 4 ~= 44.876px */
+
+
+}
+
+.forConTex { /* What: Form Control Textarea. Why: A question may be long, and the box should grow with it. How: This lets the visitor drag it taller, never wider, with roomy lines. */
+
+
+	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
+	resize      : vertical;
+
+
+}
+
+/* #endregion forFieDiv */
+
+/* #endregion forRowDiv */
+
+
+.errMesPar { /* What: Error Message Paragraph. Why: A failed send has to stand out, and its arrival should be seen. How: This fades the message up into view with the shared entrance on a pale red panel with a red border and text. */
+
+
+	animation     : global( contentEnterFadeUp ) var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	background    : var( --err-tin-col );                                                        /* Error Tint Color = #fdf0ee */
+	border        : var( --bor-wid-bas ) solid var( --err-mai-col );                             /* Border Width Base ~= 1.160px, Error Main Color = #e8b4ae */
+	border-radius : var( --rad-bor-sma );                                                        /* Radius Border Small ~= 8.304px */
+	color         : var( --err-dar-col );                                                        /* Error Dark Color = #c0392b */
+	font-size     : var( --fon-siz-p02 );                                                        /* Font Size Base Plus 2 ~= 19.304px */
+	padding       : var( --spa-ver-m01 ) var( --spa-hor-bas );                                   /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Error Message Paragraph. Why: Someone who asked for less motion shouldn't see the error slide in. How: This applies only when the reduced-motion preference is set. */
+
+
+	.errMesPar { /* What: Motionless Error Message Paragraph. Why: The error should simply be there. How: This turns the entrance off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.senQueBut { /* What: Send Question Button. Why: Sending is the form's one main action. How: This sets an orange button in mono capitals, easing its color, lift, press, and focus, and dimming while it sends. */
+
+
+	align-self     : flex-start;
+	background     : var( --acc-mai-col );                      /* Accent Main Color = #F26419 */
+	border         : 0;
+	border-radius  : var( --rad-bor-xsm );                      /* Radius Border Extra Small ~= 3.572px */
+	color          : var( --tex-acc-col );                      /* Text Accent Color = #1A1A2E */
+	cursor         : pointer;
+	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 );                      /* Font Size Base Plus 1 ~= 14.572px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	padding        : var( --spa-ver-bas ) var( --spa-hor-p03 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	text-transform : uppercase;
+	transition     : background var( --dur-tra-bas ), opacity var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.senQueBut:hover:not( :disabled ) { /* What: Hovered Send Question Button. Why: A button should respond to the pointer, but not while it's sending. How: This darkens its orange and lifts it 2px. */
+
+
+	background : var( --acc-hov-col );                            /* Accent Hover Color ~= #e45700 */
+	transform  : translateY( calc( var( --spa-ver-m07 ) * -1 ) ); /* Spacing Vertical Base Minus 7 ~= -2.035px */
+
+
+}
+.senQueBut:active:not( :disabled ) { /* What: Pressed Send Question Button. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.97 ); /* What: Press Scale. Why: A press should register before anything else happens. How: This shrinks the control by 3%, a literal since no scale step lands within 10%. */
+
+
+}
+.senQueBut:disabled { /* What: Sending Send Question Button. Why: The button should look busy while the question is on its way. How: This dims it to about 57% and shows the waiting cursor. */
+
+
+	cursor  : wait;
+	opacity : var( --cdn-pow-002-rec ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Send Question Button. Why: Someone who asked for less motion shouldn't see the button glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.senQueBut { /* What: Motionless Send Question Button. Why: The hover, press, sending, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion queForFor */
+
+/* #endregion forWraDiv */
+
+
+
+/* #region conSidAsi */
+
+.conSidAsi { /* What: Contact Sidebar Aside. Why: The sidebar's cards stack beside the form. How: This stacks them with even gaps. */
+
+
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+
+
+}
+
+
+/* #region sidCarDiv */
+
+.sidCarDiv,
+.safCarDiv { /* What: Sidebar Cards. Why: Each sidebar note is its own small card. How: This rounds and pads them and stacks their parts. */
+
+
+	border-radius  : var( --rad-bor-xla );                      /* Radius Border Extra Large ~= 19.304px */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+
+
+}
+
+.sidCarDiv { /* What: Sidebar Card Div. Why: The plain notes sit on white. How: This draws a white card with a quiet border. */
+
+
+	background : var( --bac-sur-col );                            /* Background Surface Color = #FFFFFF */
+	border     : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+
+
+}
+
+.sidTitHea { /* What: Sidebar Title Heading. Why: Each card's heading reads clearly at a small size. How: This sets it in the main text color at the base plus 2 size. */
+
+
+	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+
+
+}
+
+
+/* #region sidTexPar */
+
+.sidTexPar { /* What: Sidebar Text Paragraph. Why: The cards' text stays a comfortable length. How: This caps it at the small text measure. */
+
+
+	max-width : var( --tex-wid-sma ); /* Text Width Small ~= 22.047em */
+
+
+}
+
+.sidStrStr { /* What: Sidebar Strong Strong. Why: The reply time is the card's key fact. How: This sets it in dark teal at full weight. */
+
+
+	color       : var( --act-dar-col ); /* Accent-Tertiary Dark Color ~= #007063 */
+	font-weight : 700;
+
+
+}
+
+.sidLinAnc { /* What: Sidebar Link Anchor. Why: The email address reads as a link inside the sentence. How: This underlines it in the dark orange, easing its color, press, and focus. */
+
+
+	color                 : var( --acc-dar-col );                   /* Accent Dark Color ~= #bd3000 */
+	overflow-wrap         : anywhere;
+	text-decoration       : underline;
+	text-underline-offset : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
+	transition            : color var( --dur-tra-bas ), opacity var( --dur-tra-m02 ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Minus 2 ~= 89.9ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.sidLinAnc:hover { /* What: Hovered Sidebar Link Anchor. Why: A link should answer the pointer. How: This turns it the main text color. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+.sidLinAnc:active { /* What: Pressed Sidebar Link Anchor. Why: A text link presses by dimming. How: This drops it to about 75% strength. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Sidebar Link Anchor. Why: Someone who asked for less motion shouldn't see the link fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.sidLinAnc { /* What: Motionless Sidebar Link Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion sidTexPar */
+
+/* #endregion sidCarDiv */
+
+
+/* #region safCarDiv */
+
+.safCarDiv { /* What: Safety Card Div. Why: The safety promise stands out calmly from the other notes. How: This sets it on the pale teal. */
+
+
+	background : var( --act-tin-col ); /* Accent-Tertiary Tint Color = #D3EEE9 */
+
+
+}
+
+/* What: Sidebar Title Heading Pointer. Why: The safety card's heading shares its rule with the other cards'. How: Its rule sits in the sidCarDiv region above. */
+
+.safLisUno { /* What: Safety List Unordered. Why: Each thing real help never asks for reads as a point. How: This lists them with small teal dots and room on the left for them. */
+
+
+	color          : var( --tex-mai-col );                /* Text Main Color = #1A1A2E */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m03 );                /* Spacing Vertical Base Minus 3 ~= 6.268px */
+	list-style     : disc;
+	margin         : 0;
+	padding-left   : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
+
+
+}
+
+.safIteIte::marker { /* What: Safety Item Marker. Why: The dots carry the site's teal. How: This colors each item's marker teal. */
+
+
+	color : var( --act-mai-col ); /* Accent-Tertiary Main Color = #2A9D8F */
+
+
+}
+
+.safTexPar { /* What: Safety Text Paragraph. Why: The warning about impostors reads plainly. How: This sets it in the main text color, capped at the small text measure. */
+
+
+	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	max-width : var( --tex-wid-sma ); /* Text Width Small ~= 22.047em */
+
+
+}
+
+/* #endregion safCarDiv */
+
+/* #endregion conSidAsi */
+
+/* #endregion conGriDiv */
+
+/* #endregion conBodSec */
+
+/* #endregion pagEntDiv */
+
+
