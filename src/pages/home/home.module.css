@@ -10,9 +10,10 @@
  * the buttons. The topic tiles sit on a white band, each a soft ivory tile
  * with a dashed, stitched border just inside its edge, a teal speech bubble,
  * its topic, and a muted hint, four, three, or two across so every row stays
- * even. The three step cards follow on the ivory. The page fades up as it
- * opens, every control eases its hover, press, and focus, and every
- * animation and transition holds still under reduced motion.
+ * even. The three newest articles follow on the ivory as white cards, three
+ * across or one, then the three step cards. The page fades up as it opens,
+ * every control eases its hover, press, and focus, and every animation and
+ * transition holds still under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -542,6 +543,256 @@
 /* #endregion secInnDiv */
 
 /* #endregion homTopSec */
+
+
+
+/* #region homArtSec */
+
+.homArtSec { /* What: Home Articles Section. Why: The newest articles follow the topics on the ivory, with the steps section below supplying the gap after them. How: This pads only the section's top. */
+
+
+	padding-top : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
+
+
+}
+
+
+/* #region secInnDiv */
+
+/* What: Section Inner Div Pointer. Why: This section's centered column, eyebrow, and heading share their rules with the topic section's. How: Their rules sit in the homTopSec region above. */
+
+
+
+/* #region artHeaDiv */
+
+.artHeaDiv { /* What: Articles Header Div. Why: The heading and the link to every article sit on one line on wide screens. How: This spreads them apart along their bottoms, wrapping on phones. */
+
+
+	align-items     : flex-end;
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-bas ) var( --spa-hor-p03 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	justify-content : space-between;
+
+
+}
+
+
+/* #region allArtAnc */
+
+.allArtAnc { /* What: All Articles Anchor. Why: The way to every article reads as a quiet text link. How: This sets it in dark orange mono, easing its color, press, and focus. */
+
+
+	color       : var( --acc-dar-col ); /* Accent Dark Color ~= #bd3000 */
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	transition  : color var( --dur-tra-bas ), opacity var( --dur-tra-m02 ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Minus 2 ~= 89.9ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+.allArtAnc:hover { /* What: Hovered All Articles Anchor. Why: A link should answer the pointer. How: This turns it the main text color. */
+
+
+	color : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+.allArtAnc:active { /* What: Pressed All Articles Anchor. Why: A text link presses by dimming. How: This drops it to about 75% strength. */
+
+
+	opacity : var( --cdn-pow-001-rec ); /* Core-Design-Number to the Power of 1 Reciprocal ~= 0.755 */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion All Articles Anchor. Why: Someone who asked for less motion shouldn't see the link fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.allArtAnc { /* What: Motionless All Articles Anchor. Why: The hover, press, and focus looks should simply switch. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.allArrSpa { /* What: All Arrow Span. Why: The arrow points onward and nudges forward on hover. How: This sets it inline and eases its slide. */
+
+
+	display    : inline-block;
+	transition : transform var( --dur-tra-p01 ) var( --mot-ove-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+
+
+}
+.allArtAnc:hover .allArrSpa { /* What: Hovered All Arrow Span. Why: The arrow leans toward where the link goes. How: This slides it about 4.7px to the right. */
+
+
+	transform : translateX( var( --spa-hor-m04 ) ); /* Spacing Horizontal Base Minus 4 ~= 4.732px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion All Arrow Span. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.allArrSpa { /* What: Motionless All Arrow Span. Why: The arrow should simply move. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion allArtAnc */
+
+/* #endregion artHeaDiv */
+
+
+
+/* #region artGriUno */
+
+.artGriUno { /* What: Article Grid Unordered. Why: The three newest articles sit side by side as equal cards. How: This lays them out three across below the header, with no list markers. */
+
+
+	display               : grid;
+	gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+	grid-template-columns : repeat( 3, minmax( 0, 1fr ) );
+	list-style            : none;
+	margin                : var( --spa-ver-p04 ) 0 0;                  /* Spacing Vertical Base Plus 4 ~= 44.876px */
+	padding               : 0;
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Article Grid Unordered. Why: Three cards across are too narrow for their titles on phones and small tablets. How: This applies at 768px and below. */
+
+
+	.artGriUno { /* What: Stacked Article Grid Unordered. Why: The cards read top to bottom on a narrow screen. How: This sets one column. */
+
+
+		grid-template-columns : 1fr;
+
+
+	}
+
+
+}
+
+
+/* #region artCarAnc */
+
+.artCarAnc { /* What: Article Card Anchor. Why: The whole card opens the article, and every card in the row shares one height. How: This draws a white card filling its cell, stacks its parts with the reading time at the bottom, and eases its border, lift, press, and focus. */
+
+
+	background     : var( --bac-sur-col );                            /* Background Surface Color = #FFFFFF */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-m02 );                            /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	height         : 100%;
+	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );       /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	transition     : border-color var( --dur-tra-bas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+
+
+}
+.artCarAnc:hover { /* What: Hovered Article Card Anchor. Why: A card should answer the pointer. How: This turns its border teal and lifts it about 3px. */
+
+
+	border-color : var( --act-mai-col );                            /* Accent-Tertiary Main Color = #2A9D8F */
+	transform    : translateY( calc( var( --spa-ver-m06 ) * -1 ) ); /* Spacing Vertical Base Minus 6 ~= -2.696px */
+
+
+}
+.artCarAnc:active { /* What: Pressed Article Card Anchor. Why: A press should register before anything else happens. How: This presses it in slightly, which also undoes its hover lift. */
+
+
+	transform : scale( 0.98 ); /* What: Card Press Scale. Why: A whole card pressing in by 3% would move its edges too far for its size. How: This shrinks it by 2%, a literal since no scale step lands within 10%. */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Article Card Anchor. Why: Someone who asked for less motion shouldn't see the card glide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.artCarAnc { /* What: Motionless Article Card Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.artTitHea { /* What: Article Title Heading. Why: A card's title reads clearly at a card's size. How: This sets it in the main text color at the base plus 2 size. */
+
+
+	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+
+
+}
+
+
+/* #region artMetSpa */
+
+.artMetSpa { /* What: Article Meta Span. Why: The reading time and arrow sit together at the card's foot. How: This sets them in muted mono, pushed to the bottom of the card. */
+
+
+	align-items : center;
+	color       : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	display     : inline-flex;
+	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
+	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	gap         : var( --spa-hor-m02 ); /* Spacing Horizontal Base Minus 2 ~= 8.304px */
+	margin-top  : auto;
+
+
+}
+
+.artArrSpa { /* What: Article Arrow Span. Why: The arrow invites a click and nudges forward as the card lifts. How: This colors it dark teal and eases its slide. */
+
+
+	color      : var( --act-dar-col );                                /* Accent-Tertiary Dark Color ~= #007063 */
+	transition : transform var( --dur-tra-p01 ) var( --mot-ove-eas ); /* Duration Transition Base Plus 1 ~= 209.1ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+
+
+}
+.artCarAnc:hover .artArrSpa { /* What: Hovered Article Arrow Span. Why: The arrow points onward as the card lifts. How: This slides it about 4.7px to the right. */
+
+
+	transform : translateX( var( --spa-hor-m04 ) ); /* Spacing Horizontal Base Minus 4 ~= 4.732px */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Article Arrow Span. Why: Someone who asked for less motion shouldn't see the arrow slide. How: This applies only when the reduced-motion preference is set. */
+
+
+	.artArrSpa { /* What: Motionless Article Arrow Span. Why: The arrow should simply move. How: This turns the transition off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion artMetSpa */
+
+/* #endregion artCarAnc */
+
+/* #endregion artGriUno */
+
+/* #endregion secInnDiv */
+
+/* #endregion homArtSec */
 
 
 

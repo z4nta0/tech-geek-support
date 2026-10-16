@@ -6,9 +6,11 @@
 import cssModObj from './home.module.css'; // What: CSS Module Object. Why: Home's hero, topic tiles, and steps are styled in its own module. How: This maps each class name in home.module.css to its hashed module class.
 
 
+import { ART_REC_ARR } from '../../ui/articles.ts';      // What: Article Record Array. Why: Home features the newest articles. How: The page shows the first three, which the catalog lists newest first.
 import { Link        } from 'react-router';              // What: Link. Why: The hero's buttons and the topic tiles move to other pages without a full page load. How: This renders those links.
 import { SigRinCom   } from '../../ui/signal-rings.tsx'; // What: Signal Rings Component. Why: The hero carries the site's motif. How: The hero sets it beside the pitch.
 import { TOP_REC_ARR } from '../../ui/topics.ts';        // What: Topic Record Array. Why: The topic tiles list every help topic. How: The page renders one tile per row.
+import { TopTagCom   } from '../../ui/topic-tag.tsx';    // What: Topic Tag Component. Why: Each featured article shows its topic. How: The page renders one tag per card.
 
 
 import type { JSX } from 'react'; // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.
@@ -23,8 +25,8 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * @summary
  * The home page: a calm hero with the site's pitch beside the signal rings,
  * the help topics as tiles that open the Articles page filtered to each one,
- * plus a last tile for anything else, and the three steps from asking a
- * question to being sorted. Every way onward leads to asking a question or
+ * plus a last tile for anything else, the three newest articles, and the
+ * three steps from asking a question to being sorted. Every way onward leads to asking a question or
  * reading an article.
  *
  * Sections:
@@ -255,6 +257,81 @@ function HomPagCom () : JSX.Element {
 
 
 							</li>
+
+
+						</ul>
+
+
+					</div>
+
+
+				</section>
+
+
+
+				<section className={ cssModObj.homArtSec }>{ /* What: Home Articles Section Element. Why: A visitor can jump straight into the newest help. How: This holds the header and three article cards. */ }
+
+
+					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The section's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
+
+
+						<div className={ cssModObj.artHeaDiv }>{ /* What: Articles Header Div Element. Why: The heading and the link to every article sit on one line on wide screens. How: This spreads them apart, wrapping on phones. */ }
+
+
+							<div>{ /* What: Articles Heading Div Element. Why: The eyebrow and heading read as one block beside the link. How: This stacks them. */ }
+
+
+								<p className={ cssModObj.secEyePar }>New articles</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+
+								<h2 className={ cssModObj.secTitHea }>Fresh help, step by step</h2>{ /* What: Section Title Heading Element. Why: The heading introduces the newest articles. How: This shows the section's h2. */ }
+
+
+							</div>
+
+
+
+							<Link
+								className={ cssModObj.allArtAnc }
+
+								to='/articles'
+							>See all articles <span className={ cssModObj.allArrSpa } aria-hidden='true'>→</span></Link>{ /* What: See All Articles Link. Why: Three articles are only a taste. How: This routes to the Articles page, its arrow nudging on hover and hidden from screen readers. */ }
+
+
+						</div>
+
+
+						<ul className={ cssModObj.artGriUno }>{ /* What: Article Grid Unordered Element. Why: The newest articles sit side by side as equal cards. How: This lays them out three across, stacking on phones. */ }
+
+
+							{ ART_REC_ARR.slice( 0, 3 ).map( ( artRecObj ) => ( // What: Article Map Call. Why: The newest three articles each get a card. How: This renders one list item per article, taking the catalog's first three.
+
+
+								<li key={ artRecObj.ideStr }>{ /* What: Article Item Element. Why: Each card is one item in the list. How: This holds the card's link. */ }
+
+
+									<Link
+										className={ cssModObj.artCarAnc }
+
+										to={ `/articles/${ artRecObj.ideStr }` }
+									>{ /* What: Article Card Anchor Element. Why: The whole card opens the article. How: This draws a white card with the topic, title, and reading time, lifting on hover. */ }
+
+
+										<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }
+
+
+
+										<h3 className={ cssModObj.artTitHea }>{ artRecObj.titStr }</h3>{ /* What: Article Title Heading Element. Why: The title is the card's main line. How: This shows it as an h3 under the section's h2. */ }
+
+										<span className={ cssModObj.artMetSpa }>{ `${ artRecObj.minNum } min read` }<span className={ cssModObj.artArrSpa } aria-hidden='true'>→</span></span>{ /* What: Article Meta Span Element. Why: A reader can see how long it takes, and an arrow invites a click. How: This shows the reading time with an arrow that nudges on hover, hidden from screen readers. */ }
+
+
+									</Link>
+
+
+								</li>
+
+
+							))}
 
 
 						</ul>
