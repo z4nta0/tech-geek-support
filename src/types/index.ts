@@ -1,29 +1,3 @@
-// ── Project types ──────────────────────────────────────────
-export interface Project {
-  id: string
-  title: string
-  description: string
-  longDescription?: string
-  tags: string[]
-  liveUrl?: string
-  githubUrl?: string
-  imageUrl: string
-  featured?: boolean
-  year: number
-}
-
-// ── Greeting Card types ────────────────────────────────────
-export interface GreetingCard {
-  id: string
-  title: string
-  occasion: string
-  description: string
-  previewUrl: string
-  liveUrl?: string
-  tags: string[]
-  year: number
-}
-
 // ── Support / Tech Help types ──────────────────────────────
 export interface SupportQuestion {
   id: string

@@ -22,12 +22,7 @@ export const Footer: React.FC = () => {
 
         <nav className={styles.links} aria-label="Footer navigation">
           {[
-            ['Home', '/'],
-            ['Work', '/work'],
-            ['Cards', '/cards'],
-            ['Support', '/support'],
-            ['About', '/about'],
-            ['Contact', '/contact'],
+            ['Support', '/'],
           ].map(([label, path]) => (
             <Link key={path} to={path} className={styles.link}>{label}</Link>
           ))}
