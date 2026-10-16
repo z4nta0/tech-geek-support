@@ -3,12 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import styles from './Nav.module.css'
 
 const links = [
-  { label: 'Home',     path: '/'          },
-  { label: 'Work',     path: '/work'      },
-  { label: 'Cards',    path: '/cards'     },
-  { label: 'Support',  path: '/support'   },
-  { label: 'About',    path: '/about'     },
-  { label: 'Contact',  path: '/contact'   },
+  { label: 'Support',  path: '/'          },
 ]
 
 export const Nav: React.FC = () => {
@@ -59,8 +54,8 @@ export const Nav: React.FC = () => {
         </nav>
 
         {/* CTA */}
-        <a href="/contact" className={styles.cta}>
-          Hire Me
+        <a href="/#ask" className={styles.cta}>
+          Ask a Question
         </a>
 
         {/* Mobile menu toggle */}
@@ -87,7 +82,7 @@ export const Nav: React.FC = () => {
             {label}
           </NavLink>
         ))}
-        <a href="/contact" className={styles.drawerCta}>Hire Me</a>
+        <a href="/#ask" className={styles.drawerCta}>Ask a Question</a>
       </div>
     </header>
   )

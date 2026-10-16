@@ -97,7 +97,7 @@ export const Support: React.FC = () => {
       </section>
 
       {/* ── Ask Question Form ── */}
-      <section className={`section ${styles.formSection}`}>
+      <section id="ask" className={`section ${styles.formSection}`}>
         <div className={`container ${styles.formContainer}`}>
 
           <div className={styles.formCard}>
