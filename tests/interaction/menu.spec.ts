@@ -99,7 +99,7 @@ test( 'the open menu offers the pages, profiles, and email over a dimmed page', 
 
 	await expect( curPagObj.getByRole( 'banner' ).locator( 'a[target="_blank"][aria-label]' ) ).toHaveCount( 2 ); // What: Profile Links Assertion. Why: Both of z4nta0's profiles should be one tap away. How: This counts the menu's named links that open in a new tab.
 
-	await expect( curPagObj.getByRole( 'banner' ).getByRole( 'link', { name : 'contact@techgeek.dev' } ) ).toBeVisible(); // What: Email Link Assertion. Why: The contact email should be one tap away. How: This checks the menu shows the mailto link.
+	await expect( curPagObj.getByRole( 'banner' ).getByRole( 'link', { name : 'contact@techgeek.support' } ) ).toBeVisible(); // What: Email Link Assertion. Why: The contact email should be one tap away. How: This checks the menu shows the mailto link.
 
 	expect( await curPagObj.evaluate( () => document.elementFromPoint( 200, 800 )?.getAttribute( 'aria-hidden' ) ) ).toBe( 'true' ); // What: Scrim On Top Assertion. Why: A tap on the page below the menu has to land on the scrim, not the page. How: This checks the element at a point below the panel is the scrim, the one element there hidden from screen readers.
 
@@ -147,7 +147,7 @@ test( 'tapping the brand goes home and closes the menu', async ( { page : curPag
 
 	await menOpeFun( curPagObj ); // What: Menu Open Call. Why: The check needs the menu open on a page other than Home. How: This opens and checks it on About.
 
-	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'TechGeek.dev' } ).click(); // What: Brand Tap Call. Why: The brand is the way home from the open menu. How: This taps the bar's brand link.
+	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'TechGeek.support' } ).click(); // What: Brand Tap Call. Why: The brand is the way home from the open menu. How: This taps the bar's brand link.
 
 	await expect( curPagObj ).toHaveURL( '/' ); // What: Home Assertion. Why: The brand links to the home page. How: This waits for the address to change.
 

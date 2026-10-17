@@ -152,10 +152,20 @@ On the `rebuild` branch, following the sister sites.
    three engines, with rendering baselines.
 6. **SEO and social preview**: every page's title, description, and
    canonical link, each article's own, the sitemap, and the preview card.
-7. **Close-out**: the README, rule audit rounds until clean, and the version
+7. **Manual responsive pass** (added by the user 2026-10-16): the user checks
+   every page by hand across screen widths, the Contact form especially, and
+   the fixes land before the close-out.
+8. **Close-out**: the README, rule audit rounds until clean, and the version
    bump.
 
 ## Test suites
-Copied from TechGeek.dev on 2026-10-16 and adapted in build step 5. Playwright
+Copied from TechGeek.dev on 2026-10-16 and adapted the same day. Playwright
 suites live in `tests/`, one project per suite and engine in
 `tests/playwright.config.ts`, which starts its own dev server on port 5196.
+- **States** (`tests/support/states.ts`): Home, Articles, one article (the slow
+  Wi-Fi one, which has steps, bullets, and tips, standing in for every
+  article, since they share one page), About, Contact, and the 404 at 390px
+  and 1,440px, plus the phone menu open.
+- **Rendering** baselines live in `tests/rendering/baselines`, captured on
+  this Linux machine; refresh them with `npm run test:rendering --
+  --update-snapshots` when a page is meant to look different.

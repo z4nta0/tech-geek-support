@@ -23,8 +23,10 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers dr
  * puts every link-driven navigation back at the top. Footer links clicked at
  * the bottom of each page open the next page at its top, the current page's
  * own bar link scrolls back to the top, a phone menu link does the same,
- * back returns the visitor to where they were rather than to the top, and the
- * Hire Me button switches to Contact without reloading the site.
+ * back returns the visitor to where they were rather than to the top, the
+ * Ask a Question button switches to Contact without reloading the site, and
+ * an article card opens its article, whose More articles link leads back to
+ * the list filtered to the article's topic.
  *
  * Sections:
  *  - Constants
@@ -59,10 +61,10 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers dr
 const PAG_LIN_ARR = [ // What: Page Link Array. Why: Every page is checked as a starting point and as a destination. How: Each row pairs a route's path with its link text, in the bar's order.
 
 
-	{ labStr : 'Home',    patStr : '/'        },
-	{ labStr : 'Work',    patStr : '/work'    },
-	{ labStr : 'About',   patStr : '/about'   },
-	{ labStr : 'Contact', patStr : '/contact' }
+	{ labStr : 'Home',     patStr : '/'         },
+	{ labStr : 'Articles', patStr : '/articles' },
+	{ labStr : 'About',    patStr : '/about'    },
+	{ labStr : 'Contact',  patStr : '/contact'  }
 
 
 ];
@@ -217,20 +219,48 @@ test( 'back returns to where the visitor was, not the top', async ( { page : cur
 
 
 
-test( 'the Hire Me button opens Contact without reloading the site', async ( { page : curPagObj } ) => { // What: Hire Me Link Test. Why: A plain link would reload the whole site instead of switching pages. How: This marks the document, clicks the bar's Hire Me, and checks the mark survived, which only happens without a reload.
+test( 'the Ask a Question button opens Contact without reloading the site', async ( { page : curPagObj } ) => { // What: Ask Question Link Test. Why: A plain link would reload the whole site instead of switching pages. How: This marks the document, clicks the bar's Ask a Question, and checks the mark survived, which only happens without a reload.
 
 
-	await curPagObj.setViewportSize( { height : 900, width : 1440 } ); // What: Desktop Viewport Call. Why: The bar shows its Hire Me button at desktop width. How: This sizes the page before it loads.
+	await curPagObj.setViewportSize( { height : 900, width : 1440 } ); // What: Desktop Viewport Call. Why: The bar shows its Ask a Question button at desktop width. How: This sizes the page before it loads.
 
 	await curPagObj.goto( '/' ); // What: Home Page Navigation. Why: The check starts away from Contact. How: This loads Home.
 
 	await curPagObj.evaluate( () => document.documentElement.setAttribute( 'data-test-reload-marker', '' ) ); // What: Reload Marker Call. Why: A reload would build a fresh document without the mark. How: This sets a presence-only attribute on the root element.
 
-	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Hire Me' } ).click(); // What: Hire Me Click. Why: This is the link that used to reload the site. How: This clicks the bar's Hire Me.
+	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Ask a Question' } ).click(); // What: Ask Question Click. Why: The bar's main action is the link most likely to be clicked. How: This clicks the bar's Ask a Question.
 
 	await expect( curPagObj ).toHaveURL( '/contact' ); // What: Destination Assertion. Why: The button has to reach Contact. How: This waits for the address to change.
 
 	expect( await curPagObj.evaluate( () => document.documentElement.hasAttribute( 'data-test-reload-marker' ) ) ).toBe( true ); // What: No Reload Assertion. Why: The router should switch pages within the same document. How: This checks the mark is still on the root element.
+
+
+} );
+
+
+
+test( 'an article card opens its article, and the article leads back to its topic', async ( { page : curPagObj } ) => { // What: Article Round Trip Test. Why: Opening an article and coming back are the help center's main path. How: This opens the slow Wi-Fi article from its card without a reload, checks the article's page, then follows More articles back to the list filtered to its topic, at its top.
+
+
+	await curPagObj.setViewportSize( { height : 900, width : 1440 } ); // What: Desktop Viewport Call. Why: The cards sit side by side at desktop width. How: This sizes the page before it loads.
+
+	await curPagObj.goto( '/articles' ); // What: Articles Navigation. Why: The trip starts from the list of articles. How: This loads the Articles page.
+
+	await curPagObj.evaluate( () => document.documentElement.setAttribute( 'data-test-reload-marker', '' ) ); // What: Reload Marker Call. Why: A reload would build a fresh document without the mark. How: This sets a presence-only attribute on the root element.
+
+	await curPagObj.getByRole( 'link' ).filter( { has : curPagObj.getByRole( 'heading', { name : 'Why Is My Wi-Fi So Slow?' } ) } ).click(); // What: Card Click. Why: The whole card is one link, named by everything on it. How: This clicks the link holding the slow Wi-Fi article's title.
+
+	await expect( curPagObj ).toHaveURL( '/articles/why-is-my-wi-fi-so-slow' ); // What: Article Address Assertion. Why: The card has to open its own article. How: This waits for the article's address.
+
+	await expect( curPagObj.getByRole( 'heading', { level : 1, name : 'Why Is My Wi-Fi So Slow?' } ) ).toBeVisible(); // What: Article Title Assertion. Why: The page has to show the article that was picked. How: This checks its h1.
+
+	expect( await curPagObj.evaluate( () => document.documentElement.hasAttribute( 'data-test-reload-marker' ) ) ).toBe( true ); // What: No Reload Assertion. Why: The router should switch to the article within the same document. How: This checks the mark is still on the root element.
+
+	await curPagObj.getByRole( 'link', { exact : true, name : 'More articles' } ).click(); // What: More Articles Click. Why: The article's header leads back to the list. How: This clicks More articles.
+
+	await expect( curPagObj ).toHaveURL( '/articles?topic=internet-wi-fi' ); // What: Return Assertion. Why: A reader going back most likely wants more of the same topic. How: This waits for the list's address, filtered to Internet & Wi-Fi.
+
+	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Assertion. Why: A link opens its page at the top. How: This polls until the list sits at its top.
 
 
 } );
