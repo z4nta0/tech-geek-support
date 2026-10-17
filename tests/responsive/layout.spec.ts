@@ -89,8 +89,9 @@ const WID_LIS_ARR = [ 320, 360, 390, 414, 480, 640, 641, 768, 769, 1024, 1025, 1
  * clips its overflow (the body hides sideways overflow on every page, so it
  * would excuse everything); one moved wholly off-screen, like the form's
  * honeypot, is hidden on purpose and doesn't count. And a reachable control
- * (see below) counts as cut off when it reaches past an edge even inside a
- * clipping ancestor, since a clipped button is still half hidden. An element
+ * (see below) counts as cut off when it reaches past an edge inside an
+ * ancestor that hides its overflow, since a clipped button is still half
+ * hidden, while one in a container that scrolls can be scrolled to. An element
  * with text of its own spills its box when a line of that text runs more than
  * a pixel past either inner edge and it doesn't clip or scroll its content; a
  * decoration drawn past the text on purpose doesn't count, and inline elements
@@ -134,6 +135,19 @@ function layProFun () : string[] {
 
 
 		return false; // What: Unclipped Return. Why: No ancestor clips the element, so its spill would show. How: This reports that none was found.
+
+
+	};
+
+
+	const hidAncFun = ( hidCurEle : Element ) => { // What: Hidden Ancestor Function. Why: A control cut off inside a container that scrolls can still be scrolled to, but one cut off inside a container that hides its overflow can't be reached at all. How: This reports whether any ancestor below the body hides or clips its overflow, leaving out ones that scroll.
+
+
+		for ( let ancCurEle = hidCurEle.parentElement; ancCurEle && ancCurEle !== document.body; ancCurEle = ancCurEle.parentElement ) if ( [ 'clip', 'hidden' ].includes( getComputedStyle( ancCurEle ).overflowX ) ) return true; // What: Ancestor Hidden Overflow Loop. Why: Any hiding container cuts its content off for good. How: This walks up the tree and returns as soon as one hides or clips its overflow.
+
+
+
+		return false; // What: Not Hidden Return. Why: No ancestor hides the element's overflow, so either it shows or it can be scrolled to. How: This reports that none was found.
 
 
 	};
@@ -237,13 +251,13 @@ function layProFun () : string[] {
 	} );
 
 
-	conEleArr.forEach( ( conCurEle ) => { // What: Cut Off Control Loop. Why: A container that clips its overflow hides the spill, but a control cut off at the edge, like a menu button pushed half off a crowded bar, still can't be fully seen or reached, which the edge check above lets through. How: This records each reachable control partly on screen whose box runs more than a pixel past either edge inside a clipping ancestor.
+	conEleArr.forEach( ( conCurEle ) => { // What: Cut Off Control Loop. Why: A container that clips its overflow hides the spill, but a control cut off at the edge, like a menu button pushed half off a crowded bar, still can't be fully seen or reached, which the edge check above lets through. How: This records each reachable control partly on screen whose box runs more than a pixel past either edge inside an ancestor that hides its overflow.
 
 
 		const conRecObj = conCurEle.getBoundingClientRect(); // What: Control Rect Object. Why: The control's edges are compared with the viewport's. How: This reads its box.
 
 
-		if ( !cliAncFun( conCurEle ) ) return; // What: Unclipped Control Guard. Why: An unclipped control past the edge is already recorded as a spill. How: This skips it, so nothing is reported twice.
+		if ( !hidAncFun( conCurEle ) ) return; // What: Unhidden Control Guard. Why: An unclipped control past the edge is already recorded as a spill, and one inside a scrolling container, like a row of filters that scrolls sideways, can be scrolled to. How: This skips both, keeping only controls a hiding container cuts off for good.
 
 
 
