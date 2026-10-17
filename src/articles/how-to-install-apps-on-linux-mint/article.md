@@ -1,6 +1,6 @@
 ---
 published: 2026-10-16
-summary: New to Linux Mint? Learn the safe, easy way to install apps from the Software Manager, and why to skip download sites.
+summary: New to Linux Mint? Learn the safe, easy way to install apps from the Software Manager, and why to skip random download sites.
 title: How to Install Apps on Linux Mint
 topic: linux
 ---

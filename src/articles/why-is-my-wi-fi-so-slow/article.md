@@ -1,6 +1,6 @@
 ---
 published: 2026-10-16
-summary: Slow or spotty Wi-Fi at home? Start with these simple fixes, from a proper router restart to a better spot for the box.
+summary: Slow or spotty Wi-Fi at home? Start with these simple fixes, from a proper router restart to a better spot for your router.
 title: Why Is My Wi-Fi So Slow?
 topic: internet-wi-fi
 ---

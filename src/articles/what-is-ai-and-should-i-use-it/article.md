@@ -1,6 +1,6 @@
 ---
 published: 2026-10-16
-summary: AI is everywhere now. Here's what it actually is, what it's good and bad at, and how to try it safely if you want to.
+summary: AI is everywhere now. Here's what it actually is, what it's good and bad at, and how to try it safely, if you want to at all.
 title: What Is AI, and Should I Use It?
 topic: understanding-tech
 ---

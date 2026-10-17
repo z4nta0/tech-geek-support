@@ -1,6 +1,6 @@
 ---
 published: 2026-10-16
-summary: Save a picture of your Mac's screen in seconds: the whole screen, one window, or just a part, plus where to find it.
+summary: Save a picture of your Mac's screen in seconds: the whole screen, one window, or just a part, and where to find it after.
 title: How to Take a Screenshot on a Mac
 topic: mac
 ---

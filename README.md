@@ -72,7 +72,7 @@ npm run icons      # copies the design package's favicon.svg into public/ and re
 ## Adding an article
 
 1. Give the article its own folder, `src/articles/<slug>/`, named for its address (`/articles/<slug>`), holding `article.md` and any photos it uses. Photo originals go in `design/articles/<slug>/`, outside the site, and only optimized copies go in the article's folder.
-2. Start `article.md` with its front matter on line 1, keys in alphabetical order: `published` (its date), `summary` (100 to 125 characters, since it's the search description), `title`, `topic` (a topic's identifier from `src/ui/topics.ts`, such as `internet-wi-fi`), and `updated` once it's revised. Write each paragraph or list item on one line, and end it with the invitation to ask.
+2. Start `article.md` with its front matter on line 1, keys in alphabetical order: `published` (its date), `summary` (120 to 125 characters, since it's the search description and link preview checkers flag one under 120), `title`, `topic` (a topic's identifier from `src/ui/topics.ts`, such as `internet-wi-fi`), and `updated` once it's revised. Write each paragraph or list item on one line, and end it with the invitation to ask.
 3. Run `npm run og-images` for its link preview image.
 
 The site picks the new folder up on its own: the Articles page lists it, the build gives it its own page and sitemap entry, and the SEO suite checks it, all without editing anything else. Drafts and their research notes (why each problem was chosen, where it was found, and the sources its steps were checked against) live in `research/articles/` and are never published.
