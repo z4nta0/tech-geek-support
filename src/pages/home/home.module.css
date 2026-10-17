@@ -742,19 +742,32 @@
 
 /* #region artGriUno */
 
-.artGriUno { /* What: Article Grid Unordered. Why: The three newest articles sit side by side as equal cards. How: This lays them out three across below the header, with no list markers. */
+.artGriUno { /* What: Article Grid Unordered. Why: The four newest articles sit side by side as equal cards. How: This lays them out four across below the header, with no list markers. */
 
 
 	display               : grid;
 	gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
-	grid-template-columns : repeat( 3, minmax( 0, 1fr ) );
+	grid-template-columns : repeat( 4, minmax( 0, 1fr ) );
 	list-style            : none;
 	margin                : var( --spa-ver-p04 ) 0 0;                  /* Spacing Vertical Base Plus 4 ~= 44.876px */
 	padding               : 0;
 
 
 }
-@media ( max-width : 768px ) { /* What: Phone Article Grid Unordered. Why: Three cards across are too narrow for their titles on phones and small tablets. How: This applies at 768px and below. */
+@media ( max-width : 1024px ) { /* What: Tablet Article Grid Unordered. Why: Four cards across are too narrow for their titles on a tablet, while one column makes each card very wide. How: This applies at 1,024px and below. */
+
+
+	.artGriUno { /* What: Two-Column Article Grid Unordered. Why: Two divides the four cards evenly, in two rows of two. How: This sets two columns that may shrink below their longest word. */
+
+
+		grid-template-columns : repeat( 2, minmax( 0, 1fr ) );
+
+
+	}
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Article Grid Unordered. Why: Two cards across are too narrow for their titles on a phone. How: This applies at 640px and below. */
 
 
 	.artGriUno { /* What: Stacked Article Grid Unordered. Why: The cards read top to bottom on a narrow screen. How: This sets one column. */

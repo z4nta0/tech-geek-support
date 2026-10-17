@@ -6,7 +6,7 @@
 import cssModObj from './home.module.css'; // What: CSS Module Object. Why: Home's hero, topic tiles, and steps are styled in its own module. How: This maps each class name in home.module.css to its hashed module class.
 
 
-import { ART_REC_ARR } from '../../ui/articles.ts';      // What: Article Record Array. Why: Home features the newest articles. How: The page shows the first three, which the catalog lists newest first.
+import { ART_REC_ARR } from '../../ui/articles.ts';      // What: Article Record Array. Why: Home features the newest articles. How: The page shows the first four, which the catalog lists newest first.
 import { Link        } from 'react-router';              // What: Link. Why: The hero's buttons and the topic tiles move to other pages without a full page load. How: This renders those links.
 import { SigRinCom   } from '../../ui/signal-rings.tsx'; // What: Signal Rings Component. Why: The hero carries the site's motif. How: The hero sets it beside the pitch.
 import { TOP_REC_ARR } from '../../ui/topics.ts';        // What: Topic Record Array. Why: The topic tiles list every help topic. How: The page renders one tile per row.
@@ -25,9 +25,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * @summary
  * The home page: a calm hero with the site's pitch beside the signal rings,
  * the help topics as tiles that open the Articles page filtered to each one,
- * plus a last tile for anything else, the three newest articles, and the
- * three steps from asking a question to being sorted. Every way onward leads to asking a question or
- * reading an article.
+ * plus a last tile for anything else, the four newest articles, and the three
+ * steps from asking a question to being sorted. Every way onward leads to
+ * asking a question or reading an article.
  *
  * Sections:
  *  - Constants
@@ -274,7 +274,7 @@ function HomPagCom () : JSX.Element {
 
 
 
-				<section className={ cssModObj.homArtSec }>{ /* What: Home Articles Section Element. Why: A visitor can jump straight into the newest help. How: This holds the header and three article cards. */ }
+				<section className={ cssModObj.homArtSec }>{ /* What: Home Articles Section Element. Why: A visitor can jump straight into the newest help. How: This holds the header and four article cards. */ }
 
 
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The section's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
@@ -305,10 +305,10 @@ function HomPagCom () : JSX.Element {
 						</div>
 
 
-						<ul className={ cssModObj.artGriUno }>{ /* What: Article Grid Unordered Element. Why: The newest articles sit side by side as equal cards. How: This lays them out three across, stacking on phones. */ }
+						<ul className={ cssModObj.artGriUno }>{ /* What: Article Grid Unordered Element. Why: The newest articles sit side by side as equal cards. How: This lays them out four across, two by two on tablets, and stacked on phones. */ }
 
 
-							{ ART_REC_ARR.slice( 0, 3 ).map( ( artRecObj ) => ( // What: Article Map Call. Why: The newest three articles each get a card. How: This renders one list item per article, taking the catalog's first three.
+							{ ART_REC_ARR.slice( 0, 4 ).map( ( artRecObj ) => ( // What: Article Map Call. Why: The newest four articles each get a card, a count that divides evenly into four, two, or one column. How: This renders one list item per article, taking the catalog's first four.
 
 
 								<li key={ artRecObj.ideStr }>{ /* What: Article Item Element. Why: Each card is one item in the list. How: This holds the card's link. */ }
