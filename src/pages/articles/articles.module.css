@@ -506,6 +506,47 @@
 /* #endregion empMesDiv */
 
 
+/* #region stiStuAsi */
+
+.stiStuAsi { /* What: Still Stuck Aside. Why: The invitation to ask closes the list as a calm panel, the same one an article ends with. How: This draws a pale teal panel a large step below the list, as wide as the cards, stacking its heading, text, and button. */
+
+
+	align-items    : flex-start;
+	background     : var( --act-tin-col );                      /* Accent-Tertiary Tint Color = #D3EEE9 */
+	border-radius  : var( --rad-bor-xla );                      /* Radius Border Extra Large ~= 19.304px */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-bas );                      /* Spacing Vertical Base ~= 14.572px */
+	margin-top     : var( --spa-ver-p05 );                      /* Spacing Vertical Base Plus 5 ~= 59.447px */
+	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );       /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	padding        : var( --spa-ver-p03 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+
+
+}
+
+.stiTitHea { /* What: Still Stuck Title Heading. Why: The panel's question reads clearly without the full h2 size. How: This sets it in the main text color at the base plus 4 size. */
+
+
+	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size : var( --fon-siz-p04 ); /* Font Size Base Plus 4 ~= 33.876px */
+
+
+}
+
+.stiTexPar { /* What: Still Stuck Text Paragraph. Why: The reassurance reads a step larger, in the main text color. How: This sets it at the base plus 2 size, capped at the paragraph measure. */
+
+
+	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+
+
+}
+
+/* What: Button Primary Anchor. Why: The panel's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which every button on the page shares. */
+
+/* #endregion stiStuAsi */
+
 
 /* #region helCarAsi */
 
@@ -566,7 +607,7 @@
 
 }
 
-/* What: Button Primary Anchor. Why: The card's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which both buttons share. */
+/* What: Button Primary Anchor. Why: The card's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which every button on the page shares. */
 
 .helSafPar { /* What: Help Safety Paragraph. Why: The safety note is a quiet aside under the button. How: This sets it in the muted color at the base plus 1 size. */
 

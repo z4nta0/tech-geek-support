@@ -31,7 +31,8 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * so Home's topic tiles and any shared link open the page already filtered,
  * and choosing a topic replaces the address rather than adding to the
  * history, so Back still leaves the page. A topic with no articles yet
- * invites the visitor to ask instead. On a wide screen a help card sits
+ * invites the visitor to ask instead, and a list of articles ends with the
+ * same Still Stuck panel an article does. On a wide screen a help card sits
  * beside the list, staying in view as it scrolls, so a visitor who can't find
  * their problem always sees how to ask.
  *
@@ -184,69 +185,105 @@ function ArtLisCom () : JSX.Element {
 						<div className={ cssModObj.lisLayDiv }>{ /* What: List Layout Div Element. Why: On a wide screen the list's right side was empty, so the help card sits there beside it. How: This lays the list and the help card side by side above 1,024px, and leaves the list alone below that. */ }
 
 
-							{ shoArtArr.length > 0 ? ( // What: Article List Check. Why: A topic may have no articles yet. How: This shows the list when there are articles, and an invitation to ask otherwise.
+							<div>{ /* What: List Column Div Element. Why: The list and the Still Stuck panel below it share the layout's first column. How: This groups them into one grid item, so the help card keeps the second column. */ }
 
 
-								<ul className={ cssModObj.artLisUno }>{ /* What: Article List Unordered Element. Why: The articles read as a list, one per row. How: This stacks them with even gaps. */ }
+								{ shoArtArr.length > 0 ? ( // What: Article List Check. Why: A topic may have no articles yet. How: This shows the list when there are articles, and an invitation to ask otherwise.
 
 
-									{ shoArtArr.map( ( artRecObj ) => ( // What: Article Map Call. Why: Every matching article gets a row. How: This renders one list item per article.
+									<ul className={ cssModObj.artLisUno }>{ /* What: Article List Unordered Element. Why: The articles read as a list, one per row. How: This stacks them with even gaps. */ }
 
 
-										<li key={ artRecObj.ideStr }>{ /* What: Article Item Element. Why: Each article is one item in the list. How: This holds the article's card. */ }
+										{ shoArtArr.map( ( artRecObj ) => ( // What: Article Map Call. Why: Every matching article gets a row. How: This renders one list item per article.
 
 
-											<Link
-												className={ cssModObj.artCarAnc }
-
-												to={ `/articles/${ artRecObj.ideStr }` }
-											>{ /* What: Article Card Anchor Element. Why: The whole card opens the article. How: This draws a white card with the topic, title, summary, and reading time, lifting on hover. */ }
+											<li key={ artRecObj.ideStr }>{ /* What: Article Item Element. Why: Each article is one item in the list. How: This holds the article's card. */ }
 
 
-												<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }
+												<Link
+													className={ cssModObj.artCarAnc }
+
+													to={ `/articles/${ artRecObj.ideStr }` }
+												>{ /* What: Article Card Anchor Element. Why: The whole card opens the article. How: This draws a white card with the topic, title, summary, and reading time, lifting on hover. */ }
 
 
-
-												<h2 className={ cssModObj.artTitHea }>{ artRecObj.titStr }</h2>{ /* What: Article Title Heading Element. Why: The title is the card's main line. How: This shows it as an h2 under the page's h1. */ }
-
-												<p className={ cssModObj.artSumPar }>{ artRecObj.sumStr }</p>{ /* What: Article Summary Paragraph Element. Why: A line says what the article covers. How: This shows the article's summary. */ }
-
-												<span className={ cssModObj.artMetSpa }>{ `${ artRecObj.minNum } min read` }<span className={ cssModObj.artArrSpa } aria-hidden='true'>→</span></span>{ /* What: Article Meta Span Element. Why: A reader can see how long it takes, and an arrow invites a click. How: This shows the reading time with an arrow that nudges on hover, hidden from screen readers. */ }
-
-
-											</Link>
-
-
-										</li>
-
-
-									))}
-
-
-								</ul>
-
-
-							) : ( // What: Empty Topic Branch. Why: A topic with no articles yet still deserves a way forward. How: This shows an invitation to ask instead.
-
-
-								<div className={ cssModObj.empMesDiv }>{ /* What: Empty Message Div Element. Why: The invitation reads as one calm block. How: This holds the message and the button. */ }
-
-
-									<p className={ cssModObj.empMesPar }>No articles about this yet, but I'm happy to help directly. Ask your question, and I'll reply within 24 hours.</p>{ /* What: Empty Message Paragraph Element. Why: An empty list shouldn't feel like a dead end. How: This offers to answer directly. */ }
+													<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }
 
 
 
-									<Link
-										className={ cssModObj.butPriAnc }
+													<h2 className={ cssModObj.artTitHea }>{ artRecObj.titStr }</h2>{ /* What: Article Title Heading Element. Why: The title is the card's main line. How: This shows it as an h2 under the page's h1. */ }
 
-										to='/contact'
-									>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the way forward when no article fits. How: This routes to the question form as an orange button. */ }
+													<p className={ cssModObj.artSumPar }>{ artRecObj.sumStr }</p>{ /* What: Article Summary Paragraph Element. Why: A line says what the article covers. How: This shows the article's summary. */ }
 
-
-								</div>
+													<span className={ cssModObj.artMetSpa }>{ `${ artRecObj.minNum } min read` }<span className={ cssModObj.artArrSpa } aria-hidden='true'>→</span></span>{ /* What: Article Meta Span Element. Why: A reader can see how long it takes, and an arrow invites a click. How: This shows the reading time with an arrow that nudges on hover, hidden from screen readers. */ }
 
 
-							) }
+												</Link>
+
+
+											</li>
+
+
+										))}
+
+
+									</ul>
+
+
+								) : ( // What: Empty Topic Branch. Why: A topic with no articles yet still deserves a way forward. How: This shows an invitation to ask instead.
+
+
+									<div className={ cssModObj.empMesDiv }>{ /* What: Empty Message Div Element. Why: The invitation reads as one calm block. How: This holds the message and the button. */ }
+
+
+										<p className={ cssModObj.empMesPar }>No articles about this yet, but I'm happy to help directly. Ask your question, and I'll reply within 24 hours.</p>{ /* What: Empty Message Paragraph Element. Why: An empty list shouldn't feel like a dead end. How: This offers to answer directly. */ }
+
+
+
+										<Link
+											className={ cssModObj.butPriAnc }
+
+											to='/contact'
+										>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the way forward when no article fits. How: This routes to the question form as an orange button. */ }
+
+
+									</div>
+
+
+								) }
+
+
+
+								{ shoArtArr.length > 0 && ( // What: Still Stuck Check. Why: An empty topic already shows its own invitation to ask. How: This shows the panel only under a list of articles.
+
+
+									<aside
+										className={ cssModObj.stiStuAsi }
+
+										aria-label='Still stuck'
+									>{ /* What: Still Stuck Aside Element. Why: A visitor who scrolled the whole list without finding their problem should know what to do next, and the page's end filled out. How: This draws the same pale teal panel the article page ends with, named for screen readers apart from the help card. */ }
+
+
+										<h2 className={ cssModObj.stiTitHea }>Still stuck?</h2>{ /* What: Still Stuck Title Heading Element. Why: The panel names the worry it answers. How: This shows the panel's heading. */ }
+
+										<p className={ cssModObj.stiTexPar }>That's completely okay. Ask me your question, in your own words, and I'll reply by email within 24 hours. It's always free.</p>{ /* What: Still Stuck Text Paragraph Element. Why: The visitor should feel welcome to ask. How: This reassures them and repeats the promise. */ }
+
+
+
+										<Link
+											className={ cssModObj.butPriAnc }
+
+											to='/contact'
+										>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the next step for anyone still stuck. How: This routes to the question form as an orange button. */ }
+
+
+									</aside>
+
+
+								) }
+
+
+							</div>
 
 
 
@@ -270,11 +307,15 @@ function ArtLisCom () : JSX.Element {
 
 								<p className={ cssModObj.helTexPar }>Ask in plain words. It's free, and I'll reply within 24 hours.</p>{ /* What: Help Text Paragraph Element. Why: The site's promise makes asking feel easy and safe. How: This says it's free and how fast the reply comes. */ }
 
+
+
 								<Link
 									className={ cssModObj.butPriAnc }
 
 									to='/contact'
 								>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the site's main action. How: This routes to the question form as an orange button. */ }
+
+
 
 								<p className={ cssModObj.helSafPar }>I'll never ask for your passwords, money, or remote access.</p>{ /* What: Help Safety Paragraph Element. Why: Scammers pose as tech support, and a nervous visitor should know what real help never asks for. How: This states it as a quiet note under the button. */ }
 
