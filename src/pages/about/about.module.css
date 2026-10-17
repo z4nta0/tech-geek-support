@@ -442,16 +442,18 @@
 
 /* #region cloPanDiv */
 
-.cloPanDiv { /* What: Closing Panel Div. Why: Privacy and the invitation read together as one calm panel. How: This draws a pale teal panel with roomy padding, stacking its heading, text, and button. */
+.cloPanDiv { /* What: Closing Panel Div. Why: Privacy and the invitation read together as one calm panel, no wider than its text needs. How: This draws a pale teal panel with roomy padding, stacking its heading, text, and button, capped at its paragraph's measure plus its padding and centered in the column. */
 
 
 	align-items    : flex-start;
-	background     : var( --act-tin-col );                      /* Accent-Tertiary Tint Color = #D3EEE9 */
-	border-radius  : var( --rad-bor-xla );                      /* Radius Border Extra Large ~= 19.304px */
+	background     : var( --act-tin-col );                                                        /* Accent-Tertiary Tint Color = #D3EEE9 */
+	border-radius  : var( --rad-bor-xla );                                                        /* Radius Border Extra Large ~= 19.304px */
 	display        : flex;
 	flex-direction : column;
-	gap            : var( --spa-ver-bas );                      /* Spacing Vertical Base ~= 14.572px */
-	padding        : var( --spa-ver-p04 ) var( --spa-hor-p04 ); /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	gap            : var( --spa-ver-bas );                                                        /* Spacing Vertical Base ~= 14.572px */
+	margin         : 0 auto;
+	max-width      : calc( var( --cdn-pow-012 ) * var( --fon-siz-p02 ) + var( --spa-hor-p04 ) * 2 ); /* Core-Design-Number to the Power of 12 ~= 29.207, Font Size Base Plus 2 ~= 19.304px, Spacing Horizontal Base Plus 4 ~= 44.876px, about 653.6px in all */ /* What: Text-Fitted Width. Why: The panel exists to hold its paragraph, so it should be no wider than that text plus its own padding. How: This multiplies the paragraph measure's power by the paragraph's font size and adds the padding on both sides. */
+	padding        : var( --spa-ver-p04 ) var( --spa-hor-p04 );                                   /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
