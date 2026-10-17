@@ -537,6 +537,15 @@
 
 
 }
+.forConInp::placeholder,
+.forConTex::placeholder { /* What: Form Control Placeholders. Why: The sample name and address and the password warning read as quiet examples, not as text already typed, yet still clearly. How: This sets it in the muted color at full opacity, which Firefox would otherwise fade below a readable contrast. */
+
+
+	color   : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	opacity : 1;
+
+
+}
 
 .forConSel { /* What: Form Control Select. Why: The menu draws its own arrow in the site's style. How: This removes the native arrow and draws a muted chevron at the right, making room for it. */
 
@@ -556,14 +565,6 @@
 
 	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	resize      : vertical;
-
-
-}
-.forConTex::placeholder { /* What: Form Control Textarea Placeholder. Why: The password warning reads as a quiet note, not as text already typed, yet still clearly. How: This sets it in the muted color at full opacity, which Firefox would otherwise fade below a readable contrast. */
-
-
-	color   : var( --tex-mut-col ); /* Text Muted Color = #646482 */
-	opacity : 1;
 
 
 }

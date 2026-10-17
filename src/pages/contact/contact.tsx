@@ -448,12 +448,13 @@ function ConPagCom () : JSX.Element {
 												name='name'
 
 												autoComplete='given-name'
+												placeholder='John'
 												required
 												type='text'
 												value={ forDatObj.name }
 
 												onChange={ chaFieFun }
-											/>{ /* What: Form Control Input Element. Why: A reply should greet the visitor by name. How: This holds the name in the form's state, offering the browser's saved first name. */ }
+											/>{ /* What: Form Control Input Element. Why: A reply should greet the visitor by name. How: This holds the name in the form's state, offering the browser's saved first name, with a sample name as its placeholder. */ }
 
 
 										</div>
@@ -490,13 +491,14 @@ function ConPagCom () : JSX.Element {
 												name='email'
 
 												autoComplete='email'
+												placeholder='example@example.com'
 												type='email'
 												value={ forDatObj.email }
 
 												aria-describedby='forEmaHin'
 
 												onChange={ chaFieFun }
-											/>{ /* What: Form Control Input Element. Why: A reply needs somewhere to go, when the visitor wants one. How: This holds the optional address in the form's state, offering the browser's saved address, described by its help tip's bubble. */ }
+											/>{ /* What: Form Control Input Element. Why: A reply needs somewhere to go, when the visitor wants one. How: This holds the optional address in the form's state, offering the browser's saved address, with a sample address on the reserved example domain as its placeholder, described by its help tip's bubble. */ }
 
 
 										</div>
