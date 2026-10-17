@@ -169,12 +169,21 @@
 
 /* #region filRowDiv */
 
-.filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills. How: This lines them up in a row that wraps. */
+.filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills, each full row reaching both edges of the column like the list and help card below it. How: This lines them up in a row that wraps, spreading each full row's pills across the whole width. */
 
 
-	display   : flex;
-	flex-wrap : wrap;
-	gap       : var( --spa-ver-m02 ) var( --spa-hor-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Minus 2 ~= 8.304px */
+	display         : flex;
+	flex-wrap       : wrap;
+	gap             : var( --spa-ver-m02 ) var( --spa-hor-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Minus 2 ~= 8.304px */
+	justify-content : space-between;
+
+
+}
+.filRowDiv::after { /* What: Filter Row Div Filler. Why: Spreading the rows would also push a short last row's few pills to opposite edges. How: This adds an invisible item after the last pill that grows to fill the last row's spare room, keeping that row packed to the left. */
+
+
+	content : '';
+	flex    : auto;
 
 
 }
@@ -255,6 +264,33 @@
 
 }
 
+
+
+/* #region lisLayDiv */
+
+.lisLayDiv { /* What: List Layout Div. Why: On a wide screen the list leaves its right side empty, which the help card fills. How: This sets the list on the left and the card on the right edge, the card growing with the screen from about 321px to 426px, the list keeping its own cap, and the gap between them taking whatever room is left, with the card aligned to the top. */
+
+
+	align-items           : start;
+	display               : grid;
+	column-gap            : var( --spa-hor-p06 );                                                                                     /* Spacing Horizontal Base Plus 6 ~= 78.751px */
+	grid-template-columns : minmax( 0, 1fr ) clamp( calc( var( --ver-rhy-p11 ) * 1rem ), 30vw, calc( var( --ver-rhy-p12 ) * 1rem ) ); /* Vertical Rhythm Base Plus 11 ~= 321.277px, Vertical Rhythm Base Plus 12 ~= 425.601px */
+
+
+}
+@media ( max-width : 1024px ) { /* What: Tablet List Layout Div. Why: Below 1,024px there's no room beside the list, and its lead already says to ask. How: This applies at 1,024px and below. */
+
+
+	.lisLayDiv { /* What: Single Column List Layout Div. Why: The list takes the full width on its own. How: This drops the grid, leaving the list as it was. */
+
+
+		display : block;
+
+
+	}
+
+
+}
 
 
 /* #region artLisUno */
@@ -468,6 +504,82 @@
 }
 
 /* #endregion empMesDiv */
+
+
+
+/* #region helCarAsi */
+
+.helCarAsi { /* What: Help Card Aside. Why: The invitation to ask should read as one calm card that stays in reach while the list scrolls. How: This draws a white card with a quiet border, stacks its parts, and keeps it just below the bar as the page scrolls. */
+
+
+	align-items    : flex-start;
+	background     : var( --bac-sur-col );                                /* Background Surface Color = #FFFFFF */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );     /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xla );                                /* Radius Border Extra Large ~= 19.304px */
+	display        : flex;
+	flex-direction : column;
+	gap            : var( --spa-ver-p01 );                                /* Spacing Vertical Base Plus 1 ~= 19.304px */
+	padding        : var( --spa-ver-p03 ) var( --spa-hor-p03 );           /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	position       : sticky;
+	top            : calc( var( --nav-bar-hei ) + var( --spa-ver-p02 ) ); /* Navigation Bar Height ~= 78.751px, Spacing Vertical Base Plus 2 ~= 25.572px */
+
+
+}
+@media ( max-width : 1024px ) { /* What: Tablet Help Card Aside. Why: Below 1,024px the list needs the whole width, and the hero's lead already says to ask. How: This applies at 1,024px and below. */
+
+
+	.helCarAsi { /* What: Hidden Help Card Aside. Why: The card has no room beside the list. How: This hides it. */
+
+
+		display : none;
+
+
+	}
+
+
+}
+
+.helRinSvg { /* What: Help Rings SVG. Why: The site's motif marks the card as the way to reach the Tech Geek. How: This caps the small rings at about 79px wide, a cap rather than a width, since the rings' own module sets their width to fill the box and may load after this one; their height follows their width. */
+
+
+	max-width : calc( var( --ver-rhy-p06 ) * 1rem ); /* Vertical Rhythm Base Plus 6 ~= 78.751px */
+
+
+}
+
+.helTitHea { /* What: Help Title Heading. Why: The card's question should read clearly without competing with the article titles. How: This sets it in the main text color at the base plus 3 size, set tight like every heading. */
+
+
+	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size   : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
+	line-height : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
+
+
+}
+
+.helTexPar { /* What: Help Text Paragraph. Why: The promise reads a step larger, like the site's other leads, for older or nervous readers. How: This sets it in the main text color at the base plus 2 size. */
+
+
+	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+
+
+}
+
+/* What: Button Primary Anchor. Why: The card's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which both buttons share. */
+
+.helSafPar { /* What: Help Safety Paragraph. Why: The safety note is a quiet aside under the button. How: This sets it in the muted color at the base plus 1 size. */
+
+
+	color     : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	font-size : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+
+
+}
+
+/* #endregion helCarAsi */
+
+/* #endregion lisLayDiv */
 
 /* #endregion secInnDiv */
 

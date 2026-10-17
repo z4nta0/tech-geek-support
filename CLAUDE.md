@@ -92,6 +92,13 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   reviewed in the manual responsive pass).
 - **How it works**: "Calm Signal"'s three white step cards, chosen to match
   the hero.
+- **Articles help card** (decided by the user 2026-10-17): above 1,024px the
+  Articles page shows a card beside the list that stays in view as it scrolls,
+  with the small rings, an invitation to ask, the promise, the Ask a Question
+  button, and a safety note. It grows from about 321px to 426px and sits
+  flush with the content's right edge, the list stays aligned with the
+  heading, and the topic pills spread each full row to both edges, the last
+  row packed left.
 - **Bar wordmark**: "TechGeek.support" is the family's longest wordmark, so
   this site sets the package's `--bra-wor-siz` to ease it down below about
   440px (about 14px at 320px), keeping the menu button on screen without a
