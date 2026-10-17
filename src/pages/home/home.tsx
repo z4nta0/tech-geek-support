@@ -45,9 +45,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 const STE_REC_ARR = [ // What: Step Record Array. Why: How It Works walks through the same three steps every visit. How: Each row holds a step's title and description.
 
 
-	{ desStr : "Tell me what's going on, the way you'd tell a friend. No tech terms needed.", titStr : 'Ask in plain words' }, // What: Ask Step Row. Why: Asking starts everything, and plain words are welcome. How: This invites a visitor to describe the problem their own way.
+	{ desStr : "Tell me what's going on, the way you'd tell a friend. No tech terms needed.", titStr : 'Ask in plain words' },       // What: Ask Step Row. Why: Asking starts everything, and plain words are welcome. How: This invites a visitor to describe the problem their own way.
 	{ desStr : 'A real person reads every question and answers by email, one step at a time.', titStr : 'I reply within 24 hours' }, // What: Reply Step Row. Why: A visitor should know who answers and how soon. How: This promises an email reply within a day.
-	{ desStr : 'Still stuck? Just reply. The most common answers become articles that help everyone.', titStr : "You're sorted" } // What: Sorted Step Row. Why: A visitor should know the help doesn't stop at one reply. How: This invites a reply and explains where articles come from.
+	{ desStr : 'Still stuck? Just reply. The most common answers become articles that help everyone.', titStr : "You're sorted" }    // What: Sorted Step Row. Why: A visitor should know the help doesn't stop at one reply. How: This invites a reply and explains where articles come from.
 
 
 ];

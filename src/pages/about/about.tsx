@@ -43,9 +43,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 const PRO_REC_ARR = [ // What: Promise Record Array. Why: The page lists the same three promises every visit. How: Each row holds a promise's title and description.
 
 
-	{ titStr : 'Plain words',         desStr : "No jargon and no assumptions. If a term can't be avoided, I explain it the first time it comes up." }, // What: Plain Words Row. Why: Jargon is what makes tech feel hard. How: This promises plain explanations.
-	{ titStr : 'Patience, always',    desStr : 'There are no silly questions here. Everyone starts somewhere, and asking is the smart move.' }, // What: Patience Row. Why: Many people are embarrassed to ask. How: This promises no judgment.
-	{ titStr : 'Honest about limits', desStr : "If something needs a repair shop or the company that made it, I'll tell you so, and who to ask." } // What: Honest Limits Row. Why: Trust comes from saying what can't be fixed here. How: This promises an honest referral.
+	{ desStr : "No jargon and no assumptions. If a term can't be avoided, I explain it the first time it comes up.", titStr : 'Plain words' },      // What: Plain Words Row. Why: Jargon is what makes tech feel hard. How: This promises plain explanations.
+	{ desStr : 'There are no silly questions here. Everyone starts somewhere, and asking is the smart move.', titStr : 'Patience, always' },        // What: Patience Row. Why: Many people are embarrassed to ask. How: This promises no judgment.
+	{ desStr : "If something needs a repair shop or the company that made it, I'll tell you so, and who to ask.", titStr : 'Honest about limits' }  // What: Honest Limits Row. Why: Trust comes from saying what can't be fixed here. How: This promises an honest referral.
 
 
 ];
@@ -55,11 +55,11 @@ const PRO_REC_ARR = [ // What: Promise Record Array. Why: The page lists the sam
 const STO_REC_ARR = [ // What: Story Record Array. Why: The story runs through the same milestones every visit, newest last. How: Each row holds a milestone's year and description.
 
 
-	{ yeaStr : '2004', desStr : 'I bought my first computer and started figuring out how everything worked.' }, // What: First Computer Row. Why: The story starts with the first computer. How: This dates it.
-	{ yeaStr : '2007', desStr : 'I started opening computers up, swapping parts, and upgrading them myself.' }, // What: Tinkering Row. Why: Taking computers apart is how hardware becomes familiar. How: This dates it.
-	{ yeaStr : '2013', desStr : 'I wrote my first websites and learned how the web works from the inside.' }, // What: First Websites Row. Why: Building websites is the other half of the experience. How: This dates it.
-	{ yeaStr : '2014', desStr : 'I built my first computer from scratch, part by part.' }, // What: Custom Computer Row. Why: Building a whole computer shows the depth of the hardware experience. How: This dates it.
-	{ yeaStr : '2015', desStr : 'I built my first website for a client, and have been building them for people since.' } // What: Client Website Row. Why: Building for others is where helping people with tech became the work. How: This dates it.
+	{ desStr : 'I bought my first computer and started figuring out how everything worked.', yeaStr : '2004' },           // What: First Computer Row. Why: The story starts with the first computer. How: This dates it.
+	{ desStr : 'I started opening computers up, swapping parts, and upgrading them myself.', yeaStr : '2007' },           // What: Tinkering Row. Why: Taking computers apart is how hardware becomes familiar. How: This dates it.
+	{ desStr : 'I wrote my first websites and learned how the web works from the inside.', yeaStr : '2013' },             // What: First Websites Row. Why: Building websites is the other half of the experience. How: This dates it.
+	{ desStr : 'I built my first computer from scratch, part by part.', yeaStr : '2014' },                                // What: Custom Computer Row. Why: Building a whole computer shows the depth of the hardware experience. How: This dates it.
+	{ desStr : 'I built my first website for a client, and have been building them for people since.', yeaStr : '2015' }  // What: Client Website Row. Why: Building for others is where helping people with tech became the work. How: This dates it.
 
 
 ];

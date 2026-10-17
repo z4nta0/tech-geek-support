@@ -286,11 +286,47 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 
 
 
-							if ( bloRecObj.kinStr === 'ordered' ) return <ol key={ bloIndNum }>{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => <li key={ iteIndNum }>{ renInlFun( iteTokArr ) }</li> ) }</ol>; // What: Steps Return. Why: Numbered steps are done in order. How: This renders an ol, one li per step.
+							if ( bloRecObj.kinStr === 'ordered' ) return ( // What: Steps Return. Why: Numbered steps are done in order. How: This renders an ol, one li per step.
+
+
+								<ol key={ bloIndNum }>{ /* What: Step List Element. Why: Numbered steps are done in order. How: The browser counts the items, and the module draws each number in a pale teal circle. */ }
+
+
+									{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => ( // What: Step Map Call. Why: Every step is its own item. How: This renders one li per step.
+
+
+										<li key={ iteIndNum }>{ renInlFun( iteTokArr ) }</li> // What: Step Item Element. Why: Each step is one thing to do. How: This renders the step's text with its bold, italics, and links.
+
+
+									))}
+
+
+								</ol>
+
+
+							);
 
 
 
-							if ( bloRecObj.kinStr === 'unordered' ) return <ul key={ bloIndNum }>{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => <li key={ iteIndNum }>{ renInlFun( iteTokArr ) }</li> ) }</ul>; // What: List Return. Why: Some points have no order. How: This renders a ul, one li per point.
+							if ( bloRecObj.kinStr === 'unordered' ) return ( // What: List Return. Why: Some points have no order. How: This renders a ul, one li per point.
+
+
+								<ul key={ bloIndNum }>{ /* What: Point List Element. Why: Some points have no order. How: The module marks each item with a small teal dot. */ }
+
+
+									{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => ( // What: Point Map Call. Why: Every point is its own item. How: This renders one li per point.
+
+
+										<li key={ iteIndNum }>{ renInlFun( iteTokArr ) }</li> // What: Point Item Element. Why: Each point stands on its own. How: This renders the point's text with its bold, italics, and links.
+
+
+									))}
+
+
+								</ul>
+
+
+							);
 
 
 

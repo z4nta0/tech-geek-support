@@ -30,8 +30,8 @@
 	/* #region Color Tokens */
 
 	--act-dar-col : oklch( from var( --act-mai-col ) calc( l - 0.15 ) c h ); /* What: Accent-Tertiary Dark Color ~= #007063. Why: The teal is too light to read as text on the ivory, about 2.9:1. How: Teal text, such as the hero's accent word and the eyebrows, reads this darker shade of it, about 5.5:1 on the ivory and 5.1:1 on the pale teal. */
-	--act-mai-col : #2A9D8F;                                                 /* What: Accent-Tertiary Main Color = #2A9D8F. Why: A calm, reassuring teal gives TechGeek.support a color of its own beside the family's orange and blue, as berry does for TechGeek.cards. How: The signal rings, the topic icons, and the dots are drawn in it, never buttons or links, which stay orange; ink text on it reaches 5.1:1. */
-	--act-tin-col : #D3EEE9;                                                 /* What: Accent-Tertiary Tint Color = #D3EEE9. Why: Some shapes and labels sit on a pale teal. How: The rings' center pool and the topic icons' circles read it. */
+	--act-mai-col : #2A9D8F;                                                 /* What: Accent-Tertiary Main Color = #2A9D8F. Why: A calm, reassuring teal gives TechGeek.support a color of its own beside the family's orange and blue, as berry does for TechGeek.cards. How: The signal rings, the dots, and the teal hover borders are drawn in it, never buttons or links, which stay orange; ink text on it reaches 5.1:1. */
+	--act-tin-col : #D3EEE9;                                                 /* What: Accent-Tertiary Tint Color = #D3EEE9. Why: Some shapes and labels sit on a pale teal. How: The rings' center pool, the topic tags, an article's step numbers, tips, and Still Stuck panel, the Articles page's empty-topic message and Still Stuck panel, About's portrait circle, timeline line, and closing panel, and the Contact form's focus glow, help tips, and safety card read it. */
 
 	/* #endregion Color Tokens */
 

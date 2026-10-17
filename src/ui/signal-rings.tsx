@@ -180,7 +180,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 // #region Exports
 
-export { SigRinCom }; // What: Named Exports. Why: Home's hero, its eyebrow on phones, and the 404 page show the motif. How: This exports SigRinCom.
+export { SigRinCom }; // What: Named Exports. Why: Home's hero, its eyebrow on phones, the Articles page's help card, and the 404 page show the motif. How: This exports SigRinCom.
 
 // #endregion Exports
 

@@ -912,7 +912,9 @@
 
 /* #region secInnDiv */
 
-/* What: Section Inner Div Pointer. Why: This section's centered column, eyebrow, and heading share their rules with the topic section's. How: Their rules sit in the homTopSec region above. */
+/* What: Section Inner Div Pointer. Why: This section's centered column shares its rule with the topic section's. How: Its rule sits in the homTopSec region above. */
+
+/* What: Section Eyebrow Paragraph And Section Title Heading Pointer. Why: This section's eyebrow and heading share their rules with the topic section's. How: Their rules sit in the homTopSec region above. */
 
 
 
