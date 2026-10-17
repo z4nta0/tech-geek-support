@@ -7,6 +7,7 @@ import cssModObj from './article.module.css'; // What: CSS Module Object. Why: T
 
 
 import { ART_REC_ARR  } from '../../ui/articles.ts';                   // What: Article Record Array. Why: The page shows one article from the catalog. How: The page finds it by its address.
+import { artTitFun    } from '../../ui/article-title.ts';              // What: Article Title Function. Why: The article's page title has to match the one its own HTML page and link preview carry. How: The view names the page through it.
 import { Link         } from 'react-router';                           // What: Link. Why: The back link, the closing panel, and links inside articles move without a full page load. How: This renders those links.
 import { NotFouCom    } from '../not-found/not-found.tsx';             // What: Not Found Component. Why: An address naming no article should land on the 404 page. How: The page renders it when no article matches.
 import { TopTagCom    } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: The article shows its topic above its title. How: The header renders it.
@@ -192,7 +193,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 		<>{ /* What: Article Fragment. Why: The page's title, canonical link, and content render side by side. How: This groups them without adding an element. */ }
 
 
-			<title>{ `${ artRecObj.titStr } | TechGeek.support` }</title>{ /* What: Page Title Element. Why: A visitor's tab, history, and search listings should name the article. How: React 19 moves this title into the document head while the article is shown. */ }
+			<title>{ artTitFun( artRecObj.titStr ) }</title>{ /* What: Page Title Element. Why: A visitor's tab, history, and search listings should name the article. How: React 19 moves this title, with the site's name when it fits within 60 characters, into the document head while the article is shown. */ }
 
 			<link
 				href={ `https://techgeek.support/articles/${ artRecObj.ideStr }` }

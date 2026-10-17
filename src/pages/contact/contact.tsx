@@ -90,7 +90,7 @@ const EMP_FOR_OBJ = { 'bot-field' : '', email : '', name : '', question : '', to
 function ConPagCom () : JSX.Element {
 
 
-	usePagDesFun( 'Ask a free tech question in plain words, about your phone, computer, Wi-Fi, or anything else, and get a reply within 24 hours.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
+	usePagDesFun( 'Ask a free tech question in plain words, about your phone, computer, Wi-Fi, or anything else, and hear back within 24 hours.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
 
 
 

@@ -124,6 +124,21 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   and the Copy rules apply. No What/Why/How comments, since it's content.
   `topic` is the topic's identifier from `ui/topics.ts` (`internet-wi-fi`),
   and `summary` is 100 to 125 characters, as it's the search description.
+- **Its own page** (built 2026-10-16): link scrapers never run the site's
+  script, so the build (`artPagFun` in `vite.config.ts`) writes a copy of the
+  page per article, `articles/<slug>.html`, carrying its title, description,
+  link preview tags (`og:type` article, its date and topic), and its own
+  `Article` structured data, with a rewrite rule ahead of the catch-all in
+  `_redirects`, and adds every article to the sitemap with its last change.
+  The dev server serves both the same way. Code that runs in Node reads the
+  articles through `scripts/article-files.ts`, since the site's catalog loads
+  them through Vite.
+- **Page title**: the article's title plus " | TechGeek.support" when both fit
+  within 60 characters, or the title alone otherwise (`ui/article-title.ts`).
+- **Preview image**: `public/social/<slug>.png`, the article's topic and title
+  over the wordmark between the signal rings, drawn from
+  `design/og-image/card.html`, which also draws the site's `og-image.png`.
+  Run `npm run og-images` after adding or retitling an article.
 - **Closing line**: every article ends by inviting the reader to ask, in the
   first person ("Ask me at TechGeek.support. It's free, and I'll reply within
   24 hours."), decided by the user 2026-10-16.
@@ -166,6 +181,9 @@ suites live in `tests/`, one project per suite and engine in
   Wi-Fi one, which has steps, bullets, and tips, standing in for every
   article, since they share one page), About, Contact, and the 404 at 390px
   and 1,440px, plus the phone menu open.
+- **SEO** reads the article list through `scripts/article-files.ts`, so a new
+  article is checked (head, raw preview tags, Article data, sitemap entry,
+  preview image) without editing the suite.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.
