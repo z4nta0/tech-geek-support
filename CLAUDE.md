@@ -8,7 +8,7 @@ TechGeek.dev (`../tech-geek-dev`) is the source of this project's configs and
 test suites, TechGeek.cards (`../tech-geek-cards`) the closest worked example
 of a sister site built on the shared design from its first day, and the
 shared design comes from `techgeek-design` (`../techgeek-design`, installed
-from its `v0.1.0` tag).
+from its `v0.3.0` tag).
 
 ## Origin and sibling sites
 This repository once held the portfolio, the support articles, and the
@@ -88,6 +88,12 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   reviewed in the manual responsive pass).
 - **How it works**: "Calm Signal"'s three white step cards, chosen to match
   the hero.
+- **Bar wordmark**: "TechGeek.support" is the family's longest wordmark, so
+  this site sets the package's `--bra-wor-siz` to ease it down below about
+  440px (about 14px at 320px), keeping the menu button on screen without a
+  breakpoint (decided by the user 2026-10-17, over stacking the wordmark on
+  two lines). The full bar needs about 940px, which is why the package's bar
+  keeps its menu up to 1,024px from `v0.3.0` on.
 - **Colors**: the family's palette, plus one role this site adds, the teal
   accent family: `--act-mai-col` (#2A9D8F, for drawings, dots, and fills,
   never buttons or links, which stay orange; about 2.9:1 on the ivory, so
