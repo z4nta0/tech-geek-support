@@ -169,7 +169,7 @@
 
 /* #region filRowDiv */
 
-.filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills, each full row reaching both edges of the column like the list and help card below it. How: This lines them up in a row that wraps, spreading each full row's pills across the whole width. */
+.filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills, each full row reaching both edges of the column like the list and help card below it. How: This lines them up in a row that wraps, spreading each full row's pills across the whole width above 1,024px, where they always fit in two rows. */
 
 
 	display         : flex;
@@ -184,6 +184,27 @@
 
 	content : '';
 	flex    : auto;
+
+
+}
+@media ( max-width : 1024px ) { /* What: Tablet Filter Row Div. Why: Below about 860px the pills need three rows or more, and spreading a middle row that isn't full pushes its few pills to opposite edges. How: This applies at 1,024px and below, the layout's own switch point. */
+
+
+	.filRowDiv { /* What: Packed Filter Row Div. Why: Every row reads as a tidy set lined up with the heading and cards. How: This packs each row's pills to the left with the same even gaps. */
+
+
+		justify-content : flex-start;
+
+
+	}
+
+	.filRowDiv::after { /* What: Removed Filter Row Div Filler. Why: Packed rows have no spare room to fill. How: This drops the filler. */
+
+
+		display : none;
+
+
+	}
 
 
 }
