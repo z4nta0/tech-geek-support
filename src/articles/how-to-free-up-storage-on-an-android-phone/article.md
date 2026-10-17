@@ -1,6 +1,6 @@
 ---
 published: 2026-10-16
-summary: Phone says storage is full? Free up space on your Android phone safely, with steps for Google Pixel and Samsung Galaxy.
+summary: Phone says its storage is full? Free up space on your Android phone safely, with steps for Google Pixel and Samsung Galaxy.
 title: How to Free Up Storage on an Android Phone
 topic: android
 ---

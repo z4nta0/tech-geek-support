@@ -1,6 +1,6 @@
 ---
 published: 2026-10-16
-summary: A scary warning says your computer is infected and to call a number? It's a scam. Here's how to close it and stay safe.
+summary: A scary warning says your computer is infected and to call a number? It's a scam. Here's how to close it safely and move on.
 title: What to Do About a Fake Virus Warning Pop-Up
 topic: scams-safety
 ---

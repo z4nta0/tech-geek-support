@@ -96,7 +96,7 @@ const STO_REC_ARR = [ // What: Story Record Array. Why: The story runs through t
 function AboPagCom () : JSX.Element {
 
 
-	usePagDesFun( 'Meet the Tech Geek, who has worked with computers since 2004 and answers every TechGeek.support question for free.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
+	usePagDesFun( 'Meet the Tech Geek, who has worked with computers since 2004 and answers every TechGeek.support question, always for free.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
 
 
 

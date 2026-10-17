@@ -1,6 +1,6 @@
 ---
 published: 2026-10-16
-summary: Forgot your Gmail password? Use Google's free recovery steps, with tips that make success more likely and avoid scams.
+summary: Forgot your Gmail password? Use Google's free recovery steps, with tips that make success more likely and help avoid scams.
 title: How to Get Back Into Your Gmail or Google Account
 topic: email-accounts
 ---

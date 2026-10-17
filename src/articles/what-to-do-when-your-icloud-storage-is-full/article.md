@@ -1,6 +1,6 @@
 ---
 published: 2026-10-16
-summary: Your iPhone keeps saying iCloud storage is full? Learn what it means and how to free up space before you pay for more.
+summary: Your iPhone keeps saying iCloud storage is full? Learn what that means and how to free up space before you pay for any more.
 title: What to Do When Your iCloud Storage Is Full
 topic: iphone
 ---

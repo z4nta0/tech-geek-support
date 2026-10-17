@@ -78,7 +78,7 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 function ArtLisCom () : JSX.Element {
 
 
-	usePagDesFun( 'Free, step-by-step help articles for phones, computers, Wi-Fi, smart homes, scams, and more, written in plain words.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
+	usePagDesFun( 'Free, step-by-step help articles for phones, computers, Wi-Fi, smart homes, scams, and more, all written in plain words.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
 
 
 

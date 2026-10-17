@@ -164,7 +164,10 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   or list item sits on one unwrapped line so an edit stays small in a diff,
   and the Copy rules apply. No What/Why/How comments, since it's content.
   `topic` is the topic's identifier from `ui/topics.ts` (`internet-wi-fi`),
-  and `summary` is 100 to 125 characters, as it's the search description.
+  and `summary` is 120 to 125 characters, as it's the search description:
+  the shared rule's 125 keeps it whole on a phone's link card, and link
+  preview checkers flag anything under 120 (decided by the user
+  2026-10-17, after a preview checker flagged four articles as short).
 - **Its own page** (built 2026-10-16): link scrapers never run the site's
   script, so the build (`artPagFun` in `vite.config.ts`) writes a copy of the
   page per article, `articles/<slug>.html`, carrying its title, description,
