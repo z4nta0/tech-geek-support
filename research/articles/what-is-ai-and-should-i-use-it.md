@@ -31,7 +31,7 @@ Many people find AI chatbots genuinely handy for everyday tasks like:
 - **Writing help**: drafting a polite email, a thank-you note, or a complaint letter that you then edit.
 - **Ideas**: recipes from what's in your fridge, gift ideas, or a trip plan.
 - **Summarizing**: turning a long, confusing letter into a few clear points.
-- **Practice**: rehearsing a hard conversation or learning a few phrases before a trip.
+- **Practice**: rehearsing a hard conversation or learning a few phrases in another language before a trip.
 
 ## What it's not good at
 
