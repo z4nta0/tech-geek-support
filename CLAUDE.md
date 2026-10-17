@@ -200,35 +200,19 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   photo. The first article with a photo adds reading each photo's size at
   build time and rendering both attributes.
 
-## Build plan
-On the `rebuild` branch, following the sister sites.
-1. **Scaffold**: TechGeek.dev's configs, ESLint, TypeScript, the shared
-   design package, the favicon set, `_headers`, `_redirects`, `robots.txt`,
-   the sitemap, the head and its hidden question form, the routes with
-   placeholder pages, and the test suites copied for adapting. Test server
-   port 5196 (the siblings use 5190 through 5195).
-2. **Theme**: three directions offered to the user before any styling.
-3. **Pages**: Home, Articles and the article page, About, Contact with the
-   question form, and the 404, in the chosen theme.
-4. **Articles**: the researched drafts reviewed by the user, then converted to
-   the site's article format.
-5. **Tests**: every suite adapted to this site's pages and passing in all
-   three engines, with rendering baselines.
-6. **SEO and social preview**: every page's title, description, and
-   canonical link, each article's own, the sitemap, and the preview card.
-7. **Manual responsive pass** (added by the user 2026-10-16): the user checks
-   every page by hand across screen widths, the Contact form especially, and
-   the fixes land before the close-out.
-   - **Full suites waited until the pass ended** (decided by the user
-     2026-10-17): each fix got the typecheck, lint, build, and an
-     accessibility scan of its page in all three engines, followed by the
-     user's own accessibility pass with WAVE, and the full suites ran once
-     after the last fix, on 2026-10-17. That run refreshed the About,
-     Articles, article, and Contact baselines, matched the form tests' fields
-     by their whole names now that each help tip's button shares their words,
-     and added the check that no source comment shows on any page.
-8. **Close-out**: the README, rule audit rounds until clean, and the version
-   bump.
+## Rebuild
+Done. Built on the `rebuild` branch from TechGeek.dev's configs, released as
+v2.0.0 on 2026-10-17, and deployed, with the sitemap submitted to Google and
+Bing. The test server runs on port 5196 (the sister sites use 5190 through
+5195).
+- **The steps it took**: the scaffold, three theme directions offered before
+  any styling, the pages, the researched starter articles reviewed by the
+  user, the test suites, SEO and link previews, the user's manual responsive
+  and accessibility passes (added 2026-10-16), and the close-out: the README,
+  three rule audit rounds until clean, and the version bump.
+- **How the passes were verified** (decided by the user 2026-10-17): each fix
+  got the typecheck, lint, build, and an accessibility scan of its page in all
+  three engines, and the full suites ran once after the last fix.
 
 ## Test suites
 Copied from TechGeek.dev on 2026-10-16 and adapted the same day. Playwright
