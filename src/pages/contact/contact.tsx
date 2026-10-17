@@ -6,6 +6,7 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The Contact page's hero, question form, and sidebar are styled in its own module. How: This maps each class name in contact.module.css to its hashed module class.
 
 
+import { HelTipCom       } from './help-tip.tsx';                         // What: Help Tip Component. Why: The email and question fields keep their longer hints behind a small question mark. How: The form renders one beside each of those labels.
 import { Link            } from 'react-router';                           // What: Link. Why: The thank-you offers the articles without a full page load. How: This renders that link.
 import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // What: Topic Record Array. Why: The topic menu offers every help topic. How: The page renders one option per topic.
 import { useEffect       } from 'react';                                  // What: Use Effect. Why: The thank-you takes focus once it appears. How: An effect moves focus to its heading after the question is sent.
@@ -28,13 +29,14 @@ import type { JSX         } from 'react'; // What: JSX. Why: The component decla
  *
  * @summary
  * The Contact page, where a visitor asks their question: a calm hero, the
- * question form, its email address optional, and a sidebar saying what
- * happens next, how soon a reply comes, the email address, and a promise
- * never to ask for a password, payment, or remote access, since scammers do
- * exactly that. The form posts
- * to Netlify Forms, which emails each question to contact@techgeek.support,
- * then shows a thank-you in its place, or an error above the button when the
- * send fails. A link can choose the topic ahead of time (/contact?topic=mac).
+ * question form, its email address optional and its longer hints behind
+ * small "?" help tips, and a sidebar saying what happens next, how soon a
+ * reply comes, the email address, and a promise never to ask for a
+ * password, payment, or remote access, since scammers do exactly that. The
+ * form posts to Netlify Forms, which emails each question to
+ * contact@techgeek.support, then shows a thank-you in its place, or an error
+ * above the button when the send fails. A link can choose the topic ahead of
+ * time (/contact?topic=mac).
  *
  * Sections:
  *  - Constants
@@ -425,6 +427,7 @@ function ConPagCom () : JSX.Element {
 									</p>
 
 
+
 									<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields share a row on wide screens. How: This sets them side by side. */ }
 
 
@@ -455,14 +458,29 @@ function ConPagCom () : JSX.Element {
 
 										</div>
 
-										<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The email's label and input read as one field. How: This stacks them. */ }
+
+										<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The email's label, help tip, and input read as one field. How: This stacks them. */ }
 
 
-											<label
-												className={ cssModObj.fieLabLab }
+											<div className={ cssModObj.fieHeaDiv }>{ /* What: Field Header Div Element. Why: The email's label and its help tip sit together, and the tip's bubble opens just under them. How: This lets the tip follow the label inline and positions the bubble against the row. */ }
 
-												htmlFor='forEmaInp'
-											>Your email address <span className={ cssModObj.fieOptSpa }>(optional)</span></label>{ /* What: Field Label Label Element. Why: The input needs a visible name, and saying it's optional lets a wary visitor ask without one. How: This labels it and marks it optional. */ }
+
+												<label
+													className={ cssModObj.fieLabLab }
+
+													htmlFor='forEmaInp'
+												>Your email address <span className={ cssModObj.fieOptSpa }>(optional)</span></label>{ /* What: Field Label Label Element. Why: The input needs a visible name, and saying it's optional lets a wary visitor ask without one. How: This labels it and marks it optional. */ }
+
+
+
+												<HelTipCom
+													bubIdeStr='forEmaHin'
+													butLabStr='More about your email address'
+													tipTexStr="Only used to reply to you, never for anything else. Without it I can't reply or ask you follow-up questions, so you'd need to check back for an article."
+												/>{ /* What: Help Tip Component. Why: A visitor deciding whether to leave an address can learn how it's used and what skipping it means, without the hint crowding the form. How: This offers the hint behind a question mark, its bubble describing the email input for screen readers. */ }
+
+
+											</div>
 
 											<input
 												id='forEmaInp'
@@ -478,19 +496,14 @@ function ConPagCom () : JSX.Element {
 												aria-describedby='forEmaHin'
 
 												onChange={ chaFieFun }
-											/>{ /* What: Form Control Input Element. Why: A reply needs somewhere to go, when the visitor wants one. How: This holds the optional address in the form's state, offering the browser's saved address, described by the hint below it. */ }
-
-											<p
-												id='forEmaHin'
-
-												className={ cssModObj.fieHinPar }
-											>Only used to reply to you, never for anything else. Without it I can't reply or ask you follow-up questions, so you'd need to check back for an article.</p>{ /* What: Field Hint Paragraph Element. Why: A visitor deciding whether to leave an address should know how it's used and what skipping it means. How: This shows the hint under the field, so the name and email boxes line up, tied to the field for screen readers. */ }
+											/>{ /* What: Form Control Input Element. Why: A reply needs somewhere to go, when the visitor wants one. How: This holds the optional address in the form's state, offering the browser's saved address, described by its help tip's bubble. */ }
 
 
 										</div>
 
 
 									</div>
+
 
 
 									<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The topic's label and menu read as one field. How: This stacks them. */ }
@@ -535,20 +548,29 @@ function ConPagCom () : JSX.Element {
 
 									</div>
 
-									<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The question's label, hint, and box read as one field. How: This stacks them. */ }
+
+									<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The question's label, help tip, and box read as one field. How: This stacks them. */ }
 
 
-										<label
-											className={ cssModObj.fieLabLab }
+										<div className={ cssModObj.fieHeaDiv }>{ /* What: Field Header Div Element. Why: The question's label and its help tip sit together, and the tip's bubble opens just under them. How: This lets the tip follow the label inline and positions the bubble against the row. */ }
 
-											htmlFor='forQueTex'
-										>Your question</label>{ /* What: Field Label Label Element. Why: The box needs a visible name. How: This labels it. */ }
 
-										<p
-											id='forQueHin'
+											<label
+												className={ cssModObj.fieLabLab }
 
-											className={ cssModObj.fieHinPar }
-										>Tell me what you were trying to do and what happened, like any message on the screen. Please never include a password.</p>{ /* What: Field Hint Paragraph Element. Why: A few details make a good answer possible, and nobody should share a password, here or anywhere. How: This shows the hint under the label, tied to the box for screen readers. */ }
+												htmlFor='forQueTex'
+											>Your question</label>{ /* What: Field Label Label Element. Why: The box needs a visible name. How: This labels it. */ }
+
+
+
+											<HelTipCom
+												bubIdeStr='forQueHin'
+												butLabStr='More about your question'
+												tipTexStr='Tell me what you were trying to do and what happened, like any message on the screen. Please never include a password.'
+											/>{ /* What: Help Tip Component. Why: A few details make a good answer possible, and nobody should share a password, here or anywhere, without the hint crowding the form. How: This offers the hint behind a question mark, its bubble describing the box for screen readers. */ }
+
+
+										</div>
 
 										<textarea
 											id='forQueTex'
@@ -557,6 +579,7 @@ function ConPagCom () : JSX.Element {
 
 											name='question'
 
+											placeholder='Please never include a password.'
 											required
 											rows={ 7 }
 											value={ forDatObj.question }
@@ -564,10 +587,11 @@ function ConPagCom () : JSX.Element {
 											aria-describedby='forQueHin'
 
 											onChange={ chaFieFun }
-										/>{ /* What: Form Control Textarea Element. Why: The visitor writes their question here. How: This holds it in the form's state, seven rows tall, described by the hint above it. */ }
+										/>{ /* What: Form Control Textarea Element. Why: The visitor writes their question here. How: This holds it in the form's state, seven rows tall, described by its help tip's bubble, its placeholder keeping the password warning in view until the visitor starts typing, a placeholder rather than text so it's never sent. */ }
 
 
 									</div>
+
 
 									{ errMesStr && ( // What: Error Presence Check. Why: An error shows only after a failed send. How: This renders the message when there is one.
 

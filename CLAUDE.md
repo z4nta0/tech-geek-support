@@ -52,6 +52,12 @@ SEO (never the demo treatment), and free.
   none was given. Netlify emails each
   submission to contact@techgeek.support with the visitor's email as the
   reply-to.
+- **Help tips** (decided by the user 2026-10-17): the email and question
+  hints sit behind a small "?" button (`pages/contact/help-tip.tsx`) that
+  follows each label, opening a bubble on a mouse hover or on a click or tap,
+  and closing on Escape or a press elsewhere; each field still names its
+  bubble for screen readers. The password warning also shows as the
+  question box's placeholder, so every visitor sees it before typing.
 - **Structured data**: a `WebSite` for this domain whose author is the same
   `Person` TechGeek.dev describes (`https://techgeek.dev/#person`), as
   TechGeek.cards does.
@@ -198,10 +204,14 @@ On the `rebuild` branch, following the sister sites.
      accessibility scan of its page in all three engines, and the full suites
      run once, after the last fix. Until then, these need a close look:
      - The rendering baselines for every page the pass changed (About,
-       Articles, the article page), refreshed once and checked by eye.
+       Articles, the article page, Contact), refreshed once and checked by
+       eye.
      - The Articles page: the Still Stuck panel under a list and not under
        an empty topic, the help card above 1,024px only, the Tab walk past
        both asides, and the spread topic pills at every width.
+     - The Contact help tips: the interaction suite's hover, press, and focus
+       checks on the new buttons, and the name and email boxes level
+       wherever their labels wrap.
      - A new check that no `What:`, `Why:`, or `How:` text renders on any
        page, after a JSX comment written as plain text showed on the
        Articles page (fixed in `dc4217c`).

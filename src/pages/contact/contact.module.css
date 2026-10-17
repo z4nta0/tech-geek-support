@@ -441,12 +441,13 @@
 
 /* #region forFieDiv */
 
-.forFieDiv { /* What: Form Field Div. Why: Each field's label, hint, and control read as one. How: This stacks them with a small gap. */
+.forFieDiv { /* What: Form Field Div. Why: Each field's label and control read as one, and side by side the name and email boxes have to line up even when one label wraps. How: This stacks them with a small gap at the bottom of the field, so a field stretched to its row's height keeps its box level with its neighbor's. */
 
 
-	display        : flex;
-	flex-direction : column;
-	gap            : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	display         : flex;
+	flex-direction  : column;
+	gap             : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+	justify-content : flex-end;
 
 
 }
@@ -476,14 +477,22 @@
 /* #endregion fieLabLab */
 
 
-.fieHinPar { /* What: Field Hint Paragraph. Why: The hint is a quiet helper beside its field. How: This sets it in the muted color, capped at the small text measure. */
+
+/* #region fieHeaDiv */
+
+.fieHeaDiv { /* What: Field Header Div. Why: A label and its help tip read together, and the tip's bubble opens just under them, across the field. How: This lets the tip flow right after the label's last word, positioned so the bubble spans the row's width. */
 
 
-	color     : var( --tex-mut-col ); /* Text Muted Color = #646482 */
-	max-width : var( --tex-wid-sma ); /* Text Width Small ~= 22.047em */
+	position : relative;
 
 
 }
+
+/* What: Field Label Label. Why: The email and question labels look like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
+
+/* #endregion fieHeaDiv */
+
+
 
 .forConInp,
 .forConSel,
@@ -547,6 +556,14 @@
 
 	line-height : var( --ver-rhy-p01 ); /* Vertical Rhythm Base Plus 1 ~= 1.755 */
 	resize      : vertical;
+
+
+}
+.forConTex::placeholder { /* What: Form Control Textarea Placeholder. Why: The password warning reads as a quiet note, not as text already typed, yet still clearly. How: This sets it in the muted color at full opacity, which Firefox would otherwise fade below a readable contrast. */
+
+
+	color   : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	opacity : 1;
 
 
 }
