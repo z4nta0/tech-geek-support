@@ -410,6 +410,20 @@
 
 
 }
+@media ( max-width : 640px ) { /* What: Narrow Phone Topic Grid Unordered. Why: Two tiles across leave too little room for a name like Understanding on a narrow phone. How: This applies at 640px and below. */
+
+
+	.topGriUno { /* What: One-Column Topic Grid Unordered. Why: One divides the twelve tiles evenly, and each tile becomes a short row with room for its whole name. How: This sets one column a little closer together. */
+
+
+		gap                   : var( --spa-ver-m02 ); /* Spacing Vertical Base Minus 2 ~= 8.304px */
+		grid-template-columns : minmax( 0, 1fr );
+
+
+	}
+
+
+}
 
 
 /* #region topTilAnc */
@@ -463,13 +477,17 @@
 
 
 }
-@media ( max-width : 640px ) { /* What: Phone Topic Tile Anchor. Why: Two tiles across leave a phone's tile little room inside its padding. How: This applies at 640px and below. */
+@media ( max-width : 640px ) { /* What: Phone Topic Tile Anchor. Why: The one-column list reads better as rows than as tall tiles. How: This applies at 640px and below. */
 
 
-	.topTilAnc { /* What: Snug Topic Tile Anchor. Why: The name and hint need the room more than the padding does. How: This pads the tile by the p01 steps instead. */
+	.topTilAnc { /* What: Row Topic Tile Anchor. Why: In one column, a tall tile would make a long list, while a row keeps all twelve within a few screens. How: This sets the icon beside the name and hint, centered, with snugger padding. */
 
 
-		padding : var( --spa-ver-p01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
+		align-items           : center;
+		display               : grid;
+		gap                   : var( --spa-ver-m05 ) var( --spa-hor-bas ); /* Spacing Vertical Base Minus 5 ~= 3.572px, Spacing Horizontal Base ~= 14.572px */
+		grid-template-columns : auto minmax( 0, 1fr );
+		padding               : var( --spa-ver-p01 ) var( --spa-hor-p01 ); /* Spacing Vertical Base Plus 1 ~= 19.304px, Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 	}
@@ -495,6 +513,7 @@
 
 
 	height          : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
+	pointer-events  : none;                                /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 	stroke          : var( --act-dar-col );                /* Accent-Tertiary Dark Color ~= #007063 */
 	stroke-linejoin : round;
 	stroke-width    : 2;                                   /* What: Icon Stroke Width. Why: The bubble's line should read clearly at its small size. How: This is 2 units of the 24-unit drawing space. */
@@ -502,24 +521,13 @@
 
 
 }
-
-.topNamSpa { /* What: Topic Name Span. Why: The topic's name is the tile's main line. How: This sets it bold in the main text color at the base plus 2 size. */
-
-
-	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
-	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
-	font-weight : 700;
-	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+@media ( max-width : 640px ) { /* What: Phone Topic Icon SVG. Why: In a row tile, the icon sits beside both lines of text. How: This applies at 640px and below. */
 
 
-}
-@media ( max-width : 640px ) { /* What: Phone Topic Name Span. Why: "Understanding" is too wide for a phone's tile at the base plus 2 size. How: This applies at 640px and below. */
+	.topIcoSvg { /* What: Row Topic Icon SVG. Why: The icon should sit level with the name and hint together. How: This spans it across both of the tile's rows. */
 
 
-	.topNamSpa { /* What: Smaller Topic Name Span. Why: Every topic's longest word should fit its tile on a 320px screen. How: This sets the name at the base plus 1 size. */
-
-
-		font-size : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+		grid-row : span 2;
 
 
 	}
@@ -527,13 +535,26 @@
 
 }
 
+.topNamSpa { /* What: Topic Name Span. Why: The topic's name is the tile's main line. How: This sets it bold in the main text color at the base plus 2 size. */
+
+
+	color          : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	font-weight    : 700;
+	line-height    : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
+
+
+}
+
 .topHinSpa { /* What: Topic Hint Span. Why: The hint is a quieter second line. How: This sets it in muted mono at the base plus 1 size. */
 
 
-	color       : var( --tex-mut-col ); /* Text Muted Color = #646482 */
-	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
-	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
-	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	color          : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	line-height    : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 
 
 }
@@ -733,9 +754,10 @@
 .artTitHea { /* What: Article Title Heading. Why: A card's title reads clearly at a card's size. How: This sets it in the main text color at the base plus 2 size. */
 
 
-	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
-	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
-	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	color          : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	line-height    : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 
 
 }
@@ -746,13 +768,14 @@
 .artMetSpa { /* What: Article Meta Span. Why: The reading time and arrow sit together at the card's foot. How: This sets them in muted mono, pushed to the bottom of the card. */
 
 
-	align-items : center;
-	color       : var( --tex-mut-col ); /* Text Muted Color = #646482 */
-	display     : inline-flex;
-	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
-	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
-	gap         : var( --spa-hor-m02 ); /* Spacing Horizontal Base Minus 2 ~= 8.304px */
-	margin-top  : auto;
+	align-items    : center;
+	color          : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	gap            : var( --spa-hor-m02 ); /* Spacing Horizontal Base Minus 2 ~= 8.304px */
+	margin-top     : auto;
+	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 
 
 }

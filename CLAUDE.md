@@ -82,7 +82,10 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   in after them.
 - **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
   border inset from the edge and a hint line under each topic, carrying
-  "Friendly Conversation"'s small speech-bubble icon.
+  "Friendly Conversation"'s small speech-bubble icon. At 640px and below the
+  twelve tiles become one column of short rows, the icon beside the name and
+  hint, since two across left no room for "Understanding" (2026-10-16, to be
+  reviewed in the manual responsive pass).
 - **How it works**: "Calm Signal"'s three white step cards, chosen to match
   the hero.
 - **Colors**: the family's palette, plus one role this site adds, the teal

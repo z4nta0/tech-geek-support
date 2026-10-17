@@ -28,6 +28,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	line-height    : var( --ver-rhy-bas );                      /* Vertical Rhythm Base ~= 1.325 */
 	padding        : var( --spa-ver-m04 ) var( --spa-hor-m01 ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Spacing Horizontal Base Minus 1 = 11px */
+	pointer-events : none;                                      /* What: Pass Through Pointer. Why: The tag sits inside the article cards' links, and WebKit drops a card's pressed look when a press lands on its text after hovering. How: This lets every press on the tag reach whatever holds it, since the tag itself never needs to catch one. */
 	text-transform : uppercase;
 
 

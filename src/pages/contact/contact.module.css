@@ -245,12 +245,12 @@
 
 }
 
-.sucTitHea { /* What: Success Title Heading. Why: The thank-you's heading reads clearly without the full h2 size, and lands clear of the fixed bar when it takes focus. How: This sets it in the main text color at the base plus 4 size, keeping room above it when it scrolls into view. */
+.sucTitHea { /* What: Success Title Heading. Why: The thank-you's heading reads clearly without the full h2 size, and lands clear of the fixed bar when it takes focus. How: This sets it in the main text color at the base plus 4 size, keeping room for the check above it when it scrolls into view. */
 
 
-	color             : var( --tex-mai-col );                                    /* Text Main Color = #1A1A2E */
-	font-size         : var( --fon-siz-p04 );                                    /* Font Size Base Plus 4 ~= 33.876px */
-	scroll-margin-top : calc( var( --nav-bar-hei ) + var( --spa-ver-p05 ) * 2 ); /* Navigation Bar Height ~= 78.751px, Spacing Vertical Base Plus 5 ~= 59.447px */ /* What: Bar Clearance. Why: The heading should land below the fixed bar with the check above it in view. How: This keeps the bar's height plus twice the p05 step, room for the check, above the heading. */
+	color             : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size         : var( --fon-siz-p04 ); /* Font Size Base Plus 4 ~= 33.876px */
+	scroll-margin-top : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */ /* What: Check Clearance. Why: The heading should land with the check above it in view, while the root's scroll padding already clears the fixed bar. How: This adds room for the check on top of that padding. */
 
 
 }

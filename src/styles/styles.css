@@ -9,11 +9,12 @@
  * fonts.css, tokens.css, and base.css, which hold the TechGeek family's
  * tokens, base element styles, and shared keyframes. It adds this site's own
  * color, a calm teal, and sets its layout values, the one token layer every
- * site sets for itself. Everything else lives in each component's own CSS
- * module.
+ * site sets for itself, and keeps anything the page scrolls to clear of the
+ * fixed bar. Everything else lives in each component's own CSS module.
  *
  * Sections:
  *  - Tokens
+ *  - Base Elements
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -49,5 +50,19 @@
 }
 
 /* #endregion Tokens */
+
+
+
+/* #region Base Elements */
+
+html { /* What: Root Element. Why: The bar stays fixed over the page, so anything scrolled into view at the top, a link reached by Tab or a section opened by its address, would sit hidden under it, which WCAG's focus-not-obscured rule forbids. How: This reserves the bar's height plus a base spacing step at the top of every scroll the browser makes on its own. */
+
+
+	scroll-padding-top : calc( var( --nav-bar-hei ) + var( --spa-ver-bas ) ); /* Navigation Bar Height ~= 78.751px, Spacing Vertical Base ~= 14.572px */
+
+
+}
+
+/* #endregion Base Elements */
 
 

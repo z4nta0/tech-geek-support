@@ -219,6 +219,14 @@
 
 
 }
+.filPilBut[aria-pressed='true']:hover { /* What: Hovered Chosen Filter Pill Button. Why: The chosen pill should answer the pointer too, and its ink fill hides the other pills' teal border and text. How: This turns its fill and border dark teal, which keeps the ivory text readable. */
+
+
+	background   : var( --act-dar-col ); /* Accent-Tertiary Dark Color ~= #007063 */
+	border-color : var( --act-dar-col ); /* Accent-Tertiary Dark Color ~= #007063 */
+
+
+}
 @media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Filter Pill Button. Why: Someone who asked for less motion shouldn't see the pill fade or press smoothly. How: This applies only when the reduced-motion preference is set. */
 
 
@@ -314,9 +322,10 @@
 .artTitHea { /* What: Article Title Heading. Why: A card's title reads clearly without the full h2 size. How: This sets it in the main text color at the base plus 3 size. */
 
 
-	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
-	font-size   : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
-	line-height : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	color          : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	font-size      : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
+	line-height    : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 
 
 }
@@ -324,7 +333,8 @@
 .artSumPar { /* What: Article Summary Paragraph. Why: The summary stays a comfortable length. How: This caps it at the paragraph measure. */
 
 
-	max-width : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+	max-width      : var( --tex-wid-bas ); /* Text Width Base ~= 29.207em */
+	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 
 
 }
@@ -335,12 +345,13 @@
 .artMetSpa { /* What: Article Meta Span. Why: The reading time and arrow sit together as a quiet last line. How: This sets them in muted mono, a small gap apart. */
 
 
-	align-items : center;
-	color       : var( --tex-mut-col ); /* Text Muted Color = #646482 */
-	display     : inline-flex;
-	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
-	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
-	gap         : var( --spa-hor-m02 ); /* Spacing Horizontal Base Minus 2 ~= 8.304px */
+	align-items    : center;
+	color          : var( --tex-mut-col ); /* Text Muted Color = #646482 */
+	display        : inline-flex;
+	font-family    : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
+	gap            : var( --spa-hor-m02 ); /* Spacing Horizontal Base Minus 2 ~= 8.304px */
+	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 
 
 }
