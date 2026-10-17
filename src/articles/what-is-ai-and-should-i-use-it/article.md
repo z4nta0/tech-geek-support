@@ -66,4 +66,4 @@ That's entirely up to you. Many people never use AI chatbots and get along just 
 
 ## If you have more questions
 
-Wondering whether a specific AI app is legitimate, or how to try one on your phone? Ask us at TechGeek.support. It's free, and we'll reply within 24 hours.
+Wondering whether a specific AI app is legitimate, or how to try one on your phone? Ask me at TechGeek.support. It's free, and I'll reply within 24 hours.

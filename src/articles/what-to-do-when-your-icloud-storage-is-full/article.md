@@ -75,4 +75,4 @@ Just don't feel pushed into it. Clearing out old backups alone often solves the 
 - **Turn off backup for apps you don't need.** In **Settings**, tap your name, **iCloud**, **Storage** (or **Manage Account Storage**), **Backups**, then your device. Turn off apps you don't need backed up and tap **Turn Off** to confirm. This removes that app's information from iCloud, so only do it for apps you're sure about.
 - **Check large message attachments.** Photos and videos sent in Messages can also count toward iCloud.
 
-Not sure what's safe to delete? Ask us at TechGeek.support. We'll walk you through it for free, usually within 24 hours.
+Not sure what's safe to delete? Ask me at TechGeek.support. I'll walk you through it for free, usually within 24 hours.

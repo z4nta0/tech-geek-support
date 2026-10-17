@@ -265,7 +265,7 @@ function AboPagCom () : JSX.Element {
 
 							<h2 className={ cssModObj.cloTitHea }>Your question stays yours</h2>{ /* What: Closing Title Heading Element. Why: A visitor may worry about who sees their question. How: This shows the panel's heading. */ }
 
-							<p className={ cssModObj.cloTexPar }>I only use your email address to reply to you. When a question is common enough to become an article, it's rewritten from scratch, so nothing in it points back to you.</p>{ /* What: Closing Text Paragraph Element. Why: A visitor should know how their question and address are used. How: This states the privacy promise. */ }
+							<p className={ cssModObj.cloTexPar }>Your email address has one job: letting me reply to you. It's never sold, shared, added to a mailing list, or used for anything else. When a question is common enough to become an article, it's rewritten from scratch, so nothing in it points back to you.</p>{ /* What: Closing Text Paragraph Element. Why: A visitor should know how their question and address are used. How: This states the privacy promise: the address is used only to reply, and an article never points back to whoever asked. */ }
 
 
 

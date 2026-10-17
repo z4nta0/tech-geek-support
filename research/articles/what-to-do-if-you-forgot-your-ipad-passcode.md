@@ -75,7 +75,7 @@ If you don't see **Forgot Passcode?** (for example, the iPad isn't on Wi-Fi), yo
 - If you see a picture of a computer and cable but your computer doesn't notice the iPad, try a different cable or USB port.
 - If the iPad asks for an Apple Account you don't know (for example, a used iPad), it's tied to the previous owner. Only they can remove it.
 
-Feeling unsure about erasing? Ask us at TechGeek.support before you start. It's free, and we'll reply within 24 hours.
+Feeling unsure about erasing? Ask me at TechGeek.support before you start. It's free, and I'll reply within 24 hours.
 
 ---
 

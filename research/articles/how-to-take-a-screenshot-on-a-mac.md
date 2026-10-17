@@ -77,7 +77,7 @@ Want to paste the screenshot straight into an email or message without saving a 
 - **Nothing happened?** Make sure you're pressing **Command** (⌘) and not **Option** or **Control**. Hold the first two keys down first, then press the number.
 - **Can't find the file?** Press **Shift + Command + 5**, click **Options**, and look at the checked place under **Save to**. That's where your screenshots are going.
 
-Still having trouble? Ask us at TechGeek.support. It's free, and you'll get a reply within 24 hours.
+Still having trouble? Ask me at TechGeek.support. It's free, and you'll get a reply within 24 hours.
 
 ---
 

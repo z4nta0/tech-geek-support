@@ -61,7 +61,7 @@ If your router uses one Wi-Fi name for both bands, you have a few options. The e
 - **Try a different phone** if someone in the house has one. Phone settings sometimes get in the way.
 - **Contact the device maker.** Their support team knows their own setup quirks.
 
-Not comfortable digging into router settings? Tell us your device and your internet company at TechGeek.support and we'll walk you through it, free, within 24 hours.
+Not comfortable digging into router settings? Tell me your device and your internet company at TechGeek.support and I'll walk you through it, free, within 24 hours.
 
 ---
 

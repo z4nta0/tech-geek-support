@@ -69,7 +69,7 @@ If you have a TV or computer close to the router, an **Ethernet cable** (a netwo
 - **Ask about your equipment.** Routers more than about five years old may not keep up with today's internet speeds. Your internet company may offer a newer model.
 - **Consider a mesh system** for a larger home. A **mesh system** is a set of two or three Wi-Fi boxes placed around the house that work together as one network.
 
-Not sure whether the problem is your Wi-Fi or your plan? Send us your speed test numbers at TechGeek.support. It's free, and we'll reply within 24 hours.
+Not sure whether the problem is your Wi-Fi or your plan? Send me your speed test numbers at TechGeek.support. It's free, and I'll reply within 24 hours.
 
 ---
 

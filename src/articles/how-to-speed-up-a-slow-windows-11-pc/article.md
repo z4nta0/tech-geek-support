@@ -88,4 +88,4 @@ Some computers are set to save energy, which can make them feel sluggish.
 - **Close extra browser tabs.** Dozens of open tabs can slow even a newer computer.
 - **Consider the computer's age.** A computer that is more than six or seven years old may simply be struggling with today's websites and programs. Adding memory or replacing an old spinning hard drive with a newer type of drive can help a lot, but that's a job for a repair shop or a handy friend.
 
-Still stuck, or not sure which programs are safe to turn off? Ask us at TechGeek.support. It's free, and you'll hear back within 24 hours.
+Still stuck, or not sure which programs are safe to turn off? Ask me at TechGeek.support. It's free, and you'll hear back within 24 hours.

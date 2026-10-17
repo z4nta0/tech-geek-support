@@ -68,7 +68,7 @@ Ubuntu, another popular version of Linux, has its own store called **App Center*
 - **Can't find the app?** Some programs, like Microsoft Office, don't make a Linux version. Search for the kind of app you need (for example, "spreadsheet") to find a free alternative.
 - **Install button not working?** Check that you're connected to the internet, then close the Software Manager and open it again.
 
-Need a hand finding the right app? Ask us at TechGeek.support. It's free, and we'll reply within 24 hours.
+Need a hand finding the right app? Ask me at TechGeek.support. It's free, and I'll reply within 24 hours.
 
 ---
 

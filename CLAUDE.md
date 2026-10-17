@@ -53,6 +53,15 @@ SEO (never the demo treatment), and free.
   TechGeek.cards does.
 - **Voice**: page copy speaks as z4nta0 in the first person; articles speak
   to the reader as "you".
+- **Privacy** (decided by the user 2026-10-16): a visitor's email address has
+  one purpose, letting z4nta0 reply, and the copy says so plainly: never
+  sold, shared, added to a mailing list, or used for anything else. Copy
+  never claims it isn't stored, since Netlify Forms keeps each submission in
+  the site's dashboard until it's deleted. A question that becomes an article
+  is rewritten from scratch, so nothing in it points back to whoever asked.
+- **Article link previews** (decided by the user 2026-10-16): each article
+  gets its own preview card and tags when shared, as each card does on
+  TechGeek.cards, built in the SEO step.
 - **Future feature, not now**: talking with z4nta0 directly (live help or
   booked sessions), which the user may add once they know they have the
   time.
@@ -104,6 +113,9 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   and the Copy rules apply. No What/Why/How comments, since it's content.
   `topic` is the topic's identifier from `ui/topics.ts` (`internet-wi-fi`),
   and `summary` is 100 to 125 characters, as it's the search description.
+- **Closing line**: every article ends by inviting the reader to ask, in the
+  first person ("Ask me at TechGeek.support. It's free, and I'll reply within
+  24 hours."), decided by the user 2026-10-16.
 - **Supported Markdown**: the site reads articles with its own small parser
   (`utils/markdown.ts`), never a library and never raw HTML: `##` and `###`
   headings, paragraphs, numbered steps (`1.`), bullet lists (`-`), tips

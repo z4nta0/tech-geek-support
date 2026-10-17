@@ -61,4 +61,4 @@ Changes to your recovery phone can take up to 7 days to take full effect.
 - **Work or school accounts** (email addresses that don't end in @gmail.com) are often managed by your employer or school. Ask their IT helpdesk.
 - **Last resort:** If recovery keeps failing, you can create a new Google Account and let your contacts know your new address.
 
-Stuck on a particular question, or worried a message might be a scam? Ask us at TechGeek.support. It's free, and we'll reply within 24 hours. (We'll never ask for your password.)
+Stuck on a particular question, or worried a message might be a scam? Ask me at TechGeek.support. It's free, and I'll reply within 24 hours. (I'll never ask for your password.)

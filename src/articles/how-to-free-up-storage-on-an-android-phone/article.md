@@ -82,4 +82,4 @@ Downloaded shows, movies, and music for offline listening can be very large. Ope
 - **Turn on automatic cleanup (Pixel and some other phones).** Go to **Settings**, **Storage**, **Free up space**, tap the menu, then **Settings**, and turn on **Smart Storage**. It removes backed-up photos for you when space runs low.
 - **Restart the phone.** It sometimes takes a restart for freed space to show up.
 
-Still running out of room, or worried about deleting the wrong thing? Ask us at TechGeek.support. It's free, and we'll reply within 24 hours.
+Still running out of room, or worried about deleting the wrong thing? Ask me at TechGeek.support. It's free, and I'll reply within 24 hours.

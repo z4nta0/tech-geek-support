@@ -68,7 +68,7 @@ It's okay. Many smart, careful people have been fooled by these scams. Act quick
 - **The pop-up comes back every time you open the browser?** When you reopen it, don't restore the previous pages. If it still appears, the browser's settings may have been changed. A trusted helper can reset them.
 - **Worried about a phone call instead of a pop-up?** The same rule applies: Microsoft and Apple don't make surprise support calls. Hang up.
 
-Still uneasy, or not sure whether something is real? Ask us at TechGeek.support. It's free, we'll reply within 24 hours, and we'll never ask to take control of your computer.
+Still uneasy, or not sure whether something is real? Ask me at TechGeek.support. It's free, I'll reply within 24 hours, and I'll never ask to take control of your computer.
 
 ---
 
