@@ -96,7 +96,7 @@ const STO_REC_ARR = [ // What: Story Record Array. Why: The story runs through t
 function AboPagCom () : JSX.Element {
 
 
-	usePagDesFun( 'Meet z4nta0, who has worked with computers since 2004 and answers every TechGeek.support question personally, for free.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
+	usePagDesFun( 'Meet the Tech Geek, who has worked with computers since 2004 and answers every TechGeek.support question for free.' ); // What: Page Description Call. Why: Search listings should describe this page, not repeat the home page. How: This swaps the one description tag's text for the page's own while it shows.
 
 
 
@@ -129,7 +129,7 @@ function AboPagCom () : JSX.Element {
 
 							<p className={ cssModObj.secEyePar }>About</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the page. How: This shows it in teal mono capitals. */ }
 
-							<h1 className={ cssModObj.herTitHea }>Hi, I'm z4nta0</h1>{ /* What: Hero Title Heading Element. Why: The page introduces a person, so it says hello. How: This shows the page's h1. */ }
+							<h1 className={ cssModObj.herTitHea }>Hi, I'm the Tech Geek</h1>{ /* What: Hero Title Heading Element. Why: The page introduces a person, so it says hello, by the friendlier name the site uses rather than the developer name z4nta0. How: This shows the page's h1. */ }
 
 							<p className={ cssModObj.herLeaPar }>I'm the person who reads and answers every question sent to TechGeek.support. I've been working with computers since 2004 and building websites since 2013.</p>{ /* What: Hero Lead Paragraph Element. Why: A visitor should know a real person answers, and that they know what they're doing. How: This says who answers and for how long they've done this. */ }
 
@@ -150,7 +150,7 @@ function AboPagCom () : JSX.Element {
 								src={ selPorUrl }
 								width='642' // What: Intrinsic Width. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's width in pixels.
 
-								alt='z4nta0, who answers the questions on TechGeek.support'
+								alt='The Tech Geek, who answers the questions on TechGeek.support'
 							/>{ /* What: Portrait Photo Image Element. Why: A face makes the help personal. How: This shows z4nta0's portrait. */ }
 
 

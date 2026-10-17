@@ -28,9 +28,10 @@ import type { JSX         } from 'react'; // What: JSX. Why: The component decla
  *
  * @summary
  * The Contact page, where a visitor asks their question: a calm hero, the
- * question form, and a sidebar saying what happens next, how soon a reply
- * comes, the email address, and a promise never to ask for a password,
- * payment, or remote access, since scammers do exactly that. The form posts
+ * question form, its email address optional, and a sidebar saying what
+ * happens next, how soon a reply comes, the email address, and a promise
+ * never to ask for a password, payment, or remote access, since scammers do
+ * exactly that. The form posts
  * to Netlify Forms, which emails each question to contact@techgeek.support,
  * then shows a thank-you in its place, or an error above the button when the
  * send fails. A link can choose the topic ahead of time (/contact?topic=mac).
@@ -100,10 +101,11 @@ function ConPagCom () : JSX.Element {
 	const rawTopStr = seaParObj.get( 'topic' ) ?? '';                                       // What: Raw Topic String. Why: The address may name a topic, or nothing. How: This reads the topic parameter, or an empty string.
 	const staTopStr = TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === rawTopStr ) ? rawTopStr : ''; // What: Starting Topic String. Why: Only a real topic should be chosen ahead of time. How: This keeps the address's topic when it's on the list, or leaves the menu unchosen.
 
-	const [ errMesStr, setErrMesStr ] = useState< string | null >( null );                      // What: Error Message String And Setter. Why: A failed send has to say so above the button. How: This starts with no error.
+	const [ errMesStr, setErrMesStr ] = useState< string | null >( null );                           // What: Error Message String And Setter. Why: A failed send has to say so above the button. How: This starts with no error.
 	const [ forDatObj, setForDatObj ] = useState( () => ( { ...EMP_FOR_OBJ, topic : staTopStr } ) ); // What: Form Data Object And Setter. Why: The fields are controlled, so their values live here. How: This starts with every field blank but the topic, which takes the address's when there is one.
-	const [ isaLoaBoo, setIsaLoaBoo ] = useState( false );                                      // What: Is-A Loading Boolean And Setter. Why: The button shows Sending while the question is on its way. How: This starts false.
-	const [ isaSenBoo, setIsaSenBoo ] = useState( false );                                      // What: Is-A Sent Boolean And Setter. Why: A sent question swaps the form for a thank-you. How: This starts false.
+	const [ hasEmaBoo, setHasEmaBoo ] = useState( true );                                            // What: Has Email Boolean And Setter. Why: The thank-you promises a reply only when there's an address to reply to. How: This records whether the sent question carried an email address.
+	const [ isaLoaBoo, setIsaLoaBoo ] = useState( false );                                           // What: Is-A Loading Boolean And Setter. Why: The button shows Sending while the question is on its way. How: This starts false.
+	const [ isaSenBoo, setIsaSenBoo ] = useState( false );                                           // What: Is-A Sent Boolean And Setter. Why: A sent question swaps the form for a thank-you. How: This starts false.
 
 	const sucTitRef = useRef< HTMLHeadingElement >( null ); // What: Success Title Reference. Why: The thank-you's heading takes focus once it appears. How: This holds the heading element.
 
@@ -240,6 +242,8 @@ function ConPagCom () : JSX.Element {
 
 
 
+			setHasEmaBoo( forDatObj.email.trim() !== '' ); // What: Email Presence Set Call. Why: The thank-you differs when there's no address to reply to. How: This records whether the visitor left one.
+
 			setIsaSenBoo( true ); // What: Sent Flag Set Call. Why: The question went out. How: This swaps the form for the thank-you.
 
 
@@ -353,7 +357,7 @@ function ConPagCom () : JSX.Element {
 										tabIndex={ -1 } // What: Programmatic Focus Target. Why: The heading takes focus after sending without becoming a Tab stop. How: A tabIndex of -1 lets script focus it while Tab skips it.
 									>Question sent!</h2>{ /* What: Success Title Heading Element. Why: The thank-you's heading says what happened. How: This shows it, taking focus as the thank-you appears. */ }
 
-									<p className={ cssModObj.sucTexPar }>Thank you. I'll reply by email within 24 hours. If you don't see my reply, please check your spam or junk folder.</p>{ /* What: Success Text Paragraph Element. Why: A visitor should know when to expect a reply and where it might hide. How: This promises a reply within a day and mentions the spam folder. */ }
+									<p className={ cssModObj.sucTexPar }>{ hasEmaBoo ? "Thank you. I'll reply by email within 24 hours. If you don't see my reply, please check your spam or junk folder." : "Thank you. Since you didn't leave an email address, I can't reply directly. If your question becomes an article, you'll find it on the Articles page, so check back in a few days." }</p>{ /* What: Success Text Paragraph Element. Why: A visitor should know what happens next, which depends on whether they left an address. How: This promises a reply within a day and mentions the spam folder, or, with no address, points them to the Articles page. */ }
 
 									<div className={ cssModObj.sucActDiv }>{ /* What: Success Actions Div Element. Why: The two ways onward sit side by side. How: This sets them in a row that wraps. */ }
 
@@ -458,7 +462,13 @@ function ConPagCom () : JSX.Element {
 												className={ cssModObj.fieLabLab }
 
 												htmlFor='forEmaInp'
-											>Your email address</label>{ /* What: Field Label Label Element. Why: The input needs a visible name. How: This labels it. */ }
+											>Your email address <span className={ cssModObj.fieOptSpa }>(optional)</span></label>{ /* What: Field Label Label Element. Why: The input needs a visible name, and saying it's optional lets a wary visitor ask without one. How: This labels it and marks it optional. */ }
+
+											<p
+												id='forEmaHin'
+
+												className={ cssModObj.fieHinPar }
+											>Only used to reply to you, never for anything else. Without it I can't reply or ask you follow-up questions, so you'd need to check back for an article.</p>{ /* What: Field Hint Paragraph Element. Why: A visitor deciding whether to leave an address should know how it's used and what skipping it means. How: This shows the hint under the label, tied to the field for screen readers. */ }
 
 											<input
 												id='forEmaInp'
@@ -468,12 +478,13 @@ function ConPagCom () : JSX.Element {
 												name='email'
 
 												autoComplete='email'
-												required
 												type='email'
 												value={ forDatObj.email }
 
+												aria-describedby='forEmaHin'
+
 												onChange={ chaFieFun }
-											/>{ /* What: Form Control Input Element. Why: The reply needs somewhere to go. How: This holds the address in the form's state, offering the browser's saved address. */ }
+											/>{ /* What: Form Control Input Element. Why: A reply needs somewhere to go, when the visitor wants one. How: This holds the optional address in the form's state, offering the browser's saved address, described by the hint above it. */ }
 
 
 										</div>

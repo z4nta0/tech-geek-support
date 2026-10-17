@@ -45,14 +45,22 @@ SEO (never the demo treatment), and free.
 - **Question form**: Netlify Forms, as on the sister sites (replacing the old
   EmailJS function): a hidden copy of form `question` in `index.html`
   registers its fields (name, email, topic, question, and the `bot-field`
-  honeypot), and the page posts them form-encoded to `/`. Netlify emails each
+  honeypot), and the page posts them form-encoded to `/`. The email address is
+  optional (decided by the user 2026-10-16): its hint says it's only used to
+  reply and that without it there's no reply or follow-up question, so the
+  visitor checks back for an article, and the thank-you says the same when
+  none was given. Netlify emails each
   submission to contact@techgeek.support with the visitor's email as the
   reply-to.
 - **Structured data**: a `WebSite` for this domain whose author is the same
   `Person` TechGeek.dev describes (`https://techgeek.dev/#person`), as
   TechGeek.cards does.
-- **Voice**: page copy speaks as z4nta0 in the first person; articles speak
-  to the reader as "you".
+- **Voice**: page copy speaks in the first person as "the Tech Geek"
+  (decided by the user 2026-10-16), the friendlier name for z4nta0, which is
+  a developer moniker; z4nta0 appears only in the author meta and the
+  structured data. Home's eyebrow reads "Your friendly neighborhood Tech
+  Geek", a nod to Spider-Man's tagline and the site's touch of whimsy.
+  Articles speak to the reader as "you".
 - **Privacy** (decided by the user 2026-10-16): a visitor's email address has
   one purpose, letting z4nta0 reply, and the copy says so plainly: never
   sold, shared, added to a mailing list, or used for anything else. Copy

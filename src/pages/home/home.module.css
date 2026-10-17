@@ -103,10 +103,10 @@
 
 /* #region herEyePar */
 
-.herEyePar { /* What: Hero Eyebrow Paragraph. Why: The label reads as a small teal caption with its dot. How: This lines up the dot and the words in teal mono capitals. */
+.herEyePar { /* What: Hero Eyebrow Paragraph. Why: The label reads as a small teal caption with its dot, which stays beside the first line when the label wraps on a phone. How: This lines up the dot with the words' first line in teal mono capitals. */
 
 
-	align-items    : center;
+	align-items    : flex-start;
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
 	display        : inline-flex;
 	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'DM Mono', monospace */
@@ -119,13 +119,15 @@
 
 }
 
-.herDotSpa { /* What: Hero Dot Span. Why: A small teal dot leads the label, echoing the rings. How: This draws a teal circle. */
+.herDotSpa { /* What: Hero Dot Span. Why: A small teal dot leads the label, echoing the rings. How: This draws a teal circle centered on the label's first line. */
 
 
-	background    : var( --act-mai-col );                /* Accent-Tertiary Main Color = #2A9D8F */
+	background    : var( --act-mai-col );                              /* Accent-Tertiary Main Color = #2A9D8F */
 	border-radius : 50%;
-	height        : calc( var( --ver-rhy-m02 ) * 1rem ); /* Vertical Rhythm Base Minus 2 ~= 8.304px */
-	width         : calc( var( --ver-rhy-m02 ) * 1rem ); /* Vertical Rhythm Base Minus 2 ~= 8.304px */
+	flex          : none;
+	height        : calc( var( --ver-rhy-m02 ) * 1rem );               /* Vertical Rhythm Base Minus 2 ~= 8.304px */
+	margin-top    : calc( 1lh / 2 - var( --ver-rhy-m02 ) * 1rem / 2 ); /* Vertical Rhythm Base Minus 2 ~= 8.304px */ /* What: First-Line Centering. Why: The dot should sit beside the label's first line, however many lines it wraps to. How: This moves it down by half a line less half its own size. */
+	width         : calc( var( --ver-rhy-m02 ) * 1rem );               /* Vertical Rhythm Base Minus 2 ~= 8.304px */
 
 
 }
