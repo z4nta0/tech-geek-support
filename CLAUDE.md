@@ -8,7 +8,7 @@ TechGeek.dev (`../tech-geek-dev`) is the source of this project's configs and
 test suites, TechGeek.cards (`../tech-geek-cards`) the closest worked example
 of a sister site built on the shared design from its first day, and the
 shared design comes from `techgeek-design` (`../techgeek-design`, installed
-from its `v0.3.0` tag).
+from its `v0.4.0` tag).
 
 ## Origin and sibling sites
 This repository once held the portfolio, the support articles, and the
