@@ -289,7 +289,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 							if ( bloRecObj.kinStr === 'ordered' ) return ( // What: Steps Return. Why: Numbered steps are done in order. How: This renders an ol, one li per step.
 
 
-								<ol key={ bloIndNum }>{ /* What: Step List Element. Why: Numbered steps are done in order. How: The browser counts the items, and the module draws each number in a pale teal circle. */ }
+								<ol key={ bloIndNum }>{ /* What: Step List Element. Why: Numbered steps are done in order. How: The module counts the items with its own step counter and draws each number in a pale teal circle. */ }
 
 
 									{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => ( // What: Step Map Call. Why: Every step is its own item. How: This renders one li per step.
