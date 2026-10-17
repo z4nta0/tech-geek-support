@@ -211,22 +211,14 @@ On the `rebuild` branch, following the sister sites.
 7. **Manual responsive pass** (added by the user 2026-10-16): the user checks
    every page by hand across screen widths, the Contact form especially, and
    the fixes land before the close-out.
-   - **Full suites wait until the pass ends** (decided by the user
-     2026-10-17): each fix gets the typecheck, lint, build, and an
-     accessibility scan of its page in all three engines, and the full suites
-     run once, after the last fix. Until then, these need a close look:
-     - The rendering baselines for every page the pass changed (About,
-       Articles, the article page, Contact), refreshed once and checked by
-       eye.
-     - The Articles page: the Still Stuck panel under a list and not under
-       an empty topic, the help card above 1,024px only, the Tab walk past
-       both asides, and the spread topic pills at every width.
-     - The Contact help tips: the interaction suite's hover, press, and focus
-       checks on the new buttons, and the name and email boxes level
-       wherever their labels wrap.
-     - A new check that no `What:`, `Why:`, or `How:` text renders on any
-       page, after a JSX comment written as plain text showed on the
-       Articles page (fixed in `dc4217c`).
+   - **Full suites waited until the pass ended** (decided by the user
+     2026-10-17): each fix got the typecheck, lint, build, and an
+     accessibility scan of its page in all three engines, followed by the
+     user's own accessibility pass with WAVE, and the full suites ran once
+     after the last fix, on 2026-10-17. That run refreshed the About,
+     Articles, article, and Contact baselines, matched the form tests' fields
+     by their whole names now that each help tip's button shares their words,
+     and added the check that no source comment shows on any page.
 8. **Close-out**: the README, rule audit rounds until clean, and the version
    bump.
 
@@ -241,6 +233,9 @@ suites live in `tests/`, one project per suite and engine in
 - **SEO** reads the article list through `scripts/article-files.ts`, so a new
   article is checked (head, raw preview tags, Article data, sitemap entry,
   preview image) without editing the suite.
+- **Comment text**: the scripted accessibility suite fails any page whose
+  visible text carries a `What:`, `Why:`, or `How:` label, the sign of a JSX
+  comment written where it renders as text.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.

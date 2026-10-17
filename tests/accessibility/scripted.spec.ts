@@ -28,7 +28,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
  * anything else, and visibly changed by focus. Reflow: at 320px wide, WCAG's
  * narrowest reflow width, nothing scrolls sideways. Motion: with reduced
  * motion requested, no animation or transition plays while the state opens.
- * Each failure lists every problem found, by element.
+ * Comments: no line of the page's visible text carries a What, Why, or How
+ * label, the sign of a source comment written where JSX renders it as text.
+ * Each failure lists every problem found, by element or line.
  *
  * Sections:
  *  - Constants
@@ -43,6 +45,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Every helper d
 
 // #region Constants
 
+const COM_LAB_REG = /\b(?:What|Why|How):/;                 // What: Comment Label Regular Expression. Why: A source comment that leaks onto the page carries the What, Why, and How labels every comment starts its parts with. How: This matches any of the three labels followed by a colon.
 const GLY_DEC_REG = /[←↑→↓·•]|\p{Extended_Pictographic}/u; // What: Glyph Decorative Regular Expression. Why: A decorative glyph inside a name is read aloud as noise, such as right arrow. How: This matches the arrows and dots a decorative glyph would add to a name, plus any emoji or pictograph.
 const REF_WID_NUM = 320;                                   // What: Reflow Width Number. Why: WCAG's reflow criterion asks for no sideways scrolling at 320 CSS pixels, the width of 1,280px at 400% zoom. How: This is the viewport width the reflow check opens each state at.
 const TAB_MAX_NUM = 80;                                    // What: Tab Maximum Number. Why: A keyboard trap would otherwise keep the walk going forever. How: This caps the walk at far more Tab presses than the site has stops.
@@ -468,6 +471,19 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every ch
 
 
 		expect( await curPagObj.evaluate( () => document.getAnimations().filter( ( aniCurObj ) => ( Number( aniCurObj.effect?.getTiming().duration ) || 0 ) > 1 ).map( ( aniCurObj ) => ( aniCurObj as CSSAnimation ).animationName || ( aniCurObj as CSSTransition ).transitionProperty || 'script animation' ) ) ).toEqual( [] ); // What: No Motion Assertion. Why: The state passes only when nothing animated as it opened. How: This lists every animation or transition the page still holds that lasts longer than 1ms, which should be none. // What: Type Assertion Note. Why: getAnimations returns plain Animation objects, which don't type their CSS names. How: Each one is read as a CSS animation, then a CSS transition, falling back to a generic label when neither name exists.
+
+
+	} );
+
+
+
+	test( `${ staRecObj.ideStr } shows no source comment text`, async ( { page : curPagObj } ) => { // What: Comment Text Test. Why: A JSX comment written as plain text renders on the page, as one did on the Articles page, and a screen reader reads it aloud too. How: This opens the state and lists every visible line carrying a What, Why, or How label.
+
+
+		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The text should be read with the state settled, its menu open where the state opens one. How: This loads and settles it.
+
+
+		expect( ( await curPagObj.locator( 'body' ).innerText() ).split( '\n' ).filter( ( texLinStr ) => COM_LAB_REG.test( texLinStr ) ) ).toEqual( [] ); // What: No Comment Text Assertion. Why: The state passes only when no source comment shows. How: This splits the page's visible text into lines and lists those matching a comment label, which should be none.
 
 
 	} );
