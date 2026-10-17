@@ -64,7 +64,6 @@ type TtcProTyp = { topIdeStr : string }; // What: Topic-Tag-Component Props Type
 function TopTagCom ( { topIdeStr } : TtcProTyp ) : JSX.Element {
 
 
-
 	return (
 
 

@@ -10,10 +10,11 @@
  * the buttons. The topic tiles sit on a white band, each a soft ivory tile
  * with a dashed, stitched border just inside its edge, a teal speech bubble,
  * its topic, and a muted hint, four, three, or two across so every row stays
- * even. The three newest articles follow on the ivory as white cards, three
- * across or one, then the three step cards. The page fades up as it opens,
- * every control eases its hover, press, and focus, and every animation and
- * transition holds still under reduced motion.
+ * even, and one column of short rows on a phone. The four newest articles
+ * follow on the ivory as white cards, four, two, or one across, then the
+ * three step cards. The page fades up as it opens, every control eases its
+ * hover, press, and focus, and every animation and transition holds still
+ * under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -645,8 +646,7 @@
 
 /* #region secInnDiv */
 
-/* What: Section Inner Div Pointer. Why: This section's centered column, eyebrow, and heading share their rules with the topic section's. How: Their rules sit in the homTopSec region above. */
-
+/* What: Section Inner Div Pointer. Why: This section's centered column shares its rule with the topic section's. How: Its rule sits in the homTopSec region above. */
 
 
 /* #region artHeaDiv */
@@ -662,6 +662,8 @@
 
 
 }
+
+/* What: Section Eyebrow Paragraph And Section Title Heading Pointer. Why: This section's eyebrow and heading share their rules with the topic section's. How: Their rules sit in the homTopSec region above. */
 
 
 /* #region allArtAnc */

@@ -61,10 +61,10 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers dr
 const PAG_LIN_ARR = [ // What: Page Link Array. Why: Every page is checked as a starting point and as a destination. How: Each row pairs a route's path with its link text, in the bar's order.
 
 
-	{ labStr : 'Home',     patStr : '/'         },
-	{ labStr : 'Articles', patStr : '/articles' },
-	{ labStr : 'About',    patStr : '/about'    },
-	{ labStr : 'Contact',  patStr : '/contact'  }
+	{ labStr : 'Home',     patStr : '/'         }, // What: Home Link Row. Why: Home is where most visitors start. How: This pairs the home path with its link text.
+	{ labStr : 'Articles', patStr : '/articles' }, // What: Articles Link Row. Why: The help articles are the site's main reading. How: This pairs the Articles path with its link text.
+	{ labStr : 'About',    patStr : '/about'    }, // What: About Link Row. Why: About introduces the person answering. How: This pairs the About path with its link text.
+	{ labStr : 'Contact',  patStr : '/contact'  } // What: Contact Link Row. Why: Contact holds the question form, the site's main action. How: This pairs the Contact path with its link text.
 
 
 ];

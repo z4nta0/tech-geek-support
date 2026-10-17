@@ -44,17 +44,17 @@ type TopRecTyp = { hinStr : string, ideStr : string, labStr : string }; // What:
 const TOP_REC_ARR : TopRecTyp[] = [ // What: Topic Record Array. Why: The site lists the same topics everywhere, in the same order. How: Each row names one topic.
 
 
-	{ hinStr : 'Updates, slow PCs, printers',  ideStr : 'windows',            labStr : 'Windows'            }, // What: Windows Topic Row. Why: Windows computers are the most common at home. How: This lists the Windows topic.
-	{ hinStr : 'Storage, passwords, backups',  ideStr : 'mac',                labStr : 'Mac'                }, // What: Mac Topic Row. Why: Mac computers have their own menus and habits. How: This lists the Mac topic.
-	{ hinStr : 'Storage, iCloud, settings',    ideStr : 'iphone',             labStr : 'iPhone'             }, // What: iPhone Topic Row. Why: The iPhone is many people's main device. How: This lists the iPhone topic.
-	{ hinStr : 'Apps, updates, sharing',       ideStr : 'ipad',               labStr : 'iPad'               }, // What: iPad Topic Row. Why: The iPad differs enough from the iPhone to have its own topic. How: This lists the iPad topic.
-	{ hinStr : 'Battery, storage, Google',     ideStr : 'android',            labStr : 'Android'            }, // What: Android Topic Row. Why: Android phones and tablets come from many makers. How: This lists the Android topic.
-	{ hinStr : 'Getting started, apps',        ideStr : 'linux',              labStr : 'Linux'              }, // What: Linux Topic Row. Why: Some people try Linux on an older computer. How: This lists the Linux topic.
-	{ hinStr : 'Speakers, lights, cameras',    ideStr : 'smart-home',         labStr : 'Smart Home'         }, // What: Smart Home Topic Row. Why: Smart speakers, plugs, and cameras confuse many people. How: This lists the Smart Home topic.
-	{ hinStr : 'Slow or dropping Wi-Fi',       ideStr : 'internet-wi-fi',     labStr : 'Internet & Wi-Fi'   }, // What: Internet And Wi-Fi Topic Row. Why: Every device depends on the connection. How: This lists the Internet & Wi-Fi topic.
-	{ hinStr : 'Passwords, sign-in, spam',     ideStr : 'email-accounts',     labStr : 'Email & Accounts'   }, // What: Email And Accounts Topic Row. Why: Getting locked out of an account is a common worry. How: This lists the Email & Accounts topic.
-	{ hinStr : 'Is this message real?',        ideStr : 'scams-safety',       labStr : 'Scams & Safety'     }, // What: Scams And Safety Topic Row. Why: Scams aim at people who are unsure about technology. How: This lists the Scams & Safety topic.
-	{ hinStr : 'AI, the cloud, and more',      ideStr : 'understanding-tech', labStr : 'Understanding Tech' }  // What: Understanding Tech Topic Row. Why: Some questions are about what something is, not a problem to fix. How: This lists the Understanding Tech topic.
+	{ hinStr : 'Updates, slow PCs, printers', ideStr : 'windows',            labStr : 'Windows'            }, // What: Windows Topic Row. Why: Windows computers are the most common at home. How: This lists the Windows topic.
+	{ hinStr : 'Storage, passwords, backups', ideStr : 'mac',                labStr : 'Mac'                }, // What: Mac Topic Row. Why: Mac computers have their own menus and habits. How: This lists the Mac topic.
+	{ hinStr : 'Storage, iCloud, settings',   ideStr : 'iphone',             labStr : 'iPhone'             }, // What: iPhone Topic Row. Why: The iPhone is many people's main device. How: This lists the iPhone topic.
+	{ hinStr : 'Apps, updates, sharing',      ideStr : 'ipad',               labStr : 'iPad'               }, // What: iPad Topic Row. Why: The iPad differs enough from the iPhone to have its own topic. How: This lists the iPad topic.
+	{ hinStr : 'Battery, storage, Google',    ideStr : 'android',            labStr : 'Android'            }, // What: Android Topic Row. Why: Android phones and tablets come from many makers. How: This lists the Android topic.
+	{ hinStr : 'Getting started, apps',       ideStr : 'linux',              labStr : 'Linux'              }, // What: Linux Topic Row. Why: Some people try Linux on an older computer. How: This lists the Linux topic.
+	{ hinStr : 'Speakers, lights, cameras',   ideStr : 'smart-home',         labStr : 'Smart Home'         }, // What: Smart Home Topic Row. Why: Smart speakers, plugs, and cameras confuse many people. How: This lists the Smart Home topic.
+	{ hinStr : 'Slow or dropping Wi-Fi',      ideStr : 'internet-wi-fi',     labStr : 'Internet & Wi-Fi'   }, // What: Internet And Wi-Fi Topic Row. Why: Every device depends on the connection. How: This lists the Internet & Wi-Fi topic.
+	{ hinStr : 'Passwords, sign-in, spam',    ideStr : 'email-accounts',     labStr : 'Email & Accounts'   }, // What: Email And Accounts Topic Row. Why: Getting locked out of an account is a common worry. How: This lists the Email & Accounts topic.
+	{ hinStr : 'Is this message real?',       ideStr : 'scams-safety',       labStr : 'Scams & Safety'     }, // What: Scams And Safety Topic Row. Why: Scams aim at people who are unsure about technology. How: This lists the Scams & Safety topic.
+	{ hinStr : 'AI, the cloud, and more',     ideStr : 'understanding-tech', labStr : 'Understanding Tech' }  // What: Understanding Tech Topic Row. Why: Some questions are about what something is, not a problem to fix. How: This lists the Understanding Tech topic.
 
 
 ];

@@ -138,8 +138,6 @@ function AboPagCom () : JSX.Element {
 
 						</div>
 
-
-
 						<div className={ cssModObj.porFraDiv }>{ /* What: Portrait Frame Div Element. Why: The portrait sits in a soft frame with the site's rings behind it. How: This holds the photo and draws the rings around it. */ }
 
 

@@ -103,11 +103,11 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 
 
 
-		document.querySelector( '[data-topic-label]' )!.textContent   = filTexArr[ 0 ]; // What: Topic Label Fill. Why: The card names the article's topic. How: This sets the label's text. // What: Non-Null Note. Why: card.html always holds the label. How: The ! drops the null querySelector's type allows.
-		document.querySelector( '[data-article-title]' )!.textContent = filTexArr[ 1 ]; // What: Article Title Fill. Why: The card leads with the article's title. How: This sets the heading's text. // What: Non-Null Note. Why: card.html always holds the heading. How: The ! drops the null querySelector's type allows.
+		document.querySelector( '[data-element-name-hook~="topLabPar"]' )!.textContent = filTexArr[ 0 ]; // What: Topic Label Fill. Why: The card names the article's topic. How: This sets the label's text. // What: Non-Null Note. Why: card.html always holds the label. How: The ! drops the null querySelector's type allows.
+		document.querySelector( '[data-element-name-hook~="artTitHea"]' )!.textContent = filTexArr[ 1 ]; // What: Article Title Fill. Why: The card leads with the article's title. How: This sets the heading's text. // What: Non-Null Note. Why: card.html always holds the heading. How: The ! drops the null querySelector's type allows.
 
 
-	}, artTexArr );
+	}, artTexArr ); // What: Card Fill Arguments. Why: The page can't read this script's variables. How: This hands the article's topic and title, or null for the site's card, into the page.
 
 	await capPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text captured before its web font loads would be set in a fallback. How: This waits for every font face.
 

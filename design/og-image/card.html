@@ -88,10 +88,10 @@
 
 			}
 
-			.rinOutCir { /* What: Ring Outer Circle. Why: The outermost ring is the faintest. How: This sets it at about 14% strength, as on the site. */
+			.rinOutCir { /* What: Ring Outer Circle. Why: The outermost ring is the faintest. How: This sets it at about 11% strength, as on the site. */
 
 
-				opacity : var( --cdn-pow-008-rec ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.140 */
+				opacity : var( --cdn-pow-008-rec ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 
 
 			}
@@ -201,13 +201,13 @@
 			.artTitHea { /* What: Article Title Heading. Why: An article's title is its card's main line, large enough to read at thumbnail size. How: This sets it bold in the display font in the ink, a little tight, wrapping evenly, with room below so the wordmark reads as a sign-off. */
 
 
-				color          : var( --tex-mai-col );     /* Text Main Color = #1A1A2E */
-				font-family    : var( --fon-fam-mai );     /* Font Family Main = 'Syne', sans-serif */
-				font-size      : var( --fon-siz-p05 );     /* Font Size Base Plus 5 ~= 44.876px */
+				color          : var( --tex-mai-col );                    /* Text Main Color = #1A1A2E */
+				font-family    : var( --fon-fam-mai );                    /* Font Family Main = 'Syne', sans-serif */
+				font-size      : var( --fon-siz-p05 );                    /* Font Size Base Plus 5 ~= 44.876px */
 				font-weight    : 800;
-				letter-spacing : -0.02em;
-				line-height    : var( --ver-rhy-m01 );     /* Vertical Rhythm Base Minus 1 = 1 */
-				margin         : 0 0 var( --spa-ver-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px */
+				letter-spacing : calc( var( --cdn-pow-014-rec ) * -1em ); /* Core-Design-Number to the Power of 14 Reciprocal ~= -0.020em */
+				line-height    : var( --ver-rhy-m01 );                    /* Vertical Rhythm Base Minus 1 = 1 */
+				margin         : 0 0 var( --spa-ver-p03 );                /* Spacing Vertical Base Plus 3 ~= 33.876px */
 				text-wrap      : balance;
 
 
@@ -273,7 +273,7 @@
 
 
 
-	<body class='carBodBod'><!-- What: Card Body Element. Why: The card fills the capture. How: This holds the two ring drawings and the center column. -->
+	<body class='carBodBod'><!-- What: Card Body Body Element. Why: The card fills the capture. How: This holds the two ring drawings and the center column. -->
 
 
 		<svg
@@ -363,7 +363,6 @@
 		</svg>
 
 
-
 		<div class='carColDiv'><!-- What: Card Column Div Element. Why: The card's lines lead it in its center square. How: This stacks them in one centered column, the site's lines or an article's, as the capture script fills it. -->
 
 
@@ -381,14 +380,14 @@
 				class='topLabPar'
 
 				data-article-only
-				data-topic-label
+				data-element-name-hook='topLabPar'
 			></p><!-- What: Topic Label Paragraph Element. Why: An article's card names its topic first. How: The capture script fills it, and removes it from the site's card. -->
 
 			<h1
 				class='artTitHea'
 
 				data-article-only
-				data-article-title
+				data-element-name-hook='artTitHea'
 			></h1><!-- What: Article Title Heading Element. Why: An article's card leads with its title. How: The capture script fills it, and removes it from the site's card. -->
 
 			<p class='braWorPar'><span class='worFirSpa'>TechGeek</span><span class='worLasSpa'>.support</span></p><!-- What: Brand Wordmark Paragraph Element. Why: The site's name reads on every card. How: This sets TechGeek in ink and .support in orange. -->
@@ -401,7 +400,6 @@
 
 
 		</div>
-
 
 
 		<svg
@@ -443,3 +441,5 @@
 
 
 </html>
+
+

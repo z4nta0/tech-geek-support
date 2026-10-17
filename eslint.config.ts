@@ -4,7 +4,7 @@
 // #region Imports
 
 import react      from 'eslint-plugin-react';       // What: React. Why: An undefined component in a JSX tag should fail lint. How: This registers the plugin behind react/jsx-no-undef.
-import reactHooks from 'eslint-plugin-react-hooks'; // What: React Hooks. Why: Hook calls follow rules plain JS linting can't check. How: Its recommended rules are spread into the .tsx config.
+import reactHooks from 'eslint-plugin-react-hooks'; // What: React Hooks. Why: Hook calls follow rules plain JS linting can't check. How: Its recommended rules are spread into the hooks config for every .tsx file and the .ts files under src/.
 import tseslint   from 'typescript-eslint';         // What: TypeScript ESLint. Why: ESLint's default parser can't read TypeScript's type annotations. How: Its recommended rules are spread into the config, and its parser is set on both configs below.
 
 // #endregion Imports
@@ -23,12 +23,12 @@ import tseslint   from 'typescript-eslint';         // What: TypeScript ESLint. 
  * component reference a rename missed. ESLint's own no-undef is left off, as
  * typescript-eslint recommends, since TypeScript already reports every
  * undefined name and no-undef can't see TypeScript's type-only names. Every
- * .tsx file also gets the React Hooks plugin's recommended rules, minus the
- * four React Compiler readiness rules, which only matter to a site built with
- * the React Compiler, which this one isn't. Generated output (dist/ and
- * tests/output/) is ignored. npm run lint runs it across the repo, and an
- * editor integration can run it per file. Adapted from ease-my-life's own
- * config.
+ * .tsx file, and every .ts file under src/, also gets the React Hooks plugin's
+ * recommended rules, minus the four React Compiler readiness rules, which only
+ * matter to a site built with the React Compiler, which this one isn't.
+ * Generated output (dist/ and tests/output/) is ignored. npm run lint runs it
+ * across the repo, and an editor integration can run it per file. Adapted from
+ * ease-my-life's own config.
  *
  * Sections:
  *  - Constants
@@ -42,7 +42,7 @@ import tseslint   from 'typescript-eslint';         // What: TypeScript ESLint. 
 
 // #region Constants
 
-const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the build-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the .tsx hooks config.
+const ESL_CON_ARR = [ // What: ESLint Config Array. Why: ESLint reads its flat config as an array of objects, each scoped to the files it lists. How: This holds the build-output ignore, typescript-eslint's recommended configs and two rule overrides, the src/ undefined-component config, and the hooks config for every .tsx file and the .ts files under src/.
 
 
 	{ ignores : [ 'dist/**', 'tests/output/**' ] }, // What: Ignores Object. Why: The build output and the test suites' reports are generated, not hand-written, so their lint results mean nothing. How: This global ignores entry skips both folders for every config below; one glob each, since braces break ESLint's matching here.

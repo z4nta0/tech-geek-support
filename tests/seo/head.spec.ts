@@ -58,6 +58,55 @@ const LIV_URL_STR = 'https://techgeek.support/';                                
 
 
 
+// #region PAG_HEA_ARR
+
+/**
+ * PAG_HEA_ARR = Page Head Array
+ *
+ * @summary
+ * What each page's head should say. Every row shares one shape, so its fields
+ * carry no comments of their own:
+ * - `canStr` (String or null): Canonical String, the page's canonical
+ *   address, or null for a page that carries noindex and no canonical link.
+ * - `heaBoo` (Boolean): Heading Boolean, whether the page's one h1 is checked,
+ *   true on every row.
+ * - `patStr` (String): Path String, the address the page is loaded from.
+ * - `titStr` (String): Title String, the page's exact title.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const PAG_HEA_ARR = [ // What: Page Head Array. Why: Every page's head is checked against what it should say. How: Each row names one page, its title, its canonical address or null, and whether its h1 is checked, the site's pages first in the sitemap's order, then every article in address order.
+
+
+	{ canStr : LIV_URL_STR,                         heaBoo : true, patStr : '/',                         titStr : 'Free Tech Help for Everyday People | TechGeek.support' }, // What: Home Head Row. Why: The home page's head is the one link checkers read most. How: This names its title and canonical address.
+	{ canStr : 'https://techgeek.support/articles', heaBoo : true, patStr : '/articles',                 titStr : 'Free Tech Help Articles | TechGeek.support'            }, // What: Articles Head Row. Why: The Articles page is indexed with its own title. How: This names its title and canonical address.
+	{ canStr : 'https://techgeek.support/about',    heaBoo : true, patStr : '/about',                    titStr : 'About the Person Behind TechGeek.support'              }, // What: About Head Row. Why: About is indexed with its own title. How: This names its title and canonical address.
+	{ canStr : 'https://techgeek.support/contact',  heaBoo : true, patStr : '/contact',                  titStr : 'Ask a Free Tech Question | TechGeek.support'           }, // What: Contact Head Row. Why: Contact is indexed with its own title. How: This names its title and canonical address.
+	{ canStr : null,                                heaBoo : true, patStr : '/no-such-page',             titStr : 'Page Not Found | TechGeek.support'                     }, // What: Missing Page Head Row. Why: An unknown address shows the 404 page, which carries noindex and no canonical link. How: This names its title and a null canonical.
+	{ canStr : null,                                heaBoo : true, patStr : '/articles/no-such-article', titStr : 'Page Not Found | TechGeek.support'                     }, // What: Missing Article Head Row. Why: An unknown article address shows the 404 page too, not an empty article. How: This names its title and a null canonical.
+
+	...ART_FIL_ARR.map( ( artFilObj ) => ( { // What: Article Rows Spread. Why: Every article is an indexed page of its own. How: This adds a row per article, its canonical address and title built the way its page builds them.
+
+
+		canStr : `${ LIV_URL_STR }articles/${ artFilObj.ideStr }`,
+		heaBoo : true,
+		patStr : `/articles/${ artFilObj.ideStr }`,
+		titStr : artTitFun( artFilObj.titStr )
+
+
+	} ) )
+
+
+];
+
+// #endregion PAG_HEA_ARR
+
+
+
+// #region SOC_KEY_ARR
+
 /**
  * SOC_KEY_ARR = Social Key Array
  *
@@ -93,43 +142,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: A shared link shows a full
 
 ];
 
-
-
-// #region PAG_HEA_ARR
-
-/**
- * PAG_HEA_ARR = Page Head Array
- *
- * @summary
- * What each page's head should say. Every row shares one shape, so its fields
- * carry no comments of their own:
- * - `canStr` (String or null): Canonical String, the page's canonical
- *   address, or null for a page that carries noindex and no canonical link.
- * - `heaBoo` (Boolean): Heading Boolean, whether the page's one h1 is checked,
- *   true on every row.
- * - `patStr` (String): Path String, the address the page is loaded from.
- * - `titStr` (String): Title String, the page's exact title.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
-*/
-
-const PAG_HEA_ARR = [ // What: Page Head Array. Why: Every page's head is checked against what it should say. How: Each row names one page, its title, its canonical address or null, and whether its h1 is checked, the site's pages first in the sitemap's order, then every article in address order.
-
-
-	{ canStr : LIV_URL_STR,                heaBoo : true, patStr : '/',                         titStr : 'Free Tech Help for Everyday People | TechGeek.support' },
-	{ canStr : `${ LIV_URL_STR }articles`, heaBoo : true, patStr : '/articles',                 titStr : 'Free Tech Help Articles | TechGeek.support'            },
-	{ canStr : `${ LIV_URL_STR }about`,    heaBoo : true, patStr : '/about',                    titStr : 'About the Person Behind TechGeek.support'              },
-	{ canStr : `${ LIV_URL_STR }contact`,  heaBoo : true, patStr : '/contact',                  titStr : 'Ask a Free Tech Question | TechGeek.support'           },
-	{ canStr : null,                       heaBoo : true, patStr : '/no-such-page',             titStr : 'Page Not Found | TechGeek.support'                     },
-	{ canStr : null,                       heaBoo : true, patStr : '/articles/no-such-article', titStr : 'Page Not Found | TechGeek.support'                     },
-
-	...ART_FIL_ARR.map( ( artFilObj ) => ( { canStr : `${ LIV_URL_STR }articles/${ artFilObj.ideStr }`, heaBoo : true, patStr : `/articles/${ artFilObj.ideStr }`, titStr : artTitFun( artFilObj.titStr ) } ) ) // What: Article Rows Spread. Why: Every article is an indexed page of its own. How: This adds a row per article, its canonical address and title built the way its page builds them.
-
-
-];
-
-// #endregion PAG_HEA_ARR
+// #endregion SOC_KEY_ARR
 
 // #endregion Constants
 
@@ -216,10 +229,6 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
 
 
 
-const socTagFun = ( htmTexStr : string ) : Record< string, string > => Object.fromEntries( [ ...htmTexStr.matchAll( /<meta\s+(?:name|property)=(['"])([^'"]+)\1\s+content=(['"])(.*?)\3/g ) ].map( ( tagMatArr ) => [ tagMatArr[ 2 ], tagMatArr[ 4 ].replace( /&quot;/g, '"' ).replace( /&#39;/g, "'" ).replace( /&amp;/g, '&' ) ] ) ); // What: Social Tag Function. Why: The raw page's tags are read without a browser, the way a link scraper reads them. How: This maps each meta tag's name or property to its decoded content.
-
-
-
 // #region imaSizFun
 
 /**
@@ -278,6 +287,10 @@ function imaSizFun ( imaBufObj : Buffer ) : [ number, number ] {
 }
 
 // #endregion imaSizFun
+
+
+
+const socTagFun = ( htmTexStr : string ) : Record< string, string > => Object.fromEntries( [ ...htmTexStr.matchAll( /<meta\s+(?:name|property)=(['"])([^'"]+)\1\s+content=(['"])(.*?)\3/g ) ].map( ( tagMatArr ) => [ tagMatArr[ 2 ], tagMatArr[ 4 ].replace( /&quot;/g, '"' ).replace( /&#39;/g, "'" ).replace( /&amp;/g, '&' ) ] ) ); // What: Social Tag Function. Why: The raw page's tags are read without a browser, the way a link scraper reads them. How: This maps each meta tag's name or property to its decoded content.
 
 // #endregion Helpers
 

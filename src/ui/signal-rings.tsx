@@ -69,7 +69,6 @@ type SrcProTyp = { className? : string, smaBoo? : boolean }; // What: Signal-Rin
 function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 
-
 	return (
 
 
@@ -87,6 +86,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 				<circle
 					className={ cssModObj.rinOutCir }
+
 					cx='200'
 					cy='200'
 					r='190'
@@ -97,6 +97,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 			<circle
 				className={ cssModObj.rinMidCir }
+
 				cx='200'
 				cy='200'
 				r='150'
@@ -104,6 +105,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 			<circle
 				className={ cssModObj.rinInnCir }
+
 				cx='200'
 				cy='200'
 				r='110'
@@ -111,6 +113,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 			<circle
 				className={ cssModObj.corTinCir }
+
 				cx='200'
 				cy='200'
 				r='72'
@@ -118,11 +121,13 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 			<path
 				className={ cssModObj.bubOutPat }
+
 				d='M 170 186 H 230 A 10 10 0 0 1 240 196 V 222 A 10 10 0 0 1 230 232 H 200 L 186 244 V 232 H 170 A 10 10 0 0 1 160 222 V 196 A 10 10 0 0 1 170 186 Z'
 			/>{ /* What: Bubble Outline Path Element. Why: A speech bubble says a person is there to talk to. How: This draws a rounded bubble with a tail. */ }
 
 			<circle
 				className={ cssModObj.bubDotCir }
+
 				cx='186'
 				cy='209'
 				r='3.5'
@@ -130,6 +135,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 			<circle
 				className={ cssModObj.bubDotCir }
+
 				cx='200'
 				cy='209'
 				r='3.5'
@@ -137,6 +143,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 			<circle
 				className={ cssModObj.bubDotCir }
+
 				cx='214'
 				cy='209'
 				r='3.5'
@@ -144,11 +151,13 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 			<path
 				className={ cssModObj.spaOraPat }
+
 				d='M 326 96 L 332 110 L 346 116 L 332 122 L 326 136 L 320 122 L 306 116 L 320 110 Z'
 			/>{ /* What: Sparkle Orange Path Element. Why: A sparkle adds the touch of fun. How: This draws a four-pointed orange star near the outer ring. */ }
 
 			<circle
 				className={ cssModObj.dotBluCir }
+
 				cx='88'
 				cy='300'
 				r='6'

@@ -18,7 +18,7 @@ It's one of three sister sites that share a design so they read as one family, a
 - **React Router 8** (Home, Articles, a page for each article, About, Contact, and a 404 page for every other path)
 - **techgeek-design**, the family's shared design package, installed from GitHub at a tagged release
 - **ESLint 9** with typescript-eslint, and **Playwright** with axe-core for the test suites
-- Deployed on **Netlify**, which serves `index.html` for every path (`public/_redirects`), sends the security headers in `public/_headers`, and handles the question form through Netlify Forms
+- Deployed on **Netlify**, which serves `index.html` for every path without a page of its own (`public/_redirects`), sends the security headers in `public/_headers`, and handles the question form through Netlify Forms
 
 ## Getting started
 
@@ -122,7 +122,7 @@ design/                Source artwork and the scripts that render it, not served
 ## Design notes
 
 - **Theme:** Calm and reassuring first, techy but never intimidating, with a small touch of whimsy. The hero's "Calm Signal" rings ripple out once from a speech bubble as the page opens; the topic tiles borrow a fix-it kit's stitched borders; and the help, safety, and Still Stuck panels sit on a pale teal.
-- **Type pairing:** The family's three self-hosted fonts from the design package: Syne for headings, body text, and the wordmark, DM Mono for labels and buttons, and Lora's italic for the phone menu's tagline. Leads and article text read a step larger than the family's body size, since many readers here are older or nervous about technology.
+- **Type pairing:** The family's three self-hosted fonts from the design package: Syne for headings, body text, and the wordmark, DM Mono for labels and buttons, and Lora's italic for the hero's note and the phone menu's tagline. Leads and article text read a step larger than the family's body size, since many readers here are older or nervous about technology.
 - **Palette:** The family's warm ivory page (`#F5F0E8`), deep ink (`#1A1A2E`), bright orange (`#F26419`), and soft blue (`#7DB9D8`), plus one color of this site's own, a calm teal (`#2A9D8F`), used for drawings, dots, and fills, never for buttons or links, which stay orange. Teal text reads a darker shade so it meets contrast.
 - **Scale:** Every size, from type to spacing to motion, is a step on one scale built from the plastic ratio (about 1.32) on an 11px base, and layout widths grow with the screen between fixed bounds. The question form's labels size to the form's own width, so each label and its "?" tip stay on one line.
 - **Motion:** Each page fades up into place, the hero's rings ripple out with an orange sparkle popping in after them, and a "?" tip's bubble settles into place. Links, buttons, pills, and cards respond to hover, press, and keyboard focus with a color shift, a small lift or press-in, and a focus ring that eases in. All of it turns off when a visitor's system asks for reduced motion, leaving only the instant color and position changes.

@@ -3,10 +3,10 @@
 
 // #region Imports
 
+import { fileURLToPath } from 'node:url';                 // What: File URL To Path. Why: The articles folder is found from this file's own location. How: This turns its URL into a path.
 import { parMarFun     } from '../src/utils/markdown.ts'; // What: Parse Markdown Function. Why: Each article's details live in its file's front matter. How: This reads the front matter the same way the site does.
 import { readdirSync   } from 'node:fs';                  // What: Read Directory Sync. Why: Every folder under src/articles is one article. How: This lists them.
 import { readFileSync  } from 'node:fs';                  // What: Read File Sync. Why: Each article's front matter is in its article.md. How: This reads the file's text.
-import { fileURLToPath } from 'node:url';                 // What: File URL To Path. Why: The articles folder is found from this file's own location. How: This turns its URL into a path.
 
 // #endregion Imports
 
@@ -27,7 +27,6 @@ import { fileURLToPath } from 'node:url';                 // What: File URL To P
  * added.
  *
  * Sections:
- *  - Types
  *  - Constants
  *  - Exports
  *
@@ -37,19 +36,13 @@ import { fileURLToPath } from 'node:url';                 // What: File URL To P
 
 
 
-// #region Types
-
-type ArtFilTyp = { ideStr : string, pubStr : string, sumStr : string, titStr : string, topStr : string, updStr : string }; // What: Article File Type. Why: Each consumer reads the same handful of an article's details. How: This types its address, its dates, its summary, its title, and its topic.
-
-// #endregion Types
-
-
-
 // #region Constants
 
 const ART_DIR_STR = fileURLToPath( new URL( '../src/articles/', import.meta.url ) ); // What: Article Directory String. Why: Every article's folder sits in src/articles. How: This resolves that folder from this file's own location.
 
 
+
+type ArtFilTyp = { ideStr : string, pubStr : string, sumStr : string, titStr : string, topStr : string, updStr : string }; // What: Article File Type. Why: Each consumer reads the same handful of an article's details. How: This types its address, its dates, its summary, its title, and its topic.
 
 const ART_FIL_ARR : ArtFilTyp[] = readdirSync( ART_DIR_STR, { withFileTypes : true } ).filter( ( dirEntObj ) => dirEntObj.isDirectory() ).sort( ( dirOneObj, dirTwoObj ) => dirOneObj.name.localeCompare( dirTwoObj.name ) ).map( ( dirEntObj ) => { // What: Article File Array. Why: Each consumer needs every article's details. How: This sorts the article folders by name, their addresses, and reads each one's front matter into a record.
 

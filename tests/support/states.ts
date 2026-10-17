@@ -60,11 +60,11 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  * STA_REC_ARR = State Record Array
  *
  * @summary
- * Every state the checks visit: each route (Home, Articles, one article, About,
- * and Contact) and the 404 page at a phone width (390px) and a desktop width
- * (1,440px), plus the mobile menu open at the phone width, since the menu is
- * only reachable there. Every row shares the {@link StaRecTyp} shape, so its
- * fields carry no comments of their own:
+ * Every state the checks visit: each route (Home, Articles, one article,
+ * About, and Contact) and the 404 page at a phone width (390px) and a desktop
+ * width (1,440px), plus the mobile menu open at the phone width, since the
+ * menu is only reachable there. Every row shares the {@link StaRecTyp} shape,
+ * so its fields carry no comments of their own:
  * - `actFun` (Function): Action Function, run after the page loads to open
  *   something on it, such as the menu. Only the menu row has one.
  * - `heiNum` (Number): Height Number, the viewport height in CSS pixels.
@@ -191,10 +191,11 @@ async function revPagFun ( curPagObj : Page ) : Promise< void > {
  * Waits until the page has stayed still for half a second: no animation or
  * transition running except ones that repeat forever, such as the bar's
  * pulsing availability dot, which never finishes and so is skipped (the
- * reduced motion check is what catches one that shouldn't be playing). A single still moment isn't enough, since a fade can
- * start just after the last one ends, so the page has to read as still on five
- * checks in a row, 100ms apart. It fails after 5 seconds rather than hanging,
- * which leaves plenty of room for each page's entrance fade.
+ * reduced motion check is what catches one that shouldn't be playing). A
+ * single still moment isn't enough, since a fade can start just after the last
+ * one ends, so the page has to read as still on five checks in a row, 100ms
+ * apart. It fails after 5 seconds rather than hanging, which leaves plenty of
+ * room for each page's entrance fade.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

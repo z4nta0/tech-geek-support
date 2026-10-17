@@ -55,7 +55,7 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  *
  * @param props - This component does not use any props.
  *
- * @returns The 404 page's title, robots tag, and wrapper div.
+ * @returns The 404 page's title, robots tag, and its section.
  *
  * @example
  * ```tsx
@@ -65,7 +65,6 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 */
 
 function NotFouCom () : JSX.Element {
-
 
 
 	return (

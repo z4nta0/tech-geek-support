@@ -141,7 +141,6 @@
 /* #endregion herTexDiv */
 
 
-
 /* #region porFraDiv */
 
 .porFraDiv { /* What: Portrait Frame Div. Why: The portrait sits over a pale teal circle, the rings' color, without growing past a comfortable size. How: This centers a capped frame, positions the circle against it, and starts a stacking context so the circle sits behind the photo but in front of the page. */
@@ -217,6 +216,8 @@
 
 
 }
+
+/* What: Section Eyebrow Paragraph Pointer. Why: This section's eyebrow shares its rule with the hero's. How: Its rule sits in the herTexDiv region above. */
 
 .secTitHea { /* What: Section Title Heading. Why: Each section's heading reads in the main text color at the shared h2 size. How: This sets its color. */
 

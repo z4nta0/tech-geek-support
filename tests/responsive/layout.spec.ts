@@ -209,7 +209,7 @@ function layProFun () : string[] {
 
 		const rigSpiBoo = recCurObj.right > vieWidNum + 1 && recCurObj.left < vieWidNum; // What: Right Spill Boolean. Why: Content past the right edge is cut off or forces sideways scrolling, while an element moved wholly off-screen, like the form's honeypot, is hidden on purpose. How: This checks the box reaches more than a pixel beyond the viewport's right while still starting on screen.
 		const lefSpiBoo = recCurObj.left < -1 && recCurObj.right > 0;                    // What: Left Spill Boolean. Why: Content past the left edge is cut off, while an element moved wholly off-screen is hidden on purpose. How: This checks the box starts more than a pixel before the viewport while still ending on screen.
-		const ancCliBoo = cliAncFun( layCurEle );                                       // What: Ancestor Clipped Boolean. Why: An element an ancestor clips doesn't show past the edge. How: This checks for a clipping ancestor.
+		const ancCliBoo = cliAncFun( layCurEle );                                        // What: Ancestor Clipped Boolean. Why: An element an ancestor clips doesn't show past the edge. How: This checks for a clipping ancestor.
 
 		const edgSpiBoo = ( rigSpiBoo || lefSpiBoo ) && !ancCliBoo; // What: Edge Spill Boolean. Why: Only an unclipped element past an edge breaks the layout. How: This combines them.
 
@@ -254,14 +254,19 @@ function layProFun () : string[] {
 	conEleArr.forEach( ( conCurEle ) => { // What: Cut Off Control Loop. Why: A container that clips its overflow hides the spill, but a control cut off at the edge, like a menu button pushed half off a crowded bar, still can't be fully seen or reached, which the edge check above lets through. How: This records each reachable control partly on screen whose box runs more than a pixel past either edge inside an ancestor that hides its overflow.
 
 
-		const conRecObj = conCurEle.getBoundingClientRect(); // What: Control Rect Object. Why: The control's edges are compared with the viewport's. How: This reads its box.
-
-
 		if ( !hidAncFun( conCurEle ) ) return; // What: Unhidden Control Guard. Why: An unclipped control past the edge is already recorded as a spill, and one inside a scrolling container, like a row of filters that scrolls sideways, can be scrolled to. How: This skips both, keeping only controls a hiding container cuts off for good.
 
 
 
-		if ( ( conRecObj.right > vieWidNum + 1 && conRecObj.left < vieWidNum ) || ( conRecObj.left < -1 && conRecObj.right > 0 ) ) proLisArr.push( `${ desEleFun( conCurEle ) } is cut off at the ${ conRecObj.right > vieWidNum + 1 ? 'right' : 'left' } edge` ); // What: Cut Off Control Check. Why: Every reachable control has to sit fully on screen. How: This records one that runs past an edge.
+		const conRecObj = conCurEle.getBoundingClientRect(); // What: Control Rect Object. Why: The control's edges are compared with the viewport's. How: This reads its box.
+
+		const rigCutBoo = conRecObj.right > vieWidNum + 1 && conRecObj.left < vieWidNum; // What: Right Cut Boolean. Why: A control running past the right edge is cut off. How: This checks its right side passes the edge while some of it is still on screen.
+		const lefCutBoo = conRecObj.left < -1 && conRecObj.right > 0;                    // What: Left Cut Boolean. Why: A control running past the left edge is cut off. How: This checks its left side passes the edge while some of it is still on screen.
+
+		const conCutBoo = rigCutBoo || lefCutBoo; // What: Control Cut Boolean. Why: A control cut off at either edge is a problem. How: This combines them.
+
+
+		if ( conCutBoo ) proLisArr.push( `${ desEleFun( conCurEle ) } is cut off at the ${ rigCutBoo ? 'right' : 'left' } edge` ); // What: Cut Off Control Check. Why: Every reachable control has to sit fully on screen. How: This records one that runs past an edge.
 
 
 	} );

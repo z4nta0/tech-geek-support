@@ -74,7 +74,6 @@ import type { ReactNode } from 'react';                   // What: React Node. W
 function datForFun ( isoDatStr : string ) : string {
 
 
-
 	return new Date( `${ isoDatStr }T00:00:00Z` ).toLocaleDateString( 'en-US', { day : 'numeric', month : 'long', timeZone : 'UTC', year : 'numeric' } ); // What: Formatted Date Return. Why: Dates read best in words. How: This reads the day at midnight UTC and formats it in American English, in UTC.
 
 
@@ -104,13 +103,12 @@ function datForFun ( isoDatStr : string ) : string {
  *
  * @example
  * ```ts
- * renInlFun(bloRecObj.inlTokArr) // => ['Press ', <strong>Restart</strong>, ' now']
+ * renInlFun(inlTokArr) // => ['Press ', <strong>Restart</strong>, ' now']
  * ```
  *
 */
 
 function renInlFun ( inlTokArr : InlTokTyp[] ) : ReactNode[] {
-
 
 
 	return inlTokArr.map( ( inlTokObj, tokIndNum ) => { // What: Piece Render Map. Why: Each piece renders by its kind. How: This turns each into text or an element.
@@ -124,11 +122,35 @@ function renInlFun ( inlTokArr : InlTokTyp[] ) : ReactNode[] {
 
 
 
-		if ( inlTokObj.kinStr === 'link' && inlTokObj.hreStr?.startsWith( '/' ) ) return <Link key={ tokIndNum } className={ cssModObj.bodLinAnc } to={ inlTokObj.hreStr }>{ inlTokObj.texStr }</Link>; // What: Site Link Piece Return. Why: A link to another page of the site shouldn't reload it. How: This renders a router link.
+		if ( inlTokObj.kinStr === 'link' && inlTokObj.hreStr?.startsWith( '/' ) ) return ( // What: Site Link Piece Return. Why: A link to another page of the site shouldn't reload it. How: This renders a router link.
+
+
+			<Link
+				key={ tokIndNum }
+
+				className={ cssModObj.bodLinAnc }
+
+				to={ inlTokObj.hreStr }
+			>{ inlTokObj.texStr }</Link> // What: Body Site Link. Why: A link inside the article's text can lead to another page of the site. How: This routes there without a reload, styled as a body link.
+
+
+		);
 
 
 
-		if ( inlTokObj.kinStr === 'link' ) return <a key={ tokIndNum } className={ cssModObj.bodLinAnc } href={ inlTokObj.hreStr }>{ inlTokObj.texStr }</a>; // What: Outside Link Piece Return. Why: A link to another site is a plain link. How: This renders an anchor that opens in the same tab.
+		if ( inlTokObj.kinStr === 'link' ) return ( // What: Outside Link Piece Return. Why: A link to another site is a plain link. How: This renders an anchor that opens in the same tab.
+
+
+			<a
+				key={ tokIndNum }
+
+				className={ cssModObj.bodLinAnc }
+
+				href={ inlTokObj.hreStr }
+			>{ inlTokObj.texStr }</a> // What: Body Link Anchor Element. Why: A link inside the article's text can lead to another site. How: This opens the address in the same tab, styled as a body link.
+
+
+		);
 
 
 
@@ -208,14 +230,14 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 				<article className={ cssModObj.artBodArt }>{ /* What: Article Body Article Element. Why: The article is one self-contained piece. How: This holds its header, body, and closing panel in a reading column. */ }
 
 
-					<header className={ cssModObj.artHedHed }>{ /* What: Article Header Header Element. Why: The way back, the topic, the title, and the details sit together above the body. How: This stacks them. */ }
+					<header className={ cssModObj.artHeaHed }>{ /* What: Article Header Header Element. Why: The way back, the topic, the title, and the details sit together above the body. How: This stacks them. */ }
 
 
 						<Link
 							className={ cssModObj.bacLinAnc }
 
 							to={ `/articles?topic=${ artRecObj.topStr }` } // What: Back Link Address. Why: A reader going back most likely wants more of the same topic. How: This opens the list filtered to the article's topic.
-						><span aria-hidden='true'>←</span> More articles</Link>{ /* What: Back Link Anchor Element. Why: A reader should always see the way back to the list. How: This routes to the Articles page filtered to this topic, its arrow hidden from screen readers so the link reads as its words. */ }
+						><span aria-hidden='true'>←</span> More articles</Link>{ /* What: Back Link. Why: A reader should always see the way back to the list. How: This routes to the Articles page filtered to this topic, its arrow hidden from screen readers so the link reads as its words. */ }
 
 
 
@@ -250,7 +272,17 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 
 
 
-							if ( bloRecObj.kinStr === 'tip' ) return <aside key={ bloIndNum } className={ cssModObj.tipBloAsi }>{ renInlFun( bloRecObj.inlTokArr ) }</aside>; // What: Tip Return. Why: A tip stands apart from the steps. How: This renders an aside the module draws as a pale teal panel.
+							if ( bloRecObj.kinStr === 'tip' ) return ( // What: Tip Return. Why: A tip stands apart from the steps. How: This renders an aside the module draws as a pale teal panel.
+
+
+								<aside
+									key={ bloIndNum }
+
+									className={ cssModObj.tipBloAsi }
+								>{ renInlFun( bloRecObj.inlTokArr ) }</aside> // What: Tip Block Aside Element. Why: A tip reads as its own calm note between the steps. How: This holds the tip's text in a pale teal panel.
+
+
+							);
 
 
 
@@ -359,7 +391,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 											className={ cssModObj.relLinAnc }
 
 											to={ `/articles/${ relArtObj.ideStr }` }
-										>{ relArtObj.titStr }</Link>{ /* What: Related Link Anchor Element. Why: The reader can open the related article. How: This routes to it, named by its title. */ }
+										>{ relArtObj.titStr }</Link>{ /* What: Related Article Link. Why: The reader can open the related article. How: This routes to it, named by its title. */ }
 
 
 									</li>

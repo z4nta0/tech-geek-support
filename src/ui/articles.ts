@@ -83,9 +83,9 @@ type ArtRecTyp = { bloRecArr : BloRecTyp[], ideStr : string, medUrlObj : Record<
 function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 
-	const ideStr                   = filPatStr.split( '/' ).at( -2 )!; // What: Identifier String. Why: An article's address is its folder's name. How: This takes the path's second-to-last part. // What: Non-Null Note. Why: at() allows undefined for a short array. How: Every glob path ends in a folder and article.md.
-	const { bloRecArr, froMatObj } = parMarFun( filTexStr );           // What: Block Record Array And Front Matter Object. Why: The article's fields and body come from its file. How: This reads the file.
+	const ideStr = filPatStr.split( '/' ).at( -2 )!; // What: Identifier String. Why: An article's address is its folder's name. How: This takes the path's second-to-last part. // What: Non-Null Note. Why: at() allows undefined for a short array. How: Every glob path ends in a folder and article.md.
 
+	const { bloRecArr, froMatObj } = parMarFun( filTexStr ); // What: Block Record Array And Front Matter Object. Why: The article's fields and body come from its file. How: This reads the file.
 
 
 	for ( const keyNamStr of [ 'published', 'summary', 'title', 'topic' ] ) { // What: Required Key Loop. Why: Every article needs these four fields to show anywhere. How: This checks each one.
@@ -108,7 +108,7 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	for ( const bloRecObj of bloRecArr ) { // What: Media Lookup Loop. Why: Every media block's file has to exist. How: This looks each one up beside the article.
 
 
-		if ( bloRecObj.kinStr !== 'media' ) continue;
+		if ( bloRecObj.kinStr !== 'media' ) continue; // What: Non-Media Skip. Why: Only media blocks name a file to look up. How: This moves on to the next block.
 
 
 
@@ -157,7 +157,6 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 const ART_REC_ARR = Object.entries( ART_TEX_OBJ ).map( ( [ filPatStr, filTexStr ] ) => artRecFun( filPatStr, filTexStr ) ).sort( ( artOneObj, artTwoObj ) => artTwoObj.pubStr.localeCompare( artOneObj.pubStr ) || artOneObj.titStr.localeCompare( artTwoObj.titStr ) ); // What: Article Record Array. Why: The pages list every article, newest first. How: This builds a record from every file and sorts by published date, newest first, then by title.
 
 // #endregion Helpers
-
 
 
 

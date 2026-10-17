@@ -201,7 +201,7 @@ function ArtLisCom () : JSX.Element {
 												className={ cssModObj.artCarAnc }
 
 												to={ `/articles/${ artRecObj.ideStr }` }
-											>{ /* What: Article Card Anchor Element. Why: The whole card opens the article. How: This draws a white card with the topic, title, summary, and reading time, lifting on hover. */ }
+											>{ /* What: Article Card Link. Why: The whole card opens the article. How: This draws a white card with the topic, title, summary, and reading time, lifting on hover. */ }
 
 
 												<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }
@@ -256,7 +256,6 @@ function ArtLisCom () : JSX.Element {
 
 								aria-label='Ask the Tech Geek'
 							>{ /* What: Help Card Aside Element. Why: A visitor scanning the list who can't find their problem should see how to ask, right where they give up looking. How: This holds the small rings, the invitation, the promise, the button, and a safety note, staying in view as the list scrolls, on wide screens only. */ }
-
 
 
 								<SigRinCom

@@ -191,6 +191,11 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   inside a line **bold**, *italic*, and `[links](/articles/...)`. An HTML
   comment (`<!-- Image: what it should show -->`) is skipped, which keeps a
   reminder of a photo still to add without showing anything.
+- **Photo sizes, still to do** (decided by the user 2026-10-17): the Images
+  rule asks for every image's intrinsic `width` and `height` in its markup,
+  and the article page's `<img>` has neither yet, since no article has a
+  photo. The first article with a photo adds reading each photo's size at
+  build time and rendering both attributes.
 
 ## Build plan
 On the `rebuild` branch, following the sister sites.

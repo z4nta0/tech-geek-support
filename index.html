@@ -12,7 +12,7 @@
 
 		<meta charset='UTF-8' />                                                 <!-- What: Character Set Meta. Why: The browser has to decode the page as UTF-8 before it reads anything else. How: This sits first in the head, inside the first 1,024 bytes the browser checks. -->
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' /> <!-- What: Viewport Meta. Why: Phones should lay the site out at device width instead of a zoomed-out desktop width. How: This sets the layout width to the device's and starts at no zoom. -->
-		<title>Free Tech Help for Everyday People | TechGeek.support</title><!-- What: Page Title Element. Why: Browser tabs, bookmarks, and search listings name the page by its title, and checkers and crawlers that never run the site's script read only this one. How: This is the home page's full title, and every other page renders its own, which React 19 places ahead of it. -->
+		<title>Free Tech Help for Everyday People | TechGeek.support</title>     <!-- What: Page Title Element. Why: Browser tabs, bookmarks, and search listings name the page by its title, and checkers and crawlers that never run the site's script read only this one. How: This is the home page's full title, and every other page renders its own, which React 19 places ahead of it. -->
 
 		<!-- #endregion Document -->
 
@@ -25,10 +25,10 @@
 			@summary
 			Each page renders its own canonical link or noindex tag, and every
 			page but Home its own title, since React 19 adds those beside any
-			in this file rather than replacing them. Articles, About, Contact, and each
-			article swap this one description's text for their own while they show.
-			So this section holds no canonical or robots tag, and the title
-			above and the description below are the home page's.
+			in this file rather than replacing them. Articles, About, Contact,
+			and each article swap this one description's text for their own
+			while they show. So this section holds no canonical or robots tag,
+			and the title above and the description below are the home page's.
 
 			@author z4nta0 <https://github.com/z4nta0>
 

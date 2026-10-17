@@ -100,8 +100,9 @@ function ConPagCom () : JSX.Element {
 
 	const [ seaParObj ] = useSearchParams(); // What: Search Parameters Object. Why: A link may name the question's topic. How: This reads the address's parameters.
 
-	const rawTopStr = seaParObj.get( 'topic' ) ?? '';                                       // What: Raw Topic String. Why: The address may name a topic, or nothing. How: This reads the topic parameter, or an empty string.
+	const rawTopStr = seaParObj.get( 'topic' ) ?? '';                                                       // What: Raw Topic String. Why: The address may name a topic, or nothing. How: This reads the topic parameter, or an empty string.
 	const staTopStr = TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === rawTopStr ) ? rawTopStr : ''; // What: Starting Topic String. Why: Only a real topic should be chosen ahead of time. How: This keeps the address's topic when it's on the list, or leaves the menu unchosen.
+	const sucTitRef = useRef< HTMLHeadingElement >( null );                                                 // What: Success Title Reference. Why: The thank-you's heading takes focus once it appears. How: This holds the heading element.
 
 	const [ errMesStr, setErrMesStr ] = useState< string | null >( null );                           // What: Error Message String And Setter. Why: A failed send has to say so above the button. How: This starts with no error.
 	const [ forDatObj, setForDatObj ] = useState( () => ( { ...EMP_FOR_OBJ, topic : staTopStr } ) ); // What: Form Data Object And Setter. Why: The fields are controlled, so their values live here. How: This starts with every field blank but the topic, which takes the address's when there is one.
@@ -109,14 +110,12 @@ function ConPagCom () : JSX.Element {
 	const [ isaLoaBoo, setIsaLoaBoo ] = useState( false );                                           // What: Is-A Loading Boolean And Setter. Why: The button shows Sending while the question is on its way. How: This starts false.
 	const [ isaSenBoo, setIsaSenBoo ] = useState( false );                                           // What: Is-A Sent Boolean And Setter. Why: A sent question swaps the form for a thank-you. How: This starts false.
 
-	const sucTitRef = useRef< HTMLHeadingElement >( null ); // What: Success Title Reference. Why: The thank-you's heading takes focus once it appears. How: This holds the heading element.
-
 
 
 	useEffect( () => { // What: Success Focus Effect. Why: After sending, the page would stay scrolled where the button was, with the thank-you half under the bar, and a screen reader wouldn't hear that the question went out. How: This moves focus to the thank-you's heading and scrolls it into view.
 
 
-		if ( !isaSenBoo ) return;
+		if ( !isaSenBoo ) return; // What: Unsent Form Guard. Why: Focus moves only once the thank-you shows. How: This leaves while the form is still showing.
 
 
 
@@ -350,7 +349,6 @@ function ConPagCom () : JSX.Element {
 
 									</svg>
 
-
 									<h2
 										ref={ sucTitRef }
 
@@ -415,7 +413,7 @@ function ConPagCom () : JSX.Element {
 												autoComplete='off'
 												value={ forDatObj[ 'bot-field' ] }
 
-												tabIndex={ -1 }
+												tabIndex={ -1 } // What: Skipped Tab Stop. Why: A keyboard user should never land on the hidden honeypot. How: A tabIndex of -1 keeps Tab from reaching it.
 
 												onChange={ chaFieFun }
 											/>{ /* What: Bot Field Input Element. Why: A filled honeypot marks a bot. How: This writes into the form's bot-field through the shared change handler and posts with the other fields. */ }
@@ -655,7 +653,6 @@ function ConPagCom () : JSX.Element {
 
 								<h2 className={ cssModObj.sidTitHea }>I'll never ask for</h2>{ /* What: Sidebar Title Heading Element. Why: The card is named by its promise. How: This shows its title. */ }
 
-
 								<ul className={ cssModObj.safLisUno }>{ /* What: Safety List Unordered Element. Why: Each thing real help never asks for is its own point. How: This lists them. */ }
 
 
@@ -667,7 +664,6 @@ function ConPagCom () : JSX.Element {
 
 
 								</ul>
-
 
 								<p className={ cssModObj.safTexPar }>If anyone claiming to be TechGeek.support asks for these, it isn't me.</p>{ /* What: Safety Text Paragraph Element. Why: A visitor should know what to make of an impostor. How: This says plainly that such a request isn't real. */ }
 

@@ -224,7 +224,7 @@ const sitXmlFun = ( xmlTexStr : string ) : string => xmlTexStr.replace( /\n*<\/u
  *
  * @example
  * ```ts
- * artPagFun() // => { closeBundle, configResolved, configureServer, name, transformIndexHtml }
+ * artPagFun() // => the plugin object
  * ```
  *
 */
@@ -285,10 +285,10 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 		configureServer : ( serInsObj ) => { // What: Configure Server Hook. Why: The dev server should serve the sitemap the build writes, so the SEO suite can check it. How: This answers the sitemap's address itself, ahead of Vite's own file serving.
 
 
-			serInsObj.middlewares.use( async ( reqInsObj, resInsObj, nexFunObj ) => { // What: Sitemap Middleware. Why: The sitemap in public/ lists only the site's own pages. How: This answers the sitemap's address with the articles added, as XML, and passes every other request on.
+			serInsObj.middlewares.use( async ( reqInsObj, resInsObj, nexMidFun ) => { // What: Sitemap Middleware. Why: The sitemap in public/ lists only the site's own pages. How: This answers the sitemap's address with the articles added, as XML, and passes every other request on.
 
 
-				if ( reqInsObj.url !== '/sitemap.xml' ) return nexFunObj(); // What: Other Request Guard. Why: Only the sitemap is answered here. How: This hands any other request on to Vite.
+				if ( reqInsObj.url !== '/sitemap.xml' ) return nexMidFun(); // What: Other Request Guard. Why: Only the sitemap is answered here. How: This hands any other request on to Vite.
 
 
 
@@ -302,10 +302,10 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 
 		},
 
-		transformIndexHtml : ( htmTexStr, ctxIndObj ) => { // What: Transform Index HTML Hook. Why: On the dev server, an article's address should serve the article's own tags, as the built site does. How: This rewrites the page for an article's address and leaves every other page alone.
+		transformIndexHtml : ( htmTexStr, cotIndObj ) => { // What: Transform Index HTML Hook. Why: On the dev server, an article's address should serve the article's own tags, as the built site does. How: This rewrites the page for an article's address and leaves every other page alone.
 
 
-			const reqPatStr = new URL( ctxIndObj.originalUrl ?? '/', LIV_URL_STR ).pathname;                        // What: Requested Path String. Why: The requested address names the article, if any. How: This reads the path without its query.
+			const reqPatStr = new URL( cotIndObj.originalUrl ?? '/', LIV_URL_STR ).pathname;                        // What: Requested Path String. Why: The requested address names the article, if any. How: This reads the path without its query.
 			const artFilObj = ART_FIL_ARR.find( ( artCurObj ) => `/articles/${ artCurObj.ideStr }` === reqPatStr ); // What: Article File Object. Why: Only an article's address gets an article's tags. How: This finds the article, if the address names one.
 
 

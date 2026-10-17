@@ -166,7 +166,6 @@
 /* What: Section Inner Div Pointer. Why: This section's centered column shares its rule with the hero's. How: Its rule sits in the artHerSec region above. */
 
 
-
 /* #region filRowDiv */
 
 .filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills, each full row reaching both edges of the column like the list and help card below it. How: This lines them up in a row that wraps, spreading each full row's pills across the whole width above 1,024px, where they always fit in two rows. */
@@ -197,7 +196,6 @@
 
 
 	}
-
 	.filRowDiv::after { /* What: Removed Filter Row Div Filler. Why: Packed rows have no spare room to fill. How: This drops the filler. */
 
 
@@ -293,8 +291,8 @@
 
 
 	align-items           : start;
-	display               : grid;
 	column-gap            : var( --spa-hor-p06 );                                                                                     /* Spacing Horizontal Base Plus 6 ~= 78.751px */
+	display               : grid;
 	grid-template-columns : minmax( 0, 1fr ) clamp( calc( var( --ver-rhy-p11 ) * 1rem ), 30vw, calc( var( --ver-rhy-p12 ) * 1rem ) ); /* Vertical Rhythm Base Plus 11 ~= 321.277px, Vertical Rhythm Base Plus 12 ~= 425.601px */
 
 

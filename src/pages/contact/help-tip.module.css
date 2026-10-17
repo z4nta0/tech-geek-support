@@ -1,7 +1,6 @@
 
 
 
-
 /**
  * help-tip.module.css = Help Tip Module
  *
@@ -54,7 +53,7 @@
 
 }
 .helTipBut:hover,
-.helTipBut[aria-expanded='true'] { /* What: Hovered Or Open Help Tip Button. Why: The button responds to the pointer and shows when its bubble is open. How: This fills it with pale teal, a color shift only, since a lift would jostle its label. */
+.helTipBut[aria-expanded='true'] { /* What: Hovered Or Open Help Tip Button. Why: The button responds to the pointer and shows when its bubble is open. How: This fills it with pale teal, a color shift only, the Interaction Feedback rule's exemption for a small inline button following a label, since a lift would nudge it off its label's line. */
 
 
 	background : var( --act-tin-col ); /* Accent-Tertiary Tint Color = #D3EEE9 */

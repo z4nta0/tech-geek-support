@@ -45,9 +45,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 const STE_REC_ARR = [ // What: Step Record Array. Why: How It Works walks through the same three steps every visit. How: Each row holds a step's title and description.
 
 
-	{ titStr : 'Ask in plain words',      desStr : "Tell me what's going on, the way you'd tell a friend. No tech terms needed." }, // What: Ask Step Row. Why: Asking starts everything, and plain words are welcome. How: This invites a visitor to describe the problem their own way.
-	{ titStr : 'I reply within 24 hours', desStr : 'A real person reads every question and answers by email, one step at a time.' }, // What: Reply Step Row. Why: A visitor should know who answers and how soon. How: This promises an email reply within a day.
-	{ titStr : "You're sorted",           desStr : 'Still stuck? Just reply. The most common answers become articles that help everyone.' } // What: Sorted Step Row. Why: A visitor should know the help doesn't stop at one reply. How: This invites a reply and explains where articles come from.
+	{ desStr : "Tell me what's going on, the way you'd tell a friend. No tech terms needed.", titStr : 'Ask in plain words' }, // What: Ask Step Row. Why: Asking starts everything, and plain words are welcome. How: This invites a visitor to describe the problem their own way.
+	{ desStr : 'A real person reads every question and answers by email, one step at a time.', titStr : 'I reply within 24 hours' }, // What: Reply Step Row. Why: A visitor should know who answers and how soon. How: This promises an email reply within a day.
+	{ desStr : 'Still stuck? Just reply. The most common answers become articles that help everyone.', titStr : "You're sorted" } // What: Sorted Step Row. Why: A visitor should know the help doesn't stop at one reply. How: This invites a reply and explains where articles come from.
 
 
 ];
@@ -86,7 +86,6 @@ const STE_REC_ARR = [ // What: Step Record Array. Why: How It Works walks throug
 */
 
 function HomPagCom () : JSX.Element {
-
 
 
 	return (
@@ -182,7 +181,7 @@ function HomPagCom () : JSX.Element {
 						<h2 className={ cssModObj.secTitHea }>Popular things people ask about</h2>{ /* What: Section Title Heading Element. Why: The heading tells a visitor they're not alone in asking. How: This shows the section's h2. */ }
 
 
-						<ul className={ cssModObj.topGriUno }>{ /* What: Topic Grid Unordered Element. Why: The topics sit in an even grid of tiles. How: This lays them out four, three, or two across. */ }
+						<ul className={ cssModObj.topGriUno }>{ /* What: Topic Grid Unordered Element. Why: The topics sit in an even grid of tiles. How: This lays them out four, three, or two across, and in one column of short rows on a phone. */ }
 
 
 							{ TOP_REC_ARR.map( ( topRecObj ) => ( // What: Topic Map Call. Why: Every topic gets a tile. How: This renders one list item per topic.
@@ -195,7 +194,7 @@ function HomPagCom () : JSX.Element {
 										className={ cssModObj.topTilAnc }
 
 										to={ `/articles?topic=${ topRecObj.ideStr }` } // What: Topic Address. Why: The tile should open the Articles page already showing this topic. How: This puts the topic's identifier in the address, which the Articles page reads as its filter.
-									>{ /* What: Topic Tile Anchor Element. Why: A tile opens the articles for its topic. How: This draws a stitched tile with the icon, name, and hint, lifting on hover. */ }
+									>{ /* What: Topic Tile Link. Why: A tile opens the articles for its topic. How: This draws a stitched tile with the icon, name, and hint, lifting on hover. */ }
 
 
 										<svg
@@ -235,7 +234,7 @@ function HomPagCom () : JSX.Element {
 									className={ cssModObj.topTilAnc }
 
 									to='/contact'
-								>{ /* What: Topic Tile Anchor Element. Why: A visitor whose question fits no topic can still ask it. How: This draws the same stitched tile, leading to the question form. */ }
+								>{ /* What: Something Else Tile Link. Why: A visitor whose question fits no topic can still ask it. How: This draws the same stitched tile, leading to the question form. */ }
 
 
 									<svg
@@ -299,7 +298,7 @@ function HomPagCom () : JSX.Element {
 								className={ cssModObj.allArtAnc }
 
 								to='/articles'
-							>See all articles <span className={ cssModObj.allArrSpa } aria-hidden='true'>→</span></Link>{ /* What: See All Articles Link. Why: Three articles are only a taste. How: This routes to the Articles page, its arrow nudging on hover and hidden from screen readers. */ }
+							>See all articles <span className={ cssModObj.allArrSpa } aria-hidden='true'>→</span></Link>{ /* What: See All Articles Link. Why: Four articles are only a taste. How: This routes to the Articles page, its arrow nudging on hover and hidden from screen readers. */ }
 
 
 						</div>
@@ -318,7 +317,7 @@ function HomPagCom () : JSX.Element {
 										className={ cssModObj.artCarAnc }
 
 										to={ `/articles/${ artRecObj.ideStr }` }
-									>{ /* What: Article Card Anchor Element. Why: The whole card opens the article. How: This draws a white card with the topic, title, and reading time, lifting on hover. */ }
+									>{ /* What: Article Card Link. Why: The whole card opens the article. How: This draws a white card with the topic, title, and reading time, lifting on hover. */ }
 
 
 										<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }

@@ -61,11 +61,11 @@
 
 }
 
-.rinOutCir { /* What: Ring Outer Circle. Why: The outermost ring is the faintest and ripples in last. How: This sets it at about 14% strength, two base steps after the first ring. */
+.rinOutCir { /* What: Ring Outer Circle. Why: The outermost ring is the faintest and ripples in last. How: This sets it at about 11% strength, two base steps after the first ring. */
 
 
 	animation-delay : calc( var( --dur-ani-bas ) * 2 ); /* Duration Animation Base ~= 157.8ms */
-	opacity         : var( --cdn-pow-008-rec );         /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.140 */
+	opacity         : var( --cdn-pow-008-rec );         /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
 
 
 }
