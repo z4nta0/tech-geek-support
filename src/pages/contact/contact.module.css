@@ -665,12 +665,40 @@
 
 /* #region conSidAsi */
 
-.conSidAsi { /* What: Contact Sidebar Aside. Why: The sidebar's cards stack beside the form. How: This stacks them with even gaps. */
+.conSidAsi { /* What: Contact Sidebar Aside. Why: The sidebar's cards stack beside the form. How: This stacks them with even gaps, pairing them under the form on a tablet. */
 
 
 	display        : flex;
 	flex-direction : column;
 	gap            : var( --spa-ver-bas ); /* Spacing Vertical Base ~= 14.572px */
+
+
+}
+@media ( max-width : 1024px ) { /* What: Tablet Contact Sidebar Aside. Why: Below the form, a single stack of short cards leaves wide, half-empty rows. How: This applies at 1,024px and below. */
+
+
+	.conSidAsi { /* What: Paired Contact Sidebar Aside. Why: The two white notes fill a row together, with the safety card centered under them. How: This sets two equal columns, stretching each row's cards to one height. */
+
+
+		display               : grid;
+		gap                   : var( --spa-ver-bas ) var( --spa-hor-bas ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base ~= 14.572px */
+		grid-template-columns : repeat( 2, minmax( 0, 1fr ) );
+
+
+	}
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Contact Sidebar Aside. Why: Two cards side by side are too narrow on a phone. How: This applies at 640px and below. */
+
+
+	.conSidAsi { /* What: Stacked Contact Sidebar Aside. Why: Each card takes the full width. How: This sets one column. */
+
+
+		grid-template-columns : minmax( 0, 1fr );
+
+
+	}
 
 
 }
@@ -779,6 +807,35 @@
 
 
 	background : var( --act-tin-col ); /* Accent-Tertiary Tint Color = #D3EEE9 */
+
+
+}
+@media ( max-width : 1024px ) { /* What: Tablet Safety Card Div. Why: Three cards can't share two columns evenly. How: This applies at 1,024px and below. */
+
+
+	.safCarDiv { /* What: Centered Safety Card Div. Why: The odd card sits alone, so it keeps the others' width and centers under them rather than leaving a short row hanging left, an exception to the even card rows. How: This spans both columns, centered, as wide as one column. */
+
+
+		grid-column  : 1 / -1;
+		justify-self : center;
+		width        : calc( ( 100% - var( --spa-hor-bas ) ) / 2 ); /* Spacing Horizontal Base ~= 14.572px */ /* What: One Column Width. Why: Spanning both columns, the card would otherwise stretch across the row. How: This takes the gap out of the row's width and halves it, matching each white card. */
+
+
+	}
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Safety Card Div. Why: The cards stack in one column on a phone. How: This applies at 640px and below. */
+
+
+	.safCarDiv { /* What: Full Safety Card Div. Why: In one column, the card should match the others' full width. How: This stretches it again. */
+
+
+		justify-self : stretch;
+		width        : auto;
+
+
+	}
 
 
 }

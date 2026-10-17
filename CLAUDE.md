@@ -111,6 +111,11 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   room: both Still Stuck panels sit the p06 step below what comes before
   them, and all three pad their text one step more above and below than at
   their sides.
+- **Contact sidebar** (decided by the user 2026-10-17): below the form, from
+  1,024px down to 641px, the two white notes share a row and the safety card
+  sits centered under them at the same width, the Card Grids rule's centered
+  odd card exception; three across only fit down to about 880px, where the
+  email address started breaking mid-word. At 640px and below they stack.
 - **Bar wordmark**: "TechGeek.support" is the family's longest wordmark, so
   this site sets the package's `--bra-wor-siz` to ease it down below about
   440px (about 14px at 320px), keeping the menu button on screen without a
