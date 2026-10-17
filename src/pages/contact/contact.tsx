@@ -464,12 +464,6 @@ function ConPagCom () : JSX.Element {
 												htmlFor='forEmaInp'
 											>Your email address <span className={ cssModObj.fieOptSpa }>(optional)</span></label>{ /* What: Field Label Label Element. Why: The input needs a visible name, and saying it's optional lets a wary visitor ask without one. How: This labels it and marks it optional. */ }
 
-											<p
-												id='forEmaHin'
-
-												className={ cssModObj.fieHinPar }
-											>Only used to reply to you, never for anything else. Without it I can't reply or ask you follow-up questions, so you'd need to check back for an article.</p>{ /* What: Field Hint Paragraph Element. Why: A visitor deciding whether to leave an address should know how it's used and what skipping it means. How: This shows the hint under the label, tied to the field for screen readers. */ }
-
 											<input
 												id='forEmaInp'
 
@@ -484,7 +478,13 @@ function ConPagCom () : JSX.Element {
 												aria-describedby='forEmaHin'
 
 												onChange={ chaFieFun }
-											/>{ /* What: Form Control Input Element. Why: A reply needs somewhere to go, when the visitor wants one. How: This holds the optional address in the form's state, offering the browser's saved address, described by the hint above it. */ }
+											/>{ /* What: Form Control Input Element. Why: A reply needs somewhere to go, when the visitor wants one. How: This holds the optional address in the form's state, offering the browser's saved address, described by the hint below it. */ }
+
+											<p
+												id='forEmaHin'
+
+												className={ cssModObj.fieHinPar }
+											>Only used to reply to you, never for anything else. Without it I can't reply or ask you follow-up questions, so you'd need to check back for an article.</p>{ /* What: Field Hint Paragraph Element. Why: A visitor deciding whether to leave an address should know how it's used and what skipping it means. How: This shows the hint under the field, so the name and email boxes line up, tied to the field for screen readers. */ }
 
 
 										</div>

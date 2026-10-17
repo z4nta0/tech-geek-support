@@ -476,7 +476,7 @@
 /* #endregion fieLabLab */
 
 
-.fieHinPar { /* What: Field Hint Paragraph. Why: The hint is a quiet helper under the label. How: This sets it in the muted color, capped at the small text measure. */
+.fieHinPar { /* What: Field Hint Paragraph. Why: The hint is a quiet helper beside its field. How: This sets it in the muted color, capped at the small text measure. */
 
 
 	color     : var( --tex-mut-col ); /* Text Muted Color = #646482 */
