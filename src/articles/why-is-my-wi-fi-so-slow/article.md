@@ -16,13 +16,13 @@ First, two quick terms:
 
 This really does fix a lot of problems, which is why every support line asks you to do it first.
 
+> **Before you start:** If a light on the box is a solid orange or is flashing in an unusual way, it may be installing an update. Wait 20 minutes before unplugging it, because interrupting an update can cause problems.
+
 1. Unplug the power cord from your router (and your modem, if it's a separate box).
 2. Wait a full 60 seconds.
 3. Plug the modem back in first, if you have one, and wait until its lights settle.
 4. Plug the router back in.
 5. Wait about 5 to 10 minutes for everything to fully start up before testing.
-
-> **Before you start:** If a light on the box is a solid orange or is flashing in an unusual way, it may be installing an update. Wait 20 minutes before unplugging it, because interrupting an update can cause problems.
 
 ## Step 2: Check whether it's your Wi-Fi or your internet
 

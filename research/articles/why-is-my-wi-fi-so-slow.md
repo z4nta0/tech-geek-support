@@ -18,13 +18,13 @@ First, two quick terms:
 
 This really does fix a lot of problems, which is why every support line asks you to do it first.
 
+> **Before you start:** If a light on the box is a solid orange or is flashing in an unusual way, it may be installing an update. Wait 20 minutes before unplugging it, because interrupting an update can cause problems.
+
 1. Unplug the power cord from your router (and your modem, if it's a separate box).
 2. Wait a full 60 seconds.
 3. Plug the modem back in first, if you have one, and wait until its lights settle.
 4. Plug the router back in.
 5. Wait about 5 to 10 minutes for everything to fully start up before testing.
-
-> **Before you start:** If a light on the box is a solid orange or is flashing in an unusual way, it may be installing an update. Wait 20 minutes before unplugging it, because interrupting an update can cause problems.
 
 ## Step 2: Check whether it's your Wi-Fi or your internet
 
@@ -74,6 +74,7 @@ Not sure whether the problem is your Wi-Fi or your plan? Send me your speed test
 ---
 
 ## Research notes (not published)
+- **Owner's review (2026-10-16)**: Step 1's warning about a router installing an update moved ahead of the unplug steps, since a warning after them comes too late to prevent the interruption it warns about.
 
 - **Why this problem**: Slow or unreliable home Wi-Fi is a perennial top complaint, and the FCC maintains a consumer "Home Network Tips" page for exactly this. Troubleshooting guides consistently say most slow-internet problems come from inside the home (placement, congestion, old routers) rather than the provider, which makes it a good fit for clear self-help.
 - **Where it was found**:
