@@ -168,13 +168,12 @@
 @media ( max-width : 640px ) { /* What: Phone Eyebrow Rings SVG. Why: On a phone the motif moves from above the pitch to beside the label, keeping the heading and buttons on the first screen. How: This applies at 640px and below. */
 
 
-	.eyeRinSvg { /* What: Shown Eyebrow Rings SVG. Why: The small rings read like the Tech Geek's avatar beside the label. How: This shows them at about 59px, never shrinking. */
+	.eyeRinSvg { /* What: Shown Eyebrow Rings SVG. Why: The small rings read like the Tech Geek's avatar beside the label. How: This shows them never shrinking, capped at about 59px wide, a cap rather than a width, since the rings' own module sets their width to fill the box and may load after this one; their height follows their width. */
 
 
-		display : block;
-		flex    : none;
-		height  : calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
-		width   : calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
+		display   : block;
+		flex      : none;
+		max-width : calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
 
 
 	}
