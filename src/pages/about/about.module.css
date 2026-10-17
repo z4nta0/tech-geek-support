@@ -453,17 +453,17 @@
 	gap            : var( --spa-ver-bas );                                                        /* Spacing Vertical Base ~= 14.572px */
 	margin         : 0 auto;
 	max-width      : calc( var( --cdn-pow-012 ) * var( --fon-siz-p02 ) + var( --spa-hor-p04 ) * 2 ); /* Core-Design-Number to the Power of 12 ~= 29.207, Font Size Base Plus 2 ~= 19.304px, Spacing Horizontal Base Plus 4 ~= 44.876px, about 653.6px in all */ /* What: Text-Fitted Width. Why: The panel exists to hold its paragraph, so it should be no wider than that text plus its own padding. How: This multiplies the paragraph measure's power by the paragraph's font size and adds the padding on both sides. */
-	padding        : var( --spa-ver-p04 ) var( --spa-hor-p04 );                                   /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding        : var( --spa-ver-p05 ) var( --spa-hor-p04 );                                   /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
 @media ( max-width : 640px ) { /* What: Phone Closing Panel Div. Why: Roomy padding squeezes the panel's text on a phone. How: This applies at 640px and below. */
 
 
-	.cloPanDiv { /* What: Snug Closing Panel Div. Why: The text needs the width more than the padding does. How: This pads the panel by the p02 steps instead. */
+	.cloPanDiv { /* What: Snug Closing Panel Div. Why: The text needs the width more than the padding does. How: This pads the panel by the p03 step above and below and the p02 step at the sides instead. */
 
 
-		padding : var( --spa-ver-p02 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+		padding : var( --spa-ver-p03 ) var( --spa-hor-p02 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 2 ~= 25.572px */
 
 
 	}

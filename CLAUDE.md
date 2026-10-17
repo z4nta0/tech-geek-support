@@ -98,7 +98,13 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   button, and a safety note. It grows from about 321px to 426px and sits
   flush with the content's right edge, the list stays aligned with the
   heading, and the topic pills spread each full row to both edges, the last
-  row packed left.
+  row packed left. Under the list, the article page's Still Stuck panel sits
+  centered below both, fitted to its text.
+- **Closing panels** (decided by the user 2026-10-17): the Still Stuck panels
+  on the Articles and article pages, and About's closing panel, get generous
+  room: both Still Stuck panels sit the p06 step below what comes before
+  them, and all three pad their text one step more above and below than at
+  their sides.
 - **Bar wordmark**: "TechGeek.support" is the family's longest wordmark, so
   this site sets the package's `--bra-wor-siz` to ease it down below about
   440px (about 14px at 320px), keeping the menu button on screen without a
@@ -192,7 +198,7 @@ On the `rebuild` branch, following the sister sites.
      accessibility scan of its page in all three engines, and the full suites
      run once, after the last fix. Until then, these need a close look:
      - The rendering baselines for every page the pass changed (About,
-       Articles), refreshed once and checked by eye.
+       Articles, the article page), refreshed once and checked by eye.
      - The Articles page: the Still Stuck panel under a list and not under
        an empty topic, the help card above 1,024px only, the Tab walk past
        both asides, and the spread topic pills at every width.
