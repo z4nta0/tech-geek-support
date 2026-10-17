@@ -1,0 +1,181 @@
+
+
+
+/**
+ * signal-rings.module.css = Signal Rings Module
+ *
+ * @summary
+ * Styles for SigRinCom. The rings are teal outlines that grow stronger
+ * toward the center, around a pale teal pool holding a white speech bubble
+ * outlined in ink, with an orange sparkle and a blue dot nearby. As the
+ * drawing appears, the rings ripple out from the bubble one after another,
+ * each a base duration step after the last, and the sparkle pops in with a
+ * gentle overshoot once they're done. Nothing loops, and under reduced
+ * motion the drawing is simply there.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region sigRinSvg */
+
+.sigRinSvg { /* What: Signal Rings SVG. Why: The drawing fills whatever box the page gives it. How: This sizes it to its box's width, keeping its square shape. */
+
+
+	display : block;
+	height  : auto;
+	width   : 100%;
+
+
+}
+
+.rinOutCir,
+.rinMidCir,
+.rinInnCir { /* What: Ring Circles. Why: The three rings share their look and their ripple. How: This draws each as a teal outline, scaling it from the drawing's center as it ripples in. */
+
+
+	animation        : ringEnterRipple var( --dur-ani-p04 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 4 ~= 486.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	fill             : none;
+	stroke           : var( --act-mai-col );                                           /* Accent-Tertiary Main Color = #2A9D8F */
+	stroke-width     : 2;                                                              /* What: Ring Stroke Width. Why: The rings are thin, quiet lines. How: This is 2 units of the 400-unit drawing space, which scales with the drawing. */
+	transform-box    : view-box;
+	transform-origin : 50% 50%;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Ring Circles. Why: Someone who asked for less motion shouldn't see the rings ripple. How: This applies only when the reduced-motion preference is set. */
+
+
+	.rinOutCir,
+	.rinMidCir,
+	.rinInnCir { /* What: Motionless Ring Circles. Why: The rings should simply be there. How: This turns the ripple off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+.rinOutCir { /* What: Ring Outer Circle. Why: The outermost ring is the faintest and ripples in last. How: This sets it at about 11% strength, two base steps after the first ring. */
+
+
+	animation-delay : calc( var( --dur-ani-bas ) * 2 ); /* Duration Animation Base ~= 157.8ms */
+	opacity         : var( --cdn-pow-008-rec );         /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105 */
+
+
+}
+
+.rinMidCir { /* What: Ring Middle Circle. Why: The middle ring sits between the other two in strength and timing. How: This sets it at about 19% strength, one base step after the first ring. */
+
+
+	animation-delay : var( --dur-ani-bas );     /* Duration Animation Base ~= 157.8ms */
+	opacity         : var( --cdn-pow-006-rec ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185 */
+
+
+}
+
+.rinInnCir { /* What: Ring Inner Circle. Why: The ring nearest the bubble is the strongest and ripples in first. How: This sets it at about 33% strength. */
+
+
+	opacity : var( --cdn-pow-004-rec ); /* Core-Design-Number to the Power of 4 Reciprocal ~= 0.325 */
+
+
+}
+
+@keyframes ringEnterRipple { /* What: Ring Enter Ripple. Why: The rings spread out from the bubble as the drawing appears, like a signal going out. How: This grows each ring from 60% of its size and fades it in. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : scale( 0.6 );
+
+
+	}
+
+
+}
+
+.corTinCir { /* What: Core Tint Circle. Why: The bubble sits on a calm pool of color. How: This fills the circle with the pale teal. */
+
+
+	fill : var( --act-tin-col ); /* Accent-Tertiary Tint Color = #D3EEE9 */
+
+
+}
+
+.bubOutPat { /* What: Bubble Outline Path. Why: The speech bubble is the drawing's center of attention. How: This fills it white with an ink outline and rounded joins. */
+
+
+	fill            : var( --bac-sur-col ); /* Background Surface Color = #FFFFFF */
+	stroke          : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+	stroke-linejoin : round;
+	stroke-width    : 3;                    /* What: Bubble Stroke Width. Why: The bubble's outline is a little bolder than the rings, so it reads first. How: This is 3 units of the 400-unit drawing space. */
+
+
+}
+
+.bubDotCir { /* What: Bubble Dot Circle. Why: The typing dots read in ink inside the white bubble. How: This fills each dot with the main text color. */
+
+
+	fill : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
+
+
+}
+
+.spaOraPat { /* What: Sparkle Orange Path. Why: The sparkle is the drawing's touch of fun, and it pops in once the rings are out. How: This fills it orange and pops it in with the gentle overshoot, three base steps after the first ring. */
+
+
+	animation        : spaOraPatEnterPop var( --dur-ani-p03 ) var( --mot-ove-eas ) calc( var( --dur-ani-bas ) * 3 ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ), Duration Animation Base ~= 157.8ms */
+	fill             : var( --acc-mai-col );                                                                              /* Accent Main Color = #F26419 */
+	transform-box    : fill-box;
+	transform-origin : 50% 50%;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Sparkle Orange Path. Why: Someone who asked for less motion shouldn't see the sparkle pop. How: This applies only when the reduced-motion preference is set. */
+
+
+	.spaOraPat { /* What: Motionless Sparkle Orange Path. Why: The sparkle should simply be there. How: This turns the pop off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+
+@keyframes spaOraPatEnterPop { /* What: Sparkle Orange Path Enter Pop. Why: The sparkle arrives with a little flourish. How: This grows it from nothing and turns it a quarter turn as it appears. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : rotate( -90deg ) scale( 0 );
+
+
+	}
+
+
+}
+
+.dotBluCir { /* What: Dot Blue Circle. Why: A small dot in the family's blue balances the orange sparkle. How: This fills it with the secondary accent. */
+
+
+	fill : var( --acc-sec-col ); /* Accent Secondary Color = #7DB9D8 */
+
+
+}
+
+/* #endregion sigRinSvg */
+
+

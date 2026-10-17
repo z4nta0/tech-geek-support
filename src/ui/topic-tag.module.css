@@ -1,0 +1,37 @@
+
+
+
+/**
+ * topic-tag.module.css = Topic Tag Module
+ *
+ * @summary
+ * Styles for TopTagCom: a rounded pale teal pill with its topic's name in
+ * dark teal mono capitals.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+.topTagSpa { /* What: Topic Tag Span. Why: The topic reads as a small, calm label. How: This draws a pale teal pill with dark teal mono capitals. */
+
+
+	align-self     : flex-start;
+	background     : var( --act-tin-col );                      /* Accent-Tertiary Tint Color = #D3EEE9 */
+	border-radius  : 999px;
+	color          : var( --act-dar-col );                      /* Accent-Tertiary Dark Color ~= #007063 */
+	display        : inline-block;
+	font-family    : var( --fon-fam-sec );                      /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : var( --fon-siz-bas );                      /* Font Size Base = 11px */
+	font-weight    : 500;
+	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
+	line-height    : var( --ver-rhy-bas );                      /* Vertical Rhythm Base ~= 1.325 */
+	padding        : var( --spa-ver-m04 ) var( --spa-hor-m01 ); /* Spacing Vertical Base Minus 4 ~= 4.732px, Spacing Horizontal Base Minus 1 = 11px */
+	pointer-events : none;                                      /* What: Pass Through Pointer. Why: The tag sits inside the article cards' links, and WebKit drops a card's pressed look when a press lands on its text after hovering. How: This lets every press on the tag reach whatever holds it, since the tag itself never needs to catch one. */
+	text-transform : uppercase;
+
+
+}
+
+

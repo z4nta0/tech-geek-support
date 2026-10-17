@@ -1,0 +1,55 @@
+
+
+
+/**
+ * styles.css = Global Styles
+ *
+ * @summary
+ * The site's own global stylesheet, loaded after the shared design package's
+ * fonts.css, tokens.css, and base.css, which hold the TechGeek family's
+ * tokens, base element styles, and shared keyframes. It adds this site's own
+ * color, a calm teal, and sets its layout values, the one token layer every
+ * site sets for itself, its wordmark size included, since its domain ending
+ * is the family's longest. Everything else lives in each component's own CSS
+ * module.
+ *
+ * Sections:
+ *  - Tokens
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+/* #region Tokens */
+
+:root { /* What: Root Tokens. Why: The package's color roles and layout values are defaults a site builds on. How: This adds the teal accent family and sets this site's content cap, side gutter, hero gap, and bar height on the root. */
+
+
+	/* #region Color Tokens */
+
+	--act-dar-col : oklch( from var( --act-mai-col ) calc( l - 0.15 ) c h ); /* What: Accent-Tertiary Dark Color ~= #007063. Why: The teal is too light to read as text on the ivory, about 2.9:1. How: Teal text, such as the hero's accent word and the eyebrows, reads this darker shade of it, about 5.5:1 on the ivory and 5.1:1 on the pale teal. */
+	--act-mai-col : #2A9D8F;                                                 /* What: Accent-Tertiary Main Color = #2A9D8F. Why: A calm, reassuring teal gives TechGeek.support a color of its own beside the family's orange and blue, as berry does for TechGeek.cards. How: The signal rings, the dots, and the teal hover borders are drawn in it, never buttons or links, which stay orange; ink text on it reaches 5.1:1. */
+	--act-tin-col : #D3EEE9;                                                 /* What: Accent-Tertiary Tint Color = #D3EEE9. Why: Some shapes and labels sit on a pale teal. How: The rings' center pool, the topic tags, an article's step numbers, tips, and Still Stuck panel, the Articles page's empty-topic message and Still Stuck panel, About's portrait circle, timeline line, and closing panel, and the Contact form's focus glow, help tips, and safety card read it. */
+
+	/* #endregion Color Tokens */
+
+
+
+	/* #region Layout Tokens */
+
+	--bra-wor-siz : clamp( var( --fon-siz-bas ), 4.4vw, var( --fon-siz-p02 ) );                /* What: Brand Wordmark Size, about 11px - 19.304px. Why: TechGeek.support is the family's longest wordmark, so at the package's rate the mark, the wordmark, and the menu toggle ran past a 320px screen. How: This eases the wordmark down below about 440px, about 14px at 320px, fitting every phone without a breakpoint. */
+	--con-max-wid : calc( 1920px / var( --cdn-pow-001 ) );                                     /* What: Container Maximum Width. Why: The content column should fill the screen on phones and tablets but stop widening on large monitors. How: Every page's centered columns, the bar's row, and the footer's row cap their width at a 1,920px viewport divided by the first power of the core design number, about 1,449px, the same cap as TechGeek.dev and TechGeek.cards. */
+	--gut-sid-pad : clamp( var( --spa-hor-p01 ), var( --hor-rhy-016 ), var( --spa-hor-p04 ) ); /* What: Gutter Side Padding. Why: Content needs side margins that grow with the screen within sensible bounds. How: Every centered column, the bar, the phone menu, the footer, and the 404 page pad their sides with horizontal step 016, held between the p01 and p04 horizontal spacing steps, about 19.304px to 44.876px, the same gutter as the sister sites. */
+	--her-gap-pad : clamp( var( --spa-ver-p05 ), 10vw, var( --spa-ver-p08 ) );                 /* What: Hero Gap Padding. Why: Every page's hero should sit the same distance below the bar, a distance that suits the screen rather than the window's height. How: Each hero pads its top by the bar's height plus this, and the inner pages their bottom by it too, 10vw held between the p05 and p08 vertical spacing steps, about 59.447px to 138.199px. */
+	--nav-bar-hei : calc( var( --ver-rhy-p06 ) * 1rem );                                       /* What: Navigation Bar Height ~= 78.751px. Why: Content has to clear the fixed bar. How: The bar sets its height from it, and the heroes and sticky elements offset by it, on the p06 rhythm step, the nearest to the 72px it used to be. */
+
+	/* #endregion Layout Tokens */
+
+
+}
+
+/* #endregion Tokens */
+
+
