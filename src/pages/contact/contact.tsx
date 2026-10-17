@@ -470,7 +470,7 @@ function ConPagCom () : JSX.Element {
 													className={ cssModObj.fieLabLab }
 
 													htmlFor='forEmaInp'
-												>Your email address <span className={ cssModObj.fieOptSpa }>(optional)</span></label>{ /* What: Field Label Label Element. Why: The input needs a visible name, and saying it's optional lets a wary visitor ask without one. How: This labels it and marks it optional. */ }
+												>Your email <span className={ cssModObj.fieOptSpa }>(optional)</span></label>{ /* What: Field Label Label Element. Why: The input needs a visible name, and saying it's optional lets a wary visitor ask without one. How: This labels it and marks it optional, short enough to stay on one line beside its help tip. */ }
 
 
 
@@ -491,7 +491,7 @@ function ConPagCom () : JSX.Element {
 												name='email'
 
 												autoComplete='email'
-												placeholder='example@example.com'
+												placeholder='you@example.com'
 												type='email'
 												value={ forDatObj.email }
 

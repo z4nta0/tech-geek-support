@@ -58,6 +58,12 @@ SEO (never the demo treatment), and free.
   and closing on Escape or a press elsewhere; each field still names its
   bubble for screen readers. The password warning also shows as the
   question box's placeholder, so every visitor sees it before typing.
+  The labels ease from the base plus 2 size toward the base plus 1 size with
+  the form's own width (`3.8cqi`), and the email label reads "Your email
+  (optional)", so every label and its tip stay on one line at every width;
+  the longer "Your email address" couldn't fit beside its tip above
+  1,024px at a readable size. The name and email boxes show "John" and
+  "you@example.com" as placeholders.
 - **Structured data**: a `WebSite` for this domain whose author is the same
   `Person` TechGeek.dev describes (`https://techgeek.dev/#person`), as
   TechGeek.cards does.

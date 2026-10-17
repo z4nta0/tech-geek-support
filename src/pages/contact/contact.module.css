@@ -390,9 +390,10 @@
 
 /* #region queForFor */
 
-.queForFor { /* What: Question Form Form. Why: The fields stack with room between them. How: This stacks them with even gaps. */
+.queForFor { /* What: Question Form Form. Why: The fields stack with room between them, and their labels size to the form's own width. How: This stacks them with even gaps and makes the form a container its labels measure. */
 
 
+	container-type : inline-size;
 	display        : flex;
 	flex-direction : column;
 	gap            : var( --spa-ver-p02 ); /* Spacing Vertical Base Plus 2 ~= 25.572px */
@@ -455,12 +456,25 @@
 
 /* #region fieLabLab */
 
-.fieLabLab { /* What: Field Label Label. Why: A label should be easy to read and plainly tied to its field. How: This sets it in the main text color, semibold, at the base plus 2 size. */
+.fieLabLab { /* What: Field Label Label. Why: A label should be easy to read, plainly tied to its field, and on one line even in a half-width field. How: This sets it in the main text color, semibold, at the base plus 2 size, easing down toward the base plus 1 size as the form narrows. */
 
 
-	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
-	font-size   : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+	color       : var( --tex-mai-col );                                      /* Text Main Color = #1A1A2E */
+	font-size   : clamp( var( --fon-siz-p01 ), 3.8cqi, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */ /* What: Form-Width Label Size. Why: The email field's width rises and falls with the layout, not the screen, so a viewport unit would shrink labels in the wrong places. How: This reads 3.8% of the form's width, which keeps the email label and its help tip on one line in a half-width field, every label sharing the size. */
 	font-weight : 600;
+
+
+}
+@media ( max-width : 640px ) { /* What: Phone Field Label Label. Why: On a phone every field spans the form, so each label has the room for its full size. How: This applies at 640px and below. */
+
+
+	.fieLabLab { /* What: Full Size Field Label Label. Why: The form's width no longer halves for the email field. How: This holds the base plus 2 size. */
+
+
+		font-size : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
+
+
+	}
 
 
 }
