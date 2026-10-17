@@ -21,7 +21,8 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * nearby. It says "someone is listening" without a word. As it first
  * appears, the rings ripple out from the bubble one after another and the
  * sparkle pops in, once, never looping. It's decoration, hidden from screen
- * readers, and sized by whatever holds it.
+ * readers, and sized by whatever holds it. A small version crops the drawing
+ * to its inner rings, for a spot too small for the faint outer one to show.
  *
  * Sections:
  *  - Components
@@ -35,7 +36,7 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 
 // #region Components
 
-type SrcProTyp = { className? : string }; // What: Signal-Rings-Component Props Type. Why: A page places and sizes the drawing. How: This types the optional class it passes.
+type SrcProTyp = { className? : string, smaBoo? : boolean }; // What: Signal-Rings-Component Props Type. Why: A page places and sizes the drawing, and a small spot needs the cropped version. How: This types the optional class and the small flag it passes.
 
 // #region SigRinCom
 
@@ -45,12 +46,16 @@ type SrcProTyp = { className? : string }; // What: Signal-Rings-Component Props 
  * @summary
  * Renders the motif as one SVG on a 400 by 400 drawing space, with the class
  * a page passes for its size and placement. Every shape's color, strength,
- * and entrance comes from the module.
+ * and entrance comes from the module. The small version shows only the middle
+ * 300 by 300 and leaves out the outer ring, which that crop would cut into
+ * stray arcs, so the bubble reads clearly even at about 60px.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param props.className - Class Name: The page's own class, which places and
  *                          sizes the drawing; none by default.
+ * @param props.smaBoo    - Small Boolean: True for the cropped version without
+ *                          the outer ring; false by default.
  *
  * @returns The motif's SVG element.
  *
@@ -61,7 +66,7 @@ type SrcProTyp = { className? : string }; // What: Signal-Rings-Component Props 
  *
 */
 
-function SigRinCom ( { className } : SrcProTyp ) : JSX.Element {
+function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 
 
@@ -71,18 +76,24 @@ function SigRinCom ( { className } : SrcProTyp ) : JSX.Element {
 		<svg
 			className={` ${ cssModObj.sigRinSvg }   ${ className ?? '' } `}
 
-			viewBox='0 0 400 400'
+			viewBox={ smaBoo ? '50 50 300 300' : '0 0 400 400' } // What: View Box. Why: The small version needs its bubble larger in the same space. How: This crops to the middle 300 units for it, and shows the whole 400 otherwise.
 
 			aria-hidden='true'
-		>{ /* What: Signal Rings SVG Element. Why: The motif is one drawing. How: This holds the rings, the bubble, the sparkle, and the dot on a square drawing space, hidden from screen readers. */ }
+		>{ /* What: Signal Rings SVG Element. Why: The motif is one drawing. How: This holds the rings, the bubble, the sparkle, and the dot on a square drawing space, cropped for the small version, hidden from screen readers. */ }
 
 
-			<circle
-				className={ cssModObj.rinOutCir }
-				cx='200'
-				cy='200'
-				r='190'
-			/>{ /* What: Ring Outer Circle Element. Why: The signal's faintest ring reaches furthest. How: This draws the outer ring. */ }
+			{ !smaBoo && ( // What: Full Size Check. Why: The small version's crop would cut the outer ring into stray arcs. How: This draws the outer ring only at full size.
+
+
+				<circle
+					className={ cssModObj.rinOutCir }
+					cx='200'
+					cy='200'
+					r='190'
+				/> // What: Ring Outer Circle Element. Why: The signal's faintest ring reaches furthest. How: This draws the outer ring.
+
+
+			) }
 
 			<circle
 				className={ cssModObj.rinMidCir }
@@ -160,7 +171,7 @@ function SigRinCom ( { className } : SrcProTyp ) : JSX.Element {
 
 // #region Exports
 
-export { SigRinCom }; // What: Named Exports. Why: Home's hero and the 404 page show the motif. How: This exports SigRinCom.
+export { SigRinCom }; // What: Named Exports. Why: Home's hero, its eyebrow on phones, and the 404 page show the motif. How: This exports SigRinCom.
 
 // #endregion Exports
 

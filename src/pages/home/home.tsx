@@ -119,7 +119,12 @@ function HomPagCom () : JSX.Element {
 									className={ cssModObj.herDotSpa }
 
 									aria-hidden='true'
-								/>{ /* What: Hero Dot Span Element. Why: A small teal dot leads the label. How: This draws the dot, hidden from screen readers. */ }
+								/>{ /* What: Hero Dot Span Element. Why: A small teal dot leads the label. How: This draws the dot, hidden from screen readers, and gives way to the small rings on a phone. */ }
+								<SigRinCom
+									className={ cssModObj.eyeRinSvg }
+
+									smaBoo
+								/>{ /* What: Signal Rings Component. Why: On a phone the hero has no room for the full rings above its pitch, so the motif leads the label instead, like the Tech Geek's avatar. How: This draws the small, cropped rings in place of the dot at 640px and below, hidden elsewhere. */ }
 								Your friendly neighborhood Tech Geek
 							</p>
 
@@ -156,7 +161,7 @@ function HomPagCom () : JSX.Element {
 
 
 
-						<SigRinCom className={ cssModObj.herRinSvg } />{ /* What: Signal Rings Component. Why: The hero's picture is the site's calm motif. How: This draws the rings beside the text, sized by the hero's grid. */ }
+						<SigRinCom className={ cssModObj.herRinSvg } />{ /* What: Signal Rings Component. Why: The hero's picture is the site's calm motif. How: This draws the rings beside the text on wide screens and above it on a tablet, sized by the hero's grid, and gives way to the small rings in the eyebrow on a phone. */ }
 
 
 					</div>

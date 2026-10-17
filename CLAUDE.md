@@ -79,7 +79,11 @@ Decided by the user 2026-10-16, mixing the three directions offered:
 - **Hero**: "Calm Signal": the pitch beside the signal rings
   (`ui/signal-rings.tsx`), a speech bubble at the center of soft teal rings
   that ripple out once as the page opens, with an orange sparkle that pops
-  in after them.
+  in after them. In one column the rings lead the hero, full size on a
+  tablet (641 to 768px); on a phone (640px and below) they shrink to a
+  cropped, 59px version beside the eyebrow in place of its dot, so the
+  heading and the Ask a Question button stay on an iPhone SE's first screen
+  (decided by the user 2026-10-17, after trying the rings above the pitch).
 - **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
   border inset from the edge and a hint line under each topic, carrying
   "Friendly Conversation"'s small speech-bubble icon. At 640px and below the
