@@ -107,12 +107,12 @@ Decided by the user 2026-10-16, mixing the three directions offered:
 - **Articles help card** (decided by the user 2026-10-17): above 1,024px the
   Articles page shows a card beside the list that stays in view as it scrolls,
   with the small rings, an invitation to ask, the promise, the Ask a Question
-  button, and a safety note. It grows from about 321px to 426px and sits
-  flush with the content's right edge, the list stays aligned with the
-  heading, and the topic pills spread each full row to both edges, the last
-  row packed left. At 1,024px and below, where the pills need three rows or
-  more below about 860px, every row packs left instead. Under the list, the article page's Still Stuck panel sits
-  centered below both, fitted to its text.
+  button, and a safety note. It grows from about 321px to 426px and sits flush
+  with the content's right edge, the list stays aligned with the heading, and
+  the topic pills spread each full row to both edges, the last row packed left.
+  At 1,024px and below, where the pills need three rows or more below about
+  860px, every row packs left instead. The page's Still Stuck panel sits
+  centered below the list and the card, fitted to its text.
 - **Closing panels** (decided by the user 2026-10-17): the Still Stuck panels
   on the Articles and article pages, and About's closing panel, get generous
   room: both Still Stuck panels sit the p06 step below what comes before
