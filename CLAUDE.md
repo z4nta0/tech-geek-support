@@ -107,12 +107,12 @@ Decided by the user 2026-10-16, mixing the three directions offered:
 - **Articles help card** (decided by the user 2026-10-17): above 1,024px the
   Articles page shows a card beside the list that stays in view as it scrolls,
   with the small rings, an invitation to ask, the promise, the Ask a Question
-  button, and a safety note. It grows from about 321px to 426px and sits
-  flush with the content's right edge, the list stays aligned with the
-  heading, and the topic pills spread each full row to both edges, the last
-  row packed left. At 1,024px and below, where the pills need three rows or
-  more below about 860px, every row packs left instead. Under the list, the article page's Still Stuck panel sits
-  centered below both, fitted to its text.
+  button, and a safety note. It grows from about 321px to 426px and sits flush
+  with the content's right edge, the list stays aligned with the heading, and
+  the topic pills spread each full row to both edges, the last row packed left.
+  At 1,024px and below, where the pills need three rows or more below about
+  860px, every row packs left instead. The page's Still Stuck panel sits
+  centered below the list and the card, fitted to its text.
 - **Closing panels** (decided by the user 2026-10-17): the Still Stuck panels
   on the Articles and article pages, and About's closing panel, get generous
   room: both Still Stuck panels sit the p06 step below what comes before
@@ -231,3 +231,42 @@ suites live in `tests/`, one project per suite and engine in
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.
+
+## Hosting and DNS
+Set up with the user 2026-10-17, following TechGeek.dev's steps (see its
+CLAUDE.md, "Putting a new TechGeek domain behind Cloudflare"). techgeek.support
+is registered at name.com (its December 24, 2026 expiration taken care of by
+the user on 2026-10-17) and uses Cloudflare's nameservers (corey and khloe), on
+the Free plan, in front of Netlify. The switch reached the `.support` registry
+within minutes, but resolvers held Netlify's nameservers for up to an hour
+(their TTL is 3,600 seconds), so Cloudflare took longer to activate than for
+the sister sites.
+- **Records**: `@` and `www` are proxied CNAMEs to the site's `.netlify.app`
+  address (Cloudflare flattens the one on the bare domain), replacing the
+  fixed A addresses Netlify's zone had. Titan's two MX records (priorities 10
+  and 20; the second was missing before and added during the move), SPF, the
+  `titan1._domainkey` DKIM key, the Google Search Console verification, and a
+  new DMARC record (`p=none`, reports to contact@techgeek.support) are DNS
+  only.
+- **Settings**: SSL/TLS Full (strict), Automatic HTTPS Rewrites on, Always Use
+  HTTPS and HSTS off, and a minimum of TLS 1.2.
+- **DNSSEC** (turned on the same day, as for techgeek.cards): Cloudflare signs
+  the zone, and its DS record (key tag 2371, algorithm 13, digest type 2) is
+  entered at name.com, with Max Sig Life left blank. Google's and
+  Cloudflare's resolvers both returned verified answers. Before ever moving
+  the domain off Cloudflare, turn DNSSEC off there and remove the DS record at
+  name.com, then wait a day before changing nameservers.
+- **Redirects and HSTS come from Netlify, not Cloudflare**: Netlify sends
+  `http` to `https` and `www` to the bare domain, and `public/_headers` sends
+  HSTS and every other security header. Cloudflare passes all of it through.
+- **Checked through Cloudflare** on the day: every page, an article's own page
+  and its raw preview tags, the redirects, every security header, the crawler
+  files, icons, and preview images, the sitemap's articles, the mail and
+  verification records, and that TLS 1.0 and 1.1 are refused.
+- **Netlify's DNS zone** was deleted the same day, right after DNSSEC went
+  on, with no trouble. Netlify still
+  issues the site's own certificate, which Full (strict) requires: the
+  current one (a wildcard, which only Netlify's own zone could issue) runs to
+  December 29, 2026, so check the project's Domain management, HTTPS section
+  after its renewal (about late November 2026), and if renewal fails, set `@`
+  and `www` to DNS only for a few minutes, renew, and proxy them again.
