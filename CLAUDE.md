@@ -234,13 +234,13 @@ suites live in `tests/`, one project per suite and engine in
 
 ## Hosting and DNS
 Set up with the user 2026-10-17, following TechGeek.dev's steps (see its
-CLAUDE.md, "Putting a new TechGeek domain behind Cloudflare").
-techgeek.support is registered at name.com (renewal due December 24, 2026)
-and uses Cloudflare's nameservers (corey and khloe), on the Free plan, in
-front of Netlify. The switch reached the `.support` registry within minutes,
-but resolvers held Netlify's nameservers for up to an hour (their TTL is
-3,600 seconds), so Cloudflare took longer to activate than for the sister
-sites.
+CLAUDE.md, "Putting a new TechGeek domain behind Cloudflare"). techgeek.support
+is registered at name.com (its December 24, 2026 expiration taken care of by
+the user on 2026-10-17) and uses Cloudflare's nameservers (corey and khloe), on
+the Free plan, in front of Netlify. The switch reached the `.support` registry
+within minutes, but resolvers held Netlify's nameservers for up to an hour
+(their TTL is 3,600 seconds), so Cloudflare took longer to activate than for
+the sister sites.
 - **Records**: `@` and `www` are proxied CNAMEs to the site's `.netlify.app`
   address (Cloudflare flattens the one on the bare domain), replacing the
   fixed A addresses Netlify's zone had. Titan's two MX records (priorities 10
@@ -263,7 +263,8 @@ sites.
   and its raw preview tags, the redirects, every security header, the crawler
   files, icons, and preview images, the sitemap's articles, the mail and
   verification records, and that TLS 1.0 and 1.1 are refused.
-- **Netlify's DNS zone** is deleted once the switch settles. Netlify still
+- **Netlify's DNS zone** was deleted the same day, right after DNSSEC went
+  on, with no trouble. Netlify still
   issues the site's own certificate, which Full (strict) requires: the
   current one (a wildcard, which only Netlify's own zone could issue) runs to
   December 29, 2026, so check the project's Domain management, HTTPS section
