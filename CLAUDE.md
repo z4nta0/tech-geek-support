@@ -90,12 +90,16 @@ SEO (never the demo treatment), and free.
 Decided by the user 2026-10-16, mixing the three directions offered:
 - **Hero**: "Calm Signal": the pitch beside the signal rings
   (`ui/signal-rings.tsx`), a speech bubble at the center of soft teal rings
-  that ripple out once as the page opens, with an orange sparkle that pops
-  in after them. In one column the rings lead the hero, full size on a
-  tablet (641 to 768px); on a phone (640px and below) they shrink to a
-  cropped, 59px version beside the eyebrow in place of its dot, so the
-  heading and the Ask a Question button stay on an iPhone SE's first screen
-  (decided by the user 2026-10-17, after trying the rings above the pitch).
+  that ripple out once as the page opens, with an orange sparkle that pops in
+  after them. In one column (768px and below) the rings lead the hero on their
+  own row, a step smaller (about 243px, the p10 step) at every width down to
+  320px, as the sister sites' stacked pictures do, with a small drawing of the
+  site's motif on each side (speech bubbles, signal arcs, a sparkle, dots)
+  filling the room down to 441px and hidden below, where it would shrink to
+  specks (decided by the user 2026-10-19, replacing the 2026-10-17 small rings
+  beside the eyebrow). The heading's last line and the Ask a Question button
+  fall below an iPhone SE's first screen, the same tradeoff the sister sites
+  accept.
 - **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
   border inset from the edge and a hint line under each topic, carrying
   "Friendly Conversation"'s small speech-bubble icon. At 640px and below the
@@ -129,6 +133,8 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   breakpoint (decided by the user 2026-10-17, over stacking the wordmark on
   two lines). The full bar needs about 940px, which is why the package's bar
   keeps its menu up to 1,024px from `v0.3.0` on.
+- **Breakpoints**: the family's 640, 768, and 1,024px, plus 440px, added
+  for the hero's flourishes (decided by the user 2026-10-19).
 - **Colors**: the family's palette, plus one role this site adds, the teal
   accent family: `--act-mai-col` (#2A9D8F, for drawings, dots, and fills,
   never buttons or links, which stay orange; about 2.9:1 on the ivory, so
