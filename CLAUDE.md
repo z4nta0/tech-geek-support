@@ -99,7 +99,10 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   specks (decided by the user 2026-10-19, replacing the 2026-10-17 small rings
   beside the eyebrow). The heading's last line and the Ask a Question button
   fall below an iPhone SE's first screen, the same tradeoff the sister sites
-  accept.
+  accept. The eyebrow's label eases from the base plus 1 size toward the base
+  size below about 455px (`3.2vw`), so it stays on one line down to about
+  350px; below that it wraps, too long for a 320px screen at any readable size
+  (decided by the user 2026-10-19).
 - **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
   border inset from the edge and a hint line under each topic, carrying
   "Friendly Conversation"'s small speech-bubble icon. At 640px and below the
