@@ -48,7 +48,7 @@ type SrcProTyp = { className? : string, smaBoo? : boolean }; // What: Signal-Rin
  * a page passes for its size and placement. Every shape's color, strength,
  * and entrance comes from the module. The small version shows only the middle
  * 300 by 300 and leaves out the outer ring, which that crop would cut into
- * stray arcs, so the bubble reads clearly even at about 60px.
+ * stray arcs, so the bubble reads clearly even at about 80px.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -180,7 +180,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 // #region Exports
 
-export { SigRinCom }; // What: Named Exports. Why: Home's hero, its eyebrow on phones, the Articles page's help card, and the 404 page show the motif. How: This exports SigRinCom.
+export { SigRinCom }; // What: Named Exports. Why: Home's hero, the Articles page's help card, and the 404 page show the motif. How: This exports SigRinCom.
 
 // #endregion Exports
 

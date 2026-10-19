@@ -97,7 +97,7 @@ src/
 │   ├── about/         About page and its .module.css
 │   ├── contact/       Contact page with the question form, and the "?" help tips beside its labels
 │   └── not-found/     The 404 page every unknown path shows, with its .module.css
-├── ui/                What more than one page uses: the article catalog (articles.ts), the topics, the topic tag, the signal rings, page titles, and page-links.ts (the pages the bar and footer link to)
+├── ui/                What more than one page uses: the article catalog (articles.ts), the topics, the topic tag, the signal rings, the hero flourishes, page titles, and page-links.ts (the pages the bar and footer link to)
 ├── styles/            styles.css: this site's teal color, larger reading size, and layout values, loaded after the design package's stylesheets
 ├── utils/             markdown.ts, the reader that turns an article's Markdown into the page's content
 ├── app.tsx            Root component and the route table

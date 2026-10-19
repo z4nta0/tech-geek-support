@@ -6,11 +6,12 @@
 import cssModObj from './home.module.css'; // What: CSS Module Object. Why: Home's hero, topic tiles, and steps are styled in its own module. How: This maps each class name in home.module.css to its hashed module class.
 
 
-import { ART_REC_ARR } from '../../ui/articles.ts';      // What: Article Record Array. Why: Home features the newest articles. How: The page shows the first four, which the catalog lists newest first.
-import { Link        } from 'react-router';              // What: Link. Why: The hero's buttons and the topic tiles move to other pages without a full page load. How: This renders those links.
-import { SigRinCom   } from '../../ui/signal-rings.tsx'; // What: Signal Rings Component. Why: The hero carries the site's motif. How: The hero sets it beside the pitch.
-import { TOP_REC_ARR } from '../../ui/topics.ts';        // What: Topic Record Array. Why: The topic tiles list every help topic. How: The page renders one tile per row.
-import { TopTagCom   } from '../../ui/topic-tag.tsx';    // What: Topic Tag Component. Why: Each featured article shows its topic. How: The page renders one tag per card.
+import { ART_REC_ARR } from '../../ui/articles.ts';       // What: Article Record Array. Why: Home features the newest articles. How: The page shows the first four, which the catalog lists newest first.
+import { HerFloCom   } from '../../ui/hero-flourish.tsx'; // What: Hero Flourish Component. Why: The stacked hero fills the room beside its rings. How: The hero sets a drawing on each side of them.
+import { Link        } from 'react-router';               // What: Link. Why: The hero's buttons and the topic tiles move to other pages without a full page load. How: This renders those links.
+import { SigRinCom   } from '../../ui/signal-rings.tsx';  // What: Signal Rings Component. Why: The hero carries the site's motif. How: The hero sets it beside the pitch.
+import { TOP_REC_ARR } from '../../ui/topics.ts';         // What: Topic Record Array. Why: The topic tiles list every help topic. How: The page renders one tile per row.
+import { TopTagCom   } from '../../ui/topic-tag.tsx';     // What: Topic Tag Component. Why: Each featured article shows its topic. How: The page renders one tag per card.
 
 
 import type { JSX } from 'react'; // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.
@@ -23,11 +24,12 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * home.tsx = Home
  *
  * @summary
- * The home page: a calm hero with the site's pitch beside the signal rings,
- * the help topics as tiles that open the Articles page filtered to each one,
- * plus a last tile for anything else, the four newest articles, and the three
- * steps from asking a question to being sorted. Every way onward leads to
- * asking a question or reading an article.
+ * The home page: a calm hero with the site's pitch beside the signal rings on
+ * wide screens, the rings stacked above it at 768px and below with a small
+ * drawing on each side down to 441px, the help topics as tiles that open the
+ * Articles page filtered to each one, plus a last tile for anything else, the
+ * four newest articles, and the three steps from asking a question to being
+ * sorted. Every way onward leads to asking a question or reading an article.
  *
  * Sections:
  *  - Constants
@@ -65,12 +67,12 @@ const STE_REC_ARR = [ // What: Step Record Array. Why: How It Works walks throug
  *
  * @summary
  * Renders the home page and its canonical link. The page's title and
- * description are index.html's own, so crawlers that never run the script
- * read them too. Each topic tile links to the Articles page with its topic in
- * the address (/articles?topic=windows), which the Articles page reads as its
- * filter, and the last tile leads to the question form for anything the
- * topics don't cover. The signal rings are decoration, hidden from screen
- * readers.
+ * description are index.html's own, so crawlers that never run the script read
+ * them too. Each topic tile links to the Articles page with its topic in the
+ * address (/articles?topic=windows), which the Articles page reads as its
+ * filter, and the last tile leads to the question form for anything the topics
+ * don't cover. The signal rings and their flourishes are decoration, hidden
+ * from screen readers.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -118,12 +120,7 @@ function HomPagCom () : JSX.Element {
 									className={ cssModObj.herDotSpa }
 
 									aria-hidden='true'
-								/>{ /* What: Hero Dot Span Element. Why: A small teal dot leads the label. How: This draws the dot, hidden from screen readers, and gives way to the small rings on a phone. */ }
-								<SigRinCom
-									className={ cssModObj.eyeRinSvg }
-
-									smaBoo
-								/>{ /* What: Signal Rings Component. Why: On a phone the hero has no room for the full rings above its pitch, so the motif leads the label instead, like the Tech Geek's avatar. How: This draws the small, cropped rings in place of the dot at 640px and below, hidden elsewhere. */ }
+								/>{ /* What: Hero Dot Span Element. Why: A small teal dot leads the label. How: This draws the dot, hidden from screen readers. */ }
 								Your friendly neighborhood Tech Geek
 							</p>
 
@@ -160,7 +157,29 @@ function HomPagCom () : JSX.Element {
 
 
 
-						<SigRinCom className={ cssModObj.herRinSvg } />{ /* What: Signal Rings Component. Why: The hero's picture is the site's calm motif. How: This draws the rings beside the text on wide screens and above it on a tablet, sized by the hero's grid, and gives way to the small rings in the eyebrow on a phone. */ }
+						<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The rings and their flourishes form the hero's picture. How: This holds the rings, beside the text on wide screens and above it at 768px and below, where a small drawing fills the room on each side of them. */ }
+
+
+							<SigRinCom className={ cssModObj.herRinSvg } />{ /* What: Signal Rings Component. Why: The hero's picture is the site's calm motif. How: This draws the rings, sized by the hero's grid on wide screens and a step smaller in the stacked hero at 768px and below. */ }
+
+
+
+							<HerFloCom
+								className={` ${ cssModObj.visFloSvg }   ${ cssModObj.visFloSvgLeft } `}
+
+								sidStr='left'
+							/>{ /* What: Hero Flourish Component. Why: The stacked hero leaves empty room beside the smaller rings, which a little of the site's motif fills. How: This draws the question side's drawing down the left at 768px and below, down to 441px. */ }
+
+
+
+							<HerFloCom
+								className={` ${ cssModObj.visFloSvg }   ${ cssModObj.visFloSvgRight } `}
+
+								sidStr='right'
+							/>{ /* What: Hero Flourish Component. Why: The stacked hero leaves empty room beside the smaller rings, which a little of the site's motif fills. How: This draws the answer side's drawing down the right at 768px and below, down to 441px. */ }
+
+
+						</div>
 
 
 					</div>

@@ -6,15 +6,16 @@
  *
  * @summary
  * Styles for HomPagCom. The hero sits on the ivory with the pitch beside the
- * signal rings, its last heading word in teal and a warm italic note under
- * the buttons. The topic tiles sit on a white band, each a soft ivory tile
- * with a dashed, stitched border just inside its edge, a teal speech bubble,
- * its topic, and a muted hint, four, three, or two across so every row stays
- * even, and one column of short rows on a phone. The four newest articles
- * follow on the ivory as white cards, four, two, or one across, then the
- * three step cards. The page fades up as it opens, every control eases its
- * hover, press, and focus, and every animation and transition holds still
- * under reduced motion.
+ * signal rings, which stack above it a step smaller at 768px and below, with a
+ * small drawing on each side down to 441px, its last heading word in teal and
+ * a warm italic note under the buttons. The topic tiles sit on a white band,
+ * each a soft ivory tile with a dashed, stitched border just inside its edge,
+ * a teal speech bubble, its topic, and a muted hint, four, three, or two
+ * across so every row stays even, and one column of short rows on a phone. The
+ * four newest articles follow on the ivory as white cards, four, two, or one
+ * across, then the three step cards. The page fades up as it opens, every
+ * control eases its hover, press, and focus, and every animation and
+ * transition holds still under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -108,27 +109,14 @@
 
 
 	align-items    : flex-start;
-	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
+	color          : var( --act-dar-col );                                       /* Accent-Tertiary Dark Color ~= #007063 */
 	display        : inline-flex;
-	font-family    : var( --fon-fam-sec );                   /* Font Family Secondary = 'DM Mono', monospace */
-	font-size      : var( --fon-siz-p01 );                   /* Font Size Base Plus 1 ~= 14.572px */
+	font-family    : var( --fon-fam-sec );                                       /* Font Family Secondary = 'DM Mono', monospace */
+	font-size      : clamp( var( --fon-siz-bas ), 3.2vw, var( --fon-siz-p01 ) ); /* Font Size Base = 11px, Font Size Base Plus 1 ~= 14.572px */ /* What: Phone-Width Label Size. Why: At its full size the label wraps below about 440px, pushing the heading down. How: This eases it from the base plus 1 size at about 455px and up toward the base size, keeping it on one line down to about 350px. */
 	font-weight    : 500;
-	gap            : var( --spa-hor-m02 );                   /* Spacing Horizontal Base Minus 2 ~= 8.304px */
-	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em ); /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
+	gap            : var( --spa-hor-m02 );                                       /* Spacing Horizontal Base Minus 2 ~= 8.304px */
+	letter-spacing : calc( var( --cdn-pow-008-rec ) * 1em );                     /* Core-Design-Number to the Power of 8 Reciprocal ~= 0.105em */
 	text-transform : uppercase;
-
-
-}
-@media ( max-width : 640px ) { /* What: Phone Hero Eyebrow Paragraph. Why: On a phone the small rings lead the label, taller than its two lines. How: This applies at 640px and below. */
-
-
-	.herEyePar { /* What: Ringed Hero Eyebrow Paragraph. Why: The label should sit level with the small rings beside it. How: This centers the label's lines against the rings. */
-
-
-		align-items : center;
-
-
-	}
 
 
 }
@@ -142,42 +130,6 @@
 	height        : calc( var( --ver-rhy-m02 ) * 1rem );               /* Vertical Rhythm Base Minus 2 ~= 8.304px */
 	margin-top    : calc( 1lh / 2 - var( --ver-rhy-m02 ) * 1rem / 2 ); /* Vertical Rhythm Base Minus 2 ~= 8.304px */ /* What: First-Line Centering. Why: The dot should sit beside the label's first line, however many lines it wraps to. How: This moves it down by half a line less half its own size. */
 	width         : calc( var( --ver-rhy-m02 ) * 1rem );               /* Vertical Rhythm Base Minus 2 ~= 8.304px */
-
-
-}
-@media ( max-width : 640px ) { /* What: Phone Hero Dot Span. Why: On a phone the small rings take the dot's place. How: This applies at 640px and below. */
-
-
-	.herDotSpa { /* What: Hidden Hero Dot Span. Why: The dot and the rings would say the same thing twice. How: This hides the dot. */
-
-
-		display : none;
-
-
-	}
-
-
-}
-
-.eyeRinSvg { /* What: Eyebrow Rings SVG. Why: The small rings only lead the label on a phone, where the full rings have no room above the pitch. How: This hides them on wider screens. */
-
-
-	display : none;
-
-
-}
-@media ( max-width : 640px ) { /* What: Phone Eyebrow Rings SVG. Why: On a phone the motif moves from above the pitch to beside the label, keeping the heading and buttons on the first screen. How: This applies at 640px and below. */
-
-
-	.eyeRinSvg { /* What: Shown Eyebrow Rings SVG. Why: The small rings read like the Tech Geek's avatar beside the label. How: This shows them never shrinking, capped at about 59px wide, a cap rather than a width, since the rings' own module sets their width to fill the box and may load after this one; their height follows their width. */
-
-
-		display   : block;
-		flex      : none;
-		max-width : calc( var( --ver-rhy-p05 ) * 1rem ); /* Vertical Rhythm Base Plus 5 ~= 59.447px */
-
-
-	}
 
 
 }
@@ -342,32 +294,81 @@
 
 
 
-.herRinSvg { /* What: Hero Rings SVG. Why: The rings fill their column without growing past a comfortable size. How: This centers them and caps their width at about 426px. */
+/* #region herVisDiv */
+
+.herVisDiv { /* What: Hero Visual Div. Why: The rings sit centered in their column, with room on either side for the flourishes once the hero stacks. How: This centers the rings and positions the flourishes against it. */
 
 
-	justify-self : center;
-	max-width    : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.601px */
+	display         : flex;
+	justify-content : center;
+	position        : relative;
 
 
 }
-@media ( max-width : 768px ) { /* What: Stacked Hero Rings SVG Variant. Why: In one column the rings lead the hero, and a tablet has room for them above the pitch. How: This applies at 768px and below. */
+@media ( max-width : 768px ) { /* What: Phone Hero Visual Div. Why: In one column the rings lead the hero, as every sister site's stacked hero opens on its picture. How: This applies at 768px and below. */
 
 
-	.herRinSvg { /* What: Leading Hero Rings SVG. Why: The rings greet the visitor first and still leave the pitch and its buttons on a tablet's first screen. How: This moves them above the text and caps their width at about 321px. */
+	.herVisDiv { /* What: Leading Hero Visual Div. Why: The rings greet the visitor first, above the pitch. How: This moves the rings and their flourishes above the text. */
 
 
-		max-width : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.277px */
-		order     : -1;
+		order : -1;
 
 
 	}
 
 
 }
-@media ( max-width : 640px ) { /* What: Phone Hero Rings SVG. Why: Above the pitch on a phone, even small rings push the Ask a Question button off a short phone's first screen. How: This applies at 640px and below. */
+
+.herRinSvg { /* What: Hero Rings SVG. Why: The rings fill their column without growing past a comfortable size. How: This caps their width at about 426px. */
 
 
-	.herRinSvg { /* What: Hidden Hero Rings SVG. Why: The small rings in the eyebrow carry the motif on a phone instead. How: This hides the full rings. */
+	max-width : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.601px */
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Hero Rings SVG. Why: Stacked above the pitch, the rings shouldn't fill a phone's or tablet's first screen. How: This applies at 768px and below. */
+
+
+	.herRinSvg { /* What: Smaller Hero Rings SVG. Why: A step smaller, the rings leave more of the pitch above the fold, at the same size down to 320px, as the sister sites' stacked pictures do. How: This caps their width at about 243px, the p10 step. */
+
+
+		max-width : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.522px */
+
+
+	}
+
+
+}
+
+
+.visFloSvg { /* What: Visual Flourish SVG. Why: The flourishes only fill the room the stacked hero leaves beside the rings. How: This hides them until the hero stacks. */
+
+
+	display : none;
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Visual Flourish SVG. Why: The stacked hero leaves empty room on either side of the smaller rings. How: This applies at 768px and below. */
+
+
+	.visFloSvg { /* What: Shown Visual Flourish SVG. Why: Each drawing should fill its side's room beside the rings, keeping clear of them. How: This shows it level with the rings, as tall as they are and as wide as the room left beside them less a gap, the drawing scaling to fit. */
+
+
+		display  : block;
+		height   : 100%;
+		position : absolute;
+		top      : 0;
+		width    : calc( ( 100% - var( --ver-rhy-p10 ) * 1rem ) / 2 - var( --spa-hor-p02 ) ); /* Vertical Rhythm Base Plus 10 ~= 242.522px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+
+
+	}
+
+
+}
+@media ( max-width : 440px ) { /* What: Narrow Phone Visual Flourish SVG. Why: Below about 440px the room beside the rings is too narrow for the drawings at full size, and smaller they read as stray specks. How: This applies at 440px and below. */
+
+
+	.visFloSvg { /* What: Hidden Visual Flourish SVG. Why: The rings fill most of a narrow phone's width on their own. How: This hides the drawings. */
 
 
 		display : none;
@@ -377,6 +378,22 @@
 
 
 }
+.visFloSvg--left { /* What: Visual Flourish SVG Left. Why: One drawing fills the rings' left side. How: This sets it against the column's left edge. */
+
+
+	left : 0;
+
+
+}
+.visFloSvg--right { /* What: Visual Flourish SVG Right. Why: The other drawing fills the rings' right side. How: This sets it against the column's right edge. */
+
+
+	right : 0;
+
+
+}
+
+/* #endregion herVisDiv */
 
 /* #endregion herInnDiv */
 
