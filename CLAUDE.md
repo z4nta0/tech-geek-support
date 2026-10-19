@@ -103,6 +103,12 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   size below about 455px (`3.2vw`), so it stays on one line down to about
   350px; below that it wraps, too long for a 320px screen at any readable size
   (decided by the user 2026-10-19).
+- **About hero** (decided by the user 2026-10-19): the same stacked layout as
+  Home's, following TechGeek.dev's About page: at 768px and below the portrait
+  leads the hero, a step smaller (about 183 by 242px, the p09 step, dev's size)
+  at every width down to 320px, with the same two drawings beside it down to
+  441px, kept clear of the pale teal circle behind the photo. The drawings come
+  from one shared component, `ui/hero-flourish.tsx`.
 - **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
   border inset from the edge and a hint line under each topic, carrying
   "Friendly Conversation"'s small speech-bubble icon. At 640px and below the

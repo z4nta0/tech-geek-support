@@ -6,11 +6,12 @@
 import cssModObj from './home.module.css'; // What: CSS Module Object. Why: Home's hero, topic tiles, and steps are styled in its own module. How: This maps each class name in home.module.css to its hashed module class.
 
 
-import { ART_REC_ARR } from '../../ui/articles.ts';      // What: Article Record Array. Why: Home features the newest articles. How: The page shows the first four, which the catalog lists newest first.
-import { Link        } from 'react-router';              // What: Link. Why: The hero's buttons and the topic tiles move to other pages without a full page load. How: This renders those links.
-import { SigRinCom   } from '../../ui/signal-rings.tsx'; // What: Signal Rings Component. Why: The hero carries the site's motif. How: The hero sets it beside the pitch.
-import { TOP_REC_ARR } from '../../ui/topics.ts';        // What: Topic Record Array. Why: The topic tiles list every help topic. How: The page renders one tile per row.
-import { TopTagCom   } from '../../ui/topic-tag.tsx';    // What: Topic Tag Component. Why: Each featured article shows its topic. How: The page renders one tag per card.
+import { ART_REC_ARR } from '../../ui/articles.ts';       // What: Article Record Array. Why: Home features the newest articles. How: The page shows the first four, which the catalog lists newest first.
+import { HerFloCom   } from '../../ui/hero-flourish.tsx'; // What: Hero Flourish Component. Why: The stacked hero fills the room beside its rings. How: The hero sets a drawing on each side of them.
+import { Link        } from 'react-router';               // What: Link. Why: The hero's buttons and the topic tiles move to other pages without a full page load. How: This renders those links.
+import { SigRinCom   } from '../../ui/signal-rings.tsx';  // What: Signal Rings Component. Why: The hero carries the site's motif. How: The hero sets it beside the pitch.
+import { TOP_REC_ARR } from '../../ui/topics.ts';         // What: Topic Record Array. Why: The topic tiles list every help topic. How: The page renders one tile per row.
+import { TopTagCom   } from '../../ui/topic-tag.tsx';     // What: Topic Tag Component. Why: Each featured article shows its topic. How: The page renders one tag per card.
 
 
 import type { JSX } from 'react'; // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.
@@ -163,185 +164,19 @@ function HomPagCom () : JSX.Element {
 
 
 
-							<svg
+							<HerFloCom
 								className={` ${ cssModObj.visFloSvg }   ${ cssModObj.visFloSvgLeft } `}
 
-								viewBox='0 0 60 240'
-
-								aria-hidden='true'
-							>{ /* What: Visual Flourish SVG Element. Why: The stacked hero leaves empty room beside the smaller rings, which a little of the site's motif fills. How: This draws a speech bubble with typing dots, signal arcs, and a small ringed disc down the left side at 768px and below, hidden from screen readers as decoration. */ }
+								sidStr='left'
+							/>{ /* What: Hero Flourish Component. Why: The stacked hero leaves empty room beside the smaller rings, which a little of the site's motif fills. How: This draws the question side's drawing down the left at 768px and below, down to 441px. */ }
 
 
-								<path
-									style={{ opacity : 'var( --cdn-pow-002-rec )' }} // Core-Design-Number to the Power of 2 Reciprocal ~= 0.570
 
-									d='M18 10 H42 A8 8 0 0 1 50 18 V30 A8 8 0 0 1 42 38 H26 L18 46 V38 A8 8 0 0 1 10 30 V18 A8 8 0 0 1 18 10 Z'
-									fill='none'
-									stroke='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									strokeLinejoin='round'
-									strokeWidth='1.5'
-								/>{ /* What: Flourish Bubble Path Element. Why: A speech bubble echoes the one at the heart of the rings, the site's promise of a conversation. How: This traces an outlined bubble in teal at about 57% strength at the drawing's top. */ }
-
-								<circle
-									style={{ opacity : 'var( --cdn-pow-002-rec )' }} // Core-Design-Number to the Power of 2 Reciprocal ~= 0.570
-
-									cx='22'
-									cy='24'
-									fill='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									r='2'
-								/>{ /* What: Flourish Typing Dot Circle Element. Why: Three dots inside the bubble read as someone typing a reply. How: This draws one of them in teal at about 57% strength. */ }
-
-								<circle
-									style={{ opacity : 'var( --cdn-pow-002-rec )' }} // Core-Design-Number to the Power of 2 Reciprocal ~= 0.570
-
-									cx='30'
-									cy='24'
-									fill='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									r='2'
-								/>{ /* What: Flourish Typing Dot Circle Element. Why: Three dots inside the bubble read as someone typing a reply. How: This draws one of them in teal at about 57% strength. */ }
-
-								<circle
-									style={{ opacity : 'var( --cdn-pow-002-rec )' }} // Core-Design-Number to the Power of 2 Reciprocal ~= 0.570
-
-									cx='38'
-									cy='24'
-									fill='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									r='2'
-								/>{ /* What: Flourish Typing Dot Circle Element. Why: Three dots inside the bubble read as someone typing a reply. How: This draws one of them in teal at about 57% strength. */ }
-
-								<path
-									style={{ opacity : 'var( --cdn-pow-001-rec )' }} // Core-Design-Number to the Power of 1 Reciprocal ~= 0.755
-
-									d='M22 148 A8 8 0 0 1 38 148'
-									fill='none'
-									stroke='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									strokeLinecap='round'
-									strokeWidth='1.5'
-								/>{ /* What: Flourish Signal Arc Path Element. Why: Arcs fanning out from a dot read as a signal, the rings' motif in miniature. How: This draws the smallest arc in teal at about 75% strength. */ }
-
-								<path
-									style={{ opacity : 'var( --cdn-pow-002-rec )' }} // Core-Design-Number to the Power of 2 Reciprocal ~= 0.570
-
-									d='M14 148 A16 16 0 0 1 46 148'
-									fill='none'
-									stroke='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									strokeLinecap='round'
-									strokeWidth='1.5'
-								/>{ /* What: Flourish Signal Arc Path Element. Why: Arcs fanning out from a dot read as a signal, the rings' motif in miniature. How: This draws the middle arc in teal at about 57% strength. */ }
-
-								<path
-									style={{ opacity : 'var( --cdn-pow-004-rec )' }} // Core-Design-Number to the Power of 4 Reciprocal ~= 0.325
-
-									d='M6 148 A24 24 0 0 1 54 148'
-									fill='none'
-									stroke='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									strokeLinecap='round'
-									strokeWidth='1.5'
-								/>{ /* What: Flourish Signal Arc Path Element. Why: Arcs fanning out from a dot read as a signal, the rings' motif in miniature. How: This draws the widest arc in teal at about 33% strength, fading outward like the rings. */ }
-
-								<circle
-									cx='30'
-									cy='152'
-									fill='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									r='3'
-								/>{ /* What: Flourish Signal Dot Circle Element. Why: The arcs need a source. How: This draws a teal dot under them. */ }
-
-								<circle
-									cx='30'
-									cy='208'
-									fill='var( --act-tin-col )' // Accent-Tertiary Tint Color = #D3EEE9
-									r='7'
-								/>{ /* What: Flourish Pool Circle Element. Why: A small pale disc echoes the rings' center pool. How: This fills it in the pale teal at the drawing's bottom. */ }
-
-								<circle
-									style={{ opacity : 'var( --cdn-pow-004-rec )' }} // Core-Design-Number to the Power of 4 Reciprocal ~= 0.325
-
-									cx='30'
-									cy='208'
-									fill='none'
-									r='14'
-									stroke='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									strokeWidth='1'
-								/>{ /* What: Flourish Ring Circle Element. Why: One ring around the disc completes the miniature rings. How: This outlines it in teal at about 33% strength. */ }
-
-
-							</svg>
-
-							<svg
+							<HerFloCom
 								className={` ${ cssModObj.visFloSvg }   ${ cssModObj.visFloSvgRight } `}
 
-								viewBox='0 0 60 240'
-
-								aria-hidden='true'
-							>{ /* What: Visual Flourish SVG Element. Why: The stacked hero leaves empty room beside the smaller rings, which a little of the site's motif fills. How: This draws a sparkle, a dot, small rings, and a reply bubble down the right side at 768px and below, hidden from screen readers as decoration. */ }
-
-
-								<path
-									style={{ opacity : 'var( --cdn-pow-001-rec )' }} // Core-Design-Number to the Power of 1 Reciprocal ~= 0.755
-
-									d='M32 12 L35.5 22.5 L46 26 L35.5 29.5 L32 40 L28.5 29.5 L18 26 L28.5 22.5 Z'
-									fill='var( --acc-mai-col )' // Accent Main Color = #F26419
-								/>{ /* What: Flourish Sparkle Path Element. Why: The hero's orange sparkle repeats once, the theme's touch of whimsy. How: This fills a four-point star in orange at about 75% strength at the drawing's top. */ }
-
-								<circle
-									style={{ opacity : 'var( --cdn-pow-002-rec )' }} // Core-Design-Number to the Power of 2 Reciprocal ~= 0.570
-
-									cx='16'
-									cy='62'
-									fill='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									r='3'
-								/>{ /* What: Flourish Dot Circle Element. Why: A lone dot links the sparkle to the rings below it. How: This draws a teal dot at about 57% strength. */ }
-
-								<circle
-									style={{ opacity : 'var( --cdn-pow-002-rec )' }} // Core-Design-Number to the Power of 2 Reciprocal ~= 0.570
-
-									cx='30'
-									cy='118'
-									fill='none'
-									r='12'
-									stroke='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									strokeWidth='1.5'
-								/>{ /* What: Flourish Ring Circle Element. Why: Two rings around a dot echo the hero's rings. How: This outlines the inner ring in teal at about 57% strength. */ }
-
-								<circle
-									style={{ opacity : 'var( --cdn-pow-004-rec )' }} // Core-Design-Number to the Power of 4 Reciprocal ~= 0.325
-
-									cx='30'
-									cy='118'
-									fill='none'
-									r='22'
-									stroke='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									strokeWidth='1'
-								/>{ /* What: Flourish Ring Circle Element. Why: Two rings around a dot echo the hero's rings. How: This outlines the outer ring in teal at about 33% strength, fading outward like the rings. */ }
-
-								<circle
-									cx='30'
-									cy='118'
-									fill='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									r='3.5'
-								/>{ /* What: Flourish Ring Dot Circle Element. Why: The rings need a center. How: This draws a teal dot inside them. */ }
-
-								<path
-									style={{ opacity : 'var( --cdn-pow-001-rec )' }} // Core-Design-Number to the Power of 1 Reciprocal ~= 0.755
-
-									d='M18 178 H42 A8 8 0 0 1 50 186 V198 A8 8 0 0 1 42 206 V214 L34 206 H18 A8 8 0 0 1 10 198 V186 A8 8 0 0 1 18 178 Z'
-									fill='var( --act-tin-col )' // Accent-Tertiary Tint Color = #D3EEE9
-									stroke='var( --act-mai-col )' // Accent-Tertiary Main Color = #2A9D8F
-									strokeLinejoin='round'
-									strokeWidth='1'
-								/>{ /* What: Flourish Reply Bubble Path Element. Why: A second bubble, its tail on the other side, reads as the reply to the first drawing's question. How: This fills a pale teal bubble with a thin teal outline at about 75% strength. */ }
-
-								<circle
-									style={{ opacity : 'var( --cdn-pow-002-rec )' }} // Core-Design-Number to the Power of 2 Reciprocal ~= 0.570
-
-									cx='46'
-									cy='230'
-									fill='var( --acc-mai-col )' // Accent Main Color = #F26419
-									r='2.5'
-								/>{ /* What: Flourish Dot Circle Element. Why: A small orange dot balances the sparkle at the drawing's bottom. How: This draws it at about 57% strength. */ }
-
-
-							</svg>
+								sidStr='right'
+							/>{ /* What: Hero Flourish Component. Why: The stacked hero leaves empty room beside the smaller rings, which a little of the site's motif fills. How: This draws the answer side's drawing down the right at 768px and below, down to 441px. */ }
 
 
 						</div>

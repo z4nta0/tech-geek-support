@@ -7,6 +7,7 @@ import cssModObj from './about.module.css';   // What: CSS Module Object. Why: T
 import selPorUrl from './self-portrait.webp'; // What: Self Portrait URL. Why: The hero shows z4nta0's portrait, so a visitor sees who answers. How: Vite resolves this to the image's fingerprinted URL.
 
 
+import { HerFloCom    } from '../../ui/hero-flourish.tsx';             // What: Hero Flourish Component. Why: The stacked hero fills the room beside its portrait. How: The hero sets a drawing on each side of it.
 import { Link         } from 'react-router';                           // What: Link. Why: The closing panel moves to the question form without a full page load. How: This renders it as a router link.
 import { usePagDesFun } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
 
@@ -21,11 +22,12 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * about.tsx = About
  *
  * @summary
- * The About page: who answers the questions, beside z4nta0's portrait, the
- * three promises behind every answer, the short story of a life with
- * computers, a note on privacy, and an invitation to ask. Its job is trust:
- * a nervous visitor should finish it knowing a real, patient person is on
- * the other end.
+ * The About page: who answers the questions, beside z4nta0's portrait on wide
+ * screens and below it at 768px and below, where a small drawing flanks the
+ * portrait down to 441px, the three promises behind every answer, the short
+ * story of a life with computers, a note on privacy, and an invitation to ask.
+ * Its job is trust: a nervous visitor should finish it knowing a real, patient
+ * person is on the other end.
  *
  * Sections:
  *  - Constants
@@ -118,10 +120,10 @@ function AboPagCom () : JSX.Element {
 			<div className={ cssModObj.pagEntDiv }>{ /* What: Page Enter Div Element. Why: The page fades up into view as it opens. How: This wraps every section and plays the shared entrance. */ }
 
 
-				<section className={ cssModObj.aboHerSec }>{ /* What: About Hero Section Element. Why: The page opens on who answers the questions. How: This holds the introduction beside the portrait. */ }
+				<section className={ cssModObj.aboHerSec }>{ /* What: About Hero Section Element. Why: The page opens on who answers the questions. How: This holds the introduction and the portrait, side by side on wide screens and the portrait above at 768px and below. */ }
 
 
-					<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The text and the portrait sit side by side on wide screens and stack on phones. How: This lays them out in the site's centered column. */ }
+					<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The text and the portrait sit side by side on wide screens and stack at 768px and below. How: This lays them out in the site's centered column. */ }
 
 
 						<div className={ cssModObj.herTexDiv }>{ /* What: Hero Text Div Element. Why: The introduction reads as one column. How: This stacks the eyebrow, heading, and paragraphs. */ }
@@ -138,18 +140,41 @@ function AboPagCom () : JSX.Element {
 
 						</div>
 
-						<div className={ cssModObj.porFraDiv }>{ /* What: Portrait Frame Div Element. Why: The portrait sits in a soft frame with the site's rings behind it. How: This holds the photo and draws the rings around it. */ }
+
+						<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The portrait and its flourishes form the hero's picture. How: This holds the portrait, beside the introduction on wide screens and above it at 768px and below, where a small drawing fills the room on each side of it down to 441px. */ }
 
 
-							<img
-								className={ cssModObj.porPhoIma }
+							<div className={ cssModObj.porFraDiv }>{ /* What: Portrait Frame Div Element. Why: The portrait sits in a soft frame with the site's rings behind it. How: This holds the photo and draws a pale teal circle behind it. */ }
 
-								height='850' // What: Intrinsic Height. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's height in pixels.
-								src={ selPorUrl }
-								width='642' // What: Intrinsic Width. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's width in pixels.
 
-								alt='The Tech Geek, who answers the questions on TechGeek.support'
-							/>{ /* What: Portrait Photo Image Element. Why: A face makes the help personal. How: This shows z4nta0's portrait. */ }
+								<img
+									className={ cssModObj.porPhoIma }
+
+									height='850' // What: Intrinsic Height. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's height in pixels.
+									src={ selPorUrl }
+									width='642' // What: Intrinsic Width. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's width in pixels.
+
+									alt='The Tech Geek, who answers the questions on TechGeek.support'
+								/>{ /* What: Portrait Photo Image Element. Why: A face makes the help personal. How: This shows z4nta0's portrait. */ }
+
+
+							</div>
+
+
+
+							<HerFloCom
+								className={` ${ cssModObj.visFloSvg }   ${ cssModObj.visFloSvgLeft } `}
+
+								sidStr='left'
+							/>{ /* What: Hero Flourish Component. Why: The stacked hero leaves empty room beside the smaller portrait, which a little of the site's motif fills. How: This draws the question side's drawing down the left at 768px and below, down to 441px. */ }
+
+
+
+							<HerFloCom
+								className={` ${ cssModObj.visFloSvg }   ${ cssModObj.visFloSvgRight } `}
+
+								sidStr='right'
+							/>{ /* What: Hero Flourish Component. Why: The stacked hero leaves empty room beside the smaller portrait, which a little of the site's motif fills. How: This draws the answer side's drawing down the right at 768px and below, down to 441px, clear of the circle behind the photo. */ }
 
 
 						</div>

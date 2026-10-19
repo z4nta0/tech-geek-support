@@ -6,11 +6,12 @@
  *
  * @summary
  * Styles for AboPagCom. The hero sets the introduction beside the portrait,
- * which sits in a white-bordered frame over a pale teal circle, echoing the
- * signal rings. The promises follow as three ivory cards on a white band,
- * the story as a narrow timeline whose milestones sit as teal dots on a thin
- * teal line, and the closing panel on pale teal. The page fades up as it
- * opens, and every transition holds still under reduced motion.
+ * which leads it a step smaller at 768px and below, with a small drawing on
+ * each side down to 441px, and sits in a white-bordered frame over a pale teal
+ * circle, echoing the signal rings. The promises follow as three ivory cards
+ * on a white band, the story as a narrow timeline whose milestones sit as teal
+ * dots on a thin teal line, and the closing panel on pale teal. The page fades
+ * up as it opens, and every transition holds still under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -73,7 +74,7 @@
 @media ( max-width : 768px ) { /* What: Phone Hero Inner Div. Why: Two columns are too tight on phones and small tablets. How: This applies at 768px and below. */
 
 
-	.herInnDiv { /* What: Stacked Hero Inner Div. Why: The portrait sits under the introduction on a narrow screen. How: This sets one column. */
+	.herInnDiv { /* What: Stacked Hero Inner Div. Why: The introduction and the portrait stack on a narrow screen. How: This sets one column. */
 
 
 		grid-template-columns : 1fr;
@@ -141,16 +142,55 @@
 /* #endregion herTexDiv */
 
 
+
+/* #region herVisDiv */
+
+.herVisDiv { /* What: Hero Visual Div. Why: The portrait sits centered in its column, with room on either side for the flourishes once the hero stacks. How: This centers the portrait and positions the flourishes against it. */
+
+
+	display         : flex;
+	justify-content : center;
+	position        : relative;
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Hero Visual Div. Why: In one column the portrait leads the hero, as every sister site's stacked hero opens on its picture. How: This applies at 768px and below. */
+
+
+	.herVisDiv { /* What: Leading Hero Visual Div. Why: The portrait greets the visitor first, above the introduction. How: This moves the portrait and its flourishes above the text. */
+
+
+		order : -1;
+
+
+	}
+
+
+}
+
+
 /* #region porFraDiv */
 
-.porFraDiv { /* What: Portrait Frame Div. Why: The portrait sits over a pale teal circle, the rings' color, without growing past a comfortable size. How: This centers a capped frame, positions the circle against it, and starts a stacking context so the circle sits behind the photo but in front of the page. */
+.porFraDiv { /* What: Portrait Frame Div. Why: The portrait sits over a pale teal circle, the rings' color, without growing past a comfortable size. How: This caps the frame, positions the circle against it, and starts a stacking context so the circle sits behind the photo but in front of the page. */
 
 
-	isolation    : isolate;
-	justify-self : center;
-	max-width    : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.277px */
-	position     : relative;
-	width        : 100%;
+	isolation : isolate;
+	max-width : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.277px */
+	position  : relative;
+	width     : 100%;
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Portrait Frame Div. Why: Leading the stacked hero, the portrait shouldn't fill a phone's or tablet's first screen. How: This applies at 768px and below. */
+
+
+	.porFraDiv { /* What: Smaller Portrait Frame Div. Why: A step smaller, the portrait leaves more of the introduction above the fold, at the same size down to 320px, as TechGeek.dev's About portrait does. How: This caps it at about 183px wide, the p09 step, about 242px tall. */
+
+
+		max-width : calc( var( --ver-rhy-p09 ) * 1rem ); /* Vertical Rhythm Base Plus 9 ~= 183.073px */
+
+
+	}
 
 
 }
@@ -184,6 +224,61 @@
 }
 
 /* #endregion porFraDiv */
+
+
+.visFloSvg { /* What: Visual Flourish SVG. Why: The flourishes only fill the room the stacked hero leaves beside the portrait. How: This hides them until the hero stacks. */
+
+
+	display : none;
+
+
+}
+@media ( max-width : 768px ) { /* What: Phone Visual Flourish SVG. Why: The stacked hero leaves empty room on either side of the smaller portrait. How: This applies at 768px and below. */
+
+
+	.visFloSvg { /* What: Shown Visual Flourish SVG. Why: Each drawing should fill its side's room beside the portrait, keeping clear of the circle that reaches past the photo's right edge. How: This shows it level with the portrait, as tall as it is and as wide as the room left beside it less a gap a little wider than the circle's reach, the drawing scaling to fit. */
+
+
+		display  : block;
+		height   : 100%;
+		position : absolute;
+		top      : 0;
+		width    : calc( ( 100% - var( --ver-rhy-p09 ) * 1rem ) / 2 - var( --spa-hor-p03 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.073px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+
+
+	}
+
+
+}
+@media ( max-width : 440px ) { /* What: Narrow Phone Visual Flourish SVG. Why: Below about 440px the room beside the portrait is too narrow for the drawings at full size, and smaller they read as stray specks. How: This applies at 440px and below. */
+
+
+	.visFloSvg { /* What: Hidden Visual Flourish SVG. Why: The portrait and its circle fill most of a narrow phone's width on their own. How: This hides the drawings. */
+
+
+		display : none;
+
+
+	}
+
+
+}
+.visFloSvg--left { /* What: Visual Flourish SVG Left. Why: One drawing fills the portrait's left side. How: This sets it against the column's left edge. */
+
+
+	left : 0;
+
+
+}
+.visFloSvg--right { /* What: Visual Flourish SVG Right. Why: The other drawing fills the portrait's right side. How: This sets it against the column's right edge. */
+
+
+	right : 0;
+
+
+}
+
+/* #endregion herVisDiv */
 
 /* #endregion herInnDiv */
 
