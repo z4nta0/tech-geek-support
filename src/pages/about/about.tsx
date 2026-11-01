@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import cssModObj from './about.module.css';   // What: CSS Module Object. Why: The About page's hero, promises, story, and closing panel are styled in its own module. How: This maps each class name in about.module.css to its hashed module class.
+import cssModObj from './about.module.css';   // What: CSS Module Object. Why: The About page's sections are styled in its own module. How: This maps each class name in about.module.css to its hashed module class.
 import selPorUrl from './self-portrait.webp'; // What: Self Portrait URL. Why: The hero shows z4nta0's portrait, so a visitor sees who answers. How: Vite resolves this to the image's fingerprinted URL.
 
 
@@ -25,8 +25,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * The About page: who answers the questions, beside z4nta0's portrait on wide
  * screens and below it at 768px and below, where a small drawing flanks the
  * portrait down to 441px, the three promises behind every answer, the short
- * story of a life with computers, a note on privacy, and an invitation to ask.
- * Its job is trust: a nervous visitor should finish it knowing a real, patient
+ * story of a life with computers, a note on privacy, an invitation to ask,
+ * and a closing invitation to support the work with a tip on Ko-fi. Its job
+ * is trust: a nervous visitor should finish it knowing a real, patient
  * person is on the other end.
  *
  * Sections:
@@ -65,6 +66,10 @@ const STO_REC_ARR = [ // What: Story Record Array. Why: The story runs through t
 
 
 ];
+
+
+
+const TIP_URL_STR = 'https://ko-fi.com/techgeekdev'; // What: Tip URL String. Why: The Support section's button opens z4nta0's Ko-fi page, the same address every README links. How: This is the page's public address, written here since it never changes between builds.
 
 // #endregion Constants
 
@@ -277,7 +282,7 @@ function AboPagCom () : JSX.Element {
 
 
 
-				<section className={ cssModObj.aboClaSec }>{ /* What: About Closing Section Element. Why: The page ends with a note on privacy and an invitation to ask. How: This holds the closing panel. */ }
+				<section className={ cssModObj.aboClaSec }>{ /* What: About Closing Section Element. Why: A note on privacy and an invitation to ask follow the story. How: This holds the closing panel. */ }
 
 
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The panel sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
@@ -300,6 +305,34 @@ function AboPagCom () : JSX.Element {
 
 
 						</div>
+
+
+					</div>
+
+
+				</section>
+
+
+
+				<section className={ cssModObj.aboSupSec }>{ /* What: About Support Section Element. Why: The page closes with a low-key invitation to tip, after the invitation to ask. How: This holds the Support column on a white band. */ }
+
+
+					<div className={ cssModObj.supInnDiv }>{ /* What: Support Inner Div Element. Why: The invitation sits centered in the page's column. How: This stacks the eyebrow, heading, paragraph, and Ko-fi button. */ }
+
+
+						<p className={ cssModObj.secEyePar }>Support My Work</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+
+						<h2 className={ cssModObj.secTitHea }>Buy Me a Coffee</h2>{ /* What: Section Title Heading Element. Why: The heading names the invitation. How: This shows the section's h2. */ }
+
+						<p className={ cssModObj.supTexPar }>The help on this site is free, and it always will be. If an answer here helped you, you can support my work with a tip on Ko-fi. It's never expected, and always appreciated.</p>{ /* What: Support Text Paragraph Element. Why: A visitor should know a tip is optional and the help stays free either way. How: This states the invitation. */ }
+
+						<a
+							className={ cssModObj.butPriAnc }
+
+							href={ TIP_URL_STR }
+							rel='noopener noreferrer'
+							target='_blank'
+						>Buy Me a Coffee<span className={ cssModObj.visHidSpa }> (opens Ko-fi in a new tab)</span></a>{ /* What: Button Primary Anchor Element. Why: The invitation ends with its one action. How: This opens the Ko-fi page in a new tab, cut off from this page, telling screen reader users where it goes through a visually hidden note. */ }
 
 
 					</div>
