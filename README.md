@@ -41,7 +41,7 @@ npm run typecheck  # TypeScript across src/, the configs, scripts/, tests/, and 
 ```bash
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted naming, keyboard, reflow, and motion checks, and a check that no source comment shows on a page
-npm run test:interaction    # page navigation, the phone menu, the question form, and every link and button's hover, press, and focus feedback
+npm run test:interaction    # page navigation, the phone menu, the question form, the Ko-fi button, and every link and button's hover, press, and focus feedback
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # every page and the phone menu from 320 to 1,920px: no sideways scroll, spill, or overlap, and every paragraph within its measure
 npm run test:seo            # titles, descriptions, canonical links, robots, link previews, structured data, icons, robots.txt, and the sitemap, for every page and article
@@ -107,7 +107,7 @@ scripts/               article-files.ts, which lists the articles for code that 
 research/articles/     The article drafts and their research notes, never published
 tests/
 ├── accessibility/     axe-core scan and scripted checks
-├── interaction/       navigation, phone menu, question form, and hover, press, and focus feedback checks
+├── interaction/       navigation, phone menu, question form, Ko-fi button, and hover, press, and focus feedback checks
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout checks across screen widths
 ├── seo/               head tags, structured data, icon, and crawler file checks
@@ -132,3 +132,11 @@ design/                Source artwork and the scripts that render it, not served
 Home, Articles, every article, About, and Contact are indexed, each with its own title, description, and canonical link, while the 404 page carries `noindex`. Each article also has its own link preview card and `Article` structured data. The site's structured data describes it as a `WebSite` by z4nta0, the same person TechGeek.dev describes. `index.html` carries the home page's title and description, since link checkers and many crawlers read it without running the site's script.
 
 The question form posts to Netlify Forms: a hidden copy of the form in `index.html` registers its fields, and Netlify emails each question to contact@techgeek.support, with the visitor's email as the reply-to. The email address is optional, and the form says plainly that without one there's no reply, so the visitor checks back for an article. An address is used only to reply, never sold, shared, or added to a mailing list, and a question that becomes an article is rewritten from scratch, so nothing in it points back to whoever asked.
+
+## Support
+
+If this project is useful to you, you can support its development with a tip
+on Ko-fi. It's never required, and always appreciated.
+
+[![Support me on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/techgeekdev)
+

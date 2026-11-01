@@ -82,6 +82,13 @@ SEO (never the demo treatment), and free.
 - **Article link previews** (decided by the user 2026-10-16): each article
   gets its own preview card and tags when shared, as each card does on
   TechGeek.cards, built in the SEO step.
+- **Ko-fi** (decided by the user 2026-11-01, following TechGeek.dev): the
+  README ends with the shared Support section, and About closes with a white
+  Support My Work band below the privacy panel, its "Buy Me a Coffee" button
+  opening https://ko-fi.com/techgeekdev in a new tab from `TIP_URL_STR` in
+  `pages/about/about.tsx`. Its wording follows dev's, said for this site: the
+  help is free and always will be, and a tip is never expected.
+  `tests/interaction/ko-fi.spec.ts` checks the link.
 - **Future feature, not now**: talking with z4nta0 directly (live help or
   booked sessions), which the user may add once they know they have the
   time.
