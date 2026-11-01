@@ -89,6 +89,11 @@ SEO (never the demo treatment), and free.
   `pages/about/about.tsx`. Its wording follows dev's, said for this site: the
   help is free and always will be, and a tip is never expected.
   `tests/interaction/ko-fi.spec.ts` checks the link.
+- **License** (decided by the user 2026-11-01, per the user-level Licenses
+  rule): the code is source available under the PolyForm Noncommercial
+  License 1.0.0 in `LICENSE.md`, whose note keeps the written content,
+  images, and TechGeek name and marks all rights reserved, so the site never
+  calls its code open source.
 - **Future feature, not now**: talking with z4nta0 directly (live help or
   booked sessions), which the user may add once they know they have the
   time.
