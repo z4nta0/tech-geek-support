@@ -125,6 +125,16 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   at every width down to 320px, with the same two drawings beside it down to
   441px, kept clear of the pale teal circle behind the photo. The drawings come
   from one shared component, `ui/hero-flourish.tsx`.
+- **The portrait's own render** (decided by the user 2026-11-15): this site's
+  frame shows the portrait larger than dev's (up to about 315 by 417px, at
+  1,000px wide and up, in all three engines), so it keeps its own copy of the
+  original, `design/images/originals/self-portrait.jpg` (1,374 by 2,048px,
+  copied from TechGeek.dev and ignored by git), and `npm run images`
+  (`design/images/render.mts`) writes `pages/about/self-portrait.webp` at
+  three times that width, 945 by 1,251px (the height keeps the 642 by 850
+  shape the frame has always shown, as closely as whole pixels allow, so the
+  page's layout barely moves), cut around its center and encoded at dev's 0.85
+  quality. A fresh checkout copies the original from dev first.
 - **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
   border inset from the edge and a hint line under each topic, carrying
   "Friendly Conversation"'s small speech-bubble icon. At 640px and below the
