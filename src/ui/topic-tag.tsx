@@ -83,7 +83,7 @@ function TopTagCom ( { topIdeStr } : TtcProTyp ) : JSX.Element {
 
 // #region Exports
 
-export { TopTagCom }; // What: Named Exports. Why: The Articles page and each article show their topic. How: This exports TopTagCom.
+export { TopTagCom }; // What: Named Export. Why: The Articles page and each article show their topic. How: This exports TopTagCom.
 
 // #endregion Exports
 

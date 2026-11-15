@@ -202,7 +202,7 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 
 // #region Exports
 
-export { HelTipCom }; // What: Named Exports. Why: The Contact form's email and question fields offer extra help. How: This exports HelTipCom.
+export { HelTipCom }; // What: Named Export. Why: The Contact form's email and question fields offer extra help. How: This exports HelTipCom.
 
 // #endregion Exports
 

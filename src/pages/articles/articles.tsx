@@ -344,7 +344,7 @@ function ArtLisCom () : JSX.Element {
 
 // #region Exports
 
-export { ArtLisCom }; // What: Named Exports. Why: The router's articles route renders the page. How: This exports ArtLisCom.
+export { ArtLisCom }; // What: Named Export. Why: The router's articles route renders the page. How: This exports ArtLisCom.
 
 // #endregion Exports
 
