@@ -87,7 +87,7 @@
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #FFFFFF */
 	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
 	border-radius : var( --rad-bor-sma );                            /* Radius Border Small ~= 8.304px */
-	box-shadow    : var( --ele-med-sha );                            /* Elevation Medium Shadow, about 0 4.7px 14.6px plus 0 1.5px 3.6px -1.2px */
+	box-shadow    : var( --ele-med-sha );                            /* Elevation Medium Shadow ~= 0 4.732px 14.572px plus 0 1.536px 3.572px -1.160px */
 	color         : var( --tex-mai-col );                            /* Text Main Color = #1A1A2E */
 	display       : block;
 	left          : 0;

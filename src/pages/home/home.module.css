@@ -366,7 +366,7 @@
 
 
 }
-@media ( max-width : 440px ) { /* What: Narrow Phone Visual Flourish SVG. Why: Below about 440px the room beside the rings is too narrow for the drawings at full size, and smaller they read as stray specks. How: This applies at 440px and below. */
+@media ( max-width : 440px ) { /* What: Narrow Phone Visual Flourish SVG. Why: At 440px and below the room beside the rings is too narrow for the drawings at full size, and smaller they read as stray specks. How: This applies at 440px and below. */
 
 
 	.visFloSvg { /* What: Hidden Visual Flourish SVG. Why: The rings fill most of a narrow phone's width on their own. How: This hides the drawings. */
@@ -580,7 +580,7 @@
 
 
 	.topTilAnc,
-	.topTilAnc::before { /* What: Motionless Topic Tile Anchor Stitching. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the tile's and its stitching's transitions off. */
+	.topTilAnc::before { /* What: Motionless Topic Tile Anchor And Stitching. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the tile's and its stitching's transitions off. */
 
 
 		transition : none;

@@ -145,7 +145,7 @@
 
 }
 
-.bodTexDiv h2 { /* What: Body Section Heading. Why: Section headings break the article into steps a reader can find again. How: This sets them at the base plus 3 size, a large step below the text before them. */
+.bodTexDiv h2 { /* What: Body Section Heading. Why: Section headings break the article into steps a reader can find again. How: This sets them at the base plus 3 size, the p04 spacing step below the text before them. */
 
 
 	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
@@ -156,7 +156,7 @@
 
 }
 
-.bodTexDiv h3 { /* What: Body Subsection Heading. Why: Subsections sit a step below sections. How: This sets them at the base plus 2 size, a medium step below the text before them. */
+.bodTexDiv h3 { /* What: Body Subsection Heading. Why: Subsections sit a step below sections. How: This sets them at the base plus 2 size, the p02 spacing step below the text before them. */
 
 
 	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
@@ -194,7 +194,7 @@
 
 
 	margin-top   : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
-	padding-left : calc( var( --ver-rhy-p02 ) * 1rem * 1.5 ); /* Vertical Rhythm Base Plus 2 ~= 25.572px, about 38.358px in all */ /* What: Marker Room. Why: The step numbers' circles need room beside the text. How: This leaves one and a half circle widths. */
+	padding-left : calc( var( --ver-rhy-p02 ) * 1rem * 1.5 ); /* Vertical Rhythm Base Plus 2 ~= 25.572px, ~= 38.358px in all * /* What: Marker Room. Why: The step numbers' circles need room beside the text. How: This leaves one and a half circle widths. */
 	position     : relative;
 
 

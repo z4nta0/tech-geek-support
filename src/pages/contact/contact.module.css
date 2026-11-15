@@ -6,14 +6,14 @@
  *
  * @summary
  * Styles for ConPagCom. A short hero introduces the page, then the question
- * form sits in a white card beside a sidebar of what to expect, stacking
- * under it below 1,024px. The fields are large and roomy, their text a step
- * above the family's body size, each glowing pale teal with a dark teal
- * border while focused. A failed send shows a pale red panel above the
- * button, and a sent question swaps the form for a thank-you whose check
- * pops in. The sidebar's cards are white, and the safety promise sits on
- * pale teal. The page fades up as it opens, and every animation and
- * transition holds still under reduced motion.
+ * form sits in a white card beside a sidebar of what to expect, stacking under
+ * it at 1,024px and below. The fields are large and roomy, their text a step
+ * above the family's body size, each glowing pale teal with a dark teal border
+ * while focused. A failed send shows a pale red panel above the button, and a
+ * sent question swaps the form for a thank-you whose check pops in. The
+ * sidebar's cards are white, and the safety promise sits on pale teal. The
+ * page fades up as it opens, and every animation and transition holds still
+ * under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -400,7 +400,7 @@
 
 }
 
-.forHonPar { /* What: Form Honeypot Paragraph. Why: Bots should find and fill the honeypot while people never see it, and some bots skip fields hidden with display none. How: This moves it off screen into a 1px box instead, the same as TechGeek.dev's. */
+.forHonPar { /* What: Form Honeypot Paragraph. Why: Bots should find and fill the honeypot while people never see it. How: This moves it off screen into a 1px box, the same as TechGeek.dev's. */
 
 
 	height   : 1px;
