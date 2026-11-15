@@ -69,7 +69,7 @@
 
 }
 
-.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names the page above its heading. How: This sets it in teal mono capitals. */
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A teal label names the page above its heading. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
@@ -793,7 +793,7 @@
 
 }
 
-.sidTitHea { /* What: Sidebar Title Heading. Why: Each card's heading reads clearly at a small size. How: This sets it in the main text color at the base plus 2 size. */
+.sidTitHea { /* What: Sidebar Title Heading. Why: Each card's heading reads clearly above its text. How: This sets it in the main text color at the base plus 2 size. */
 
 
 	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */

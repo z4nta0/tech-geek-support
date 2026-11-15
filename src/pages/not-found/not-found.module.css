@@ -6,7 +6,7 @@
  *
  * @summary
  * Styles for NotFouCom: one centered column below the bar, the signal rings
- * at a modest size above a small teal Error 404 label, the heading, a
+ * at a modest size above a teal "Error 404" label, the heading, a
  * reassuring line, and the three buttons in a centered row. The page fades
  * up as it opens, and every transition holds still under reduced motion.
  *
@@ -56,7 +56,7 @@
 
 }
 
-.notCodPar { /* What: Not Found Code Paragraph. Why: The error number reads as a small label, not a shout. How: This sets it in teal mono capitals. */
+.notCodPar { /* What: Not Found Code Paragraph. Why: The error number reads as a quiet label, not a shout. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */

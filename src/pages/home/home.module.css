@@ -105,7 +105,7 @@
 
 /* #region herEyePar */
 
-.herEyePar { /* What: Hero Eyebrow Paragraph. Why: The label reads as a small teal caption with its dot, which stays beside the first line when the label wraps. How: This lines up the dot with the words' first line in teal mono capitals. */
+.herEyePar { /* What: Hero Eyebrow Paragraph. Why: The label reads as a teal caption with its dot, which stays beside the first line when the label wraps. How: This lines up the dot with the words' first line in teal mono capitals. */
 
 
 	align-items    : flex-start;
@@ -428,7 +428,7 @@
 
 }
 
-.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names each section above its heading. How: This sets it in teal mono capitals. */
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A teal label names each section above its heading. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
@@ -492,7 +492,7 @@
 
 
 }
-@media ( max-width : 640px ) { /* What: Narrow Phone Topic Grid Unordered. Why: Two tiles across leave too little room for a name like Understanding on a narrow phone. How: This applies at 640px and below. */
+@media ( max-width : 640px ) { /* What: Narrow Phone Topic Grid Unordered. Why: Two tiles across leave too little room for a name like "Understanding" on a narrow phone. How: This applies at 640px and below. */
 
 
 	.topGriUno { /* What: One-Column Topic Grid Unordered. Why: One divides the twelve tiles evenly, and each tile becomes a short row with room for its whole name. How: This sets one column a little closer together. */
@@ -1007,7 +1007,7 @@
 
 }
 
-.steLabSpa { /* What: Step Label Span. Why: A small teal label numbers each step. How: This sets it in teal mono capitals. */
+.steLabSpa { /* What: Step Label Span. Why: A teal label numbers each step. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */

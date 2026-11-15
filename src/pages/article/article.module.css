@@ -446,7 +446,7 @@
 
 }
 
-.relTitHea { /* What: Related Title Heading. Why: The list's heading reads as a small label. How: This sets it in the main text color at the base plus 3 size. */
+.relTitHea { /* What: Related Title Heading. Why: The list's heading names the links below it. How: This sets it in the main text color at the base plus 3 size. */
 
 
 	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
