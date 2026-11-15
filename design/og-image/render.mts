@@ -95,7 +95,7 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 	await capPagObj.evaluate( ( filTexArr ) => { // What: Card Fill Call. Why: The same card serves the site and every article. How: This keeps one set of lines, removes the other, and fills an article's topic and title.
 
 
-		document.querySelectorAll( filTexArr ? '[data-site-only]' : '[data-article-only]' ).forEach( ( linCurEle ) => linCurEle.remove() ); // What: Line Removal Call. Why: An article's card has no mark or tag line, and the site's has no topic or title. How: This removes whichever set doesn't belong.
+		document.querySelectorAll( filTexArr ? '[data-site-card-part]' : '[data-article-card-part]' ).forEach( ( linCurEle ) => linCurEle.remove() ); // What: Line Removal Call. Why: An article's card has no mark or tag line, and the site's has no topic or title. How: This removes whichever set doesn't belong.
 
 
 
