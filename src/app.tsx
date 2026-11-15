@@ -84,8 +84,9 @@ const SIS_LIN_ARR : SisLinTyp[] = [ // What: Sister Link Array. Why: TechGeek.su
  * same frame. The routes take the current location and use its path as their
  * key, so moving to another page replaces the old page's tree rather than
  * updating it, which restarts the new page's entrance animation. It calls
- * useScrTopFun so every link opens its page at the top, as a real page load
- * would, while back and forward keep the browser's restored position.
+ * useScrTopFun so a link opens its page at the top, as a real page load
+ * would, or at its section when it names one, while back, forward, and a
+ * reload return the visitor to where they were.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

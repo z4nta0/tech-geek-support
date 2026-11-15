@@ -136,7 +136,7 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 
 
 
-		return () => { // What: Listener Cleanup Function. Why: A closed tip shouldn't keep listening. How: This removes both listeners when the tip closes or leaves the page.
+		return () => { // What: Listener Cleanup Function. Why: A closed tip shouldn't keep listening. How: This removes all three listeners when the tip closes or leaves the page.
 
 
 			document.removeEventListener( 'focusin', focOutFun );     // What: Focus In Removal Call. Why: The focus listener ends with the open tip. How: This removes it.
