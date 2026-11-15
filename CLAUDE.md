@@ -321,11 +321,13 @@ suites live in `tests/`, one project per suite and engine in
   rewrite, the build for secrets, and `npm audit` in Chromium only, and loads
   every state, the reachable ones above included, from a `vite preview` build
   on port 5206 with the headers applied, failing on any CSP violation or a new
-  tab link without `noopener` and `noreferrer`. The policy's `img-src` allows
-  `data:` for the Contact select's arrow, an inline SVG in the stylesheet, and
-  WebKit's own report about the select's inline style is ignored, as on
-  TechGeek.cards. Chromium runs as full headless Chrome (`channel :
-  'chromium'`).
+  tab link without `noopener` and `noreferrer`. The policy allows no `data:`
+  image, which the headers check fails: the Contact select's arrow is its own
+  `pages/contact/select-arrow.svg` (since 2026-11-15, per the user-level rule
+  "## Dropdown Arrows: An SVG File"), and `vite.config.ts` turns off asset
+  inlining, so every asset ships as a file. WebKit's own report about the
+  select's inline style is ignored, as on TechGeek.cards. Chromium runs as
+  full headless Chrome (`channel : 'chromium'`).
 - **Speed** (2026-11-15, following TechGeek.cards' fixes): the feedback
   probe waits for each look's animations to finish (`aniFinFun`) rather than a
   fixed pause, its tests run in parallel across 6 workers, and the dev
