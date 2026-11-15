@@ -240,10 +240,9 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
  * imaSizFun = Image Size Function
  *
  * @summary
- * Reads an image's width and height from its own bytes, the way an app sizes
- * a preview before drawing it. A PNG keeps them at a fixed place in its
- * header; a JPEG keeps them in its first start-of-frame segment, found by
- * walking its segments from the start.
+ * Reads an image's width and height from its own bytes. A PNG keeps them at
+ * a fixed place in its header; a JPEG keeps them in its first start-of-frame
+ * segment, found by walking its segments from the start.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

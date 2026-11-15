@@ -93,7 +93,7 @@ const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: The checks
 	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing',                          widNum : 1440 }, // What: Not Found Desktop State. Why: Every unknown address lands on the 404 page. How: This loads an address the site doesn't have at 1,440px.
 	{ heiNum : 844, ideStr : 'not-found-phone',   patStr : '/missing',                          widNum : 390  }, // What: Not Found Phone State. Why: The phone bar hides its links behind the menu on the 404 page too. How: This loads an address the site doesn't have at 390px.
 
-	{ // What: Menu Phone State. Why: The open menu holds the phone's only copy of the page links. How: This loads the home page at 390px and opens the menu through its toggle button.
+	{ // What: Menu Phone State. Why: The open menu holds the phone bar's page links. How: This loads the home page at 390px and opens the menu through its toggle button.
 
 
 		heiNum : 844,
@@ -190,7 +190,7 @@ async function revPagFun ( curPagObj : Page ) : Promise< void > {
  *
  * @summary
  * Waits until the page has stayed still for half a second: no animation or
- * transition running except ones that repeat forever, such as the bar's
+ * transition running except ones that repeat forever, such as the menu's
  * pulsing availability dot, which never finishes and so is skipped (the
  * reduced motion check is what catches one that shouldn't be playing). A
  * single still moment isn't enough, since a fade can start just after the last

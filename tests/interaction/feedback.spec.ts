@@ -900,10 +900,10 @@ for ( const staRecObj of ALL_STA_ARR ) { // What: State Test Loop. Why: Every pa
 
 
 
-for ( const staRecObj of STA_REC_ARR ) { // What: Shared State Ring Loop. Why: The first keyboard stop's ring is read on the shared states, where the first Tab lands on a link or button, while the feedback probe checks every control's ring eases on the reachable states too. How: This declares the ring check once per shared state.
+for ( const staRecObj of STA_REC_ARR ) { // What: Shared State Ring Loop. Why: The first keyboard stop's ring is read on the shared states, where the first Tab lands on a link or button. How: This declares the ring check once per shared state.
 
 
-	test( `${ staRecObj.ideStr } eases its focus ring in to full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop and reads its ring once it has eased in, while the feedback probe checks every control's ring eases on the reachable states too.
+	test( `${ staRecObj.ideStr } eases its focus ring in to full width`, async ( { browserName : engNamStr, page : curPagObj } ) => { // What: Focus Ring Test. Why: A keyboard user has to see where focus lands. How: This tabs to the first stop and reads its ring once it has eased in.
 
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The walk starts from the state settled. How: This loads and settles it.
