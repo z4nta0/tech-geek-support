@@ -441,7 +441,9 @@
 
 }
 
-/* What: Section Eyebrow Paragraph And Section Title Heading Pointer. Why: The story's eyebrow and heading share their rules with the other sections'. How: Their rules sit in the herTexDiv and aboProSec regions above. */
+/* What: Section Eyebrow Paragraph Pointer. Why: The story's eyebrow shares its rule with the hero's. How: Its rule sits in the herTexDiv region above. */
+
+/* What: Section Title Heading Pointer. Why: The story's heading shares its rule with the promises section's. How: Its rule sits in the aboProSec region above. */
 
 
 
@@ -672,7 +674,9 @@
 
 }
 
-/* What: Section Eyebrow Paragraph And Section Title Heading Pointer. Why: The Support section's eyebrow and heading share their rules with the other sections'. How: Their rules sit in the herTexDiv and aboProSec regions above. */
+/* What: Section Eyebrow Paragraph Pointer. Why: The Support section's eyebrow shares its rule with the hero's. How: Its rule sits in the herTexDiv region above. */
+
+/* What: Section Title Heading Pointer. Why: The Support section's heading shares its rule with the promises section's. How: Its rule sits in the aboProSec region above. */
 
 .supTexPar { /* What: Support Text Paragraph. Why: The invitation reads a step larger, like the page's other paragraphs, with room before its button. How: This sets it at the base plus 2 size, capped at the paragraph measure, with a small step below. */
 

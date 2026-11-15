@@ -560,7 +560,9 @@
 
 /* #region fieLabLab */
 
-/* What: Field Label Label Pointer. Why: The email label looks like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
+/* What: Field Label Label Pointer. Why: The email label looks like every other field's. How: Its rule sits once in the fieLabLab region above. */
+
+/* What: Field Optional Span Pointer. Why: The email label's optional note looks like the other optional note. How: Its rule sits once in the fieLabLab region above. */
 
 /* #endregion fieLabLab */
 
@@ -579,7 +581,9 @@
 
 /* #region fieLabLab */
 
-/* What: Field Label Label Pointer. Why: The topic label looks like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
+/* What: Field Label Label Pointer. Why: The topic label looks like every other field's. How: Its rule sits once in the fieLabLab region above. */
+
+/* What: Field Optional Span Pointer. Why: The topic label's optional note looks like the other optional note. How: Its rule sits once in the fieLabLab region above. */
 
 /* #endregion fieLabLab */
 
