@@ -491,28 +491,6 @@
 /* #endregion fieLabLab */
 
 
-
-/* #region fieHeaDiv */
-
-.fieHeaDiv { /* What: Field Header Div. Why: A label and its help tip read together, and the tip's bubble opens just under them, across the field. How: This lets the tip flow right after the label's last word, positioned so the bubble spans the row's width. */
-
-
-	position : relative;
-
-
-}
-
-
-/* #region fieLabLab */
-
-/* What: Field Label Label. Why: The email and question labels look like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
-
-/* #endregion fieLabLab */
-
-/* #endregion fieHeaDiv */
-
-
-
 .forConInp,
 .forConSel,
 .forConTex { /* What: Form Control Fields. Why: The inputs, the menu, and the box share one large, friendly look. How: This sets them full width on the ivory with a quiet border, rounded corners, and text at the base plus 2 size, easing their focus border, glow, and outline. */
@@ -567,6 +545,29 @@
 
 }
 
+
+
+/* #region fieHeaDiv */
+
+.fieHeaDiv { /* What: Field Header Div. Why: A label and its help tip read together, and the tip's bubble opens just under them, across the field. How: This lets the tip flow right after the label's last word, positioned so the bubble spans the row's width. */
+
+
+	position : relative;
+
+
+}
+
+
+/* #region fieLabLab */
+
+/* What: Field Label Label Pointer. Why: The email and question labels look like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
+
+/* #endregion fieLabLab */
+
+/* #endregion fieHeaDiv */
+
+
+
 .forConSel { /* What: Form Control Select. Why: The menu draws its own arrow in the site's style. How: This removes the native arrow and draws a muted chevron at the right, making room for it. */
 
 
@@ -597,7 +598,7 @@
 
 /* #region forFieDiv */
 
-/* What: Form Field Div. Why: The topic and question fields share the name and email fields' look. How: Its rule sits once in the forFieDiv region above, with its children's. */
+/* What: Form Field Div Pointer. Why: The topic and question fields share the name and email fields' look. How: Its rule sits once in the forFieDiv region above, with its children's. */
 
 /* #endregion forFieDiv */
 

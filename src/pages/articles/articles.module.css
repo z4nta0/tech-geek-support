@@ -585,7 +585,7 @@
 
 }
 
-/* What: Button Primary Anchor. Why: The card's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which every button on the page shares. */
+/* What: Button Primary Anchor Pointer. Why: The card's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which every button on the page shares. */
 
 .helSafPar { /* What: Help Safety Paragraph. Why: The safety note is a quiet aside under the button. How: This sets it in the muted color at the base plus 1 size. */
 
@@ -639,7 +639,7 @@
 
 }
 
-/* What: Button Primary Anchor. Why: The panel's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which every button on the page shares. */
+/* What: Button Primary Anchor Pointer. Why: The panel's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which every button on the page shares. */
 
 /* #endregion stiStuAsi */
 
