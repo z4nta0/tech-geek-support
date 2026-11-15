@@ -8,7 +8,9 @@ TechGeek.dev (`../tech-geek-dev`) is the source of this project's configs and
 test suites, TechGeek.cards (`../tech-geek-cards`) the closest worked example
 of a sister site built on the shared design from its first day, and the
 shared design comes from `techgeek-design` (`../techgeek-design`, installed
-from its `v0.4.0` tag).
+from its `v0.7.2` tag, which brought the skip link, the scroll
+restoration on back, forward, and reload, and the menu closing on any link
+click, updated 2026-11-15).
 
 ## Origin and sibling sites
 This repository once held the portfolio, the support articles, and the
@@ -255,6 +257,16 @@ suites live in `tests/`, one project per suite and engine in
 - **Comment text**: the scripted accessibility suite fails any page whose
   visible text carries a `What:`, `Why:`, or `How:` label, the sign of a JSX
   comment written where it renders as text.
+- **Skip link** (from the design package's `v0.7.2`, 2026-11-15): the main
+  content is everything between the bar and the footer, so `app.tsx`'s
+  `<main>` carries `id='main'` and `tabIndex={ -1 }` for the bar's skip link.
+  The feedback probe focuses the skip link before hovering it, since it waits
+  above the screen until it's focused.
+- **Speed** (2026-11-15, following TechGeek.cards' fixes): the feedback
+  probe waits for each look's animations to finish (`aniFinFun`) rather than a
+  fixed pause, its tests run in parallel across 6 workers, and the dev
+  server's watcher ignores `tests/output`, so the full run takes about 8
+  minutes in all three engines rather than over an hour.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.
