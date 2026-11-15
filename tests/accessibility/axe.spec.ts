@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import AxeBuilder from '@axe-core/playwright'; // What: Axe Builder. Why: axe-core finds the mechanical accessibility failures, such as low contrast, missing names, and misused ARIA. How: This runs its scan against a Playwright page.
+import AxeBuiCla from '@axe-core/playwright'; // What: Axe Builder Class. Why: axe-core finds the mechanical accessibility failures, such as low contrast, missing names, and misused ARIA. How: This runs its scan against a Playwright page.
 
 
 import { ADR_STA_ARR } from '../support/articles.ts'; // What: Address State Array. Why: An address naming a topic, as Home's topic tiles give, opens the Articles list narrowed, a state a visitor reaches. How: This lists the Articles states opened that way, one per width.
@@ -48,7 +48,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The scan helpe
 
 // #region Types
 
-type AxeResTyp = Awaited< ReturnType< AxeBuilder[ 'analyze' ] > >; // What: Axe Results Type. Why: The scan's findings are summarized for the report, and axe-core itself is only a dependency of the Playwright integration. How: This reads the type from what AxeBuilder's analyze resolves to.
+type AxeResTyp = Awaited< ReturnType< AxeBuiCla[ 'analyze' ] > >; // What: Axe Results Type. Why: The scan's findings are summarized for the report, and axe-core itself is only a dependency of the Playwright integration. How: This reads the type from what the axe builder class's analyze resolves to.
 
 // #endregion Types
 
@@ -91,7 +91,7 @@ const AXE_TAG_ARR = [ 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'b
 async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
 
 
-	return new AxeBuilder( { page : curPagObj } ).withTags( AXE_TAG_ARR ).analyze(); // What: Axe Scan Return. Why: The scan's results decide the test. How: This builds an axe run for the page, limits it to the chosen rule sets, and runs it.
+	return new AxeBuiCla( { page : curPagObj } ).withTags( AXE_TAG_ARR ).analyze(); // What: Axe Scan Return. Why: The scan's results decide the test. How: This builds an axe run for the page, limits it to the chosen rule sets, and runs it.
 
 
 }
