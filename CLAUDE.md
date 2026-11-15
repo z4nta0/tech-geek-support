@@ -57,9 +57,11 @@ SEO (never the demo treatment), and free.
 - **Help tips** (decided by the user 2026-10-17): the email and question
   hints sit behind a small "?" button (`pages/contact/help-tip.tsx`) that
   follows each label, opening a bubble on a mouse hover or on a click or tap,
-  and closing on Escape or a press elsewhere; each field still names its
-  bubble for screen readers. The password warning also shows as the
-  question box's placeholder, so every visitor sees it before typing.
+  and closing on Escape, a press elsewhere, or focus moving elsewhere (added
+  2026-11-15, in the audit, since the email tip's bubble hid the field Tab
+  moved on to); each field still names its bubble for screen readers. The
+  password warning also shows as the question box's placeholder, so every
+  visitor sees it before typing.
   The labels ease from the base plus 2 size toward the base plus 1 size with
   the form's own width (`3.8cqi`), and the email label reads "Your email
   (optional)", so every label and its tip stay on one line at every width;
