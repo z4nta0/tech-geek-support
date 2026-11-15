@@ -28,6 +28,7 @@ import { readFileSync  } from 'node:fs';                  // What: Read File Syn
  *
  * Sections:
  *  - Constants
+ *  - Module State
  *  - Exports
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -40,7 +41,11 @@ import { readFileSync  } from 'node:fs';                  // What: Read File Syn
 
 const ART_DIR_STR = fileURLToPath( new URL( '../src/articles/', import.meta.url ) ); // What: Article Directory String. Why: Every article's folder sits in src/articles. How: This resolves that folder from this file's own location.
 
+// #endregion Constants
 
+
+
+// #region Module State
 
 type ArtFilTyp = { ideStr : string, pubStr : string, sumStr : string, titStr : string, topStr : string, updStr : string }; // What: Article File Type. Why: Each consumer reads the same handful of an article's details. How: This types its address, its dates, its summary, its title, and its topic.
 
@@ -67,7 +72,7 @@ const ART_FIL_ARR : ArtFilTyp[] = readdirSync( ART_DIR_STR, { withFileTypes : tr
 
 } );
 
-// #endregion Constants
+// #endregion Module State
 
 
 
