@@ -95,10 +95,10 @@
 
 			@summary
 			Link scrapers read only this file and never run the site's script,
-			so every page shares this one card, describing the home page: its
-			title and description, and the card npm run og-image renders. A
-			page that ever needs a card of its own would need the site
-			prerendered first.
+			so every page but an article shares this one card, describing the
+			home page: its title and description, and the card npm run og-image
+			renders. Each article's own page, written by the build, carries its
+			own tags and card.
 
 			@author z4nta0 <https://github.com/z4nta0>
 

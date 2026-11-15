@@ -9,9 +9,8 @@
  * previews. Search listings cut a title off past about 60 characters, so an
  * article's title carries the site's name after it only when both fit within
  * 60, and stands alone otherwise, since the article's own words matter more
- * to a searcher than the site's name. The article's page, the build that
- * writes each article's own HTML page, and the SEO suite all read it here, so
- * the three never disagree.
+ * to a searcher than the site's name. It's the one place an article's page
+ * title is worked out, so the title reads the same wherever it's shown.
  *
  * Sections:
  *  - Constants
