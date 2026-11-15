@@ -282,7 +282,7 @@ function AboPagCom () : JSX.Element {
 
 
 
-				<section className={ cssModObj.aboClaSec }>{ /* What: About Closing Section Element. Why: A note on privacy and an invitation to ask follow the story. How: This holds the closing panel. */ }
+				<section className={ cssModObj.aboCloSec }>{ /* What: About Closing Section Element. Why: A note on privacy and an invitation to ask follow the story. How: This holds the closing panel. */ }
 
 
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The panel sits in the site's centered column. How: This caps and centers it with the side gutter. */ }

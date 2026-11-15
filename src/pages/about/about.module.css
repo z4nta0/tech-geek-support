@@ -521,9 +521,9 @@
 
 
 
-/* #region aboClaSec */
+/* #region aboCloSec */
 
-.aboClaSec { /* What: About Closing Section. Why: The closing panel gets room below before the Support band. How: This pads the section's bottom. */
+.aboCloSec { /* What: About Closing Section. Why: The closing panel gets room below before the Support band. How: This pads the section's bottom. */
 
 
 	padding-bottom : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
@@ -638,7 +638,7 @@
 
 /* #endregion secInnDiv */
 
-/* #endregion aboClaSec */
+/* #endregion aboCloSec */
 
 
 
