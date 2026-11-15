@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import react from '@vitejs/plugin-react'; // What: React. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
+import reaPluFun from '@vitejs/plugin-react'; // What: React Plugin Function. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
 
 
 import { ART_FIL_ARR  } from './scripts/article-files.ts'; // What: Article File Array. Why: Every article gets its own page carrying its title, description, and link preview, and a sitemap entry. How: The article pages plugin writes one per row.
@@ -396,7 +396,7 @@ const VIT_CON_OBJ = defineConfig({ // What: Vite Config Object. Why: Vite reads 
 
 
 	css     : { modules : { localsConvention : 'camelCaseOnly' } },                        // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so every module reads the same way, per the CSS modules rules. How: This sets the locals convention.
-	plugins : [ react(), minHtmFun(), artPagFun() ],                                       // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React, the page minifier, and the article pages, which copy the page after the minifier has compacted it.
+	plugins : [ reaPluFun(), minHtmFun(), artPagFun() ],                                   // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React, the page minifier, and the article pages, which copy the page after the minifier has compacted it.
 	server  : { watch : { ignored : [ '**/*.log', '**/dist/**', '**/tests/output/**' ] } } // What: Server. Why: A test run writes thousands of trace frames into the test output, which kept every dev server watching the project busy for hours (measured 2026-11-13 in tech-geek-cards), and none of these folders hold app code. How: This keeps the file watcher off logs, the build, and the test output.
 
 
