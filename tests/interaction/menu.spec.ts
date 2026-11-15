@@ -45,8 +45,6 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: The helpers
 
 // #region Constants
 
-const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: Both ways of asking for a new tab have to close the menu. How: Each row pairs a name for the test title with the click options that make that kind of click.
-
 const MEN_LIN_ARR = [ // What: Menu Link Array. Why: A page link, the call to action, and each profile icon have to close the open menu. How: Each entry is a link's accessible name: a page link, the call to action, then the profile icons.
 
 
@@ -57,6 +55,8 @@ const MEN_LIN_ARR = [ // What: Menu Link Array. Why: A page link, the call to ac
 
 
 ];
+
+const CLI_KIN_ARR : Array< [ string, Parameters< Locator[ 'click' ] >[ 0 ] ] > = [ [ 'Ctrl or Cmd', { modifiers : [ 'ControlOrMeta' ] } ], [ 'middle', { button : 'middle' } ] ]; // What: Click Kind Array. Why: Both ways of asking for a new tab have to close the menu. How: Each row pairs a name for the test title with the click options that make that kind of click.
 
 // #endregion Constants
 
