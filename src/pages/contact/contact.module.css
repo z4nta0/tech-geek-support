@@ -602,6 +602,16 @@
 
 
 
+/* #region errAleDiv */
+
+.errAleDiv:empty { /* What: Empty Error Alert Div. Why: The alert region stays in the form from the first render so a failed send is announced, but as an empty flex item it would still add the form's gap above the button. How: This takes it out of the form's flow while it holds no message, so it takes no space and adds no gap. */
+
+
+	position : absolute;
+
+
+}
+
 .errMesPar { /* What: Error Message Paragraph. Why: A failed send has to stand out, and its arrival should be seen. How: This fades the message up into view with the shared entrance on a pale red panel with a red border and text. */
 
 
@@ -628,6 +638,9 @@
 
 
 }
+
+/* #endregion errAleDiv */
+
 
 .senQueBut { /* What: Send Question Button. Why: Sending is the form's one main action. How: This sets an orange button in mono capitals, easing its color, lift, press, and focus, and dimming while it sends. */
 
