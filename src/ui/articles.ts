@@ -84,7 +84,7 @@ type ArtRecTyp = { bloRecArr : BloRecTyp[], ideStr : string, medUrlObj : Record<
 function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 
-	const ideStr = filPatStr.split( '/' ).at( -2 )!; // What: Identifier String. Why: An article's address is its folder's name. How: This takes the path's second-to-last part. // What: Non-Null Note. Why: at() allows undefined for a short array. How: Every glob path ends in a folder and article.md.
+	const artIdeStr = filPatStr.split( '/' ).at( -2 )!; // What: Article Identifier String. Why: An article's address is its folder's name. How: This takes the path's second-to-last part. // What: Non-Null Note. Why: at() allows undefined for a short array. How: Every glob path ends in a folder and article.md.
 
 	const { bloRecArr, froMatObj } = parMarFun( filTexStr ); // What: Block Record Array And Front Matter Object. Why: The article's fields and body come from its file. How: This reads the file.
 
@@ -95,14 +95,14 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	for ( const keyNamStr of [ 'published', 'summary', 'title', 'topic' ] ) { // What: Required Key Loop. Why: Every article needs these four fields to show anywhere. How: This checks each one.
 
 
-		if ( !froMatObj[ keyNamStr ] ) throw new Error( `Article "${ ideStr }" is missing its ${ keyNamStr } in the front matter.` ); // What: Missing Key Guard. Why: A missing field would show as a blank on the site. How: This stops the build, naming the article and the field.
+		if ( !froMatObj[ keyNamStr ] ) throw new Error( `Article "${ artIdeStr }" is missing its ${ keyNamStr } in the front matter.` ); // What: Missing Key Guard. Why: A missing field would show as a blank on the site. How: This stops the build, naming the article and the field.
 
 
 	}
 
 
 
-	if ( !TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === froMatObj.topic ) ) throw new Error( `Article "${ ideStr }" has an unknown topic, "${ froMatObj.topic }".` ); // What: Unknown Topic Guard. Why: An article with no real topic would never show under a filter. How: This stops the build, naming the article and its topic.
+	if ( !TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === froMatObj.topic ) ) throw new Error( `Article "${ artIdeStr }" has an unknown topic, "${ froMatObj.topic }".` ); // What: Unknown Topic Guard. Why: An article with no real topic would never show under a filter. How: This stops the build, naming the article and its topic.
 
 	// #endregion Front Matter Checks
 
@@ -120,10 +120,10 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 
 
-		const medUrlStr = MED_URL_OBJ[ `../articles/${ ideStr }/${ bloRecObj.souStr }` ]; // What: Media URL String. Why: The file's built address comes from Vite's glob. How: This looks it up by its path.
+		const medUrlStr = MED_URL_OBJ[ `../articles/${ artIdeStr }/${ bloRecObj.souStr }` ]; // What: Media URL String. Why: The file's built address comes from Vite's glob. How: This looks it up by its path.
 
 
-		if ( !medUrlStr ) throw new Error( `Article "${ ideStr }" names ${ bloRecObj.souStr }, which isn't in its folder.` ); // What: Missing Media Guard. Why: A missing photo would show as a broken image. How: This stops the build, naming the article and the file.
+		if ( !medUrlStr ) throw new Error( `Article "${ artIdeStr }" names ${ bloRecObj.souStr }, which isn't in its folder.` ); // What: Missing Media Guard. Why: A missing photo would show as a broken image. How: This stops the build, naming the article and the file.
 
 
 
@@ -139,7 +139,7 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	// #region Reading Time
 
 	const bodTexStr = bloRecArr.map( ( bloRecObj ) => 'iteTokArr' in bloRecObj ? bloRecObj.iteTokArr.flat() : 'inlTokArr' in bloRecObj ? bloRecObj.inlTokArr : [] ).flat().map( ( inlTokObj ) => inlTokObj.texStr ).join( ' ' ); // What: Body Text String. Why: The reading time counts the words a reader reads. How: This gathers the text of every heading, paragraph, tip, and list item.
-	const minNum    = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) ); // What: Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
+	const reaMinNum = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) ); // What: Reading Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
 
 	// #endregion Reading Time
 
@@ -148,10 +148,11 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	return { // What: Article Record Return. Why: Every page reads the article from one record. How: This gathers its fields.
 
 
-		bloRecArr,                       // What: Block Record Array. Why: The article's page renders the body. How: This is the parsed body's blocks.
-		ideStr,                          // What: Identifier String. Why: The article's address is its folder's name. How: This is that name.
-		medUrlObj,                       // What: Media URL Object. Why: The body's media need their built addresses. How: This maps each file name to its address.
-		minNum,                          // What: Minutes Number. Why: The article shows its reading time. How: This is the estimate in whole minutes.
+		bloRecArr, // What: Block Record Array. Why: The article's page renders the body. How: This is the parsed body's blocks.
+		medUrlObj, // What: Media URL Object. Why: The body's media need their built addresses. How: This maps each file name to its address.
+
+		ideStr : artIdeStr,              // What: Identifier String. Why: The article's address is its folder's name. How: This is that name.
+		minNum : reaMinNum,              // What: Minutes Number. Why: The article shows its reading time. How: This is the estimate in whole minutes.
 		pubStr : froMatObj.published,    // What: Published String. Why: The article shows when it was published. How: This is the front matter's published date.
 		sumStr : froMatObj.summary,      // What: Summary String. Why: Cards and search listings show the summary. How: This is the front matter's summary.
 		titStr : froMatObj.title,        // What: Title String. Why: The article is named everywhere by its title. How: This is the front matter's title.
