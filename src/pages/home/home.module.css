@@ -580,7 +580,7 @@
 
 
 	.topTilAnc,
-	.topTilAnc::before { /* What: Motionless Topic Tile Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the tile's and its stitching's transitions off. */
+	.topTilAnc::before { /* What: Motionless Topic Tile Anchor Stitching. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the tile's and its stitching's transitions off. */
 
 
 		transition : none;

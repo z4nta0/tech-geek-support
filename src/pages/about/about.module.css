@@ -195,7 +195,7 @@
 
 
 }
-.porFraDiv::before { /* What: Portrait Frame Circle. Why: A soft teal circle behind the photo ties it to the site's motif. How: This draws a pale teal circle reaching past the photo's top right corner, behind it. */
+.porFraDiv::before { /* What: Portrait Frame Div Circle. Why: A soft teal circle behind the photo ties it to the site's motif. How: This draws a pale teal circle reaching past the photo's top right corner, behind it. */
 
 
 	aspect-ratio  : 1;
@@ -475,7 +475,7 @@
 
 
 }
-.stoIteIte::before { /* What: Story Item Dot. Why: Each milestone is a point on the line, the rings' teal in miniature. How: This draws a teal dot ringed in ivory, centered on the line beside the year. */
+.stoIteIte::before { /* What: Story Item Item Dot. Why: Each milestone is a point on the line, the rings' teal in miniature. How: This draws a teal dot ringed in ivory, centered on the line beside the year. */
 
 
 	background    : var( --act-mai-col );                                                /* Accent-Tertiary Main Color = #2A9D8F */
