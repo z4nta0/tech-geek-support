@@ -27,18 +27,19 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The head helpe
  * Every page has exactly one description, index.html's, which every page but
  * Home and the 404 page swaps for its own, names z4nta0 as its author, and has
  * one h1; moving between pages swaps the tags rather than piling them up. The
- * raw page, read without running the site's script the way link checkers read
- * it, carries the home page's full title and description. The structured data
- * describes this domain as a WebSite whose author is z4nta0, the same Person
- * TechGeek.dev describes, with the GitHub and LinkedIn profiles the footer
- * links to, and every article's raw page adds an Article naming the same
- * author and site. Every icon the head links to is served, the PNGs at the
- * size their links promise. robots.txt lets every crawler in and names the
- * sitemap, which lists every indexed page, the articles last with their dates.
- * Home's raw page and every article's carry a complete set of link preview
- * tags with absolute addresses, the article's own title, description,
- * address, and image, and every preview image is served at 1,200x630 under
- * 300 KB. Adapted from TechGeek.cards.
+ * raw page, read from the build without running the site's script the way link
+ * checkers read it, carries the home page's full title and description. The
+ * structured data describes this domain as a WebSite whose author is z4nta0,
+ * the same Person TechGeek.dev describes, with the GitHub and LinkedIn
+ * profiles the footer links to, and every article's raw page, read from the
+ * build, adds an Article naming the same author and site. Every icon the head
+ * links to is served, the PNGs at the size their links promise. robots.txt
+ * lets every crawler in and names the sitemap, which lists every indexed page,
+ * the articles last with their dates. Home's raw page and every article's,
+ * read from the build, carry a complete set of link preview tags with absolute
+ * addresses, the article's own title, description, address, and image, and
+ * every preview image is served at 1,200x630 under 300 KB. Adapted from
+ * TechGeek.cards.
  *
  * Sections:
  *  - Constants
@@ -55,6 +56,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The head helpe
 
 const HOM_DES_STR = 'Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.'; // What: Home Description String. Why: The raw page carries the home page's description, and every other page must swap it for its own. How: This is the exact text it should hold.
 const LIV_URL_STR = 'https://techgeek.support/';                                                                                                  // What: Live URL String. Why: The canonical links, structured data, robots.txt, and sitemap all name the live site. How: This is its address.
+const PRE_URL_STR = 'http://localhost:5206';                                                                                                      // What: Preview URL String. Why: Link scrapers read the shipped page, which the build minifies and copies once per article, so the raw pages are read from the build rather than the dev server. How: This is the address the preview server answers on.
 
 
 
@@ -380,7 +382,7 @@ test( 'the structured data describes z4nta0 and matches the pages', async ( { pa
 test( 'the raw page carries the home title and description for script-free readers', async ( { request : reqConObj } ) => { // What: Raw Head Test. Why: Link checkers and many crawlers read the page without running the site's script, so the title and description have to be in index.html itself. How: This fetches the root as raw HTML and checks both.
 
 
-	const rawHtmStr = await ( await reqConObj.get( '/' ) ).text();                                        // What: Raw HTML String. Why: The page is read the way a script-free reader reads it. How: This fetches the root's HTML without a browser.
+	const rawHtmStr = await ( await reqConObj.get( `${ PRE_URL_STR }/` ) ).text();                        // What: Raw HTML String. Why: The page is read the way a script-free reader reads what ships. How: This fetches the built root's HTML without a browser.
 	const titTexStr = rawHtmStr.match( /<title>([^<]*)<\/title>/ )?.[ 1 ].replace( /&amp;/g, '&' ) ?? ''; // What: Title Text String. Why: The raw title is checked as written. How: This reads the title element's text and decodes its ampersand.
 
 
@@ -404,7 +406,7 @@ for ( const artFilObj of [ null, ...ART_FIL_ARR ] ) { // What: Raw Preview Loop.
 	test( `${ pagPatStr } raw page carries its link preview`, async ( { request : reqConObj } ) => { // What: Raw Preview Test. Why: Link scrapers never run the site's script, so the raw page alone decides the card a shared link shows. How: This fetches the page without a browser and checks every preview tag.
 
 
-		const socTagObj = socTagFun( await ( await reqConObj.get( pagPatStr ) ).text() );                                  // What: Social Tag Object. Why: The tags are read the way a scraper reads them. How: This reads the tags of the page, fetched without a browser.
+		const socTagObj = socTagFun( await ( await reqConObj.get( `${ PRE_URL_STR }${ pagPatStr }` ) ).text() );           // What: Social Tag Object. Why: The tags are read the way a scraper reads what ships. How: This reads the tags of the built page, fetched without a browser.
 		const expUrlStr = artFilObj ? `${ LIV_URL_STR }articles/${ artFilObj.ideStr }` : LIV_URL_STR;                      // What: Expected URL String. Why: The preview has to point at the page's own address. How: This is the article's absolute address, or the root.
 		const expImaStr = artFilObj ? `${ LIV_URL_STR }social/${ artFilObj.ideStr }.png` : `${ LIV_URL_STR }og-image.png`; // What: Expected Image String. Why: Each page shows its own image. How: This is the article's PNG, or the site's card.
 		const expTitStr = artFilObj ? artTitFun( artFilObj.titStr ) : PAG_HEA_ARR[ 0 ].titStr;                             // What: Expected Title String. Why: The preview's title matches the page's own. How: This is the article's page title, or Home's.
@@ -435,7 +437,7 @@ for ( const artFilObj of ART_FIL_ARR ) { // What: Article Data Loop. Why: Every 
 	test( `/articles/${ artFilObj.ideStr } raw page carries its Article data`, async ( { request : reqConObj } ) => { // What: Article Data Test. Why: Search engines read an article's headline, dates, and author from its structured data, which has to match the page. How: This fetches the raw page, finds the Article node, and checks it.
 
 
-		const rawHtmStr = await ( await reqConObj.get( `/articles/${ artFilObj.ideStr }` ) ).text();                                                                      // What: Raw HTML String. Why: The data is read the way a crawler without the script reads it. How: This fetches the article's page without a browser.
+		const rawHtmStr = await ( await reqConObj.get( `${ PRE_URL_STR }/articles/${ artFilObj.ideStr }` ) ).text();                                                      // What: Raw HTML String. Why: The data is read the way a crawler without the script reads what ships. How: This fetches the article's built page without a browser.
 		const ldjObjArr = [ ...rawHtmStr.matchAll( /<script type='application\/ld\+json'>([\s\S]*?)<\/script>/g ) ].map( ( ldjMatArr ) => JSON.parse( ldjMatArr[ 1 ] ) ); // What: Linked-Data-JSON Object Array. Why: The page carries the site's data and the article's. How: This parses every JSON-LD script on the page.
 		const artNodObj = ldjObjArr.find( ( ldjCurObj ) => ldjCurObj[ '@type' ] === 'Article' );                                                                          // What: Article Node Object. Why: The article's own data is checked on its own. How: This finds the Article node.
 

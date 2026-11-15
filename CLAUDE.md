@@ -272,7 +272,12 @@ suites live in `tests/`, one project per suite and engine in
   lasting animation and transition from the start of the load.
 - **SEO** reads the article list through `scripts/article-files.ts`, so a new
   article is checked (head, raw preview tags, Article data, sitemap entry,
-  preview image) without editing the suite.
+  preview image) without editing the suite. The raw page checks (Home's title
+  and description, and the link preview tags of Home and the Article data and
+  link preview tags of every article's own `articles/<slug>.html`) read the
+  build from the preview on 5206 (changed 2026-11-15, in the audit), since
+  scrapers read what ships; `vite preview` serves each article's address from
+  its `.html` copy, as `_redirects` does on Netlify.
 - **Comment text**: the scripted accessibility suite fails any page whose
   visible text carries a `What:`, `Why:`, or `How:` label, the sign of a JSX
   comment written where it renders as text.
