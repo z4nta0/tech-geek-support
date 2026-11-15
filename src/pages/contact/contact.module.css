@@ -515,7 +515,7 @@
 
 .forConInp,
 .forConSel,
-.forConTex { /* What: Form Control Fields. Why: The inputs, the menu, and the box share one large, friendly look. How: This sets them full width on the ivory with a quiet border, rounded corners, and text at the base plus 2 size, easing their focus border and glow. */
+.forConTex { /* What: Form Control Fields. Why: The inputs, the menu, and the box share one large, friendly look. How: This sets them full width on the ivory with a quiet border, rounded corners, and text at the base plus 2 size, easing their focus border, glow, and outline. */
 
 
 	background    : var( --bac-pag-col );                                                                                         /* Background Page Color = #F5F0E8 */
@@ -524,8 +524,9 @@
 	color         : var( --tex-mai-col );                                                                                         /* Text Main Color = #1A1A2E */
 	font-family   : var( --fon-fam-mai );                                                                                         /* Font Family Main = 'Syne', sans-serif */
 	font-size     : var( --fon-siz-p02 );                                                                                         /* Font Size Base Plus 2 ~= 19.304px */
+	outline-color : transparent;                                                                                                  /* What: Transparent Outline Color. Why: The focused field's outline is transparent, so a resting color would only snap to it. How: This sets the same transparent color at rest, leaving the width and offset to ease. */
 	padding       : var( --spa-ver-m01 ) var( --spa-hor-bas );                                                                    /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
-	transition    : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease */ /* What: Focus Glow Transition. Why: The glow is a spread around the field's rounded edge, which no transform or opacity change can draw. How: This eases the box shadow, a paint-only change on one field. */
+	transition    : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Focus Glow Transition. Why: The glow is a spread around the field's rounded edge, which no transform or opacity change can draw. How: This eases the box shadow, a paint-only change on one field. */
 	width         : 100%;
 
 
