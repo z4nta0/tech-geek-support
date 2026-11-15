@@ -27,7 +27,8 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * draw that ring at full width once it has eased in. Under reduced motion
  * every control keeps its hover change but transitions nothing. Real clicks
  * are blocked during the checks, so pressing a link or the menu's links
- * never navigates or closes anything mid-check.
+ * never navigates or closes anything mid-check. A control that waits above
+ * the screen until it's focused, the skip link, is focused before it's hovered.
  *
  * Sections:
  *  - Constants
@@ -246,6 +247,14 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		await conCurObj.scrollIntoViewIfNeeded(); // What: Control Scroll Call. Why: A control has to be on screen to hover or press. How: This scrolls it into view.
 
+
+		const offScrBoo = await conCurObj.evaluate( ( conCurEle ) => conCurEle.getBoundingClientRect().bottom <= 0 ); // What: Off Screen Boolean. Why: A control that waits above the screen until it's focused, the skip link, can't be hovered where it rests. How: This is true when its box still sits wholly above the viewport after the scroll.
+
+
+		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.focus( { focusVisible : true } ); } ); // What: Off Screen Focus Call. Why: The skip link only slides into view once it's focused. How: This focuses it, so the rest settle wait lets it arrive before its resting look is read.
+
+
+
 		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The resting look is read with nothing hovered. How: This moves the pointer to the corner of the bar.
 
 		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
@@ -273,6 +282,9 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end before the next control. How: This releases the button, whose click the caller has blocked.
+
+
+		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Off Screen Blur Call. Why: Left focused, the skip link would stay in view over whatever is probed next. How: This blurs it, and the next rest settle wait lets it slide back out.
 
 
 
