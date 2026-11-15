@@ -194,7 +194,7 @@
 
 
 	margin-top   : var( --spa-ver-m02 );                      /* Spacing Vertical Base Minus 2 ~= 8.304px */
-	padding-left : calc( var( --ver-rhy-p02 ) * 1rem * 1.5 ); /* Vertical Rhythm Base Plus 2 ~= 25.572px, ~= 38.358px in all * /* What: Marker Room. Why: The step numbers' circles need room beside the text. How: This leaves one and a half circle widths. */
+	padding-left : calc( var( --ver-rhy-p02 ) * 1rem * 1.5 ); /* Vertical Rhythm Base Plus 2 ~= 25.572px, ~= 38.358px in all */ /* What: Marker Room. Why: The step numbers' circles need room beside the text. How: This leaves one and a half circle widths. */
 	position     : relative;
 
 
