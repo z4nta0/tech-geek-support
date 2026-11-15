@@ -262,6 +262,14 @@ suites live in `tests/`, one project per suite and engine in
   `<main>` carries `id='main'` and `tabIndex={ -1 }` for the bar's skip link.
   The feedback probe focuses the skip link before hovering it, since it waits
   above the screen until it's focused.
+- **Navigation and menu** (audit 2026-11-15, from TechGeek.cards): the
+  navigation spec checks exact restores through back, forward, and a reload
+  (which reads `history.scrollRestoration` as `manual`), a fresh load at the
+  top, a hash winning over a saved position (refusing any scroll call after
+  the hash change, which caught a Firefox gap in the cards version), malformed
+  saved positions, an instant jump with smooth scrolling on, and the skip link
+  on every page; the menu spec checks plain, Ctrl or Cmd, and middle clicks
+  each close the menu; the names check fails a new tab link without its note.
 - **Speed** (2026-11-15, following TechGeek.cards' fixes): the feedback
   probe waits for each look's animations to finish (`aniFinFun`) rather than a
   fixed pause, its tests run in parallel across 6 workers, and the dev
