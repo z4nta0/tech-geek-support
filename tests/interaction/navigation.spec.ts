@@ -51,9 +51,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers dr
  * PAG_LIN_ARR = Page Link Array
  *
  * @summary
- * Every page of the site, in the bar's order, each one both a starting point
- * and a destination. Every row shares one shape, so its fields carry no
- * comments of their own:
+ * The four pages the bar links to, in the bar's order, each one both a
+ * starting point and a destination. Every row shares one shape, so its
+ * fields carry no comments of their own:
  *
  * - `labStr` (String): Label String, the page's link text in the bar and the
  *   footer.
@@ -64,7 +64,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers dr
  *
 */
 
-const PAG_LIN_ARR = [ // What: Page Link Array. Why: Every page is checked as a starting point and as a destination. How: Each row pairs a route's path with its link text, in the bar's order.
+const PAG_LIN_ARR = [ // What: Page Link Array. Why: Each of the four pages the bar links to is checked as a starting point and as a destination. How: Each row pairs a route's path with its link text, in the bar's order.
 
 
 	{ labStr : 'Home',     patStr : '/'         }, // What: Home Link Row. Why: Home is where most visitors start. How: This pairs the home path with its link text.

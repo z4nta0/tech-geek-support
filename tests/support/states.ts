@@ -61,7 +61,7 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  * STA_REC_ARR = State Record Array
  *
  * @summary
- * Every state the checks visit: each route (Home, Articles, one article,
+ * The states the checks share: each route (Home, Articles, one article,
  * About, and Contact) and the 404 page at a phone width (390px) and a desktop
  * width (1,440px), plus the mobile menu open at the phone width, since the
  * menu is only reachable there. Every row shares the {@link StaRecTyp} shape,
@@ -77,7 +77,7 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  *
 */
 
-const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: Every check walks the same list of states, so a new state is added in one place. How: Each row names a state, its path, and its viewport, and the menu row adds the action that opens it.
+const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: The checks share one list of states, so a new shared state is added in one place. How: Each row names a state, its path, and its viewport, and the menu row adds the action that opens it.
 
 
 	{ heiNum : 900, ideStr : 'home-desktop',      patStr : '/',                                 widNum : 1440 }, // What: Home Desktop State. Why: Most visitors land here. How: This loads the home page at 1,440px.
@@ -279,7 +279,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 	await curPagObj.goto( staRecObj.patStr ); // What: Page Load Call. Why: Each state starts from a fresh load of its route. How: This opens the path on the suite's server.
 
-	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until every font face has loaded.
+	await curPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text measured before its web font loads would have the wrong size and wrapping. How: This waits until the fonts the page uses have loaded.
 
 	await revPagFun( curPagObj ); // What: Page Reveal Call. Why: Lazy images stay blank until scrolled near. How: This scrolls through the page and back to the top.
 

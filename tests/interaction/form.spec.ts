@@ -122,7 +122,7 @@ test( 'an empty form stays put and sends nothing', async ( { page : curPagObj } 
 
 
 
-test( 'a malformed email stays put and sends nothing', async ( { page : curPagObj } ) => { // What: Malformed Email Test. Why: A question with an unreachable reply address shouldn't be sent. How: This fills every field with a bad email, presses Send, and checks that nothing was sent.
+test( 'a malformed email stays put and sends nothing', async ( { page : curPagObj } ) => { // What: Malformed Email Test. Why: A question with an unreachable reply address shouldn't be sent. How: This fills the name, a bad email, and the question, presses Send, and checks that nothing was sent.
 
 
 	const senBodArr = await forOpeFun( curPagObj ); // What: Sent Body Array. Why: The check needs to know whether anything was sent. How: This opens the form with the root's POST answered and counted.

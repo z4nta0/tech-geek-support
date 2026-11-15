@@ -44,7 +44,7 @@ const ENG_NAM_ARR = [ // What: Engine Name Array. Why: Every suite runs in all t
 
 	'chromium', // What: Chromium Engine. Why: Chrome and Edge render with it. How: This is Playwright's Chromium build.
 	'firefox',  // What: Firefox Engine. Why: Firefox renders with its own engine, Gecko. How: This is Playwright's Firefox build.
-	'webkit'    // What: WebKit Engine. Why: Safari, and every browser on iOS, renders with it. How: This is Playwright's WebKit build.
+	'webkit'    // What: WebKit Engine. Why: Safari renders with it. How: This is Playwright's WebKit build.
 
 
 ] as const;
@@ -127,7 +127,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 
 			command             : 'npx vite --port 5196 --strictPort', // What: Command. Why: A strict port fails loudly instead of drifting onto another server's port. How: This starts the Vite dev server on 5196.
 			cwd                 : ROO_DIR_STR,                         // What: Current Working Directory. Why: Vite reads its config from the repo root. How: This starts the command there.
-			reuseExistingServer : false,                               // What: Reuse Existing Server. Why: A leftover server could be running other code. How: This always starts a fresh one.
+			reuseExistingServer : false,                               // What: Reuse Existing Server. Why: A leftover server could be running other code. How: This never reuses a server on the port, failing the run if one is there.
 			timeout             : 60000,                               // What: Timeout. Why: The first start can take a while on a cold cache. How: This waits up to a minute for the server to answer.
 			url                 : SER_URL_STR                          // What: URL. Why: Playwright starts the tests only once the site answers. How: This is the address it polls.
 
@@ -139,7 +139,7 @@ const PLA_CON_OBJ = defineConfig({ // What: Playwright Config Object. Why: Playw
 
 			command             : 'npm run build && npx vite preview --port 5206 --strictPort', // What: Command. Why: The preview serves only a fresh build, and a strict port fails loudly. How: This type checks and builds the site, then serves dist/ on 5206.
 			cwd                 : ROO_DIR_STR,                                                  // What: Current Working Directory. Why: The build and Vite read their config from the repo root. How: This starts the command there.
-			reuseExistingServer : false,                                                        // What: Reuse Existing Server. Why: A leftover server could be serving an older build. How: This always starts a fresh one.
+			reuseExistingServer : false,                                                        // What: Reuse Existing Server. Why: A leftover server could be serving an older build. How: This never reuses a server on the port, failing the run if one is there.
 			timeout             : 120000,                                                       // What: Timeout. Why: The type check and build run before the server starts. How: This waits up to two minutes for it to answer.
 			url                 : PRE_URL_STR                                                   // What: URL. Why: Playwright starts the tests only once the build is served. How: This is the address it polls.
 

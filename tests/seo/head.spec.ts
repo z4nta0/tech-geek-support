@@ -54,7 +54,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The head helpe
 
 // #region Constants
 
-const HOM_DES_STR = 'Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.'; // What: Home Description String. Why: The raw page carries the home page's description, and every other page must swap it for its own. How: This is the exact text it should hold.
+const HOM_DES_STR = 'Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.'; // What: Home Description String. Why: The raw page carries the home page's description, and every other indexed page must swap it for its own, while the 404 page keeps it. How: This is the exact text it should hold.
 const LIV_URL_STR = 'https://techgeek.support/';                                                                                                  // What: Live URL String. Why: The canonical links, structured data, robots.txt, and sitemap all name the live site. How: This is its address.
 
 
@@ -391,7 +391,7 @@ test( 'the raw page carries the home title and description for script-free reade
 
 	expect( titTexStr ).toBe( PAG_HEA_ARR[ 0 ].titStr ); // What: Raw Title Assertion. Why: The raw page should name the home page in full, not the bare site name. How: This checks it matches the home page's title.
 
-	expect( titTexStr.length ).toBeGreaterThanOrEqual( 50 ); // What: Raw Title Length Assertion. Why: Checkers flag a title that leaves most of a listing's room unused. How: This checks it runs at least 50 characters.
+	expect( titTexStr.length ).toBeGreaterThanOrEqual( 50 ); // What: Raw Title Length Assertion. Why: The home page's title should use most of a listing's 60 characters to describe the site. How: This checks it runs at least 50 characters.
 
 	expect( rawHtmStr ).toContain( `<meta name='description' content='${ HOM_DES_STR }' />` ); // What: Raw Description Assertion. Why: Checkers and crawlers without the script need a description to show. How: This checks the raw page carries the home page's.
 
@@ -457,7 +457,7 @@ for ( const artFilObj of ART_FIL_ARR ) { // What: Article Data Loop. Why: Every 
 
 
 
-test( 'every link preview image is 1,200x630 and under 300 KB', async ( { request : reqCotObj } ) => { // What: Preview Images Test. Why: The tags promise each image's size, and WhatsApp drops one of 300 KB or more. How: This fetches every preview image and checks its type, its 1,200 by 630 size, and its bytes against the limit.
+test( 'every link preview image is 1,200x630 and under 300 KB', async ( { request : reqCotObj } ) => { // What: Preview Images Test. Why: The tags promise each image's size, and the site keeps preview images under 300 KB, the limit the Social Previews rule sets. How: This fetches every preview image and checks its type, its 1,200 by 630 size, and its bytes against the limit.
 
 
 	for ( const imaPatStr of [ '/og-image.png', ...ART_FIL_ARR.map( ( artFilObj ) => `/social/${ artFilObj.ideStr }.png` ) ] ) { // What: Image Check Loop. Why: Every page's image has to be real. How: This checks the site's card, then each article's.
@@ -471,7 +471,7 @@ test( 'every link preview image is 1,200x630 and under 300 KB', async ( { reques
 
 		expect( [ imaPatStr, ...imaSizFun( imaBufObj ) ] ).toEqual( [ imaPatStr, 1200, 630 ] ); // What: Image Size Assertion. Why: The tags promise 1,200x630. How: This reads the image's real size, naming it on failure.
 
-		expect( imaBufObj.length ).toBeLessThan( 300 * 1024 ); // What: Image Bytes Assertion. Why: WhatsApp drops a preview image of 300 KB or more. How: This checks the file is under the limit.
+		expect( imaBufObj.length ).toBeLessThan( 300 * 1024 ); // What: Image Bytes Assertion. Why: The site keeps preview images under 300 KB, the limit the Social Previews rule sets. How: This checks the file is under the limit.
 
 
 	}
@@ -537,7 +537,7 @@ test( 'every icon the head links to is served at its size', async ( { page : cur
 		if ( icoHreStr.endsWith( '.svg' ) ) { // What: SVG Icon Guard. Why: The SVG mark has no fixed size to check. How: This checks it's served as an SVG and moves on.
 
 
-			expect( icoResObj.headers()[ 'content-type' ] ).toContain( 'image/svg+xml' ); // What: SVG Type Assertion. Why: Browsers only draw an SVG favicon served as one. How: This checks the served type.
+			expect( icoResObj.headers()[ 'content-type' ] ).toContain( 'image/svg+xml' ); // What: SVG Type Assertion. Why: The icon link names an SVG file, so it has to be served as one. How: This checks the served type.
 
 
 
