@@ -245,6 +245,7 @@ test( 'widening the screen closes the menu', async ( { page : curPagObj } ) => {
 } );
 
 
+
 for ( const [ cliKinStr, cliOptObj ] of CLI_KIN_ARR ) { // What: Click Kind Loop. Why: Each way of asking for a new tab gets its own checks. How: This declares one test per menu link for each row of CLI_KIN_ARR.
 
 
