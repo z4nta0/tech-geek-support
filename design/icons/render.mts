@@ -143,7 +143,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 		finCanEle.width  = tarSizNum; // What: Final Width Assignment. Why: The icon is square at its target size. How: This sets the width.
 
 
-		const finConObj = finCanEle.getContext( '2d' )!;                 // What: Final Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
+		const finCotObj = finCanEle.getContext( '2d' )!;                 // What: Final Context Object. Why: Drawing goes through the canvas's 2D context. How: This gets it. // What: Non-Null Note. Why: getContext can return null for an unsupported type. How: A 2D context is always available on a fresh canvas.
 		const marSizNum = solBacBoo ? tarSizNum * touScaNum : tarSizNum; // What: Mark Size Number. Why: The touch icon leaves room around the mark for iOS's rounded corners. How: This shrinks the mark for the opaque icon and fills the square otherwise.
 		const marOffNum = ( tarSizNum - marSizNum ) / 2;                 // What: Mark Offset Number. Why: The shrunk mark sits in the middle of its square. How: This splits the spare room evenly on each side.
 
@@ -151,16 +151,16 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 		if ( solBacBoo ) { // What: Solid Background Fill. Why: iOS fills transparency with black. How: For the opaque icon, this paints the square ivory before the mark goes on.
 
 
-			finConObj.fillStyle = '#F5F0E8'; // What: Ivory Fill Assignment. Why: The background has to be solid, and the site's page ivory matches its pages. How: This sets the fill color, the default value of the page background role, since a script's canvas can't read the stylesheet's tokens.
+			finCotObj.fillStyle = '#F5F0E8'; // What: Ivory Fill Assignment. Why: The background has to be solid, and the site's page ivory matches its pages. How: This sets the fill color, the default value of the page background role, since a script's canvas can't read the stylesheet's tokens.
 
-			finConObj.fillRect( 0, 0, tarSizNum, tarSizNum ); // What: Background Fill Call. Why: Every pixel under the mark has to be opaque. How: This paints the whole square.
+			finCotObj.fillRect( 0, 0, tarSizNum, tarSizNum ); // What: Background Fill Call. Why: Every pixel under the mark has to be opaque. How: This paints the whole square.
 
 
 		}
 
 
 
-		finConObj.drawImage( souImaEle, marOffNum, marOffNum, marSizNum, marSizNum ); // What: Mark Draw Call. Why: This draws the icon itself. How: This rasterizes the mark at its size and offset.
+		finCotObj.drawImage( souImaEle, marOffNum, marOffNum, marSizNum, marSizNum ); // What: Mark Draw Call. Why: This draws the icon itself. How: This rasterizes the mark at its size and offset.
 
 
 
@@ -185,39 +185,39 @@ for ( const icoRecObj of ICO_REC_ARR ) writeFileSync( OUT_DIR_STR + icoRecObj.fi
 
 
 const icoPngArr = await Promise.all( ICO_SIZ_ARR.map( ( icoSizNum ) => renPngFun( icoSizNum, false ) ) ); // What: ICO PNG Array. Why: favicon.ico packs one PNG per size. How: This renders each of its sizes.
-const icoHeaBuf = Buffer.alloc( 6 + 16 * icoPngArr.length );                                              // What: ICO Header Buffer. Why: An ICO file starts with a header and one directory entry per image. How: This allocates both.
+const icoHeaObj = Buffer.alloc( 6 + 16 * icoPngArr.length );                                              // What: ICO Header Object. Why: An ICO file starts with a header and one directory entry per image. How: This allocates both.
 
 
-icoHeaBuf.writeUInt16LE( 1, 2 );                // What: ICO Type Write. Why: The format marks icons with type 1. How: This writes it after the reserved zero.
-icoHeaBuf.writeUInt16LE( icoPngArr.length, 4 ); // What: ICO Count Write. Why: The header says how many images follow. How: This writes the count.
+icoHeaObj.writeUInt16LE( 1, 2 );                // What: ICO Type Write. Why: The format marks icons with type 1. How: This writes it after the reserved zero.
+icoHeaObj.writeUInt16LE( icoPngArr.length, 4 ); // What: ICO Count Write. Why: The header says how many images follow. How: This writes the count.
 
 
-let icoOffNum = icoHeaBuf.length; // What: ICO Offset Number. Why: Each directory entry says where its image starts. How: This begins right after the header and directory.
+let icoOffNum = icoHeaObj.length; // What: ICO Offset Number. Why: Each directory entry says where its image starts. How: This begins right after the header and directory.
 
 
-for ( const [ icoIndNum, icoPngBuf ] of icoPngArr.entries() ) { // What: ICO Entry Loop. Why: Each image needs a directory entry. How: This writes one per size, in order.
+for ( const [ icoIndNum, icoPngObj ] of icoPngArr.entries() ) { // What: ICO Entry Loop. Why: Each image needs a directory entry. How: This writes one per size, in order.
 
 
 	const entOffNum = 6 + 16 * icoIndNum;       // What: Entry Offset Number. Why: Each entry has its own place in the directory. How: This finds it.
 	const entSizNum = ICO_SIZ_ARR[ icoIndNum ]; // What: Entry Size Number. Why: The entry names its image's width and height. How: This reads the size it was rendered at.
 
 
-	icoHeaBuf.writeUInt8( entSizNum, entOffNum );               // What: Entry Width Write. Why: The entry names the image's width. How: This writes it.
-	icoHeaBuf.writeUInt8( entSizNum, entOffNum + 1 );           // What: Entry Height Write. Why: The entry names the image's height. How: This writes it.
-	icoHeaBuf.writeUInt16LE( 1, entOffNum + 4 );                // What: Entry Planes Write. Why: The format expects one color plane. How: This writes it.
-	icoHeaBuf.writeUInt16LE( 32, entOffNum + 6 );               // What: Entry Depth Write. Why: The images are full-color PNGs with alpha. How: This writes 32 bits per pixel.
-	icoHeaBuf.writeUInt32LE( icoPngBuf.length, entOffNum + 8 ); // What: Entry Size Write. Why: The entry says how many bytes its image takes. How: This writes the PNG's length.
-	icoHeaBuf.writeUInt32LE( icoOffNum, entOffNum + 12 );       // What: Entry Offset Write. Why: The entry says where its image starts. How: This writes the running offset.
+	icoHeaObj.writeUInt8( entSizNum, entOffNum );               // What: Entry Width Write. Why: The entry names the image's width. How: This writes it.
+	icoHeaObj.writeUInt8( entSizNum, entOffNum + 1 );           // What: Entry Height Write. Why: The entry names the image's height. How: This writes it.
+	icoHeaObj.writeUInt16LE( 1, entOffNum + 4 );                // What: Entry Planes Write. Why: The format expects one color plane. How: This writes it.
+	icoHeaObj.writeUInt16LE( 32, entOffNum + 6 );               // What: Entry Depth Write. Why: The images are full-color PNGs with alpha. How: This writes 32 bits per pixel.
+	icoHeaObj.writeUInt32LE( icoPngObj.length, entOffNum + 8 ); // What: Entry Size Write. Why: The entry says how many bytes its image takes. How: This writes the PNG's length.
+	icoHeaObj.writeUInt32LE( icoOffNum, entOffNum + 12 );       // What: Entry Offset Write. Why: The entry says where its image starts. How: This writes the running offset.
 
 
-	icoOffNum += icoPngBuf.length; // What: Offset Advance. Why: The next image starts after this one. How: This adds its length.
+	icoOffNum += icoPngObj.length; // What: Offset Advance. Why: The next image starts after this one. How: This adds its length.
 
 
 }
 
 
 
-writeFileSync( OUT_DIR_STR + 'favicon.ico', Buffer.concat( [ icoHeaBuf, ...icoPngArr ] ) ); // What: ICO Write Call. Why: Browsers request /favicon.ico on their own. How: This writes the header, directory, and PNGs as one file.
+writeFileSync( OUT_DIR_STR + 'favicon.ico', Buffer.concat( [ icoHeaObj, ...icoPngArr ] ) ); // What: ICO Write Call. Why: Browsers request /favicon.ico on their own. How: This writes the header, directory, and PNGs as one file.
 
 await broInsObj.close(); // What: Browser Close Call. Why: The script should exit once the icons are saved. How: This shuts Chromium down.
 
