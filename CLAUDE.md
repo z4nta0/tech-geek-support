@@ -285,7 +285,29 @@ suites live in `tests/`, one project per suite and engine in
   content is everything between the bar and the footer, so `app.tsx`'s
   `<main>` carries `id='main'` and `tabIndex={ -1 }` for the bar's skip link.
   The feedback probe focuses the skip link before hovering it, since it waits
-  above the screen until it's focused.
+  above the screen until it's focused, and fails a state with no menu open
+  where it doesn't find the skip link waiting there.
+- **Feedback probe** (rebuilt 2026-11-15, in the audit, from TechGeek.cards',
+  helpers in `tests/support/feedback.ts`): on every shared state and the
+  reachable ones above, each reachable link, button, and field is read at
+  rest, hovered, pressed, unfocused, and focused through `focus( {
+  focusVisible : true } )`, and every property that changes on it or inside
+  it, its `::before` and `::after` included, has to ease, or switch at once
+  under reduced motion. It reads the properties this site's controls change:
+  color, background, border color, box shadow, transform, the separate
+  `translate` the step and promise cards lift through, opacity, and on focus
+  the outline's color, offset, and width. The toggled states are flipped off,
+  on, and off by their attributes, before the controls are probed, since
+  probing moves focus and closes an open tip: the menu toggle, the bar's and
+  drawer's current links, the open drawer and scrim, the scrolled bar, the
+  chosen topic pill, an open tip's button and bubble, and the sending button.
+  Home's How It Works step cards and About's promise cards, which lift
+  without being controls, are hovered too. The shared states' first Tab has
+  to land on the skip link and draw a 2px ring. After probing the skip link
+  the probe waits for it to slide back out, since the package's skip link
+  lifts on hover even while unfocused, so a pointer landing on the brand link
+  mid-slide held it in view and hung WebKit's next hover. The probe's first
+  run found the Contact fields' focus outline snapping (fixed the same day).
 - **Navigation and menu** (audit 2026-11-15, from TechGeek.cards): the
   navigation spec checks exact restores through back, forward, and a reload
   (which reads `history.scrollRestoration` as `manual`), a fresh load at the
