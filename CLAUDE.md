@@ -262,6 +262,11 @@ suites live in `tests/`, one project per suite and engine in
   `<main>` carries `id='main'` and `tabIndex={ -1 }` for the bar's skip link.
   The feedback probe focuses the skip link before hovering it, since it waits
   above the screen until it's focused.
+- **Speed** (2026-11-15, following TechGeek.cards' fixes): the feedback
+  probe waits for each look's animations to finish (`aniFinFun`) rather than a
+  fixed pause, its tests run in parallel across 6 workers, and the dev
+  server's watcher ignores `tests/output`, so the full run takes about 8
+  minutes in all three engines rather than over an hour.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.

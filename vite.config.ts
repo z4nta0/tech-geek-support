@@ -35,10 +35,11 @@ import type { Plugin    } from 'vite';                       // What: Plugin. Wh
  * title, description, link preview, and structured data, since link scrapers
  * read only a page's raw HTML, and lists every article in the sitemap: the
  * dev server serves both that way, and the build writes the copies, the
- * rewrite rules that serve them, and the fuller sitemap. Every other setting
- * stays at Vite's default, including copying the files in public/ (the icons,
- * the social images, the crawler files, and Netlify's _headers and
- * _redirects) into the build untouched.
+ * rewrite rules that serve them, and the fuller sitemap. The dev server's file
+ * watcher stays off folders that hold no app code, such as the test output.
+ * Every other setting stays at Vite's default, including copying the files in
+ * public/ (the icons, the social images, the crawler files, and Netlify's
+ * _headers and _redirects) into the build untouched.
  *
  * Sections:
  *  - Constants
@@ -394,8 +395,9 @@ const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.ht
 const VIT_CON_OBJ = defineConfig({ // What: Vite Config Object. Why: Vite reads its whole configuration from this file's default export. How: This builds the config, including the minHtmFun and artPagFun plugins above.
 
 
-	css     : { modules : { localsConvention : 'camelCaseOnly' } }, // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so every module reads the same way, per the CSS modules rules. How: This sets the locals convention.
-	plugins : [ react(), minHtmFun(), artPagFun() ]                 // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React, the page minifier, and the article pages, which copy the page after the minifier has compacted it.
+	css     : { modules : { localsConvention : 'camelCaseOnly' } },                        // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so every module reads the same way, per the CSS modules rules. How: This sets the locals convention.
+	plugins : [ react(), minHtmFun(), artPagFun() ],                                       // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React, the page minifier, and the article pages, which copy the page after the minifier has compacted it.
+	server  : { watch : { ignored : [ '**/*.log', '**/dist/**', '**/tests/output/**' ] } } // What: Server. Why: A test run writes thousands of trace frames into the test output, which kept every dev server watching the project busy for hours (measured 2026-11-13 in tech-geek-cards), and none of these folders hold app code. How: This keeps the file watcher off logs, the build, and the test output.
 
 
 });

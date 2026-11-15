@@ -31,7 +31,6 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * the screen until it's focused, the skip link, is focused before it's hovered.
  *
  * Sections:
- *  - Constants
  *  - Helpers
  *  - Module Init
  *
@@ -41,15 +40,65 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
 
 
 
-// #region Constants
-
-const SET_WAI_NUM = 400; // What: Settle Wait Number. Why: Each look is read once its transition has finished, and the longest transition on a link or button, or anything inside one, runs about 277ms (the bar links' underline and the menu toggle's bars). How: This is the pause, in milliseconds, after each hover, press, or focus, leaving over 100ms of margin for a slow frame or a short delay.
-
-// #endregion Constants
-
-
-
 // #region Helpers
+
+// #region aniFinFun
+
+/**
+ * aniFinFun = Animation Finish Function
+ *
+ * @summary
+ * Runs inside the page and waits until a look just changed has settled: two
+ * animation frames first, so the hover, press, focus, or attribute change has
+ * been styled and its transitions have started, then every animation and
+ * transition on the element, everything inside it, and each of its ancestors
+ * has finished, leaving out any that repeat forever. An ancestor counts since
+ * a color fading on it reaches the element through inheritance. A look with
+ * nothing easing, such as every look under reduced motion, is read after the
+ * two frames alone, and one easing longer than usual, such as a staggered
+ * entrance or a transition WebKit runs behind the clock on a heavy page, is
+ * waited out. One cancelled midway counts as ended. Passed to Playwright's
+ * evaluate, so it can't read anything from this file.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param eleCurEle - Element Current Element: The element to wait on.
+ *
+ * @returns A promise that settles once every finite animation has finished,
+ *          with no value.
+ *
+ * @example
+ * ```ts
+ * handle.evaluate(aniFinFun) // => Promise<void>
+ * ```
+ *
+*/
+
+async function aniFinFun ( eleCurEle : Element ) : Promise< void > {
+
+
+	for ( let fraIndNum = 0; fraIndNum < 2; fraIndNum++ ) await new Promise( ( resCurFun ) => requestAnimationFrame( resCurFun ) ); // What: Frame Wait Loop. Why: A change applied from outside the page, such as the pointer moving onto the element, may not be styled until the next frame, so its transitions wouldn't be listed yet. How: This waits two animation frames.
+
+
+
+	const ancEleArr : Element[] = []; // What: Ancestor Element Array. Why: An ancestor's fading color reaches the element through inheritance. How: This collects every element above it.
+
+
+	for ( let ancCurEle = eleCurEle.parentElement; ancCurEle; ancCurEle = ancCurEle.parentElement ) ancEleArr.push( ancCurEle ); // What: Ancestor Walk Loop. Why: Each level up can pass a color down. How: This climbs from the parent to the root, recording each element.
+
+
+
+	const finAniArr = [ ...eleCurEle.getAnimations( { subtree : true } ), ...ancEleArr.flatMap( ( ancCurEle ) => ancCurEle.getAnimations() ) ].filter( ( aniCurObj ) => aniCurObj.effect?.getTiming().iterations !== Infinity ); // What: Finite Animation Array. Why: A loop never finishes, so waiting on one would hang. How: This lists the animations and transitions of the element, its descendants, and its ancestors' own that end.
+
+
+	await Promise.all( finAniArr.map( ( aniCurObj ) => aniCurObj.finished.catch( () => undefined ) ) ); // What: Animation Finish Wait. Why: The look is read only once every entrance and transition has ended. How: This waits on each one's finished promise, treating one cancelled midway, such as a transition a new one replaced, as ended too, since its promise rejects rather than resolves.
+
+
+}
+
+// #endregion aniFinFun
+
+
 
 // #region cliBloFun
 
@@ -251,13 +300,13 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		const offScrBoo = await conCurObj.evaluate( ( conCurEle ) => conCurEle.getBoundingClientRect().bottom <= 0 ); // What: Off Screen Boolean. Why: A control that waits above the screen until it's focused, the skip link, can't be hovered where it rests. How: This is true when its box still sits wholly above the viewport after the scroll.
 
 
-		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.focus( { focusVisible : true } ); } ); // What: Off Screen Focus Call. Why: The skip link only slides into view once it's focused. How: This focuses it, so the rest settle wait lets it arrive before its resting look is read.
+		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.focus( { focusVisible : true } ); } ); // What: Off Screen Focus Call. Why: The skip link only slides into view once it's focused. How: This focuses it, so the rest settle call lets it arrive before its resting look is read.
 
 
 
 		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Away Call. Why: The resting look is read with nothing hovered. How: This moves the pointer to the corner of the bar.
 
-		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Rest Settle Wait. Why: Any earlier hover has to finish fading. How: This pauses for the settle time.
+		await conCurObj.evaluate( aniFinFun ); // What: Rest Settle Call. Why: Any earlier hover has to finish fading before the resting look is read. How: This waits two frames, then for every finite animation on the element, inside it, and above it to end.
 
 
 		const resSigStr = await conCurObj.evaluate( sigEleFun ); // What: Rest Signature String. Why: The resting look is what hover is compared with. How: This reads it.
@@ -265,7 +314,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		await conCurObj.hover(); // What: Control Hover Call. Why: Hover feedback is the first thing checked. How: This moves the pointer onto the control.
 
-		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Hover Settle Wait. Why: The hover look is read once it has eased in. How: This pauses for the settle time.
+		await conCurObj.evaluate( aniFinFun ); // What: Hover Settle Call. Why: The hover look is read once it has eased in. How: This waits two frames, then for every finite animation on the element, inside it, and above it to end.
 
 
 		const hovSigStr = await conCurObj.evaluate( sigEleFun ); // What: Hover Signature String. Why: The hovered look is compared with rest and with pressed. How: This reads it.
@@ -273,7 +322,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 		await curPagObj.mouse.down(); // What: Mouse Down Call. Why: A press shows while the button is held. How: This holds the mouse button down on the control.
 
-		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Press Settle Wait. Why: The pressed look is read once it has eased in. How: This pauses for the settle time.
+		await conCurObj.evaluate( aniFinFun ); // What: Press Settle Call. Why: The pressed look is read once it has eased in. How: This waits two frames, then for every finite animation on the element, inside it, and above it to end.
 
 
 		const preSigStr = await conCurObj.evaluate( sigEleFun );                                                         // What: Press Signature String. Why: The pressed look is compared with hovered. How: This reads it.
@@ -284,7 +333,7 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 		await curPagObj.mouse.up(); // What: Mouse Up Call. Why: The press has to end before the next control. How: This releases the button, whose click the caller has blocked.
 
 
-		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Off Screen Blur Call. Why: Left focused, the skip link would stay in view over whatever is probed next. How: This blurs it, and the next rest settle wait lets it slide back out.
+		if ( offScrBoo ) await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Off Screen Blur Call. Why: Left focused, the skip link would stay in view over whatever is probed next. How: This blurs it, and the next rest settle call waits for it to slide back out.
 
 
 
@@ -318,6 +367,10 @@ async function feeProFun ( curPagObj : Page, redMotBoo : boolean ) : Promise< st
 
 // #region Module Init
 
+test.describe.configure( { mode : 'parallel' } ); // What: Parallel Mode Call. Why: Each test opens its own state in its own page, so none depends on another, and run in sequence this file alone set the pace of the whole suite. How: This lets the file's tests spread across the workers.
+
+
+
 for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state is checked. How: This declares each check once per state.
 
 
@@ -345,7 +398,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 
 		await curPagObj.keyboard.press( engNamStr === 'webkit' ? 'Alt+Tab' : 'Tab' ); // What: First Tab Press Call. Why: The ring shows only for keyboard focus. How: This tabs to the first stop, holding Alt in WebKit, which otherwise skips links the way Safari does.
 
-		await curPagObj.waitForTimeout( SET_WAI_NUM ); // What: Ring Settle Wait. Why: The ring is read once it has grown in. How: This pauses for the settle time.
+		await curPagObj.locator( ':focus' ).evaluate( aniFinFun ); // What: Ring Settle Call. Why: The ring is read once it has grown in. How: This waits two frames, then for every finite animation on the focused stop, inside it, and above it to end.
 
 
 		expect( await curPagObj.evaluate( () => getComputedStyle( document.activeElement as Element ).outlineWidth ) ).toBe( '2px' ); // What: Full Ring Assertion. Why: The ring has to reach its full width. How: This reads the focused stop's outline width, which the large border width token snaps to 2px. // What: Type Assertion Note. Why: activeElement types as possibly null. How: The Tab press just put focus on a stop.
