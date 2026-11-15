@@ -133,8 +133,11 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   (`design/images/render.mts`) writes `pages/about/self-portrait.webp` at
   three times that width, 945 by 1,251px (the height keeps the 642 by 850
   shape the frame has always shown, as closely as whole pixels allow, so the
-  page's layout barely moves), cut around its center and encoded at dev's 0.85
-  quality. A fresh checkout copies the original from dev first.
+  page's layout barely moves), cut around its center and encoded at 0.93
+  quality, the lowest that looked the same as the original at 3x zoom (decided
+  by the user 2026-11-15: dev's 0.85, and anything up to 0.92, visibly
+  smoothed the photo's grain). A fresh checkout copies the original from dev
+  first.
 - **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
   border inset from the edge and a hint line under each topic, carrying
   "Friendly Conversation"'s small speech-bubble icon. At 640px and below the

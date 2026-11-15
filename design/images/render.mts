@@ -23,10 +23,10 @@ import { writeFileSync } from 'node:fs';          // What: Write File Sync. Why:
  * page's frame shows it at, so it stays sharp on the densest phones, its
  * height kept to the shape the frame has always shown, cut to exactly that box
  * around its center, the way object-fit cover crops it, and never scaled up.
- * It's encoded as WebP at 0.85 quality, the lowest that showed no difference
- * from the original at 3x zoom, and written beside the About page. Run it with
- * npm run images whenever the portrait is replaced or its frame's largest size
- * changes.
+ * It's encoded as WebP at 0.93 quality, the lowest that showed no difference
+ * from the original at 3x zoom, since 0.92 and below smoothed the photo's
+ * grain, and written beside the About page. Run it with npm run images
+ * whenever the portrait is replaced or its frame's largest size changes.
  *
  * Sections:
  *  - Constants
@@ -45,7 +45,7 @@ const BOX_HEI_NUM = 1251;                                                       
 const BOX_WID_NUM = 945;                                                                                     // What: Box Width Number. Why: The About frame shows the portrait up to about 315.3 wide, measured in all three engines at 1,000px wide and up. How: This is three times that, rounded down.
 const ORI_PAT_STR = fileURLToPath( new URL( './originals/self-portrait.jpg', import.meta.url ) );            // What: Original Path String. Why: The original lives beside this script, outside git. How: This resolves its path.
 const OUT_PAT_STR = fileURLToPath( new URL( '../../src/pages/about/self-portrait.webp', import.meta.url ) ); // What: Output Path String. Why: The About page imports the portrait from beside itself. How: This resolves the WebP's path there.
-const QUA_VAL_NUM = 0.85;                                                                                    // What: Quality Value Number. Why: This is the lowest quality that showed no difference from the original at 3x zoom. How: The portrait is encoded at it.
+const QUA_VAL_NUM = 0.93;                                                                                    // What: Quality Value Number. Why: This is the lowest quality that showed no difference from the original at 3x zoom, while 0.92 and below visibly smoothed the photo's grain. How: The portrait is encoded at it.
 
 // #endregion Constants
 
