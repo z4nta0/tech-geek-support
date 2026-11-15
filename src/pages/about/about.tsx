@@ -301,7 +301,7 @@ function AboPagCom () : JSX.Element {
 								className={ cssModObj.butPriAnc }
 
 								to='/contact'
-							>Ask a Question</Link>{ /* What: Ask Question Link. Why: The page ends where help begins. How: This routes to the question form as an orange button. */ }
+							>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: The page ends where help begins. How: This "Ask a Question" button in the closing panel routes to the question form, drawn in orange. */ }
 
 
 						</div>

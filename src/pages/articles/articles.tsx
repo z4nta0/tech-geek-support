@@ -151,7 +151,7 @@ function ArtLisCom () : JSX.Element {
 								aria-pressed={ !topRecObj }
 
 								onClick={ () => setSeaParObj( {}, { replace : true } ) } // What: All Topics Click. Why: Choosing All should show every article without adding a history entry. How: This clears the address's parameters, replacing the current entry.
-							>All topics</button>{ /* What: All Topics Button Element. Why: A visitor can go back to every article. How: This clears the filter, marked pressed when no topic is chosen. */ }
+							>All topics</button>{ /* What: Filter Pill Button Element. Why: A visitor can go back to every article. How: This "All topics" button clears the filter, marked pressed when no topic is chosen. */ }
 
 							{ TOP_REC_ARR.map( ( topCurObj ) => ( // What: Topic Button Map Call. Why: Every topic gets a filter button. How: This renders one button per topic.
 
@@ -166,7 +166,7 @@ function ArtLisCom () : JSX.Element {
 									aria-pressed={ topCurObj.ideStr === topRecObj?.ideStr }
 
 									onClick={ () => setSeaParObj( { topic : topCurObj.ideStr }, { replace : true } ) } // What: Topic Click. Why: Choosing a topic should filter the list and keep the choice shareable, without adding a history entry. How: This puts the topic in the address, replacing the current entry.
-								>{ topCurObj.labStr }</button> // What: Topic Button Element. Why: A visitor narrows the list to one topic. How: This shows the topic's name, marked pressed while it's chosen.
+								>{ topCurObj.labStr }</button> // What: Filter Pill Button Element. Why: A visitor narrows the list to one topic. How: This is each topic's own button, showing the topic's name, marked pressed while it's chosen.
 
 
 							))}
@@ -201,7 +201,7 @@ function ArtLisCom () : JSX.Element {
 												className={ cssModObj.artCarAnc }
 
 												to={ `/articles/${ artRecObj.ideStr }` }
-											>{ /* What: Article Card Link. Why: The whole card opens the article. How: This draws a white card with the topic, title, summary, and reading time, lifting on hover. */ }
+											>{ /* What: Article Card Anchor Link. Why: The whole card opens the article. How: This draws each article's white card with the topic, title, summary, and reading time, lifting on hover. */ }
 
 
 												<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }
@@ -241,7 +241,7 @@ function ArtLisCom () : JSX.Element {
 										className={ cssModObj.butPriAnc }
 
 										to='/contact'
-									>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the way forward when no article fits. How: This routes to the question form as an orange button. */ }
+									>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking is the way forward when no article fits. How: This "Ask a Question" button in the empty topic's message routes to the question form, drawn in orange. */ }
 
 
 								</div>
@@ -276,7 +276,7 @@ function ArtLisCom () : JSX.Element {
 									className={ cssModObj.butPriAnc }
 
 									to='/contact'
-								>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the site's main action. How: This routes to the question form as an orange button. */ }
+								>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking is the site's main action. How: This "Ask a Question" button in the help card routes to the question form, drawn in orange. */ }
 
 
 
@@ -310,7 +310,7 @@ function ArtLisCom () : JSX.Element {
 									className={ cssModObj.butPriAnc }
 
 									to='/contact'
-								>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the next step for anyone still stuck. How: This routes to the question form as an orange button. */ }
+								>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking is the next step for anyone still stuck. How: This "Ask a Question" button in the Still Stuck panel routes to the question form, drawn in orange. */ }
 
 
 							</aside>

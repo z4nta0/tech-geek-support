@@ -412,7 +412,7 @@ function ConPagCom () : JSX.Element {
 											className={ cssModObj.butPriAnc }
 
 											to='/articles'
-										>Browse Articles</Link>{ /* What: Browse Articles Link. Why: A visitor waiting for a reply may find their answer sooner. How: This routes to the Articles page as an orange button. */ }
+										>Browse Articles</Link>{ /* What: Button Primary Anchor Link. Why: A visitor waiting for a reply may find their answer sooner. How: This "Browse Articles" button routes to the Articles page, drawn in orange. */ }
 
 
 									</div>

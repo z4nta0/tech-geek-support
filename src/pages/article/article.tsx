@@ -131,7 +131,7 @@ function renInlFun ( inlTokArr : InlTokTyp[] ) : ReactNode[] {
 				className={ cssModObj.bodLinAnc }
 
 				to={ inlTokObj.hreStr }
-			>{ inlTokObj.texStr }</Link> // What: Body Site Link. Why: A link inside the article's text can lead to another page of the site. How: This routes there without a reload, styled as a body link.
+			>{ inlTokObj.texStr }</Link> // What: Body Link Anchor Link. Why: A link inside the article's text can lead to another page of the site. How: This routes there without a reload, styled as a body link.
 
 
 		);
@@ -237,7 +237,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 							className={ cssModObj.bacLinAnc }
 
 							to={ `/articles?topic=${ artRecObj.topStr }` } // What: Back Link Address. Why: A reader going back most likely wants more of the same topic. How: This opens the list filtered to the article's topic.
-						><span aria-hidden='true'>←</span> More articles</Link>{ /* What: Back Link. Why: A reader should always see the way back to the list. How: This routes to the Articles page filtered to this topic, its arrow hidden from screen readers so the link reads as its words. */ }
+						><span aria-hidden='true'>←</span> More articles</Link>{ /* What: Back Link Anchor Link. Why: A reader should always see the way back to the list. How: This routes to the Articles page filtered to this topic, its arrow hidden from screen readers so the link reads as its words. */ }
 
 
 
@@ -394,7 +394,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 							className={ cssModObj.butPriAnc }
 
 							to='/contact'
-						>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the next step for anyone still stuck. How: This routes to the question form as an orange button. */ }
+						>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking is the next step for anyone still stuck. How: This "Ask a Question" button routes to the question form, drawn in orange. */ }
 
 
 					</aside>
@@ -427,7 +427,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 											className={ cssModObj.relLinAnc }
 
 											to={ `/articles/${ relArtObj.ideStr }` }
-										>{ relArtObj.titStr }</Link>{ /* What: Related Article Link. Why: The reader can open the related article. How: This routes to it, named by its title. */ }
+										>{ relArtObj.titStr }</Link>{ /* What: Related Link Anchor Link. Why: The reader can open each related article. How: This routes to one of them, named by its title. */ }
 
 
 									</li>

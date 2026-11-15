@@ -103,7 +103,7 @@ function NotFouCom () : JSX.Element {
 						className={ cssModObj.butPriAnc }
 
 						to='/contact'
-					>Ask a Question</Link>{ /* What: Ask Question Link. Why: Whatever the visitor came for, asking is the surest way to get it. How: This routes to the question form as an orange button. */ }
+					>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Whatever the visitor came for, asking is the surest way to get it. How: This "Ask a Question" button routes to the question form, drawn in orange. */ }
 
 
 
@@ -111,7 +111,7 @@ function NotFouCom () : JSX.Element {
 						className={ cssModObj.butSecAnc }
 
 						to='/articles'
-					>Browse Articles</Link>{ /* What: Browse Articles Link. Why: The visitor may have been looking for an article. How: This routes to the Articles page as an outlined button. */ }
+					>Browse Articles</Link>{ /* What: Button Secondary Anchor Link. Why: The visitor may have been looking for an article. How: This "Browse Articles" button routes to the Articles page, drawn as an outline. */ }
 
 
 
@@ -119,7 +119,7 @@ function NotFouCom () : JSX.Element {
 						className={ cssModObj.butSecAnc }
 
 						to='/'
-					>Go Home</Link>{ /* What: Go Home Link. Why: The home page is the safe place to start over. How: This routes to the root as an outlined button. */ }
+					>Go Home</Link>{ /* What: Button Secondary Anchor Link. Why: The home page is the safe place to start over. How: This "Go Home" button routes to the root, drawn as an outline. */ }
 
 
 				</div>

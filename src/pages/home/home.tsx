@@ -137,7 +137,7 @@ function HomPagCom () : JSX.Element {
 									className={ cssModObj.butPriAnc }
 
 									to='/contact'
-								>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking a question is the site's main action. How: This routes to the Contact page's question form as an orange button. */ }
+								>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking a question is the site's main action. How: This "Ask a Question" button routes to the Contact page's question form, drawn in orange. */ }
 
 
 
@@ -145,7 +145,7 @@ function HomPagCom () : JSX.Element {
 									className={ cssModObj.butSecAnc }
 
 									to='/articles'
-								>Browse Articles</Link>{ /* What: Browse Articles Link. Why: A visitor may prefer to look for an answer first. How: This routes to the Articles page as an outlined button. */ }
+								>Browse Articles</Link>{ /* What: Button Secondary Anchor Link. Why: A visitor may prefer to look for an answer first. How: This "Browse Articles" button routes to the Articles page, drawn as an outline. */ }
 
 
 							</div>
@@ -213,7 +213,7 @@ function HomPagCom () : JSX.Element {
 										className={ cssModObj.topTilAnc }
 
 										to={ `/articles?topic=${ topRecObj.ideStr }` } // What: Topic Address. Why: The tile should open the Articles page already showing this topic. How: This puts the topic's identifier in the address, which the Articles page reads as its filter.
-									>{ /* What: Topic Tile Link. Why: A tile opens the articles for its topic. How: This draws a stitched tile with the icon, name, and hint, lifting on hover. */ }
+									>{ /* What: Topic Tile Anchor Link. Why: A tile opens the articles for its topic. How: This draws each topic's stitched tile with the icon, name, and hint, lifting on hover. */ }
 
 
 										<svg
@@ -253,7 +253,7 @@ function HomPagCom () : JSX.Element {
 									className={ cssModObj.topTilAnc }
 
 									to='/contact'
-								>{ /* What: Something Else Tile Link. Why: A visitor whose question fits no topic can still ask it. How: This draws the same stitched tile, leading to the question form. */ }
+								>{ /* What: Topic Tile Anchor Link. Why: A visitor whose question fits no topic can still ask it. How: This draws the same stitched tile for "Something else", leading to the question form. */ }
 
 
 									<svg
@@ -317,7 +317,7 @@ function HomPagCom () : JSX.Element {
 								className={ cssModObj.allArtAnc }
 
 								to='/articles'
-							>See all articles <span className={ cssModObj.allArrSpa } aria-hidden='true'>→</span></Link>{ /* What: See All Articles Link. Why: Four articles are only a taste. How: This routes to the Articles page, its arrow nudging on hover and hidden from screen readers. */ }
+							>See all articles <span className={ cssModObj.allArrSpa } aria-hidden='true'>→</span></Link>{ /* What: All Articles Anchor Link. Why: Four articles are only a taste. How: This routes to the Articles page, its arrow nudging on hover and hidden from screen readers. */ }
 
 
 						</div>
@@ -336,7 +336,7 @@ function HomPagCom () : JSX.Element {
 										className={ cssModObj.artCarAnc }
 
 										to={ `/articles/${ artRecObj.ideStr }` }
-									>{ /* What: Article Card Link. Why: The whole card opens the article. How: This draws a white card with the topic, title, and reading time, lifting on hover. */ }
+									>{ /* What: Article Card Anchor Link. Why: The whole card opens the article. How: This draws each article's white card with the topic, title, and reading time, lifting on hover. */ }
 
 
 										<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }
