@@ -595,7 +595,7 @@
 
 
 	height          : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
-	pointer-events  : none;                                /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
+	pointer-events  : none;                                /* What: Pass Through Pointer. Why: A press on the icon should land on its tile link. How: This lets every press on the icon reach the link itself. */
 	stroke          : var( --act-dar-col );                /* Accent-Tertiary Dark Color ~= #007063 */
 	stroke-linejoin : round;
 	stroke-width    : 2;                                   /* What: Icon Stroke Width. Why: The bubble's line should read clearly at its small size. How: This is 2 units of the 24-unit drawing space. */
