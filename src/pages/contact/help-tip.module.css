@@ -102,7 +102,7 @@
 
 
 }
-.helBubSpa::before { /* What: Help Bubble Bridge. Why: A mouse moving from the button down to the bubble crosses a small gap, which would close the tip on the way. How: This stretches an invisible strip of the bubble up across the gap, so the pointer never leaves the tip. */
+.helBubSpa::before { /* What: Help Bubble Span Bridge. Why: A mouse moving from the button down to the bubble crosses a small gap, which would close the tip on the way. How: This stretches an invisible strip of the bubble up across the gap, so the pointer never leaves the tip. */
 
 
 	content  : '';

@@ -921,7 +921,7 @@
 
 }
 
-.safIteIte::marker { /* What: Safety Item Marker. Why: The dots carry the site's teal. How: This colors each item's marker teal. */
+.safIteIte::marker { /* What: Safety Item Item Marker. Why: The dots carry the site's teal. How: This colors each item's marker teal. */
 
 
 	color : var( --act-mai-col ); /* Accent-Tertiary Main Color = #2A9D8F */
