@@ -56,7 +56,6 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The head helpe
 
 const HOM_DES_STR = 'Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.'; // What: Home Description String. Why: The raw page carries the home page's description, and every other page must swap it for its own. How: This is the exact text it should hold.
 const LIV_URL_STR = 'https://techgeek.support/';                                                                                                  // What: Live URL String. Why: The canonical links, structured data, robots.txt, and sitemap all name the live site. How: This is its address.
-const PRE_URL_STR = 'http://localhost:5206';                                                                                                      // What: Preview URL String. Why: Link scrapers read the shipped page, which the build minifies and copies once per article, so the raw pages are read from the build rather than the dev server. How: This is the address the preview server answers on.
 
 
 
@@ -104,6 +103,10 @@ const PAG_HEA_ARR = [ // What: Page Head Array. Why: Every page's head is checke
 ];
 
 // #endregion PAG_HEA_ARR
+
+
+
+const PRE_URL_STR = 'http://localhost:5206'; // What: Preview URL String. Why: Link scrapers read the shipped page, which the build minifies and copies once per article, so the raw pages are read from the build rather than the dev server. How: This is the address the preview server answers on.
 
 
 
