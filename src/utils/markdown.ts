@@ -33,11 +33,11 @@ type InlTokTyp = { hreStr? : string, kinStr : 'bold' | 'italic' | 'link' | 'text
 
 
 type BloRecTyp = // What: Block Record Type. Why: An article is a list of blocks of a few kinds. How: This types each kind of block by its kinStr.
-	| { inlTokArr : InlTokTyp[], kinStr : 'heading', levNum : 2 | 3 }          // What: Heading Block. Why: Sections are named by headings. How: This holds the heading's level and text.
-	| { inlTokArr : InlTokTyp[], kinStr : 'paragraph' }                        // What: Paragraph Block. Why: Most text is paragraphs. How: This holds the paragraph's text.
-	| { inlTokArr : InlTokTyp[], kinStr : 'tip' }                              // What: Tip Block. Why: A tip is a paragraph set apart from the steps. How: This holds the tip's text.
-	| { iteTokArr : InlTokTyp[][], kinStr : 'ordered' }                        // What: Ordered List Block. Why: Steps are done in order. How: This holds each step's text.
-	| { iteTokArr : InlTokTyp[][], kinStr : 'unordered' }                      // What: Unordered List Block. Why: Some points have no order. How: This holds each point's text.
+	| { inlArr : InlTokTyp[], kinStr : 'heading', levNum : 2 | 3 }             // What: Heading Block. Why: Sections are named by headings. How: This holds the heading's level and text.
+	| { inlArr : InlTokTyp[], kinStr : 'paragraph' }                           // What: Paragraph Block. Why: Most text is paragraphs. How: This holds the paragraph's text.
+	| { inlArr : InlTokTyp[], kinStr : 'tip' }                                 // What: Tip Block. Why: A tip is a paragraph set apart from the steps. How: This holds the tip's text.
+	| { iteArr : InlTokTyp[][], kinStr : 'ordered' }                           // What: Ordered List Block. Why: Steps are done in order. How: This holds each step's text.
+	| { iteArr : InlTokTyp[][], kinStr : 'unordered' }                         // What: Unordered List Block. Why: Some points have no order. How: This holds each point's text.
 	| { altStr : string, capStr : string, kinStr : 'media', souStr : string }; // What: Media Block. Why: A photo or video stands on its own line. How: This holds its alt text, caption, and file name.
 
 // #endregion Types
@@ -266,9 +266,9 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 			bloRecArr.push({ // What: Heading Push. Why: The page needs the heading's level and text. How: This adds a heading block.
 
 
-				inlTokArr : parInlFun( heaMatArr[ 2 ] ),        // What: Inline Token Array. Why: A heading's text may hold bold, italic, or links. How: This splits the text after the hashes into pieces.
-				kinStr    : 'heading',                          // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a heading.
-				levNum    : heaMatArr[ 1 ].length === 2 ? 2 : 3 // What: Level Number. Why: The page picks h2 or h3 by the level. How: This gives 2 for ## and 3 for ###.
+				inlArr : parInlFun( heaMatArr[ 2 ] ),        // What: Inline Array. Why: A heading's text may hold bold, italic, or links. How: This splits the text after the hashes into pieces.
+				kinStr : 'heading',                          // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a heading.
+				levNum : heaMatArr[ 1 ].length === 2 ? 2 : 3 // What: Level Number. Why: The page picks h2 or h3 by the level. How: This gives 2 for ## and 3 for ###.
 
 
 			});
@@ -333,8 +333,8 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 			bloRecArr.push({ // What: Tip Push. Why: The tip reads as one paragraph. How: This adds a tip block.
 
 
-				inlTokArr : parInlFun( tipLinArr.join( ' ' ) ), // What: Inline Token Array. Why: A tip's text may hold bold, italic, or links. How: This joins the tip's lines with spaces and splits them into pieces.
-				kinStr    : 'tip'                               // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a tip.
+				inlArr : parInlFun( tipLinArr.join( ' ' ) ), // What: Inline Array. Why: A tip's text may hold bold, italic, or links. How: This joins the tip's lines with spaces and splits them into pieces.
+				kinStr : 'tip'                               // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a tip.
 
 
 			});
@@ -375,7 +375,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 
 
-			bloRecArr.push( lisKinStr === 'ordered' ? { iteTokArr, kinStr : 'ordered' } : { iteTokArr, kinStr : 'unordered' } ); // What: List Push. Why: The page renders the items as one list. How: This adds a numbered or bulleted list block.
+			bloRecArr.push( lisKinStr === 'ordered' ? { iteArr : iteTokArr, kinStr : 'ordered' } : { iteArr : iteTokArr, kinStr : 'unordered' } ); // What: List Push. Why: The page renders the items as one list. How: This adds a numbered or bulleted list block.
 
 
 
@@ -404,8 +404,8 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 		bloRecArr.push({ // What: Paragraph Push. Why: The lines read as one paragraph. How: This adds a paragraph block.
 
 
-			inlTokArr : parInlFun( parLinArr.join( ' ' ) ), // What: Inline Token Array. Why: A paragraph's text may hold bold, italic, or links. How: This joins the paragraph's lines with spaces and splits them into pieces.
-			kinStr    : 'paragraph'                         // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a paragraph.
+			inlArr : parInlFun( parLinArr.join( ' ' ) ), // What: Inline Array. Why: A paragraph's text may hold bold, italic, or links. How: This joins the paragraph's lines with spaces and splits them into pieces.
+			kinStr : 'paragraph'                         // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a paragraph.
 
 
 		});

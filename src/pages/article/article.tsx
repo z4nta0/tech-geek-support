@@ -257,18 +257,18 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 					<div className={ cssModObj.bodTexDiv }>{ /* What: Body Text Div Element. Why: The article's body is long-form prose, styled as a whole. How: This holds every block, which the module styles through their tags. */ }
 
 
-						{ artRecObj.bloRecArr.map( ( bloRecObj, bloIndNum ) => { // What: Block Map Call. Why: Each block renders as its own element. How: This picks the element by the block's kind, keyed by its place in the body.
+						{ artRecObj.bloArr.map( ( bloRecObj, bloIndNum ) => { // What: Block Map Call. Why: Each block renders as its own element. How: This picks the element by the block's kind, keyed by its place in the body.
 
 
-							if ( bloRecObj.kinStr === 'heading' && bloRecObj.levNum === 2 ) return <h2 key={ bloIndNum }>{ renInlFun( bloRecObj.inlTokArr ) }</h2>; // What: Section Heading Return. Why: ## starts a section. How: This renders an h2.
-
-
-
-							if ( bloRecObj.kinStr === 'heading' ) return <h3 key={ bloIndNum }>{ renInlFun( bloRecObj.inlTokArr ) }</h3>; // What: Subsection Heading Return. Why: ### starts a subsection. How: This renders an h3.
+							if ( bloRecObj.kinStr === 'heading' && bloRecObj.levNum === 2 ) return <h2 key={ bloIndNum }>{ renInlFun( bloRecObj.inlArr ) }</h2>; // What: Section Heading Return. Why: ## starts a section. How: This renders an h2.
 
 
 
-							if ( bloRecObj.kinStr === 'paragraph' ) return <p key={ bloIndNum }>{ renInlFun( bloRecObj.inlTokArr ) }</p>; // What: Paragraph Return. Why: Most of the body is paragraphs. How: This renders a p.
+							if ( bloRecObj.kinStr === 'heading' ) return <h3 key={ bloIndNum }>{ renInlFun( bloRecObj.inlArr ) }</h3>; // What: Subsection Heading Return. Why: ### starts a subsection. How: This renders an h3.
+
+
+
+							if ( bloRecObj.kinStr === 'paragraph' ) return <p key={ bloIndNum }>{ renInlFun( bloRecObj.inlArr ) }</p>; // What: Paragraph Return. Why: Most of the body is paragraphs. How: This renders a p.
 
 
 
@@ -279,7 +279,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 									key={ bloIndNum }
 
 									className={ cssModObj.tipBloAsi }
-								>{ renInlFun( bloRecObj.inlTokArr ) }</aside> // What: Tip Block Aside Element. Why: A tip reads as its own calm note between the steps. How: This holds the tip's text in a pale teal panel.
+								>{ renInlFun( bloRecObj.inlArr ) }</aside> // What: Tip Block Aside Element. Why: A tip reads as its own calm note between the steps. How: This holds the tip's text in a pale teal panel.
 
 
 							);
@@ -292,7 +292,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 								<ol key={ bloIndNum }>{ /* What: Step List Element. Why: Numbered steps are done in order. How: The module counts the items with its own step counter and draws each number in a pale teal circle. */ }
 
 
-									{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => ( // What: Step Map Call. Why: Every step is its own item. How: This renders one li per step.
+									{ bloRecObj.iteArr.map( ( iteTokArr, iteIndNum ) => ( // What: Step Map Call. Why: Every step is its own item. How: This renders one li per step.
 
 
 										<li key={ iteIndNum }>{ renInlFun( iteTokArr ) }</li> // What: Step Item Element. Why: Each step is one thing to do. How: This renders the step's text with its bold, italics, and links.
@@ -314,7 +314,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 								<ul key={ bloIndNum }>{ /* What: Point List Element. Why: Some points have no order. How: The module marks each item with a small teal dot. */ }
 
 
-									{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => ( // What: Point Map Call. Why: Every point is its own item. How: This renders one li per point.
+									{ bloRecObj.iteArr.map( ( iteTokArr, iteIndNum ) => ( // What: Point Map Call. Why: Every point is its own item. How: This renders one li per point.
 
 
 										<li key={ iteIndNum }>{ renInlFun( iteTokArr ) }</li> // What: Point Item Element. Why: Each point stands on its own. How: This renders the point's text with its bold, italics, and links.
@@ -346,7 +346,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 										<video
 											controls
 											preload='metadata'
-											src={ artRecObj.medUrlObj[ bloRecObj.souStr ] }
+											src={ artRecObj.medObj[ bloRecObj.souStr ] }
 
 											aria-label={ bloRecObj.altStr }
 										/> // What: Media Video Element. Why: A short video shows steps a photo can't. How: This plays the file with the browser's controls, loading only its details until played, named by its alt text.
@@ -357,7 +357,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 
 										<img
 											loading='lazy'
-											src={ artRecObj.medUrlObj[ bloRecObj.souStr ] }
+											src={ artRecObj.medObj[ bloRecObj.souStr ] }
 
 											alt={ bloRecObj.altStr }
 										/> // What: Media Image Element. Why: A photo shows what to look for on screen. How: This shows the file lazily, since most photos start below the fold, with its alt text.

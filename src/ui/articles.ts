@@ -49,7 +49,7 @@ const REA_WOR_NUM = 200; // What: Reading Words Number. Why: An article's readin
 
 // #region Helpers
 
-type ArtRecTyp = { bloRecArr : BloRecTyp[], ideStr : string, medUrlObj : Record< string, string >, minNum : number, pubStr : string, sumStr : string, titStr : string, topStr : string, updStr : string }; // What: Article Record Type. Why: Every page that shows an article reads the same fields. How: This types the body blocks, the address, the media addresses, the reading minutes, the published date, the summary, the title, the topic, and the updated date, empty when never revised.
+type ArtRecTyp = { bloArr : BloRecTyp[], ideStr : string, medObj : Record< string, string >, minNum : number, pubStr : string, sumStr : string, titStr : string, topStr : string, updStr : string }; // What: Article Record Type. Why: Every page that shows an article reads the same fields. How: This types the body blocks, the address, the media addresses, the reading minutes, the published date, the summary, the title, the topic, and the updated date, empty when never revised.
 
 // #region artRecFun
 
@@ -138,7 +138,7 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 	// #region Reading Time
 
-	const bodTexStr = bloRecArr.map( ( bloRecObj ) => 'iteTokArr' in bloRecObj ? bloRecObj.iteTokArr.flat() : 'inlTokArr' in bloRecObj ? bloRecObj.inlTokArr : [] ).flat().map( ( inlTokObj ) => inlTokObj.texStr ).join( ' ' ); // What: Body Text String. Why: The reading time counts the words a reader reads. How: This gathers the text of every heading, paragraph, tip, and list item.
+	const bodTexStr = bloRecArr.map( ( bloRecObj ) => 'iteArr' in bloRecObj ? bloRecObj.iteArr.flat() : 'inlArr' in bloRecObj ? bloRecObj.inlArr : [] ).flat().map( ( inlTokObj ) => inlTokObj.texStr ).join( ' ' ); // What: Body Text String. Why: The reading time counts the words a reader reads. How: This gathers the text of every heading, paragraph, tip, and list item.
 	const reaMinNum = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) ); // What: Reading Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
 
 	// #endregion Reading Time
@@ -148,10 +148,9 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	return { // What: Article Record Return. Why: Every page reads the article from one record. How: This gathers its fields.
 
 
-		bloRecArr, // What: Block Record Array. Why: The article's page renders the body. How: This is the parsed body's blocks.
-		medUrlObj, // What: Media URL Object. Why: The body's media need their built addresses. How: This maps each file name to its address.
-
+		bloArr : bloRecArr,              // What: Block Array. Why: The article's page renders the body. How: This is the parsed body's blocks.
 		ideStr : artIdeStr,              // What: Identifier String. Why: The article's address is its folder's name. How: This is that name.
+		medObj : medUrlObj,              // What: Media Object. Why: The body's media need their built addresses. How: This maps each file name to its address.
 		minNum : reaMinNum,              // What: Minutes Number. Why: The article shows its reading time. How: This is the estimate in whole minutes.
 		pubStr : froMatObj.published,    // What: Published String. Why: The article shows when it was published. How: This is the front matter's published date.
 		sumStr : froMatObj.summary,      // What: Summary String. Why: Cards and search listings show the summary. How: This is the front matter's summary.
