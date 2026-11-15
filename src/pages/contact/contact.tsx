@@ -121,42 +121,6 @@ function ConPagCom () : JSX.Element {
 
 
 
-	useEffect( () => { // What: Success Focus Effect. Why: After sending, the page would stay scrolled where the button was, with the thank-you half under the bar, and a screen reader wouldn't hear that the question went out. How: This moves focus to the thank-you's heading and scrolls it into view.
-
-
-		if ( !isaSenBoo ) return; // What: Unsent Form Guard. Why: Focus moves only once the thank-you shows. How: This leaves while the form is still showing.
-
-
-
-		sucTitRef.current?.focus( { preventScroll : true } ); // What: Heading Focus Call. Why: A screen reader should announce that the question went out. How: This focuses the heading without the browser's own scroll, which skips an element already partly on screen.
-
-		sucTitRef.current?.scrollIntoView( { block : 'start' } ); // What: Heading Scroll Call. Why: The thank-you would otherwise sit half under the fixed bar. How: This scrolls the heading to the top, where its scroll margin leaves room for the bar and the check, following the page's own smooth scrolling, which reduced motion turns off.
-
-
-	}, [ isaSenBoo ] ); // What: Effect Dependency Array. Why: Focus moves only when the thank-you appears. How: isaSenBoo turning true reruns the effect.
-
-
-
-	useEffect( () => { // What: Return Focus Effect. Why: Asking another question removes the focused button with the thank-you, and focus must land on the form that replaces it rather than fall to the page. How: This focuses the name field once the form returns from the thank-you.
-
-
-		if ( !isaSenBoo && retForRef.current ) forNamRef.current?.focus(); // What: Name Field Focus Call. Why: A visitor asking another question starts at the first field, while a first visit shouldn't move focus at all. How: This focuses the name input only after resForFun has marked the return.
-
-
-	}, [ isaSenBoo ] ); // What: Effect Dependency Array. Why: Focus moves only when the thank-you gives way to the form. How: isaSenBoo turning false reruns the effect.
-
-
-
-	useEffect( () => { // What: Error Focus Effect. Why: The send button is disabled while the question sends, which can drop its focus to the page, and focus must never fall there. How: This focuses the button again once a failed send shows its error.
-
-
-		if ( errMesStr ) subForRef.current?.focus(); // What: Send Focus Call. Why: The visitor can try again from where they were, and focus never stays on the page. How: This focuses the button, enabled again by the same render that shows the error.
-
-
-	}, [ errMesStr ] ); // What: Effect Dependency Array. Why: Focus moves back only when a send fails. How: errMesStr gains its message when a send fails, and clears as the next one starts.
-
-
-
 	// #region chaFieFun
 
 	/**
@@ -201,6 +165,46 @@ function ConPagCom () : JSX.Element {
 	};
 
 	// #endregion Form State
+
+
+
+	// #region Focus Handling
+
+	useEffect( () => { // What: Success Focus Effect. Why: After sending, the page would stay scrolled where the button was, with the thank-you half under the bar, and a screen reader wouldn't hear that the question went out. How: This moves focus to the thank-you's heading and scrolls it into view.
+
+
+		if ( !isaSenBoo ) return; // What: Unsent Form Guard. Why: Focus moves only once the thank-you shows. How: This leaves while the form is still showing.
+
+
+
+		sucTitRef.current?.focus( { preventScroll : true } ); // What: Heading Focus Call. Why: A screen reader should announce that the question went out. How: This focuses the heading without the browser's own scroll, which skips an element already partly on screen.
+
+		sucTitRef.current?.scrollIntoView( { block : 'start' } ); // What: Heading Scroll Call. Why: The thank-you would otherwise sit half under the fixed bar. How: This scrolls the heading to the top, where its scroll margin leaves room for the bar and the check, following the page's own smooth scrolling, which reduced motion turns off.
+
+
+	}, [ isaSenBoo ] ); // What: Effect Dependency Array. Why: Focus moves only when the thank-you appears. How: isaSenBoo turning true reruns the effect.
+
+
+
+	useEffect( () => { // What: Return Focus Effect. Why: Asking another question removes the focused button with the thank-you, and focus must land on the form that replaces it rather than fall to the page. How: This focuses the name field once the form returns from the thank-you.
+
+
+		if ( !isaSenBoo && retForRef.current ) forNamRef.current?.focus(); // What: Name Field Focus Call. Why: A visitor asking another question starts at the first field, while a first visit shouldn't move focus at all. How: This focuses the name input only after resForFun has marked the return.
+
+
+	}, [ isaSenBoo ] ); // What: Effect Dependency Array. Why: Focus moves only when the thank-you gives way to the form. How: isaSenBoo turning false reruns the effect.
+
+
+
+	useEffect( () => { // What: Error Focus Effect. Why: The send button is disabled while the question sends, which can drop its focus to the page, and focus must never fall there. How: This focuses the button again once a failed send shows its error.
+
+
+		if ( errMesStr ) subForRef.current?.focus(); // What: Send Focus Call. Why: The visitor can try again from where they were, and focus never stays on the page. How: This focuses the button, enabled again by the same render that shows the error.
+
+
+	}, [ errMesStr ] ); // What: Effect Dependency Array. Why: Focus moves back only when a send fails. How: errMesStr gains its message when a send fails, and clears as the next one starts.
+
+	// #endregion Focus Handling
 
 
 
