@@ -66,7 +66,7 @@ const TOP_REC_ARR : TopRecTyp[] = [ // What: Topic Record Array. Why: The site l
 
 // #region Exports
 
-export { TOP_REC_ARR, type TopRecTyp }; // What: Named Exports. Why: The pages that list the topics, and the articles that name theirs, read this list. How: This exports the list and its type.
+export { TOP_REC_ARR, type TopRecTyp }; // What: Named Exports. Why: The topics are listed and named from one place. How: This exports the list and its type.
 
 // #endregion Exports
 

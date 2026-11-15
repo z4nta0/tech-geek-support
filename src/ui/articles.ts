@@ -176,7 +176,7 @@ const ART_REC_ARR = Object.entries( ART_TEX_OBJ ).map( ( [ filPatStr, filTexStr 
 
 // #region Exports
 
-export { ART_REC_ARR, type ArtRecTyp }; // What: Named Exports. Why: Home, the Articles page, and each article's page read the catalog. How: This exports the records and their type.
+export { ART_REC_ARR, type ArtRecTyp }; // What: Named Exports. Why: The article catalog is read from one place. How: This exports the records and their type.
 
 // #endregion Exports
 

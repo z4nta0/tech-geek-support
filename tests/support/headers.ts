@@ -182,7 +182,7 @@ function heaPatFun ( reqPatStr : string ) : Record< string, string > {
 
 // #region Exports
 
-export { heaAllFun, heaPatFun }; // What: Named Exports. Why: The security checks read the policy and each path's headers. How: This exports the reader for the /* block and the one for a single path.
+export { heaAllFun, heaPatFun }; // What: Named Exports. Why: The headers file's policy and each path's headers are read from one place. How: This exports the reader for the /* block and the one for a single path.
 
 // #endregion Exports
 

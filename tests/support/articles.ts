@@ -82,7 +82,7 @@ const PIL_STA_ARR : StaRecTyp[] = ART_STA_ARR.map( ( staRecObj ) => ( { // What:
 
 // #region Exports
 
-export { ADR_STA_ARR, PIL_STA_ARR }; // What: Named Exports. Why: The suites that check every reachable state share the narrowed states. How: This exports the address and pill state lists.
+export { ADR_STA_ARR, PIL_STA_ARR }; // What: Named Exports. Why: The Articles page's narrowed states are shared across suites. How: This exports the address and pill state lists.
 
 // #endregion Exports
 

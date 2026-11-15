@@ -69,7 +69,7 @@ const artTitFun = ( titTexStr : string ) : string => titTexStr.length + SIT_SUF_
 
 // #region Exports
 
-export { artTitFun }; // What: Named Export. Why: The article's page, the build, and the SEO suite name an article's page the same way. How: This exports artTitFun.
+export { artTitFun }; // What: Named Export. Why: An article's page title is worked out the same way wherever it's named. How: This exports artTitFun.
 
 // #endregion Exports
 

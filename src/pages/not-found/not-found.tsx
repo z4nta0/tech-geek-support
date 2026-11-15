@@ -143,7 +143,7 @@ function NotFouCom () : JSX.Element {
 
 // #region Exports
 
-export { NotFouCom }; // What: Named Export. Why: The router's catch-all route and the article page render the 404 page. How: This exports NotFouCom.
+export { NotFouCom }; // What: Named Export. Why: The 404 page is shown wherever an address leads to no page. How: This exports NotFouCom.
 
 // #endregion Exports
 

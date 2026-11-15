@@ -180,7 +180,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 // #region Exports
 
-export { SigRinCom }; // What: Named Export. Why: Home's hero, the Articles page's help card, and the 404 page show the motif. How: This exports SigRinCom.
+export { SigRinCom }; // What: Named Export. Why: The motif is drawn wherever a page shows the signal. How: This exports SigRinCom.
 
 // #endregion Exports
 

@@ -304,7 +304,7 @@ async function opeStaFun ( curPagObj : Page, staRecObj : StaRecTyp ) : Promise< 
 
 // #region Exports
 
-export { opeStaFun, STA_REC_ARR, type StaRecTyp }; // What: Named Exports. Why: The page suites share these states, their shape, and their opener. How: This exports the state list, its row type, and the helper that opens one.
+export { opeStaFun, STA_REC_ARR, type StaRecTyp }; // What: Named Exports. Why: The page states, their shape, and their opener are shared across suites. How: This exports the state list, its row type, and the helper that opens one.
 
 // #endregion Exports
 

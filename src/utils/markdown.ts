@@ -428,7 +428,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 // #region Exports
 
-export { parMarFun, type BloRecTyp, type InlTokTyp }; // What: Named Exports. Why: Code that reads an article's file uses the parser, and code that renders an article uses its block and piece types. How: This exports the parser and its two types.
+export { parMarFun, type BloRecTyp, type InlTokTyp }; // What: Named Exports. Why: The parser turns an article's Markdown into blocks, and its block and piece types describe what it returns. How: This exports the parser and its two types.
 
 // #endregion Exports
 

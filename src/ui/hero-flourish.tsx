@@ -275,7 +275,7 @@ function HerFloCom ( { className, sidStr } : HfcProTyp ) : JSX.Element {
 
 // #region Exports
 
-export { HerFloCom }; // What: Named Export. Why: Home's and About's stacked heroes draw the flourishes beside their pictures. How: This exports HerFloCom.
+export { HerFloCom }; // What: Named Export. Why: A stacked hero draws the flourishes beside its picture. How: This exports HerFloCom.
 
 // #endregion Exports
 

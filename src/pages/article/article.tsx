@@ -508,7 +508,7 @@ function ArtPagCom () : JSX.Element {
 
 // #region Exports
 
-export { ArtPagCom }; // What: Named Export. Why: The router's article route renders the page. How: This exports ArtPagCom.
+export { ArtPagCom }; // What: Named Export. Why: Each article's page renders at its own route. How: This exports ArtPagCom.
 
 // #endregion Exports
 

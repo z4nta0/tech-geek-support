@@ -238,7 +238,7 @@ const RES_STA_ARR : StaRecTyp[] = RES_REC_ARR.flatMap( ( resRecObj ) => CON_STA_
 
 // #region Exports
 
-export { ERR_MES_STR, INV_STA_ARR, RES_STA_ARR, senForFun, TIP_STA_ARR }; // What: Named Exports. Why: The suites that check every reachable state, and those that check a send's result, share the Contact states, the error message, and the sender. How: This exports the error message, the invalid, result, and tip state lists, and the send helper.
+export { ERR_MES_STR, INV_STA_ARR, RES_STA_ARR, senForFun, TIP_STA_ARR }; // What: Named Exports. Why: The Contact states, the error message, and the sender are shared across suites. How: This exports the error message, the invalid, result, and tip state lists, and the send helper.
 
 // #endregion Exports
 
