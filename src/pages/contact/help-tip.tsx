@@ -125,12 +125,12 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 		};
 
 
-		const focInsFun = ( focEveObj : FocusEvent ) => { if ( !tipWraRef.current?.contains( focEveObj.target as Node ) ) cloTipFun(); };   // What: Focus In Function. Why: The bubble opens over the field below its label, so a keyboard user tabbing on would land on a field hidden behind it. How: This closes the tip when focus moves to anything outside the wrapper. // What: Type Assertion Note. Why: A focus event's target is typed as a general event target. How: Focus always lands on a node in the page, so it's read as a Node.
+		const focOutFun = ( focEveObj : FocusEvent ) => { if ( !tipWraRef.current?.contains( focEveObj.target as Node ) ) cloTipFun(); };   // What: Focus Outside Function. Why: The bubble opens over the field below its label, so a keyboard user tabbing on would land on a field hidden behind it. How: This closes the tip when focus moves to anything outside the wrapper. // What: Type Assertion Note. Why: A focus event's target is typed as a general event target. How: Focus always lands on a node in the page, so it's read as a Node.
 		const keyDowFun = ( keyEveObj : KeyboardEvent ) => { if ( keyEveObj.key === 'Escape' ) cloTipFun(); };                              // What: Key Down Function. Why: Escape dismisses the tip without moving the pointer. How: This closes it when the key is Escape.
 		const poiDowFun = ( poiEveObj : PointerEvent ) => { if ( !tipWraRef.current?.contains( poiEveObj.target as Node ) ) cloTipFun(); }; // What: Pointer Down Function. Why: A press anywhere else dismisses the tip. How: This closes it when the press lands outside the wrapper. // What: Type Assertion Note. Why: A pointer event's target is typed as a general event target. How: A press always lands on a node in the page, so it's read as a Node.
 
 
-		document.addEventListener( 'focusin', focInsFun );     // What: Focus In Listener Call. Why: Focus moving anywhere else can close the tip. How: This listens on the document.
+		document.addEventListener( 'focusin', focOutFun );     // What: Focus In Listener Call. Why: Focus moving anywhere else can close the tip. How: This listens on the document.
 		document.addEventListener( 'keydown', keyDowFun );     // What: Key Down Listener Call. Why: Escape works wherever focus is. How: This listens on the document.
 		document.addEventListener( 'pointerdown', poiDowFun ); // What: Pointer Down Listener Call. Why: A press anywhere can close the tip. How: This listens on the document.
 
@@ -139,7 +139,7 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 		return () => { // What: Listener Cleanup Function. Why: A closed tip shouldn't keep listening. How: This removes both listeners when the tip closes or leaves the page.
 
 
-			document.removeEventListener( 'focusin', focInsFun );     // What: Focus In Removal Call. Why: The focus listener ends with the open tip. How: This removes it.
+			document.removeEventListener( 'focusin', focOutFun );     // What: Focus In Removal Call. Why: The focus listener ends with the open tip. How: This removes it.
 			document.removeEventListener( 'keydown', keyDowFun );     // What: Key Down Removal Call. Why: The Escape listener ends with the open tip. How: This removes it.
 			document.removeEventListener( 'pointerdown', poiDowFun ); // What: Pointer Down Removal Call. Why: The press listener ends with the open tip. How: This removes it.
 
