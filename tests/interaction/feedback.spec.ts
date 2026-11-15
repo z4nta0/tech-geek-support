@@ -43,16 +43,16 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: The h
  * on and off, such as a topic pill's chosen state or a help tip's bubble, is
  * flipped off, on, and off again by its attribute, and has to look different
  * and ease each change both ways. On the plain Home and About states, the
- * cards that lift on hover without being controls have to show and ease
- * their hover. A control that waits above the screen until it's focused, the
- * skip link, is focused before it's hovered, and on a state with nothing
- * opened the probe fails when it isn't found there. On the shared states the
- * first keyboard stop has to draw its ring at full width, and on one with
- * nothing opened it has to be the skip link. Under reduced motion every
- * change stays but switches at once. Real clicks are blocked during the
- * checks, so pressing a control never navigates or closes anything
- * mid-check. The snapshot and comparison helpers live in
- * tests/support/feedback.ts. Adapted from TechGeek.cards' own feedback spec.
+ * cards that lift on hover without being controls have to show and ease their
+ * hover. A control that waits above the screen until it's focused, the skip
+ * link, is focused before it's hovered, and on every state but the open menu
+ * the probe fails when it isn't found. On the shared states the first keyboard
+ * stop has to draw its ring at full width, and on one with nothing opened it
+ * has to be the skip link. Under reduced motion every change stays but
+ * switches at once. Real clicks are blocked during the checks, so pressing a
+ * control never navigates or closes anything mid-check. The snapshot and
+ * comparison helpers live in tests/support/feedback.ts. Adapted from
+ * TechGeek.cards' own feedback spec.
  *
  * Sections:
  *  - Types

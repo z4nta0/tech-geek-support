@@ -371,9 +371,9 @@ test( 'the structured data describes z4nta0 and matches the pages', async ( { pa
 	const webNodObj = ldjGraArr.find( ( graNodObj ) => graNodObj[ '@type' ] === 'WebSite' ) ?? {}; // What: WebSite Node Object. Why: This site's details are checked together. How: This finds its node, or an empty object.
 
 
-	expect( [ perNodObj[ '@id' ], perNodObj.name, perNodObj.url, webNodObj.name, webNodObj.url ] ).toEqual( [ 'https://techgeek.dev/#person', 'z4nta0', 'https://techgeek.dev/', 'TechGeek.support', LIV_URL_STR ] ); // What: Person And Site Assertion. Why: The site is z4nta0's, never a business's, and z4nta0 is the same person TechGeek.dev describes. How: This checks the person's id, name, and address match TechGeek.dev's, and the site's name and address are this one's.
+	expect( [ perNodObj[ '@id' ], perNodObj.name, perNodObj.url, webNodObj.name, webNodObj.url ] ).toEqual( [ 'https://techgeek.dev/#person', 'z4nta0', 'https://techgeek.dev/', 'TechGeek.support', LIV_URL_STR ] ); // What: Person And Site Assertion. Why: The site is z4nta0's, never a business's, and z4nta0 is the same person TechGeek.dev describes. How: This checks the person's ID, name, and address match TechGeek.dev's, and the site's name and address are this one's.
 
-	expect( webNodObj.author?.[ '@id' ] ).toBe( perNodObj[ '@id' ] ); // What: Author Link Assertion. Why: Search engines join the nodes by their ids. How: This checks the site names z4nta0 as its author.
+	expect( webNodObj.author?.[ '@id' ] ).toBe( perNodObj[ '@id' ] ); // What: Author Link Assertion. Why: Search engines join the nodes by their IDs. How: This checks the site names z4nta0 as its author.
 
 	expect( [ ...( perNodObj.sameAs ?? [] ) ].sort() ).toEqual( [ ...socHreArr ].sort() ); // What: Profiles Assertion. Why: Every profile in the data has to be one the site links to. How: This compares the data's profiles with the footer's outside links.
 
@@ -447,7 +447,7 @@ for ( const artFilObj of ART_FIL_ARR ) { // What: Article Data Loop. Why: Every 
 
 		expect( [ artNodObj?.headline, artNodObj?.description, artNodObj?.datePublished, artNodObj?.dateModified ] ).toEqual( [ artFilObj.titStr, artFilObj.sumStr, artFilObj.pubStr, artFilObj.updStr || artFilObj.pubStr ] ); // What: Article Details Assertion. Why: The data has to claim only what the article shows. How: This checks the headline, the description, and both dates against the article's front matter.
 
-		expect( [ artNodObj?.author?.[ '@id' ], artNodObj?.isPartOf?.[ '@id' ], artNodObj?.url ] ).toEqual( [ 'https://techgeek.dev/#person', `${ LIV_URL_STR }#website`, `${ LIV_URL_STR }articles/${ artFilObj.ideStr }` ] ); // What: Article Links Assertion. Why: Search engines join the article to its author and its site by their ids. How: This checks the author, the site, and the article's own address.
+		expect( [ artNodObj?.author?.[ '@id' ], artNodObj?.isPartOf?.[ '@id' ], artNodObj?.url ] ).toEqual( [ 'https://techgeek.dev/#person', `${ LIV_URL_STR }#website`, `${ LIV_URL_STR }articles/${ artFilObj.ideStr }` ] ); // What: Article Links Assertion. Why: Search engines join the article to its author and its site by their IDs. How: This checks the author, the site, and the article's own address.
 
 
 	} );

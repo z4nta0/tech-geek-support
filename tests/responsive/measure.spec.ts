@@ -213,7 +213,7 @@ for ( const meaCasObj of MEA_CAS_ARR ) { // What: Case Test Loop. Why: Every pag
 	test( `${ meaCasObj.ideStr } keeps every paragraph within its measure`, async ( { page : curPagObj } ) => { // What: Measure Test. Why: Long lines are hard to read at any width. How: This measures the case at each width and collects every problem.
 
 
-		test.slow(); // What: Slow Test Mark. Why: Each case is measured at up to fourteen widths, one character at a time. How: This triples the test's timeout.
+		test.slow(); // What: Slow Test Mark. Why: Each case is measured at up to sixteen widths, one character at a time. How: This triples the test's timeout.
 
 
 		const proAllArr : string[] = []; // What: Problem All Array. Why: Every width's problems are reported together. How: This collects them.

@@ -67,7 +67,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers dr
 const PAG_LIN_ARR = [ // What: Page Link Array. Why: Each of the four pages the bar links to is checked as a starting point and as a destination. How: Each row pairs a route's path with its link text, in the bar's order.
 
 
-	{ labStr : 'Home',     patStr : '/'         }, // What: Home Link Row. Why: Home is where most visitors start. How: This pairs the home path with its link text.
+	{ labStr : 'Home',     patStr : '/'         }, // What: Home Link Row. Why: Home is the site's front page. How: This pairs the home path with its link text.
 	{ labStr : 'Articles', patStr : '/articles' }, // What: Articles Link Row. Why: The help articles are the site's main reading. How: This pairs the Articles path with its link text.
 	{ labStr : 'About',    patStr : '/about'    }, // What: About Link Row. Why: About introduces the person answering. How: This pairs the About path with its link text.
 	{ labStr : 'Contact',  patStr : '/contact'  }  // What: Contact Link Row. Why: Contact holds the question form, the site's main action. How: This pairs the Contact path with its link text.
@@ -564,7 +564,7 @@ test( 'the "Ask a Question" button opens Contact without reloading the site', as
 
 	await curPagObj.evaluate( () => document.documentElement.setAttribute( 'data-test-reload-marker', '' ) ); // What: Reload Marker Call. Why: A reload would build a fresh document without the mark. How: This sets a presence-only attribute on the root element.
 
-	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Ask a Question' } ).click(); // What: Ask Question Click. Why: The bar's main action is the link most likely to be clicked. How: This clicks the bar's "Ask a Question".
+	await curPagObj.getByRole( 'banner' ).getByRole( 'link', { exact : true, name : 'Ask a Question' } ).click(); // What: Ask Question Click. Why: The bar's main action leads to the question form. How: This clicks the bar's "Ask a Question".
 
 	await expect( curPagObj ).toHaveURL( '/contact' ); // What: Destination Assertion. Why: The button has to reach Contact. How: This waits for the address to change.
 
@@ -593,7 +593,7 @@ test( 'an article card opens its article, and the article leads back to its topi
 
 	await curPagObj.getByRole( 'link', { exact : true, name : 'More articles' } ).click(); // What: More Articles Click. Why: The article's header leads back to the list. How: This clicks "More articles".
 
-	await expect( curPagObj ).toHaveURL( '/articles?topic=internet-wi-fi' );          // What: Return Assertion. Why: A reader going back most likely wants more of the same topic. How: This waits for the list's address, filtered to Internet & Wi-Fi.
+	await expect( curPagObj ).toHaveURL( '/articles?topic=internet-wi-fi' );          // What: Return Assertion. Why: The link leads back to the article's own topic. How: This waits for the list's address, filtered to Internet & Wi-Fi.
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Assertion. Why: A link opens its page at the top. How: This polls until the list sits at its top.
 
 
