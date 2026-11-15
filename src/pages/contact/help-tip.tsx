@@ -72,7 +72,8 @@ type HtcProTyp = { bubIdeStr : string, butLabStr : string, tipTexStr : string };
  *
  * @example
  * ```tsx
- * HelTipCom({bubIdeStr: 'forEmaHin', butLabStr: 'More about your email address', tipTexStr: 'Only used to reply to you...'}) // => <HelTipCom />
+ * HelTipCom({bubIdeStr: 'forEmaHin', butLabStr: '...', tipTexStr: '...'})
+ * // => <HelTipCom />
  * ```
  *
 */

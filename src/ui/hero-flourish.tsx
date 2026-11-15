@@ -59,7 +59,8 @@ type HfcProTyp = { className : string, sidStr : 'left' | 'right' }; // What: Her
  *
  * @example
  * ```tsx
- * HerFloCom({className: cssModObj.visFloSvg, sidStr: 'left'}) // => <HerFloCom />
+ * HerFloCom({className: cssModObj.visFloSvg, sidStr: 'left'})
+ * // => <HerFloCom />
  * ```
  *
 */

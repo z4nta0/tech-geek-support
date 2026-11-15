@@ -75,7 +75,8 @@ type ArtRecTyp = { bloRecArr : BloRecTyp[], ideStr : string, medUrlObj : Record<
  *
  * @example
  * ```ts
- * artRecFun('../articles/why-is-my-wi-fi-so-slow/article.md', filTexStr) // => the Wi-Fi article's record
+ * artRecFun('../articles/why-is-my-wi-fi-so-slow/article.md', filTexStr)
+ * // => the Wi-Fi article's record
  * ```
  *
 */

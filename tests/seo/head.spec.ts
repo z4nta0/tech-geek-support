@@ -452,7 +452,7 @@ for ( const artFilObj of ART_FIL_ARR ) { // What: Article Data Loop. Why: Every 
 
 
 
-test( 'every link preview image is 1,200x630 and under 300 KB', async ( { request : reqConObj } ) => { // What: Preview Images Test. Why: The tags promise each image's size, and WhatsApp drops one of 300 KB or more. How: This fetches every preview image and reads its bytes.
+test( 'every link preview image is 1,200x630 and under 300 KB', async ( { request : reqConObj } ) => { // What: Preview Images Test. Why: The tags promise each image's size, and WhatsApp drops one of 300 KB or more. How: This fetches every preview image and checks its type, its 1,200 by 630 size, and its bytes against the limit.
 
 
 	for ( const imaPatStr of [ '/og-image.png', ...ART_FIL_ARR.map( ( artFilObj ) => `/social/${ artFilObj.ideStr }.png` ) ] ) { // What: Image Check Loop. Why: Every page's image has to be real. How: This checks the site's card, then each article's.

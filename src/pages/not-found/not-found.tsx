@@ -6,7 +6,7 @@
 import cssModObj from './not-found.module.css'; // What: CSS Module Object. Why: The 404 page's layout and buttons are styled in its own module. How: This maps each class name in not-found.module.css to its hashed module class.
 
 
-import { Link      } from 'react-router';             // What: Link. Why: The ways onward move without a full page load. How: This renders them as router links.
+import { Link      } from 'react-router';              // What: Link. Why: The ways onward move without a full page load. How: This renders them as router links.
 import { SigRinCom } from '../../ui/signal-rings.tsx'; // What: Signal Rings Component. Why: The page carries the site's calm motif, so a wrong turn still feels like the same friendly place. How: The page draws it above the message.
 
 

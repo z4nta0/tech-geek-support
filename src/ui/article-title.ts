@@ -54,7 +54,8 @@ const TIT_MAX_NUM = 60;                    // What: Title Maximum Number. Why: S
  *
  * @example
  * ```ts
- * artTitFun('Why Is My Wi-Fi So Slow?') // => 'Why Is My Wi-Fi So Slow? | TechGeek.support'
+ * artTitFun('Why Is My Wi-Fi So Slow?')
+ * // => 'Why Is My Wi-Fi So Slow? | TechGeek.support'
  * ```
  *
 */

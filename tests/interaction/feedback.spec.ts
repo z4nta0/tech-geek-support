@@ -28,7 +28,8 @@ import type { Page          } from '@playwright/test'; // What: Page. Why: Every
  * every control keeps its hover change but transitions nothing. Real clicks
  * are blocked during the checks, so pressing a link or the menu's links
  * never navigates or closes anything mid-check. A control that waits above
- * the screen until it's focused, the skip link, is focused before it's hovered.
+ * the screen until it's focused, the skip link, is focused before it's
+ * hovered.
  *
  * Sections:
  *  - Helpers
