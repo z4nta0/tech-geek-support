@@ -270,6 +270,17 @@ suites live in `tests/`, one project per suite and engine in
   saved positions, an instant jump with smooth scrolling on, and the skip link
   on every page; the menu spec checks plain, Ctrl or Cmd, and middle clicks
   each close the menu; the names check fails a new tab link without its note.
+- **Security** (audit 2026-11-15, from TechGeek.cards): `tests/security/`
+  checks `public/_headers`' policy and hardening headers, the built catch-all
+  rewrite, the build for secrets, and `npm audit` in Chromium only, and loads
+  every state (plus a filtered Articles list, an open help tip, a refused
+  send, and the Contact form's results) from a `vite preview` build on port
+  5206 with the headers applied, failing on any CSP violation or a new tab
+  link without `noopener` and `noreferrer`. The policy's `img-src` allows
+  `data:` for the Contact select's arrow, an inline SVG in the stylesheet, and
+  WebKit's own report about the select's inline style is ignored, as on
+  TechGeek.cards. Chromium runs as full headless Chrome (`channel :
+  'chromium'`).
 - **Speed** (2026-11-15, following TechGeek.cards' fixes): the feedback
   probe waits for each look's animations to finish (`aniFinFun`) rather than a
   fixed pause, its tests run in parallel across 6 workers, and the dev
