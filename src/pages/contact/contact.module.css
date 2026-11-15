@@ -560,12 +560,28 @@
 
 /* #region fieLabLab */
 
-/* What: Field Label Label Pointer. Why: The email and question labels look like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
+/* What: Field Label Label Pointer. Why: The email label looks like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
 
 /* #endregion fieLabLab */
 
 /* #endregion fieHeaDiv */
 
+/* #endregion forFieDiv */
+
+/* #endregion forRowDiv */
+
+
+
+/* #region forFieDiv */
+
+/* What: Form Field Div Pointer. Why: The topic and question fields share the name and email fields' look. How: Its rule sits once in the forFieDiv region above, with its children's. */
+
+
+/* #region fieLabLab */
+
+/* What: Field Label Label Pointer. Why: The topic label looks like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
+
+/* #endregion fieLabLab */
 
 
 .forConSel { /* What: Form Control Select. Why: The menu draws its own arrow in the site's style. How: This removes the native arrow and draws a muted chevron at the right, making room for it. */
@@ -581,6 +597,18 @@
 
 }
 
+
+
+/* #region fieHeaDiv */
+
+/* What: Field Header Div Pointer. Why: The question's label and help tip sit together the way the email's do. How: Its rule sits once in the fieHeaDiv region above. */
+
+/* What: Field Label Label Pointer. Why: The question label looks like every other field's. How: Its rule sits once in the fieLabLab region above. */
+
+/* #endregion fieHeaDiv */
+
+
+
 .forConTex { /* What: Form Control Textarea. Why: A question may be long, and the box should grow with it. How: This lets the visitor drag it taller, never wider, with roomy lines. */
 
 
@@ -589,16 +617,6 @@
 
 
 }
-
-/* #endregion forFieDiv */
-
-/* #endregion forRowDiv */
-
-
-
-/* #region forFieDiv */
-
-/* What: Form Field Div Pointer. Why: The topic and question fields share the name and email fields' look. How: Its rule sits once in the forFieDiv region above, with its children's. */
 
 /* #endregion forFieDiv */
 
