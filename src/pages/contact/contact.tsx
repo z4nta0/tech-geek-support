@@ -335,7 +335,7 @@ function ConPagCom () : JSX.Element {
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The hero's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
 
 
-						<p className={ cssModObj.secEyePar }>Ask a question</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the page. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>Ask a question</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the page. How: This shows it in teal mono capitals. */ }
 
 						<h1 className={ cssModObj.herTitHea }>Ask me anything about your tech</h1>{ /* What: Hero Title Heading Element. Why: The heading makes the invitation plainly. How: This shows the page's h1. */ }
 
@@ -352,7 +352,7 @@ function ConPagCom () : JSX.Element {
 				<section className={ cssModObj.conBodSec }>{ /* What: Contact Body Section Element. Why: The form and what to expect sit together. How: This holds the two columns. */ }
 
 
-					<div className={ cssModObj.conGriDiv }>{ /* What: Contact Grid Div Element. Why: The form and the sidebar sit side by side on wide screens. How: This lays out the two columns in the site's centered column, stacking them on phones. */ }
+					<div className={ cssModObj.conGriDiv }>{ /* What: Contact Grid Div Element. Why: The form and the sidebar sit side by side on wide screens. How: This lays out the two columns in the site's centered column, stacking them at 1,024px and below. */ }
 
 
 						<div className={ cssModObj.forWraDiv }>{ /* What: Form Wrap Div Element. Why: The form and its thank-you share one white card. How: This holds whichever one shows. */ }
@@ -669,7 +669,7 @@ function ConPagCom () : JSX.Element {
 
 
 
-						<aside className={ cssModObj.conSidAsi }>{ /* What: Contact Sidebar Aside Element. Why: A visitor should know what happens after they ask. How: This stacks the expectation, reply, email, and safety cards. */ }
+						<aside className={ cssModObj.conSidAsi }>{ /* What: Contact Sidebar Aside Element. Why: A visitor should know what happens after they ask. How: This holds the reply, email, and safety cards, stacked beside the form, then below it at 1,024px and below with the first two side by side and the safety card centered under them, and stacked again at 640px and below. */ }
 
 
 							<div className={ cssModObj.sidCarDiv }>{ /* What: Sidebar Card Div Element. Why: The reply's timing is the first thing a visitor wonders about. How: This shows the 24-hour promise. */ }

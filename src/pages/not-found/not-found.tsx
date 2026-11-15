@@ -89,7 +89,7 @@ function NotFouCom () : JSX.Element {
 
 
 
-				<p className={ cssModObj.notCodPar }>Error 404</p>{ /* What: Not Found Code Paragraph Element. Why: Some visitors look for the error number. How: This shows it as a small teal label. */ }
+				<p className={ cssModObj.notCodPar }>Error 404</p>{ /* What: Not Found Code Paragraph Element. Why: Some visitors look for the error number. How: This shows it as a teal label. */ }
 
 				<h1 className={ cssModObj.notTitHea }>That page isn't here</h1>{ /* What: Not Found Title Heading Element. Why: The heading says plainly what happened. How: This shows the page's h1. */ }
 

@@ -134,7 +134,7 @@ function AboPagCom () : JSX.Element {
 						<div className={ cssModObj.herTexDiv }>{ /* What: Hero Text Div Element. Why: The introduction reads as one column. How: This stacks the eyebrow, heading, and paragraphs. */ }
 
 
-							<p className={ cssModObj.secEyePar }>About</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the page. How: This shows it in teal mono capitals. */ }
+							<p className={ cssModObj.secEyePar }>About</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the page. How: This shows it in teal mono capitals. */ }
 
 							<h1 className={ cssModObj.herTitHea }>Hi, I'm the Tech Geek</h1>{ /* What: Hero Title Heading Element. Why: The page introduces a person, so it says hello, by the friendlier name the site uses rather than the developer name z4nta0. How: This shows the page's h1. */ }
 
@@ -198,12 +198,12 @@ function AboPagCom () : JSX.Element {
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The section's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
 
 
-						<p className={ cssModObj.secEyePar }>How I help</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>How I help</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Three promises in every answer</h2>{ /* What: Section Title Heading Element. Why: The heading says what the cards are. How: This shows the section's h2. */ }
 
 
-						<ul className={ cssModObj.proGriUno }>{ /* What: Promise Grid Unordered Element. Why: The promises sit side by side as equal cards. How: This lays them out three across, stacking on phones. */ }
+						<ul className={ cssModObj.proGriUno }>{ /* What: Promise Grid Unordered Element. Why: The promises sit side by side as equal cards. How: This lays them out three across, stacking at 768px and below. */ }
 
 
 							{ PRO_REC_ARR.map( ( proRecObj ) => ( // What: Promise Map Call. Why: Every promise gets a card. How: This renders one list item per promise.
@@ -243,7 +243,7 @@ function AboPagCom () : JSX.Element {
 					<div className={ cssModObj.stoInnDiv }>{ /* What: Story Inner Div Element. Why: The story reads best in a narrow column. How: This caps it near a reading width and centers it. */ }
 
 
-						<p className={ cssModObj.secEyePar }>My tech story</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>My tech story</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Twenty years of figuring things out</h2>{ /* What: Section Title Heading Element. Why: The heading sums up the experience. How: This shows the section's h2. */ }
 
@@ -320,7 +320,7 @@ function AboPagCom () : JSX.Element {
 					<div className={ cssModObj.supInnDiv }>{ /* What: Support Inner Div Element. Why: The invitation sits centered in the page's column. How: This stacks the eyebrow, heading, paragraph, and Ko-fi button. */ }
 
 
-						<p className={ cssModObj.secEyePar }>Support My Work</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>Support My Work</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Buy Me a Coffee</h2>{ /* What: Section Title Heading Element. Why: The heading names the invitation. How: This shows the section's h2. */ }
 

@@ -17,7 +17,7 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * hero's picture to fill the room a phone or tablet's single column leaves
  * beside it, as TechGeek.dev's About page does around its portrait. The left
  * drawing holds a speech bubble with typing dots, signal arcs, and a small
- * ringed disc, and the right one a sparkle, a dot, small rings, and a reply
+ * ringed disc, and the right one a sparkle, two dots, small rings, and a reply
  * bubble, in the site's teal with touches of orange. Each is decoration,
  * hidden from screen readers, drawn on a 60 by 240 space that scales to the
  * box the page gives it.
@@ -182,10 +182,10 @@ function HerFloCom ( { className, sidStr } : HfcProTyp ) : JSX.Element {
 				</>
 
 
-			) : ( // What: Right Side Branch. Why: The right side draws the answer. How: This draws the sparkle, the rings, and the reply bubble.
+			) : ( // What: Right Side Branch. Why: The right side draws the answer. How: This draws the sparkle, two dots, the rings, and the reply bubble.
 
 
-				<>{ /* What: Answer Drawing Fragment. Why: The right drawing reads as the reply. How: This groups the sparkle, the dot, the small rings, and the reply bubble. */ }
+				<>{ /* What: Answer Drawing Fragment. Why: The right drawing reads as the reply. How: This groups the sparkle, the two dots, the small rings, and the reply bubble. */ }
 
 
 				<path

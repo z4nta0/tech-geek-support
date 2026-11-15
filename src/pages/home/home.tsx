@@ -109,13 +109,13 @@ function HomPagCom () : JSX.Element {
 				<section className={ cssModObj.homHerSec }>{ /* What: Home Hero Section Element. Why: The page opens on the site's pitch and its calm motif. How: This holds the text and the signal rings. */ }
 
 
-					<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The text and the rings sit side by side on wide screens and stack on phones. How: This lays them out in a centered, capped grid. */ }
+					<div className={ cssModObj.herInnDiv }>{ /* What: Hero Inner Div Element. Why: The text and the rings sit side by side on wide screens and stack at 768px and below. How: This lays them out in a centered, capped grid. */ }
 
 
 						<div className={ cssModObj.herTexDiv }>{ /* What: Hero Text Div Element. Why: The pitch reads as one column. How: This stacks the eyebrow, heading, lead, buttons, and note. */ }
 
 
-							<p className={ cssModObj.herEyePar }>{ /* What: Hero Eyebrow Paragraph Element. Why: A small label greets the visitor before the heading does, a playful nod to Spider-Man's friendly neighborhood tagline. How: This shows a teal dot and the label in mono capitals. */ }
+							<p className={ cssModObj.herEyePar }>{ /* What: Hero Eyebrow Paragraph Element. Why: A label greets the visitor before the heading does, a playful nod to Spider-Man's friendly neighborhood tagline. How: This shows a teal dot and the label in mono capitals. */ }
 								<span
 									className={ cssModObj.herDotSpa }
 
@@ -195,12 +195,12 @@ function HomPagCom () : JSX.Element {
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The section's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
 
 
-						<p className={ cssModObj.secEyePar }>Topics</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>Topics</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Popular things people ask about</h2>{ /* What: Section Title Heading Element. Why: The heading tells a visitor they're not alone in asking. How: This shows the section's h2. */ }
 
 
-						<ul className={ cssModObj.topGriUno }>{ /* What: Topic Grid Unordered Element. Why: The topics sit in an even grid of tiles. How: This lays them out four, three, or two across, and in one column of short rows on a phone. */ }
+						<ul className={ cssModObj.topGriUno }>{ /* What: Topic Grid Unordered Element. Why: The topics sit in an even grid of tiles. How: This lays them out four across, three at 1,024px and below, two at 768px and below, and in one column of short rows at 640px and below. */ }
 
 
 							{ TOP_REC_ARR.map( ( topRecObj ) => ( // What: Topic Map Call. Why: Every topic gets a tile. How: This renders one list item per topic.
@@ -304,7 +304,7 @@ function HomPagCom () : JSX.Element {
 							<div>{ /* What: Articles Heading Div Element. Why: The eyebrow and heading read as one block beside the link. How: This stacks them. */ }
 
 
-								<p className={ cssModObj.secEyePar }>New articles</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+								<p className={ cssModObj.secEyePar }>New articles</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 								<h2 className={ cssModObj.secTitHea }>Fresh help, step by step</h2>{ /* What: Section Title Heading Element. Why: The heading introduces the newest articles. How: This shows the section's h2. */ }
 
@@ -323,7 +323,7 @@ function HomPagCom () : JSX.Element {
 						</div>
 
 
-						<ul className={ cssModObj.artGriUno }>{ /* What: Article Grid Unordered Element. Why: The newest articles sit side by side as equal cards. How: This lays them out four across, two by two on tablets, and stacked on phones. */ }
+						<ul className={ cssModObj.artGriUno }>{ /* What: Article Grid Unordered Element. Why: The newest articles sit side by side as equal cards. How: This lays them out four across, two by two at 1,024px and below, and stacked at 640px and below. */ }
 
 
 							{ ART_REC_ARR.slice( 0, 4 ).map( ( artRecObj ) => ( // What: Article Map Call. Why: The newest four articles each get a card, a count that divides evenly into four, two, or one column. How: This renders one list item per article, taking the catalog's first four.
@@ -373,12 +373,12 @@ function HomPagCom () : JSX.Element {
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The section's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
 
 
-						<p className={ cssModObj.secEyePar }>How it works</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>How it works</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>From stuck to sorted</h2>{ /* What: Section Title Heading Element. Why: The heading sums up what the steps get a visitor. How: This shows the section's h2. */ }
 
 
-						<ol className={ cssModObj.steLisOrd }>{ /* What: Step List Ordered Element. Why: The steps happen in order. How: This lays the three steps out in a row, stacking on phones. */ }
+						<ol className={ cssModObj.steLisOrd }>{ /* What: Step List Ordered Element. Why: The steps happen in order. How: This lays the three steps out in a row, stacking at 768px and below. */ }
 
 
 							{ STE_REC_ARR.map( ( steRecObj, steIndNum ) => ( // What: Step Map Call. Why: Every step gets a card. How: This renders one list item per step.
@@ -395,7 +395,7 @@ function HomPagCom () : JSX.Element {
 										className={ cssModObj.steLabSpa }
 
 										aria-hidden='true'
-									>{ `Step ${ steIndNum + 1 }` }</span>{ /* What: Step Label Span Element. Why: A small label numbers each step. How: This shows the step's number in teal mono, hidden from screen readers since the list already numbers it. */ }
+									>{ `Step ${ steIndNum + 1 }` }</span>{ /* What: Step Label Span Element. Why: A label numbers each step. How: This shows the step's number in teal mono, hidden from screen readers since the list already numbers it. */ }
 
 									<h3 className={ cssModObj.steTitHea }>{ steRecObj.titStr }</h3>{ /* What: Step Title Heading Element. Why: Each step has a short name. How: This shows it as an h3. */ }
 

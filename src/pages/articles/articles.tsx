@@ -115,7 +115,7 @@ function ArtLisCom () : JSX.Element {
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The hero's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
 
 
-						<p className={ cssModObj.secEyePar }>Help articles</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the page. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>Help articles</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the page. How: This shows it in teal mono capitals. */ }
 
 						<h1 className={ cssModObj.herTitHea }>Step-by-step help, in plain words</h1>{ /* What: Hero Title Heading Element. Why: The heading promises help a visitor can follow. How: This shows the page's h1. */ }
 
