@@ -89,6 +89,9 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	const { bloRecArr, froMatObj } = parMarFun( filTexStr ); // What: Block Record Array And Front Matter Object. Why: The article's fields and body come from its file. How: This reads the file.
 
 
+
+	// #region Front Matter Checks
+
 	for ( const keyNamStr of [ 'published', 'summary', 'title', 'topic' ] ) { // What: Required Key Loop. Why: Every article needs these four fields to show anywhere. How: This checks each one.
 
 
@@ -101,7 +104,11 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 	if ( !TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === froMatObj.topic ) ) throw new Error( `Article "${ ideStr }" has an unknown topic, "${ froMatObj.topic }".` ); // What: Unknown Topic Guard. Why: An article with no real topic would never show under a filter. How: This stops the build, naming the article and its topic.
 
+	// #endregion Front Matter Checks
 
+
+
+	// #region Media Lookup
 
 	const medUrlObj : Record< string, string > = {}; // What: Media URL Object. Why: The body names its media by file name, and the page needs each one's built address. How: This collects them.
 
@@ -125,10 +132,16 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 	}
 
+	// #endregion Media Lookup
 
+
+
+	// #region Reading Time
 
 	const bodTexStr = bloRecArr.map( ( bloRecObj ) => 'iteTokArr' in bloRecObj ? bloRecObj.iteTokArr.flat() : 'inlTokArr' in bloRecObj ? bloRecObj.inlTokArr : [] ).flat().map( ( inlTokObj ) => inlTokObj.texStr ).join( ' ' ); // What: Body Text String. Why: The reading time counts the words a reader reads. How: This gathers the text of every heading, paragraph, tip, and list item.
 	const minNum    = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) ); // What: Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
+
+	// #endregion Reading Time
 
 
 
