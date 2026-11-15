@@ -96,9 +96,9 @@
 			@summary
 			Link scrapers read only this file and never run the site's script,
 			so every page but an article shares this one card, describing the
-			home page: its title and description, and the card npm run og-image
-			renders. Each article's own page, written by the build, carries its
-			own tags and card.
+			home page: its title and description, and the card npm run
+			og-images renders. Each article's own page, written by the build,
+			carries its own tags and card.
 
 			@author z4nta0 <https://github.com/z4nta0>
 
@@ -107,7 +107,7 @@
 
 
 		<meta property='og:description'  content='Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.' /> <!-- What: Open Graph Description Meta. Why: A shared link shows a summary under its title. How: This matches the home page's description. -->
-		<meta property='og:image'        content='https://techgeek.support/og-image.png' />                                                    <!-- What: Open Graph Image Meta. Why: A shared link shows a preview image. How: This points at the card npm run og-image renders, by its absolute address. -->
+		<meta property='og:image'        content='https://techgeek.support/og-image.png' />                                                    <!-- What: Open Graph Image Meta. Why: A shared link shows a preview image. How: This points at the card npm run og-images renders, by its absolute address. -->
 		<meta property='og:image:alt'    content='The TechGeek.support hexagon mark and wordmark above the words Free, Friendly Tech Help.' /> <!-- What: Open Graph Image Alt Meta. Why: Screen readers on social sites read the preview image's description. How: This describes the card. -->
 		<meta property='og:image:height' content='630' />                                                                                      <!-- What: Open Graph Image Height Meta. Why: Sites can lay out the preview before the image arrives. How: This gives the card's height. -->
 		<meta property='og:image:type'   content='image/png' />                                                                                <!-- What: Open Graph Image Type Meta. Why: Some apps check an image's type before fetching it. How: This names the card a PNG. -->
@@ -161,7 +161,7 @@
 					}
 				]
 			}
-		</script> <!-- What: Site Structured Data Script. Why: Search engines read JSON-LD to tell who a site belongs to, and this site belongs to a person, never a business. How: This describes this domain as a website by z4nta0, the same person, under the same id, that TechGeek.dev describes, with the GitHub and LinkedIn profiles the footer links to. -->
+		</script> <!-- What: Site Structured Data Script. Why: Search engines read JSON-LD to tell who a site belongs to, and this site belongs to a person, never a business. How: This describes this domain as a website by z4nta0, the same person, under the same ID, that TechGeek.dev describes, with the GitHub and LinkedIn profiles the footer links to. -->
 
 		<!-- #endregion Structured Data -->
 
@@ -173,7 +173,7 @@
 	<body><!-- What: Document Body Element. Why: This holds the site's mount point, the hidden copy of the question form Netlify reads, and the entry script. How: The mount point stays empty until React renders the site into it. -->
 
 
-		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this id. -->
+		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this ID. -->
 
 		<form
 			name='question'

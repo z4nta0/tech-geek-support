@@ -69,7 +69,7 @@ const EMP_FOR_OBJ = { 'bot-field' : '', email : '', name : '', question : '', to
  * each field's name attribute, starting with the topic the address names
  * when it's a real topic. The browser checks the required fields and the
  * email format before letting it send. Sending posts the fields to Netlify
- * Forms, disabling the button and showing Sending while it waits; a reply
+ * Forms, disabling the button and showing "Sending…" while it waits; a reply
  * Netlify doesn't answer with ok counts as an error, like a network failure,
  * leaving the form in place with an error above the button, while a sent
  * question swaps the form for a thank-you with a button that empties the
@@ -116,7 +116,7 @@ function ConPagCom () : JSX.Element {
 	const [ errMesStr, setErrMesStr ] = useState< string | null >( null );                           // What: Error Message String And Setter. Why: A failed send has to say so above the button. How: This starts with no error.
 	const [ forDatObj, setForDatObj ] = useState( () => ( { ...EMP_FOR_OBJ, topic : staTopStr } ) ); // What: Form Data Object And Setter. Why: The fields are controlled, so their values live here. How: This starts with every field blank but the topic, which takes the address's when there is one.
 	const [ hasEmaBoo, setHasEmaBoo ] = useState( true );                                            // What: Has Email Boolean And Setter. Why: The thank-you promises a reply only when there's an address to reply to. How: This records whether the sent question carried an email address.
-	const [ isaLoaBoo, setIsaLoaBoo ] = useState( false );                                           // What: Is-A Loading Boolean And Setter. Why: The button shows Sending while the question is on its way. How: This starts false.
+	const [ isaLoaBoo, setIsaLoaBoo ] = useState( false );                                           // What: Is-A Loading Boolean And Setter. Why: The button shows "Sending…" while the question is on its way. How: This starts false.
 	const [ isaSenBoo, setIsaSenBoo ] = useState( false );                                           // What: Is-A Sent Boolean And Setter. Why: A sent question swaps the form for a thank-you. How: This starts false.
 
 
@@ -243,7 +243,7 @@ function ConPagCom () : JSX.Element {
 
 		subEveObj.preventDefault(); // What: Default Submission Prevention Call. Why: The browser would otherwise reload the page to submit the form. How: This stops it, so the question is sent in the background.
 
-		setIsaLoaBoo( true ); // What: Loading Flag Set Call. Why: The button shows Sending while the question is on its way. How: This sets the loading flag.
+		setIsaLoaBoo( true ); // What: Loading Flag Set Call. Why: The button shows "Sending…" while the question is on its way. How: This sets the loading flag.
 
 		setErrMesStr( null ); // What: Error Clear Call. Why: A new attempt shouldn't show the last one's error. How: This clears it.
 
@@ -656,7 +656,7 @@ function ConPagCom () : JSX.Element {
 
 										disabled={ isaLoaBoo }
 										type='submit'
-									>{ isaLoaBoo ? 'Sending…' : 'Send My Question' }</button>{ /* What: Send Question Button Element. Why: The visitor sends the question. How: This submits the form, disabled and reading Sending while it's on its way. */ }
+									>{ isaLoaBoo ? 'Sending…' : 'Send My Question' }</button>{ /* What: Send Question Button Element. Why: The visitor sends the question. How: This submits the form, disabled and reading "Sending…" while it's on its way. */ }
 
 
 								</form>

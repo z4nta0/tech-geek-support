@@ -7,9 +7,8 @@
  * @summary
  * The help topics every article belongs to, in the order the site lists
  * them: the devices first, then the everyday problems, then the "What is...?"
- * questions. Home's topic tiles, the Articles page's filter, and the Contact
- * form's topic menu all read this list, so a topic added or renamed changes
- * in one place.
+ * questions. Every place that lists the topics, such as a filter, reads this
+ * list, so a topic added or renamed changes in one place.
  *
  * Sections:
  *  - Constants
@@ -67,7 +66,7 @@ const TOP_REC_ARR : TopRecTyp[] = [ // What: Topic Record Array. Why: The site l
 
 // #region Exports
 
-export { TOP_REC_ARR, type TopRecTyp }; // What: Named Exports. Why: Home, the Articles page, and the Contact form list the topics, and the articles name theirs. How: This exports the list and its type.
+export { TOP_REC_ARR, type TopRecTyp }; // What: Named Exports. Why: The pages that list the topics, and the articles that name theirs, read this list. How: This exports the list and its type.
 
 // #endregion Exports
 

@@ -17,14 +17,11 @@ import { readFileSync  } from 'node:fs';                  // What: Read File Syn
  *
  * @summary
  * Lists the published articles for code that runs in Node rather than in the
- * browser, where the site's own catalog (src/ui/articles.ts) can't load,
- * since it gathers the files through Vite's import.meta.glob. The build
- * reads it to write each article's own page and add the articles to the
- * sitemap, the preview image script reads it to draw each article's image,
- * and the SEO suite reads it to check every article. It reads only the front
- * matter, with the site's own Markdown reader, and lists the articles in
- * address order, so the sitemap's order never shifts when an article is
- * added.
+ * browser, such as the build writing each article's own page. There the site's
+ * own catalog (src/ui/articles.ts) can't load, since it gathers the files
+ * through Vite's import.meta.glob. It reads only the front matter, with the
+ * site's own Markdown reader, and lists the articles in address order, so the
+ * sitemap's order never shifts when an article is added.
  *
  * Sections:
  *  - Constants
@@ -78,7 +75,7 @@ const ART_FIL_ARR : ArtFilTyp[] = readdirSync( ART_DIR_STR, { withFileTypes : tr
 
 // #region Exports
 
-export { ART_FIL_ARR, type ArtFilTyp }; // What: Named Exports. Why: The build, the preview image script, and the SEO suite read the articles. How: This exports the list and its type.
+export { ART_FIL_ARR, type ArtFilTyp }; // What: Named Exports. Why: Code that runs in Node, such as the build, reads the articles. How: This exports the list and its type.
 
 // #endregion Exports
 

@@ -24,8 +24,7 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * footer: the signal rings, a calm message that the page isn't here, and
  * three ways onward, home, the articles, and the question form. Its own
  * title and a noindex robots tag keep search engines from indexing it under
- * every mistyped address. The router's catch-all route renders it, and so
- * does an article address naming no article.
+ * every mistyped address.
  *
  * Sections:
  *  - Components

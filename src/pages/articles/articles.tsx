@@ -58,7 +58,7 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * address, which leaves out the topic so every filtered view counts as one
  * page. The topic comes from the address's topic parameter, and one that
  * isn't a real topic shows every article. Pressing a topic's button puts it
- * in the address, replacing the current entry; pressing All Topics removes
+ * in the address, replacing the current entry; pressing "All topics" removes
  * it. The count line is a polite live region, so a screen reader announces
  * the new count after each choice.
  *
@@ -150,7 +150,7 @@ function ArtLisCom () : JSX.Element {
 
 								aria-pressed={ !topRecObj }
 
-								onClick={ () => setSeaParObj( {}, { replace : true } ) } // What: All Topics Click. Why: Choosing All should show every article without adding a history entry. How: This clears the address's parameters, replacing the current entry.
+								onClick={ () => setSeaParObj( {}, { replace : true } ) } // What: All Topics Click. Why: Choosing "All topics" should show every article without adding a history entry. How: This clears the address's parameters, replacing the current entry.
 							>All topics</button>{ /* What: Filter Pill Button Element. Why: A visitor can go back to every article. How: This "All topics" button clears the filter, marked pressed when no topic is chosen. */ }
 
 							{ TOP_REC_ARR.map( ( topCurObj ) => ( // What: Topic Button Map Call. Why: Every topic gets a filter button. How: This renders one button per topic.
@@ -182,7 +182,7 @@ function ArtLisCom () : JSX.Element {
 
 
 
-						<div className={ cssModObj.lisLayDiv }>{ /* What: List Layout Div Element. Why: On a wide screen the list's right side was empty, so the help card sits there beside it. How: This lays the list and the help card side by side above 1,024px, and leaves the list alone below that. */ }
+						<div className={ cssModObj.lisLayDiv }>{ /* What: List Layout Div Element. Why: On a wide screen the list's right side was empty, so the help card sits there beside it. How: This lays the list and the help card side by side above 1,024px, and leaves the list alone at 1,024px and below. */ }
 
 
 							{ shoArtArr.length > 0 ? ( // What: Article List Check. Why: A topic may have no articles yet. How: This shows the list when there are articles, and an invitation to ask otherwise.

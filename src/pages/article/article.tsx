@@ -360,7 +360,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 											src={ artRecObj.medObj[ bloRecObj.souStr ] }
 
 											alt={ bloRecObj.altStr }
-										/> // What: Media Image Element. Why: A photo shows what to look for on screen. How: This shows the file lazily, since most photos start below the fold, with its alt text.
+										/> // What: Media Image Element. Why: A photo shows what to look for on screen. How: This shows the file lazily, with its alt text.
 
 
 									) }

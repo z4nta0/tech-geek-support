@@ -42,7 +42,7 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 
 // #region Components
 
-type HtcProTyp = { bubIdeStr : string, butLabStr : string, tipTexStr : string }; // What: Help-Tip-Component Props Type. Why: Each tip names its bubble, its button, and its help. How: This types the bubble's id, the button's accessible name, and the help text.
+type HtcProTyp = { bubIdeStr : string, butLabStr : string, tipTexStr : string }; // What: Help-Tip-Component Props Type. Why: Each tip names its bubble, its button, and its help. How: This types the bubble's ID, the button's accessible name, and the help text.
 
 // #region HelTipCom
 
@@ -62,7 +62,7 @@ type HtcProTyp = { bubIdeStr : string, butLabStr : string, tipTexStr : string };
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
- * @param props.bubIdeStr - Bubble Identifier String: The bubble's id, which
+ * @param props.bubIdeStr - Bubble Identifier String: The bubble's ID, which
  *                          the field's aria-describedby names.
  * @param props.butLabStr - Button Label String: The button's accessible
  *                          name, such as More about your email address.
