@@ -253,6 +253,23 @@ suites live in `tests/`, one project per suite and engine in
   Wi-Fi one, which has steps, bullets, and tips, standing in for every
   article, since they share one page), About, Contact, and the 404 at 390px
   and 1,440px, plus the phone menu open.
+- **Reachable states** (added 2026-11-15, in the audit, from TechGeek.cards):
+  the looks a control leads to and a visitor can stay on live in their own
+  support files, kept out of the rendering suite: the Articles list narrowed
+  by a pressed pill and by a `?topic=` address (`tests/support/articles.ts`),
+  and each help tip open, the form after a refused empty send, and its sent
+  and failed results (`tests/support/contact.ts`, which answers Netlify's
+  POST with a 200 or a 500), each at both widths. axe, the scripted checks,
+  and the security browser spec load them all. Every topic has an article, so
+  the empty topic's invitation is a look no control reaches and is left out.
+- **Scripted checks** (added 2026-11-15, in the audit, from TechGeek.dev's
+  and TechGeek.cards'): the names check fails a tree with no link or button
+  and a new tab link whose name doesn't end in its note; the Tab walk fails
+  one that reaches no stop and lists every enabled, drawn, non-inert element
+  from its first stop on that Tab never reached (only the open dialog's while
+  a modal dialog is open), a start already showing the keyboard's ring
+  counting as the first stop; and the reduced motion check records every
+  lasting animation and transition from the start of the load.
 - **SEO** reads the article list through `scripts/article-files.ts`, so a new
   article is checked (head, raw preview tags, Article data, sitemap entry,
   preview image) without editing the suite.
@@ -275,10 +292,9 @@ suites live in `tests/`, one project per suite and engine in
 - **Security** (audit 2026-11-15, from TechGeek.cards): `tests/security/`
   checks `public/_headers`' policy and hardening headers, the built catch-all
   rewrite, the build for secrets, and `npm audit` in Chromium only, and loads
-  every state (plus a filtered Articles list, an open help tip, a refused
-  send, and the Contact form's results) from a `vite preview` build on port
-  5206 with the headers applied, failing on any CSP violation or a new tab
-  link without `noopener` and `noreferrer`. The policy's `img-src` allows
+  every state, the reachable ones above included, from a `vite preview` build
+  on port 5206 with the headers applied, failing on any CSP violation or a new
+  tab link without `noopener` and `noreferrer`. The policy's `img-src` allows
   `data:` for the Contact select's arrow, an inline SVG in the stylesheet, and
   WebKit's own report about the select's inline style is ignored, as on
   TechGeek.cards. Chromium runs as full headless Chrome (`channel :

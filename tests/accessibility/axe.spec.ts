@@ -6,10 +6,15 @@
 import AxeBuilder from '@axe-core/playwright'; // What: Axe Builder. Why: axe-core finds the mechanical accessibility failures, such as low contrast, missing names, and misused ARIA. How: This runs its scan against a Playwright page.
 
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: A state passes only with no violations. How: This asserts the violation list is empty.
-import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each state has to be opened and settled before it's scanned. How: This loads it and waits for it.
-import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is scanned. How: This lists them.
-import { test        } from '@playwright/test';     // What: Test. Why: Each state is its own test. How: This declares them.
+import { ADR_STA_ARR } from '../support/articles.ts'; // What: Address State Array. Why: An address naming a topic, as Home's topic tiles give, opens the Articles list narrowed, a state a visitor reaches. How: This lists the Articles states opened that way, one per width.
+import { expect      } from '@playwright/test';       // What: Expect. Why: A state passes only with no violations. How: This asserts the violation list is empty.
+import { INV_STA_ARR } from '../support/contact.ts';  // What: Invalid State Array. Why: The Contact form after a refused empty send is a state a visitor reaches. How: This lists the Contact states after that send, one per width.
+import { opeStaFun   } from '../support/states.ts';   // What: Open State Function. Why: Each state has to be opened and settled before it's scanned. How: This loads it and waits for it.
+import { PIL_STA_ARR } from '../support/articles.ts'; // What: Pill State Array. Why: A pressed topic pill narrows the Articles list and stays pressed, a state a visitor reaches. How: This lists the Articles states with a topic's pill pressed, one per width.
+import { RES_STA_ARR } from '../support/contact.ts';  // What: Result State Array. Why: The Contact form's thank-you and error are states a visitor reaches too. How: This lists the Contact states with the form sent, one per result and width.
+import { STA_REC_ARR } from '../support/states.ts';   // What: State Record Array. Why: Every page state is scanned. How: This lists them.
+import { test        } from '@playwright/test';       // What: Test. Why: Each state is its own test. How: This declares them.
+import { TIP_STA_ARR } from '../support/contact.ts';  // What: Tip State Array. Why: A help tip pinned open stays until it's dismissed, a state a visitor reaches. How: This lists the Contact states with a tip open, one per tip and width.
 
 
 import type { Page } from '@playwright/test'; // What: Page. Why: The scan helper drives a Playwright page. How: This types its page parameter.
@@ -136,7 +141,7 @@ function sumResFun ( resLisArr : AxeResTyp[ 'violations' ] ) : string[] {
 
 // #region Module Init
 
-for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state must pass the scan. How: This declares one axe test per state.
+for ( const staRecObj of [ ...STA_REC_ARR, ...PIL_STA_ARR, ...ADR_STA_ARR, ...TIP_STA_ARR, ...INV_STA_ARR, ...RES_STA_ARR ] ) { // What: State Test Loop. Why: Every page state must pass the scan, the Articles list narrowed to a topic, an open help tip, and the Contact form's refused send and results included. How: This declares one axe test per state, the shared states first, then the reachable ones each control leads to.
 
 
 	test( `${ staRecObj.ideStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Axe Test. Why: A state passes only with zero axe violations. How: This opens the state, scans it, reports anything needing review, and fails on any violation.

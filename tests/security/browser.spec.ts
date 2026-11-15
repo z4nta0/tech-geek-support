@@ -3,15 +3,19 @@
 
 // #region Imports
 
-import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only when the policy is enforced and the page breaks none of its rules. How: This asserts on what each check collects from the page.
-import { heaPatFun   } from '../support/headers.ts'; // What: Headers Path Function. Why: The pages are loaded under the headers Netlify really sends with each path. How: This reads the headers the built dist/_headers sends with one path.
-import { opeStaFun   } from '../support/states.ts';  // What: Open State Function. Why: Each state is opened the way the other page suites open it. How: This loads the state and waits until it's settled.
-import { STA_REC_ARR } from '../support/states.ts';  // What: State Record Array. Why: The policy has to hold in every state the suites visit. How: This is the list of states to load.
-import { test        } from '@playwright/test';      // What: Test. Why: Each state is its own test. How: This declares them.
+import { ADR_STA_ARR } from '../support/articles.ts'; // What: Address State Array. Why: An address naming a topic narrows the Articles list as it loads, a state the policy has to allow too. How: This lists the Articles states opened with a topic in the address, one per width.
+import { expect      } from '@playwright/test';       // What: Expect. Why: Each check passes only when the policy is enforced and the page breaks none of its rules. How: This asserts on what each check collects from the page.
+import { heaPatFun   } from '../support/headers.ts';  // What: Headers Path Function. Why: The pages are loaded under the headers Netlify really sends with each path. How: This reads the headers the built dist/_headers sends with one path.
+import { INV_STA_ARR } from '../support/contact.ts';  // What: Invalid State Array. Why: The Contact form after a refused empty send is a state the policy has to allow too. How: This lists the Contact states after that send, one per width.
+import { opeStaFun   } from '../support/states.ts';   // What: Open State Function. Why: Each state is opened the way the other page suites open it. How: This loads the state and waits until it's settled.
+import { PIL_STA_ARR } from '../support/articles.ts'; // What: Pill State Array. Why: A pressed topic pill narrows the Articles list, a state the policy has to allow too. How: This lists the Articles states with a topic's pill pressed, one per width.
+import { RES_STA_ARR } from '../support/contact.ts';  // What: Result State Array. Why: Sending the form posts to the site and swaps in the thank-you or the error, which the policy has to allow too. How: This lists the Contact states with the form sent, one per result and width.
+import { STA_REC_ARR } from '../support/states.ts';   // What: State Record Array. Why: The policy has to hold in every state the suites visit. How: This is the list of states to load.
+import { test        } from '@playwright/test';       // What: Test. Why: Each state is its own test. How: This declares them.
+import { TIP_STA_ARR } from '../support/contact.ts';  // What: Tip State Array. Why: A help tip's bubble opens over the form, a state the policy has to allow too. How: This lists the Contact states with a tip pinned open, one per tip and width.
 
 
-import type { Page      } from '@playwright/test';     // What: Page. Why: The policy setup drives a Playwright page. How: This types the policy helpers' page parameters.
-import type { StaRecTyp } from '../support/states.ts'; // What: State Record Type. Why: The states a control leads to share the page suites' state shape. How: This types EXT_STA_ARR's rows.
+import type { Page } from '@playwright/test'; // What: Page. Why: The policy setup drives a Playwright page. How: This types the policy helpers' page parameters.
 
 // #endregion Imports
 
@@ -27,79 +31,19 @@ import type { StaRecTyp } from '../support/states.ts'; // What: State Record Typ
  * policy would block. Neither server reads Netlify's headers file, so every
  * response is given the headers the built dist/_headers sends with its path.
  * First a check proves the policy is live, by injecting an inline script and
- * seeing it refused and reported. Then every state the suites visit, and the
- * looks a control leads to, is checked for policy violations, apart from the
- * one WebKit reports for every select element, and checked to close off every
- * new tab link, with neither an opener nor a referrer. The Contact form's sent
- * and failed results are checked for policy violations too.
+ * seeing it refused and reported. Then every state the suites visit, the
+ * looks a control leads to and the Contact form's sent and failed results
+ * included, is checked for policy violations, apart from the one WebKit
+ * reports for every select element, and checked to close off every new tab
+ * link, with neither an opener nor a referrer.
  *
  * Sections:
- *  - Constants
  *  - Helpers
  *  - Module Init
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
-
-
-
-// #region Constants
-
-// #region EXT_STA_ARR
-
-/**
- * EXT_STA_ARR = Extra State Array
- *
- * @summary
- * The looks a visitor reaches through a control and can stay on, beyond the
- * page suites' own states: the Articles list narrowed to one topic at both
- * widths, the question field's help tip open on a phone, and the Contact form
- * after the browser refuses an empty send on a phone. Every row shares the
- * {@link StaRecTyp} shape, so its fields carry no comments of their own.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
-*/
-
-const EXT_STA_ARR : StaRecTyp[] = [ // What: Extra State Array. Why: A control can change what a page loads, which the policy has to allow too. How: Each row names a state, its path, and its viewport, and the Contact rows add the action that reaches them.
-
-
-	{ heiNum : 900, ideStr : 'articles-topic-desktop', patStr : '/articles?topic=internet-wi-fi', widNum : 1440 }, // What: Articles Topic Desktop State. Why: A chosen topic narrows the list. How: This loads the Articles page at 1,440px with Internet & Wi-Fi chosen through its address.
-	{ heiNum : 844, ideStr : 'articles-topic-phone',   patStr : '/articles?topic=internet-wi-fi', widNum : 390  }, // What: Articles Topic Phone State. Why: The narrowed list stacks into one column on a phone. How: This loads the Articles page at 390px with Internet & Wi-Fi chosen through its address.
-
-	{ // What: Contact Tip Phone State. Why: A help tip's bubble opens over the form. How: This loads the Contact page at 390px and taps the question field's tip.
-
-
-		heiNum : 844,
-		ideStr : 'contact-tip-phone',
-		patStr : '/contact',
-		widNum : 390,
-
-		actFun : async ( curPagObj ) => { await curPagObj.getByRole( 'button', { name : 'More about your question' } ).click(); } // What: Tip Open Action. Why: The bubble opens only through its button. How: This clicks the question field's tip.
-
-
-	},
-
-	{ // What: Contact Refused Phone State. Why: The browser refuses an empty send and points to the first empty field. How: This loads the Contact page at 390px and presses Send on the empty form.
-
-
-		heiNum : 844,
-		ideStr : 'contact-refused-phone',
-		patStr : '/contact',
-		widNum : 390,
-
-		actFun : async ( curPagObj ) => { await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); } // What: Empty Send Action. Why: The refused send is reached only by pressing Send. How: This clicks "Send My Question" on the empty form.
-
-
-	}
-
-
-];
-
-// #endregion EXT_STA_ARR
-
-// #endregion Constants
 
 
 
@@ -292,7 +236,7 @@ test( 'the policy refuses an injected inline script', async ( { browserName : br
 
 
 
-for ( const staRecObj of [ ...STA_REC_ARR, ...EXT_STA_ARR ] ) { // What: State Loop. Why: Every state the suites visit has to work under the policy, and so does every look a control leads to. How: This declares one test per state.
+for ( const staRecObj of [ ...STA_REC_ARR, ...PIL_STA_ARR, ...ADR_STA_ARR, ...TIP_STA_ARR, ...INV_STA_ARR, ...RES_STA_ARR ] ) { // What: State Loop. Why: Every state the suites visit has to work under the policy, and so does every look a control leads to, the Articles list narrowed to a topic, an open help tip, the Contact form's refused send, and its sent and failed results included. How: This declares one test per state, the shared states first, then the reachable ones.
 
 
 	test( `${ staRecObj.ideStr } breaks no rule of the security policy and closes off every new tab link`, async ( { browserName : broNamStr, page : curPagObj } ) => { // What: State Policy Test. Why: A blocked resource, such as a font, would break the page once deployed, and the policy can't be loosened to hide it. How: This opens the state under the policy and checks nothing was refused and every new tab link is closed off.
@@ -305,36 +249,6 @@ for ( const staRecObj of [ ...STA_REC_ARR, ...EXT_STA_ARR ] ) { // What: State L
 		expect( await polVioFun( curPagObj, broNamStr ) ).toEqual( [] ); // What: No Violation Assertion. Why: Everything the state loads should be allowed by the policy. How: This checks none was refused.
 
 		await relCheFun( curPagObj ); // What: Relationship Check Call. Why: Every new tab link has to be closed off. How: This checks each carries noopener and noreferrer.
-
-
-	} );
-
-
-}
-
-
-
-for ( const [ resNamStr, staCodNum, resHeaStr ] of [ [ 'sent', 200, 'Question sent!' ], [ 'failed', 500, '' ] ] as const ) { // What: Form Result Loop. Why: Sending the form posts to the site and swaps in the thank-you or the error, which the policy has to allow too. How: This declares one test per result, each with the status Netlify answers with and the heading the thank-you shows, empty for the error. // What: Type Assertion Note. Why: Each row has to keep its fixed types rather than widen to a mixed array. How: The as const keeps each row a tuple.
-
-
-	test( `the Contact form's ${ resNamStr } result breaks no rule of the security policy`, async ( { browserName : broNamStr, page : curPagObj } ) => { // What: Form Result Policy Test. Why: Netlify Forms takes the post on the live site, and the result has to show without a refused resource. How: This sends the filled-in form with its post answered in the page, waits for the result, and checks nothing was refused.
-
-
-		await polSetFun( curPagObj ); // What: Policy Setup Call. Why: The page has to load under the policy. How: This adds the headers and the violation listener.
-
-		await curPagObj.route( ( urlCurObj ) => urlCurObj.pathname === '/', ( rouCurObj ) => rouCurObj.request().method() === 'POST' ? rouCurObj.fulfill( { body : '', status : staCodNum } ) : rouCurObj.fallback() ); // What: Root Post Route Call. Why: The preview server has no Netlify Forms to take the post. How: This answers a POST to the root with the result's status and hands every other request on to the policy's route.
-
-		await curPagObj.goto( '/contact' ); // What: Contact Open Call. Why: The form lives on the Contact page. How: This loads it.
-
-		await curPagObj.getByLabel( 'Your first name' ).fill( 'Test' );                                       // What: Name Fill Call. Why: The name is required. How: This fills in a first name.
-		await curPagObj.getByLabel( 'Your email (optional)', { exact : true } ).fill( 'visitor@example.com' ); // What: Email Fill Call. Why: The thank-you differs without an address, so the form is sent with one. How: This fills in a reserved example address, matched by its whole name like every field with a help tip.
-		await curPagObj.getByLabel( 'Your question', { exact : true } ).fill( 'Hello.' );                     // What: Question Fill Call. Why: The question is required. How: This fills in a question, matched by its whole name since its help tip button shares its label's words.
-
-		await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The filled-in form is sent. How: This presses "Send My Question".
-
-		await expect( resHeaStr ? curPagObj.getByRole( 'heading', { name : resHeaStr } ) : curPagObj.getByRole( 'alert' ) ).toBeVisible(); // What: Result Shown Assertion. Why: The check means something only once the result is on screen. How: This waits for the thank-you's heading, or the error's alert.
-
-		expect( await polVioFun( curPagObj, broNamStr ) ).toEqual( [] ); // What: No Violation Assertion. Why: The result should load nothing the policy refuses. How: This checks none was refused.
 
 
 	} );
