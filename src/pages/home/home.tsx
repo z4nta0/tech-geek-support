@@ -116,12 +116,17 @@ function HomPagCom () : JSX.Element {
 
 
 							<p className={ cssModObj.herEyePar }>{ /* What: Hero Eyebrow Paragraph Element. Why: A label greets the visitor before the heading does, a playful nod to Spider-Man's friendly neighborhood tagline. How: This shows a teal dot and the label in mono capitals. */ }
+
+
 								<span
 									className={ cssModObj.herDotSpa }
 
 									aria-hidden='true'
 								/>{ /* What: Hero Dot Span Element. Why: A small teal dot leads the label. How: This draws the dot, hidden from screen readers. */ }
+
 								Your friendly neighborhood Tech Geek
+
+
 							</p>
 
 							<h1 className={ cssModObj.herTitHea }>Tech trouble? Let's sort it out <span className={ cssModObj.herAccSpa }>together</span>.</h1>{ /* What: Hero Title Heading Element. Why: The heading names the worry and promises help with it. How: This shows the page's h1, its last word in teal. */ }

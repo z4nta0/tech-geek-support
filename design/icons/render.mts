@@ -151,6 +151,7 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 
 			finCotObj.fillStyle = '#F5F0E8'; // What: Ivory Fill Assignment. Why: The background has to be solid, and the site's page ivory matches its pages. How: This sets the fill color, the default value of the page background role, since a script's canvas can't read the stylesheet's tokens.
 
+
 			finCotObj.fillRect( 0, 0, tarSizNum, tarSizNum ); // What: Background Fill Call. Why: Every pixel under the mark has to be opaque. How: This paints the whole square.
 
 

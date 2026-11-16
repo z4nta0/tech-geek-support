@@ -77,12 +77,12 @@ const encResStr = await encPagObj.evaluate( async ( [ souUrlStr, boxHeiNum, boxW
 	await souImaEle.decode(); // What: Source Decode Wait. Why: Drawing an undecoded image draws nothing. How: This waits until it's ready.
 
 
+	const outCanEle = document.createElement( 'canvas' );                                      // What: Output Canvas Element. Why: The portrait is redrawn at its new size. How: This creates the canvas.
 	const souHeiNum = souImaEle.naturalHeight;                                                 // What: Source Height Number. Why: The fit is measured against the original. How: This reads its height.
 	const souWidNum = souImaEle.naturalWidth;                                                  // What: Source Width Number. Why: The fit is measured against the original. How: This reads its width.
 	const scaValNum = Math.min( 1, Math.max( boxWidNum / souWidNum, boxHeiNum / souHeiNum ) ); // What: Scale Value Number. Why: The portrait covers its box, as object-fit cover shows it, but is never enlarged. How: This takes the larger of the two fits, capped at 1.
 	const draHeiNum = Math.round( souHeiNum * scaValNum );                                     // What: Drawn Height Number. Why: The original is drawn at the fitted size. How: This scales its height.
 	const draWidNum = Math.round( souWidNum * scaValNum );                                     // What: Drawn Width Number. Why: The original is drawn at the fitted size. How: This scales its width.
-	const outCanEle = document.createElement( 'canvas' );                                      // What: Output Canvas Element. Why: The portrait is redrawn at its new size. How: This creates the canvas.
 
 
 	outCanEle.height = boxHeiNum; // What: Canvas Height Assignment. Why: The portrait is cut to exactly its box. How: This sets the canvas's height to the box's.

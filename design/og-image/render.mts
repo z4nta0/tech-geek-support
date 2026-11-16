@@ -91,6 +91,7 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 
 	await capPagObj.goto( CAR_URL_STR ); // What: Card Load Call. Why: Each capture starts from a fresh card. How: This opens card.html.
 
+
 	await capPagObj.evaluate( ( filTexArr ) => { // What: Card Fill Call. Why: The same card serves the site and every article. How: This keeps one set of lines, removes the other, and fills an article's topic and title.
 
 
@@ -107,6 +108,7 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 
 
 	}, artTexArr ); // What: Card Fill Arguments. Why: The page can't read this script's variables. How: This hands the article's topic and title, or null for the site's card, into the page.
+
 
 	await capPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text captured before its web font loads would be set in a fallback. How: This waits for every font face.
 

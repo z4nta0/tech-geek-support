@@ -328,7 +328,6 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 			await Promise.all( ART_FIL_ARR.map( ( artFilObj ) => writeFile( resolve( buiRecObj.outStr, 'articles', `${ artFilObj.ideStr }.html` ), artTagFun( indHtmStr, artFilObj ) ) ) ); // What: Article Pages Write. Why: Each article needs its own page. How: This writes one tagged copy of the built page per article.
 
 			await writeFile( redPatStr, `# What: Article Page Rules. Why: Each article's address serves its own page, which carries its link preview. How: These rewrite each article's address to its page, ahead of the catch-all.\n${ artRulStr }\n\n\n\n${ redTexStr }` ); // What: Redirects Write. Why: The article rules must come before the catch-all, which would otherwise answer every article's address. How: This writes them ahead of the existing rules.
-
 			await writeFile( sitPatStr, sitXmlFun( await readFile( sitPatStr, 'utf8' ) ) ); // What: Sitemap Write. Why: Crawlers should find every article. How: This rewrites the built sitemap with the articles added.
 
 

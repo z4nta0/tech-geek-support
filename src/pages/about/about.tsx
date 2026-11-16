@@ -210,6 +210,7 @@ function AboPagCom () : JSX.Element {
 						</div>
 
 
+
 						<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The portrait and its flourishes form the hero's picture. How: This holds the portrait, beside the introduction on wide screens and above it at 768px and below, where a small drawing fills the room on each side of it down to 441px. */ }
 
 
