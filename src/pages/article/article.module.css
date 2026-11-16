@@ -207,7 +207,6 @@
 
 
 }
-
 .bodTexDiv ol > li::before { /* What: Body Step Number. Why: A step's number sits in a pale teal circle, easy to keep track of. How: This draws the counter in dark teal mono inside a circle at the item's start. */
 
 
