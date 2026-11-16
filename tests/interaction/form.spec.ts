@@ -153,7 +153,7 @@ test( 'a filled-in form sends to Netlify and shows the thank-you', async ( { pag
 	await curPagObj.getByLabel( 'Your first name' ).fill( 'Test' );                                        // What: Name Fill Call. Why: Every field is filled. How: This fills in a first name.
 	await curPagObj.getByLabel( 'Your email (optional)', { exact : true } ).fill( 'visitor@example.com' ); // What: Email Fill Call. Why: Every field is filled. How: This fills in a reserved example address. // What: Exact Match Note. Why: The question field's help tip button shares its label's words, so every field with a tip is matched the same way. How: Matching the field's whole name finds only the field.
 
-	await curPagObj.getByLabel( 'What is it about?' ).selectOption( 'internet-wi-fi' ); // What: Topic Pick Call. Why: Every field is filled. How: This picks Internet & Wi-Fi by its identifier.
+	await curPagObj.getByLabel( 'What is it about?' ).selectOption( 'internet-wi-fi' ); // What: Topic Pick Call. Why: Every field is filled. How: This picks "Internet & Wi-Fi" by its identifier.
 
 	await curPagObj.getByLabel( 'Your question', { exact : true } ).fill( 'Hello.' ); // What: Question Fill Call. Why: Every field is filled. How: This fills in a question. // What: Exact Match Note. Why: The field's help tip button is named "More about your question", which a partial match would also find. How: Matching the field's whole name finds only the field.
 

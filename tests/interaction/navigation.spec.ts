@@ -593,7 +593,7 @@ test( 'an article card opens its article, and the article leads back to its topi
 
 	await curPagObj.getByRole( 'link', { exact : true, name : 'More articles' } ).click(); // What: More Articles Click. Why: The article's header leads back to the list. How: This clicks "More articles".
 
-	await expect( curPagObj ).toHaveURL( '/articles?topic=internet-wi-fi' );         // What: Return Assertion. Why: The link leads back to the article's own topic. How: This waits for the list's address, filtered to Internet & Wi-Fi.
+	await expect( curPagObj ).toHaveURL( '/articles?topic=internet-wi-fi' );         // What: Return Assertion. Why: The link leads back to the article's own topic. How: This waits for the list's address, filtered to "Internet & Wi-Fi".
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Assertion. Why: A link opens its page at the top. How: This polls until the list sits at its top.
 
 

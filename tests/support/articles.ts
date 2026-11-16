@@ -42,13 +42,13 @@ import type { StaRecTyp } from './states.ts';      // What: State Record Type. W
 const ART_STA_ARR = STA_REC_ARR.filter( ( staRecObj ) => staRecObj.patStr === '/articles' ); // What: Articles State Array. Why: Each narrowed state is opened at the Articles page's phone and desktop widths. How: This picks the Articles rows from the shared state list.
 
 
-const ADR_STA_ARR : StaRecTyp[] = ART_STA_ARR.map( ( staRecObj ) => ( { // What: Address State Array. Why: An address naming a topic opens the list already narrowed, as Home's topic tiles do. How: For each Articles state, this copies the state with the Internet & Wi-Fi topic added to its address, and names it after the state.
+const ADR_STA_ARR : StaRecTyp[] = ART_STA_ARR.map( ( staRecObj ) => ( { // What: Address State Array. Why: An address naming a topic opens the list already narrowed, as Home's topic tiles do. How: For each Articles state, this copies the state with the "Internet & Wi-Fi" topic added to its address, and names it after the state.
 
 
 	...staRecObj, // What: State Record Spread. Why: The address state keeps the Articles state's viewport. How: This copies the row.
 
 	ideStr : `${ staRecObj.ideStr }-address`, // What: Identifier String. Why: Each test names its width and how the topic was chosen. How: This adds address to the Articles state's name, such as articles-desktop-address.
-	patStr : '/articles?topic=internet-wi-fi' // What: Path String. Why: The topic parameter narrows the list as the page loads. How: This names the Internet & Wi-Fi topic in the address.
+	patStr : '/articles?topic=internet-wi-fi' // What: Path String. Why: The topic parameter narrows the list as the page loads. How: This names the "Internet & Wi-Fi" topic in the address.
 
 
 } ) );
