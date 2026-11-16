@@ -51,8 +51,8 @@ const TOP_REC_ARR : TopRecTyp[] = [ // What: Topic Record Array. Why: The site l
 	{ hinStr : 'Getting started, apps',       ideStr : 'linux',              labStr : 'Linux'              }, // What: Linux Topic Row. Why: Some people try Linux on an older computer. How: This lists the Linux topic.
 	{ hinStr : 'Speakers, lights, cameras',   ideStr : 'smart-home',         labStr : 'Smart Home'         }, // What: Smart Home Topic Row. Why: Smart speakers, plugs, and cameras confuse many people. How: This lists the Smart Home topic.
 	{ hinStr : 'Slow or dropping Wi-Fi',      ideStr : 'internet-wi-fi',     labStr : 'Internet & Wi-Fi'   }, // What: Internet And Wi-Fi Topic Row. Why: Every device depends on the connection. How: This lists the Internet & Wi-Fi topic.
-	{ hinStr : 'Passwords, sign-in, spam',    ideStr : 'email-accounts',     labStr : 'Email & Accounts'   }, // What: Email And Accounts Topic Row. Why: Getting locked out of an account is a common worry. How: This lists the Email & Accounts topic.
-	{ hinStr : 'Is this message real?',       ideStr : 'scams-safety',       labStr : 'Scams & Safety'     }, // What: Scams And Safety Topic Row. Why: Scams aim at people who are unsure about technology. How: This lists the Scams & Safety topic.
+	{ hinStr : 'Passwords, sign-in, spam',    ideStr : 'email-accounts',     labStr : 'Email & Accounts'   }, // What: Email And Accounts Topic Row. Why: Many people worry about getting locked out of an account. How: This lists the Email & Accounts topic.
+	{ hinStr : 'Is this message real?',       ideStr : 'scams-safety',       labStr : 'Scams & Safety'     }, // What: Scams And Safety Topic Row. Why: Many people want to check whether a message is a scam. How: This lists the Scams & Safety topic.
 	{ hinStr : 'AI, the cloud, and more',     ideStr : 'understanding-tech', labStr : 'Understanding Tech' }  // What: Understanding Tech Topic Row. Why: Some questions are about what something is, not a problem to fix. How: This lists the Understanding Tech topic.
 
 

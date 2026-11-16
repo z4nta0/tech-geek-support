@@ -152,9 +152,9 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 	const metAddStr = [ // What: Meta Additions String. Why: An article's preview can also carry when it was published and what it's about, which the home page has no use for. How: This joins the extra tags and the structured data into the text added before the head closes.
 
 
-		`<meta property="article:published_time" content="${ artFilObj.pubStr }" />`,                                   // What: Published Time Row. Why: Some previews and crawlers show when an article was written. How: This gives its publication date.
+		`<meta property="article:published_time" content="${ artFilObj.pubStr }" />`,                                   // What: Published Time Row. Why: The Open Graph article namespace gives an article's publication date. How: This gives its publication date.
 		...( artFilObj.updStr ? [ `<meta property="article:modified_time" content="${ artFilObj.updStr }" />` ] : [] ), // What: Modified Time Row. Why: A revised article should say when it last changed. How: This gives its updated date, only when it has one.
-		`<meta property="article:section" content="${ htmEscFun( topLabStr ) }" />`,                                    // What: Section Row. Why: An article's topic tells a reader what it's about before they tap. How: This gives its topic's label.
+		`<meta property="article:section" content="${ htmEscFun( topLabStr ) }" />`,                                    // What: Section Row. Why: The Open Graph article namespace names an article's section, and its topic is that section. How: This gives its topic's label.
 		`<script type='application/ld+json'>${ JSON.stringify( artLdjObj ).replace( /</g, '\\u003c' ) }</script>`       // What: Structured Data Row. Why: Search engines read the article's details from JSON-LD. How: This writes the object on one line, with every < escaped so no text can close the script early.
 
 

@@ -31,8 +31,8 @@
 
 	/* CTRL+ALT+C to toggle color swatches on and off *Requires Extension Toggle by Peng Lv */
 
-	--act-dar-col : oklch( from var( --act-mai-col ) calc( l - 0.15 ) c h ); /* What: Accent-Tertiary Dark Color. Why: The teal is too light to read as text on the ivory, about 2.9:1. How: This is the teal's text and icon shade, its lightness lowered by 0.15, about 5.5:1 on the ivory and 5.1:1 on the pale teal. */
-	--act-mai-col : #2A9D8F;                                                 /* What: Accent-Tertiary Main Color. Why: A calm, reassuring teal gives TechGeek.support a color of its own beside the family's orange and blue, as berry does for TechGeek.cards. How: This is the teal for drawings, dots, and fills, never buttons or links, which stay orange; ink text on it reaches 5.1:1. */
+	--act-dar-col : oklch( from var( --act-mai-col ) calc( l - 0.15 ) c h ); /* What: Accent-Tertiary Dark Color. Why: The teal is too light to read as text on the ivory, about 2.9:1. How: This is the teal's text and icon shade, its lightness lowered by 0.15, about 5.3:1 on the ivory and 4.9:1 on the pale teal. */
+	--act-mai-col : #2A9D8F;                                                 /* What: Accent-Tertiary Main Color. Why: A calm, reassuring teal gives TechGeek.support a color of its own beside the family's orange and blue, as berry does for TechGeek.cards. How: This is the teal for drawings, dots, and fills, never button fills or link text, which stay orange; ink text on it reaches 5.1:1. */
 	--act-tin-col : #D3EEE9;                                                 /* What: Accent-Tertiary Tint Color. Why: Some shapes and labels sit on a pale teal. How: This is the pale teal fill behind shapes and labels, a light tint of the teal accent, such as a tip's background. */
 
 	/* #endregion Color Tokens */
