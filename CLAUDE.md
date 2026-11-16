@@ -352,6 +352,12 @@ suites live in `tests/`, one project per suite and engine in
   articles, and steps, and About's promises. The Contact sidebar follows the
   centered odd card exception, its one leftover card at the others' width
   and centered within 2px.
+- **Help tips** (added 2026-11-15, in the audit): `tests/interaction/
+  help-tip.spec.ts` pins each tip open and checks it closes when Tab moves
+  focus on, on Escape, and on a press elsewhere, read from the button's
+  `aria-expanded`. The Tab walk alone can't show it for the question tip,
+  whose bubble leaves the middle of the box below it clear (measured: with
+  the focus close turned off, only the email tip's walk failed).
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.
