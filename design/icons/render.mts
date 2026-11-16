@@ -59,7 +59,7 @@ type IcoRecTyp = { // What: Icon Record Type. Why: Every PNG icon is described t
 const ICO_REC_ARR : IcoRecTyp[] = [ // What: Icon Record Array. Why: The PNG icons the head links to, and the one iOS reads, are rendered from one list. How: Each row names a file and its size.
 
 
-	{ filStr : 'favicon-16x16.png',    opaBoo : false, sizNum : 16  }, // What: Small Icon Row. Why: Tabs draw small icons crisper at their own size. How: This renders the 16px icon.
+	{ filStr : 'favicon-16x16.png',    opaBoo : false, sizNum : 16  }, // What: Small Icon Row. Why: The icon set offers a 16px size of its own. How: This renders the 16px icon.
 	{ filStr : 'favicon-32x32.png',    opaBoo : false, sizNum : 32  }, // What: Medium Icon Row. Why: The head offers a 32px tab icon beside the 16px one. How: This renders the 32px icon.
 	{ filStr : 'favicon-192x192.png',  opaBoo : false, sizNum : 192 }, // What: Large Icon Row. Why: The head offers a large icon for any browser or launcher that asks for one. How: This renders the 192px icon.
 	{ filStr : 'favicon-512x512.png',  opaBoo : false, sizNum : 512 }, // What: Extra Large Icon Row. Why: High-density screens and launchers can ask for a bigger icon still. How: This renders the 512px icon.
@@ -114,7 +114,7 @@ const draPagObj = await broInsObj.newPage(); // What: Draw Page Object. Why: The
  *
  * @example
  * ```ts
- * renPngFun(32, false) // => Promise<Buffer>
+ * renPngFun(32, false) // => the 32px icon's PNG bytes
  * ```
  *
 */
