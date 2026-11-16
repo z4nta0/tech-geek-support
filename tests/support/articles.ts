@@ -48,7 +48,7 @@ const ADR_STA_ARR : StaRecTyp[] = ART_STA_ARR.map( ( staRecObj ) => ( { // What:
 	...staRecObj, // What: State Record Spread. Why: The address state keeps the Articles state's viewport. How: This copies the row.
 
 	ideStr : `${ staRecObj.ideStr }-address`, // What: Identifier String. Why: Each test names its width and how the topic was chosen. How: This adds address to the Articles state's name, such as articles-desktop-address.
-	patStr : '/articles?topic=internet-wi-fi'  // What: Path String. Why: The topic parameter narrows the list as the page loads. How: This names the Internet & Wi-Fi topic in the address.
+	patStr : '/articles?topic=internet-wi-fi' // What: Path String. Why: The topic parameter narrows the list as the page loads. How: This names the Internet & Wi-Fi topic in the address.
 
 
 } ) );

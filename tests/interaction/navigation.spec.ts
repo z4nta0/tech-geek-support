@@ -586,14 +586,14 @@ test( 'an article card opens its article, and the article leads back to its topi
 
 	await curPagObj.getByRole( 'link' ).filter( { has : curPagObj.getByRole( 'heading', { name : 'Why Is My Wi-Fi So Slow?' } ) } ).click(); // What: Card Click. Why: The whole card is one link, named by everything on it. How: This clicks the link holding the slow Wi-Fi article's title.
 
-	await expect( curPagObj ).toHaveURL( '/articles/why-is-my-wi-fi-so-slow' );                                         // What: Article Address Assertion. Why: The card has to open its own article. How: This waits for the article's address.
+	await expect( curPagObj ).toHaveURL( '/articles/why-is-my-wi-fi-so-slow' );                                       // What: Article Address Assertion. Why: The card has to open its own article. How: This waits for the article's address.
 	await expect( curPagObj.getByRole( 'heading', { level : 1, name : 'Why Is My Wi-Fi So Slow?' } ) ).toBeVisible(); // What: Article Title Assertion. Why: The page has to show the article that was picked. How: This checks its h1.
 
 	expect( await curPagObj.evaluate( () => document.documentElement.hasAttribute( 'data-test-reload-marker' ) ) ).toBe( true ); // What: No Reload Assertion. Why: The router should switch to the article within the same document. How: This checks the mark is still on the root element.
 
 	await curPagObj.getByRole( 'link', { exact : true, name : 'More articles' } ).click(); // What: More Articles Click. Why: The article's header leads back to the list. How: This clicks "More articles".
 
-	await expect( curPagObj ).toHaveURL( '/articles?topic=internet-wi-fi' );          // What: Return Assertion. Why: The link leads back to the article's own topic. How: This waits for the list's address, filtered to Internet & Wi-Fi.
+	await expect( curPagObj ).toHaveURL( '/articles?topic=internet-wi-fi' );         // What: Return Assertion. Why: The link leads back to the article's own topic. How: This waits for the list's address, filtered to Internet & Wi-Fi.
 	await expect.poll( () => curPagObj.evaluate( () => window.scrollY ) ).toBe( 0 ); // What: Top Assertion. Why: A link opens its page at the top. How: This polls until the list sits at its top.
 
 
@@ -622,7 +622,6 @@ test.describe( 'with smooth scrolling on', () => { // What: Smooth Scroll Group.
 
 
 		expect( botTopNum ).toBeGreaterThan( 0 ); // What: Scrolled Assertion. Why: A page that can't scroll would let the check pass with nothing to reset. How: This checks the page sits below its top.
-
 
 
 		await curPagObj.evaluate( () => { // What: Top Recorder Script. Why: A retrying check would pass a glide that only reaches the top later. How: This watches for the next page's heading and records the offset once as it appears and once in the frame after, before that frame is drawn.
