@@ -346,6 +346,12 @@ suites live in `tests/`, one project per suite and engine in
   fixed pause, its tests run in parallel across 6 workers, and the dev
   server's watcher ignores `tests/output`, so the full run takes about 8
   minutes in all three engines rather than over an hour.
+- **Card grids** (added 2026-11-15, in the audit, from TechGeek.dev's):
+  `tests/responsive/grids.spec.ts` groups each card grid's cards into rows at
+  every responsive width and fails uneven rows: Home's topic tiles, newest
+  articles, and steps, and About's promises. The Contact sidebar follows the
+  centered odd card exception, its one leftover card at the others' width
+  and centered within 2px.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.
