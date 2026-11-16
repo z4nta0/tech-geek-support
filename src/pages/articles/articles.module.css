@@ -272,6 +272,9 @@
 /* #endregion filRowDiv */
 
 
+
+/* #region couTexPar */
+
 .couTexPar { /* What: Count Text Paragraph. Why: The count is a quiet note between the filter and the list. How: This sets it in muted mono, with room above and below. */
 
 
@@ -282,6 +285,50 @@
 
 
 }
+
+.couTexSpa { /* What: Count Text Span. Why: The count fades as one piece when it changes. How: This makes it an inline block, so its fade can lift it. */
+
+
+	display : inline-block;
+
+
+}
+.couTexSpa--arriving { /* What: Count Text Span Arriving. Why: The count changes with each topic a visitor chooses, and the change should be seen. How: This plays the results' short fade up on the decelerating curve each time the count remounts. */
+
+
+	animation : resultSwapFadeUp var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Count Text Span Arriving. Why: Someone who asked for less motion shouldn't see the count rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.couTexSpa--arriving { /* What: Motionless Count Text Span Arriving. Why: The new count should simply appear. How: This turns the fade off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes resultSwapFadeUp { /* What: Result Swap Fade Up. Why: A result swapped in place on each choice should arrive softly rather than rise like a whole page. How: This fades the count, the list, or the empty message in from about 3.6px low. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m05 ) ); /* Spacing Vertical Base Minus 5 ~= 3.572px */
+
+
+	}
+
+
+}
+
+/* #endregion couTexPar */
 
 
 
@@ -324,6 +371,26 @@
 	margin         : 0;
 	max-width      : calc( var( --ver-rhy-p14 ) * 1rem ); /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding        : 0;
+
+
+}
+.artLisUno--arriving { /* What: Article List Unordered Arriving. Why: The articles change with each topic a visitor chooses, and the new list should be seen arriving. How: This plays the results' short fade up on the decelerating curve each time the list remounts. */
+
+
+	animation : resultSwapFadeUp var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Article List Unordered Arriving. Why: Someone who asked for less motion shouldn't see the list rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.artLisUno--arriving { /* What: Motionless Article List Unordered Arriving. Why: The new list should simply appear. How: This turns the fade off. */
+
+
+		animation : none;
+
+
+	}
 
 
 }
@@ -461,6 +528,26 @@
 	gap            : var( --spa-ver-p01 );                      /* Spacing Vertical Base Plus 1 ~= 19.304px */
 	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );       /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding        : var( --spa-ver-p03 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+
+
+}
+.empMesDiv--arriving { /* What: Empty Message Div Arriving. Why: A chosen topic with no articles should be seen arriving like any result. How: This plays the results' short fade up on the decelerating curve. */
+
+
+	animation : resultSwapFadeUp var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Empty Message Div Arriving. Why: Someone who asked for less motion shouldn't see the message rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.empMesDiv--arriving { /* What: Motionless Empty Message Div Arriving. Why: The message should simply appear. How: This turns the fade off. */
+
+
+		animation : none;
+
+
+	}
 
 
 }

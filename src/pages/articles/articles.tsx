@@ -13,6 +13,7 @@ import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // Wha
 import { TopTagCom       } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: Each listed article shows its topic. How: The page renders one tag per article.
 import { usePagDesFun    } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
 import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: The chosen topic lives in the address, so a link can open the page already filtered. How: The page reads and sets the topic parameter through it.
+import { useState        } from 'react';                                  // What: Use State. Why: The list's arriving fade waits for a visitor's first choice. How: This holds whether a topic has been chosen yet.
 
 
 import type { JSX } from 'react'; // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.
@@ -82,12 +83,14 @@ function ArtLisCom () : JSX.Element {
 
 
 
+	const [ resChoBoo, setResChoBoo ] = useState( false ); // What: Result Chosen Boolean And Setter. Why: The list should fade in on a choice, not on top of the page's own entrance. How: This starts false and turns true once a topic button is pressed.
 	const [ seaParObj, setSeaParObj ] = useSearchParams(); // What: Search Parameters Object And Setter. Why: The chosen topic lives in the address. How: This reads the address's parameters and sets new ones.
 
 	const rawTopStr = seaParObj.get( 'topic' ) ?? ''; // What: Raw Topic String. Why: The address may name a topic, or nothing. How: This reads the topic parameter, or an empty string.
 	const topRecObj = TOP_REC_ARR.find( ( topCurObj ) => topCurObj.ideStr === rawTopStr );                                                                      // What: Topic Record Object. Why: Only a real topic filters the list. How: This finds the topic the address names, or nothing.
 	const shoArtArr = topRecObj ? ART_REC_ARR.filter( ( artRecObj ) => artRecObj.topStr === topRecObj.ideStr ) : ART_REC_ARR;                                   // What: Shown Article Array. Why: The list shows only the chosen topic's articles. How: This filters the catalog by the topic, or keeps every article when none is chosen.
 	const couTexStr = `Showing ${ shoArtArr.length } ${ shoArtArr.length === 1 ? 'article' : 'articles' }${ topRecObj ? ` about ${ topRecObj.labStr }` : '' }`; // What: Count Text String. Why: The visitor should know how many articles match. How: This counts them, in the right singular or plural, naming the topic when one is chosen.
+	const resKeyStr = shoArtArr.map( ( artRecObj ) => artRecObj.ideStr ).join( ' ' );                                                                           // What: Result Key String. Why: After a choice, the list should fade in only when the articles shown change. How: This joins the shown articles' addresses, which the count and list remount on.
 
 
 
@@ -150,7 +153,15 @@ function ArtLisCom () : JSX.Element {
 
 								aria-pressed={ !topRecObj }
 
-								onClick={ () => setSeaParObj( {}, { replace : true } ) } // What: All Topics Click. Why: Choosing "All topics" should show every article without adding a history entry. How: This clears the address's parameters, replacing the current entry.
+								onClick={ () => { // What: All Topics Click. Why: Choosing "All topics" should show every article without adding a history entry. How: This turns on the list's arriving fade and clears the address's parameters, replacing the current entry.
+
+
+									setResChoBoo( true ); // What: Result Chosen Setter Call. Why: The returning list is the result of the press. How: This turns on the list's arriving fade.
+
+									setSeaParObj( {}, { replace : true } ); // What: Parameters Clear Call. Why: "All topics" shows every article without adding a history entry. How: This clears the address's parameters, replacing the current entry.
+
+
+								} }
 							>All topics</button>{ /* What: Filter Pill Button Element. Why: A visitor can go back to every article. How: This "All topics" button clears the filter, marked pressed when no topic is chosen. */ }
 
 							{ TOP_REC_ARR.map( ( topCurObj ) => ( // What: Topic Button Map Call. Why: Every topic gets a filter button. How: This renders one button per topic.
@@ -165,7 +176,15 @@ function ArtLisCom () : JSX.Element {
 
 									aria-pressed={ topCurObj.ideStr === topRecObj?.ideStr }
 
-									onClick={ () => setSeaParObj( { topic : topCurObj.ideStr }, { replace : true } ) } // What: Topic Click. Why: Choosing a topic should filter the list and keep the choice shareable, without adding a history entry. How: This puts the topic in the address, replacing the current entry.
+									onClick={ () => { // What: Topic Click. Why: Choosing a topic should filter the list and keep the choice shareable, without adding a history entry. How: This turns on the list's arriving fade and puts the topic in the address, replacing the current entry.
+
+
+										setResChoBoo( true ); // What: Result Chosen Setter Call. Why: The narrowed list is the result of the press. How: This turns on the list's arriving fade.
+
+										setSeaParObj( { topic : topCurObj.ideStr }, { replace : true } ); // What: Topic Parameter Set Call. Why: The choice stays shareable without adding a history entry. How: This puts the topic in the address, replacing the current entry.
+
+
+									} }
 								>{ topCurObj.labStr }</button> // What: Filter Pill Button Element. Why: A visitor narrows the list to one topic. How: This is each topic's own button, showing the topic's name, marked pressed while it's chosen.
 
 
@@ -178,7 +197,17 @@ function ArtLisCom () : JSX.Element {
 							className={ cssModObj.couTexPar }
 
 							aria-live='polite'
-						>{ couTexStr }</p>{ /* What: Count Text Paragraph Element. Why: The visitor should see, and hear, how many articles match. How: This shows the count, which a screen reader announces after each change. */ }
+						>{ /* What: Count Text Paragraph Element. Why: The visitor should see, and hear, how many articles match. How: This shows the count, which a screen reader announces after each change. */ }
+
+
+							<span
+								key={ resKeyStr } // What: Count Key. Why: A new count should fade in with its list. How: A new key remounts the span inside the live region, replaying its entrance while the region itself stays.
+
+								className={` ${ cssModObj.couTexSpa }   ${ resChoBoo ? cssModObj.couTexSpaArriving : '' } `}
+							>{ couTexStr }</span>{ /* What: Count Text Span Element. Why: The count changes with the chosen topic. How: This shows the count, fading each new count in once a visitor has chosen a topic. */ }
+
+
+						</p>
 
 
 
@@ -188,7 +217,11 @@ function ArtLisCom () : JSX.Element {
 							{ shoArtArr.length > 0 ? ( // What: Article List Check. Why: A topic may have no articles yet. How: This shows the list when there are articles, and an invitation to ask otherwise.
 
 
-								<ul className={ cssModObj.artLisUno }>{ /* What: Article List Unordered Element. Why: The articles read as a list, one per row. How: This stacks them with even gaps. */ }
+								<ul
+									key={ resKeyStr } // What: List Key. Why: A new list should fade in as a whole. How: A new key remounts the list, replaying its entrance.
+
+									className={` ${ cssModObj.artLisUno }   ${ resChoBoo ? cssModObj.artLisUnoArriving : '' } `}
+								>{ /* What: Article List Unordered Element. Why: The articles read as a list, one per row. How: This stacks them with even gaps. */ }
 
 
 									{ shoArtArr.map( ( artRecObj ) => ( // What: Article Map Call. Why: Every matching article gets a row. How: This renders one list item per article.
@@ -230,7 +263,7 @@ function ArtLisCom () : JSX.Element {
 							) : ( // What: Empty Topic Branch. Why: A topic with no articles yet still deserves a way forward. How: This shows an invitation to ask instead.
 
 
-								<div className={ cssModObj.empMesDiv }>{ /* What: Empty Message Div Element. Why: The invitation reads as one calm block. How: This holds the message and the button. */ }
+								<div className={` ${ cssModObj.empMesDiv }   ${ resChoBoo ? cssModObj.empMesDivArriving : '' } `}>{ /* What: Empty Message Div Element. Why: The invitation reads as one calm block. How: This holds the message and the button. */ }
 
 
 									<p className={ cssModObj.empMesPar }>No articles about this yet, but I'm happy to help directly. Ask your question, and I'll reply within 24 hours.</p>{ /* What: Empty Message Paragraph Element. Why: An empty list shouldn't feel like a dead end. How: This offers to answer directly. */ }
