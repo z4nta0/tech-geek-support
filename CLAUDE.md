@@ -388,8 +388,9 @@ suites live in `tests/`, one project per suite and engine in
   2026-11-16), since a router navigation sent the page to its top through the
   design package's scroll hook; the page holds the choice itself until a real
   router navigation, and the spec checks a press keeps the scroll position at
-  phone width, a reload keeps the topic, and the footer's "Articles" link
-  clears it.
+  phone width, a reload keeps the topic, the footer's "Articles" link
+  clears it, and Back from an article or from that link brings back the
+  topic, its count, and the scroll position.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.

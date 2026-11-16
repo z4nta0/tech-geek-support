@@ -233,6 +233,49 @@ test( 'a topic choice keeps the page in place and the topic in the address, whic
 
 } );
 
+
+
+test( 'a topic choice survives a trip to an article and back, and a router link and back', async ( { page : curPagObj } ) => { // What: Topic History Test. Why: The topic is written outside the router, so Back has to bring back both the narrowed list and the place the visitor left it. How: This presses a topic part way down a phone-wide page, opens an article and goes back, then follows the footer's "Articles" link and goes back, checking the address, the count, and the scroll position.
+
+
+	await curPagObj.setViewportSize( { height : 844, width : 390 } ); // What: Phone Viewport Call. Why: A lost place shows most on a phone. How: This sets a phone-sized window.
+
+	await curPagObj.goto( '/articles' ); // What: Articles Open Call. Why: The filter sits on the Articles page. How: This loads it.
+
+	await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : 450 } ) ); // What: Page Scroll Call. Why: The trip should start part way down the page. How: This scrolls the page 450px down at once.
+
+	await curPagObj.getByRole( 'button', { name : 'Scams & Safety' } ).dispatchEvent( 'click' ); // What: Topic Click Call. Why: The trip starts from a chosen topic. How: This sends the click straight to the "Scams & Safety" topic, so the page doesn't scroll first.
+
+	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( 'Showing 1 article about Scams & Safety' ); // What: Narrowed Count Assertion. Why: The list has to follow the press before the trip. How: This checks the count names the topic.
+
+	await curPagObj.evaluate( () => new Promise( ( resFun ) => requestAnimationFrame( () => requestAnimationFrame( resFun ) ) ) ); // What: Two Frame Wait. Why: The position has to be recorded before the page is left. How: This waits two animation frames.
+
+
+	const befTopNum = await curPagObj.evaluate( () => scrollY ); // What: Before Top Number. Why: Back should return to this place. How: This reads the scroll position before the trip.
+
+
+	await curPagObj.locator( '[class*="_artCarAnc_"]' ).first().dispatchEvent( 'click' ); // What: Article Click Call. Why: A visitor opens the article the topic led to. How: This sends the click straight to the first card.
+
+	await expect( curPagObj ).toHaveURL( /\/articles\/[a-z0-9-]+$/ ); // What: Article Address Assertion. Why: Back is only checked once the article shows. How: This waits for an article's address.
+
+	await curPagObj.goBack(); // What: Back Call. Why: The visitor returns to the list. How: This goes back one entry.
+
+	await expect( curPagObj ).toHaveURL( '/articles?topic=scams-safety' );                                       // What: Back Address Assertion. Why: The replaced entry should still name the topic. How: This checks the address.
+	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( 'Showing 1 article about Scams & Safety' ); // What: Back Count Assertion. Why: The list should come back narrowed. How: This checks the count names the topic.
+
+	await expect.poll( async () => Math.abs( await curPagObj.evaluate( () => scrollY ) - befTopNum ) ).toBeLessThanOrEqual( 1 ); // What: Back Place Assertion. Why: Back should return to the place the visitor left. How: This waits until the scroll position is within a pixel of it.
+
+	await curPagObj.getByRole( 'navigation', { name : 'Footer navigation' } ).getByRole( 'link', { exact : true, name : 'Articles' } ).click(); // What: Footer Articles Click Call. Why: A router navigation to the page should show every article. How: This follows the footer's "Articles" link.
+
+	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( /^Showing \d+ articles$/ ); // What: Full Count Assertion. Why: The link's address names no topic. How: This checks the count reads as the whole list.
+
+	await curPagObj.goBack(); // What: Second Back Call. Why: Going back should return to the chosen topic. How: This goes back one entry.
+
+	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( 'Showing 1 article about Scams & Safety' ); // What: Second Back Count Assertion. Why: The topic should survive the router's own navigation and Back. How: This checks the count names the topic again.
+
+
+} );
+
 // #endregion Module Init
 
 
