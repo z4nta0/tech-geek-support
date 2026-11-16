@@ -40,7 +40,7 @@ test( 'the alert region is in the form and empty on load, and focus stays put', 
 
 	await expect( curPagObj.getByRole( 'main' ).getByRole( 'alert' ) ).toHaveCount( 1 );             // What: One Alert Assertion. Why: The alert region has to be in the form from the first render. How: This checks exactly one alert region exists in the main content.
 	await expect( curPagObj.getByRole( 'main' ).getByRole( 'alert' ) ).toBeEmpty();                  // What: Empty Alert Assertion. Why: Nothing has gone wrong yet. How: This checks the region holds no text.
-	await expect( curPagObj.getByRole( 'main' ).getByLabel( 'Your first name' ) ).not.toBeFocused(); // What: Unmoved Focus Assertion. Why: Only a return from the thank-you moves focus to the name field. How: This checks the field isn't focused on load.
+	await expect( curPagObj.getByRole( 'main' ).getByLabel( 'Your first name' ) ).not.toBeFocused(); // What: Unmoved Focus Assertion. Why: A first visit shouldn't move focus to the form's first field. How: This checks the field isn't focused on load.
 
 
 } );
