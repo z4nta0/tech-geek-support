@@ -301,7 +301,7 @@ const sitXmlFun = ( xmlTexStr : string ) : string => xmlTexStr.replace( /\n*<\/u
 const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link scrapers read only a page's raw HTML, so each article needs a page of its own. How: This returns a plugin that serves and writes them.
 
 
-	let buiRecObj = { buiBoo : false, outStr : '', rooStr : '' }; // What: Build Record Object. Why: The pages are written only after a production build, into its output folder, and the dev server reads the sitemap from the project. How: This holds whether the run is a build, where it writes, and the project's root, once Vite has resolved its config.
+	let buiRecObj = { buiBoo : false, outStr : '', rooStr : '' }; // What: Build Record Object. Why: The pages are written only after a production build, into its output folder, and the dev server reads the sitemap from the project. How: This holds whether the run is a build, where it writes, and the project's root, once Vite has resolved its config. // What: Build Boolean. Why: Only a production build writes the article pages. How: This starts false until the config says the run is a build. // What: Output String. Why: The pages are written into the build's output folder. How: This starts empty until the config names it. // What: Root String. Why: The dev server reads the sitemap from the project. How: This starts empty until the config names the root.
 
 
 
