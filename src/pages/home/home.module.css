@@ -10,12 +10,13 @@
  * small drawing on each side down to 441px, its last heading word in teal and
  * a warm italic note under the buttons. The topic tiles sit on a white band,
  * each a soft ivory tile with a dashed, stitched border just inside its edge,
- * a teal speech bubble, its topic, and a muted hint, four, three, or two
- * across so every row stays even, and one column of short rows on a phone. The
- * four newest articles follow on the ivory as white cards, four, two, or one
- * across, then the three step cards. The page fades up as it opens, every
- * control eases its hover, press, and focus, and every animation and
- * transition holds still under reduced motion.
+ * a teal speech bubble, its topic, and a muted hint, four across, three at
+ * 1,024px and below, and two at 768px and below, so every row stays even,
+ * then one column of short rows at 640px and below. The four newest articles
+ * follow on the ivory as white cards, four across, two at 1,024px and below,
+ * and one at 640px and below, then the three step cards. The page fades up
+ * as it opens, every control eases its hover, press, and focus, and every
+ * animation and transition holds still under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

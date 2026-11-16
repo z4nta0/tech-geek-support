@@ -35,9 +35,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * and choosing a topic replaces the address rather than adding to the
  * history, so Back still leaves the page. A topic with no articles yet
  * invites the visitor to ask instead, and a list of articles ends with the
- * same Still Stuck panel an article does. On a wide screen a help card sits
+ * same Still Stuck panel an article does. Above 1,024px a help card sits
  * beside the list, staying in view as it scrolls, so a visitor who can't find
- * their problem always sees how to ask.
+ * their problem sees how to ask.
  *
  * Sections:
  *  - Components
