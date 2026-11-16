@@ -358,6 +358,12 @@ suites live in `tests/`, one project per suite and engine in
   `aria-expanded`. The Tab walk alone can't show it for the question tip,
   whose bubble leaves the middle of the box below it clear (measured: with
   the focus close turned off, only the email tip's walk failed).
+- **Topic filter** (added 2026-11-15, in the audit): pressing a topic
+  button fades the Articles list, its count, and the empty topic message up
+  on the decelerating curve, keyed on the articles shown, and only after a
+  first choice, so it never plays over the page's entrance;
+  `tests/interaction/filter.spec.ts` reads their computed animation names
+  before and after a press, with and without reduced motion.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.
