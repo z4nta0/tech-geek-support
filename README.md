@@ -62,11 +62,12 @@ The build also writes a copy of the page for every article (`articles/<slug>.htm
 
 ## Images
 
-The icons and link preview images are rendered by scripts, so they can be rebuilt whenever something changes:
+The icons, the About portrait, and the link preview images are rendered by scripts, so they can be rebuilt whenever something changes:
 
 ```bash
 npm run og-images  # captures the link preview images from design/og-image/card.html: the site's own og-image.png and one for each article in public/social/
 npm run icons      # copies the design package's favicon.svg into public/ and renders favicon.ico, the PNG icons, and the Apple touch icon from it
+npm run images     # renders the About portrait from its original in design/images/originals/, which git ignores, so a fresh checkout copies it from TechGeek.dev first
 ```
 
 ## Adding an article
@@ -116,6 +117,7 @@ tests/
 
 design/                Source artwork and the scripts that render it, not served
 ├── icons/             render.mts, which builds the icon set in public/ (npm run icons)
+├── images/            render.mts, which renders the About portrait from its original (npm run images)
 └── og-image/          card.html and render.mts, which capture the link preview images (npm run og-images)
 ```
 
