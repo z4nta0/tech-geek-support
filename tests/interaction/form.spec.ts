@@ -57,7 +57,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helper dri
  *
  * @example
  * ```ts
- * forOpeFun(page) // => Promise<string[]>
+ * forOpeFun(page) // => []
  * ```
  *
 */

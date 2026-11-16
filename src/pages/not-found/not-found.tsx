@@ -23,8 +23,8 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * The 404 page every unknown address shows, inside the site's bar and
  * footer: the signal rings, a calm message that the page isn't here, and
  * three ways onward, home, the articles, and the question form. Its own
- * title and a noindex robots tag keep search engines from indexing it under
- * every mistyped address.
+ * title names it, and a noindex robots tag keeps search engines from
+ * indexing it under every mistyped address.
  *
  * Sections:
  *  - Components
