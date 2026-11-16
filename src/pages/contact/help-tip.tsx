@@ -6,7 +6,7 @@
 import cssModObj from './help-tip.module.css'; // What: CSS Module Object. Why: The tip's button and bubble are styled in their own module. How: This maps each class name in help-tip.module.css to its hashed module class.
 
 
-import { useEffect } from 'react'; // What: Use Effect. Why: An open tip listens for the key and the presses that close it. How: An effect adds those listeners while it's open.
+import { useEffect } from 'react'; // What: Use Effect. Why: An open tip listens for the key, the presses, and the focus changes that close it. How: An effect adds those listeners while it's open.
 import { useRef    } from 'react'; // What: Use Ref. Why: A press elsewhere is told apart from a press on the tip. How: This holds the tip's wrapper element.
 import { useState  } from 'react'; // What: Use State. Why: The tip remembers whether a hover or a press opened it. How: This holds each of those.
 

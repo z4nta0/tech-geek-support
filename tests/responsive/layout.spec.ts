@@ -252,7 +252,7 @@ function layProFun () : string[] {
 	conEleArr.forEach( ( conCurEle ) => { // What: Cut Off Control Loop. Why: A container that clips its overflow hides the spill, but a control cut off at the edge, like a menu button pushed half off a crowded bar, still can't be fully seen or reached, which the edge check above lets through. How: This records each reachable control partly on screen whose box runs more than a pixel past either edge inside an ancestor that hides its overflow.
 
 
-		if ( !hidAncFun( conCurEle ) ) return; // What: Unhidden Control Guard. Why: An unclipped control past the edge is already recorded as a spill, and one inside a scrolling container, like a row of filters that scrolls sideways, can be scrolled to. How: This skips both, keeping only controls a hiding container cuts off for good.
+		if ( !hidAncFun( conCurEle ) ) return; // What: Unhidden Control Guard. Why: An unclipped control past the edge is already recorded as a spill, and one inside a container that scrolls can be scrolled to. How: This skips both, keeping only controls a hiding container cuts off for good.
 
 
 

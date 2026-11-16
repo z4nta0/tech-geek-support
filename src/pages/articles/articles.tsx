@@ -129,7 +129,7 @@ function ArtLisCom () : JSX.Element {
 
 
 
-				<section className={ cssModObj.artLisSec }>{ /* What: Articles List Section Element. Why: The filter and the list belong together. How: This holds the topic buttons, the count, the articles, and the help card beside them on wide screens. */ }
+				<section className={ cssModObj.artLisSec }>{ /* What: Articles List Section Element. Why: The filter and the list belong together. How: This holds the topic buttons, the count, the articles, the help card beside them on wide screens, and the Still Stuck panel below them. */ }
 
 
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The list sits in the site's centered column. How: This caps and centers it with the side gutter. */ }

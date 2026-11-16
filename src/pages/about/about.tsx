@@ -149,7 +149,7 @@ function AboPagCom () : JSX.Element {
 						<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The portrait and its flourishes form the hero's picture. How: This holds the portrait, beside the introduction on wide screens and above it at 768px and below, where a small drawing fills the room on each side of it down to 441px. */ }
 
 
-							<div className={ cssModObj.porFraDiv }>{ /* What: Portrait Frame Div Element. Why: The portrait sits in a soft frame with the site's rings behind it. How: This holds the photo and draws a pale teal circle behind it. */ }
+							<div className={ cssModObj.porFraDiv }>{ /* What: Portrait Frame Div Element. Why: The portrait sits in a soft frame with a pale teal circle behind it, the rings' color. How: This holds the photo and draws a pale teal circle behind it. */ }
 
 
 								<img

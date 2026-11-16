@@ -227,7 +227,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 			<div className={ cssModObj.pagEntDiv }>{ /* What: Page Enter Div Element. Why: The page fades up into view as it opens. How: This wraps the article and plays the shared entrance. */ }
 
 
-				<article className={ cssModObj.artBodArt }>{ /* What: Article Body Article Element. Why: The article is one self-contained piece. How: This holds its header, body, and closing panel in a reading column. */ }
+				<article className={ cssModObj.artBodArt }>{ /* What: Article Body Article Element. Why: The article is one self-contained piece. How: This holds its header, body, closing panel, and related articles in a reading column. */ }
 
 
 					<header className={ cssModObj.artHeaHed }>{ /* What: Article Header Header Element. Why: The way back, the topic, the title, and the details sit together above the body. How: This stacks them. */ }
