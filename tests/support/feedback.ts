@@ -7,8 +7,9 @@
  * @summary
  * The shared pieces of the interaction feedback probe, for a spec that
  * checks a control's hover, press, and focus: the lists of properties a look
- * is read with and the helpers that read, compare, and report those looks,
- * such as the click block that keeps a press from acting mid-check. A spec collects and drives its own elements.
+ * is read with, and the helpers a check runs, such as the one that turns two
+ * snapshots of a look into problems. A spec collects and drives its own
+ * elements.
  * Adapted from TechGeek.cards' own.
  *
  * Sections:
