@@ -145,6 +145,12 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   twelve tiles become one column of short rows, the icon beside the name and
   hint, since two across left no room for "Understanding" (2026-10-16, to be
   reviewed in the manual responsive pass).
+- **Card text and WebKit** (decided by the user 2026-11-16): the titles and
+  hints inside Home's topic tiles and the Articles cards keep `pointer-events
+  : none`, an exception to the user-level note that a text glyph needs none.
+  Measured in the audit: without it, WebKit's feedback probe missed the phone
+  "Understanding Tech" tile's pressed look under reduced motion in 4 of 4
+  runs, while Chromium and Firefox didn't need it.
 - **How it works**: "Calm Signal"'s three white step cards, chosen to match
   the hero.
 - **Articles help card** (decided by the user 2026-10-17): above 1,024px the
@@ -244,6 +250,16 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   and the article page's `<img>` has neither yet, since no article has a
   photo. The first article with a photo adds reading each photo's size at
   build time and rendering both attributes.
+- **Video, still to do** (decided by the user 2026-11-16): `public/_headers`'
+  Permissions-Policy turns fullscreen off, which would block a video's
+  fullscreen button, so the first article with a video changes it to
+  `fullscreen=(self)` and updates the security headers check with it.
+- **Link styles, still to do** (decided by the user 2026-11-16): an article's
+  body links (`.bodLinAnc`) and its "More on this topic" list (`.relLinAnc`)
+  never render yet, since no article holds a link and every topic has one
+  article, so no test reaches their hover, press, and focus feedback. The
+  first article with a body link, or the second on a topic, brings them into
+  the feedback probe's article state; check they pass it then.
 
 ## Rebuild
 Done. Built on the `rebuild` branch from TechGeek.dev's configs, released as
@@ -367,7 +383,13 @@ suites live in `tests/`, one project per suite and engine in
   `tests/interaction/filter.spec.ts` reads the count's and the list's
   computed animation names and their keyframes before and after two presses,
   with and without reduced motion, and checks both remount on each press while
-  the count's live region stays.
+  the count's live region stays. A press writes the topic into the address
+  with `history.replaceState`, outside the router (decided by the user
+  2026-11-16), since a router navigation sent the page to its top through the
+  design package's scroll hook; the page holds the choice itself until a real
+  router navigation, and the spec checks a press keeps the scroll position at
+  phone width, a reload keeps the topic, and the footer's "Articles" link
+  clears it.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.
