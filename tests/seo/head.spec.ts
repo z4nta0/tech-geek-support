@@ -400,6 +400,20 @@ for ( const heaRowObj of PAG_HEA_ARR ) { // What: Page Head Loop. Why: Every pag
 
 
 
+test( 'every indexed page has its own title and description', () => { // What: Unique Head Test. Why: Search listings should tell the pages apart, so no two indexed pages share a title or a description. How: This checks the indexed rows' titles and descriptions each hold no repeat, which the page head tests prove each page shows.
+
+
+	const indRowArr = PAG_HEA_ARR.filter( ( heaRowObj ) => heaRowObj.canStr !== null ); // What: Indexed Row Array. Why: A page kept out of search may share the 404 page's head. How: This keeps the rows with a canonical address.
+
+
+	expect( new Set( indRowArr.map( ( heaRowObj ) => heaRowObj.titStr ) ).size ).toBe( indRowArr.length ); // What: Unique Title Assertion. Why: Two pages with one title read as the same page in a listing. How: This checks the set of titles is as large as the list.
+	expect( new Set( indRowArr.map( ( heaRowObj ) => heaRowObj.desStr ) ).size ).toBe( indRowArr.length ); // What: Unique Description Assertion. Why: Two pages with one description read as the same page in a listing. How: This checks the set of descriptions is as large as the list.
+
+
+} );
+
+
+
 test( 'moving between pages swaps their head tags', async ( { page : curPagObj } ) => { // What: Navigation Head Test. Why: React adds and removes each page's tags as visitors move around, and a leftover description or canonical link would mislabel the next page. How: This walks from Home through Articles and About to Contact by the footer's links, checking each head.
 
 
