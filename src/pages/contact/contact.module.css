@@ -592,11 +592,12 @@
 
 
 	appearance          : none;
-	background-image    : url( './select-arrow.svg' );       /* What: Chevron Image. Why: The menu needs an arrow that matches the site. How: This reads select-arrow.svg beside this module, a muted chevron drawn in #646482, the Text Muted Color role's value, written out since an SVG file can't read a custom property. */
-	background-position : right var( --spa-hor-bas ) center; /* Spacing Horizontal Base ~= 14.572px */
+	background-image    : url( './select-arrow.svg' );         /* What: Chevron Image. Why: The menu needs an arrow that matches the site. How: This reads select-arrow.svg beside this module, a muted chevron drawn in #646482, the Text Muted Color role's value, written out since an SVG file can't read a custom property. */
+	background-position : right var( --spa-hor-bas ) center;   /* Spacing Horizontal Base ~= 14.572px */
 	background-repeat   : no-repeat;
+	background-size     : calc( var( --ver-rhy-bas ) * 1rem ); /* Vertical Rhythm Base ~= 14.572px */ /* What: Chevron Size. Why: The arrow should follow the visitor's text size like every other length. How: This draws it at the base rhythm step, the nearest to its 14px drawing. */
 	cursor              : pointer;
-	padding-right       : var( --spa-hor-p04 );              /* Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding-right       : var( --spa-hor-p04 );                /* Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
@@ -914,13 +915,13 @@
 .safLisUno { /* What: Safety List Unordered. Why: Each thing real help never asks for reads as a point. How: This lists them with small teal dots and room on the left for them. */
 
 
-	color          : var( --tex-mai-col );                /* Text Main Color = #1A1A2E */
+	color          : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
 	display        : flex;
 	flex-direction : column;
-	gap            : var( --spa-ver-m03 );                /* Spacing Vertical Base Minus 3 ~= 6.268px */
+	gap            : var( --spa-ver-m03 ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
 	list-style     : disc;
 	margin         : 0;
-	padding-left   : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
+	padding-left   : var( --spa-hor-p01 ); /* Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 }
