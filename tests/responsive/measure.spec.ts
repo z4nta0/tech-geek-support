@@ -45,21 +45,107 @@ const SMA_MAX_NUM = 60;                                                         
 const SMA_SIZ_NUM = 14;                                                                                      // What: Small Size Number. Why: Small text is set below the body size of about 14.572px. How: A paragraph whose font size is under this many pixels is held to the small limit.
 const WID_LIS_ARR = [ 320, 360, 390, 414, 440, 441, 480, 640, 641, 768, 769, 1024, 1025, 1280, 1440, 1920 ]; // What: Width List Array. Why: A column is at its widest just before a layout switches. How: This lists the responsive suite's widths, the site's breakpoints and the pixel past each included.
 
+
+
 type MeaCasTyp = { ideStr : string, menBoo : boolean, patStr : string }; // What: Measure Case Type. Why: Each test measures one page in one state. How: This names the case, whether it opens the menu, and its path.
+
+// #region MEA_CAS_ARR
+
+/**
+ * MEA_CAS_ARR = Measure Case Array
+ *
+ * @summary
+ * The cases the line length checks measure, one per page plus the mobile menu
+ * open on the home page. Every row shares the {@link MeaCasTyp} shape, so its
+ * fields carry no comments of their own:
+ *
+ * - `ideStr` (String): Identifier String, the case's name in test titles.
+ *
+ * - `menBoo` (Boolean): Menu Boolean, true when the case opens the menu.
+ *
+ * - `patStr` (String): Path String, the route loaded from the dev server.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
 
 const MEA_CAS_ARR : MeaCasTyp[] = [ // What: Measure Case Array. Why: Every page and the open menu hold paragraphs. How: Each row names a case, whether it opens the menu, and its path.
 
 
-	{ ideStr : 'home',      menBoo : false, patStr : '/'                                 }, // What: Home Case. Why: The home page holds the hero pitch, the topic hints, the article cards, and the steps. How: This measures it as loaded.
-	{ ideStr : 'articles',  menBoo : false, patStr : '/articles'                         }, // What: Articles Case. Why: The Articles page holds its lead and every card's summary. How: This measures it as loaded.
-	{ ideStr : 'article',   menBoo : false, patStr : '/articles/why-is-my-wi-fi-so-slow' }, // What: Article Case. Why: An article is the site's longest reading, set a step larger than the family's body text. How: This measures the slow Wi-Fi article as loaded.
-	{ ideStr : 'about',     menBoo : false, patStr : '/about'                            }, // What: About Case. Why: The About page holds the story and the promises. How: This measures it as loaded.
-	{ ideStr : 'contact',   menBoo : false, patStr : '/contact'                          }, // What: Contact Case. Why: The Contact page holds its intro, the field hints, and the sidebar cards. How: This measures it as loaded.
-	{ ideStr : 'not-found', menBoo : false, patStr : '/missing'                          }, // What: Not Found Case. Why: Every unknown address lands on the 404 page. How: This measures an address the site doesn't have.
-	{ ideStr : 'menu',      menBoo : true,  patStr : '/'                                 }  // What: Menu Case. Why: The open menu ends on its tagline. How: This measures the home page with the menu open.
+	{ // What: Home Case. Why: The home page holds the hero pitch, the topic hints, the article cards, and the steps. How: This measures it as loaded.
+
+
+		ideStr : 'home',
+		menBoo : false,
+		patStr : '/'
+
+
+	},
+
+	{ // What: Articles Case. Why: The Articles page holds its lead and every card's summary. How: This measures it as loaded.
+
+
+		ideStr : 'articles',
+		menBoo : false,
+		patStr : '/articles'
+
+
+	},
+
+	{ // What: Article Case. Why: An article is the site's longest reading, set a step larger than the family's body text. How: This measures the slow Wi-Fi article as loaded.
+
+
+		ideStr : 'article',
+		menBoo : false,
+		patStr : '/articles/why-is-my-wi-fi-so-slow'
+
+
+	},
+
+	{ // What: About Case. Why: The About page holds the story and the promises. How: This measures it as loaded.
+
+
+		ideStr : 'about',
+		menBoo : false,
+		patStr : '/about'
+
+
+	},
+
+	{ // What: Contact Case. Why: The Contact page holds its intro, the field hints, and the sidebar cards. How: This measures it as loaded.
+
+
+		ideStr : 'contact',
+		menBoo : false,
+		patStr : '/contact'
+
+
+	},
+
+	{ // What: Not Found Case. Why: Every unknown address lands on the 404 page. How: This measures an address the site doesn't have.
+
+
+		ideStr : 'not-found',
+		menBoo : false,
+		patStr : '/missing'
+
+
+	},
+
+	{ // What: Menu Case. Why: The open menu ends on its tagline. How: This measures the home page with the menu open.
+
+
+		ideStr : 'menu',
+		menBoo : true,
+		patStr : '/'
+
+
+	}
 
 
 ];
+
+// #endregion MEA_CAS_ARR
 
 // #endregion Constants
 

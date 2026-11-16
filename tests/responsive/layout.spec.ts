@@ -43,6 +43,8 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
 const MEN_MAX_NUM = 1024;                                                                                    // What: Menu Maximum Number. Why: The mobile menu exists only up to the bar's 1,024px breakpoint. How: The menu case is measured only at widths up to this.
 const WID_LIS_ARR = [ 320, 360, 390, 414, 440, 441, 480, 640, 641, 768, 769, 1024, 1025, 1280, 1440, 1920 ]; // What: Width List Array. Why: Layouts crowd at the narrowest widths and switch at the breakpoints. How: This lists common screen widths (480px a landscape phone, 1,280px a laptop) plus the site's 440px, 640px, 768px, and 1,024px breakpoints and the pixel past each.
 
+
+
 type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page in one state. How: This names the case, its path, and whether it opens the menu.
 
 
@@ -53,19 +55,103 @@ type LayCasTyp = { // What: Layout Case Type. Why: Each test measures one page i
 
 };
 
+// #region LAY_CAS_ARR
+
+/**
+ * LAY_CAS_ARR = Layout Case Array
+ *
+ * @summary
+ * The cases the layout probe measures, one per page plus the mobile menu open
+ * on the home page. Every row shares the {@link LayCasTyp} shape, so its
+ * fields carry no comments of their own:
+ *
+ * - `ideStr` (String): Identifier String, the case's name in test titles.
+ *
+ * - `menBoo` (Boolean): Menu Boolean, true when the case opens the menu.
+ *
+ * - `patStr` (String): Path String, the route loaded from the dev server.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
 const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page and the open menu are measured the same way. How: Each row names a case, its path, and whether it opens the menu.
 
 
-	{ ideStr : 'home',      menBoo : false, patStr : '/'                                 }, // What: Home Case. Why: The home page holds the hero, the topic tiles, the newest articles, and the steps. How: This measures it as loaded.
-	{ ideStr : 'articles',  menBoo : false, patStr : '/articles'                         }, // What: Articles Case. Why: The Articles page holds the topic filter and every article card. How: This measures it as loaded.
-	{ ideStr : 'article',   menBoo : false, patStr : '/articles/why-is-my-wi-fi-so-slow' }, // What: Article Case. Why: Every article shares one page, and the slow Wi-Fi article holds steps, bullets, and tips. How: This measures it as loaded.
-	{ ideStr : 'about',     menBoo : false, patStr : '/about'                            }, // What: About Case. Why: The About page tells the Tech Geek's story beside a portrait. How: This measures it as loaded.
-	{ ideStr : 'contact',   menBoo : false, patStr : '/contact'                          }, // What: Contact Case. Why: The Contact page holds the question form and the sidebar. How: This measures it as loaded.
-	{ ideStr : 'not-found', menBoo : false, patStr : '/missing'                          }, // What: Not Found Case. Why: Every unknown address lands on the 404 page. How: This measures an address the site doesn't have.
-	{ ideStr : 'menu',      menBoo : true,  patStr : '/'                                 }  // What: Menu Case. Why: The open menu stacks the page links its own way. How: This measures the home page with the menu open.
+	{ // What: Home Case. Why: The home page holds the hero, the topic tiles, the newest articles, and the steps. How: This measures it as loaded.
+
+
+		ideStr : 'home',
+		menBoo : false,
+		patStr : '/'
+
+
+	},
+
+	{ // What: Articles Case. Why: The Articles page holds the topic filter and every article card. How: This measures it as loaded.
+
+
+		ideStr : 'articles',
+		menBoo : false,
+		patStr : '/articles'
+
+
+	},
+
+	{ // What: Article Case. Why: Every article shares one page, and the slow Wi-Fi article holds steps, bullets, and tips. How: This measures it as loaded.
+
+
+		ideStr : 'article',
+		menBoo : false,
+		patStr : '/articles/why-is-my-wi-fi-so-slow'
+
+
+	},
+
+	{ // What: About Case. Why: The About page tells the Tech Geek's story beside a portrait. How: This measures it as loaded.
+
+
+		ideStr : 'about',
+		menBoo : false,
+		patStr : '/about'
+
+
+	},
+
+	{ // What: Contact Case. Why: The Contact page holds the question form and the sidebar. How: This measures it as loaded.
+
+
+		ideStr : 'contact',
+		menBoo : false,
+		patStr : '/contact'
+
+
+	},
+
+	{ // What: Not Found Case. Why: Every unknown address lands on the 404 page. How: This measures an address the site doesn't have.
+
+
+		ideStr : 'not-found',
+		menBoo : false,
+		patStr : '/missing'
+
+
+	},
+
+	{ // What: Menu Case. Why: The open menu stacks the page links its own way. How: This measures the home page with the menu open.
+
+
+		ideStr : 'menu',
+		menBoo : true,
+		patStr : '/'
+
+
+	}
 
 
 ];
+
+// #endregion LAY_CAS_ARR
 
 // #endregion Constants
 

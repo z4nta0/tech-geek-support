@@ -67,11 +67,16 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
  * menu shows only at 1,024px and narrower, which the desktop width is above.
  * Every row shares the {@link StaRecTyp} shape, so its fields carry no
  * comments of their own:
+ *
  * - `actFun` (Function): Action Function, run after the page loads to open
  *   something on it, such as the menu. Only the menu row has one.
+ *
  * - `heiNum` (Number): Height Number, the viewport height in CSS pixels.
+ *
  * - `ideStr` (String): Identifier String, the state's name in test titles.
+ *
  * - `patStr` (String): Path String, the route loaded from the suite's server.
+ *
  * - `widNum` (Number): Width Number, the viewport width in CSS pixels.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -81,18 +86,137 @@ type StaRecTyp = { // What: State Record Type. Why: Every check reads the same d
 const STA_REC_ARR : StaRecTyp[] = [ // What: State Record Array. Why: The checks share one list of states, so a new shared state is added in one place. How: Each row names a state, its path, and its viewport, and the menu row adds the action that opens it.
 
 
-	{ heiNum : 900, ideStr : 'home-desktop',      patStr : '/',                                 widNum : 1440 }, // What: Home Desktop State. Why: The home page holds the site's pitch and the topic tiles. How: This loads the home page at 1,440px.
-	{ heiNum : 844, ideStr : 'home-phone',        patStr : '/',                                 widNum : 390  }, // What: Home Phone State. Why: The phone layout stacks the page into one column and hides the bar's links behind the menu. How: This loads the home page at 390px.
-	{ heiNum : 900, ideStr : 'articles-desktop',  patStr : '/articles',                         widNum : 1440 }, // What: Articles Desktop State. Why: The Articles page holds the topic filter and every article card. How: This loads the Articles page at 1,440px.
-	{ heiNum : 844, ideStr : 'articles-phone',    patStr : '/articles',                         widNum : 390  }, // What: Articles Phone State. Why: The phone layout stacks the cards into one column and hides the bar's links behind the menu. How: This loads the Articles page at 390px.
-	{ heiNum : 900, ideStr : 'article-desktop',   patStr : '/articles/why-is-my-wi-fi-so-slow', widNum : 1440 }, // What: Article Desktop State. Why: Every article shares one page, so one with steps, bullets, and tips stands in for them all. How: This loads the slow Wi-Fi article at 1,440px.
-	{ heiNum : 844, ideStr : 'article-phone',     patStr : '/articles/why-is-my-wi-fi-so-slow', widNum : 390  }, // What: Article Phone State. Why: The phone layout gives the article's text and steps the full width and hides the bar's links behind the menu. How: This loads the slow Wi-Fi article at 390px.
-	{ heiNum : 900, ideStr : 'about-desktop',     patStr : '/about',                            widNum : 1440 }, // What: About Desktop State. Why: The About page tells the Tech Geek's story beside a portrait. How: This loads the About page at 1,440px.
-	{ heiNum : 844, ideStr : 'about-phone',       patStr : '/about',                            widNum : 390  }, // What: About Phone State. Why: The phone layout stacks the page into one column and hides the bar's links behind the menu. How: This loads the About page at 390px.
-	{ heiNum : 900, ideStr : 'contact-desktop',   patStr : '/contact',                          widNum : 1440 }, // What: Contact Desktop State. Why: The Contact page holds the question form and the sidebar. How: This loads the Contact page at 1,440px.
-	{ heiNum : 844, ideStr : 'contact-phone',     patStr : '/contact',                          widNum : 390  }, // What: Contact Phone State. Why: The phone layout stacks the page into one column and hides the bar's links behind the menu. How: This loads the Contact page at 390px.
-	{ heiNum : 900, ideStr : 'not-found-desktop', patStr : '/missing',                          widNum : 1440 }, // What: Not Found Desktop State. Why: Every unknown address lands on the 404 page. How: This loads an address the site doesn't have at 1,440px.
-	{ heiNum : 844, ideStr : 'not-found-phone',   patStr : '/missing',                          widNum : 390  }, // What: Not Found Phone State. Why: The phone bar hides its links behind the menu on the 404 page too. How: This loads an address the site doesn't have at 390px.
+	{ // What: Home Desktop State. Why: The home page holds the site's pitch and the topic tiles. How: This loads the home page at 1,440px.
+
+
+		heiNum : 900,
+		ideStr : 'home-desktop',
+		patStr : '/',
+		widNum : 1440
+
+
+	},
+
+	{ // What: Home Phone State. Why: The phone layout stacks the page into one column and hides the bar's links behind the menu. How: This loads the home page at 390px.
+
+
+		heiNum : 844,
+		ideStr : 'home-phone',
+		patStr : '/',
+		widNum : 390
+
+
+	},
+
+	{ // What: Articles Desktop State. Why: The Articles page holds the topic filter and every article card. How: This loads the Articles page at 1,440px.
+
+
+		heiNum : 900,
+		ideStr : 'articles-desktop',
+		patStr : '/articles',
+		widNum : 1440
+
+
+	},
+
+	{ // What: Articles Phone State. Why: The phone layout stacks the cards into one column and hides the bar's links behind the menu. How: This loads the Articles page at 390px.
+
+
+		heiNum : 844,
+		ideStr : 'articles-phone',
+		patStr : '/articles',
+		widNum : 390
+
+
+	},
+
+	{ // What: Article Desktop State. Why: Every article shares one page, so one with steps, bullets, and tips stands in for them all. How: This loads the slow Wi-Fi article at 1,440px.
+
+
+		heiNum : 900,
+		ideStr : 'article-desktop',
+		patStr : '/articles/why-is-my-wi-fi-so-slow',
+		widNum : 1440
+
+
+	},
+
+	{ // What: Article Phone State. Why: The phone layout gives the article's text and steps the full width and hides the bar's links behind the menu. How: This loads the slow Wi-Fi article at 390px.
+
+
+		heiNum : 844,
+		ideStr : 'article-phone',
+		patStr : '/articles/why-is-my-wi-fi-so-slow',
+		widNum : 390
+
+
+	},
+
+	{ // What: About Desktop State. Why: The About page tells the Tech Geek's story beside a portrait. How: This loads the About page at 1,440px.
+
+
+		heiNum : 900,
+		ideStr : 'about-desktop',
+		patStr : '/about',
+		widNum : 1440
+
+
+	},
+
+	{ // What: About Phone State. Why: The phone layout stacks the page into one column and hides the bar's links behind the menu. How: This loads the About page at 390px.
+
+
+		heiNum : 844,
+		ideStr : 'about-phone',
+		patStr : '/about',
+		widNum : 390
+
+
+	},
+
+	{ // What: Contact Desktop State. Why: The Contact page holds the question form and the sidebar. How: This loads the Contact page at 1,440px.
+
+
+		heiNum : 900,
+		ideStr : 'contact-desktop',
+		patStr : '/contact',
+		widNum : 1440
+
+
+	},
+
+	{ // What: Contact Phone State. Why: The phone layout stacks the page into one column and hides the bar's links behind the menu. How: This loads the Contact page at 390px.
+
+
+		heiNum : 844,
+		ideStr : 'contact-phone',
+		patStr : '/contact',
+		widNum : 390
+
+
+	},
+
+	{ // What: Not Found Desktop State. Why: Every unknown address lands on the 404 page. How: This loads an address the site doesn't have at 1,440px.
+
+
+		heiNum : 900,
+		ideStr : 'not-found-desktop',
+		patStr : '/missing',
+		widNum : 1440
+
+
+	},
+
+	{ // What: Not Found Phone State. Why: The phone bar hides its links behind the menu on the 404 page too. How: This loads an address the site doesn't have at 390px.
+
+
+		heiNum : 844,
+		ideStr : 'not-found-phone',
+		patStr : '/missing',
+		widNum : 390
+
+
+	},
 
 	{ // What: Menu Phone State. Why: The open menu holds the phone bar's page links. How: This loads the home page at 390px and opens the menu through its toggle button.
 
