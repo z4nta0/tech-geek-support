@@ -57,8 +57,8 @@ type HtcProTyp = { bubIdeStr : string, butLabStr : string, tipTexStr : string };
  * outside it closes it. The bubble is always in the page, hidden while closed,
  * so a field can name it with aria-describedby and a screen reader reads the
  * help with the field. The button names the bubble too, and reports whether
- * it's open. The bubble is positioned against the nearest positioned ancestor,
- * which the caller sets on the field's header row.
+ * it's open. The bubble is positioned against its nearest positioned
+ * ancestor, so it expects that ancestor to be the field's header row.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

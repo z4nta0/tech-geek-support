@@ -11,7 +11,7 @@ import { artTitFun    } from './src/ui/article-title.ts';  // What: Article Titl
 import { defineConfig } from 'vite';                       // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps VIT_CON_OBJ.
 import { mkdir        } from 'node:fs/promises';           // What: Make Directory. Why: The article pages go in their own folder of the build. How: This creates it.
 import { readFile     } from 'node:fs/promises';           // What: Read File. Why: The articles' files are built from files the site already has, such as the built page. How: This reads them.
-import { resolve      } from 'node:path';                  // What: Resolve. Why: The article pages are written beside the built index.html. How: This joins the build folder with each file name.
+import { resolve      } from 'node:path';                  // What: Resolve. Why: The article pages are written into the build folder that holds index.html. How: This joins the build folder with each file name.
 import { TOP_REC_ARR  } from './src/ui/topics.ts';         // What: Topic Record Array. Why: An article's preview tags name its topic. How: artTagFun looks the label up by the article's topic identifier.
 import { writeFile    } from 'node:fs/promises';           // What: Write File. Why: The articles add files to the build and change others. How: This writes them.
 
@@ -341,7 +341,7 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 
 
 				buiBoo : conResObj.command === 'build',                     // What: Build Boolean. Why: The dev server writes nothing. How: This is true only for a production build.
-				outStr : resolve( conResObj.root, conResObj.build.outDir ), // What: Output String. Why: The pages are written beside the built index.html. How: This is the build's resolved output folder.
+				outStr : resolve( conResObj.root, conResObj.build.outDir ), // What: Output String. Why: The pages are written into the build folder that holds index.html. How: This is the build's resolved output folder.
 				rooStr : conResObj.root                                     // What: Root String. Why: The dev server reads the sitemap from public/. How: This is the project's root.
 
 
