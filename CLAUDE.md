@@ -362,8 +362,10 @@ suites live in `tests/`, one project per suite and engine in
   button fades the Articles list, its count, and the empty topic message up
   on the decelerating curve, keyed on the articles shown, and only after a
   first choice, so it never plays over the page's entrance;
-  `tests/interaction/filter.spec.ts` reads their computed animation names
-  before and after a press, with and without reduced motion.
+  `tests/interaction/filter.spec.ts` reads the count's and the list's
+  computed animation names and their keyframes before and after two presses,
+  with and without reduced motion, and checks both remount on each press while
+  the count's live region stays.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.
