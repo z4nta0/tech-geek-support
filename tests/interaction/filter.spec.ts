@@ -23,14 +23,13 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers re
  * button is pressed they remount and play the results' fade up, or no
  * animation under reduced motion, while the polite live region holding the
  * count stays in the page, so a screen reader hears the new count. Each look
- * is read from the computed animation name, which the fade's both fill keeps
- * in place, so the check holds however fast an engine runs, and the name has
+ * is read from the computed animation name, which stays set after the fade
+ * ends, so the check holds however fast an engine runs, and the name has
  * to lead to a keyframes rule the page really holds. A mark set before each
  * choice has to be gone from the count and the list after it, which shows
  * both remounted and so replayed their fade, and still on the region.
  *
  * Sections:
- *  - Types
  *  - Constants
  *  - Helpers
  *  - Module Init
@@ -38,14 +37,6 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers re
  * @author z4nta0 <https://github.com/z4nta0>
  *
 */
-
-
-
-// #region Types
-
-type ParStaTyp = { aniNamStr : string, kfrHasBoo : boolean, marOldBoo : boolean }; // What: Part State Type. Why: Each part is judged by what it plays and whether it's the element marked before. How: This types the part's animation name, whether the page holds keyframes of that name, and whether it still carries the mark.
-
-// #endregion Types
 
 
 
@@ -94,6 +85,8 @@ async function parMarFun ( curPagObj : Page ) : Promise< void > {
 
 
 
+type ParStaTyp = { aniStr : string, kefBoo : boolean, marBoo : boolean }; // What: Part State Type. Why: Each part is judged by what it plays and whether it's the element marked before. How: This types the part's animation name, whether the page holds keyframes of that name, and whether it still carries the mark.
+
 // #region parStaFun
 
 /**
@@ -127,17 +120,16 @@ async function parStaFun ( curPagObj : Page ) : Promise< ParStaTyp[] > {
 
 		const parCurEle = document.querySelector( selCurStr );                                                                                                                 // What: Part Current Element. Why: The part is read where it now is. How: This finds it.
 		const aniNamStr = parCurEle ? getComputedStyle( parCurEle ).animationName : '';                                                                                        // What: Animation Name String. Why: The part's fade is named in its computed style. How: This reads the name, or an empty string when the part is missing.
-		const kfrRulArr = [ ...document.styleSheets ].flatMap( ( styShtObj ) => [ ...styShtObj.cssRules ] ).filter( ( cssRulObj ) => cssRulObj instanceof CSSKeyframesRule ); // What: Keyframes Rule Array. Why: A named fade only plays when its keyframes exist. How: This lists every keyframes rule the page's stylesheets hold.
+		const kefRulArr = [ ...document.styleSheets ].flatMap( ( styShtObj ) => [ ...styShtObj.cssRules ] ).filter( ( cssRulObj ) => cssRulObj instanceof CSSKeyframesRule ); // What: Keyframes Rule Array. Why: A named fade only plays when its keyframes exist. How: This lists every keyframes rule the page's stylesheets hold.
 
 
 
 		return { // What: Part State Return. Why: The test compares each part's three readings. How: This hands them back as one record.
 
 
-			aniNamStr,
-
-			kfrHasBoo : kfrRulArr.some( ( kfrRulObj ) => kfrRulObj.name === aniNamStr ),
-			marOldBoo : parCurEle?.hasAttribute( 'data-part-mark-old' ) ?? false
+			aniStr : aniNamStr,                                                       // What: Animation String. Why: The test reads what the part plays. How: This is its computed animation name.
+			kefBoo : kefRulArr.some( ( kefRulObj ) => kefRulObj.name === aniNamStr ), // What: Keyframes Boolean. Why: A named fade with no keyframes plays nothing. How: This is true when the page holds keyframes of that name.
+			marBoo : parCurEle?.hasAttribute( 'data-part-mark-old' ) ?? false        // What: Mark Boolean. Why: A part still marked wasn't remounted. How: This is true when it still carries the mark.
 
 
 		};
@@ -168,7 +160,7 @@ for ( const redMotBoo of [ false, true ] ) { // What: Motion Loop. Why: The list
 
 		await curPagObj.goto( '/articles' ); // What: Articles Open Call. Why: The filter sits on the Articles page. How: This loads it.
 
-		expect( ( await parStaFun( curPagObj ) ).slice( 0, 2 ).map( ( parStaObj ) => parStaObj.aniNamStr.includes( 'resultSwapFadeUp' ) ) ).toEqual( [ false, false ] ); // What: No Load Fade Assertion. Why: The page's own entrance already plays, so the list shouldn't fade again before a choice. How: This checks neither the count nor the list carries the results' fade.
+		expect( ( await parStaFun( curPagObj ) ).slice( 0, 2 ).map( ( parStaObj ) => parStaObj.aniStr.includes( 'resultSwapFadeUp' ) ) ).toEqual( [ false, false ] ); // What: No Load Fade Assertion. Why: The page's own entrance already plays, so the list shouldn't fade again before a choice. How: This checks neither the count nor the list carries the results' fade.
 
 
 		for ( const [ topLabStr, couTexStr ] of [ [ 'Scams & Safety', 'Showing 1 article about Scams & Safety' ], [ 'Mac', 'Showing 1 article about Mac' ] ] ) { // What: Choice Loop. Why: The fade has to replay on every choice, not just the first. How: This presses the "Scams & Safety" topic, then the "Mac" topic, checking the parts after each.
@@ -184,8 +176,8 @@ for ( const redMotBoo of [ false, true ] ) { // What: Motion Loop. Why: The list
 			const parStaArr = await parStaFun( curPagObj ); // What: Part State Array. Why: The count, the list, and the region are judged together. How: This reads all three.
 
 
-			expect( parStaArr.map( ( parStaObj ) => parStaObj.marOldBoo ) ).toEqual( [ false, false, true ] ); // What: Remount Assertion. Why: The count and the list replay their fade only when remounted, while the live region has to stay for its change to be announced. How: This checks the count and the list lost the mark and the region kept it.
-			expect( parStaArr.slice( 0, 2 ).map( ( parStaObj ) => redMotBoo ? parStaObj.aniNamStr === 'none' : parStaObj.aniNamStr.includes( 'resultSwapFadeUp' ) && parStaObj.kfrHasBoo ) ).toEqual( [ true, true ] ); // What: Arriving Fade Assertion. Why: The new list and count should fade up, or play nothing under reduced motion. How: This checks each plays the results' fade from keyframes the page holds, or has no animation under reduced motion.
+			expect( parStaArr.map( ( parStaObj ) => parStaObj.marBoo ) ).toEqual( [ false, false, true ] ); // What: Remount Assertion. Why: The count and the list replay their fade only when remounted, while the live region has to stay for its change to be announced. How: This checks the count and the list lost the mark and the region kept it.
+			expect( parStaArr.slice( 0, 2 ).map( ( parStaObj ) => redMotBoo ? parStaObj.aniStr === 'none' : parStaObj.aniStr.includes( 'resultSwapFadeUp' ) && parStaObj.kefBoo ) ).toEqual( [ true, true ] ); // What: Arriving Fade Assertion. Why: The new list and count should fade up, or play nothing under reduced motion. How: This checks each plays the results' fade from keyframes the page holds, or has no animation under reduced motion.
 
 
 		}
