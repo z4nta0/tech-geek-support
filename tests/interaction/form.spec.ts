@@ -77,7 +77,7 @@ async function forOpeFun ( curPagObj : Page ) : Promise< string[] > {
 
 		senBodArr.push( rouCurObj.request().postData() ?? '' ); // What: Sent Body Record. Why: The test checks what the form sent. How: This keeps the POST's body.
 
-		await rouCurObj.fulfill( { body : '', status : 200 } ); // What: Success Answer Call. Why: The form shows its thank-you only on an ok reply. How: This answers with an empty 200, as Netlify does.
+		await rouCurObj.fulfill( { body : '', status : 200 } ); // What: Success Answer Call. Why: The form shows its thank-you only on an OK reply. How: This answers with an empty 200, as Netlify does.
 
 
 	} );
@@ -104,13 +104,13 @@ test.use( { reducedMotion : 'reduce' } ); // What: Reduced Motion Use. Why: The 
 
 
 
-test( 'an empty form stays put and sends nothing', async ( { page : curPagObj } ) => { // What: Empty Form Test. Why: A blank question shouldn't reach Netlify or show a thank-you. How: This presses Send on the empty form and checks that nothing was sent and the form is still there.
+test( 'an empty form stays put and sends nothing', async ( { page : curPagObj } ) => { // What: Empty Form Test. Why: A blank question shouldn't reach Netlify or show a thank-you. How: This presses the Send button on the empty form and checks that nothing was sent and the form is still there.
 
 
 	const senBodArr = await forOpeFun( curPagObj ); // What: Sent Body Array. Why: The check needs to know whether anything was sent. How: This opens the form with the root's POST answered and counted.
 
 
-	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The empty form is submitted. How: This presses Send.
+	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The empty form is submitted. How: This presses the Send button.
 
 	await expect( curPagObj.getByLabel( 'Your first name' ) ).toBeFocused(); // What: First Invalid Field Assertion. Why: The browser stops a form with an empty required field and points to it. How: This checks focus moved to the empty name field.
 
@@ -123,7 +123,7 @@ test( 'an empty form stays put and sends nothing', async ( { page : curPagObj } 
 
 
 
-test( 'a malformed email stays put and sends nothing', async ( { page : curPagObj } ) => { // What: Malformed Email Test. Why: A question with an unreachable reply address shouldn't be sent. How: This fills the name, a bad email, and the question, presses Send, and checks that nothing was sent.
+test( 'a malformed email stays put and sends nothing', async ( { page : curPagObj } ) => { // What: Malformed Email Test. Why: A question with an unreachable reply address shouldn't be sent. How: This fills the name, a bad email, and the question, presses the Send button, and checks that nothing was sent.
 
 
 	const senBodArr = await forOpeFun( curPagObj ); // What: Sent Body Array. Why: The check needs to know whether anything was sent. How: This opens the form with the root's POST answered and counted.
@@ -133,7 +133,7 @@ test( 'a malformed email stays put and sends nothing', async ( { page : curPagOb
 	await curPagObj.getByLabel( 'Your email (optional)', { exact : true } ).fill( 'not-an-email' ); // What: Bad Email Fill Call. Why: The address has no @, so it isn't an email. How: This fills it in. // What: Exact Match Note. Why: The question field's help tip button shares its label's words, so every field with a tip is matched the same way. How: Matching the field's whole name finds only the field.
 	await curPagObj.getByLabel( 'Your question', { exact : true } ).fill( 'Hello.' );               // What: Question Fill Call. Why: Only the email should be wrong. How: This fills in a question. // What: Exact Match Note. Why: The field's help tip button is named "More about your question", which a partial match would also find. How: Matching the field's whole name finds only the field.
 
-	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The form with the bad email is submitted. How: This presses Send.
+	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The form with the bad email is submitted. How: This presses the Send button.
 
 	await expect( curPagObj.getByLabel( 'Your email (optional)', { exact : true } ) ).toBeFocused(); // What: Bad Email Focus Assertion. Why: The browser stops the form at the malformed address. How: This checks focus moved to the email field. // What: Exact Match Note. Why: The question field's help tip button shares its label's words, so every field with a tip is matched the same way. How: Matching the field's whole name finds only the field.
 
@@ -144,7 +144,7 @@ test( 'a malformed email stays put and sends nothing', async ( { page : curPagOb
 
 
 
-test( 'a filled-in form sends to Netlify and shows the thank-you', async ( { page : curPagObj } ) => { // What: Sent Form Test. Why: A valid question has to reach Netlify as form question and thank the visitor. How: This fills every field, presses Send, and checks the thank-you and the posted fields.
+test( 'a filled-in form sends to Netlify and shows the thank-you', async ( { page : curPagObj } ) => { // What: Sent Form Test. Why: A valid question has to reach Netlify as form question and thank the visitor. How: This fills every field, presses the Send button, and checks the thank-you and the posted fields.
 
 
 	const senBodArr = await forOpeFun( curPagObj ); // What: Sent Body Array. Why: The check reads what was sent. How: This opens the form with the root's POST answered and counted.
@@ -157,7 +157,7 @@ test( 'a filled-in form sends to Netlify and shows the thank-you', async ( { pag
 
 	await curPagObj.getByLabel( 'Your question', { exact : true } ).fill( 'Hello.' ); // What: Question Fill Call. Why: Every field is filled. How: This fills in a question. // What: Exact Match Note. Why: The field's help tip button is named "More about your question", which a partial match would also find. How: Matching the field's whole name finds only the field.
 
-	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The valid form is submitted. How: This presses Send.
+	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The valid form is submitted. How: This presses the Send button.
 
 	await expect( curPagObj.getByRole( 'heading', { name : 'Question sent!' } ) ).toBeVisible(); // What: Thank-You Assertion. Why: The visitor should learn the question went out. How: This checks the thank-you's heading shows.
 	await expect( curPagObj.getByText( "I'll reply by email within 24 hours." ) ).toBeVisible(); // What: Reply Promise Assertion. Why: A visitor who left an address should hear when to expect the reply. How: This checks the thank-you promises one.
@@ -175,7 +175,7 @@ test( 'a filled-in form sends to Netlify and shows the thank-you', async ( { pag
 
 
 
-test( 'a form without an email still sends, and says no reply can come', async ( { page : curPagObj } ) => { // What: No Email Form Test. Why: The email is optional, so a wary visitor can still ask, but they should know no reply can reach them. How: This fills only the required fields, presses Send, and checks the thank-you and the empty email.
+test( 'a form without an email still sends, and says no reply can come', async ( { page : curPagObj } ) => { // What: No Email Form Test. Why: The email is optional, so a wary visitor can still ask, but they should know no reply can reach them. How: This fills only the required fields, presses the Send button, and checks the thank-you and the empty email.
 
 
 	const senBodArr = await forOpeFun( curPagObj ); // What: Sent Body Array. Why: The check reads what was sent. How: This opens the form with the root's POST answered and counted.
@@ -184,7 +184,7 @@ test( 'a form without an email still sends, and says no reply can come', async (
 	await curPagObj.getByLabel( 'Your first name' ).fill( 'Test' );                   // What: Name Fill Call. Why: The name is required. How: This fills in a first name.
 	await curPagObj.getByLabel( 'Your question', { exact : true } ).fill( 'Hello.' ); // What: Question Fill Call. Why: The question is required. How: This fills in a question. // What: Exact Match Note. Why: The field's help tip button is named "More about your question", which a partial match would also find. How: Matching the field's whole name finds only the field.
 
-	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The form without an email is submitted. How: This presses Send.
+	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The form without an email is submitted. How: This presses the Send button.
 
 	await expect( curPagObj.getByRole( 'heading', { name : 'Question sent!' } ) ).toBeVisible(); // What: Thank-You Assertion. Why: The visitor should learn the question went out. How: This checks the thank-you's heading shows.
 	await expect( curPagObj.getByText( "I can't reply directly." ) ).toBeVisible();              // What: No Reply Assertion. Why: A visitor without an address should know to check back instead. How: This checks the thank-you says no reply can come.
