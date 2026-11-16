@@ -64,6 +64,7 @@ const LIV_URL_STR = 'https://techgeek.support/'; // What: Live URL String. Why: 
 
 // #region Helpers
 
+const dolEscFun = ( rawTexStr : string ) : string => rawTexStr.replace( /\$/g, '$$$$' );                                                                           // What: Dollar Escape Function. Why: A replacement string reads $&, $', $`, and $1 as patterns, so an article's title or summary holding one would come out changed. How: This doubles every $, which a replacement string writes as one $.
 const htmEscFun = ( rawTexStr : string ) : string => rawTexStr.replace( /&/g, '&amp;' ).replace( /"/g, '&quot;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' ); // What: HTML Escape Function. Why: An article's text goes into double-quoted attributes, and some holds apostrophes and could hold quotes. How: This escapes the characters that would break out of the attribute.
 
 
@@ -161,7 +162,7 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 
 
 
-	return tagRowArr.reduce( ( curHtmStr, [ tagKeyStr, tagValStr ] ) => curHtmStr.replace( new RegExp( `<meta\\s+(name|property)=['"]${ tagKeyStr.replace( /:/g, '\\:' ) }['"][^>]*>` ), `<meta $1="${ tagKeyStr }" content="${ tagValStr }" />` ), htmTexStr.replace( /<title>[^<]*<\/title>/, `<title>${ artTitStr }</title>` ).replace( '</head>', `${ metAddStr }\n</head>` ) ); // What: Tagged Page Return. Why: The page's title and every listed tag carry the article's values, with its own extras added. How: This replaces the title, adds the extras before the head closes, then replaces each tag in turn, keeping whether it used name or property.
+	return tagRowArr.reduce( ( curHtmStr, [ tagKeyStr, tagValStr ] ) => curHtmStr.replace( new RegExp( `<meta\\s+(name|property)=['"]${ tagKeyStr.replace( /:/g, '\\:' ) }['"][^>]*>` ), `<meta $1="${ tagKeyStr }" content="${ dolEscFun( tagValStr ) }" />` ), htmTexStr.replace( /<title>[^<]*<\/title>/, `<title>${ dolEscFun( artTitStr ) }</title>` ).replace( '</head>', `${ dolEscFun( metAddStr ) }\n</head>` ) ); // What: Tagged Page Return. Why: The page's title and every listed tag carry the article's values, with its own extras added. How: This replaces the title, adds the extras before the head closes, then replaces each tag in turn, keeping whether it used name or property, each article value passed through dolEscFun so a $ in it is written as it is rather than read as a replacement pattern.
 
 
 };
