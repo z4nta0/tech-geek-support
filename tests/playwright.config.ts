@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';         // What: File URL To Path. Why
  * all three of Playwright's engines (Chromium, Firefox, and WebKit), one
  * project per suite and engine, since a check that passes in one engine proves
  * nothing about the others. The suites are accessibility, which the pre-commit
- * check runs, interaction, rendering, responsive, security, and seo.
+ * check runs, interaction, rendering, responsive, security, and SEO.
  * Playwright starts the Vite dev server on port 5196 for the run, and a build
  * served by vite preview on 5206 for checks of what ships, and stops both
  * afterwards, so a dev server already running on the usual 5173, or a sibling
