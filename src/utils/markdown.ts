@@ -193,7 +193,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 		linIndNum = 1; // What: Front Matter Start. Why: The opening --- isn't a pair. How: This starts on the line after it.
 
 
-		while ( linIndNum < linTexArr.length && linTexArr[ linIndNum ] !== '---' ) { // What: Front Matter Loop. Why: The pairs sit on the lines up to the closing ---. How: This reads each line in turn, keeping those that hold a colon.
+		while ( linIndNum < linTexArr.length && linTexArr[ linIndNum ] !== '---' ) { // What: Front Matter Loop. Why: The pairs sit on the lines up to the closing ---. How: This reads each line in turn, keeping those with a key before a colon.
 
 
 			const sepIndNum = linTexArr[ linIndNum ].indexOf( ':' ); // What: Separator Index Number. Why: A pair's key ends at its first colon. How: This finds it.
