@@ -193,7 +193,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 		linIndNum = 1; // What: Front Matter Start. Why: The opening --- isn't a pair. How: This starts on the line after it.
 
 
-		while ( linIndNum < linTexArr.length && linTexArr[ linIndNum ] !== '---' ) { // What: Front Matter Loop. Why: Every line up to the closing --- is one pair. How: This reads each in turn.
+		while ( linIndNum < linTexArr.length && linTexArr[ linIndNum ] !== '---' ) { // What: Front Matter Loop. Why: The pairs sit on the lines up to the closing ---. How: This reads each line in turn, keeping those that hold a colon.
 
 
 			const sepIndNum = linTexArr[ linIndNum ].indexOf( ':' ); // What: Separator Index Number. Why: A pair's key ends at its first colon. How: This finds it.
@@ -217,7 +217,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 
 
-	while ( linIndNum < linTexArr.length ) { // What: Body Loop. Why: Every line of the body belongs to a block or is a gap between blocks. How: This reads one block per pass.
+	while ( linIndNum < linTexArr.length ) { // What: Body Loop. Why: The body is read as blocks, the gaps and comments between them skipped. How: This reads one block, gap, or comment per pass.
 
 
 		const curLinStr = linTexArr[ linIndNum ].trim(); // What: Current Line String. Why: Leading and trailing spaces never change what a line means here. How: This trims the line being read.

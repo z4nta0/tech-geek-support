@@ -190,7 +190,7 @@ for ( const redMotBoo of [ false, true ] ) { // What: Motion Loop. Why: The list
 
 
 
-test( 'a topic choice keeps the page in place and the topic in the address, which a reload keeps and a router link replaces', async ( { page : curPagObj } ) => { // What: Topic Address Test. Why: A press shouldn't jump the page to its top, while the choice stays shareable and a real navigation takes over. How: This scrolls a phone-wide page to the topic buttons, presses topics, and checks the scroll position, the address, a reload, and the footer's "Articles" link.
+test( 'a topic choice keeps the page in place and the topic in the address, which a reload keeps and a router link replaces', async ( { page : curPagObj } ) => { // What: Topic Address Test. Why: A press shouldn't jump the page to its top, while the choice stays shareable and a real navigation takes over. How: This scrolls a phone-wide page 450px down, presses topics, and checks the scroll position, the address, a reload, and the footer's "Articles" link.
 
 
 	await curPagObj.setViewportSize( { height : 844, width : 390 } ); // What: Phone Viewport Call. Why: A jump to the top hides the list most on a phone. How: This sets a phone-sized window.

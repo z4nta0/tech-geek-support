@@ -155,7 +155,7 @@
 
 
 }
-@media ( max-width : 768px ) { /* What: Phone Hero Visual Div. Why: In one column the portrait leads the hero, as every sister site's stacked hero opens on its picture. How: This applies at 768px and below. */
+@media ( max-width : 768px ) { /* What: Phone Hero Visual Div. Why: In one column the portrait leads the hero, as the sister sites' stacked heroes do. How: This applies at 768px and below. */
 
 
 	.herVisDiv { /* What: Leading Hero Visual Div. Why: The portrait greets the visitor first, above the introduction. How: This moves the portrait and its flourishes above the text. */
