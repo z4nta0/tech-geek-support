@@ -12,7 +12,7 @@ import { INV_STA_ARR } from '../support/contact.ts';  // What: Invalid State Arr
 import { opeStaFun   } from '../support/states.ts';   // What: Open State Function. Why: Each state has to be opened and settled before it's scanned. How: This loads it and waits for it.
 import { PIL_STA_ARR } from '../support/articles.ts'; // What: Pill State Array. Why: A pressed topic pill narrows the Articles list and stays pressed, a state a visitor reaches. How: This lists the Articles states with a topic's pill pressed, one per width.
 import { RES_STA_ARR } from '../support/contact.ts';  // What: Result State Array. Why: The Contact form's thank-you and error are states a visitor reaches too. How: This lists the Contact states with the form sent, one per result and width.
-import { STA_REC_ARR } from '../support/states.ts';   // What: State Record Array. Why: Every page state is scanned. How: This lists them.
+import { STA_REC_ARR } from '../support/states.ts';   // What: State Record Array. Why: Each shared state is scanned. How: This lists them.
 import { test        } from '@playwright/test';       // What: Test. Why: Each state is its own test. How: This declares them.
 import { TIP_STA_ARR } from '../support/contact.ts';  // What: Tip State Array. Why: A help tip pinned open stays until it's dismissed, a state a visitor reaches. How: This lists the Contact states with a tip open, one per tip and width.
 

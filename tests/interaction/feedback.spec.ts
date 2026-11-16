@@ -97,7 +97,7 @@ const FOR_IDE_ARR = IDE_LIS_ARR.filter( ( ideCurStr ) => ideCurStr.startsWith( '
 const PHO_IDE_ARR = IDE_LIS_ARR.filter( ( ideCurStr ) => ideCurStr.includes( '-phone' ) );                                       // What: Phone Identifier Array. Why: The menu toggle shows at 1,024px and narrower, on every phone state. How: This lists the phone states' names, the open menu's included.
 const TIP_IDE_ARR = IDE_LIS_ARR.filter( ( ideCurStr ) => ideCurStr.endsWith( '-tip' ) );                                         // What: Tip Identifier Array. Why: A help tip's bubble shows only on the states that open it. How: This lists those states' names.
 
-const HOV_KIN_OBJ : Record< string, string[] > = { about : [ 'proIteIte' ], home : [ 'steIteIte' ] }; // What: Hover Kind Object. Why: A kind of card that stopped matching, such as after a class rename, would drop out without failing. How: This lists, by page, the classes of the cards the hover probe has to find there.
+const HOV_KIN_OBJ : Record< string, string[] > = { about : [ 'proIteIte' ], home : [ 'steIteIte' ] }; // What: Hover Kind Object. Why: A kind of card that stopped matching, such as after a class rename, would drop out without failing. How: This lists, by page, the classes of the cards the hover probe has to find there. // What: About Hover Kinds. Why: About's promise cards lift without being controls. How: This names their class. // What: Home Hover Kinds. Why: Home's How It Works step cards lift without being controls. How: This names their class.
 
 
 

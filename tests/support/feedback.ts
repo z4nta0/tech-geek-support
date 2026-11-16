@@ -207,7 +207,7 @@ function movProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr
 function snaEleFun ( eleCurEle : Element, proNamArr : string[] ) : SnaRecTyp[] {
 
 
-	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand that has a shorthand to it.
+	const parNamObj : Record< string, string > = { 'background-color' : 'background', 'border-color' : 'border', 'outline-color' : 'outline', 'outline-width' : 'outline' }; // What: Parent Name Object. Why: A transition listed by a shorthand covers the longhands inside it. How: This maps each probed longhand that has a shorthand to it. // What: Background Color Parent. Why: A background transition covers its color. How: This maps background-color to background. // What: Border Color Parent. Why: A border transition covers its color. How: This maps border-color to border. // What: Outline Color Parent. Why: An outline transition covers its color. How: This maps outline-color to outline. // What: Outline Width Parent. Why: An outline transition covers its width. How: This maps outline-width to outline.
 
 
 
