@@ -14,8 +14,8 @@
 # data: address. The directives listed either need a different value than
 # 'self' (frame-src, object-src), are never covered by default-src at all
 # (base-uri, form-action, frame-ancestors), or just state the default for
-# clarity (script-src, style-src). form-action stays 'self' so the form can
-# still post to the site if its script ever fails. style-src needs no
+# clarity (script-src, style-src). form-action stays 'self' so no form can
+# post anywhere but the site itself. style-src needs no
 # 'unsafe-inline': the build ships no inline styles, and React sets its dynamic
 # styles (the menu rows' stagger index) through the DOM, which the policy
 # doesn't restrict.
