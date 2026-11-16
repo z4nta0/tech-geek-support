@@ -11,8 +11,10 @@ import { Link            } from 'react-router';                           // Wha
 import { SigRinCom       } from '../../ui/signal-rings.tsx';              // What: Signal Rings Component. Why: The help card beside the list carries the site's motif. How: The page draws the small rings at the card's top.
 import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // What: Topic Record Array. Why: The filter offers every topic. How: The page renders one button per topic.
 import { TopTagCom       } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: Each listed article shows its topic. How: The page renders one tag per article.
+import { useEffect       } from 'react';                                  // What: Use Effect. Why: A router navigation while the page stays open should bring back the router's topic. How: This clears the page's own choice whenever the location key changes.
+import { useLocation     } from 'react-router';                           // What: Use Location. Why: The page has to know when the router navigates. How: This reads the location, whose key changes on every navigation.
 import { usePagDesFun    } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
-import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: The chosen topic lives in the address, so a link can open the page already filtered. How: The page reads and sets the topic parameter through it.
+import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: The chosen topic lives in the address, so a link can open the page already filtered. How: The page reads the topic parameter through it.
 import { useState        } from 'react';                                  // What: Use State. Why: The list's arriving fade waits for a visitor's first choice. How: This holds whether a topic has been chosen yet.
 
 
@@ -57,11 +59,12 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * @summary
  * Renders the Articles page with its own title, description, and canonical
  * address, which leaves out the topic so every filtered view counts as one
- * page. The topic comes from the address's topic parameter, and one that
- * isn't a real topic shows every article. Pressing a topic's button puts it
- * in the address, replacing the current entry; pressing "All topics" removes
- * it. The count line is a polite live region, so a screen reader announces
- * the new count after each choice.
+ * page. The topic comes from the address's topic parameter, and one that isn't
+ * a real topic shows every article. Pressing a topic's button puts it in the
+ * address, replacing the current entry without a router navigation, so the
+ * page stays where it was rather than jumping to its top; pressing "All
+ * topics" removes it. The count line is a polite live region, so a screen
+ * reader announces the new count after each choice.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -83,14 +86,75 @@ function ArtLisCom () : JSX.Element {
 
 
 
-	const [ resChoBoo, setResChoBoo ] = useState( false ); // What: Result Chosen Boolean And Setter. Why: The list should fade in on a choice, not on top of the page's own entrance. How: This starts false and turns true once a topic button is pressed.
-	const [ seaParObj, setSeaParObj ] = useSearchParams(); // What: Search Parameters Object And Setter. Why: The chosen topic lives in the address. How: This reads the address's parameters and sets new ones.
+	const [ resChoBoo, setResChoBoo ] = useState( false );                 // What: Result Chosen Boolean And Setter. Why: The list should fade in on a choice, not on top of the page's own entrance. How: This starts false and turns true once a topic button is pressed.
+	const [ seaParObj ]               = useSearchParams();                 // What: Search Parameters Object. Why: The address may name a topic when the page opens or the router navigates. How: This reads the address's parameters.
+	const [ topChoStr, setTopChoStr ] = useState< string | null >( null ); // What: Topic Chosen String And Setter. Why: A topic pressed on the page is written to the address without the router, which still holds the old one. How: This holds the pressed topic, an empty string for "All topics", or null to follow the address.
 
-	const rawTopStr = seaParObj.get( 'topic' ) ?? ''; // What: Raw Topic String. Why: The address may name a topic, or nothing. How: This reads the topic parameter, or an empty string.
+	const locCurObj = useLocation(); // What: Location Current Object. Why: A router navigation should take over from a topic pressed on the page. How: This holds the location, whose key changes on each navigation.
+
+
+
+	const rawTopStr = topChoStr ?? seaParObj.get( 'topic' ) ?? ''; // What: Raw Topic String. Why: The topic pressed on the page wins over the address the router knows, which may name a topic, or nothing. How: This reads the pressed topic, else the topic parameter, else an empty string.
 	const topRecObj = TOP_REC_ARR.find( ( topCurObj ) => topCurObj.ideStr === rawTopStr );                                                                      // What: Topic Record Object. Why: Only a real topic filters the list. How: This finds the topic the address names, or nothing.
 	const shoArtArr = topRecObj ? ART_REC_ARR.filter( ( artRecObj ) => artRecObj.topStr === topRecObj.ideStr ) : ART_REC_ARR;                                   // What: Shown Article Array. Why: The list shows only the chosen topic's articles. How: This filters the catalog by the topic, or keeps every article when none is chosen.
 	const couTexStr = `Showing ${ shoArtArr.length } ${ shoArtArr.length === 1 ? 'article' : 'articles' }${ topRecObj ? ` about ${ topRecObj.labStr }` : '' }`; // What: Count Text String. Why: The visitor should know how many articles match. How: This counts them, in the right singular or plural, naming the topic when one is chosen.
 	const resKeyStr = shoArtArr.map( ( artRecObj ) => artRecObj.ideStr ).join( ' ' );                                                                           // What: Result Key String. Why: After a choice, the list should fade in only when the articles shown change. How: This joins the shown articles' addresses, which the count and list remount on.
+
+
+
+	useEffect( () => setTopChoStr( null ), [ locCurObj.key ] ); // What: Router Navigation Effect. Why: A router navigation while the page stays open, such as the bar's "Articles" link, should show the address it leads to rather than a topic pressed before it. How: This clears the pressed topic whenever the location key changes, which happens on every router navigation.
+
+
+
+	// #region choTopFun
+
+	/**
+	 * choTopFun = Choose Topic Function
+	 *
+	 * @summary
+	 * Chooses a topic for the list, or every article for an empty string. It
+	 * writes the choice into the address with history.replaceState, keeping
+	 * the router's own history state, so the choice stays shareable and a
+	 * reload keeps it, while the router sees no navigation and its scroll
+	 * hook leaves the page where it was. It then turns on the list's
+	 * arriving fade and holds the choice in the page's own state.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param topIdeStr - Topic Identifier String: The topic's identifier, or
+	 *                    an empty string for "All topics".
+	 *
+	 * @returns This function does not return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * choTopFun('scams-safety') // => void
+	 * ```
+	 *
+	*/
+
+	const choTopFun = ( topIdeStr : string ) : void => { // What: Choose Topic Function. Why: A topic button should narrow the list without the page jumping to its top. How: This writes the choice to the address outside the router, then shows it.
+
+
+		const adrUrlObj = new URL( window.location.href ); // What: Address URL Object. Why: The new address keeps the page's path and hash. How: This copies the current address.
+
+
+		if ( topIdeStr ) adrUrlObj.searchParams.set( 'topic', topIdeStr ); // What: Topic Parameter Set Call. Why: A chosen topic stays shareable in the address. How: This sets the topic parameter.
+
+		else adrUrlObj.searchParams.delete( 'topic' ); // What: Topic Parameter Delete Call. Why: "All topics" leaves the address without a topic. How: This removes the parameter.
+
+
+
+		window.history.replaceState( window.history.state, '', adrUrlObj ); // What: Address Replace Call. Why: A router navigation would send the page to its top, and a new history entry per press would crowd the Back button. How: This replaces the current entry's address, keeping the router's state on it.
+
+		setResChoBoo( true ); // What: Result Chosen Setter Call. Why: The new list is the result of the press. How: This turns on the list's arriving fade.
+
+		setTopChoStr( topIdeStr ); // What: Topic Chosen Setter Call. Why: The router still holds the old address, so the page holds the choice itself. How: This stores the pressed topic.
+
+
+	};
+
+	// #endregion choTopFun
 
 
 
@@ -153,15 +217,7 @@ function ArtLisCom () : JSX.Element {
 
 								aria-pressed={ !topRecObj }
 
-								onClick={ () => { // What: All Topics Click. Why: Choosing "All topics" should show every article without adding a history entry. How: This turns on the list's arriving fade and clears the address's parameters, replacing the current entry.
-
-
-									setResChoBoo( true ); // What: Result Chosen Setter Call. Why: The returning list is the result of the press. How: This turns on the list's arriving fade.
-
-									setSeaParObj( {}, { replace : true } ); // What: Parameters Clear Call. Why: "All topics" shows every article without adding a history entry. How: This clears the address's parameters, replacing the current entry.
-
-
-								} }
+								onClick={ () => choTopFun( '' ) } // What: All Topics Click. Why: Choosing "All topics" should show every article. How: This chooses no topic, passing an empty string.
 							>All topics</button>{ /* What: Filter Pill Button Element. Why: A visitor can go back to every article. How: This "All topics" button clears the filter, marked pressed when no topic is chosen. */ }
 
 							{ TOP_REC_ARR.map( ( topCurObj ) => ( // What: Topic Button Map Call. Why: Every topic gets a filter button. How: This renders one button per topic.
@@ -176,15 +232,7 @@ function ArtLisCom () : JSX.Element {
 
 									aria-pressed={ topCurObj.ideStr === topRecObj?.ideStr }
 
-									onClick={ () => { // What: Topic Click. Why: Choosing a topic should filter the list and keep the choice shareable, without adding a history entry. How: This turns on the list's arriving fade and puts the topic in the address, replacing the current entry.
-
-
-										setResChoBoo( true ); // What: Result Chosen Setter Call. Why: The narrowed list is the result of the press. How: This turns on the list's arriving fade.
-
-										setSeaParObj( { topic : topCurObj.ideStr }, { replace : true } ); // What: Topic Parameter Set Call. Why: The choice stays shareable without adding a history entry. How: This puts the topic in the address, replacing the current entry.
-
-
-									} }
+									onClick={ () => choTopFun( topCurObj.ideStr ) }
 								>{ topCurObj.labStr }</button> // What: Filter Pill Button Element. Why: A visitor narrows the list to one topic. How: This is each topic's own button, showing the topic's name, marked pressed while it's chosen.
 
 

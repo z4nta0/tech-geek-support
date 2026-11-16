@@ -188,6 +188,51 @@ for ( const redMotBoo of [ false, true ] ) { // What: Motion Loop. Why: The list
 
 }
 
+
+
+test( 'a topic choice keeps the page in place and the topic in the address, which a reload keeps and a router link replaces', async ( { page : curPagObj } ) => { // What: Topic Address Test. Why: A press shouldn't jump the page to its top, while the choice stays shareable and a real navigation takes over. How: This scrolls a phone-wide page to the topic buttons, presses topics, and checks the scroll position, the address, a reload, and the footer's "Articles" link.
+
+
+	await curPagObj.setViewportSize( { height : 844, width : 390 } ); // What: Phone Viewport Call. Why: A jump to the top hides the list most on a phone. How: This sets a phone-sized window.
+
+	await curPagObj.goto( '/articles' ); // What: Articles Open Call. Why: The filter sits on the Articles page. How: This loads it.
+
+	await curPagObj.evaluate( () => window.scrollTo( { behavior : 'instant', top : 450 } ) ); // What: Page Scroll Call. Why: A visitor reading down the page presses the buttons part way down it. How: This scrolls the page 450px down, past the hero, at once.
+
+	await curPagObj.evaluate( () => new Promise( ( resFun ) => requestAnimationFrame( () => requestAnimationFrame( resFun ) ) ) ); // What: Two Frame Wait. Why: The scroll should be recorded before the press. How: This waits two animation frames.
+
+
+	const befTopNum = await curPagObj.evaluate( () => scrollY ); // What: Before Top Number. Why: The page should stay where it was through the press. How: This reads the scroll position before it.
+
+
+	expect( befTopNum ).toBeGreaterThan( 0 ); // What: Scrolled Premise Assertion. Why: A page already at its top couldn't show a jump. How: This checks the page has scrolled.
+
+	await curPagObj.getByRole( 'button', { name : 'Scams & Safety' } ).dispatchEvent( 'click' ); // What: Topic Click Call. Why: The press is the change under test, and a pointer click would first scroll a button the bar covers into view, moving the page itself. How: This sends the click straight to the "Scams & Safety" topic.
+
+	await expect( curPagObj ).toHaveURL( '/articles?topic=scams-safety' );                   // What: Topic Address Assertion. Why: The choice should stay shareable. How: This checks the address names the topic.
+	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( 'Showing 1 article about Scams & Safety' ); // What: Narrowed Count Assertion. Why: The list should follow the press. How: This checks the count names the topic.
+
+	expect( Math.abs( await curPagObj.evaluate( () => scrollY ) - befTopNum ) ).toBeLessThanOrEqual( 1 ); // What: Kept Place Assertion. Why: A press shouldn't jump the page to its top. How: This checks the scroll position moved no more than a pixel.
+
+	await curPagObj.getByRole( 'button', { name : 'All topics' } ).dispatchEvent( 'click' ); // What: All Topics Click Call. Why: Clearing the filter is a press too, and a pointer click would first scroll the button into view. How: This sends the click straight to "All topics".
+
+	await expect( curPagObj ).toHaveURL( '/articles' ); // What: Cleared Address Assertion. Why: "All topics" should leave no topic in the address. How: This checks the address holds none.
+
+	expect( Math.abs( await curPagObj.evaluate( () => scrollY ) - befTopNum ) ).toBeLessThanOrEqual( 1 ); // What: Cleared Place Assertion. Why: Clearing the filter shouldn't jump the page either. How: This checks the scroll position moved no more than a pixel.
+
+	await curPagObj.getByRole( 'button', { name : 'Mac' } ).click(); // What: Mac Click Call. Why: The reload check needs a topic chosen. How: This presses the "Mac" topic.
+
+	await curPagObj.reload(); // What: Page Reload Call. Why: A chosen topic should survive a reload, as it would any address. How: This reloads the page.
+
+	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( 'Showing 1 article about Mac' ); // What: Reloaded Count Assertion. Why: The reload should open the chosen topic. How: This checks the count names it.
+
+	await curPagObj.getByRole( 'navigation', { name : 'Footer navigation' } ).getByRole( 'link', { exact : true, name : 'Articles' } ).click(); // What: Footer Articles Click Call. Why: A router navigation to the page should show the address it leads to. How: This follows the footer's "Articles" link.
+
+	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( /^Showing \d+ articles$/ ); // What: Full Count Assertion. Why: The link's address names no topic, so every article should show. How: This checks the count reads as the whole list, naming no topic.
+
+
+} );
+
 // #endregion Module Init
 
 
