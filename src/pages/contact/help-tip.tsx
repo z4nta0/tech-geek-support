@@ -65,7 +65,7 @@ type HtcProTyp = { bubIdeStr : string, butLabStr : string, tipTexStr : string };
  * @param props.bubIdeStr - Bubble Identifier String: The bubble's ID, which
  *                          the field's aria-describedby names.
  * @param props.butLabStr - Button Label String: The button's accessible
- *                          name, such as More about your email address.
+ *                          name, such as "More about your email address".
  * @param props.tipTexStr - Tip Text String: The help the bubble shows.
  *
  * @returns The tip's wrapper span, holding its button and bubble.
