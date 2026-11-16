@@ -658,6 +658,7 @@ function ConPagCom () : JSX.Element {
 
 									</div>
 
+
 									<button
 										ref={ subForRef }
 
@@ -665,7 +666,29 @@ function ConPagCom () : JSX.Element {
 
 										disabled={ isaLoaBoo }
 										type='submit'
-									>{ isaLoaBoo ? 'Sending…' : 'Send My Question' }</button>{ /* What: Send Question Button Element. Why: The visitor sends the question. How: This submits the form, disabled and reading "Sending…" while it's on its way. */ }
+									>{ /* What: Send Question Button Element. Why: The visitor sends the question. How: This submits the form, disabled and reading "Sending…" while it's on its way. */ }
+
+
+										<span className={ cssModObj.senLabSpa }>{ /* What: Send Label Span Element. Why: The button's label cross-fades between its ready and sending words without the button changing width. How: This stacks both labels in one cell, sized to the wider. */ }
+
+
+											<span
+												className={ cssModObj.senReaSpa }
+
+												aria-hidden={ isaLoaBoo || undefined } // What: Hidden While Sending. Why: Only the label showing should be announced as the button's name. How: This hides the ready label from assistive technology while the question sends.
+											>Send My Question</span>{ /* What: Send Ready Span Element. Why: The ready button says what it does. How: This shows "Send My Question", fading out while the question sends. */ }
+
+											<span
+												className={ cssModObj.senPenSpa }
+
+												aria-hidden={ !isaLoaBoo || undefined } // What: Hidden While Ready. Why: Only the label showing should be announced as the button's name. How: This hides the sending label from assistive technology until the question sends.
+											>Sending…</span>{ /* What: Send Pending Span Element. Why: A visitor sees the question is on its way. How: This shows "Sending…", fading in while the question sends. */ }
+
+
+										</span>
+
+
+									</button>
 
 
 								</form>

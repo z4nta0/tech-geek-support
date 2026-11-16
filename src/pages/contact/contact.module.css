@@ -667,6 +667,9 @@
 /* #endregion errAleDiv */
 
 
+
+/* #region senQueBut */
+
 .senQueBut { /* What: Send Question Button. Why: Sending is the form's one main action. How: This sets an orange button in mono capitals, easing its color, lift, press, and focus, and dimming while it sends. */
 
 
@@ -722,6 +725,81 @@
 
 
 }
+
+
+/* #region senLabSpa */
+
+.senLabSpa { /* What: Send Label Span. Why: The ready and sending labels share one place, so the button keeps its width as they cross-fade. How: This sets a single grid cell, sized to the wider label, with both labels centered in it. */
+
+
+	display     : grid;
+	place-items : center;
+
+
+}
+
+.senReaSpa { /* What: Send Ready Span. Why: The ready label says what the button does. How: This places it in the shared cell, line placed since both labels overlap there, and eases its fade on the standard curve. */
+
+
+	grid-area  : 1 / 1;
+	transition : opacity var( --dur-tra-bas ) var( --mot-sta-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease */
+
+
+}
+.senQueBut:disabled .senReaSpa { /* What: Sending Send Ready Span. Why: The ready label gives way while the question sends. How: This fades it out. */
+
+
+	opacity : 0;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Send Ready Span. Why: Someone who asked for less motion shouldn't see the labels fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.senReaSpa { /* What: Motionless Send Ready Span. Why: The label should simply switch. How: This turns the fade off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.senPenSpa { /* What: Send Pending Span. Why: The sending label waits in the same cell, hidden until the question sends. How: This places it over the ready label, line placed since both labels overlap there, transparent, and eases its fade on the standard curve. */
+
+
+	grid-area  : 1 / 1;
+	opacity    : 0;
+	transition : opacity var( --dur-tra-bas ) var( --mot-sta-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease */
+
+
+}
+.senQueBut:disabled .senPenSpa { /* What: Sending Send Pending Span. Why: A visitor sees the question is on its way. How: This fades the sending label in. */
+
+
+	opacity : 1;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Send Pending Span. Why: Someone who asked for less motion shouldn't see the labels fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.senPenSpa { /* What: Motionless Send Pending Span. Why: The label should simply switch. How: This turns the fade off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion senLabSpa */
+
+/* #endregion senQueBut */
 
 /* #endregion queForFor */
 
