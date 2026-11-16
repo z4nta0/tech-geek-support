@@ -97,7 +97,7 @@ function NotFouCom () : JSX.Element {
 
 
 
-				<div className={ cssModObj.notActDiv }>{ /* What: Not Found Actions Div Element. Why: The three ways onward sit together. How: This sets them in a centered row that wraps. */ }
+				<div className={ cssModObj.notActDiv }>{ /* What: Not Found Actions Div Element. Why: The three ways onward sit together. How: This sets them in a centered row, wrapping at about 645px wide and below. */ }
 
 
 					<Link

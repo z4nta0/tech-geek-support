@@ -172,7 +172,7 @@
 
 /* #region herActDiv */
 
-.herActDiv { /* What: Hero Actions Div. Why: The two buttons sit side by side and wrap on a narrow phone. How: This lines them up in a wrapping row, a little apart from the lead. */
+.herActDiv { /* What: Hero Actions Div. Why: The two buttons sit side by side, wrapping onto two lines at about 475px wide and below. How: This lines them up in a wrapping row, a little apart from the lead. */
 
 
 	display     : flex;

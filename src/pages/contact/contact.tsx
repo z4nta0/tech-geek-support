@@ -397,7 +397,7 @@ function ConPagCom () : JSX.Element {
 
 
 
-									<div className={ cssModObj.sucActDiv }>{ /* What: Success Actions Div Element. Why: The two ways onward sit side by side. How: This sets them in a row that wraps. */ }
+									<div className={ cssModObj.sucActDiv }>{ /* What: Success Actions Div Element. Why: The two ways onward sit side by side. How: This sets them in a row, wrapping onto two lines at about 585px wide and below. */ }
 
 
 										<button

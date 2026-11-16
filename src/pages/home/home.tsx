@@ -137,7 +137,7 @@ function HomPagCom () : JSX.Element {
 
 
 
-							<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The two ways onward sit side by side. How: This sets the buttons in a row that wraps. */ }
+							<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The two ways onward sit side by side. How: This sets the buttons in a row, wrapping onto two lines at about 475px wide and below. */ }
 
 
 								<Link

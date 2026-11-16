@@ -90,7 +90,7 @@
 
 /* #region notActDiv */
 
-.notActDiv { /* What: Not Found Actions Div. Why: The three ways onward sit together in the center. How: This lines them up in a centered row that wraps, a little apart from the text. */
+.notActDiv { /* What: Not Found Actions Div. Why: The three ways onward sit together in the center. How: This lines them up in a centered row, wrapping at about 645px wide and below, a little apart from the text. */
 
 
 	display         : flex;

@@ -273,7 +273,7 @@
 
 /* #region sucActDiv */
 
-.sucActDiv { /* What: Success Actions Div. Why: The two ways onward sit side by side and wrap on a narrow phone. How: This lines them up in a wrapping row, a little apart from the text. */
+.sucActDiv { /* What: Success Actions Div. Why: The two ways onward sit side by side, wrapping onto two lines at about 585px wide and below. How: This lines them up in a wrapping row, a little apart from the text. */
 
 
 	display     : flex;
