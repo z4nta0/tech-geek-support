@@ -424,7 +424,7 @@ test( 'moving between pages swaps their head tags', async ( { page : curPagObj }
 	await heaCheFun( curPagObj, PAG_HEA_ARR[ 0 ] ); // What: Home Head Check. Why: The walk starts from a known head. How: This checks Home's.
 
 
-	for ( const heaRowObj of PAG_HEA_ARR.slice( 1, 4 ) ) { // What: Footer Walk Loop. Why: Each page should take over the head from the one before. How: This follows the footer's link to Articles, About, and Contact in turn.
+	for ( const heaRowObj of PAG_HEA_ARR.slice( 1, 4 ) ) { // What: Footer Walk Loop. Why: Each page should take over the head from the one before. How: This follows the footer's link to Articles, About, and Contact in turn, before the walk returns Home.
 
 
 		const linNamStr = heaRowObj.patStr.slice( 1, 2 ).toUpperCase() + heaRowObj.patStr.slice( 2 ); // What: Link Name String. Why: The footer names each page the way its path reads, capitalized. How: This capitalizes the path's first letter and drops its slash.
@@ -440,6 +440,14 @@ test( 'moving between pages swaps their head tags', async ( { page : curPagObj }
 
 
 	}
+
+
+
+	await curPagObj.getByRole( 'navigation', { name : 'Footer navigation' } ).getByRole( 'link', { exact : true, name : 'Home' } ).click(); // What: Home Return Click. Why: A page with its own description has to put the home page's back when the visitor leaves it. How: This follows the footer's "Home" link from Contact.
+
+	await expect( curPagObj ).toHaveURL( '/' ); // What: Home Return Assertion. Why: The head is only checked once Home shows again. How: This waits for the address to change.
+
+	await heaCheFun( curPagObj, PAG_HEA_ARR[ 0 ] ); // What: Home Return Head Check. Why: Contact's description must give way to index.html's, with one description tag left. How: This checks Home's head, its description included.
 
 
 } );
