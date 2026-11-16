@@ -298,7 +298,7 @@ function HomPagCom () : JSX.Element {
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The section's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
 
 
-						<div className={ cssModObj.artHeaDiv }>{ /* What: Articles Header Div Element. Why: The heading and the link to every article sit on one line on wide screens. How: This spreads them apart, wrapping on phones. */ }
+						<div className={ cssModObj.artHeaDiv }>{ /* What: Articles Header Div Element. Why: The heading and the link to every article sit on one line on wide screens. How: This spreads them apart, wrapping onto two lines at about 562px wide and below. */ }
 
 
 							<div>{ /* What: Articles Heading Div Element. Why: The eyebrow and heading read as one block beside the link. How: This stacks them. */ }

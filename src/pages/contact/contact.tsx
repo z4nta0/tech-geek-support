@@ -6,7 +6,7 @@
 import cssModObj from './contact.module.css'; // What: CSS Module Object. Why: The Contact page's hero, question form, and sidebar are styled in its own module. How: This maps each class name in contact.module.css to its hashed module class.
 
 
-import { HelTipCom       } from './help-tip.tsx';                         // What: Help Tip Component. Why: The email and question fields keep their longer hints behind a small question mark. How: The form renders one beside each of those labels.
+import { HelTipCom       } from './help-tip.tsx';                         // What: Help Tip Component. Why: The email and question fields keep their longer hints behind a round question mark button. How: The form renders one beside each of those labels.
 import { Link            } from 'react-router';                           // What: Link. Why: The thank-you offers the articles without a full page load. How: This renders that link.
 import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // What: Topic Record Array. Why: The topic menu offers every help topic. How: The page renders one option per topic.
 import { useEffect       } from 'react';                                  // What: Use Effect. Why: Focus has to follow the swap between the form and the thank-you, and a failed send. How: Effects move focus once each change has rendered.

@@ -175,7 +175,7 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 				aria-label={ butLabStr }
 
 				onClick={ togPinFun }
-			>?</button>{ /* What: Help Tip Button Element. Why: A small question mark offers more help without crowding the form. How: This toggles the bubble, reads its help when focused, and says whether it's open. */ }
+			>?</button>{ /* What: Help Tip Button Element. Why: A round question mark button offers more help without crowding the form. How: This toggles the bubble, reads its help when focused, and says whether it's open. */ }
 
 			<span
 				id={ bubIdeStr }

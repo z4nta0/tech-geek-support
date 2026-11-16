@@ -669,7 +669,7 @@
 
 /* #region artHeaDiv */
 
-.artHeaDiv { /* What: Articles Header Div. Why: The heading and the link to every article sit on one line on wide screens. How: This spreads them apart along their bottoms, wrapping on phones. */
+.artHeaDiv { /* What: Articles Header Div. Why: The heading and the link to every article sit on one line on wide screens. How: This spreads them apart along their bottoms, wrapping onto two lines at about 562px wide and below. */
 
 
 	align-items     : flex-end;
