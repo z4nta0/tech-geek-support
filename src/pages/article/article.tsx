@@ -236,7 +236,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 						<Link
 							className={ cssModObj.bacLinAnc }
 
-							to={ `/articles?topic=${ artRecObj.topStr }` } // What: Back Link Address. Why: A reader going back most likely wants more of the same topic. How: This opens the list filtered to the article's topic.
+							to={ `/articles?topic=${ artRecObj.topStr }` } // What: Back Link Address. Why: A reader going back may want more of the same topic. How: This opens the list filtered to the article's topic.
 						><span aria-hidden='true'>←</span> More articles</Link>{ /* What: Back Link Anchor Link. Why: A reader should always see the way back to the list. How: This routes to the Articles page filtered to this topic, its arrow hidden from screen readers so the link reads as its words. */ }
 
 

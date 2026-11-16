@@ -115,10 +115,10 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 
 
 		[ 'description', artDesStr ],         // What: Description Row. Why: Search listings and many previews read the plain description. How: This sets the article's.
-		[ 'og:description', artDesStr ],      // What: Open Graph Description Row. Why: Most previews show this summary. How: This sets the article's.
-		[ 'og:image', artImaStr ],            // What: Open Graph Image Row. Why: Most previews show this picture. How: This points at the article's own image.
+		[ 'og:description', artDesStr ],      // What: Open Graph Description Row. Why: The Open Graph protocol names this tag as the preview's summary. How: This sets the article's.
+		[ 'og:image', artImaStr ],            // What: Open Graph Image Row. Why: The Open Graph protocol names this tag as the preview's picture. How: This points at the article's own image.
 		[ 'og:image:alt', artAltStr ],        // What: Open Graph Image Alt Row. Why: The picture needs a description. How: This sets the article's alt text.
-		[ 'og:title', artTitStr ],            // What: Open Graph Title Row. Why: Most previews lead with this title. How: This sets the article's.
+		[ 'og:title', artTitStr ],            // What: Open Graph Title Row. Why: The Open Graph protocol names this tag as the preview's title. How: This sets the article's.
 		[ 'og:type', 'article' ],             // What: Open Graph Type Row. Why: Sites shape a preview for an article differently from a whole website. How: This marks the page as an article.
 		[ 'og:url', artUrlStr ],              // What: Open Graph URL Row. Why: The preview points at the article's address. How: This sets it.
 		[ 'twitter:description', artDesStr ], // What: Twitter Description Row. Why: X shows this summary. How: This sets the article's.

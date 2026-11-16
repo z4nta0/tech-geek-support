@@ -255,7 +255,7 @@ function ArtLisCom () : JSX.Element {
 								className={ cssModObj.helCarAsi }
 
 								aria-label='Ask the Tech Geek'
-							>{ /* What: Help Card Aside Element. Why: A visitor scanning the list who can't find their problem should see how to ask, right where they give up looking. How: This holds the small rings, the invitation, the promise, the button, and a safety note, staying in view as the list scrolls, on wide screens only. */ }
+							>{ /* What: Help Card Aside Element. Why: A visitor scanning the list who can't find their problem should see how to ask without leaving it. How: This holds the small rings, the invitation, the promise, the button, and a safety note, staying in view as the list scrolls, on wide screens only. */ }
 
 
 								<SigRinCom

@@ -157,7 +157,7 @@ function HomPagCom () : JSX.Element {
 
 
 
-						<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The rings and their flourishes form the hero's picture. How: This holds the rings, beside the text on wide screens and above it at 768px and below, where a small drawing fills the room on each side of them. */ }
+						<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The rings and their flourishes form the hero's picture. How: This holds the rings, beside the text on wide screens and above it at 768px and below, where a small drawing fills the room on each side of them down to 441px. */ }
 
 
 							<SigRinCom className={ cssModObj.herRinSvg } />{ /* What: Signal Rings Component. Why: The hero's picture is the site's calm motif. How: This draws the rings, sized by the hero's grid on wide screens and a step smaller in the stacked hero at 768px and below. */ }
