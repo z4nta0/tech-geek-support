@@ -264,7 +264,7 @@ function layProFun () : string[] {
 		const conCutBoo = rigCutBoo || lefCutBoo; // What: Control Cut Boolean. Why: A control cut off at either edge is a problem. How: This combines them.
 
 
-		if ( conCutBoo ) proLisArr.push( `${ desEleFun( conCurEle ) } is cut off at the ${ rigCutBoo ? 'right' : 'left' } edge` ); // What: Cut Off Control Check. Why: Every reachable control has to sit fully on screen. How: This records one that runs past an edge.
+		if ( conCutBoo ) proLisArr.push( `${ desEleFun( conCurEle ) } is cut off at the ${ rigCutBoo ? 'right' : 'left' } edge` ); // What: Cut Off Control Check. Why: A control cut off at an edge by a container that hides its overflow can't be fully seen or reached. How: This records one that runs past an edge.
 
 
 	} );

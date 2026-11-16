@@ -198,7 +198,7 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
 
 
 
-	if ( heaRowObj.canStr === null ) { // What: Noindex Page Branch. Why: The 404 page must stay out of search results. How: This checks for the noindex tag and the absence of the indexed pages' tags.
+	if ( heaRowObj.canStr === null ) { // What: Noindex Page Branch. Why: The 404 page must stay out of search results. How: This checks for the noindex tag and that no canonical link is left.
 
 
 		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' ); // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the one robots tag says noindex.
