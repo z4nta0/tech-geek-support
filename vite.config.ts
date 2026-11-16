@@ -114,12 +114,12 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 	const tagRowArr : [ string, string ][] = [ // What: Tag Row Array. Why: Every tag the article changes is found and replaced the same way. How: Each row pairs a tag's name or property with its article value.
 
 
-		[ 'description', artDesStr ],         // What: Description Row. Why: Search listings and many previews read the plain description. How: This sets the article's.
+		[ 'description', artDesStr ],         // What: Description Row. Why: The SEO rule gives every indexed page its own description. How: This sets the article's.
 		[ 'og:description', artDesStr ],      // What: Open Graph Description Row. Why: The Open Graph protocol names this tag as the preview's summary. How: This sets the article's.
 		[ 'og:image', artImaStr ],            // What: Open Graph Image Row. Why: The Open Graph protocol names this tag as the preview's picture. How: This points at the article's own image.
 		[ 'og:image:alt', artAltStr ],        // What: Open Graph Image Alt Row. Why: The picture needs a description. How: This sets the article's alt text.
 		[ 'og:title', artTitStr ],            // What: Open Graph Title Row. Why: The Open Graph protocol names this tag as the preview's title. How: This sets the article's.
-		[ 'og:type', 'article' ],             // What: Open Graph Type Row. Why: Sites shape a preview for an article differently from a whole website. How: This marks the page as an article.
+		[ 'og:type', 'article' ],             // What: Open Graph Type Row. Why: The Open Graph protocol sets a page's type, and an article's is article. How: This marks the page as an article.
 		[ 'og:url', artUrlStr ],              // What: Open Graph URL Row. Why: The preview points at the article's address. How: This sets it.
 		[ 'twitter:description', artDesStr ], // What: Twitter Description Row. Why: X shows this summary. How: This sets the article's.
 		[ 'twitter:image', artImaStr ],       // What: Twitter Image Row. Why: X shows this picture. How: This points at the article's own image.
