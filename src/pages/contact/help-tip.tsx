@@ -92,7 +92,7 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 	const togPinFun = () => { // What: Toggle Pin Function. Why: A press keeps the tip open, and another closes it, even under a resting mouse. How: This pins a closed or hover-opened tip, or closes a pinned one outright, clearing the hover too.
 
 
-		if ( pinOpeBoo ) {
+		if ( pinOpeBoo ) { // What: Pinned Check. Why: A second press closes a pinned tip. How: This clears the hover and the pin when the tip is already pinned, and the else branch pins it otherwise.
 
 
 			setHovOpeBoo( false ); // What: Hover Clear Call. Why: A resting mouse would otherwise hold the tip open. How: This clears the hover.

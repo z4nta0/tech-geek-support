@@ -253,7 +253,7 @@
 
 
 }
-.sucTitHea:focus { /* What: Focused Success Title Heading. Why: The heading is focused by script, never by a visitor, so a focus ring on it would read as a stray box. How: This drops the outline, since the heading isn't a control. */
+.sucTitHea:focus { /* What: Focused Success Title Heading. Why: The heading is focused by script to be announced rather than as a control, so a focus ring on it would read as a stray box. How: This drops the outline, since the heading isn't a control. */
 
 
 	outline : none;

@@ -15,7 +15,7 @@ import { useEffect       } from 'react';                                  // Wha
 import { useLocation     } from 'react-router';                           // What: Use Location. Why: The page has to know when the router navigates. How: This reads the location, whose key changes on every navigation.
 import { usePagDesFun    } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
 import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: The chosen topic lives in the address, so a link can open the page already filtered. How: The page reads the topic parameter through it.
-import { useState        } from 'react';                                  // What: Use State. Why: The list's arriving fade waits for a visitor's first choice. How: This holds whether a topic has been chosen yet.
+import { useState        } from 'react';                                  // What: Use State. Why: The page keeps its own record of a visitor's choices. How: This holds whether a topic has been chosen yet, for the list's arriving fade, and which topic was pressed.
 
 
 import type { JSX } from 'react'; // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.
