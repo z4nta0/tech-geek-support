@@ -276,13 +276,13 @@ const sitXmlFun = ( xmlTexStr : string ) : string => xmlTexStr.replace( /\n*<\/u
  * @summary
  * Builds the Vite plugin that gives every article a page of its own and a
  * sitemap entry. On the dev server it rewrites the page it serves for an
- * article's address and serves the sitemap with the articles added, so the
- * SEO suite can read both raw. After a production build it writes one copy of
- * the built index.html per article, as articles/<address>.html, through
- * artTagFun, puts a rewrite rule for each article's address ahead of the
- * site's catch-all in _redirects, so Netlify serves the article's own page
- * while every other path still loads index.html, and adds the articles to
- * the built sitemap.
+ * article's address and serves the sitemap with the articles added, so the dev
+ * server shows both as the build serves them. After a production build it
+ * writes one copy of the built index.html per article, as
+ * articles/<address>.html, through artTagFun, puts a rewrite rule for each
+ * article's address ahead of the site's catch-all in _redirects, so Netlify
+ * serves the article's own page while every other path still loads index.html,
+ * and adds the articles to the built sitemap.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -349,7 +349,7 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 
 		},
 
-		configureServer : ( serInsObj ) => { // What: Configure Server Hook. Why: The dev server should serve the sitemap the build writes, so the SEO suite can check it. How: This answers the sitemap's address itself, ahead of Vite's own file serving.
+		configureServer : ( serInsObj ) => { // What: Configure Server Hook. Why: The dev server should serve the sitemap the build writes, so it matches what ships. How: This answers the sitemap's address itself, ahead of Vite's own file serving.
 
 
 			serInsObj.middlewares.use( async ( reqInsObj, resInsObj, nexMidFun ) => { // What: Sitemap Middleware. Why: The sitemap in public/ lists only the site's own pages. How: This answers the sitemap's address with the articles added, as XML, and passes every other request on.
