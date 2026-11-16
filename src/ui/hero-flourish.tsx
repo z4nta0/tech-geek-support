@@ -14,8 +14,8 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  *
  * @summary
  * A small drawing of the site's motif, set on either side of a stacked
- * hero's picture to fill the room a phone or tablet's single column leaves
- * beside it, as TechGeek.dev's About page does around its portrait. The left
+ * hero's picture to fill the room that hero's single column leaves beside
+ * it, as TechGeek.dev's About page does around its portrait. The left
  * drawing holds a speech bubble with typing dots, signal arcs, and a small
  * ringed disc, and the right one a sparkle, two dots, small rings, and a reply
  * bubble, in the site's teal with touches of orange. Each is decoration,

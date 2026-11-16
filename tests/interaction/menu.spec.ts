@@ -18,13 +18,13 @@ import type { Page    } from '@playwright/test'; // What: Page. Why: The helpers
  * menu.spec.ts = Menu Spec
  *
  * @summary
- * Checks the phone menu's layer behavior in whichever engine the project
- * runs. While the menu is open, the page behind it is dimmed by a scrim and
- * inert, so keyboard and screen reader users stay in the bar, and the menu
- * offers the page links, z4nta0's two profiles, and the contact email. The
- * usual ways out each close it and give the page back: tapping the scrim,
- * pressing Escape, which also returns focus to the toggle, tapping the brand,
- * which also goes home, and widening the screen past the phone layout, which
+ * Checks the phone menu's layer behavior in whichever engine the project runs.
+ * While the menu is open, the page behind it is dimmed by a scrim and inert,
+ * so keyboard and screen reader users stay in the bar, and the menu offers the
+ * page links, z4nta0's two profiles, and the contact email. The usual ways out
+ * each close it and give the page back: tapping the scrim, pressing Escape,
+ * which also returns focus to the toggle, tapping the brand, which also goes
+ * home, and widening the screen past the phone layout, above 1,024px, which
  * hides the toggle. Choosing any of its links closes it too, whether the link
  * opens in place or in a new tab, through a plain tap, a Ctrl or Cmd click, a
  * middle click, or a plain tap on a profile that opens another site. The email

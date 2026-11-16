@@ -196,7 +196,7 @@ function ArtLisCom () : JSX.Element {
 
 
 
-				<section className={ cssModObj.artLisSec }>{ /* What: Articles List Section Element. Why: The filter and the list belong together. How: This holds the topic buttons, the count, the articles, the help card beside them on wide screens, and the Still Stuck panel below them. */ }
+				<section className={ cssModObj.artLisSec }>{ /* What: Articles List Section Element. Why: The filter and the list belong together. How: This holds the topic buttons, the count, the articles, the help card beside them above 1,024px, and the Still Stuck panel below them. */ }
 
 
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The list sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
@@ -336,7 +336,7 @@ function ArtLisCom () : JSX.Element {
 								className={ cssModObj.helCarAsi }
 
 								aria-label='Ask the Tech Geek'
-							>{ /* What: Help Card Aside Element. Why: A visitor scanning the list who can't find their problem should see how to ask without leaving it. How: This holds the small rings, the invitation, the promise, the button, and a safety note, staying in view as the list scrolls, on wide screens only. */ }
+							>{ /* What: Help Card Aside Element. Why: A visitor scanning the list who can't find their problem should see how to ask without leaving it. How: This holds the small rings, the invitation, the promise, the button, and a safety note, staying in view as the list scrolls, above 1,024px only. */ }
 
 
 								<SigRinCom

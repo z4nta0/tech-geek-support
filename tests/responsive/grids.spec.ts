@@ -19,13 +19,13 @@ import { test      } from '@playwright/test';     // What: Test. Why: Each page 
  * engine the project runs: at each width, a grid's visible cards are grouped
  * into rows by where their tops land, and every row has to hold the same
  * number of cards. The Contact sidebar follows the rule's centered odd card
- * exception instead, since its three cards pair up on a tablet: every row but
- * the last is full, and a short last row holds one card at the others' width,
- * the room left of it within 2px of the room right of it, measured against the
- * grid's own content box. The widths are the responsive suite's, a pixel
- * either side of each breakpoint included, since a grid changes its column
- * count there. A wrapping row of chips, such as the Articles page's topic
- * pills, isn't a grid of cards, so it isn't checked.
+ * exception instead, since its three cards pair up from 1,024px down to 641px:
+ * every row but the last is full, and a short last row holds one card at the
+ * others' width, the room left of it within 2px of the room right of it,
+ * measured against the grid's own content box. The widths are the responsive
+ * suite's, a pixel either side of each breakpoint included, since a grid
+ * changes its column count there. A wrapping row of chips, such as the
+ * Articles page's topic pills, isn't a grid of cards, so it isn't checked.
  *
  * Sections:
  *  - Types
@@ -61,11 +61,11 @@ type GriCasTyp = { // What: Grid Case Type. Why: Each grid is found and judged t
 const GRI_CAS_ARR : GriCasTyp[] = [ // What: Grid Case Array. Why: Every grid of cards on the site is checked the same way. How: Each row names a grid, its page, its module class, and how its rows are judged, in markup order.
 
 
-	{ griStr : 'topGriUno', ideStr : 'topic tiles',     oddBoo : false, pagStr : 'home'    }, // What: Topic Tiles Grid Case. Why: The twelve tiles step through four, three, two, and one columns. How: This checks every row holds the same number.
-	{ griStr : 'artGriUno', ideStr : 'newest articles', oddBoo : false, pagStr : 'home'    }, // What: Newest Articles Grid Case. Why: The four newest articles step through four, two, and one columns. How: This checks every row holds the same number.
-	{ griStr : 'steLisOrd', ideStr : 'steps',           oddBoo : false, pagStr : 'home'    }, // What: Steps Grid Case. Why: The three How It Works steps sit three across, then stack. How: This checks every row holds the same number.
-	{ griStr : 'proGriUno', ideStr : 'promises',        oddBoo : false, pagStr : 'about'   }, // What: Promises Grid Case. Why: The three promises sit three across, then stack. How: This checks every row holds the same number.
-	{ griStr : 'conSidAsi', ideStr : 'sidebar',         oddBoo : true,  pagStr : 'contact' }  // What: Sidebar Grid Case. Why: The sidebar's three cards stack, pair up with the third centered on a tablet, then stack again. How: This checks the full rows and the odd card's width and centering.
+	{ griStr : 'topGriUno', ideStr : 'topic tiles',     oddBoo : false, pagStr : 'home'    }, // What: Topic Tiles Grid Case. Why: The twelve tiles step through four, three, two, and one columns, at 1,024px, 768px, and 640px. How: This checks every row holds the same number.
+	{ griStr : 'artGriUno', ideStr : 'newest articles', oddBoo : false, pagStr : 'home'    }, // What: Newest Articles Grid Case. Why: The four newest articles step through four, two, and one columns, at 1,024px and 640px. How: This checks every row holds the same number.
+	{ griStr : 'steLisOrd', ideStr : 'steps',           oddBoo : false, pagStr : 'home'    }, // What: Steps Grid Case. Why: The three How It Works steps sit three across, then stack at 768px and below. How: This checks every row holds the same number.
+	{ griStr : 'proGriUno', ideStr : 'promises',        oddBoo : false, pagStr : 'about'   }, // What: Promises Grid Case. Why: The three promises sit three across, then stack at 768px and below. How: This checks every row holds the same number.
+	{ griStr : 'conSidAsi', ideStr : 'sidebar',         oddBoo : true,  pagStr : 'contact' }  // What: Sidebar Grid Case. Why: The sidebar's three cards stack, pair up with the third centered from 1,024px down to 641px, then stack again at 640px and below. How: This checks the full rows and the odd card's width and centering.
 
 
 ];
