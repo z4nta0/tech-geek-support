@@ -589,6 +589,8 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 		if ( tabCouNum || !staFocBoo ) await curPagObj.keyboard.press( tabKeyStr ); // What: Tab Press Call. Why: Each pass moves focus to the next stop, while a start that's already a keyboard stop is measured where it is. How: This presses the engine's Tab key, skipping the first press when the walk starts on a keyboard-focused control.
 
+
+
 		await curPagObj.evaluate( scrSetFun ); // What: Scroll Settled Wait. Why: Some engines scroll a focused field into view a few frames late. How: This waits until the page has stopped scrolling.
 
 
@@ -605,6 +607,8 @@ async function keyProFun ( curPagObj : Page, engNamStr : string ) : Promise< str
 
 
 		if ( firOrdNum < 0 ) firOrdNum = stoInfObj.ordNum; // What: First Stop Record. Why: The walk ends if focus comes back to it. How: This remembers the first stop's position.
+
+
 
 		reaOrdSet.add( stoInfObj.ordNum ); // What: Reached Stop Record. Why: The stops reached are compared with every one Tab should reach once the walk ends. How: This adds this stop's position.
 
@@ -712,7 +716,6 @@ for ( const staRecObj of [ ...STA_REC_ARR, ...PIL_STA_ARR, ...ADR_STA_ARR, ...TI
 
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The text should be read with the state settled, its menu open where the state opens one. How: This loads and settles it.
-
 
 		expect( ( await curPagObj.locator( 'body' ).innerText() ).split( '\n' ).filter( ( texLinStr ) => COM_LAB_REG.test( texLinStr ) ) ).toEqual( [] ); // What: No Comment Text Assertion. Why: The state passes only when no source comment shows. How: This splits the page's visible text into lines and lists those matching a comment label, which should be none.
 

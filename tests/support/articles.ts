@@ -42,7 +42,6 @@ import type { StaRecTyp } from './states.ts';      // What: State Record Type. W
 const ART_STA_ARR = STA_REC_ARR.filter( ( staRecObj ) => staRecObj.patStr === '/articles' ); // What: Articles State Array. Why: Each narrowed state is opened at the Articles page's phone and desktop widths. How: This picks the Articles rows from the shared state list.
 
 
-
 const ADR_STA_ARR : StaRecTyp[] = ART_STA_ARR.map( ( staRecObj ) => ( { // What: Address State Array. Why: An address naming a topic opens the list already narrowed, as Home's topic tiles do. How: For each Articles state, this copies the state with the Internet & Wi-Fi topic added to its address, and names it after the state.
 
 
