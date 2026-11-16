@@ -27,19 +27,19 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers th
  * The accessibility checks axe-core can't make, run on every page state in
  * whichever engine the project runs. Names: every link and button in the
  * accessibility tree has a name, no name carries a decorative glyph such as an
- * arrow or an emoji, and every shown link that opens a new tab says so at the
- * end of its name. Keyboard: no element uses a positive tabindex, and a Tab
- * walk from wherever focus rests once the state opens reaches its end without
- * getting trapped, never moves backwards through the document, lands only on
- * stops that are on screen, not covered by anything else, and visibly changed
- * by focus, and leaves no stop it should reach unreached. Reflow: at 320px
- * wide, WCAG's narrowest reflow width, nothing scrolls sideways. Motion: with
- * reduced motion requested, nothing animates or transitions for longer than
- * 1ms from the moment the page starts loading, and nothing is left running or
- * waiting once the state has opened. Comments: no line of the page's visible
- * text carries a What, Why, or How label, the sign of a source comment written
- * where JSX renders it as text. A failing check lists the problems it found,
- * most of them by element or line.
+ * arrow or an emoji, and every shown link that opens a new tab reads as a link
+ * and says so at the end of its name. Keyboard: no element uses a positive
+ * tabindex, and a Tab walk from wherever focus rests once the state opens
+ * reaches its end without getting trapped, never moves backwards through the
+ * document, lands only on stops that are on screen, not covered by anything
+ * else, and visibly changed by focus, and leaves no stop it should reach
+ * unreached. Reflow: at 320px wide, WCAG's narrowest reflow width, nothing
+ * scrolls sideways. Motion: with reduced motion requested, nothing animates or
+ * transitions for longer than 1ms from the moment the page starts loading, and
+ * nothing is left running or waiting once the state has opened. Comments: no
+ * line of the page's visible text carries a What, Why, or How label, the sign
+ * of a source comment written where JSX renders it as text. A failing check
+ * lists the problems it found, most of them by element or line.
  *
  * Sections:
  *  - Types
@@ -73,11 +73,11 @@ type StoInfTyp = { // What: Stop Information Type. Why: The keyboard walk judges
 
 // #region Constants
 
-const COM_LAB_REG = /\b(?:What|Why|How):/;                 // What: Comment Label Regular Expression. Why: A source comment that leaks onto the page carries the What, Why, and How labels every comment starts its parts with. How: This matches any of the three labels followed by a colon.
-const GLY_DEC_REG = /[←↑→↓·•]|\p{Extended_Pictographic}/u; // What: Glyph Decorative Regular Expression. Why: A decorative glyph inside a name is read aloud as noise, such as right arrow. How: This matches the arrows and dots a decorative glyph would add to a name, plus any emoji or pictograph.
-const REF_WID_NUM = 320;                                   // What: Reflow Width Number. Why: WCAG's reflow criterion asks for no sideways scrolling at 320 CSS pixels, the width of 1,280px at 400% zoom. How: This is the viewport width the reflow check opens each state at.
-const TAB_HIN_REG = /in a new tab\)"/;                     // What: Tab Hint Regular Expression. Why: A link that opens a new tab has to say so at the end of its announced name. How: This matches the note's closing words, such as "(opens in a new tab)", followed by the closing quote of the name in the link's tree line.
-const TAB_MAX_NUM = 80;                                    // What: Tab Maximum Number. Why: A keyboard trap would otherwise keep the walk going forever. How: This caps the walk at far more Tab presses than the site has stops.
+const COM_LAB_REG = /\b(?:What|Why|How):/;                  // What: Comment Label Regular Expression. Why: A source comment that leaks onto the page carries the What, Why, and How labels every comment starts its parts with. How: This matches any of the three labels followed by a colon.
+const GLY_DEC_REG = /[←↑→↓·•]|\p{Extended_Pictographic}/u;  // What: Glyph Decorative Regular Expression. Why: A decorative glyph inside a name is read aloud as noise, such as right arrow. How: This matches the arrows and dots a decorative glyph would add to a name, plus any emoji or pictograph.
+const REF_WID_NUM = 320;                                    // What: Reflow Width Number. Why: WCAG's reflow criterion asks for no sideways scrolling at 320 CSS pixels, the width of 1,280px at 400% zoom. How: This is the viewport width the reflow check opens each state at.
+const TAB_HIN_REG = /\(opens (?:[^()"]+ )?in a new tab\)"/; // What: Tab Hint Regular Expression. Why: A link that opens a new tab has to say so at the end of its announced name. How: This matches the whole note, "(opens in a new tab)" or one naming where it goes, followed by the closing quote of the name in the link's tree line.
+const TAB_MAX_NUM = 80;                                     // What: Tab Maximum Number. Why: A keyboard trap would otherwise keep the walk going forever. How: This caps the walk at far more Tab presses than the site has stops.
 
 // #endregion Constants
 
@@ -224,12 +224,12 @@ async function motRecFun ( curPagObj : Page ) : Promise< void > {
  * @summary
  * Reads the page's accessibility tree, the same tree a screen reader reads,
  * and returns a problem for every link or button with no name, for every one
- * whose name contains a decorative glyph that should have been hidden, and
- * for every shown link that opens a new tab without saying so at the end of
- * its name. Elements hidden from assistive technology don't appear in the
- * tree, so the decorative elements hidden from it are never counted. A tree
- * with no link or button at all is a problem too, since every page shows at
- * least the bar's brand link.
+ * whose name contains a decorative glyph that should have been hidden, and for
+ * every shown link that opens a new tab without the tree reading it as a link
+ * or without saying so at the end of its name. Elements hidden from assistive
+ * technology don't appear in the tree, so the decorative elements hidden from
+ * it are never counted. A tree with no link or button at all is a problem too,
+ * since every page shows at least the bar's brand link.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
