@@ -577,7 +577,7 @@ async function feeProFun ( curPagObj : Page, staIdeStr : string, redMotBoo : boo
 		await conCurObj.evaluate( ( conCurEle ) => { if ( conCurEle instanceof HTMLElement ) conCurEle.blur(); } ); // What: Control Blur Call. Why: Left focused, the control would keep its ring, or the skip link would stay in view over whatever is probed next. How: This blurs it, and the next rest settle wait lets it fade.
 
 
-		if ( offScrBoo ) await conCurObj.evaluate( aniFinFun ); // What: Skip Link Exit Wait. Why: The skip link lifts on hover even while unfocused, so a pointer landing on the next control while the link still slides out over it would hold it in view, measured in WebKit hanging the next hover for ten minutes. How: For the control that waited above the screen, this waits two frames, then for its slide back out to end.
+		if ( offScrBoo ) await conCurObj.evaluate( aniFinFun ); // What: Skip Link Exit Wait. Why: Before the design package's v0.7.3 the skip link lifted on hover even while unfocused, so a pointer landing on the next control while the link still slid out over it held it in view, measured in WebKit hanging the next hover for ten minutes, and the wait still keeps each hover clear of the slide. How: For the control that waited above the screen, this waits two frames, then for its slide back out to end.
 
 
 
