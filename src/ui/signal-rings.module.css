@@ -87,14 +87,14 @@
 
 }
 
-@keyframes ringEnterRipple { /* What: Ring Enter Ripple. Why: The rings spread out from the bubble as the drawing appears, like a signal going out. How: This grows each ring from 60% of its size and fades it in. */
+@keyframes ringEnterRipple { /* What: Ring Enter Ripple. Why: The rings spread out from the bubble as the drawing appears, like a signal going out. How: This grows each ring from about 57% of its size and fades it in. */
 
 
 	from {
 
 
 		opacity   : 0;
-		transform : scale( 0.6 );
+		transform : scale( var( --cdn-pow-002-rec ) ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 
 
 	}

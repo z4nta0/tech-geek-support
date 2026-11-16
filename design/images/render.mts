@@ -116,7 +116,7 @@ await broInsObj.close(); // What: Browser Close Call. Why: The script should exi
 
 
 
-console.log( `Wrote the portrait at ${ BOX_WID_NUM }x${ BOX_HEI_NUM }, ${ Math.round( statSync( ORI_PAT_STR ).size / 1024 ).toLocaleString( 'en-US' ) } KB down to ${ Math.round( outBufObj.length / 1024 ).toLocaleString( 'en-US' ) } KB.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the portrait's size in pixels and its file size before and after.
+console.log( `Wrote the portrait at ${ BOX_WID_NUM }x${ BOX_HEI_NUM.toLocaleString( 'en-US' ) }, ${ Math.round( statSync( ORI_PAT_STR ).size / 1024 ).toLocaleString( 'en-US' ) } KB down to ${ Math.round( outBufObj.length / 1024 ).toLocaleString( 'en-US' ) } KB.` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the portrait's size in pixels and its file size before and after.
 
 // #endregion Module Init
 
