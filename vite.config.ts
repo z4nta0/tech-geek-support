@@ -135,7 +135,7 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 
 		'@context'    : 'https://schema.org',                       // What: Context. Why: Search engines read the keys by schema.org's vocabulary. How: This names it.
 		'@type'       : 'Article',                                  // What: Type. Why: The page is one article. How: This marks the node as an Article.
-		author        : { '@id' : 'https://techgeek.dev/#person' }, // What: Author. Why: z4nta0 writes every article. How: This points at the Person node TechGeek.dev and index.html describe.
+		author        : { '@id' : 'https://techgeek.dev/#person' }, // What: Author. Why: z4nta0 is the named author of every article. How: This points at the Person node TechGeek.dev and index.html describe.
 		dateModified  : artFilObj.updStr || artFilObj.pubStr,       // What: Date Modified. Why: Search engines show how fresh an article is. How: This is its updated date, or its publication date when it hasn't been revised.
 		datePublished : artFilObj.pubStr,                           // What: Date Published. Why: Search engines show when an article was written. How: This is its publication date.
 		description   : artFilObj.sumStr,                           // What: Description. Why: The data describes the article as its page does. How: This is its summary.

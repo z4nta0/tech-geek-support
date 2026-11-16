@@ -45,10 +45,11 @@ type SrcProTyp = { className? : string, smaBoo? : boolean }; // What: Signal-Rin
  *
  * @summary
  * Renders the motif as one SVG on a 400 by 400 drawing space, with the class
- * a page passes for its size and placement. Every shape's color, strength,
- * and entrance comes from the module. The small version shows only the middle
- * 300 by 300 and leaves out the outer ring, which that crop would cut into
- * stray arcs, so the bubble reads clearly even at about 80px.
+ * a page passes for its size and placement. Every shape's color comes from
+ * the module, along with the rings' strength and the rings' and sparkle's
+ * entrance. The small version shows only the middle 300 by 300 and leaves out
+ * the outer ring, which that crop would cut into stray arcs, so the bubble
+ * reads clearly even at about 80px.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -188,7 +188,7 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
 
 	await expect( curPagObj ).toHaveTitle( heaRowObj.titStr ); // What: Title Assertion. Why: Search listings and tabs name the page by its title. How: This waits for the page's own title.
 
-	expect( heaRowObj.titStr.length ).toBeLessThanOrEqual( 60 ); // What: Title Length Assertion. Why: Search listings and link cards cut long titles off. How: This keeps it to 60 characters.
+	expect( heaRowObj.titStr.length ).toBeLessThanOrEqual( 60 ); // What: Title Length Assertion. Why: The site keeps every title to about 60 characters. How: This keeps it to 60 characters.
 
 	await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'z4nta0' ); // What: Author Assertion. Why: The site names z4nta0, who built and owns it, as its author. How: This checks the author tag.
 
@@ -390,7 +390,7 @@ test( 'the raw page carries the home title and description for script-free reade
 
 	expect( titTexStr ).toBe( PAG_HEA_ARR[ 0 ].titStr ); // What: Raw Title Assertion. Why: The raw page should name the home page in full, not the bare site name. How: This checks it matches the home page's title.
 
-	expect( titTexStr.length ).toBeGreaterThanOrEqual( 50 ); // What: Raw Title Length Assertion. Why: The home page's title should use most of a listing's 60 characters to describe the site. How: This checks it runs at least 50 characters.
+	expect( titTexStr.length ).toBeGreaterThanOrEqual( 50 ); // What: Raw Title Length Assertion. Why: The home page's title should use most of the site's 60-character title length to describe the site. How: This checks it runs at least 50 characters.
 
 	expect( rawHtmStr ).toContain( `<meta name='description' content='${ HOM_DES_STR }' />` ); // What: Raw Description Assertion. Why: Checkers and crawlers without the script need a description to show. How: This checks the raw page carries the home page's.
 
