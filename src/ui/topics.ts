@@ -7,7 +7,7 @@
  * @summary
  * The help topics every article belongs to, in the order the site lists
  * them: the devices first, then the everyday problems, then the "What is...?"
- * questions. Every place that lists the topics, such as a filter, reads this
+ * questions. The places that list the topics, such as a filter, read this
  * list, so a topic added or renamed changes in one place.
  *
  * Sections:

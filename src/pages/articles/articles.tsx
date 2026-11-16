@@ -8,7 +8,7 @@ import cssModObj from './articles.module.css'; // What: CSS Module Object. Why: 
 
 import { ART_REC_ARR     } from '../../ui/articles.ts';                   // What: Article Record Array. Why: The page lists every article. How: The page filters and renders it.
 import { Link            } from 'react-router';                           // What: Link. Why: Links within the site move to another page without a full page load. How: This renders them.
-import { SigRinCom       } from '../../ui/signal-rings.tsx';              // What: Signal Rings Component. Why: The help card beside the list carries the site's motif. How: The page draws the small rings at the card's top.
+import { SigRinCom       } from '../../ui/signal-rings.tsx';              // What: Signal Rings Component. Why: The help card beside the list above 1,024px carries the site's motif. How: The page draws the small rings at the card's top.
 import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // What: Topic Record Array. Why: The filter offers every topic. How: The page renders one button per topic.
 import { TopTagCom       } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: Each listed article shows its topic. How: The page renders one tag per article.
 import { useEffect       } from 'react';                                  // What: Use Effect. Why: A router navigation while the page stays open should bring back the router's topic. How: This clears the page's own choice whenever the location key changes.

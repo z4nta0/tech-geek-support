@@ -7,7 +7,7 @@ import cssModObj from './home.module.css'; // What: CSS Module Object. Why: Home
 
 
 import { ART_REC_ARR } from '../../ui/articles.ts';       // What: Article Record Array. Why: Home features the newest articles. How: The page shows the first four, which the catalog lists newest first.
-import { HerFloCom   } from '../../ui/hero-flourish.tsx'; // What: Hero Flourish Component. Why: The stacked hero fills the room beside its rings. How: The hero sets a drawing on each side of them.
+import { HerFloCom   } from '../../ui/hero-flourish.tsx'; // What: Hero Flourish Component. Why: The stacked hero fills the room beside its rings. How: The hero sets a drawing on each side of them from 441px up.
 import { Link        } from 'react-router';               // What: Link. Why: Links within the site move to another page without a full page load. How: This renders them.
 import { SigRinCom   } from '../../ui/signal-rings.tsx';  // What: Signal Rings Component. Why: The hero carries the site's motif. How: The hero sets it beside the pitch, or above it at 768px and below.
 import { TOP_REC_ARR } from '../../ui/topics.ts';         // What: Topic Record Array. Why: The topic tiles list every help topic. How: The page renders one tile per row.

@@ -7,7 +7,7 @@ import cssModObj from './about.module.css';   // What: CSS Module Object. Why: T
 import selPorUrl from './self-portrait.webp'; // What: Self Portrait URL. Why: The hero shows z4nta0's portrait, so a visitor sees who answers. How: Vite resolves this to the image's fingerprinted URL.
 
 
-import { HerFloCom    } from '../../ui/hero-flourish.tsx';             // What: Hero Flourish Component. Why: The stacked hero fills the room beside its portrait. How: The hero sets a drawing on each side of it.
+import { HerFloCom    } from '../../ui/hero-flourish.tsx';             // What: Hero Flourish Component. Why: The stacked hero fills the room beside its portrait. How: The hero sets a drawing on each side of it from 441px up.
 import { Link         } from 'react-router';                           // What: Link. Why: The closing panel moves to the question form without a full page load. How: This renders it as a router link.
 import { usePagDesFun } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
 
