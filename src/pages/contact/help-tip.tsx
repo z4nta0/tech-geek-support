@@ -84,7 +84,7 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 	const [ hovOpeBoo, setHovOpeBoo ] = useState( false ); // What: Hover Open Boolean And Setter. Why: A mouse resting on the tip opens it. How: This is true while a mouse is over the tip.
 	const [ pinOpeBoo, setPinOpeBoo ] = useState( false ); // What: Pin Open Boolean And Setter. Why: A click or tap keeps the tip open after the pointer leaves. How: This is true from one press until the tip is closed.
 
-	const isaOpeBoo = hovOpeBoo || pinOpeBoo;           // What: Is-An Open Boolean. Why: Either a hover or a press opens the tip. How: This is true when either one holds.
+	const isaOpeBoo = hovOpeBoo || pinOpeBoo;            // What: Is-An Open Boolean. Why: Either a hover or a press opens the tip. How: This is true when either one holds.
 	const tipWraRef = useRef< HTMLSpanElement >( null ); // What: Tip Wrapper Reference. Why: A press outside the tip closes it. How: This holds the wrapper, whose contents count as inside.
 
 
@@ -96,6 +96,7 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 
 
 			setHovOpeBoo( false ); // What: Hover Clear Call. Why: A resting mouse would otherwise hold the tip open. How: This clears the hover.
+
 			setPinOpeBoo( false ); // What: Pin Clear Call. Why: A second press closes the tip. How: This clears the pin.
 
 
@@ -119,10 +120,12 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 
 
 			setHovOpeBoo( false ); // What: Hover Clear Call. Why: The tip closes even under a resting mouse. How: This clears the hover.
+
 			setPinOpeBoo( false ); // What: Pin Clear Call. Why: The tip closes even after a press opened it. How: This clears the pin.
 
 
 		};
+
 
 
 		const focOutFun = ( focEveObj : FocusEvent ) => { if ( !tipWraRef.current?.contains( focEveObj.target as Node ) ) cloTipFun(); };   // What: Focus Outside Function. Why: The bubble opens over the field below its label, so a keyboard user tabbing on would land on a field hidden behind it. How: This closes the tip when focus moves to anything outside the wrapper. // What: Type Assertion Note. Why: A focus event's target is typed as a general event target. How: Focus always lands on a node in the page, so it's read as a Node.

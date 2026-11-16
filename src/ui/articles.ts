@@ -139,7 +139,7 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	// #region Reading Time
 
 	const bodTexStr = bloRecArr.map( ( bloRecObj ) => 'iteArr' in bloRecObj ? bloRecObj.iteArr.flat() : 'inlArr' in bloRecObj ? bloRecObj.inlArr : [] ).flat().map( ( inlTokObj ) => inlTokObj.texStr ).join( ' ' ); // What: Body Text String. Why: The reading time counts the words a reader reads. How: This gathers the text of every heading, paragraph, tip, and list item.
-	const reaMinNum = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) ); // What: Reading Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
+	const reaMinNum = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) );                                                                                                    // What: Reading Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
 
 	// #endregion Reading Time
 
@@ -165,7 +165,6 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 }
 
 // #endregion artRecFun
-
 
 
 const ART_REC_ARR = Object.entries( ART_TEX_OBJ ).map( ( [ filPatStr, filTexStr ] ) => artRecFun( filPatStr, filTexStr ) ).sort( ( artOneObj, artTwoObj ) => artTwoObj.pubStr.localeCompare( artOneObj.pubStr ) || artOneObj.titStr.localeCompare( artTwoObj.titStr ) ); // What: Article Record Array. Why: The pages list every article, newest first. How: This builds a record from every file and sorts by published date, newest first, then by title.

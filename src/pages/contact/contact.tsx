@@ -261,11 +261,11 @@ function ConPagCom () : JSX.Element {
 				body : new URLSearchParams({ // What: Body. Why: Netlify reads a standard form-encoded body whose field names match the hidden form in index.html. How: This encodes the form's name, the honeypot, and the four real fields.
 
 
-					'bot-field' : forDatObj[ 'bot-field' ],                                                                     // What: Bot Field. Why: Netlify drops a submission whose honeypot is filled, which a person never does. How: This posts the hidden field as it stands.
-					email       : forDatObj.email,                                                                              // What: Email. Why: Netlify sets a field named email as the notification's reply-to, so a reply goes straight back to the visitor. How: This sends the address they entered.
-					'form-name' : 'question',                                                                                   // What: Form Name. Why: Netlify matches the POST to its detected form by this field. How: This names the question form.
-					name        : forDatObj.name,                                                                               // What: Name. Why: The email says who asked. How: This sends the name they entered.
-					question    : forDatObj.question,                                                                           // What: Question. Why: The question is the point of the email. How: This sends what they wrote.
+					'bot-field' : forDatObj[ 'bot-field' ],                                                                       // What: Bot Field. Why: Netlify drops a submission whose honeypot is filled, which a person never does. How: This posts the hidden field as it stands.
+					email       : forDatObj.email,                                                                                // What: Email. Why: Netlify sets a field named email as the notification's reply-to, so a reply goes straight back to the visitor. How: This sends the address they entered.
+					'form-name' : 'question',                                                                                     // What: Form Name. Why: Netlify matches the POST to its detected form by this field. How: This names the question form.
+					name        : forDatObj.name,                                                                                 // What: Name. Why: The email says who asked. How: This sends the name they entered.
+					question    : forDatObj.question,                                                                             // What: Question. Why: The question is the point of the email. How: This sends what they wrote.
 					topic       : TOP_REC_ARR.find( ( topRecObj ) => topRecObj.ideStr === forDatObj.topic )?.labStr ?? 'Not sure' // What: Topic. Why: The email shows the topic by name. How: This sends the chosen topic's name, or Not sure when none was chosen.
 
 

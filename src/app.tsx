@@ -58,6 +58,7 @@ const WOR_END_STR = '.support';                               // What: Wordmark 
 const CTA_LIN_OBJ : PagLinTyp = { labStr : 'Ask a Question', patStr : '/contact' }; // What: Call-To-Action Link Object. Why: The bar's one button invites a visitor to ask a question, the site's main action. How: The bar and the drawer both route it to the Contact page.
 
 
+
 const SIS_LIN_ARR : SisLinTyp[] = [ // What: Sister Link Array. Why: TechGeek.support is one of three sister sites, and a visitor here may want z4nta0's portfolio or a greeting card. How: The footer links to each row in the same tab.
 
 

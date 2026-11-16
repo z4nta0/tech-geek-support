@@ -110,7 +110,6 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 	const artTitStr = htmEscFun( artTitFun( artFilObj.titStr ) );                                               // What: Article Title String. Why: The page's title and preview title match the article page's own title. How: This builds and escapes it.
 	const artUrlStr = `${ LIV_URL_STR }articles/${ artFilObj.ideStr }`;                                         // What: Article URL String. Why: The preview links to the article's own address. How: This is its absolute address.
 
-
 	const tagRowArr : [ string, string ][] = [ // What: Tag Row Array. Why: Every tag the article changes is found and replaced the same way. How: Each row pairs a tag's name or property with its article value.
 
 
@@ -130,6 +129,7 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 	];
 
 
+
 	const artLdjObj = { // What: Article Linked-Data-JSON Object. Why: Search engines read an article's headline, dates, and author from its structured data. How: This describes the article as the page shows it, naming the same person and site as index.html's data.
 
 
@@ -147,7 +147,6 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 
 
 	};
-
 
 	const metAddStr = [ // What: Meta Additions String. Why: An article's preview can also carry when it was published and what it's about, which the home page has no use for. How: This joins the extra tags and the structured data into the text added before the head closes.
 
@@ -391,7 +390,6 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 };
 
 // #endregion artPagFun
-
 
 
 const VIT_CON_OBJ = defineConfig({ // What: Vite Config Object. Why: Vite reads its whole configuration from this file's default export. How: This builds the config, including the minHtmFun and artPagFun plugins above.
