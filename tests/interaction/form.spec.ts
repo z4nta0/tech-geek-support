@@ -168,7 +168,7 @@ test( 'a filled-in form sends to Netlify and shows the thank-you', async ( { pag
 	const senParObj = new URLSearchParams( senBodArr[ 0 ] ); // What: Sent Parameters Object. Why: The body's fields are checked one by one. How: This parses the form-encoded body.
 
 
-	expect( [ senParObj.get( 'form-name' ), senParObj.get( 'email' ), senParObj.get( 'name' ), senParObj.get( 'question' ), senParObj.get( 'topic' ) ] ).toEqual( [ 'question', 'visitor@example.com', 'Test', 'Hello.', 'Internet & Wi-Fi' ] ); // What: Sent Fields Assertion. Why: Netlify matches the form by its name and reads the fields by theirs. How: This checks the form name and every field came through, the topic by its label so the email reads plainly.
+	expect( [ senParObj.get( 'form-name' ), senParObj.get( 'email' ), senParObj.get( 'name' ), senParObj.get( 'question' ), senParObj.get( 'topic' ) ] ).toEqual( [ 'question', 'visitor@example.com', 'Test', 'Hello.', 'Internet & Wi-Fi' ] ); // What: Sent Fields Assertion. Why: Netlify matches the form by its name and reads the fields by theirs. How: This checks the form name and each field the visitor fills came through, the topic by its label so the email reads plainly.
 
 
 } );

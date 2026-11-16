@@ -19,9 +19,9 @@ import type { Page } from '@playwright/test'; // What: Page. Why: Opening a stat
  * with something opened on it: every route and the 404 page at phone and
  * desktop widths, and the mobile menu open on a phone. opeStaFun sizes the
  * viewport, loads the page, waits for the fonts, scrolls through the page so
- * any lazily loaded image loads, runs the state's own action, such as opening
- * the menu, and then waits for the page to stay still so nothing is measured
- * mid-fade.
+ * any lazily loaded image loads, waits for every image to decode, runs the
+ * state's own action, such as opening the menu, and then waits for the page
+ * to stay still so nothing is measured mid-fade.
  *
  * Sections:
  *  - Types

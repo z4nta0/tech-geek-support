@@ -79,7 +79,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 			viewBox={ smaBoo ? '50 50 300 300' : '0 0 400 400' } // What: View Box. Why: The small version needs its bubble larger in the same space. How: This crops to the middle 300 units for it, and shows the whole 400 otherwise.
 
 			aria-hidden='true'
-		>{ /* What: Signal Rings SVG Element. Why: The motif is one drawing. How: This holds the rings, the bubble, the sparkle, and the dot on a square drawing space, cropped for the small version, hidden from screen readers. */ }
+		>{ /* What: Signal Rings SVG Element. Why: The motif is one drawing. How: This holds the drawing's rings, speech bubble, and accents on a square drawing space, cropped for the small version, hidden from screen readers. */ }
 
 
 			{ !smaBoo && ( // What: Full Size Check. Why: The small version's crop would cut the outer ring into stray arcs. How: This draws the outer ring only at full size.

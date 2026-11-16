@@ -107,7 +107,7 @@ type ParStaTyp = { aniStr : string, kefBoo : boolean, marBoo : boolean }; // Wha
  *
  * @example
  * ```ts
- * parStaFun(curPagObj) // => [ { aniNamStr : 'none', ... }, ... ]
+ * parStaFun(curPagObj) // => [ { aniStr : 'none', ... }, ... ]
  * ```
  *
 */
