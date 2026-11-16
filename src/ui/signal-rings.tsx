@@ -153,7 +153,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 				className={ cssModObj.spaOraPat }
 
 				d='M 326 96 L 332 110 L 346 116 L 332 122 L 326 136 L 320 122 L 306 116 L 320 110 Z'
-			/>{ /* What: Sparkle Orange Path Element. Why: A sparkle adds the touch of fun. How: This draws a four-pointed orange star near the outer ring. */ }
+			/>{ /* What: Sparkle Orange Path Element. Why: A sparkle adds the touch of fun. How: This draws a four-pointed orange star on the middle ring at the upper right. */ }
 
 			<circle
 				className={ cssModObj.dotBluCir }

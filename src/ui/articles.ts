@@ -41,7 +41,7 @@ import type { BloRecTyp } from '../utils/markdown.ts'; // What: Block Record Typ
 
 const ART_TEX_OBJ = import.meta.glob< string >( '../articles/*/article.md', { eager : true, import : 'default', query : '?raw' } ); // What: Article Text Object. Why: Every article's text has to be in the build. How: Vite finds each article.md at build time and inlines its text, keyed by its path.
 const MED_URL_OBJ = import.meta.glob< string >( '../articles/*/*.{mp4,webp}', { eager : true, import : 'default' } );               // What: Media URL Object. Why: An article's photos and videos are fingerprinted like every other asset. How: Vite finds each file beside an article and gives its built address, keyed by its path.
-const REA_WOR_NUM = 200; // What: Reading Words Number. Why: An article's reading time is estimated from its length. How: This is a relaxed reading pace of 200 words a minute, a little slower than average, suiting the site's readers.
+const REA_WOR_NUM = 200; // What: Reading Words Number. Why: An article's reading time is estimated from its length. How: This is a relaxed reading pace of 200 words a minute, suiting the site's readers.
 
 // #endregion Constants
 

@@ -43,7 +43,7 @@ type TopRecTyp = { hinStr : string, ideStr : string, labStr : string }; // What:
 const TOP_REC_ARR : TopRecTyp[] = [ // What: Topic Record Array. Why: The site lists the same topics everywhere, in the same order. How: Each row names one topic.
 
 
-	{ hinStr : 'Updates, slow PCs, printers', ideStr : 'windows',            labStr : 'Windows'            }, // What: Windows Topic Row. Why: Windows computers are the most common at home. How: This lists the Windows topic.
+	{ hinStr : 'Updates, slow PCs, printers', ideStr : 'windows',            labStr : 'Windows'            }, // What: Windows Topic Row. Why: Many people use Windows computers at home. How: This lists the Windows topic.
 	{ hinStr : 'Storage, passwords, backups', ideStr : 'mac',                labStr : 'Mac'                }, // What: Mac Topic Row. Why: Mac computers have their own menus and habits. How: This lists the Mac topic.
 	{ hinStr : 'Storage, iCloud, settings',   ideStr : 'iphone',             labStr : 'iPhone'             }, // What: iPhone Topic Row. Why: The iPhone is many people's main device. How: This lists the iPhone topic.
 	{ hinStr : 'Apps, updates, sharing',      ideStr : 'ipad',               labStr : 'iPad'               }, // What: iPad Topic Row. Why: The iPad differs enough from the iPhone to have its own topic. How: This lists the iPad topic.

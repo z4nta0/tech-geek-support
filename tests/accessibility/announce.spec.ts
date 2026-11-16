@@ -5,7 +5,7 @@
 
 import { ERR_MES_STR } from '../support/contact.ts'; // What: Error Message String. Why: A failed send has to put this message in the alert region. How: This is the error the page shows.
 import { expect      } from '@playwright/test';      // What: Expect. Why: Each check passes only when the result is announced and focus lands where it should. How: This asserts on what each check reads, such as the alert region.
-import { senForFun   } from '../support/contact.ts'; // What: Send Form Function. Why: The focus and alert checks send the form themselves. How: This answers the root's POST at a given status, fills in and sends the form, and waits for its result.
+import { senForFun   } from '../support/contact.ts'; // What: Send Form Function. Why: The focus and alert checks send the form themselves. How: This sends the form with the server's answer faked at a given status.
 import { test        } from '@playwright/test';      // What: Test. Why: Each check is its own test. How: This declares them.
 
 // #endregion Imports

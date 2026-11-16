@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import AxeBuiCla from '@axe-core/playwright'; // What: Axe Builder Class. Why: axe-core finds the mechanical accessibility failures, such as low contrast, missing names, and misused ARIA. How: This runs its scan against a Playwright page.
+import AxeBuiCla from '@axe-core/playwright'; // What: Axe Builder Class. Why: axe-core finds the mechanical accessibility failures, such as low contrast. How: This runs its scan against a Playwright page.
 
 
 import { ADR_STA_ARR } from '../support/articles.ts'; // What: Address State Array. Why: An address naming a topic, as Home's topic tiles give, opens the Articles list narrowed, a state a visitor reaches. How: This lists the Articles states opened that way, one per width.

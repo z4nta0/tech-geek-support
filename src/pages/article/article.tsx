@@ -3,12 +3,12 @@
 
 // #region Imports
 
-import cssModObj from './article.module.css'; // What: CSS Module Object. Why: The article's header, body, and closing panel are styled in its own module. How: This maps each class name in article.module.css to its hashed module class.
+import cssModObj from './article.module.css'; // What: CSS Module Object. Why: The article page's parts are styled in its own module. How: This maps each class name in article.module.css to its hashed module class.
 
 
 import { ART_REC_ARR  } from '../../ui/articles.ts';                   // What: Article Record Array. Why: The page shows one article from the catalog. How: The page finds it by its address.
 import { artTitFun    } from '../../ui/article-title.ts';              // What: Article Title Function. Why: The article's page title has to match the one its own HTML page and link preview carry. How: The view names the page through it.
-import { Link         } from 'react-router';                           // What: Link. Why: The back link, the closing panel, and links inside articles move without a full page load. How: This renders those links.
+import { Link         } from 'react-router';                           // What: Link. Why: Links within the site move to another page without a full page load. How: This renders them.
 import { NotFouCom    } from '../not-found/not-found.tsx';             // What: Not Found Component. Why: An address naming no article should land on the 404 page. How: The page renders it when no article matches.
 import { TopTagCom    } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: The article shows its topic above its title. How: The header renders it.
 import { usePagDesFun } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: Each article's search description is its own summary. How: The view calls it to swap the one description tag's text while it shows.

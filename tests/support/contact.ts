@@ -7,7 +7,7 @@ import { expect      } from '@playwright/test'; // What: Expect. Why: A send is 
 import { STA_REC_ARR } from './states.ts';      // What: State Record Array. Why: The Contact states a control leads to reuse the Contact page's phone and desktop states. How: This lists every state, from which the Contact ones are picked.
 
 
-import type { Page      } from '@playwright/test'; // What: Page. Why: Sending the form and opening a tip drive a Playwright page. How: This types the send helper's and the actions' page parameters.
+import type { Page      } from '@playwright/test'; // What: Page. Why: The Contact helpers drive a Playwright page. How: This types their page parameters.
 import type { StaRecTyp } from './states.ts';      // What: State Record Type. Why: The Contact states a control leads to are opened like any other state. How: This types the reachable state lists.
 
 // #endregion Imports

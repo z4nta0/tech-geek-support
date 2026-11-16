@@ -10,7 +10,7 @@ import { ConPagCom    } from './pages/contact/contact.tsx';      // What: Contac
 import { HomPagCom    } from './pages/home/home.tsx';            // What: Home Page Component. Why: The site's root address is its home page. How: The home route renders it.
 import { NavBarCom    } from 'techgeek-design/ui/nav.tsx';       // What: Navigation Bar Component. Why: Every page starts with the TechGeek family's shared bar. How: This renders above the routes.
 import { NotFouCom    } from './pages/not-found/not-found.tsx';  // What: Not Found Component. Why: Every unknown address shows the 404 page. How: The catch-all route renders it.
-import { PAG_LIN_ARR  } from './ui/page-links.ts';               // What: Page Link Array. Why: The bar and the footer link to the site's pages. How: This is the list the root hands them.
+import { PAG_LIN_ARR  } from './ui/page-links.ts';               // What: Page Link Array. Why: The family's shared navigation links to the site's pages. How: This is the list the root hands it.
 import { Route        } from 'react-router';                     // What: Route. Why: Each page is matched to its path. How: This declares one route per page.
 import { Routes       } from 'react-router';                     // What: Routes. Why: Only one page should render for any path. How: This renders the first route whose path matches.
 import { SitFooCom    } from 'techgeek-design/ui/footer.tsx';    // What: Site Footer Component. Why: Every page ends with the TechGeek family's shared footer. How: This renders below the routes.

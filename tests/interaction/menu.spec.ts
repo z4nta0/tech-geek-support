@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the menu behaves as it should. How: This asserts on the menu's state, the page's inert parts, and focus.
+import { expect } from '@playwright/test'; // What: Expect. Why: Each check passes only when the menu behaves as it should. How: This asserts on what each check reads, such as the menu's state.
 import { test   } from '@playwright/test'; // What: Test. Why: Each way of using the menu is its own test. How: This declares them.
 
 

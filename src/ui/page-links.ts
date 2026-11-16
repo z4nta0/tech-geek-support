@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import type { PagLinTyp } from 'techgeek-design/ui/link-types.ts'; // What: Page Link Type. Why: The bar and footer from the design package take page links in its shape. How: This types the list.
+import type { PagLinTyp } from 'techgeek-design/ui/link-types.ts'; // What: Page Link Type. Why: The design package's shared navigation takes page links in its shape. How: This types the list.
 
 // #endregion Imports
 

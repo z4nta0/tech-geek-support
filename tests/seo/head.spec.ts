@@ -5,7 +5,7 @@
 
 import { ART_FIL_ARR } from '../../scripts/article-files.ts'; // What: Article File Array. Why: Every article's own page carries its own head and link preview. How: The tests check one page and one image per article.
 import { artTitFun   } from '../../src/ui/article-title.ts';  // What: Article Title Function. Why: An article's page title follows the site's 60-character rule. How: The rows name each article's page through it.
-import { expect      } from '@playwright/test';               // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on the page's head, its links, and the crawler files.
+import { expect      } from '@playwright/test';               // What: Expect. Why: Each check passes only when the page says what it should. How: This asserts on what each check reads, such as the page's head.
 import { test        } from '@playwright/test';               // What: Test. Why: Each page and each file is its own test. How: This declares them.
 
 

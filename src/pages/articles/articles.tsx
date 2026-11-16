@@ -3,11 +3,11 @@
 
 // #region Imports
 
-import cssModObj from './articles.module.css'; // What: CSS Module Object. Why: The Articles page's hero, filter, and list are styled in its own module. How: This maps each class name in articles.module.css to its hashed module class.
+import cssModObj from './articles.module.css'; // What: CSS Module Object. Why: The Articles page's parts are styled in its own module. How: This maps each class name in articles.module.css to its hashed module class.
 
 
 import { ART_REC_ARR     } from '../../ui/articles.ts';                   // What: Article Record Array. Why: The page lists every article. How: The page filters and renders it.
-import { Link            } from 'react-router';                           // What: Link. Why: Each article and the question form open without a full page load. How: This renders those links.
+import { Link            } from 'react-router';                           // What: Link. Why: Links within the site move to another page without a full page load. How: This renders them.
 import { SigRinCom       } from '../../ui/signal-rings.tsx';              // What: Signal Rings Component. Why: The help card beside the list carries the site's motif. How: The page draws the small rings at the card's top.
 import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // What: Topic Record Array. Why: The filter offers every topic. How: The page renders one button per topic.
 import { TopTagCom       } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: Each listed article shows its topic. How: The page renders one tag per article.

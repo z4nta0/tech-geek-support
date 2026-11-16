@@ -6,18 +6,18 @@
 import reaPluFun from '@vitejs/plugin-react'; // What: React Plugin Function. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
 
 
-import { ART_FIL_ARR  } from './scripts/article-files.ts'; // What: Article File Array. Why: Every article gets its own page carrying its title, description, and link preview, and a sitemap entry. How: The article pages plugin writes one per row.
+import { ART_FIL_ARR  } from './scripts/article-files.ts'; // What: Article File Array. Why: Every article gets its own files in the build, such as its page. How: The article pages plugin writes one per row.
 import { artTitFun    } from './src/ui/article-title.ts';  // What: Article Title Function. Why: An article's own page has to carry the title its React page shows. How: artTagFun names each page through it.
 import { defineConfig } from 'vite';                       // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps VIT_CON_OBJ.
 import { mkdir        } from 'node:fs/promises';           // What: Make Directory. Why: The article pages go in their own folder of the build. How: This creates it.
-import { readFile     } from 'node:fs/promises';           // What: Read File. Why: The article pages are copies of the built page, and the sitemap and rewrite rules gain the articles. How: This reads the built index.html, _redirects, and sitemap.xml, and the sitemap's source for the dev server.
+import { readFile     } from 'node:fs/promises';           // What: Read File. Why: The articles' files are built from files the site already has, such as the built page. How: This reads them.
 import { resolve      } from 'node:path';                  // What: Resolve. Why: The article pages are written beside the built index.html. How: This joins the build folder with each file name.
 import { TOP_REC_ARR  } from './src/ui/topics.ts';         // What: Topic Record Array. Why: An article's preview tags name its topic. How: artTagFun looks the label up by the article's topic identifier.
-import { writeFile    } from 'node:fs/promises';           // What: Write File. Why: Each article's page, the rewrite rules, and the sitemap are files in the build. How: This writes them.
+import { writeFile    } from 'node:fs/promises';           // What: Write File. Why: The articles add files to the build and change others. How: This writes them.
 
 
 import type { ArtFilTyp } from './scripts/article-files.ts'; // What: Article File Type. Why: An article's page is written from its details. How: This types the article artTagFun reads.
-import type { Plugin    } from 'vite';                       // What: Plugin. Why: The page minifier and the article pages are Vite plugins. How: This types their returns, which types their hooks.
+import type { Plugin    } from 'vite';                       // What: Plugin. Why: The config's own plugins are Vite plugins. How: This types their returns, which types their hooks.
 
 // #endregion Imports
 
