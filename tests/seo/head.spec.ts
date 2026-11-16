@@ -66,10 +66,13 @@ const LIV_URL_STR = 'https://techgeek.support/';                                
  *
  * @summary
  * What each page's head should say. Every row shares one shape, so its fields
- * carry no comments of their own:
+ * carry no comments of their own, its description last as the row's prose:
  *
  * - `canStr` (String or null): Canonical String, the page's canonical
  *   address, or null for a page that carries noindex and no canonical link.
+ *
+ * - `desStr` (String): Description String, the page's own description, or
+ *   index.html's on a page that keeps it.
  *
  * - `heaBoo` (Boolean): Heading Boolean, whether the page's one h1 is checked,
  *   true on every row.
@@ -82,82 +85,96 @@ const LIV_URL_STR = 'https://techgeek.support/';                                
  *
 */
 
-const PAG_HEA_ARR = [ // What: Page Head Array. Why: Every page's head is checked against what it should say. How: Each row names one page, its title, its canonical address or null, and whether its h1 is checked, the site's pages first in the sitemap's order, then every article in address order.
+const PAG_HEA_ARR = [ // What: Page Head Array. Why: Every page's head is checked against what it should say. How: Each row names one page, its title, its description, its canonical address or null, and whether its h1 is checked, the site's pages first in the sitemap's order, then every article in address order.
 
 
-	{ // What: Home Head Row. Why: The home page is the site's front door, so its head is checked first. How: This names its title and canonical address.
+	{ // What: Home Head Row. Why: The home page is the site's front door, so its head is checked first. How: This names its title, description, and canonical address.
 
 
 		canStr : LIV_URL_STR,
 		heaBoo : true,
 		patStr : '/',
-		titStr : 'Free Tech Help for Everyday People | TechGeek.support'
+		titStr : 'Free Tech Help for Everyday People | TechGeek.support',
+
+		desStr : HOM_DES_STR
 
 
 	},
 
-	{ // What: Articles Head Row. Why: The Articles page is indexed with its own title. How: This names its title and canonical address.
+	{ // What: Articles Head Row. Why: The Articles page is indexed with its own title. How: This names its title, description, and canonical address.
 
 
 		canStr : 'https://techgeek.support/articles',
 		heaBoo : true,
 		patStr : '/articles',
-		titStr : 'Free Tech Help Articles | TechGeek.support'
+		titStr : 'Free Tech Help Articles | TechGeek.support',
+
+		desStr : 'Free, step-by-step help articles for phones, computers, Wi-Fi, smart homes, scams, and more, all written in plain words.'
 
 
 	},
 
-	{ // What: About Head Row. Why: About is indexed with its own title. How: This names its title and canonical address.
+	{ // What: About Head Row. Why: About is indexed with its own title. How: This names its title, description, and canonical address.
 
 
 		canStr : 'https://techgeek.support/about',
 		heaBoo : true,
 		patStr : '/about',
-		titStr : 'About the Person Behind TechGeek.support'
+		titStr : 'About the Person Behind TechGeek.support',
+
+		desStr : 'Meet the Tech Geek, who has worked with computers since 2004 and answers every TechGeek.support question, always for free.'
 
 
 	},
 
-	{ // What: Contact Head Row. Why: Contact is indexed with its own title. How: This names its title and canonical address.
+	{ // What: Contact Head Row. Why: Contact is indexed with its own title. How: This names its title, description, and canonical address.
 
 
 		canStr : 'https://techgeek.support/contact',
 		heaBoo : true,
 		patStr : '/contact',
-		titStr : 'Ask a Free Tech Question | TechGeek.support'
+		titStr : 'Ask a Free Tech Question | TechGeek.support',
+
+		desStr : 'Ask a free tech question in plain words, about your phone, computer, Wi-Fi, or anything else, and hear back within 24 hours.'
 
 
 	},
 
-	{ // What: Missing Page Head Row. Why: An unknown address shows the 404 page, which carries noindex and no canonical link. How: This names its title and a null canonical.
+	{ // What: Missing Page Head Row. Why: An unknown address shows the 404 page, which carries noindex and no canonical link. How: This names its title, index.html's description, and a null canonical.
 
 
 		canStr : null,
 		heaBoo : true,
 		patStr : '/no-such-page',
-		titStr : 'Page Not Found | TechGeek.support'
+		titStr : 'Page Not Found | TechGeek.support',
+
+		desStr : HOM_DES_STR
 
 
 	},
 
-	{ // What: Missing Article Head Row. Why: An unknown article address shows the 404 page too, not an empty article. How: This names its title and a null canonical.
+	{ // What: Missing Article Head Row. Why: An unknown article address shows the 404 page too, not an empty article. How: This names its title, index.html's description, and a null canonical.
 
 
 		canStr : null,
 		heaBoo : true,
 		patStr : '/articles/no-such-article',
-		titStr : 'Page Not Found | TechGeek.support'
+		titStr : 'Page Not Found | TechGeek.support',
+
+		desStr : HOM_DES_STR
 
 
 	},
 
-	...ART_FIL_ARR.map( ( artFilObj ) => ( { // What: Article Rows Spread. Why: Every article is an indexed page of its own. How: This adds a row per article, its canonical address and title built the way its page builds them.
+	...ART_FIL_ARR.map( ( artFilObj ) => ( { // What: Article Rows Spread. Why: Every article is an indexed page of its own. How: This adds a row per article, its canonical address, title, and description built the way its page builds them.
 
 
 		canStr : `${ LIV_URL_STR }articles/${ artFilObj.ideStr }`,
 		heaBoo : true,
 		patStr : `/articles/${ artFilObj.ideStr }`,
-		titStr : artTitFun( artFilObj.titStr )
+		titStr : artTitFun( artFilObj.titStr ),
+
+		desStr : artFilObj.sumStr
 
 
 	} ) )
@@ -227,11 +244,12 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: A shared link shows a full
  *
  * @summary
  * Checks that the page showing now has the head its row describes: its exact
- * title, exactly one description, z4nta0 as author, and, when its row checks
- * it, one h1. A page with a canonical address has that one canonical link, a
- * description of 120 to 125 characters, and no robots tag; a page without one
- * has a noindex robots tag and no canonical link. Counting the tags also
- * catches a navigation that left the previous page's tags behind.
+ * title, exactly one description, its row's, z4nta0 as author, and, when its
+ * row checks it, one h1. A page with a canonical address has that one
+ * canonical link, a description of 120 to 125 characters, and no robots tag;
+ * a page without one has a noindex robots tag and no canonical link. Counting
+ * the tags also catches a navigation that left the previous page's tags
+ * behind.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -255,8 +273,9 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
 
 	expect( heaRowObj.titStr.length ).toBeLessThanOrEqual( 60 ); // What: Title Length Assertion. Why: The site keeps every title to about 60 characters. How: This keeps it to 60 characters.
 
-	await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'z4nta0' ); // What: Author Assertion. Why: The site names z4nta0, who built and owns it, as its author. How: This checks the author tag.
-	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                  // What: Single Description Assertion. Why: Two descriptions leave search engines to guess. How: This checks there's exactly one, index.html's, on every page.
+	await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'z4nta0' );              // What: Author Assertion. Why: The site names z4nta0, who built and owns it, as its author. How: This checks the author tag.
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                               // What: Single Description Assertion. Why: Two descriptions leave search engines to guess. How: This checks there's exactly one, index.html's, on every page.
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveAttribute( 'content', heaRowObj.desStr ); // What: Own Description Assertion. Why: Each page should describe itself, an article by its summary, while a page kept out of search keeps index.html's. How: This checks the one description holds the row's text.
 
 
 	if ( heaRowObj.heaBoo ) await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 ); // What: Single Heading Assertion. Why: One h1 tells search engines and screen readers what the page is about. How: This checks there's exactly one on every page the row marks.
