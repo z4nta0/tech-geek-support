@@ -289,7 +289,8 @@ suites live in `tests/`, one project per suite and engine in
   by a pressed pill and by a `?topic=` address (`tests/support/articles.ts`),
   and each help tip open, the form after a refused empty send, and its sent
   and failed results (`tests/support/contact.ts`, which answers Netlify's
-  POST with a 200 or a 500), each at both widths. axe, the scripted checks,
+  POST with a 200 or a 500), the sent one also without an email address,
+  whose thank-you reads differently (added 2026-11-16), each at both widths. axe, the scripted checks,
   and the security browser spec load them all. Every topic has an article, so
   the empty topic's invitation is a look no control reaches and is left out.
 - **Scripted checks** (added 2026-11-15, in the audit, from TechGeek.dev's

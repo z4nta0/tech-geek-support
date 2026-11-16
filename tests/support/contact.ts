@@ -75,8 +75,11 @@ const INV_STA_ARR : StaRecTyp[] = CON_STA_ARR.map( ( staRecObj ) => ( { // What:
  * RES_REC_ARR = Result Record Array
  *
  * @summary
- * The two ways a send can end. Every row shares one shape, so its fields
- * carry no comments of their own:
+ * The ways a send can end. Every row shares one shape, so its fields carry
+ * no comments of their own:
+ *
+ * - `emaBoo` (Boolean): Email Boolean, whether the form is sent with an email
+ *   address, since the thank-you reads differently without one.
  *
  * - `ideStr` (String): Identifier String, the result's name in test titles.
  *
@@ -86,11 +89,12 @@ const INV_STA_ARR : StaRecTyp[] = CON_STA_ARR.map( ( staRecObj ) => ( { // What:
  *
 */
 
-const RES_REC_ARR = [ // What: Result Record Array. Why: Both the thank-you and the error are states a visitor can reach. How: Each row names a result and the status that brings it about.
+const RES_REC_ARR = [ // What: Result Record Array. Why: Both thank-yous and the error are states a visitor can reach. How: Each row names a result, whether the form carries an email address, and the status that brings it about.
 
 
-	{ ideStr : 'sent',   staNum : 200 }, // What: Sent Result Row. Why: An OK reply shows the thank-you. How: This answers with a 200.
-	{ ideStr : 'failed', staNum : 500 }  // What: Failed Result Row. Why: A failed reply shows the error. How: This answers with a 500.
+	{ emaBoo : true,  ideStr : 'sent',          staNum : 200 }, // What: Sent Result Row. Why: An OK reply shows the thank-you. How: This sends an address and answers with a 200.
+	{ emaBoo : false, ideStr : 'sent-no-email', staNum : 200 }, // What: Sent Without Email Result Row. Why: Without an address the thank-you says no reply can come, a look of its own. How: This leaves the address empty and answers with a 200.
+	{ emaBoo : true,  ideStr : 'failed',        staNum : 500 }  // What: Failed Result Row. Why: A failed reply shows the error. How: This sends an address and answers with a 500.
 
 
 ];
@@ -164,18 +168,20 @@ const TIP_STA_ARR : StaRecTyp[] = TIP_REC_ARR.flatMap( ( tipRecObj ) => CON_STA_
  *
  * @summary
  * Sends the Contact form and waits for its result: answers the root's POST
- * with the given status, fills in a first name, an email address, and a
- * question, presses "Send My Question", then waits until the thank-you's
- * heading shows for a 200, or the error shows in the alert region for any
- * other status. Any other request to the root falls back to the page's other
- * route handlers, such as one that adds the security policy's headers. It
- * expects the Contact page already loaded.
+ * with the given status, fills in a first name, an email address unless told
+ * not to, and a question, presses "Send My Question", then waits until the
+ * thank-you's heading shows for a 200, or the error shows in the alert region
+ * for any other status. Any other request to the root falls back to the
+ * page's other route handlers, such as one that adds the security policy's
+ * headers. It expects the Contact page already loaded.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page showing the form.
  * @param staCodNum - Status Code Number: The status the root's POST answers
  *                    with.
+ * @param emaFilBoo - Email Fill Boolean: Whether to fill in an email address,
+ *                    true by default.
  *
  * @returns A promise that settles once the result shows, with no value.
  *
@@ -186,7 +192,7 @@ const TIP_STA_ARR : StaRecTyp[] = TIP_REC_ARR.flatMap( ( tipRecObj ) => CON_STA_
  *
 */
 
-async function senForFun ( curPagObj : Page, staCodNum : number ) : Promise< void > {
+async function senForFun ( curPagObj : Page, staCodNum : number, emaFilBoo = true ) : Promise< void > {
 
 
 	await curPagObj.route( ( urlCurObj ) => urlCurObj.pathname === '/', async ( rouCurObj ) => { // What: Root Route Handler. Why: Netlify Forms answers the root's POST on the live site, but not in testing. How: This answers a POST with an empty body at the given status, and hands any other request to the root on to the routes added before it.
@@ -202,9 +208,9 @@ async function senForFun ( curPagObj : Page, staCodNum : number ) : Promise< voi
 	} );
 
 
-	await curPagObj.getByRole( 'main' ).getByLabel( 'Your first name' ).fill( 'Test' );                                        // What: Name Fill Call. Why: The name is required. How: This fills in a first name.
-	await curPagObj.getByRole( 'main' ).getByLabel( 'Your email (optional)', { exact : true } ).fill( 'visitor@example.com' ); // What: Email Fill Call. Why: The thank-you differs without an address, so the form is sent with one. How: This fills in a reserved example address, matched by its whole name since its help tip button shares its label's words.
-	await curPagObj.getByRole( 'main' ).getByLabel( 'Your question', { exact : true } ).fill( 'Hello.' );                      // What: Question Fill Call. Why: The question is required. How: This fills in a question, matched by its whole name since its help tip button shares its label's words.
+	await curPagObj.getByRole( 'main' ).getByLabel( 'Your first name' ).fill( 'Test' );                                                         // What: Name Fill Call. Why: The name is required. How: This fills in a first name.
+	await curPagObj.getByRole( 'main' ).getByLabel( 'Your email (optional)', { exact : true } ).fill( emaFilBoo ? 'visitor@example.com' : '' ); // What: Email Fill Call. Why: The thank-you differs without an address, so each result says whether it has one. How: This fills in a reserved example address, or leaves the box empty when told to, matched by its whole name since its help tip button shares its label's words.
+	await curPagObj.getByRole( 'main' ).getByLabel( 'Your question', { exact : true } ).fill( 'Hello.' );                                       // What: Question Fill Call. Why: The question is required. How: This fills in a question, matched by its whole name since its help tip button shares its label's words.
 
 	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The filled-in form is submitted. How: This presses "Send My Question".
 
@@ -226,8 +232,8 @@ const RES_STA_ARR : StaRecTyp[] = RES_REC_ARR.flatMap( ( resRecObj ) => CON_STA_
 
 	...staRecObj, // What: State Record Spread. Why: The result state keeps the Contact state's path and viewport. How: This copies the row.
 
-	actFun : ( curPagObj : Page ) => senForFun( curPagObj, resRecObj.staNum ), // What: Action Function. Why: The state shows the form's result. How: This sends the form with the root's POST answered at the result's status.
-	ideStr : `${ staRecObj.ideStr }-${ resRecObj.ideStr }`                     // What: Identifier String. Why: Each test names its width and result. How: This joins the Contact state's name and the result's, such as contact-desktop-sent.
+	actFun : ( curPagObj : Page ) => senForFun( curPagObj, resRecObj.staNum, resRecObj.emaBoo ), // What: Action Function. Why: The state shows the form's result. How: This sends the form, with or without an address as the result says, and the root's POST answered at the result's status.
+	ideStr : `${ staRecObj.ideStr }-${ resRecObj.ideStr }`                                       // What: Identifier String. Why: Each test names its width and result. How: This joins the Contact state's name and the result's, such as contact-desktop-sent.
 
 
 } ) ) );
