@@ -254,7 +254,7 @@
 
 }
 
-.tipBloAsi { /* What: Tip Block Aside. Why: A tip is a helpful aside, set apart from the steps but never alarming. How: This draws a pale teal panel with roomy padding, its text at the body size. */
+.tipBloAsi { /* What: Tip Block Aside. Why: A tip is a helpful aside, set apart from the steps but never alarming. How: This draws a pale teal panel with roomy padding, its text at the base plus 2 size, like the article's paragraphs. */
 
 
 	background    : var( --act-tin-col );                      /* Accent-Tertiary Tint Color = #D3EEE9 */

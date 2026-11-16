@@ -462,7 +462,7 @@ function ConPagCom () : JSX.Element {
 
 
 
-									<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields share a row on wide screens. How: This sets them side by side. */ }
+									<div className={ cssModObj.forRowDiv }>{ /* What: Form Row Div Element. Why: The name and email fields share a row on wide screens. How: This sets them side by side, stacking them at 640px and below. */ }
 
 
 										<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The name's label and input read as one field. How: This stacks them. */ }

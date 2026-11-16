@@ -19,9 +19,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * topic-tag.tsx = Topic Tag
  *
  * @summary
- * A small pale teal pill naming an article's topic, shown on the Articles
- * page's list and above an article's title. It takes the topic's identifier
- * and shows its name from the topic list.
+ * A small pale teal pill naming an article's topic, shown on article cards
+ * and above an article's title. It takes the topic's identifier and shows
+ * its name from the topic list.
  *
  * Sections:
  *  - Components

@@ -82,7 +82,7 @@
 
 }
 
-.herTitHea { /* What: Hero Title Heading. Why: The heading is the page's loudest line, but a help center's title shouldn't shout. How: This sets it in the main text color at the shared h2 size range instead of the h1's. */
+.herTitHea { /* What: Hero Title Heading. Why: The heading is the page's loudest line, but a help center's title shouldn't shout. How: This sets it in the main text color, scaling with the screen between about 33.9px and 59.4px, below the h1's range. */
 
 
 	color     : var( --tex-mai-col );                                     /* Text Main Color = #1A1A2E */

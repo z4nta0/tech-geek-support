@@ -161,7 +161,7 @@ function parInlFun ( texLinStr : string ) : InlTokTyp[] {
  * closing --- lines, as key and value pairs, and the body as a list of
  * blocks. A blank line ends a paragraph, list, or tip; consecutive list
  * items of one kind form one list; and an HTML comment, from a line starting
- * with <!-- to the line ending with -->, is skipped entirely. A file with no
+ * with <!-- to the line containing -->, is skipped entirely. A file with no
  * front matter reads as all body.
  *
  * @author z4nta0 <https://github.com/z4nta0>
