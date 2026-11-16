@@ -4,7 +4,7 @@
 // #region Imports
 
 import { expect      } from '@playwright/test'; // What: Expect. Why: A narrowed state is ready only once the list has changed. How: This waits until it has.
-import { STA_REC_ARR } from './states.ts';      // What: State Record Array. Why: The narrowed states reuse the Articles page's phone and desktop states. How: This lists every state, from which the Articles ones are picked.
+import { STA_REC_ARR } from './states.ts';      // What: State Record Array. Why: The narrowed states reuse the Articles page's phone and desktop states. How: This lists the shared states, from which the Articles ones are picked.
 
 
 import type { Page      } from '@playwright/test'; // What: Page. Why: Choosing a topic drives a Playwright page. How: This types the pill action's page parameter.

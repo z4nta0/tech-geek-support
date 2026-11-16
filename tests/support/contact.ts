@@ -4,7 +4,7 @@
 // #region Imports
 
 import { expect      } from '@playwright/test'; // What: Expect. Why: A send is finished, and a state reached, only once its result shows. How: This waits until the result is visible.
-import { STA_REC_ARR } from './states.ts';      // What: State Record Array. Why: The Contact states a control leads to reuse the Contact page's phone and desktop states. How: This lists every state, from which the Contact ones are picked.
+import { STA_REC_ARR } from './states.ts';      // What: State Record Array. Why: The Contact states a control leads to reuse the Contact page's phone and desktop states. How: This lists the shared states, from which the Contact ones are picked.
 
 
 import type { Page      } from '@playwright/test'; // What: Page. Why: The Contact helpers drive a Playwright page. How: This types their page parameters.
