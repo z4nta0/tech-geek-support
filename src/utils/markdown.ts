@@ -32,7 +32,7 @@ type InlTokTyp = { hreStr? : string, kinStr : 'bold' | 'italic' | 'link' | 'text
 
 type BloRecTyp = // What: Block Record Type. Why: An article is a list of blocks of a few kinds. How: This types each kind of block by its kinStr.
 	| { inlArr : InlTokTyp[], kinStr : 'heading', levNum : 2 | 3 }             // What: Heading Block. Why: Sections are named by headings. How: This holds the heading's level and text.
-	| { inlArr : InlTokTyp[], kinStr : 'paragraph' }                           // What: Paragraph Block. Why: Most text is paragraphs. How: This holds the paragraph's text.
+	| { inlArr : InlTokTyp[], kinStr : 'paragraph' }                           // What: Paragraph Block. Why: A paragraph holds the article's running text. How: This holds the paragraph's text.
 	| { inlArr : InlTokTyp[], kinStr : 'tip' }                                 // What: Tip Block. Why: A tip is a paragraph set apart from the steps. How: This holds the tip's text.
 	| { iteArr : InlTokTyp[][], kinStr : 'ordered' }                           // What: Ordered List Block. Why: Steps are done in order. How: This holds each step's text.
 	| { iteArr : InlTokTyp[][], kinStr : 'unordered' }                         // What: Unordered List Block. Why: Some points have no order. How: This holds each point's text.

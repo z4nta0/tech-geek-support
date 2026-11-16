@@ -7,8 +7,8 @@
 # the sister sites and profiles only navigate away. That lets the
 # Content-Security-Policy be strict rather than needing broad allowances.
 #
-# default-src 'self' is the fallback every unlisted directive inherits, so
-# connect-src (the form's post to the site's root), font-src, img-src, and
+# default-src 'self' is the fallback every unlisted fetch directive inherits,
+# so connect-src (the form's post to the site's root), font-src, img-src, and
 # manifest-src need no lines of their own. Images need no data: source, since
 # the build ships every image as its own file rather than inlining it as a
 # data: address. The directives listed either need a different value than

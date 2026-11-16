@@ -92,8 +92,8 @@ function datForFun ( isoDatStr : string ) : string {
  * Turns one line's pieces into what the page shows: plain text as text, bold
  * as strong, italic as em, and links as links. A link to the site itself
  * (starting with /) moves through the router, and any other address is a
- * plain link that opens in the same tab. Each piece is keyed by its place in
- * the line.
+ * plain link that opens in the same tab. Each bold, italic, or link element is
+ * keyed by its place in the line.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -268,7 +268,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 
 
 
-							if ( bloRecObj.kinStr === 'paragraph' ) return <p key={ bloIndNum }>{ renInlFun( bloRecObj.inlArr ) }</p>; // What: Paragraph Return. Why: Most of the body is paragraphs. How: This renders a p.
+							if ( bloRecObj.kinStr === 'paragraph' ) return <p key={ bloIndNum }>{ renInlFun( bloRecObj.inlArr ) }</p>; // What: Paragraph Return. Why: A paragraph holds the body's running text. How: This renders a p.
 
 
 

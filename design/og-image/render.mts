@@ -110,7 +110,7 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 	}, artTexArr ); // What: Card Fill Arguments. Why: The page can't read this script's variables. How: This hands the article's topic and title, or null for the site's card, into the page.
 
 
-	await capPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text captured before its web font loads would be set in a fallback. How: This waits for every font face.
+	await capPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text captured before its web font loads would be set in a fallback. How: This waits for the page's fonts.
 
 	await capPagObj.screenshot( { path : imaPatStr, type : 'png' } ); // What: Image Capture Call. Why: This writes the image. How: This saves the page as a PNG.
 

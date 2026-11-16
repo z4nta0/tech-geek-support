@@ -86,7 +86,7 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 	const artIdeStr = filPatStr.split( '/' ).at( -2 )!; // What: Article Identifier String. Why: An article's address is its folder's name. How: This takes the path's second-to-last part. // What: Non-Null Note. Why: at() allows undefined for a short array. How: Every glob path ends in a folder and article.md.
 
-	const { bloRecArr, froMatObj } = parMarFun( filTexStr ); // What: Block Record Array And Front Matter Object. Why: The article's fields and body come from its file. How: This reads the file.
+	const { bloRecArr, froMatObj } = parMarFun( filTexStr ); // What: Block Record Array. Why: The article's body is its blocks. How: This takes the parser's blocks. // What: Front Matter Object. Why: The article's fields come from its front matter. How: This takes the parser's key and value pairs.
 
 
 

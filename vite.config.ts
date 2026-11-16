@@ -79,12 +79,12 @@ const htmEscFun = ( rawTexStr : string ) : string => rawTexStr.replace( /&/g, '&
  * and every Open Graph and Twitter tag that names the page, its address, or
  * its image, with og:type set to article. Each tag is found by its name or
  * property, whichever quotes it uses and whether or not the page has been
- * compacted, and replaced whole, so the result is the same in the dev
- * server's page and the built one. It then adds the article's publication
- * date, its topic, and its own Article structured data, naming z4nta0 as its
+ * compacted, and replaced whole, so the result is the same in the dev server's
+ * page and the built one. It then adds the article's publication date, its
+ * topic, and its own Article structured data, pointing at z4nta0 as its
  * author, just before the head closes. An article's link preview image is its
- * own PNG in public/social/, named after its address. The canonical link
- * stays with the article's page in React.
+ * own PNG in public/social/, named after its address. The canonical link stays
+ * with the article's page in React.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
