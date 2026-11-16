@@ -191,8 +191,7 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
 	expect( heaRowObj.titStr.length ).toBeLessThanOrEqual( 60 ); // What: Title Length Assertion. Why: The site keeps every title to about 60 characters. How: This keeps it to 60 characters.
 
 	await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'z4nta0' ); // What: Author Assertion. Why: The site names z4nta0, who built and owns it, as its author. How: This checks the author tag.
-
-	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 ); // What: Single Description Assertion. Why: Two descriptions leave search engines to guess. How: This checks there's exactly one, index.html's, on every page.
+	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                  // What: Single Description Assertion. Why: Two descriptions leave search engines to guess. How: This checks there's exactly one, index.html's, on every page.
 
 	if ( heaRowObj.heaBoo ) await expect( curPagObj.getByRole( 'heading', { level : 1 } ) ).toHaveCount( 1 ); // What: Single Heading Assertion. Why: One h1 tells search engines and screen readers what the page is about. How: This checks there's exactly one on every page the row marks.
 
@@ -202,8 +201,7 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
 
 
 		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveAttribute( 'content', 'noindex' ); // What: Noindex Assertion. Why: Search engines must leave the page out. How: This checks the one robots tag says noindex.
-
-		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveCount( 0 ); // What: No Canonical Assertion. Why: A page kept out of search has no use for a canonical address, and one left over from the previous page would contradict it. How: This checks there's none.
+		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveCount( 0 );                      // What: No Canonical Assertion. Why: A page kept out of search has no use for a canonical address, and one left over from the previous page would contradict it. How: This checks there's none.
 
 
 	}
@@ -215,14 +213,11 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
 
 
 		expect( desConStr.length ).toBeGreaterThanOrEqual( 120 ); // What: Description Minimum Assertion. Why: A summary that's too short wastes the space a listing gives it, and link preview checkers flag one under 120 characters. How: This checks it runs at least 120 characters.
+		expect( desConStr.length ).toBeLessThanOrEqual( 125 );    // What: Description Maximum Assertion. Why: Phones cut a summary off around 125 characters. How: This checks it stays within that.
 
-		expect( desConStr.length ).toBeLessThanOrEqual( 125 ); // What: Description Maximum Assertion. Why: Phones cut a summary off around 125 characters. How: This checks it stays within that.
-
-		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveCount( 1 ); // What: Single Canonical Assertion. Why: Two canonical links leave search engines to guess. How: This checks there's exactly one.
-
+		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveCount( 1 );                            // What: Single Canonical Assertion. Why: Two canonical links leave search engines to guess. How: This checks there's exactly one.
 		await expect( curPagObj.locator( 'link[rel="canonical"]' ) ).toHaveAttribute( 'href', heaRowObj.canStr ); // What: Canonical Assertion. Why: Every address Netlify serves the page at should count as its live one. How: This checks the canonical link names it.
-
-		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveCount( 0 ); // What: Indexable Assertion. Why: The page has to stay findable. How: This checks it carries no robots tag that could keep it out.
+		await expect( curPagObj.locator( 'meta[name="robots"]' ) ).toHaveCount( 0 );                              // What: Indexable Assertion. Why: The page has to stay findable. How: This checks it carries no robots tag that could keep it out.
 
 
 	}
@@ -371,9 +366,7 @@ test( 'the structured data describes z4nta0 and matches the pages', async ( { pa
 
 
 	expect( [ perNodObj[ '@id' ], perNodObj.name, perNodObj.url, webNodObj.name, webNodObj.url ] ).toEqual( [ 'https://techgeek.dev/#person', 'z4nta0', 'https://techgeek.dev/', 'TechGeek.support', LIV_URL_STR ] ); // What: Person And Site Assertion. Why: The site is z4nta0's, never a business's, and z4nta0 is the same person TechGeek.dev describes. How: This checks the person's ID, name, and address match TechGeek.dev's, and the site's name and address are this one's.
-
-	expect( webNodObj.author?.[ '@id' ] ).toBe( perNodObj[ '@id' ] ); // What: Author Link Assertion. Why: Search engines join the nodes by their IDs. How: This checks the site names z4nta0 as its author.
-
+	expect( webNodObj.author?.[ '@id' ] ).toBe( perNodObj[ '@id' ] );                      // What: Author Link Assertion. Why: Search engines join the nodes by their IDs. How: This checks the site names z4nta0 as its author.
 	expect( [ ...( perNodObj.sameAs ?? [] ) ].sort() ).toEqual( [ ...socHreArr ].sort() ); // What: Profiles Assertion. Why: Every profile in the data has to be one the site links to. How: This compares the data's profiles with the footer's outside links.
 
 
@@ -388,10 +381,8 @@ test( 'the raw page carries the home title and description for script-free reade
 	const titTexStr = rawHtmStr.match( /<title>([^<]*)<\/title>/ )?.[ 1 ].replace( /&amp;/g, '&' ) ?? ''; // What: Title Text String. Why: The raw title is checked as written. How: This reads the title element's text and decodes its ampersand.
 
 
-	expect( titTexStr ).toBe( PAG_HEA_ARR[ 0 ].titStr ); // What: Raw Title Assertion. Why: The raw page should name the home page in full, not the bare site name. How: This checks it matches the home page's title.
-
-	expect( titTexStr.length ).toBeGreaterThanOrEqual( 50 ); // What: Raw Title Length Assertion. Why: The home page's title should use most of the site's 60-character title length to describe the site. How: This checks it runs at least 50 characters.
-
+	expect( titTexStr ).toBe( PAG_HEA_ARR[ 0 ].titStr );                                       // What: Raw Title Assertion. Why: The raw page should name the home page in full, not the bare site name. How: This checks it matches the home page's title.
+	expect( titTexStr.length ).toBeGreaterThanOrEqual( 50 );                                   // What: Raw Title Length Assertion. Why: The home page's title should use most of the site's 60-character title length to describe the site. How: This checks it runs at least 50 characters.
 	expect( rawHtmStr ).toContain( `<meta name='description' content='${ HOM_DES_STR }' />` ); // What: Raw Description Assertion. Why: Checkers and crawlers without the script need a description to show. How: This checks the raw page carries the home page's.
 
 
@@ -415,15 +406,11 @@ for ( const artFilObj of [ null, ...ART_FIL_ARR ] ) { // What: Raw Preview Loop.
 		const expDesStr = artFilObj ? artFilObj.sumStr : HOM_DES_STR;                                                      // What: Expected Description String. Why: The preview's summary matches the page's description. How: This is the article's summary, or Home's.
 
 
-		expect( SOC_KEY_ARR.filter( ( socKeyStr ) => !socTagObj[ socKeyStr ] ) ).toEqual( [] ); // What: Complete Tags Assertion. Why: An app shows a bare link when a tag it needs is missing. How: This lists any required tag the page lacks.
-
+		expect( SOC_KEY_ARR.filter( ( socKeyStr ) => !socTagObj[ socKeyStr ] ) ).toEqual( [] );                                                    // What: Complete Tags Assertion. Why: An app shows a bare link when a tag it needs is missing. How: This lists any required tag the page lacks.
 		expect( [ socTagObj[ 'og:url' ], socTagObj[ 'og:image' ], socTagObj[ 'twitter:image' ] ] ).toEqual( [ expUrlStr, expImaStr, expImaStr ] ); // What: Address Assertion. Why: Scrapers need absolute addresses for the page and its image. How: This checks each against the page's own.
-
 		expect( [ socTagObj[ 'og:title' ], socTagObj[ 'twitter:title' ], socTagObj[ 'description' ], socTagObj[ 'og:description' ], socTagObj[ 'twitter:description' ] ] ).toEqual( [ expTitStr, expTitStr, expDesStr, expDesStr, expDesStr ] ); // What: Text Assertion. Why: The preview names and describes the page as the page itself does. How: This checks the titles and descriptions.
-
 		expect( [ socTagObj[ 'og:image:type' ], socTagObj[ 'og:image:width' ], socTagObj[ 'og:image:height' ], socTagObj[ 'og:type' ], socTagObj[ 'twitter:card' ] ] ).toEqual( [ 'image/png', '1200', '630', artFilObj ? 'article' : 'website', 'summary_large_image' ] ); // What: Image And Type Assertion. Why: Apps lay out a large preview from the image's stated type and size, and shape an article's preview as an article. How: This checks them, the page's type, and the card type.
-
-		expect( socTagObj[ 'article:published_time' ] ).toBe( artFilObj?.pubStr ); // What: Published Time Assertion. Why: An article's preview can show when it was written, while Home has no date. How: This checks the article's date, or that Home carries none.
+		expect( socTagObj[ 'article:published_time' ] ).toBe( artFilObj?.pubStr );                                                                 // What: Published Time Assertion. Why: An article's preview can show when it was written, while Home has no date. How: This checks the article's date, or that Home carries none.
 
 
 	} );
@@ -445,7 +432,6 @@ for ( const artFilObj of ART_FIL_ARR ) { // What: Article Data Loop. Why: Every 
 
 
 		expect( [ artNodObj?.headline, artNodObj?.description, artNodObj?.datePublished, artNodObj?.dateModified ] ).toEqual( [ artFilObj.titStr, artFilObj.sumStr, artFilObj.pubStr, artFilObj.updStr || artFilObj.pubStr ] ); // What: Article Details Assertion. Why: The data has to claim only what the article shows. How: This checks the headline, the description, and both dates against the article's front matter.
-
 		expect( [ artNodObj?.author?.[ '@id' ], artNodObj?.isPartOf?.[ '@id' ], artNodObj?.url ] ).toEqual( [ 'https://techgeek.dev/#person', `${ LIV_URL_STR }#website`, `${ LIV_URL_STR }articles/${ artFilObj.ideStr }` ] ); // What: Article Links Assertion. Why: Search engines join the article to its author and its site by their IDs. How: This checks the author, the site, and the article's own address.
 
 
@@ -467,10 +453,8 @@ test( 'every link preview image is 1,200x630 and under 300 KB', async ( { reques
 
 
 		expect( [ imaPatStr, imaResObj.headers()[ 'content-type' ] ] ).toEqual( [ imaPatStr, 'image/png' ] ); // What: Image Type Assertion. Why: A missing image falls through to the app's HTML. How: This checks the file is served as a PNG, naming it on failure.
-
-		expect( [ imaPatStr, ...imaSizFun( imaBufObj ) ] ).toEqual( [ imaPatStr, 1200, 630 ] ); // What: Image Size Assertion. Why: The tags promise 1,200x630. How: This reads the image's real size, naming it on failure.
-
-		expect( imaBufObj.length ).toBeLessThan( 300 * 1024 ); // What: Image Bytes Assertion. Why: The site keeps preview images under 300 KB, the limit the Social Previews rule sets. How: This checks the file is under the limit.
+		expect( [ imaPatStr, ...imaSizFun( imaBufObj ) ] ).toEqual( [ imaPatStr, 1200, 630 ] );               // What: Image Size Assertion. Why: The tags promise 1,200x630. How: This reads the image's real size, naming it on failure.
+		expect( imaBufObj.length ).toBeLessThan( 300 * 1024 );                                                // What: Image Bytes Assertion. Why: The site keeps preview images under 300 KB, the limit the Social Previews rule sets. How: This checks the file is under the limit.
 
 
 	}
@@ -486,8 +470,7 @@ test( 'robots.txt welcomes crawlers and names the sitemap', async ( { request : 
 	const robTexStr = await ( await reqCotObj.get( '/robots.txt' ) ).text(); // What: Robots Text String. Why: The file's rules are checked as served. How: This fetches and reads it.
 
 
-	expect( robTexStr ).toContain( 'User-agent: *\nAllow: /' ); // What: Allow All Assertion. Why: Every crawler may read the site, since the unwanted pages keep themselves out with noindex. How: This checks the one rule group.
-
+	expect( robTexStr ).toContain( 'User-agent: *\nAllow: /' );              // What: Allow All Assertion. Why: Every crawler may read the site, since the unwanted pages keep themselves out with noindex. How: This checks the one rule group.
 	expect( robTexStr ).toContain( `Sitemap: ${ LIV_URL_STR }sitemap.xml` ); // What: Sitemap Line Assertion. Why: Crawlers find the sitemap from this line. How: This checks it names the live sitemap.
 
 
@@ -502,8 +485,7 @@ test( 'the sitemap lists every indexed page', async ( { request : reqCotObj } ) 
 
 
 	expect( [ ...sitXmlStr.matchAll( /<loc>([^<]+)<\/loc>/g ) ].map( ( locMatArr ) => locMatArr[ 1 ] ) ).toEqual( PAG_HEA_ARR.filter( ( heaRowObj ) => heaRowObj.canStr !== null ).map( ( heaRowObj ) => heaRowObj.canStr ) ); // What: Indexed Pages Assertion. Why: Listing a noindex page would contradict it, and missing an indexed page slows its discovery. How: This checks the sitemap's addresses equal the indexed pages' canonical addresses, in order.
-
-	expect( [ ...sitXmlStr.matchAll( /<lastmod>([^<]+)<\/lastmod>/g ) ].map( ( modMatArr ) => modMatArr[ 1 ] ) ).toEqual( ART_FIL_ARR.map( ( artFilObj ) => artFilObj.updStr || artFilObj.pubStr ) ); // What: Last Changed Assertion. Why: Crawlers decide when to come back to an article by its last change. How: This checks every article's entry carries its updated or published date, in order.
+	expect( [ ...sitXmlStr.matchAll( /<lastmod>([^<]+)<\/lastmod>/g ) ].map( ( modMatArr ) => modMatArr[ 1 ] ) ).toEqual( ART_FIL_ARR.map( ( artFilObj ) => artFilObj.updStr || artFilObj.pubStr ) );                          // What: Last Changed Assertion. Why: Crawlers decide when to come back to an article by its last change. How: This checks every article's entry carries its updated or published date, in order.
 
 
 } );
