@@ -70,7 +70,7 @@ const EMP_FOR_OBJ = { 'bot-field' : '', email : '', name : '', question : '', to
  * when it's a real topic. The browser checks the required fields and the
  * email format before letting it send. Sending posts the fields to Netlify
  * Forms, disabling the button and showing "Sending…" while it waits; a reply
- * Netlify doesn't answer with ok counts as an error, like a network failure,
+ * Netlify doesn't answer with OK counts as an error, like a network failure,
  * leaving the form in place with an error above the button, while a sent
  * question swaps the form for a thank-you with a button that empties the
  * form for another. The error's alert region is in the form, empty, from the
@@ -220,7 +220,7 @@ function ConPagCom () : JSX.Element {
 	 * earlier error, then posts the fields form-encoded to the site's root
 	 * under the question form's name, which Netlify matches to the hidden copy
 	 * of the form in index.html, with the topic's name, or Not sure when none
-	 * was chosen, and the honeypot as it stands. Only an ok reply counts as
+	 * was chosen, and the honeypot as it stands. Only an OK reply counts as
 	 * success; a failed reply or a network failure is logged and shown as an
 	 * error above the button. Sending ends either way.
 	 *
