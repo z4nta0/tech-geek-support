@@ -130,6 +130,8 @@ function HomPagCom () : JSX.Element {
 								Help with phones, computers, Wi-Fi, and everything in between. Ask in plain words, and I'll answer you by email within 24 hours.
 							</p>
 
+
+
 							<div className={ cssModObj.herActDiv }>{ /* What: Hero Actions Div Element. Why: The two ways onward sit side by side. How: This sets the buttons in a row that wraps. */ }
 
 
@@ -149,6 +151,8 @@ function HomPagCom () : JSX.Element {
 
 
 							</div>
+
+
 
 							<p className={ cssModObj.herNotPar }>No question is too basic. Really.</p>{ /* What: Hero Note Paragraph Element. Why: Many visitors worry their question is too simple to ask. How: This reassures them in the warm italic accent face. */ }
 
@@ -198,6 +202,7 @@ function HomPagCom () : JSX.Element {
 						<p className={ cssModObj.secEyePar }>Topics</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Popular things people ask about</h2>{ /* What: Section Title Heading Element. Why: The heading tells a visitor they're not alone in asking. How: This shows the section's h2. */ }
+
 
 
 						<ul className={ cssModObj.topGriUno }>{ /* What: Topic Grid Unordered Element. Why: The topics sit in an even grid of tiles. How: This lays them out four across, three at 1,024px and below, two at 768px and below, and in one column of short rows at 640px and below. */ }
@@ -321,6 +326,7 @@ function HomPagCom () : JSX.Element {
 
 
 						</div>
+
 
 
 						<ul className={ cssModObj.artGriUno }>{ /* What: Article Grid Unordered Element. Why: The newest articles sit side by side as equal cards. How: This lays them out four across, two by two at 1,024px and below, and stacked at 640px and below. */ }

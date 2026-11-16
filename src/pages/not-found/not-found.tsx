@@ -95,6 +95,8 @@ function NotFouCom () : JSX.Element {
 
 				<p className={ cssModObj.notTexPar }>The address may have a typo, or the page may have moved. Nothing's broken on your end. Here are a few good places to go instead.</p>{ /* What: Not Found Text Paragraph Element. Why: A nervous visitor should know it isn't their fault and where to go. How: This explains and reassures. */ }
 
+
+
 				<div className={ cssModObj.notActDiv }>{ /* What: Not Found Actions Div Element. Why: The three ways onward sit together. How: This sets them in a centered row that wraps. */ }
 
 

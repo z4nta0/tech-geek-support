@@ -395,6 +395,8 @@ function ConPagCom () : JSX.Element {
 
 									<p className={ cssModObj.sucTexPar }>{ hasEmaBoo ? "Thank you. I'll reply by email within 24 hours. If you don't see my reply, please check your spam or junk folder." : "Thank you. Since you didn't leave an email address, I can't reply directly. If your question becomes an article, you'll find it on the Articles page, so check back in a few days." }</p>{ /* What: Success Text Paragraph Element. Why: A visitor should know what happens next, which depends on whether they left an address. How: This promises a reply within a day and mentions the spam folder, or, with no address, points them to the Articles page. */ }
 
+
+
 									<div className={ cssModObj.sucActDiv }>{ /* What: Success Actions Div Element. Why: The two ways onward sit side by side. How: This sets them in a row that wraps. */ }
 
 
@@ -496,6 +498,7 @@ function ConPagCom () : JSX.Element {
 										</div>
 
 
+
 										<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The email's label, help tip, and input read as one field. How: This stacks them. */ }
 
 
@@ -518,6 +521,8 @@ function ConPagCom () : JSX.Element {
 
 
 											</div>
+
+
 
 											<input
 												id='forEmaInp'
@@ -587,6 +592,7 @@ function ConPagCom () : JSX.Element {
 									</div>
 
 
+
 									<div className={ cssModObj.forFieDiv }>{ /* What: Form Field Div Element. Why: The question's label, help tip, and box read as one field. How: This stacks them. */ }
 
 
@@ -610,6 +616,8 @@ function ConPagCom () : JSX.Element {
 
 										</div>
 
+
+
 										<textarea
 											id='forQueTex'
 
@@ -629,6 +637,7 @@ function ConPagCom () : JSX.Element {
 
 
 									</div>
+
 
 
 									<div
@@ -681,7 +690,6 @@ function ConPagCom () : JSX.Element {
 
 
 							</div>
-
 
 							<div className={ cssModObj.sidCarDiv }>{ /* What: Sidebar Card Div Element. Why: Some people would rather write an email. How: This shows the address. */ }
 
