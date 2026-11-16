@@ -50,7 +50,7 @@ import type { SisLinTyp } from 'techgeek-design/ui/link-types.ts'; // What: Sist
 
 // #region Constants
 
-const AVA_LAB_STR = 'Free help, answered within 24 hours';    // What: Availability Label String. Why: The phone menu reassures a visitor on any page that help is free and quick. How: The bar shows it in the drawer's pulsing label.
+const AVA_LAB_STR = 'Free help, answered within 24 hours';    // What: Availability Label String. Why: The phone menu reassures a visitor on any page that help is free and quick. How: The bar shows it in the drawer's label beside its pulsing dot.
 const SIT_EMA_STR = 'contact@techgeek.support';               // What: Site Email String. Why: The phone menu offers the site's contact address. How: The bar links it from the drawer.
 const SIT_TAG_STR = 'Patient tech help for everyday people.'; // What: Site Tagline String. Why: The phone menu and the footer end on the site's tagline. How: The bar and the footer both show it.
 const WOR_END_STR = '.support';                               // What: Wordmark Ending String. Why: The family's wordmark ends in each site's own domain. How: The bar's wordmark and the footer's copyright both show it after TechGeek.

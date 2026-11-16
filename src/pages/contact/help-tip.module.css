@@ -29,7 +29,7 @@
 
 }
 
-.helTipBut { /* What: Help Tip Button. Why: A small, plainly round question mark reads as optional help. How: This draws a dark teal ring with a mono question mark at the p02 rhythm size, a comfortable target, easing its fill, press, and focus. */
+.helTipBut { /* What: Help Tip Button. Why: A small, plainly round question mark reads as optional help. How: This draws a dark teal ring at the p02 rhythm size, a comfortable target, around a mono question mark, easing its fill, press, and focus. */
 
 
 	align-items     : center;

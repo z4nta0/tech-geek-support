@@ -254,7 +254,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 
 
 
-					<div className={ cssModObj.bodTexDiv }>{ /* What: Body Text Div Element. Why: The article's body is long-form prose, styled as a whole. How: This holds every block, which the module styles through their tags. */ }
+					<div className={ cssModObj.bodTexDiv }>{ /* What: Body Text Div Element. Why: The article's body is long-form prose, styled as a whole. How: This holds every block, which the module styles by their tags, except the tip and the media figure, which carry classes of their own. */ }
 
 
 						{ artRecObj.bloArr.map( ( bloRecObj, bloIndNum ) => { // What: Block Map Call. Why: Each block renders as its own element. How: This picks the element by the block's kind, keyed by its place in the body.
