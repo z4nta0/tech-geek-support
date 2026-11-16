@@ -323,7 +323,7 @@
 .herRinSvg { /* What: Hero Rings SVG. Why: The rings fill their column without growing past a comfortable size. How: This caps their width at about 426px. */
 
 
-	max-width : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.601px */
+	max-width : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.596px */
 
 
 }

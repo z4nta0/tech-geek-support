@@ -27,7 +27,7 @@
 	flex-direction : column;
 	gap            : var( --spa-ver-bas );                                                                          /* Spacing Vertical Base ~= 14.572px */
 	margin         : 0 auto;
-	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );                                                           /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );                                                           /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding        : calc( var( --nav-bar-hei ) + var( --her-gap-pad ) ) var( --gut-sid-pad ) var( --spa-ver-p07 ); /* Navigation Bar Height ~= 78.751px, Hero Gap Padding, about 59.447px - 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
 	text-align     : center;
 
@@ -51,7 +51,7 @@
 
 
 	margin-bottom : var( --spa-ver-m02 );                /* Spacing Vertical Base Minus 2 ~= 8.304px */
-	max-width     : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.517px */
+	max-width     : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.522px */
 
 
 }

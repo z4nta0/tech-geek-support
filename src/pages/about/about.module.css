@@ -176,7 +176,7 @@
 
 
 	isolation : isolate;
-	max-width : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.277px */
+	max-width : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */
 	position  : relative;
 	width     : 100%;
 
@@ -188,7 +188,7 @@
 	.porFraDiv { /* What: Smaller Portrait Frame Div. Why: A step smaller, the portrait leaves more of the introduction above the fold, at the same size down to 320px, as TechGeek.dev's About portrait does. How: This caps it at about 183px wide, the p09 step, about 242px tall. */
 
 
-		max-width : calc( var( --ver-rhy-p09 ) * 1rem ); /* Vertical Rhythm Base Plus 9 ~= 183.073px */
+		max-width : calc( var( --ver-rhy-p09 ) * 1rem ); /* Vertical Rhythm Base Plus 9 ~= 183.074px */
 
 
 	}
@@ -244,7 +244,7 @@
 		height   : 100%;
 		position : absolute;
 		top      : 0;
-		width    : calc( ( 100% - var( --ver-rhy-p09 ) * 1rem ) / 2 - var( --spa-hor-p03 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.073px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+		width    : calc( ( 100% - var( --ver-rhy-p09 ) * 1rem ) / 2 - var( --spa-hor-p03 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 	}
@@ -435,7 +435,7 @@
 
 
 	margin    : 0 auto;
-	max-width : calc( var( --ver-rhy-p14 ) * 1rem ); /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	max-width : calc( var( --ver-rhy-p14 ) * 1rem ); /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding   : 0 var( --gut-sid-pad );              /* Gutter Side Padding, about 19.304px - 44.876px */
 
 
