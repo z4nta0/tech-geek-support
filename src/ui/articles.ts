@@ -139,7 +139,7 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	// #region Reading Time
 
 	const bodTexStr = bloRecArr.map( ( bloRecObj ) => 'iteArr' in bloRecObj ? bloRecObj.iteArr.flat() : 'inlArr' in bloRecObj ? bloRecObj.inlArr : [] ).flat().map( ( inlTokObj ) => inlTokObj.texStr ).join( ' ' ); // What: Body Text String. Why: The reading time counts the words a reader reads. How: This gathers the text of every heading, paragraph, tip, and list item.
-	const reaMinNum = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) );                                                                                                    // What: Reading Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
+	const reaMinNum = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) );                                                                                                   // What: Reading Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
 
 	// #endregion Reading Time
 

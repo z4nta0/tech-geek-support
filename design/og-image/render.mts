@@ -128,11 +128,9 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 // #endregion capImaFun
 
 
-
 await capImaFun( OUT_PAT_STR, null ); // What: Site Card Capture Call. Why: The home page and every page but an article's share the site's card. How: This captures it.
 
 mkdirSync( SOC_DIR_STR, { recursive : true } ); // What: Social Folder Creation. Why: The articles' images need their folder. How: This creates it if it's missing.
-
 
 
 for ( const artFilObj of ART_FIL_ARR ) { // What: Article Capture Loop. Why: Every article gets its own preview. How: This captures each in turn, with its topic's label and its title.

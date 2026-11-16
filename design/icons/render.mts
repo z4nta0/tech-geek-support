@@ -178,7 +178,6 @@ async function renPngFun ( icoSizNum : number, icoOpaBoo : boolean ) : Promise< 
 // #endregion renPngFun
 
 
-
 for ( const icoRecObj of ICO_REC_ARR ) writeFileSync( OUT_DIR_STR + icoRecObj.filStr, await renPngFun( icoRecObj.sizNum, icoRecObj.opaBoo ) ); // What: PNG Icon Loop. Why: Each PNG icon is saved under its own name. How: This renders every row and writes it into public/.
 
 
