@@ -8,9 +8,10 @@ TechGeek.dev (`../tech-geek-dev`) is the source of this project's configs and
 test suites, TechGeek.cards (`../tech-geek-cards`) the closest worked example
 of a sister site built on the shared design from its first day, and the
 shared design comes from `techgeek-design` (`../techgeek-design`, installed
-from its `v0.7.2` tag, which brought the skip link, the scroll
+from its `v0.7.3` tag; `v0.7.2` brought the skip link, the scroll
 restoration on back, forward, and reload, and the menu closing on any link
-click, updated 2026-11-15).
+click, and `v0.7.3` lifts the skip link on hover only while it's focused,
+updated 2026-11-16).
 
 ## Origin and sibling sites
 This repository once held the portfolio, the support articles, and the
@@ -317,9 +318,10 @@ suites live in `tests/`, one project per suite and engine in
   Home's How It Works step cards and About's promise cards, which lift
   without being controls, are hovered too. The shared states' first Tab has
   to land on the skip link and draw a 2px ring. After probing the skip link
-  the probe waits for it to slide back out, since the package's skip link
-  lifts on hover even while unfocused, so a pointer landing on the brand link
-  mid-slide held it in view and hung WebKit's next hover. The probe's first
+  the probe waits for it to slide back out, since before `v0.7.3` the
+  package's skip link lifted on hover even while unfocused, so a pointer
+  landing on the brand link mid-slide held it in view and hung WebKit's next
+  hover (the audit's question 4, fixed in the package). The probe's first
   run found the Contact fields' focus outline snapping (fixed the same day).
 - **Navigation and menu** (audit 2026-11-15, from TechGeek.cards): the
   navigation spec checks exact restores through back, forward, and a reload
