@@ -180,8 +180,9 @@ const PRE_URL_STR = 'http://localhost:5206'; // What: Preview URL String. Why: L
  *
  * @summary
  * Every Open Graph and Twitter tag a complete link preview needs, per the
- * social preview rule; twitter:site and twitter:creator are left out, since
- * the site has no X account. Every row is one tag's property or name.
+ * social preview rule, plus theme-color, which Discord edges its card with;
+ * twitter:site and twitter:creator are left out, since the site has no X
+ * account. Every row is one tag's property or name.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -201,6 +202,7 @@ const SOC_KEY_ARR = [ // What: Social Key Array. Why: A shared link shows a full
 	'og:title',
 	'og:type',
 	'og:url',
+	'theme-color',
 	'twitter:card',
 	'twitter:description',
 	'twitter:image',
