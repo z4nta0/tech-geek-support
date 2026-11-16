@@ -286,7 +286,9 @@ async function namProFun ( curPagObj : Page ) : Promise< string[] > {
 		const tabSnaStr = ( await tabLinObj.ariaSnapshot() ).split( '\n' )[ 0 ]; // What: Tab Snapshot String. Why: The link's own tree line holds its role and announced name. How: This reads the link's tree and keeps its first line.
 
 
-		if ( tabSnaStr.startsWith( '- link' ) && !TAB_HIN_REG.test( tabSnaStr ) ) proLisArr.push( `${ tabSnaStr } opens a new tab without saying so` ); // What: Tab Hint Check. Why: A screen reader user should know before a new tab opens. How: This records a link whose tree line names it without ending in the note.
+		if ( !tabSnaStr.startsWith( '- link' ) ) proLisArr.push( `a new tab link reads as "${ tabSnaStr }" rather than as a link` ); // What: Tab Role Check. Why: A shown new tab link that the tree doesn't read as a link would otherwise slip past the hint check. How: This records the link's line when it doesn't open with the link role.
+
+		else if ( !TAB_HIN_REG.test( tabSnaStr ) ) proLisArr.push( `${ tabSnaStr } opens a new tab without saying so` ); // What: Tab Hint Check. Why: A screen reader user should know before a new tab opens. How: This records a link whose tree line names it without ending in the note.
 
 
 	}
