@@ -177,7 +177,7 @@ function ConPagCom () : JSX.Element {
 
 
 
-		sucTitRef.current?.focus( { preventScroll : true } ); // What: Heading Focus Call. Why: A screen reader should announce that the question went out. How: This focuses the heading without the browser's own scroll, which skips an element already partly on screen.
+		sucTitRef.current?.focus( { preventScroll : true } ); // What: Heading Focus Call. Why: A screen reader should announce that the question went out. How: This focuses the heading without the browser's own scroll, since the next call scrolls it to the top.
 
 		sucTitRef.current?.scrollIntoView( { block : 'start' } ); // What: Heading Scroll Call. Why: The thank-you would otherwise sit half under the fixed bar. How: This scrolls the heading to the top, where its scroll margin leaves room for the bar and the check, following the page's own smooth scrolling, which reduced motion turns off.
 
