@@ -44,10 +44,11 @@ npm run test:accessibility  # axe-core plus scripted naming, keyboard, reflow, a
 npm run test:interaction    # page navigation, the phone menu, the question form and its help tips, the Ko-fi button, and every link and button's hover, press, and focus feedback
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
 npm run test:responsive     # every page and the phone menu from 320 to 1,920px: no sideways scroll, spill, or overlap, every card grid's rows even, and every paragraph within its measure
+npm run test:security       # the security headers, no policy violations on any page from the build, new tab links that can't reach back, no secrets in the build, and a dependency audit
 npm run test:seo            # titles, descriptions, canonical links, robots, link previews, structured data, icons, robots.txt, and the sitemap, for every page and article
 ```
 
-Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5196, so a dev server already running on 5173 is left alone. The states the suites visit are Home, Articles, About, Contact, the 404 page, and one article (the slow Wi-Fi one, which uses every kind of content an article can hold, standing in for the rest, since every article shares one page), each at phone and desktop widths, plus the open phone menu. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report.
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5196, while the security suite and the SEO suite's raw page and sitemap checks read the build served by `vite preview` on 5206, so a dev server already running on 5173 is left alone. The states the suites visit are Home, Articles, About, Contact, the 404 page, and one article (the slow Wi-Fi one, which uses every kind of content an article can hold, standing in for the rest, since every article shares one page), each at phone and desktop widths, plus the open phone menu. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report.
 
 The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how a page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
@@ -111,6 +112,7 @@ tests/
 ├── interaction/       navigation, phone menu, question form, help tip, Ko-fi button, and hover, press, and focus feedback checks
 ├── rendering/         screenshot comparisons and their baselines/
 ├── responsive/        layout, card grid, and measure checks across screen widths
+├── security/          security header, build, dependency, and browser policy checks
 ├── seo/               head tags, structured data, icon, and crawler file checks
 ├── support/           the page states the suites visit
 └── playwright.config.ts
