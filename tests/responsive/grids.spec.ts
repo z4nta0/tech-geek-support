@@ -167,7 +167,7 @@ function griProFun ( griArgObj : GriArgTyp ) : string[] {
 
 
 
-		const labGriStr = `${ griCasObj.ideStr } grid at ${ griArgObj.widStr }`;                                                                                      // What: Label Grid String. Why: A problem should say which grid and width it appeared at. How: This names the grid and the width.
+		const labGriStr = `${ griCasObj.ideStr } grid at ${ griArgObj.widStr }`;                                                                                       // What: Label Grid String. Why: A problem should say which grid and width it appeared at. How: This names the grid and the width.
 		const rowRecArr = [ ...rowTopMap.entries() ].sort( ( oneEntArr, twoEntArr ) => oneEntArr[ 0 ] - twoEntArr[ 0 ] ).map( ( rowEntArr ) => rowEntArr[ 1 ] );       // What: Row Rect Array. Why: Rows are judged from top to bottom, the last one by its place. How: This lists each row's card boxes, ordered by their top.
 		const rowCouArr = rowRecArr.map( ( rowCurArr ) => rowCurArr.length );                                                                                          // What: Row Count Array. Why: The rule compares how many cards each row holds. How: This counts each row's cards.
 		const fulCouArr = griCasObj.oddBoo ? rowCouArr.slice( 0, -1 ) : rowCouArr;                                                                                     // What: Full Count Array. Why: Every row of an even grid has to be full, while the odd card grid's last row may hold one card. How: This keeps every row's count, or every count but the last for the odd card grid.

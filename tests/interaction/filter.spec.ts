@@ -118,8 +118,8 @@ async function parStaFun ( curPagObj : Page ) : Promise< ParStaTyp[] > {
 	return curPagObj.evaluate( ( selLisArr ) => selLisArr.map( ( selCurStr ) => { // What: Part States Return. Why: The test judges the parts at once. How: This reads each part's animation name, its keyframes, and its mark.
 
 
-		const parCurEle = document.querySelector( selCurStr );                                                                                                                 // What: Part Current Element. Why: The part is read where it now is. How: This finds it.
-		const aniNamStr = parCurEle ? getComputedStyle( parCurEle ).animationName : '';                                                                                        // What: Animation Name String. Why: The part's fade is named in its computed style. How: This reads the name, or an empty string when the part is missing.
+		const parCurEle = document.querySelector( selCurStr ); // What: Part Current Element. Why: The part is read where it now is. How: This finds it.
+		const aniNamStr = parCurEle ? getComputedStyle( parCurEle ).animationName : '';                                                                                       // What: Animation Name String. Why: The part's fade is named in its computed style. How: This reads the name, or an empty string when the part is missing.
 		const kefRulArr = [ ...document.styleSheets ].flatMap( ( styShtObj ) => [ ...styShtObj.cssRules ] ).filter( ( cssRulObj ) => cssRulObj instanceof CSSKeyframesRule ); // What: Keyframes Rule Array. Why: A named fade only plays when its keyframes exist. How: This lists every keyframes rule the page's stylesheets hold.
 
 
@@ -129,7 +129,7 @@ async function parStaFun ( curPagObj : Page ) : Promise< ParStaTyp[] > {
 
 			aniStr : aniNamStr,                                                       // What: Animation String. Why: The test reads what the part plays. How: This is its computed animation name.
 			kefBoo : kefRulArr.some( ( kefRulObj ) => kefRulObj.name === aniNamStr ), // What: Keyframes Boolean. Why: A named fade with no keyframes plays nothing. How: This is true when the page holds keyframes of that name.
-			marBoo : parCurEle?.hasAttribute( 'data-part-mark-old' ) ?? false        // What: Mark Boolean. Why: A part still marked wasn't remounted. How: This is true when it still carries the mark.
+			marBoo : parCurEle?.hasAttribute( 'data-part-mark-old' ) ?? false         // What: Mark Boolean. Why: A part still marked wasn't remounted. How: This is true when it still carries the mark.
 
 
 		};
@@ -176,7 +176,7 @@ for ( const redMotBoo of [ false, true ] ) { // What: Motion Loop. Why: The list
 			const parStaArr = await parStaFun( curPagObj ); // What: Part State Array. Why: The count, the list, and the region are judged together. How: This reads all three.
 
 
-			expect( parStaArr.map( ( parStaObj ) => parStaObj.marBoo ) ).toEqual( [ false, false, true ] ); // What: Remount Assertion. Why: The count and the list replay their fade only when remounted, while the live region has to stay for its change to be announced. How: This checks the count and the list lost the mark and the region kept it.
+			expect( parStaArr.map( ( parStaObj ) => parStaObj.marBoo ) ).toEqual( [ false, false, true ] );                                                                                                    // What: Remount Assertion. Why: The count and the list replay their fade only when remounted, while the live region has to stay for its change to be announced. How: This checks the count and the list lost the mark and the region kept it.
 			expect( parStaArr.slice( 0, 2 ).map( ( parStaObj ) => redMotBoo ? parStaObj.aniStr === 'none' : parStaObj.aniStr.includes( 'resultSwapFadeUp' ) && parStaObj.kefBoo ) ).toEqual( [ true, true ] ); // What: Arriving Fade Assertion. Why: The new list and count should fade up, or play nothing under reduced motion. How: This checks each plays the results' fade from keyframes the page holds, or has no animation under reduced motion.
 
 
@@ -209,7 +209,7 @@ test( 'a topic choice keeps the page in place and the topic in the address, whic
 
 	await curPagObj.getByRole( 'button', { name : 'Scams & Safety' } ).dispatchEvent( 'click' ); // What: Topic Click Call. Why: The press is the change under test, and a pointer click would first scroll a button the bar covers into view, moving the page itself. How: This sends the click straight to the "Scams & Safety" topic.
 
-	await expect( curPagObj ).toHaveURL( '/articles?topic=scams-safety' );                   // What: Topic Address Assertion. Why: The choice should stay shareable. How: This checks the address names the topic.
+	await expect( curPagObj ).toHaveURL( '/articles?topic=scams-safety' );                                               // What: Topic Address Assertion. Why: The choice should stay shareable. How: This checks the address names the topic.
 	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( 'Showing 1 article about Scams & Safety' ); // What: Narrowed Count Assertion. Why: The list should follow the press. How: This checks the count names the topic.
 
 	expect( Math.abs( await curPagObj.evaluate( () => scrollY ) - befTopNum ) ).toBeLessThanOrEqual( 1 ); // What: Kept Place Assertion. Why: A press shouldn't jump the page to its top. How: This checks the scroll position moved no more than a pixel.
@@ -260,7 +260,7 @@ test( 'a topic choice survives a trip to an article and back, and a router link 
 
 	await curPagObj.goBack(); // What: Back Call. Why: The visitor returns to the list. How: This goes back one entry.
 
-	await expect( curPagObj ).toHaveURL( '/articles?topic=scams-safety' );                                       // What: Back Address Assertion. Why: The replaced entry should still name the topic. How: This checks the address.
+	await expect( curPagObj ).toHaveURL( '/articles?topic=scams-safety' );                                               // What: Back Address Assertion. Why: The replaced entry should still name the topic. How: This checks the address.
 	await expect( curPagObj.locator( 'p[aria-live="polite"]' ) ).toHaveText( 'Showing 1 article about Scams & Safety' ); // What: Back Count Assertion. Why: The list should come back narrowed. How: This checks the count names the topic.
 
 	await expect.poll( async () => Math.abs( await curPagObj.evaluate( () => scrollY ) - befTopNum ) ).toBeLessThanOrEqual( 1 ); // What: Back Place Assertion. Why: Back should return to the place the visitor left. How: This waits until the scroll position is within a pixel of it.

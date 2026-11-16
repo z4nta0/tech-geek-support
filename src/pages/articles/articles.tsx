@@ -94,9 +94,9 @@ function ArtLisCom () : JSX.Element {
 
 
 
-	const rawTopStr = topChoStr ?? seaParObj.get( 'topic' ) ?? ''; // What: Raw Topic String. Why: The topic pressed on the page wins over the address the router knows, which may name a topic, or nothing. How: This reads the pressed topic, else the topic parameter, else an empty string.
-	const topRecObj = TOP_REC_ARR.find( ( topCurObj ) => topCurObj.ideStr === rawTopStr );                                                                      // What: Topic Record Object. Why: Only a real topic filters the list. How: This finds the topic the address names, or nothing.
-	const shoArtArr = topRecObj ? ART_REC_ARR.filter( ( artRecObj ) => artRecObj.topStr === topRecObj.ideStr ) : ART_REC_ARR;                                   // What: Shown Article Array. Why: The list shows only the chosen topic's articles. How: This filters the catalog by the topic, or keeps every article when none is chosen.
+	const rawTopStr = topChoStr ?? seaParObj.get( 'topic' ) ?? '';                                                            // What: Raw Topic String. Why: The topic pressed on the page wins over the address the router knows, which may name a topic, or nothing. How: This reads the pressed topic, else the topic parameter, else an empty string.
+	const topRecObj = TOP_REC_ARR.find( ( topCurObj ) => topCurObj.ideStr === rawTopStr );                                    // What: Topic Record Object. Why: Only a real topic filters the list. How: This finds the topic the address names, or nothing.
+	const shoArtArr = topRecObj ? ART_REC_ARR.filter( ( artRecObj ) => artRecObj.topStr === topRecObj.ideStr ) : ART_REC_ARR; // What: Shown Article Array. Why: The list shows only the chosen topic's articles. How: This filters the catalog by the topic, or keeps every article when none is chosen.
 	const couTexStr = `Showing ${ shoArtArr.length } ${ shoArtArr.length === 1 ? 'article' : 'articles' }${ topRecObj ? ` about ${ topRecObj.labStr }` : '' }`; // What: Count Text String. Why: The visitor should know how many articles match. How: This counts them, in the right singular or plural, naming the topic when one is chosen.
 	const resKeyStr = shoArtArr.map( ( artRecObj ) => artRecObj.ideStr ).join( ' ' );                                                                           // What: Result Key String. Why: After a choice, the list should fade in only when the articles shown change. How: This joins the shown articles' addresses, which the count and list remount on.
 
