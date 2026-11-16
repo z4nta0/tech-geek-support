@@ -482,6 +482,7 @@ test( 'the raw page carries the home title and description for script-free reade
 	expect( titTexStr ).toBe( PAG_HEA_ARR[ 0 ].titStr );                                       // What: Raw Title Assertion. Why: The raw page should name the home page in full, not the bare site name. How: This checks it matches the home page's title.
 	expect( titTexStr.length ).toBeGreaterThanOrEqual( 50 );                                   // What: Raw Title Length Assertion. Why: The home page's title should use most of the site's 60-character title length to describe the site. How: This checks it runs at least 50 characters.
 	expect( rawHtmStr ).toContain( `<meta name='description' content='${ HOM_DES_STR }' />` ); // What: Raw Description Assertion. Why: Checkers and crawlers without the script need a description to show. How: This checks the raw page carries the home page's.
+	expect( rawHtmStr.match( /<meta name=['"]description['"]/g )?.length ).toBe( 1 );          // What: Raw Single Description Assertion. Why: index.html's description is the site's only one, and a second would leave search engines to guess. How: This counts the raw page's description tags.
 
 
 } );
@@ -579,7 +580,7 @@ test( 'robots.txt welcomes crawlers and names the sitemap', async ( { request : 
 test( 'the sitemap lists every indexed page', async ( { request : reqCotObj } ) => { // What: Sitemap Test. Why: The sitemap should list exactly the indexed pages, by their canonical addresses, and when each article last changed. How: This fetches it and compares its addresses with the indexed rows and its dates with the articles'.
 
 
-	const sitXmlStr = await ( await reqCotObj.get( '/sitemap.xml' ) ).text(); // What: Sitemap XML String. Why: The file's addresses are checked as served. How: This fetches and reads it.
+	const sitXmlStr = await ( await reqCotObj.get( `${ PRE_URL_STR }/sitemap.xml` ) ).text(); // What: Sitemap XML String. Why: The file's addresses are checked as they ship, since the build rewrites the sitemap with every article. How: This fetches the built file from the preview, which serves the build as Netlify does, and reads it.
 
 
 	expect( [ ...sitXmlStr.matchAll( /<loc>([^<]+)<\/loc>/g ) ].map( ( locMatArr ) => locMatArr[ 1 ] ) ).toEqual( PAG_HEA_ARR.filter( ( heaRowObj ) => heaRowObj.canStr !== null ).map( ( heaRowObj ) => heaRowObj.canStr ) ); // What: Indexed Pages Assertion. Why: Listing a noindex page would contradict it, and missing an indexed page slows its discovery. How: This checks the sitemap's addresses equal the indexed pages' canonical addresses, in order.
