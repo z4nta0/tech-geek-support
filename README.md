@@ -41,9 +41,9 @@ npm run typecheck  # TypeScript across src/, the configs, scripts/, tests/, and 
 ```bash
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted naming, keyboard, reflow, and motion checks, and a check that no source comment shows on a page
-npm run test:interaction    # page navigation, the phone menu, the question form, the Ko-fi button, and every link and button's hover, press, and focus feedback
+npm run test:interaction    # page navigation, the phone menu, the question form and its help tips, the Ko-fi button, and every link and button's hover, press, and focus feedback
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
-npm run test:responsive     # every page and the phone menu from 320 to 1,920px: no sideways scroll, spill, or overlap, and every paragraph within its measure
+npm run test:responsive     # every page and the phone menu from 320 to 1,920px: no sideways scroll, spill, or overlap, every card grid's rows even, and every paragraph within its measure
 npm run test:seo            # titles, descriptions, canonical links, robots, link previews, structured data, icons, robots.txt, and the sitemap, for every page and article
 ```
 
@@ -108,9 +108,9 @@ scripts/               article-files.ts, which lists the articles for code that 
 research/articles/     The article drafts and their research notes, never published
 tests/
 ├── accessibility/     axe-core scan and scripted checks
-├── interaction/       navigation, phone menu, question form, Ko-fi button, and hover, press, and focus feedback checks
+├── interaction/       navigation, phone menu, question form, help tip, Ko-fi button, and hover, press, and focus feedback checks
 ├── rendering/         screenshot comparisons and their baselines/
-├── responsive/        layout checks across screen widths
+├── responsive/        layout, card grid, and measure checks across screen widths
 ├── seo/               head tags, structured data, icon, and crawler file checks
 ├── support/           the page states the suites visit
 └── playwright.config.ts
