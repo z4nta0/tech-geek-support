@@ -108,7 +108,7 @@ const LAY_CAS_ARR : LayCasTyp[] = [ // What: Layout Case Array. Why: Every page 
 
 	},
 
-	{ // What: About Case. Why: The About page tells the Tech Geek's story beside a portrait. How: This measures it as loaded.
+	{ // What: About Case. Why: The About page tells the Tech Geek's story with a portrait, beside it above 768px and above it at 768px and below. How: This measures it as loaded.
 
 
 		ideStr : 'about',
