@@ -231,7 +231,7 @@ test( 'tapping the brand goes home and closes the menu', async ( { page : curPag
 
 
 
-test( 'widening the screen closes the menu', async ( { page : curPagObj } ) => { // What: Resize Close Test. Why: Past the phone layout the toggle disappears, which would leave the page inert with no way to close the menu. How: This widens the screen and checks the menu closes and the page comes back.
+test( 'widening the screen closes the menu', async ( { page : curPagObj } ) => { // What: Resize Close Test. Why: Above the bar's 1,024px breakpoint the toggle disappears, which would leave the page inert with no way to close the menu. How: This widens the screen and checks the menu closes and the page comes back.
 
 
 	await menOpeFun( curPagObj ); // What: Menu Open Call. Why: The check needs the menu open. How: This opens and checks it.
