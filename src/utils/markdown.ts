@@ -404,6 +404,10 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 
 
+		if ( !parLinArr.length ) throw new Error( `Markdown line ${ linIndNum + 1 } isn't a block the reader knows: "${ linTexArr[ linIndNum ].trim() }".` ); // What: Unknown Block Guard. Why: A line that starts like a block but matches none, such as a photo line with a space in its file name, would stop the loop from moving on. How: This throws, quoting the line, so a broken article stops the build instead of hanging it.
+
+
+
 		bloRecArr.push({ // What: Paragraph Push. Why: The lines read as one paragraph. How: This adds a paragraph block.
 
 
