@@ -42,7 +42,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The helpers re
 
 // #region Constants
 
-const PAR_SEL_ARR = [ '[class*="_couTexSpa_"]', '[class*="_artLisUno_"]', 'p[aria-live="polite"]' ]; // What: Part Selector Array. Why: The count and the list arrive on each choice, inside a live region that has to stay. How: This finds the count and the list by the source names inside their hashed module classes, then the region by its live attribute.
+const PAR_SEL_ARR = [ '[class*="_couTexSpa_"]', '[class*="_artLisUno_"]', 'p[aria-live="polite"]' ]; // What: Part Selector Array. Why: The count and the list arrive on each choice, and the count sits inside a live region that has to stay. How: This finds the count and the list by the source names inside their hashed module classes, then the region by its live attribute.
 
 // #endregion Constants
 
@@ -151,7 +151,7 @@ async function parStaFun ( curPagObj : Page ) : Promise< ParStaTyp[] > {
 for ( const redMotBoo of [ false, true ] ) { // What: Motion Loop. Why: The list should arrive eased, and simply appear under reduced motion. How: This declares one test per motion setting.
 
 
-	test( `each topic choice ${ redMotBoo ? 'swaps the list and count in at once under reduced motion' : 'eases the new list and count in' }`, async ( { page : curPagObj } ) => { // What: Topic Choice Test. Why: The narrowed list is the result of each press, so it should be seen arriving every time and heard. How: This checks the list and count carry no fade on load, then after each of two topic presses checks they remounted and play the fade, or none under reduced motion, inside the same live region.
+	test( `each topic choice ${ redMotBoo ? 'swaps the list and count in at once under reduced motion' : 'eases the new list and count in' }`, async ( { page : curPagObj } ) => { // What: Topic Choice Test. Why: The narrowed list is the result of each press, so it should be seen arriving every time and heard. How: This checks the list and count carry no fade on load, then after each of two topic presses checks they remounted and play the fade, or none under reduced motion, while the live region holding the count stays.
 
 
 		if ( redMotBoo ) await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: The reduced motion test reads the list as such a visitor sees it. How: This makes the page match prefers-reduced-motion.
