@@ -228,6 +228,12 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   The dev server serves both the same way. Code that runs in Node reads the
   articles through `scripts/article-files.ts`, since the site's catalog loads
   them through Vite.
+- **Broken articles stop the build** (decided by the user 2026-11-16):
+  `scripts/article-files.ts`, which the build and the dev server read, throws
+  for a missing front matter field, a topic `ui/topics.ts` doesn't list, or a
+  photo or video the body names that isn't in the article's folder, naming
+  the article, so a broken article can't ship. The catalog in
+  `ui/articles.ts` runs the same checks as the page loads, as a backstop.
 - **Page title**: the article's title plus " | TechGeek.support" when both fit
   within 60 characters, or the title alone otherwise (`ui/article-title.ts`).
 - **Preview image**: `public/social/<slug>.png`, the article's topic and title

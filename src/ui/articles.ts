@@ -23,9 +23,9 @@ import type { BloRecTyp } from '../utils/markdown.ts'; // What: Block Record Typ
  * topic, summary, dates, reading time, body blocks, and the built address of
  * each media file it names. Every article is checked as it's read, and a
  * missing field, an unknown topic, or a media file that isn't there throws
- * an error naming the article as the catalog loads, so a broken article
- * fails loudly rather than showing blanks. The catalog lists the newest
- * articles first.
+ * an error naming the article as the catalog loads, a backstop for the same
+ * checks the build runs (scripts/article-files.ts). The catalog lists the
+ * newest articles first.
  *
  * Sections:
  *  - Constants
