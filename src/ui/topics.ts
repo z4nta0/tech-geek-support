@@ -30,11 +30,17 @@ type TopRecTyp = { hinStr : string, ideStr : string, labStr : string }; // What:
  * TOP_REC_ARR = Topic Record Array
  *
  * @summary
- * One row per topic: hinStr, a few examples of what it covers, shown under
- * the topic's name on Home's tiles; ideStr, the topic's identifier, used in
- * the Articles page's address (/articles?topic=windows) and on every
- * article; and labStr, the topic's name as the site shows it. Every row has
- * the same three fields.
+ * One row per topic. Every row shares one shape, so its fields carry no
+ * comments of their own:
+ *
+ * - `hinStr` (String): Hint String, a few examples of what the topic covers,
+ *   shown under its name on Home's tiles.
+ *
+ * - `ideStr` (String): Identifier String, the topic's identifier, used in
+ *   the Articles page's address (/articles?topic=windows) and on every
+ *   article.
+ *
+ * - `labStr` (String): Label String, the topic's name as the site shows it.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -271,7 +271,7 @@ async function heaCheFun ( curPagObj : Page, heaRowObj : typeof PAG_HEA_ARR[ num
 
 	await expect( curPagObj ).toHaveTitle( heaRowObj.titStr ); // What: Title Assertion. Why: Search listings and tabs name the page by its title. How: This waits for the page's own title.
 
-	expect( heaRowObj.titStr.length ).toBeLessThanOrEqual( 60 ); // What: Title Length Assertion. Why: The site keeps every title to about 60 characters. How: This keeps it to 60 characters.
+	expect( heaRowObj.titStr.length ).toBeLessThanOrEqual( 60 ); // What: Title Length Assertion. Why: The site keeps every title to about 60 characters. How: This checks it's at most 60 characters.
 
 	await expect( curPagObj.locator( 'meta[name="author"]' ) ).toHaveAttribute( 'content', 'z4nta0' );              // What: Author Assertion. Why: The site names z4nta0, who built and owns it, as its author. How: This checks the author tag.
 	await expect( curPagObj.locator( 'meta[name="description"]' ) ).toHaveCount( 1 );                               // What: Single Description Assertion. Why: Two descriptions leave search engines to guess. How: This checks there's exactly one, index.html's, on every page.
@@ -592,7 +592,7 @@ test( 'the sitemap lists every indexed page', async ( { request : reqCotObj } ) 
 
 
 	expect( [ ...sitXmlStr.matchAll( /<loc>([^<]+)<\/loc>/g ) ].map( ( locMatArr ) => locMatArr[ 1 ] ) ).toEqual( PAG_HEA_ARR.filter( ( heaRowObj ) => heaRowObj.canStr !== null ).map( ( heaRowObj ) => heaRowObj.canStr ) ); // What: Indexed Pages Assertion. Why: Listing a noindex page would contradict it, and missing an indexed page slows its discovery. How: This checks the sitemap's addresses equal the indexed pages' canonical addresses, in order.
-	expect( [ ...sitXmlStr.matchAll( /<lastmod>([^<]+)<\/lastmod>/g ) ].map( ( modMatArr ) => modMatArr[ 1 ] ) ).toEqual( ART_FIL_ARR.map( ( artFilObj ) => artFilObj.updStr || artFilObj.pubStr ) );                          // What: Last Changed Assertion. Why: Crawlers decide when to come back to an article by its last change. How: This checks every article's entry carries its updated or published date, in order.
+	expect( [ ...sitXmlStr.matchAll( /<lastmod>([^<]+)<\/lastmod>/g ) ].map( ( modMatArr ) => modMatArr[ 1 ] ) ).toEqual( ART_FIL_ARR.map( ( artFilObj ) => artFilObj.updStr || artFilObj.pubStr ) );                          // What: Last Changed Assertion. Why: Crawlers can use an article's last change to decide when to come back to it. How: This checks every article's entry carries its updated or published date, in order.
 
 
 } );
