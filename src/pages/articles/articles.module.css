@@ -168,7 +168,7 @@
 
 /* #region filRowDiv */
 
-.filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills, each full row reaching both edges of the column like the list and help card below it. How: This lines them up in a row that wraps, spreading each full row's pills across the whole width above 1,024px, where they always fit in two rows. */
+.filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills, each full row reaching both edges of the column, as the list and help card together do below it. How: This lines them up in a row that wraps, spreading each full row's pills across the whole width above 1,024px, where they always fit in two rows. */
 
 
 	display         : flex;

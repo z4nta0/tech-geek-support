@@ -7,8 +7,9 @@
  * @summary
  * Styles for NotFouCom: one centered column below the bar, the signal rings
  * at a modest size above a teal "Error 404" label, the heading, a
- * reassuring line, and the three buttons in a centered row. The page fades
- * up as it opens, and every transition holds still under reduced motion.
+ * reassuring line, and the three buttons in a centered row, wrapping at
+ * about 645px wide and below. The page fades up as it opens, and every
+ * transition holds still under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

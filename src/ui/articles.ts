@@ -22,9 +22,10 @@ import type { BloRecTyp } from '../utils/markdown.ts'; // What: Block Record Typ
  * and this module turns each article into a record: its address, title,
  * topic, summary, dates, reading time, body blocks, and the built address of
  * each media file it names. Every article is checked as it's read, and a
- * missing field, an unknown topic, or a media file that isn't there stops
- * the build with a message naming the article, so a broken article never
- * ships. The catalog lists the newest articles first.
+ * missing field, an unknown topic, or a media file that isn't there throws
+ * an error naming the article as the catalog loads, so a broken article
+ * fails loudly rather than showing blanks. The catalog lists the newest
+ * articles first.
  *
  * Sections:
  *  - Constants
@@ -95,14 +96,14 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 	for ( const keyNamStr of [ 'published', 'summary', 'title', 'topic' ] ) { // What: Required Key Loop. Why: Every article needs these four fields to show anywhere. How: This checks each one.
 
 
-		if ( !froMatObj[ keyNamStr ] ) throw new Error( `Article "${ artIdeStr }" is missing its ${ keyNamStr } in the front matter.` ); // What: Missing Key Guard. Why: A missing field would show as a blank on the site. How: This stops the build, naming the article and the field.
+		if ( !froMatObj[ keyNamStr ] ) throw new Error( `Article "${ artIdeStr }" is missing its ${ keyNamStr } in the front matter.` ); // What: Missing Key Guard. Why: A missing field would show as a blank on the site. How: This throws as the catalog loads, naming the article and the field.
 
 
 	}
 
 
 
-	if ( !TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === froMatObj.topic ) ) throw new Error( `Article "${ artIdeStr }" has an unknown topic, "${ froMatObj.topic }".` ); // What: Unknown Topic Guard. Why: An article with no real topic would never show under a filter. How: This stops the build, naming the article and its topic.
+	if ( !TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === froMatObj.topic ) ) throw new Error( `Article "${ artIdeStr }" has an unknown topic, "${ froMatObj.topic }".` ); // What: Unknown Topic Guard. Why: An article with no real topic would never show under a filter. How: This throws as the catalog loads, naming the article and its topic.
 
 	// #endregion Front Matter Checks
 
@@ -123,7 +124,7 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 		const medUrlStr = MED_URL_OBJ[ `../articles/${ artIdeStr }/${ bloRecObj.souStr }` ]; // What: Media URL String. Why: The file's built address comes from Vite's glob. How: This looks it up by its path.
 
 
-		if ( !medUrlStr ) throw new Error( `Article "${ artIdeStr }" names ${ bloRecObj.souStr }, which isn't in its folder.` ); // What: Missing Media Guard. Why: A missing photo would show as a broken image. How: This stops the build, naming the article and the file.
+		if ( !medUrlStr ) throw new Error( `Article "${ artIdeStr }" names ${ bloRecObj.souStr }, which isn't in its folder.` ); // What: Missing Media Guard. Why: A missing photo would show as a broken image. How: This throws as the catalog loads, naming the article and the file.
 
 
 
