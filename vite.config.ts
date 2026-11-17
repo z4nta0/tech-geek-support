@@ -246,9 +246,9 @@ const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.ht
  * Adds every article to the sitemap. The site's own pages are listed by hand
  * in public/sitemap.xml, while the articles come and go with the files in
  * src/articles, so each one gets an entry here, with its last change (its
- * updated date, or its publication date) for crawlers deciding when to come
- * back. The entries go just before the sitemap closes, after the site's pages,
- * in address order.
+ * updated date, or its publication date), which crawlers can use to decide
+ * when to come back. The entries go just before the sitemap closes, after
+ * the site's pages, in address order.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *

@@ -135,7 +135,7 @@ async function parStaFun ( curPagObj : Page ) : Promise< ParStaTyp[] > {
 		};
 
 
-	} ), PAR_SEL_ARR );
+	} ), PAR_SEL_ARR ); // What: Part Selector Argument. Why: The page function can't read this file's constants. How: This hands it the list of selectors it maps over.
 
 
 }
