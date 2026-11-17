@@ -120,7 +120,7 @@ async function parStaFun ( curPagObj : Page ) : Promise< ParStaTyp[] > {
 
 		const parCurEle = document.querySelector( selCurStr ); // What: Part Current Element. Why: The part is read where it now is. How: This finds it.
 		const aniNamStr = parCurEle ? getComputedStyle( parCurEle ).animationName : '';                                                                                       // What: Animation Name String. Why: The part's fade is named in its computed style. How: This reads the name, or an empty string when the part is missing.
-		const kefRulArr = [ ...document.styleSheets ].flatMap( ( styShtObj ) => [ ...styShtObj.cssRules ] ).filter( ( cssRulObj ) => cssRulObj instanceof CSSKeyframesRule ); // What: Keyframes Rule Array. Why: A named fade only plays when its keyframes exist. How: This lists every keyframes rule the page's stylesheets hold.
+		const kefRulArr = [ ...document.styleSheets ].flatMap( ( styShtObj ) => [ ...styShtObj.cssRules ] ).filter( ( cssRulObj ) => cssRulObj instanceof CSSKeyframesRule ); // What: Keyframes Rule Array. Why: A named fade only plays when its keyframes exist. How: This lists the keyframes rules at the top level of the page's stylesheets.
 
 
 
