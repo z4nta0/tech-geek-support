@@ -571,7 +571,7 @@ function ConPagCom () : JSX.Element {
 										>{ /* What: Form Control Select Element. Why: Knowing the topic helps the reply start in the right place. How: This offers every topic, holding the choice in the form's state. */ }
 
 
-											<option value=''>I'm not sure</option>{ /* What: Not Sure Option Element. Why: Many visitors won't know which topic fits, and that's fine. How: This is the menu's starting choice, with an empty value. */ }
+											<option value=''>I'm not sure</option>{ /* What: Not Sure Option Element. Why: Many visitors won't know which topic fits, and that's fine. How: This is the menu's choice when the address names no topic, with an empty value. */ }
 
 											{ TOP_REC_ARR.map( ( topRecObj ) => ( // What: Topic Option Map Call. Why: Every topic is a choice. How: This renders one option per topic.
 
