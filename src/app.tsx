@@ -52,7 +52,7 @@ import type { SisLinTyp } from 'techgeek-design/ui/link-types.ts'; // What: Sist
 
 const AVA_LAB_STR = 'Free help, answered within 24 hours';    // What: Availability Label String. Why: The phone menu reassures a visitor on any page that help is free and quick. How: The bar shows it in the drawer's label beside its pulsing dot.
 const SIT_EMA_STR = 'contact@techgeek.support';               // What: Site Email String. Why: The phone menu offers the site's contact address. How: The bar links it from the drawer.
-const SIT_TAG_STR = 'Patient tech help for everyday people.'; // What: Site Tagline String. Why: The phone menu and the footer end on the site's tagline. How: The bar and the footer both show it.
+const SIT_TAG_STR = 'Patient tech help for everyday people.'; // What: Site Tagline String. Why: The phone menu ends on the site's tagline, and the footer shows it under its mark. How: The bar and the footer both show it.
 const WOR_END_STR = '.support';                               // What: Wordmark Ending String. Why: The family's wordmark ends in each site's own domain. How: The bar's wordmark and the footer's copyright both show it after TechGeek.
 
 const CTA_LIN_OBJ : PagLinTyp = { labStr : 'Ask a Question', patStr : '/contact' }; // What: Call-To-Action Link Object. Why: The bar's one button invites a visitor to ask a question, the site's main action. How: The bar and the drawer both route it to the Contact page. // What: Label String. Why: The button names its action. How: This reads "Ask a Question". // What: Path String. Why: The button leads to the question form. How: This routes to /contact.
