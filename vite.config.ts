@@ -112,7 +112,7 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 	const artTitStr = htmEscFun( artTitFun( artFilObj.titStr ) );                                               // What: Article Title String. Why: The page's title and preview title match the article page's own title. How: This builds and escapes it.
 	const artUrlStr = `${ LIV_URL_STR }articles/${ artFilObj.ideStr }`;                                         // What: Article URL String. Why: The preview links to the article's own address. How: This is its absolute address.
 
-	const tagRowArr : [ string, string ][] = [ // What: Tag Row Array. Why: Every tag the article changes is found and replaced the same way. How: Each row pairs a tag's name or property with its article value.
+	const tagRowArr : [ string, string ][] = [ // What: Tag Row Array. Why: Every meta tag the article changes is found and replaced the same way. How: Each row pairs a tag's name or property with its article value.
 
 
 		[ 'description', artDesStr ],         // What: Description Row. Why: The SEO rule gives every indexed page its own description. How: This sets the article's.

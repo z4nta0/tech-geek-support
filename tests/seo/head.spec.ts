@@ -85,7 +85,7 @@ const LIV_URL_STR = 'https://techgeek.support/';                                
  *
 */
 
-const PAG_HEA_ARR = [ // What: Page Head Array. Why: Every page's head is checked against what it should say. How: Each row names one page, its title, its description, its canonical address or null, and whether its h1 is checked, the site's pages first in the sitemap's order, then every article in address order.
+const PAG_HEA_ARR = [ // What: Page Head Array. Why: Every page's head is checked against what it should say. How: Each row names one page, its title, its description, its canonical address or null, and whether its h1 is checked, the site's pages first in the sitemap's order, then the 404 page's rows, then every article in address order.
 
 
 	{ // What: Home Head Row. Why: The home page is the site's front door, so its head is checked first. How: This names its title, description, and canonical address.

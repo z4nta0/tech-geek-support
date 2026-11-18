@@ -186,7 +186,8 @@ function movProFun ( froRecArr : SnaRecTyp[], tarRecArr : SnaRecTyp[], proNamArr
  * its own duration and the color's, since an unset border color is
  * currentColor and follows the color as it eases. An identity matrix reads as
  * none, since the two draw the same, and a property an animation that repeats
- * forever drives reads as looping, since the loop moves it whatever the state.
+ * forever drives on the element itself reads as looping, since the loop moves
+ * it whatever the state.
  * Passed to Playwright's evaluate, so it can't read anything from this file.
  *
  * @author z4nta0 <https://github.com/z4nta0>

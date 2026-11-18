@@ -114,7 +114,7 @@ function renInlFun ( inlTokArr : InlTokTyp[] ) : ReactNode[] {
 	return inlTokArr.map( ( inlTokObj, tokIndNum ) => { // What: Piece Render Map. Why: Each piece renders by its kind. How: This turns each into text or an element.
 
 
-		if ( inlTokObj.kinStr === 'bold' ) return <strong key={ tokIndNum }>{ inlTokObj.texStr }</strong>; // What: Bold Piece Return. Why: Bold marks a label to look for on screen. How: This renders it as strong.
+		if ( inlTokObj.kinStr === 'bold' ) return <strong key={ tokIndNum }>{ inlTokObj.texStr }</strong>; // What: Bold Piece Return. Why: Bold sets a word apart from the text around it, such as a label to look for on screen. How: This renders it as strong.
 
 
 
