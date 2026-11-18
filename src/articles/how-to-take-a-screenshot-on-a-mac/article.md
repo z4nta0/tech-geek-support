@@ -5,7 +5,7 @@ title: How to Take a Screenshot on a Mac
 topic: mac
 ---
 
-A screenshot is a picture of whatever is on your screen right now. It's handy for saving a receipt, keeping a recipe, or showing someone exactly what an error message says. (It also makes it much easier for us to help you when you send a question.)
+A screenshot is a picture of whatever is on your screen right now. It's handy for saving a receipt, keeping a recipe, or showing someone exactly what an error message says. (It also makes it much easier for me to help you when you send a question.)
 
 Macs don't have a "Print Screen" key like many Windows keyboards. Instead, you press a few keys at the same time. Here are the three you'll use most.
 

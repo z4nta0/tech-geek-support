@@ -6,12 +6,10 @@
  *
  * @summary
  * The page title an article shows in browser tabs, search listings, and link
- * previews. Search listings cut a title off past about 60 characters, so an
+ * previews. The site keeps every title to about 60 characters, so an
  * article's title carries the site's name after it only when both fit within
- * 60, and stands alone otherwise, since the article's own words matter more
- * to a searcher than the site's name. The article's page, the build that
- * writes each article's own HTML page, and the SEO suite all read it here, so
- * the three never disagree.
+ * 60, and stands alone otherwise. It's the one place an article's page title
+ * is worked out, so the title reads the same wherever it's shown.
  *
  * Sections:
  *  - Constants
@@ -27,7 +25,7 @@
 // #region Constants
 
 const SIT_SUF_STR = ' | TechGeek.support'; // What: Site Suffix String. Why: Every page title names the site when there's room. How: This is the suffix added after an article's title.
-const TIT_MAX_NUM = 60;                    // What: Title Maximum Number. Why: Search listings cut a title off past about 60 characters. How: This is the longest a title with the suffix may run.
+const TIT_MAX_NUM = 60;                    // What: Title Maximum Number. Why: The site keeps every title to about 60 characters. How: This is the longest a title with the suffix may run.
 
 // #endregion Constants
 
@@ -54,12 +52,13 @@ const TIT_MAX_NUM = 60;                    // What: Title Maximum Number. Why: S
  *
  * @example
  * ```ts
- * artTitFun('Why Is My Wi-Fi So Slow?') // => 'Why Is My Wi-Fi So Slow? | TechGeek.support'
+ * artTitFun('Why Is My Wi-Fi So Slow?')
+ * // => 'Why Is My Wi-Fi So Slow? | TechGeek.support'
  * ```
  *
 */
 
-const artTitFun = ( titTexStr : string ) : string => titTexStr.length + SIT_SUF_STR.length <= TIT_MAX_NUM ? titTexStr + SIT_SUF_STR : titTexStr; // What: Article Title Function. Why: A long article title would push the site's name past where listings cut off. How: This adds the suffix only when the whole fits within the limit.
+const artTitFun = ( titTexStr : string ) : string => titTexStr.length + SIT_SUF_STR.length <= TIT_MAX_NUM ? titTexStr + SIT_SUF_STR : titTexStr; // What: Article Title Function. Why: A long article title with the site's name would run past the site's 60-character title length. How: This adds the suffix only when the whole fits within the limit.
 
 // #endregion artTitFun
 
@@ -69,7 +68,7 @@ const artTitFun = ( titTexStr : string ) : string => titTexStr.length + SIT_SUF_
 
 // #region Exports
 
-export { artTitFun }; // What: Named Export. Why: The article's page, the build, and the SEO suite name an article's page the same way. How: This exports artTitFun.
+export { artTitFun }; // What: Named Export. Why: An article's page title is worked out the same way wherever it's named. How: This exports artTitFun.
 
 // #endregion Exports
 

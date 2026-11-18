@@ -3,13 +3,18 @@
 
 // #region Imports
 
-import AxeBuilder from '@axe-core/playwright'; // What: Axe Builder. Why: axe-core finds the mechanical accessibility failures, such as low contrast, missing names, and misused ARIA. How: This runs its scan against a Playwright page.
+import AxeBuiCla from '@axe-core/playwright'; // What: Axe Builder Class. Why: axe-core finds the mechanical accessibility failures, such as low contrast. How: This runs its scan against a Playwright page.
 
 
-import { expect      } from '@playwright/test';     // What: Expect. Why: A state passes only with no violations. How: This asserts the violation list is empty.
-import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each state has to be opened and settled before it's scanned. How: This loads it and waits for it.
-import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state is scanned. How: This lists them.
-import { test        } from '@playwright/test';     // What: Test. Why: Each state is its own test. How: This declares them.
+import { ADR_STA_ARR } from '../support/articles.ts'; // What: Address State Array. Why: An address naming a topic, as Home's topic tiles give, opens the Articles list narrowed, a state a visitor reaches. How: This lists the Articles states opened that way, one per width.
+import { expect      } from '@playwright/test';       // What: Expect. Why: A state passes only with no violations. How: This asserts the violation list is empty.
+import { INV_STA_ARR } from '../support/contact.ts';  // What: Invalid State Array. Why: The Contact form after a refused empty send is a state a visitor reaches. How: This lists the Contact states after that send, one per width.
+import { opeStaFun   } from '../support/states.ts';   // What: Open State Function. Why: Each state has to be opened and settled before it's scanned. How: This loads it and waits for it.
+import { PIL_STA_ARR } from '../support/articles.ts'; // What: Pill State Array. Why: A pressed topic pill narrows the Articles list and stays pressed, a state a visitor reaches. How: This lists the Articles states with a topic's pill pressed, one per width.
+import { RES_STA_ARR } from '../support/contact.ts';  // What: Result State Array. Why: The Contact form's thank-you and error are states a visitor reaches too. How: This lists the Contact states with the form sent, one per result and width.
+import { STA_REC_ARR } from '../support/states.ts';   // What: State Record Array. Why: Each shared state is scanned. How: This lists them.
+import { test        } from '@playwright/test';       // What: Test. Why: Each state is its own test. How: This declares them.
+import { TIP_STA_ARR } from '../support/contact.ts';  // What: Tip State Array. Why: A help tip pinned open stays until it's dismissed, a state a visitor reaches. How: This lists the Contact states with a tip open, one per tip and width.
 
 
 import type { Page } from '@playwright/test'; // What: Page. Why: The scan helper drives a Playwright page. How: This types its page parameter.
@@ -43,7 +48,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The scan helpe
 
 // #region Types
 
-type AxeResTyp = Awaited< ReturnType< AxeBuilder[ 'analyze' ] > >; // What: Axe Results Type. Why: The scan's findings are summarized for the report, and axe-core itself is only a dependency of the Playwright integration. How: This reads the type from what AxeBuilder's analyze resolves to.
+type AxeResTyp = Awaited< ReturnType< AxeBuiCla[ 'analyze' ] > >; // What: Axe Results Type. Why: The scan's findings are summarized for the report, and axe-core itself is only a dependency of the Playwright integration. How: This reads the type from what the axe builder class's analyze resolves to.
 
 // #endregion Types
 
@@ -51,7 +56,7 @@ type AxeResTyp = Awaited< ReturnType< AxeBuilder[ 'analyze' ] > >; // What: Axe 
 
 // #region Constants
 
-const AXE_TAG_ARR = [ 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice' ]; // What: Axe Tag Array. Why: The site targets WCAG 2.2 AA, which includes every earlier A and AA rule, and axe's best practices catch common problems WCAG doesn't name. How: This limits the scan to those rule sets.
+const AXE_TAG_ARR = [ 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice' ]; // What: Axe Tag Array. Why: The site targets WCAG 2.2 AA, which keeps all but one of the earlier A and AA rules, and axe's best practices catch common problems WCAG doesn't name. How: This limits the scan to those rule sets.
 
 // #endregion Constants
 
@@ -66,15 +71,15 @@ const AXE_TAG_ARR = [ 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'b
  *
  * @summary
  * Runs axe-core on the page as it stands, limited to the WCAG and
- * best-practice rule sets, and returns its full results. The caller opens
- * and settles the state first, so the scan never sees a page mid-load or
+ * best-practice rule sets, and returns its full results. It expects the
+ * state already open and settled, so the scan never sees a page mid-load or
  * mid-animation.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
  * @param curPagObj - Current Page Object: The page to scan.
  *
- * @returns The scan's results.
+ * @returns A promise that resolves with the scan's results.
  *
  * @example
  * ```ts
@@ -86,7 +91,7 @@ const AXE_TAG_ARR = [ 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'b
 async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
 
 
-	return new AxeBuilder( { page : curPagObj } ).withTags( AXE_TAG_ARR ).analyze(); // What: Axe Scan Return. Why: The scan's results decide the test. How: This builds an axe run for the page, limits it to the chosen rule sets, and runs it.
+	return new AxeBuiCla( { page : curPagObj } ).withTags( AXE_TAG_ARR ).analyze(); // What: Axe Scan Return. Why: The scan's results decide the test. How: This builds an axe run for the page, limits it to the chosen rule sets, and runs it.
 
 
 }
@@ -102,7 +107,7 @@ async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
  *
  * @summary
  * Turns one list of axe results into one readable line per rule: the rule's
- * id, its impact where axe gives one, its help text, and the selectors of
+ * ID, its impact where axe gives one, its help text, and the selectors of
  * the elements it flagged. Used for both the violations, which fail the
  * test, and the incomplete results, which are only reported.
  *
@@ -123,7 +128,7 @@ async function scaStaFun ( curPagObj : Page ) : Promise< AxeResTyp > {
 function sumResFun ( resLisArr : AxeResTyp[ 'violations' ] ) : string[] {
 
 
-	return resLisArr.map( ( resCurObj ) => `${ resCurObj.id } (${ resCurObj.impact || 'no impact' }): ${ resCurObj.help } at ${ resCurObj.nodes.map( ( nodCurObj ) => nodCurObj.target.join( ' ' ) ).join( ', ' ) }` ); // What: Result Lines Return. Why: A failure should say what broke and where without opening the report. How: This joins each rule's id, impact, help, and flagged selectors into one line.
+	return resLisArr.map( ( resCurObj ) => `${ resCurObj.id } (${ resCurObj.impact || 'no impact' }): ${ resCurObj.help } at ${ resCurObj.nodes.map( ( nodCurObj ) => nodCurObj.target.join( ' ' ) ).join( ', ' ) }` ); // What: Result Lines Return. Why: A failure should say what broke and where without opening the report. How: This joins each rule's ID, impact, help, and flagged selectors into one line.
 
 
 }
@@ -136,7 +141,7 @@ function sumResFun ( resLisArr : AxeResTyp[ 'violations' ] ) : string[] {
 
 // #region Module Init
 
-for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state must pass the scan. How: This declares one axe test per state.
+for ( const staRecObj of [ ...STA_REC_ARR, ...PIL_STA_ARR, ...ADR_STA_ARR, ...TIP_STA_ARR, ...INV_STA_ARR, ...RES_STA_ARR ] ) { // What: State Test Loop. Why: Every page state must pass the scan, the Articles list narrowed to a topic, an open help tip, and the Contact form's refused send and results included. How: This declares one axe test per state, the shared states first, then the reachable ones each control leads to.
 
 
 	test( `${ staRecObj.ideStr } has no axe violations`, async ( { page : curPagObj }, tesInfObj ) => { // What: Axe Test. Why: A state passes only with zero axe violations. How: This opens the state, scans it, reports anything needing review, and fails on any violation.
@@ -145,7 +150,7 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The scan should see the state settled. How: This loads and settles it.
 
 
-		const axeResObj = await scaStaFun( curPagObj );      // What: Axe Result Object. Why: Both the violations and the incomplete results come from one scan. How: This scans the page.
+		const axeResObj = await scaStaFun( curPagObj );      // What: Axe Results Object. Why: Both the violations and the incomplete results come from one scan. How: This scans the page.
 		const revLinArr = sumResFun( axeResObj.incomplete ); // What: Review Line Array. Why: Results axe couldn't decide need a person's look. How: This summarizes them.
 
 

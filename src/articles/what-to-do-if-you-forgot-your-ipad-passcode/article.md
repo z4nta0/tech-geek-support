@@ -51,11 +51,7 @@ On older iPads (iPadOS 15.2 or 16), you'll see an **Erase iPad** button instead 
 If you don't see **Forgot Passcode?** (for example, the iPad isn't on Wi-Fi), you can reset it with a Mac or a Windows PC. On a Windows PC, you'll need Apple's free **Apple Devices** app from the Microsoft Store.
 
 1. **Turn off the iPad.** Unplug it from the computer. On an iPad without a Home button, hold the top button and either volume button until the power-off slider appears. On an iPad with a Home button, hold the top button. Drag the slider, then wait a minute.
-2. **Put it in recovery mode.** Connect the iPad to the computer with its cable. Then:
-   - **No Home button:** press and release the volume button closest to the top button, press and release the other volume button, then press and hold the top button.
-   - **Home button:** press and hold the Home button and the top button together.
-   
-   Keep holding until you see a picture of a computer and a cable on the iPad. Then let go.
+2. **Put it in recovery mode.** Connect the iPad to the computer with its cable. On an iPad without a Home button, press and release the volume button closest to the top button, press and release the other volume button, then press and hold the top button. On an iPad with a Home button, press and hold the Home button and the top button together. Keep holding until you see a picture of a computer and a cable on the iPad, then let go.
 3. On the computer, open **Finder** (Mac) or the **Apple Devices** app (Windows) and click your iPad.
 4. When asked to **Restore** or **Update**, choose **Restore**.
 5. Wait. If the download takes more than 15 minutes, the iPad may leave recovery mode. Let the download finish, then start again from step 1.

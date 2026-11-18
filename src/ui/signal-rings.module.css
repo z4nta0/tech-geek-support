@@ -10,8 +10,8 @@
  * outlined in ink, with an orange sparkle and a blue dot nearby. As the
  * drawing appears, the rings ripple out from the bubble one after another,
  * each a base duration step after the last, and the sparkle pops in with a
- * gentle overshoot once they're done. Nothing loops, and under reduced
- * motion the drawing is simply there.
+ * gentle overshoot a little after the last ring starts. Nothing loops, and
+ * under reduced motion the drawing is simply there.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -86,15 +86,14 @@
 
 
 }
-
-@keyframes ringEnterRipple { /* What: Ring Enter Ripple. Why: The rings spread out from the bubble as the drawing appears, like a signal going out. How: This grows each ring from 60% of its size and fades it in. */
+@keyframes ringEnterRipple { /* What: Ring Enter Ripple. Why: The rings spread out from the bubble as the drawing appears, like a signal going out. How: This grows each ring from about 57% of its size and fades it in. */
 
 
 	from {
 
 
 		opacity   : 0;
-		transform : scale( 0.6 );
+		transform : scale( var( --cdn-pow-002-rec ) ); /* Core-Design-Number to the Power of 2 Reciprocal ~= 0.570 */
 
 
 	}
@@ -129,7 +128,7 @@
 
 }
 
-.spaOraPat { /* What: Sparkle Orange Path. Why: The sparkle is the drawing's touch of fun, and it pops in once the rings are out. How: This fills it orange and pops it in with the gentle overshoot, three base steps after the first ring. */
+.spaOraPat { /* What: Sparkle Orange Path. Why: The sparkle is the drawing's touch of fun, and it pops in as the rings ripple out. How: This fills it orange and pops it in with the gentle overshoot, three base steps after the first ring. */
 
 
 	animation        : spaOraPatEnterPop var( --dur-ani-p03 ) var( --mot-ove-eas ) calc( var( --dur-ani-bas ) * 3 ) both; /* Duration Animation Base Plus 3 ~= 366.9ms, Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ), Duration Animation Base ~= 157.8ms */
@@ -152,7 +151,6 @@
 
 
 }
-
 @keyframes spaOraPatEnterPop { /* What: Sparkle Orange Path Enter Pop. Why: The sparkle arrives with a little flourish. How: This grows it from nothing and turns it a quarter turn as it appears. */
 
 

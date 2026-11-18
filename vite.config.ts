@@ -3,21 +3,21 @@
 
 // #region Imports
 
-import react from '@vitejs/plugin-react'; // What: React. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
+import reaPluFun from '@vitejs/plugin-react'; // What: React Plugin Function. Why: Vite needs the React plugin to compile JSX. How: This is called first in the plugins array.
 
 
-import { ART_FIL_ARR  } from './scripts/article-files.ts'; // What: Article File Array. Why: Every article gets its own page carrying its title, description, and link preview, and a sitemap entry. How: The article pages plugin writes one per row.
+import { ART_FIL_ARR  } from './scripts/article-files.ts'; // What: Article File Array. Why: Every article gets its own files in the build, such as its page. How: The article pages plugin writes one per row.
 import { artTitFun    } from './src/ui/article-title.ts';  // What: Article Title Function. Why: An article's own page has to carry the title its React page shows. How: artTagFun names each page through it.
 import { defineConfig } from 'vite';                       // What: Define Config. Why: Vite's config helper passes the config through with its types. How: This wraps VIT_CON_OBJ.
 import { mkdir        } from 'node:fs/promises';           // What: Make Directory. Why: The article pages go in their own folder of the build. How: This creates it.
-import { readFile     } from 'node:fs/promises';           // What: Read File. Why: The article pages are copies of the built page, and the sitemap and rewrite rules gain the articles. How: This reads the built index.html, _redirects, and sitemap.xml, and the sitemap's source for the dev server.
-import { resolve      } from 'node:path';                  // What: Resolve. Why: The article pages are written beside the built index.html. How: This joins the build folder with each file name.
+import { readFile     } from 'node:fs/promises';           // What: Read File. Why: The articles' files are built from files the site already has, such as the built page. How: This reads them.
+import { resolve      } from 'node:path';                  // What: Resolve. Why: The article pages are written into the build folder that holds index.html. How: This joins the build folder with each file name.
 import { TOP_REC_ARR  } from './src/ui/topics.ts';         // What: Topic Record Array. Why: An article's preview tags name its topic. How: artTagFun looks the label up by the article's topic identifier.
-import { writeFile    } from 'node:fs/promises';           // What: Write File. Why: Each article's page, the rewrite rules, and the sitemap are files in the build. How: This writes them.
+import { writeFile    } from 'node:fs/promises';           // What: Write File. Why: The articles add files to the build and change others. How: This writes them.
 
 
 import type { ArtFilTyp } from './scripts/article-files.ts'; // What: Article File Type. Why: An article's page is written from its details. How: This types the article artTagFun reads.
-import type { Plugin    } from 'vite';                       // What: Plugin. Why: The page minifier and the article pages are Vite plugins. How: This types their returns, which types their hooks.
+import type { Plugin    } from 'vite';                       // What: Plugin. Why: The config's own plugins are Vite plugins. How: This types their returns, which types their hooks.
 
 // #endregion Imports
 
@@ -35,11 +35,13 @@ import type { Plugin    } from 'vite';                       // What: Plugin. Wh
  * title, description, link preview, and structured data, since link scrapers
  * read only a page's raw HTML, and lists every article in the sitemap: the
  * dev server serves both that way, and the build writes the copies, the
- * rewrite rules that serve them, and the fuller sitemap. The dev server's file
- * watcher stays off folders that hold no app code, such as the test output.
- * Every other setting stays at Vite's default, including copying the files in
- * public/ (the icons, the social images, the crawler files, and Netlify's
- * _headers and _redirects) into the build untouched.
+ * rewrite rules that serve them, and the fuller sitemap. It ships every asset
+ * as its own file rather than inlining small ones, which the security policy
+ * would refuse, and keeps the dev server's file watcher off folders that hold
+ * no app code, such as the test output. Every other setting stays at Vite's
+ * default, including copying the files in public/ (the icons, the social
+ * images, the crawler files, and Netlify's _headers and _redirects) into the
+ * build untouched.
  *
  * Sections:
  *  - Constants
@@ -62,6 +64,7 @@ const LIV_URL_STR = 'https://techgeek.support/'; // What: Live URL String. Why: 
 
 // #region Helpers
 
+const dolEscFun = ( rawTexStr : string ) : string => rawTexStr.replace( /\$/g, '$$$$' );                                                                           // What: Dollar Escape Function. Why: A replacement string reads $&, $', $`, and $1 as patterns, so an article's title or summary holding one would come out changed. How: This doubles every $, which a replacement string writes as one $.
 const htmEscFun = ( rawTexStr : string ) : string => rawTexStr.replace( /&/g, '&amp;' ).replace( /"/g, '&quot;' ).replace( /</g, '&lt;' ).replace( />/g, '&gt;' ); // What: HTML Escape Function. Why: An article's text goes into double-quoted attributes, and some holds apostrophes and could hold quotes. How: This escapes the characters that would break out of the attribute.
 
 
@@ -76,12 +79,13 @@ const htmEscFun = ( rawTexStr : string ) : string => rawTexStr.replace( /&/g, '&
  * and every Open Graph and Twitter tag that names the page, its address, or
  * its image, with og:type set to article. Each tag is found by its name or
  * property, whichever quotes it uses and whether or not the page has been
- * compacted, and replaced whole, so the result is the same in the dev
- * server's page and the built one. It then adds the article's publication
- * date, its topic, and its own Article structured data, naming z4nta0 as its
- * author, just before the head closes. An article's link preview image is its
- * own PNG in public/social/, named after its address. The canonical link
- * stays with the article's page in React.
+ * compacted, and replaced whole, so the result is the same in the dev server's
+ * page and the built one. It then adds the article's publication date, its
+ * last change when it has been revised, its topic, and its own Article
+ * structured data, pointing at z4nta0 as its author, just before the head
+ * closes. An article's link preview image is its own PNG in public/social/,
+ * named after its address. The canonical link stays with the article's page in
+ * React.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -108,16 +112,15 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 	const artTitStr = htmEscFun( artTitFun( artFilObj.titStr ) );                                               // What: Article Title String. Why: The page's title and preview title match the article page's own title. How: This builds and escapes it.
 	const artUrlStr = `${ LIV_URL_STR }articles/${ artFilObj.ideStr }`;                                         // What: Article URL String. Why: The preview links to the article's own address. How: This is its absolute address.
 
+	const tagRowArr : [ string, string ][] = [ // What: Tag Row Array. Why: Every meta tag the article changes is found and replaced the same way. How: Each row pairs a tag's name or property with its article value.
 
-	const tagRowArr : [ string, string ][] = [ // What: Tag Row Array. Why: Every tag the article changes is found and replaced the same way. How: Each row pairs a tag's name or property with its article value.
 
-
-		[ 'description', artDesStr ],         // What: Description Row. Why: Search listings and many previews read the plain description. How: This sets the article's.
-		[ 'og:description', artDesStr ],      // What: Open Graph Description Row. Why: Most previews show this summary. How: This sets the article's.
-		[ 'og:image', artImaStr ],            // What: Open Graph Image Row. Why: Most previews show this picture. How: This points at the article's own image.
+		[ 'description', artDesStr ],         // What: Description Row. Why: The SEO rule gives every indexed page its own description. How: This sets the article's.
+		[ 'og:description', artDesStr ],      // What: Open Graph Description Row. Why: The Open Graph protocol names this tag as the preview's summary. How: This sets the article's.
+		[ 'og:image', artImaStr ],            // What: Open Graph Image Row. Why: The Open Graph protocol names this tag as the preview's picture. How: This points at the article's own image.
 		[ 'og:image:alt', artAltStr ],        // What: Open Graph Image Alt Row. Why: The picture needs a description. How: This sets the article's alt text.
-		[ 'og:title', artTitStr ],            // What: Open Graph Title Row. Why: Most previews lead with this title. How: This sets the article's.
-		[ 'og:type', 'article' ],             // What: Open Graph Type Row. Why: Sites shape a preview for an article differently from a whole website. How: This marks the page as an article.
+		[ 'og:title', artTitStr ],            // What: Open Graph Title Row. Why: The Open Graph protocol names this tag as the preview's title. How: This sets the article's.
+		[ 'og:type', 'article' ],             // What: Open Graph Type Row. Why: The Open Graph protocol sets a page's type, and an article's is article. How: This marks the page as an article.
 		[ 'og:url', artUrlStr ],              // What: Open Graph URL Row. Why: The preview points at the article's address. How: This sets it.
 		[ 'twitter:description', artDesStr ], // What: Twitter Description Row. Why: X shows this summary. How: This sets the article's.
 		[ 'twitter:image', artImaStr ],       // What: Twitter Image Row. Why: X shows this picture. How: This points at the article's own image.
@@ -128,12 +131,13 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 	];
 
 
+
 	const artLdjObj = { // What: Article Linked-Data-JSON Object. Why: Search engines read an article's headline, dates, and author from its structured data. How: This describes the article as the page shows it, naming the same person and site as index.html's data.
 
 
 		'@context'    : 'https://schema.org',                       // What: Context. Why: Search engines read the keys by schema.org's vocabulary. How: This names it.
 		'@type'       : 'Article',                                  // What: Type. Why: The page is one article. How: This marks the node as an Article.
-		author        : { '@id' : 'https://techgeek.dev/#person' }, // What: Author. Why: z4nta0 writes every article. How: This points at the Person node TechGeek.dev and index.html describe.
+		author        : { '@id' : 'https://techgeek.dev/#person' }, // What: Author. Why: z4nta0 is the named author of every article. How: This points at the Person node TechGeek.dev and index.html describe.
 		dateModified  : artFilObj.updStr || artFilObj.pubStr,       // What: Date Modified. Why: Search engines show how fresh an article is. How: This is its updated date, or its publication date when it hasn't been revised.
 		datePublished : artFilObj.pubStr,                           // What: Date Published. Why: Search engines show when an article was written. How: This is its publication date.
 		description   : artFilObj.sumStr,                           // What: Description. Why: The data describes the article as its page does. How: This is its summary.
@@ -146,13 +150,12 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 
 	};
 
-
 	const metAddStr = [ // What: Meta Additions String. Why: An article's preview can also carry when it was published and what it's about, which the home page has no use for. How: This joins the extra tags and the structured data into the text added before the head closes.
 
 
-		`<meta property="article:published_time" content="${ artFilObj.pubStr }" />`,                                   // What: Published Time Row. Why: Some previews and crawlers show when an article was written. How: This gives its publication date.
+		`<meta property="article:published_time" content="${ artFilObj.pubStr }" />`,                                   // What: Published Time Row. Why: The Open Graph article namespace gives an article's publication date. How: This gives its publication date.
 		...( artFilObj.updStr ? [ `<meta property="article:modified_time" content="${ artFilObj.updStr }" />` ] : [] ), // What: Modified Time Row. Why: A revised article should say when it last changed. How: This gives its updated date, only when it has one.
-		`<meta property="article:section" content="${ htmEscFun( topLabStr ) }" />`,                                    // What: Section Row. Why: An article's topic tells a reader what it's about before they tap. How: This gives its topic's label.
+		`<meta property="article:section" content="${ htmEscFun( topLabStr ) }" />`,                                    // What: Section Row. Why: The Open Graph article namespace names an article's section, and its topic is that section. How: This gives its topic's label.
 		`<script type='application/ld+json'>${ JSON.stringify( artLdjObj ).replace( /</g, '\\u003c' ) }</script>`       // What: Structured Data Row. Why: Search engines read the article's details from JSON-LD. How: This writes the object on one line, with every < escaped so no text can close the script early.
 
 
@@ -160,12 +163,78 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
 
 
 
-	return tagRowArr.reduce( ( curHtmStr, [ tagKeyStr, tagValStr ] ) => curHtmStr.replace( new RegExp( `<meta\\s+(name|property)=['"]${ tagKeyStr.replace( /:/g, '\\:' ) }['"][^>]*>` ), `<meta $1="${ tagKeyStr }" content="${ tagValStr }" />` ), htmTexStr.replace( /<title>[^<]*<\/title>/, `<title>${ artTitStr }</title>` ).replace( '</head>', `${ metAddStr }\n</head>` ) ); // What: Tagged Page Return. Why: The page's title and every listed tag carry the article's values, with its own extras added. How: This replaces the title, adds the extras before the head closes, then replaces each tag in turn, keeping whether it used name or property.
+	return tagRowArr.reduce( ( curHtmStr, [ tagKeyStr, tagValStr ] ) => curHtmStr.replace( new RegExp( `<meta\\s+(name|property)=['"]${ tagKeyStr.replace( /:/g, '\\:' ) }['"][^>]*>` ), `<meta $1="${ tagKeyStr }" content="${ dolEscFun( tagValStr ) }" />` ), htmTexStr.replace( /<title>[^<]*<\/title>/, `<title>${ dolEscFun( artTitStr ) }</title>` ).replace( '</head>', `${ dolEscFun( metAddStr ) }\n</head>` ) ); // What: Tagged Page Return. Why: The page's title and every listed tag carry the article's values, with its own extras added. How: This replaces the title, adds the extras before the head closes, then replaces each tag in turn, keeping whether it used name or property, each article value passed through dolEscFun so a $ in it is written as it is rather than read as a replacement pattern.
 
 
 };
 
 // #endregion artTagFun
+
+
+
+// #region minHtmFun
+
+/**
+ * minHtmFun = Minify HTML Function
+ *
+ * @summary
+ * Builds the Vite plugin that compacts the shipped index.html. Vite injects
+ * the bundle's script and stylesheet tags into the page but otherwise ships
+ * it as written, with every comment and indentation level the formatting
+ * rules give it. For production builds only, this re-serializes any JSON-LD
+ * the page holds on one line, which also fails the build if that JSON is ever
+ * invalid, strips the page's HTML comments and the comment inside its
+ * external script tag, trims every line, and drops blank lines. The newlines
+ * between lines are kept, so text wrapped across lines keeps the space
+ * between its words. It runs after Vite's own transforms, so the tags Vite
+ * injects are compacted too. The dev server serves the page as written.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param void - This function takes no parameters.
+ *
+ * @returns The plugin object, for the config's plugins array.
+ *
+ * @example
+ * ```ts
+ * minHtmFun() // => { apply, name, transformIndexHtml }
+ * ```
+ *
+*/
+
+const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.html ships as written unless something minifies it. How: This returns a build-only Vite plugin that does.
+
+
+	apply : 'build',               // What: Apply. Why: The dev server should serve the page as written. How: This runs the plugin only during a production build.
+	name  : 'minify-shipped-page', // What: Name. Why: Vite reports a plugin's warnings and errors under its name. How: This names the plugin.
+
+	transformIndexHtml : { // What: Transform Index HTML Hook. Why: Vite processes index.html but doesn't minify it. How: This compacts the page after Vite's own changes.
+
+
+		order : 'post', // What: Order. Why: The page should be compacted only after Vite has injected the bundle's script and stylesheet tags. How: This runs after Vite's own transforms.
+
+		handler : ( htmTexStr ) => { // What: Handler. Why: This is the plugin's actual work. How: This compacts any structured data, strips comments, then drops indentation and blank lines.
+
+
+			return htmTexStr                                                                               // What: Compacted Page Return. Why: Vite writes whatever this returns as the shipped page. How: This chains each compaction over the page's text.
+				.replace( /(?<=<script type='application\/ld\+json'>)[\s\S]*?(?=<\/script>)/g, ( jsoTexStr ) => JSON.stringify( JSON.parse( jsoTexStr ) ) ) // What: JSON-LD Compaction. Why: Structured data reads the same without its indentation, and invalid JSON should stop the build rather than ship. How: This parses each JSON-LD script's contents and writes them back on one line.
+				.replace( /(<script\b[^>]*\bsrc=[^>]*>)\s*(?:\/\*[\s\S]*?\*\/\s*)+(<\/script>)/g, '$1$2' ) // What: External Script Comment Strip. Why: An external script's only content is its comment. How: This empties the tag.
+				.replace( /<!--[\s\S]*?-->/g, '' )                                                         // What: HTML Comment Strip. Why: Comments mean nothing to the browser. How: This removes every HTML comment.
+				.split( '\n' )                                                                             // What: Line Split. Why: Indentation and blank lines are dropped line by line. How: This splits the page into lines.
+				.map( ( linTexStr ) => linTexStr.trim() )                                                  // What: Indentation Trim. Why: Indentation means nothing to the browser. How: This trims each line.
+				.filter( Boolean )                                                                         // What: Blank Line Filter. Why: Blank lines mean nothing to the browser. How: This drops every empty line.
+				.join( '\n' );                                                                             // What: Line Join. Why: The page has to be one string again. How: This rejoins the remaining lines with newlines, which keep the spaces between words in wrapped text.
+
+
+		}
+
+
+	}
+
+
+});
+
+// #endregion minHtmFun
 
 
 
@@ -178,9 +247,9 @@ const artTagFun = ( htmTexStr : string, artFilObj : ArtFilTyp ) : string => { //
  * Adds every article to the sitemap. The site's own pages are listed by hand
  * in public/sitemap.xml, while the articles come and go with the files in
  * src/articles, so each one gets an entry here, with its last change (its
- * updated date, or its publication date) for crawlers deciding when to come
- * back. The entries go just before the sitemap closes, after the site's pages,
- * in address order.
+ * updated date, or its publication date), which crawlers can use to decide
+ * when to come back. The entries go just before the sitemap closes, after
+ * the site's pages, in address order.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -209,13 +278,13 @@ const sitXmlFun = ( xmlTexStr : string ) : string => xmlTexStr.replace( /\n*<\/u
  * @summary
  * Builds the Vite plugin that gives every article a page of its own and a
  * sitemap entry. On the dev server it rewrites the page it serves for an
- * article's address and serves the sitemap with the articles added, so the
- * SEO suite can read both raw. After a production build it writes one copy of
- * the built index.html per article, as articles/<address>.html, through
- * artTagFun, puts a rewrite rule for each article's address ahead of the
- * site's catch-all in _redirects, so Netlify serves the article's own page
- * while every other path still loads index.html, and adds the articles to
- * the built sitemap.
+ * article's address and serves the sitemap with the articles added, so the dev
+ * server shows both as the build serves them. After a production build it
+ * writes one copy of the built index.html per article, as
+ * articles/<address>.html, through artTagFun, puts a rewrite rule for each
+ * article's address ahead of the site's catch-all in _redirects, so Netlify
+ * serves the article's own page while every other path still loads index.html,
+ * and adds the articles to the built sitemap.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -233,7 +302,7 @@ const sitXmlFun = ( xmlTexStr : string ) : string => xmlTexStr.replace( /\n*<\/u
 const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link scrapers read only a page's raw HTML, so each article needs a page of its own. How: This returns a plugin that serves and writes them.
 
 
-	let buiRecObj = { buiBoo : false, outStr : '', rooStr : '' }; // What: Build Record Object. Why: The pages are written only after a production build, into its output folder, and the dev server reads the sitemap from the project. How: This holds whether the run is a build, where it writes, and the project's root, once Vite has resolved its config.
+	let buiRecObj = { buiBoo : false, outStr : '', rooStr : '' }; // What: Build Record Object. Why: The pages are written only after a production build, into its output folder, and the dev server reads the sitemap from the project. How: This holds whether the run is a build, where it writes, and the project's root, once Vite has resolved its config. // What: Build Boolean. Why: Only a production build writes the article pages. How: This starts false until the config says the run is a build. // What: Output String. Why: The pages are written into the build's output folder. How: This starts empty until the config names it. // What: Root String. Why: The dev server reads the sitemap from the project. How: This starts empty until the config names the root.
 
 
 
@@ -261,7 +330,6 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 			await Promise.all( ART_FIL_ARR.map( ( artFilObj ) => writeFile( resolve( buiRecObj.outStr, 'articles', `${ artFilObj.ideStr }.html` ), artTagFun( indHtmStr, artFilObj ) ) ) ); // What: Article Pages Write. Why: Each article needs its own page. How: This writes one tagged copy of the built page per article.
 
 			await writeFile( redPatStr, `# What: Article Page Rules. Why: Each article's address serves its own page, which carries its link preview. How: These rewrite each article's address to its page, ahead of the catch-all.\n${ artRulStr }\n\n\n\n${ redTexStr }` ); // What: Redirects Write. Why: The article rules must come before the catch-all, which would otherwise answer every article's address. How: This writes them ahead of the existing rules.
-
 			await writeFile( sitPatStr, sitXmlFun( await readFile( sitPatStr, 'utf8' ) ) ); // What: Sitemap Write. Why: Crawlers should find every article. How: This rewrites the built sitemap with the articles added.
 
 
@@ -274,7 +342,7 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 
 
 				buiBoo : conResObj.command === 'build',                     // What: Build Boolean. Why: The dev server writes nothing. How: This is true only for a production build.
-				outStr : resolve( conResObj.root, conResObj.build.outDir ), // What: Output String. Why: The pages are written beside the built index.html. How: This is the build's resolved output folder.
+				outStr : resolve( conResObj.root, conResObj.build.outDir ), // What: Output String. Why: The pages are written into the build folder that holds index.html. How: This is the build's resolved output folder.
 				rooStr : conResObj.root                                     // What: Root String. Why: The dev server reads the sitemap from public/. How: This is the project's root.
 
 
@@ -283,7 +351,7 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 
 		},
 
-		configureServer : ( serInsObj ) => { // What: Configure Server Hook. Why: The dev server should serve the sitemap the build writes, so the SEO suite can check it. How: This answers the sitemap's address itself, ahead of Vite's own file serving.
+		configureServer : ( serInsObj ) => { // What: Configure Server Hook. Why: The dev server should serve the sitemap the build writes, so it matches what ships. How: This answers the sitemap's address itself, ahead of Vite's own file serving.
 
 
 			serInsObj.middlewares.use( async ( reqInsObj, resInsObj, nexMidFun ) => { // What: Sitemap Middleware. Why: The sitemap in public/ lists only the site's own pages. How: This answers the sitemap's address with the articles added, as XML, and passes every other request on.
@@ -325,78 +393,12 @@ const artPagFun = () : Plugin => { // What: Article Pages Function. Why: Link sc
 // #endregion artPagFun
 
 
-
-// #region minHtmFun
-
-/**
- * minHtmFun = Minify HTML Function
- *
- * @summary
- * Builds the Vite plugin that compacts the shipped index.html. Vite injects
- * the bundle's script and stylesheet tags into the page but otherwise ships
- * it as written, with every comment and indentation level the formatting
- * rules give it. For production builds only, this re-serializes any JSON-LD
- * the page holds on one line, which also fails the build if that JSON is ever
- * invalid, strips the page's HTML comments and the comment inside its
- * external script tag, trims every line, and drops blank lines. The newlines
- * between lines are kept, so text wrapped across lines keeps the space
- * between its words. It runs after Vite's own transforms, so the tags Vite
- * injects are compacted too. The dev server serves the page as written.
- *
- * @author z4nta0 <https://github.com/z4nta0>
- *
- * @param void - This function takes no parameters.
- *
- * @returns The plugin object, for the config's plugins array.
- *
- * @example
- * ```ts
- * minHtmFun() // => { apply, name, transformIndexHtml }
- * ```
- *
-*/
-
-const minHtmFun = () : Plugin => ({ // What: Minify HTML Function. Why: index.html ships as written unless something minifies it. How: This returns a build-only Vite plugin that does.
-
-
-	apply : 'build',               // What: Apply. Why: The dev server should serve the page as written. How: This runs the plugin only during npm run build.
-	name  : 'minify-shipped-page', // What: Name. Why: Vite reports a plugin's warnings and errors under its name. How: This names the plugin.
-
-	transformIndexHtml : { // What: Transform Index HTML Hook. Why: Vite processes index.html but doesn't minify it. How: This compacts the page after Vite's own changes.
-
-
-		order : 'post', // What: Order. Why: The page should be compacted only after Vite has injected the bundle's script and stylesheet tags. How: This runs after Vite's own transforms.
-
-		handler : ( htmTexStr ) => { // What: Handler. Why: This is the plugin's actual work. How: This compacts any structured data, strips comments, then drops indentation and blank lines.
-
-
-			return htmTexStr                                                                               // What: Compacted Page Return. Why: Vite writes whatever this returns as the shipped page. How: This chains each compaction over the page's text.
-				.replace( /(?<=<script type='application\/ld\+json'>)[\s\S]*?(?=<\/script>)/g, ( jsoTexStr ) => JSON.stringify( JSON.parse( jsoTexStr ) ) ) // What: JSON-LD Compaction. Why: Structured data reads the same without its indentation, and invalid JSON should stop the build rather than ship. How: This parses each JSON-LD script's contents and writes them back on one line.
-				.replace( /(<script\b[^>]*\bsrc=[^>]*>)\s*(?:\/\*[\s\S]*?\*\/\s*)+(<\/script>)/g, '$1$2' ) // What: External Script Comment Strip. Why: An external script's only content is its comment. How: This empties the tag.
-				.replace( /<!--[\s\S]*?-->/g, '' )                                                         // What: HTML Comment Strip. Why: Comments mean nothing to the browser. How: This removes every HTML comment.
-				.split( '\n' )                                                                             // What: Line Split. Why: Indentation and blank lines are dropped line by line. How: This splits the page into lines.
-				.map( ( linTexStr ) => linTexStr.trim() )                                                  // What: Indentation Trim. Why: Indentation means nothing to the browser. How: This trims each line.
-				.filter( Boolean )                                                                         // What: Blank Line Filter. Why: Blank lines mean nothing to the browser. How: This drops every empty line.
-				.join( '\n' );                                                                             // What: Line Join. Why: The page has to be one string again. How: This rejoins the remaining lines with newlines, which keep the spaces between words in wrapped text.
-
-
-		}
-
-
-	}
-
-
-});
-
-// #endregion minHtmFun
-
-
-
 const VIT_CON_OBJ = defineConfig({ // What: Vite Config Object. Why: Vite reads its whole configuration from this file's default export. How: This builds the config, including the minHtmFun and artPagFun plugins above.
 
 
+	build   : { assetsInlineLimit : 0 },                                                   // What: Build. Why: Vite inlines any asset under 4 KB as a data: URI, which the Content-Security-Policy refuses as an image source, so the Contact select's arrow would vanish. How: This turns inlining off, so every asset ships as its own file on the site's own origin.
 	css     : { modules : { localsConvention : 'camelCaseOnly' } },                        // What: CSS. Why: CSS modules expose each class name as a camelCase key only, so every module reads the same way, per the CSS modules rules. How: This sets the locals convention.
-	plugins : [ react(), minHtmFun(), artPagFun() ],                                       // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React, the page minifier, and the article pages, which copy the page after the minifier has compacted it.
+	plugins : [ reaPluFun(), minHtmFun(), artPagFun() ],                                   // What: Plugins. Why: Vite builds the site through these plugins, in this order. How: This lists React, the page minifier, and the article pages, which copy the page after the minifier has compacted it.
 	server  : { watch : { ignored : [ '**/*.log', '**/dist/**', '**/tests/output/**' ] } } // What: Server. Why: A test run writes thousands of trace frames into the test output, which kept every dev server watching the project busy for hours (measured 2026-11-13 in tech-geek-cards), and none of these folders hold app code. How: This keeps the file watcher off logs, the build, and the test output.
 
 

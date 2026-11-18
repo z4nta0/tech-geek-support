@@ -8,9 +8,10 @@ TechGeek.dev (`../tech-geek-dev`) is the source of this project's configs and
 test suites, TechGeek.cards (`../tech-geek-cards`) the closest worked example
 of a sister site built on the shared design from its first day, and the
 shared design comes from `techgeek-design` (`../techgeek-design`, installed
-from its `v0.7.2` tag, which brought the skip link, the scroll
+from its `v0.7.3` tag; `v0.7.2` brought the skip link, the scroll
 restoration on back, forward, and reload, and the menu closing on any link
-click, updated 2026-11-15).
+click, and `v0.7.3` lifts the skip link on hover only while it's focused,
+updated 2026-11-16).
 
 ## Origin and sibling sites
 This repository once held the portfolio, the support articles, and the
@@ -57,9 +58,11 @@ SEO (never the demo treatment), and free.
 - **Help tips** (decided by the user 2026-10-17): the email and question
   hints sit behind a small "?" button (`pages/contact/help-tip.tsx`) that
   follows each label, opening a bubble on a mouse hover or on a click or tap,
-  and closing on Escape or a press elsewhere; each field still names its
-  bubble for screen readers. The password warning also shows as the
-  question box's placeholder, so every visitor sees it before typing.
+  and closing on Escape, a press elsewhere, or focus moving elsewhere (added
+  2026-11-15, in the audit, since the email tip's bubble hid the field Tab
+  moved on to); each field still names its bubble for screen readers. The
+  password warning also shows as the question box's placeholder, so every
+  visitor sees it before typing.
   The labels ease from the base plus 2 size toward the base plus 1 size with
   the form's own width (`3.8cqi`), and the email label reads "Your email
   (optional)", so every label and its tip stay on one line at every width;
@@ -123,12 +126,31 @@ Decided by the user 2026-10-16, mixing the three directions offered:
   at every width down to 320px, with the same two drawings beside it down to
   441px, kept clear of the pale teal circle behind the photo. The drawings come
   from one shared component, `ui/hero-flourish.tsx`.
+- **The portrait's own render** (decided by the user 2026-11-15): this site's
+  frame shows the portrait larger than dev's (up to about 315 by 417px, at
+  1,000px wide and up, in all three engines), so it keeps its own copy of the
+  original, `design/images/originals/self-portrait.jpg` (1,374 by 2,048px,
+  copied from TechGeek.dev and ignored by git), and `npm run images`
+  (`design/images/render.mts`) writes `pages/about/self-portrait.webp` at
+  three times that width, 945 by 1,251px (the height keeps the 642 by 850
+  shape the frame has always shown, as closely as whole pixels allow, so the
+  page's layout barely moves), cut around its center and encoded at 0.93
+  quality, the lowest that looked the same as the original at 3x zoom (decided
+  by the user 2026-11-15: dev's 0.85, and anything up to 0.92, visibly
+  smoothed the photo's grain). A fresh checkout copies the original from dev
+  first.
 - **Topic tiles**: "Fix-it Kit": soft ivory tiles with a dashed, stitched
   border inset from the edge and a hint line under each topic, carrying
   "Friendly Conversation"'s small speech-bubble icon. At 640px and below the
   twelve tiles become one column of short rows, the icon beside the name and
   hint, since two across left no room for "Understanding" (2026-10-16, to be
   reviewed in the manual responsive pass).
+- **Card text and WebKit** (decided by the user 2026-11-16): the titles and
+  hints inside Home's topic tiles and the Articles cards keep `pointer-events
+  : none`, an exception to the user-level note that a text glyph needs none.
+  Measured in the audit: without it, WebKit's feedback probe missed the phone
+  "Understanding Tech" tile's pressed look under reduced motion in 4 of 4
+  runs, while Chromium and Firefox didn't need it.
 - **How it works**: "Calm Signal"'s three white step cards, chosen to match
   the hero.
 - **Articles help card** (decided by the user 2026-10-17): above 1,024px the
@@ -206,6 +228,12 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   The dev server serves both the same way. Code that runs in Node reads the
   articles through `scripts/article-files.ts`, since the site's catalog loads
   them through Vite.
+- **Broken articles stop the build** (decided by the user 2026-11-16):
+  `scripts/article-files.ts`, which the build and the dev server read, throws
+  for a missing front matter field, a topic `ui/topics.ts` doesn't list, or a
+  photo or video the body names that isn't in the article's folder, naming
+  the article, so a broken article can't ship. The catalog in
+  `ui/articles.ts` runs the same checks as the page loads, as a backstop.
 - **Page title**: the article's title plus " | TechGeek.support" when both fit
   within 60 characters, or the title alone otherwise (`ui/article-title.ts`).
 - **Preview image**: `public/social/<slug>.png`, the article's topic and title
@@ -228,6 +256,16 @@ Decided by the user 2026-10-16; the workflow is still being refined.
   and the article page's `<img>` has neither yet, since no article has a
   photo. The first article with a photo adds reading each photo's size at
   build time and rendering both attributes.
+- **Video, still to do** (decided by the user 2026-11-16): `public/_headers`'
+  Permissions-Policy turns fullscreen off, which would block a video's
+  fullscreen button, so the first article with a video changes it to
+  `fullscreen=(self)` and updates the security headers check with it.
+- **Link styles, still to do** (decided by the user 2026-11-16): an article's
+  body links (`.bodLinAnc`) and its "More on this topic" list (`.relLinAnc`)
+  never render yet, since no article holds a link and every topic has one
+  article, so no test reaches their hover, press, and focus feedback. The
+  first article with a body link, or the second on a topic, brings them into
+  the feedback probe's article state; check they pass it then.
 
 ## Rebuild
 Done. Built on the `rebuild` branch from TechGeek.dev's configs, released as
@@ -251,9 +289,32 @@ suites live in `tests/`, one project per suite and engine in
   Wi-Fi one, which has steps, bullets, and tips, standing in for every
   article, since they share one page), About, Contact, and the 404 at 390px
   and 1,440px, plus the phone menu open.
+- **Reachable states** (added 2026-11-15, in the audit, from TechGeek.cards):
+  the looks a control leads to and a visitor can stay on live in their own
+  support files, kept out of the rendering suite: the Articles list narrowed
+  by a pressed pill and by a `?topic=` address (`tests/support/articles.ts`),
+  and each help tip open, the form after a refused empty send, and its sent
+  and failed results (`tests/support/contact.ts`, which answers Netlify's
+  POST with a 200 or a 500), the sent one also without an email address,
+  whose thank-you reads differently (added 2026-11-16), each at both widths. axe, the scripted checks,
+  and the security browser spec load them all. Every topic has an article, so
+  the empty topic's invitation is a look no control reaches and is left out.
+- **Scripted checks** (added 2026-11-15, in the audit, from TechGeek.dev's
+  and TechGeek.cards'): the names check fails a tree with no link or button
+  and a new tab link whose name doesn't end in its note; the Tab walk fails
+  one that reaches no stop and lists every enabled, drawn, non-inert element
+  from its first stop on that Tab never reached (only the open dialog's while
+  a modal dialog is open), a start already showing the keyboard's ring
+  counting as the first stop; and the reduced motion check records every
+  lasting animation and transition from the start of the load.
 - **SEO** reads the article list through `scripts/article-files.ts`, so a new
   article is checked (head, raw preview tags, Article data, sitemap entry,
-  preview image) without editing the suite.
+  preview image) without editing the suite. The raw page checks (Home's title
+  and description, and the link preview tags of Home and the Article data and
+  link preview tags of every article's own `articles/<slug>.html`) read the
+  build from the preview on 5206 (changed 2026-11-15, in the audit), since
+  scrapers read what ships; `vite preview` serves each article's address from
+  its `.html` copy, as `_redirects` does on Netlify.
 - **Comment text**: the scripted accessibility suite fails any page whose
   visible text carries a `What:`, `Why:`, or `How:` label, the sign of a JSX
   comment written where it renders as text.
@@ -261,12 +322,82 @@ suites live in `tests/`, one project per suite and engine in
   content is everything between the bar and the footer, so `app.tsx`'s
   `<main>` carries `id='main'` and `tabIndex={ -1 }` for the bar's skip link.
   The feedback probe focuses the skip link before hovering it, since it waits
-  above the screen until it's focused.
+  above the screen until it's focused, and fails a state with no menu open
+  where it doesn't find the skip link waiting there.
+- **Feedback probe** (rebuilt 2026-11-15, in the audit, from TechGeek.cards',
+  helpers in `tests/support/feedback.ts`): on every shared state and the
+  reachable ones above, each reachable link, button, and field is read at
+  rest, hovered, pressed, unfocused, and focused through `focus( {
+  focusVisible : true } )`, and every property that changes on it or inside
+  it, its `::before` and `::after` included, has to ease, or switch at once
+  under reduced motion. It reads the properties this site's controls change:
+  color, background, border color, box shadow, transform, the separate
+  `translate` the step and promise cards lift through, opacity, and on focus
+  the outline's color, offset, and width. The toggled states are flipped off,
+  on, and off by their attributes, before the controls are probed, since
+  probing moves focus and closes an open tip: the menu toggle, the bar's and
+  drawer's current links, the open drawer and scrim, the scrolled bar, the
+  chosen topic pill, an open tip's button and bubble, and the sending button.
+  Home's How It Works step cards and About's promise cards, which lift
+  without being controls, are hovered too. The shared states' first Tab has
+  to land on the skip link and draw a 2px ring. After probing the skip link
+  the probe waits for it to slide back out, since before `v0.7.3` the
+  package's skip link lifted on hover even while unfocused, so a pointer
+  landing on the brand link mid-slide held it in view and hung WebKit's next
+  hover (the audit's question 4, fixed in the package). The probe's first
+  run found the Contact fields' focus outline snapping (fixed the same day).
+- **Navigation and menu** (audit 2026-11-15, from TechGeek.cards): the
+  navigation spec checks exact restores through back, forward, and a reload
+  (which reads `history.scrollRestoration` as `manual`), a fresh load at the
+  top, a hash winning over a saved position (refusing any scroll call after
+  the hash change, which caught a Firefox gap in the cards version), malformed
+  saved positions, an instant jump with smooth scrolling on, and the skip link
+  on every page; the menu spec checks plain, Ctrl or Cmd, and middle clicks
+  each close the menu; the names check fails a new tab link without its note.
+- **Security** (audit 2026-11-15, from TechGeek.cards): `tests/security/`
+  checks `public/_headers`' policy and hardening headers, the built catch-all
+  rewrite, the build for secrets, and `npm audit` in Chromium only, and loads
+  every state, the reachable ones above included, from a `vite preview` build
+  on port 5206 with the headers applied, failing on any CSP violation or a new
+  tab link without `noopener` and `noreferrer`. The policy allows no `data:`
+  image, which the headers check fails: the Contact select's arrow is its own
+  `pages/contact/select-arrow.svg` (since 2026-11-15, per the user-level rule
+  "## Dropdown Arrows: An SVG File"), and `vite.config.ts` turns off asset
+  inlining, so every asset ships as a file. WebKit's own report about the
+  select's inline style is ignored, as on TechGeek.cards. Chromium runs as
+  full headless Chrome (`channel : 'chromium'`).
 - **Speed** (2026-11-15, following TechGeek.cards' fixes): the feedback
   probe waits for each look's animations to finish (`aniFinFun`) rather than a
   fixed pause, its tests run in parallel across 6 workers, and the dev
   server's watcher ignores `tests/output`, so the full run takes about 8
   minutes in all three engines rather than over an hour.
+- **Card grids** (added 2026-11-15, in the audit, from TechGeek.dev's):
+  `tests/responsive/grids.spec.ts` groups each card grid's cards into rows at
+  every responsive width and fails uneven rows: Home's topic tiles, newest
+  articles, and steps, and About's promises. The Contact sidebar follows the
+  centered odd card exception, its one leftover card at the others' width
+  and centered within 2px.
+- **Help tips** (added 2026-11-15, in the audit): `tests/interaction/
+  help-tip.spec.ts` pins each tip open and checks it closes when Tab moves
+  focus on, on Escape, and on a press elsewhere, read from the button's
+  `aria-expanded`. The Tab walk alone can't show it for the question tip,
+  whose bubble leaves the middle of the box below it clear (measured: with
+  the focus close turned off, only the email tip's walk failed).
+- **Topic filter** (added 2026-11-15, in the audit): pressing a topic
+  button fades the Articles list, its count, and the empty topic message up
+  on the decelerating curve, keyed on the articles shown, and only after a
+  first choice, so it never plays over the page's entrance;
+  `tests/interaction/filter.spec.ts` reads the count's and the list's
+  computed animation names and their keyframes before and after two presses,
+  with and without reduced motion, and checks both remount on each press while
+  the count's live region stays. A press writes the topic into the address
+  with `history.replaceState`, outside the router (decided by the user
+  2026-11-16), since a router navigation sent the page to its top through the
+  design package's scroll hook; the page holds the choice itself until a real
+  router navigation, and the spec checks a press keeps the scroll position at
+  phone width, a reload keeps the topic, the footer's "Articles" link
+  clears it, and Back from an article or from that link brings back the
+  topic, its count, and the scroll position.
 - **Rendering** baselines live in `tests/rendering/baselines`, captured on
   this Linux machine; refresh them with `npm run test:rendering --
   --update-snapshots` when a page is meant to look different.

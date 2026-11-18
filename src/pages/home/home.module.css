@@ -10,12 +10,13 @@
  * small drawing on each side down to 441px, its last heading word in teal and
  * a warm italic note under the buttons. The topic tiles sit on a white band,
  * each a soft ivory tile with a dashed, stitched border just inside its edge,
- * a teal speech bubble, its topic, and a muted hint, four, three, or two
- * across so every row stays even, and one column of short rows on a phone. The
- * four newest articles follow on the ivory as white cards, four, two, or one
- * across, then the three step cards. The page fades up as it opens, every
- * control eases its hover, press, and focus, and every animation and
- * transition holds still under reduced motion.
+ * a teal speech bubble, its topic, and a muted hint, four across, three at
+ * 1,024px and below, and two at 768px and below, so every row stays even,
+ * then one column of short rows at 640px and below. The four newest articles
+ * follow on the ivory as white cards, four across, two at 1,024px and below,
+ * and one at 640px and below, then the three step cards. The page fades up
+ * as it opens, every control eases its hover, press, and focus, and every
+ * animation and transition holds still under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -105,7 +106,7 @@
 
 /* #region herEyePar */
 
-.herEyePar { /* What: Hero Eyebrow Paragraph. Why: The label reads as a small teal caption with its dot, which stays beside the first line when the label wraps. How: This lines up the dot with the words' first line in teal mono capitals. */
+.herEyePar { /* What: Hero Eyebrow Paragraph. Why: The label reads as a teal caption with its dot, which stays beside the first line when the label wraps. How: This lines up the dot with the words' first line in teal mono capitals. */
 
 
 	align-items    : flex-start;
@@ -135,6 +136,7 @@
 }
 
 /* #endregion herEyePar */
+
 
 
 /* #region herTitHea */
@@ -170,7 +172,7 @@
 
 /* #region herActDiv */
 
-.herActDiv { /* What: Hero Actions Div. Why: The two buttons sit side by side and wrap on a narrow phone. How: This lines them up in a wrapping row, a little apart from the lead. */
+.herActDiv { /* What: Hero Actions Div. Why: The two buttons sit side by side, wrapping onto two lines at about 475px wide and below. How: This lines them up in a wrapping row, a little apart from the lead. */
 
 
 	display     : flex;
@@ -195,7 +197,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : background var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -242,7 +244,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 );       /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : border-color var( --dur-tra-bas ), color var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), color var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -305,7 +307,7 @@
 
 
 }
-@media ( max-width : 768px ) { /* What: Phone Hero Visual Div. Why: In one column the rings lead the hero, as every sister site's stacked hero opens on its picture. How: This applies at 768px and below. */
+@media ( max-width : 768px ) { /* What: Phone Hero Visual Div. Why: In one column the rings lead the hero, as the sister sites' stacked heroes do. How: This applies at 768px and below. */
 
 
 	.herVisDiv { /* What: Leading Hero Visual Div. Why: The rings greet the visitor first, above the pitch. How: This moves the rings and their flourishes above the text. */
@@ -322,7 +324,7 @@
 .herRinSvg { /* What: Hero Rings SVG. Why: The rings fill their column without growing past a comfortable size. How: This caps their width at about 426px. */
 
 
-	max-width : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.601px */
+	max-width : calc( var( --ver-rhy-p12 ) * 1rem ); /* Vertical Rhythm Base Plus 12 ~= 425.596px */
 
 
 }
@@ -339,7 +341,6 @@
 
 
 }
-
 
 .visFloSvg { /* What: Visual Flourish SVG. Why: The flourishes only fill the room the stacked hero leaves beside the rings. How: This hides them until the hero stacks. */
 
@@ -365,7 +366,7 @@
 
 
 }
-@media ( max-width : 440px ) { /* What: Narrow Phone Visual Flourish SVG. Why: Below about 440px the room beside the rings is too narrow for the drawings at full size, and smaller they read as stray specks. How: This applies at 440px and below. */
+@media ( max-width : 440px ) { /* What: Narrow Phone Visual Flourish SVG. Why: At 440px and below the room beside the rings is too narrow for the drawings at full size, and smaller they read as stray specks. How: This applies at 440px and below. */
 
 
 	.visFloSvg { /* What: Hidden Visual Flourish SVG. Why: The rings fill most of a narrow phone's width on their own. How: This hides the drawings. */
@@ -417,7 +418,7 @@
 
 /* #region secInnDiv */
 
-.secInnDiv { /* What: Section Inner Div. Why: Every section's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
+.secInnDiv { /* What: Section Inner Div. Why: A section's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
 
 
 	margin    : 0 auto;
@@ -427,7 +428,7 @@
 
 }
 
-.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names each section above its heading. How: This sets it in teal mono capitals. */
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A teal label names each section above its heading. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
@@ -491,7 +492,7 @@
 
 
 }
-@media ( max-width : 640px ) { /* What: Narrow Phone Topic Grid Unordered. Why: Two tiles across leave too little room for a name like Understanding on a narrow phone. How: This applies at 640px and below. */
+@media ( max-width : 640px ) { /* What: Narrow Phone Topic Grid Unordered. Why: Two tiles across leave too little room for a name like "Understanding" on a narrow phone. How: This applies at 640px and below. */
 
 
 	.topGriUno { /* What: One-Column Topic Grid Unordered. Why: One divides the twelve tiles evenly, and each tile becomes a short row with room for its whole name. How: This sets one column a little closer together. */
@@ -527,13 +528,13 @@
 .topTilAnc::before { /* What: Topic Tile Anchor Stitching. Why: A dashed line just inside the edge makes the tile look hand-stitched, the theme's touch of fun. How: This draws a dashed border inset from the tile's edge, easing its color, without touching the outline the focus ring uses. */
 
 
-	border         : var( --bor-wid-lar ) dashed var( --bor-mai-col ); /* Border Width Large ~= 2.035px, Border Main Color = #D8CFBE */
-	border-radius  : var( --rad-bor-sma );                             /* Radius Border Small ~= 8.304px */
+	border         : var( --bor-wid-lar ) dashed var( --bor-mai-col );       /* Border Width Large ~= 2.035px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-sma );                                   /* Radius Border Small ~= 8.304px */
 	content        : '';
-	inset          : var( --spa-ver-m02 ) var( --spa-hor-m02 );        /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Minus 2 ~= 8.304px */
+	inset          : var( --spa-ver-m02 ) var( --spa-hor-m02 );              /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base Minus 2 ~= 8.304px */
 	pointer-events : none;
 	position       : absolute;
-	transition     : border-color var( --dur-tra-bas );                /* Duration Transition Base ~= 157.8ms */
+	transition     : border-color var( --dur-tra-bas ) var( --mot-sta-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease */
 
 
 }
@@ -579,7 +580,7 @@
 
 
 	.topTilAnc,
-	.topTilAnc::before { /* What: Motionless Topic Tile Anchor. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the tile's and its stitching's transitions off. */
+	.topTilAnc::before { /* What: Motionless Topic Tile Anchor And Stitching. Why: The hover, press, and focus looks should simply switch, the lift and press still applying at once. How: This turns the tile's and its stitching's transitions off. */
 
 
 		transition : none;
@@ -594,7 +595,7 @@
 
 
 	height          : calc( var( --ver-rhy-p02 ) * 1rem ); /* Vertical Rhythm Base Plus 2 ~= 25.572px */
-	pointer-events  : none;                                /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
+	pointer-events  : none;                                /* What: Pass Through Pointer. Why: A press on the icon should land on its tile link. How: This lets every press on the icon reach the link itself. */
 	stroke          : var( --act-dar-col );                /* Accent-Tertiary Dark Color ~= #007063 */
 	stroke-linejoin : round;
 	stroke-width    : 2;                                   /* What: Icon Stroke Width. Why: The bubble's line should read clearly at its small size. How: This is 2 units of the 24-unit drawing space. */
@@ -668,7 +669,7 @@
 
 /* #region artHeaDiv */
 
-.artHeaDiv { /* What: Articles Header Div. Why: The heading and the link to every article sit on one line on wide screens. How: This spreads them apart along their bottoms, wrapping on phones. */
+.artHeaDiv { /* What: Articles Header Div. Why: The heading and the link to every article sit on one line on wide screens. How: This spreads them apart along their bottoms, wrapping onto two lines at about 562px wide and below. */
 
 
 	align-items     : flex-end;
@@ -680,7 +681,9 @@
 
 }
 
-/* What: Section Eyebrow Paragraph And Section Title Heading Pointer. Why: This section's eyebrow and heading share their rules with the topic section's. How: Their rules sit in the homTopSec region above. */
+/* What: Section Eyebrow Paragraph Pointer. Why: This section's eyebrow shares its rule with the topic section's. How: Its rule sits in the homTopSec region above. */
+
+/* What: Section Title Heading Pointer. Why: This section's heading shares its rule with the topic section's. How: Its rule sits in the homTopSec region above. */
 
 
 /* #region allArtAnc */
@@ -691,7 +694,7 @@
 	color       : var( --acc-dar-col ); /* Accent Dark Color ~= #bd3000 */
 	font-family : var( --fon-fam-sec ); /* Font Family Secondary = 'DM Mono', monospace */
 	font-size   : var( --fon-siz-p01 ); /* Font Size Base Plus 1 ~= 14.572px */
-	transition  : color var( --dur-tra-bas ), opacity var( --dur-tra-m02 ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Minus 2 ~= 89.9ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition  : color var( --dur-tra-bas ) var( --mot-sta-eas ), opacity var( --dur-tra-m02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Minus 2 ~= 89.9ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -813,7 +816,7 @@
 	gap            : var( --spa-ver-m02 );                            /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	height         : 100%;
 	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );       /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
-	transition     : border-color var( --dur-tra-bas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+	transition     : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -851,7 +854,7 @@
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
 	font-size      : var( --fon-siz-p02 ); /* Font Size Base Plus 2 ~= 19.304px */
-	line-height    : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 
 
@@ -931,7 +934,9 @@
 
 /* What: Section Inner Div Pointer. Why: This section's centered column shares its rule with the topic section's. How: Its rule sits in the homTopSec region above. */
 
-/* What: Section Eyebrow Paragraph And Section Title Heading Pointer. Why: This section's eyebrow and heading share their rules with the topic section's. How: Their rules sit in the homTopSec region above. */
+/* What: Section Eyebrow Paragraph Pointer. Why: This section's eyebrow shares its rule with the topic section's. How: Its rule sits in the homTopSec region above. */
+
+/* What: Section Title Heading Pointer. Why: This section's heading shares its rule with the topic section's. How: Its rule sits in the homTopSec region above. */
 
 
 
@@ -969,14 +974,14 @@
 .steIteIte { /* What: Step Item Item. Why: Each step is a white card that lifts on hover. How: This draws the card with a quiet border, stacks its parts, and eases its lift and border. */
 
 
-	background     : var( --bac-sur-col );                                                                   /* Background Surface Color = #FFFFFF */
-	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                        /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
-	border-radius  : var( --rad-bor-xla );                                                                   /* Radius Border Extra Large ~= 19.304px */
+	background     : var( --bac-sur-col );                            /* Background Surface Color = #FFFFFF */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
 	display        : flex;
 	flex-direction : column;
-	gap            : var( --spa-ver-m01 );                                                                   /* Spacing Vertical Base Minus 1 = 11px */
-	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );                                              /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
-	transition     : border-color var( --dur-tra-bas ), translate var( --dur-tra-bas ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	gap            : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
+	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );       /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	transition     : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), translate var( --dur-tra-bas ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -1002,7 +1007,7 @@
 
 }
 
-.steLabSpa { /* What: Step Label Span. Why: A small teal label numbers each step. How: This sets it in teal mono capitals. */
+.steLabSpa { /* What: Step Label Span. Why: A teal label numbers each step. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */

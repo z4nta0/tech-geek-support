@@ -41,13 +41,14 @@ npm run typecheck  # TypeScript across src/, the configs, scripts/, tests/, and 
 ```bash
 npm test                    # every suite
 npm run test:accessibility  # axe-core plus scripted naming, keyboard, reflow, and motion checks, and a check that no source comment shows on a page
-npm run test:interaction    # page navigation, the phone menu, the question form, the Ko-fi button, and every link and button's hover, press, and focus feedback
+npm run test:interaction    # page navigation, the phone menu, the question form and its help tips, the topic filter's arriving list, the Ko-fi button, and every link and button's hover, press, and focus feedback
 npm run test:rendering      # full-page screenshots of each page state against approved baselines
-npm run test:responsive     # every page and the phone menu from 320 to 1,920px: no sideways scroll, spill, or overlap, and every paragraph within its measure
+npm run test:responsive     # every page and the phone menu from 320 to 1,920px: no sideways scroll, spill, or overlap, every card grid's rows even, and every paragraph within its measure
+npm run test:security       # the security headers, no policy violations on any page from the build, new tab links that can't reach back, no secrets in the build, and a dependency audit
 npm run test:seo            # titles, descriptions, canonical links, robots, link previews, structured data, icons, robots.txt, and the sitemap, for every page and article
 ```
 
-Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5196, so a dev server already running on 5173 is left alone. The states the suites visit are Home, Articles, About, Contact, the 404 page, and one article (the slow Wi-Fi one, which uses every kind of content an article can hold, standing in for the rest, since every article shares one page), each at phone and desktop widths, plus the open phone menu. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report.
+Each suite runs in Chromium, Firefox, and WebKit against its own dev server on port 5196, while the security suite and the SEO suite's raw page and sitemap checks read the build served by `vite preview` on 5206, so a dev server already running on 5173 is left alone. The states the suites visit are Home, Articles, About, Contact, the 404 page, and one article (the slow Wi-Fi one, which uses every kind of content an article can hold, standing in for the rest, since every article shares one page), each at phone and desktop widths, plus the open phone menu. Reports land in `tests/output/` (git-ignored); `npx playwright show-report tests/output/report` opens the HTML report.
 
 The rendering suite's approved screenshots live in `tests/rendering/baselines/` and match to the pixel, so after a change meant to alter how a page looks, review the diff in the report, then run `npm run test:rendering -- --update-snapshots` and commit the new baselines with the change. The baselines were captured on Linux, and font rendering differs between systems, so on macOS or Windows refresh them locally before relying on the comparison. If a browser is missing, `npx playwright install chromium firefox webkit` installs all three.
 
@@ -62,11 +63,12 @@ The build also writes a copy of the page for every article (`articles/<slug>.htm
 
 ## Images
 
-The icons and link preview images are rendered by scripts, so they can be rebuilt whenever something changes:
+The icons, the About portrait, and the link preview images are rendered by scripts, so they can be rebuilt whenever something changes:
 
 ```bash
 npm run og-images  # captures the link preview images from design/og-image/card.html: the site's own og-image.png and one for each article in public/social/
 npm run icons      # copies the design package's favicon.svg into public/ and renders favicon.ico, the PNG icons, and the Apple touch icon from it
+npm run images     # renders the About portrait from its original in design/images/originals/, which git ignores, so a fresh checkout copies it from TechGeek.dev first
 ```
 
 ## Adding an article
@@ -107,15 +109,17 @@ scripts/               article-files.ts, which lists the articles for code that 
 research/articles/     The article drafts and their research notes, never published
 tests/
 ├── accessibility/     axe-core scan and scripted checks
-├── interaction/       navigation, phone menu, question form, Ko-fi button, and hover, press, and focus feedback checks
+├── interaction/       navigation, phone menu, question form, help tip, topic filter, Ko-fi button, and hover, press, and focus feedback checks
 ├── rendering/         screenshot comparisons and their baselines/
-├── responsive/        layout checks across screen widths
+├── responsive/        layout, card grid, and measure checks across screen widths
+├── security/          security header, build, dependency, and browser policy checks
 ├── seo/               head tags, structured data, icon, and crawler file checks
 ├── support/           the page states the suites visit
 └── playwright.config.ts
 
 design/                Source artwork and the scripts that render it, not served
 ├── icons/             render.mts, which builds the icon set in public/ (npm run icons)
+├── images/            render.mts, which renders the About portrait from its original (npm run images)
 └── og-image/          card.html and render.mts, which capture the link preview images (npm run og-images)
 ```
 

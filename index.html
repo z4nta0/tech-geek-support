@@ -1,3 +1,6 @@
+
+
+
 <!doctype html><!-- What: Document Type Declaration. Why: Browsers render the page in standards mode only with a doctype. How: This declares HTML5. -->
 
 
@@ -37,7 +40,7 @@
 
 
 		<meta name='author'      content='z4nta0' /> <!-- What: Author Meta. Why: Search engines and link preview inspectors look for who a page belongs to. How: This names z4nta0, who built the site and answers its questions. -->
-		<meta name='description' content='Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.' /> <!-- What: Description Meta. Why: Search listings show a summary under the title, and checkers and crawlers that never run the script read only this one. How: This is the home page's description, which the other pages swap for their own while they show. -->
+		<meta name='description' content='Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.' /> <!-- What: Description Meta. Why: Search listings show a summary under the title, and checkers and crawlers that never run the script read only this one. How: This is the home page's description, which the pages with a description of their own swap in while they show. -->
 
 		<!-- #endregion Search -->
 
@@ -70,9 +73,9 @@
 
 		<link href='/favicon.svg'         rel='icon' type='image/svg+xml' />             <!-- What: SVG Icon Link. Why: Modern browsers prefer a vector favicon that stays sharp at any tab density. How: This points at the hexagon mark in public/. -->
 		<link href='/favicon.ico'         rel='icon' sizes='any' />                      <!-- What: ICO Icon Link. Why: Older browsers read only a .ico favicon. How: This points at the root favicon.ico, which also answers the request browsers make for it on their own. -->
-		<link href='/favicon-16x16.png'   rel='icon' sizes='16x16'   type='image/png' /> <!-- What: Small PNG Icon Link. Why: Small tab icons look crisper drawn at their own size. How: This offers the 16px PNG. -->
-		<link href='/favicon-32x32.png'   rel='icon' sizes='32x32'   type='image/png' /> <!-- What: Medium PNG Icon Link. Why: A browser without SVG favicons needs a raster fallback, and most pick a 32px tab icon. How: This offers the 32px PNG. -->
-		<link href='/favicon-192x192.png' rel='icon' sizes='192x192' type='image/png' /> <!-- What: Large PNG Icon Link. Why: Some browsers and Android pick a large icon for shortcuts and tab previews. How: This offers the 192px PNG. -->
+		<link href='/favicon-16x16.png'   rel='icon' sizes='16x16'   type='image/png' /> <!-- What: Small PNG Icon Link. Why: The icon set offers a 16px size of its own. How: This offers the 16px PNG. -->
+		<link href='/favicon-32x32.png'   rel='icon' sizes='32x32'   type='image/png' /> <!-- What: Medium PNG Icon Link. Why: A browser without SVG favicons needs a raster fallback, and the head offers a 32px tab icon beside the 16px one. How: This offers the 32px PNG. -->
+		<link href='/favicon-192x192.png' rel='icon' sizes='192x192' type='image/png' /> <!-- What: Large PNG Icon Link. Why: The head offers a large icon for any browser or launcher that asks for one. How: This offers the 192px PNG. -->
 		<link href='/favicon-512x512.png' rel='icon' sizes='512x512' type='image/png' /> <!-- What: Extra Large PNG Icon Link. Why: High-density screens and app launchers can ask for a bigger icon still. How: This offers the 512px PNG. -->
 
 		<!-- #endregion Icons -->
@@ -92,10 +95,10 @@
 
 			@summary
 			Link scrapers read only this file and never run the site's script,
-			so every page shares this one card, describing the home page: its
-			title and description, and the card npm run og-image renders. A
-			page that ever needs a card of its own would need the site
-			prerendered first.
+			so every page but an article shares this one card, describing the
+			home page: its title and description, and the card npm run
+			og-images renders. Each article's own page, written by the build,
+			carries its own tags and card.
 
 			@author z4nta0 <https://github.com/z4nta0>
 
@@ -104,15 +107,15 @@
 
 
 		<meta property='og:description'  content='Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.' /> <!-- What: Open Graph Description Meta. Why: A shared link shows a summary under its title. How: This matches the home page's description. -->
-		<meta property='og:image'        content='https://techgeek.support/og-image.png' />                                                    <!-- What: Open Graph Image Meta. Why: A shared link shows a preview image. How: This points at the card npm run og-image renders, by its absolute address. -->
-		<meta property='og:image:alt'    content='The TechGeek.support hexagon mark and wordmark above the words Free, Friendly Tech Help.' /> <!-- What: Open Graph Image Alt Meta. Why: Screen readers on social sites read the preview image's description. How: This describes the card. -->
+		<meta property='og:image'        content='https://techgeek.support/og-image.png' />                                                    <!-- What: Open Graph Image Meta. Why: A shared link shows a preview image. How: This points at the card npm run og-images renders, by its absolute address. -->
+		<meta property='og:image:alt'    content='The TechGeek.support hexagon mark and wordmark above the words Free, Friendly Tech Help.' /> <!-- What: Open Graph Image Alt Meta. Why: The Open Graph protocol names this tag as a description of what is in the image. How: This describes the card. -->
 		<meta property='og:image:height' content='630' />                                                                                      <!-- What: Open Graph Image Height Meta. Why: Sites can lay out the preview before the image arrives. How: This gives the card's height. -->
-		<meta property='og:image:type'   content='image/png' />                                                                                <!-- What: Open Graph Image Type Meta. Why: Some apps check an image's type before fetching it. How: This names the card a PNG. -->
+		<meta property='og:image:type'   content='image/png' />                                                                                <!-- What: Open Graph Image Type Meta. Why: The Open Graph protocol names this tag as the image's MIME type. How: This names the card a PNG. -->
 		<meta property='og:image:width'  content='1200' />                                                                                     <!-- What: Open Graph Image Width Meta. Why: Sites can lay out the preview before the image arrives. How: This gives the card's width. -->
 		<meta property='og:locale'       content='en_US' />                                                                                    <!-- What: Open Graph Locale Meta. Why: Sites can tell which language the page is in. How: This names American English. -->
 		<meta property='og:site_name'    content='TechGeek.support' />                                                                         <!-- What: Open Graph Site Name Meta. Why: Previews show which site a link belongs to. How: This names TechGeek.support. -->
 		<meta property='og:title'        content='Free Tech Help for Everyday People | TechGeek.support' />                                    <!-- What: Open Graph Title Meta. Why: A shared link shows a title. How: This matches the home page's title. -->
-		<meta property='og:type'         content='website' />                                                                                  <!-- What: Open Graph Type Meta. Why: Sites shape a preview by what kind of page it is. How: This names the site a website. -->
+		<meta property='og:type'         content='website' />                                                                                  <!-- What: Open Graph Type Meta. Why: The Open Graph protocol sets a page's type, and the home page is a website. How: This names the site a website. -->
 		<meta property='og:url'          content='https://techgeek.support/' />                                                                <!-- What: Open Graph URL Meta. Why: Shares from any address should count as one page. How: This names the home page's canonical address. -->
 
 		<!-- #endregion Open Graph -->
@@ -123,7 +126,7 @@
 		<meta name='twitter:card'        content='summary_large_image' /> <!-- What: Twitter Card Meta. Why: X and similar sites pick a preview layout from this tag. How: This asks for the large image card. -->
 		<meta name='twitter:description' content='Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.' /> <!-- What: Twitter Description Meta. Why: The preview shows a summary. How: This matches the home page's description. -->
 		<meta name='twitter:image'       content='https://techgeek.support/og-image.png' />                                                                                      <!-- What: Twitter Image Meta. Why: The preview shows an image. How: This points at the same card as Open Graph. -->
-		<meta name='twitter:image:alt'   content='The TechGeek.support hexagon mark and wordmark above the words Free, Friendly Tech Help.' />                                   <!-- What: Twitter Image Alt Meta. Why: Screen readers read the preview image's description. How: This describes the card. -->
+		<meta name='twitter:image:alt'   content='The TechGeek.support hexagon mark and wordmark above the words Free, Friendly Tech Help.' />                                   <!-- What: Twitter Image Alt Meta. Why: The picture needs a description. How: This describes the card. -->
 		<meta name='twitter:title'       content='Free Tech Help for Everyday People | TechGeek.support' />                                                                      <!-- What: Twitter Title Meta. Why: The preview shows a title. How: This matches the home page's title. -->
 
 		<!-- #endregion Twitter Card -->
@@ -158,7 +161,7 @@
 					}
 				]
 			}
-		</script> <!-- What: Site Structured Data Script. Why: Search engines read JSON-LD to tell who a site belongs to, and this site belongs to a person, never a business. How: This describes this domain as a website by z4nta0, the same person, under the same id, that TechGeek.dev describes, with the GitHub and LinkedIn profiles the footer links to. -->
+		</script> <!-- What: Site Structured Data Script. Why: Search engines read JSON-LD to tell who a site belongs to, and this site belongs to a person, never a business. How: This describes this domain as a website by z4nta0, the same person, under the same ID, that TechGeek.dev describes, with the GitHub and LinkedIn profiles the footer links to. -->
 
 		<!-- #endregion Structured Data -->
 
@@ -170,7 +173,7 @@
 	<body><!-- What: Document Body Element. Why: This holds the site's mount point, the hidden copy of the question form Netlify reads, and the entry script. How: The mount point stays empty until React renders the site into it. -->
 
 
-		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this id. -->
+		<div id='appMouDiv'></div><!-- What: App Mount Div Element. Why: React needs one element to render the site into. How: main.tsx renders the app into this ID. -->
 
 		<form
 			name='question'
@@ -178,7 +181,7 @@
 			netlify-honeypot='bot-field'
 
 			hidden
-		><!-- What: Question Form Element. Why: Netlify registers a site's forms by reading the built HTML, and the Contact page's form only exists once React runs. How: This hidden copy carries the form and field names Netlify needs. --><!-- Netlify finds forms by parsing the built HTML at deploy time, never running the site, so the React form in pages/contact/contact.tsx is invisible to it. This copy registers the form and its fields, and the page then POSTs to '/' with a matching form-name. Keep the name and every field name in sync with the Contact page's submit, or submissions are rejected. hidden keeps it off the page, and Netlify still parses it. -->
+		><!-- What: Question Form Element. Why: Netlify registers a site's forms by reading the built HTML, and the Contact page's form only exists once React runs. How: This hidden copy carries the form and field names Netlify needs. --><!-- Netlify finds forms by parsing the built HTML at deploy time, never running the site, so the React form in pages/contact/contact.tsx is invisible to it. This copy registers the form and its fields, and the page then POSTs to '/' with a matching form-name. Keep the name in sync with the Contact page's submit, or Netlify refuses the submission, and every field name too, or Netlify drops that field from what it saves. hidden keeps it off the page, and Netlify still parses it. -->
 
 
 			<label for='hidNamInp'>Name</label><!-- What: Name Label Element. Why: The name field needs a label for Netlify's form record. How: This labels hidNamInp. -->

@@ -3,19 +3,19 @@
 
 // #region Imports
 
-import { AboPagCom    } from './pages/about/about.tsx';          // What: About Page Component. Why: The About route shows who answers the questions. How: The about route renders it.
-import { ArtLisCom    } from './pages/articles/articles.tsx';    // What: Article List Component. Why: The Articles route lists every help article. How: The articles route renders it.
-import { ArtPagCom    } from './pages/article/article.tsx';      // What: Article Page Component. Why: Each article has its own address. How: The article route renders it.
-import { ConPagCom    } from './pages/contact/contact.tsx';      // What: Contact Page Component. Why: The Contact route shows the question form. How: The contact route renders it.
-import { HomPagCom    } from './pages/home/home.tsx';            // What: Home Page Component. Why: The site's root address is its home page. How: The home route renders it.
+import { AboPagCom    } from './pages/about/about.tsx';          // What: About Page Component. Why: The About route shows who answers the questions. How: The About route renders it.
+import { ArtLisCom    } from './pages/articles/articles.tsx';    // What: Article List Component. Why: The Articles route lists every help article. How: The Articles route renders it.
+import { ArtPagCom    } from './pages/article/article.tsx';      // What: Article Page Component. Why: Each article has its own address. How: The Article route renders it.
+import { ConPagCom    } from './pages/contact/contact.tsx';      // What: Contact Page Component. Why: The Contact route shows the question form. How: The Contact route renders it.
+import { HomPagCom    } from './pages/home/home.tsx';            // What: Home Page Component. Why: The site's root address is its home page. How: The Home route renders it.
 import { NavBarCom    } from 'techgeek-design/ui/nav.tsx';       // What: Navigation Bar Component. Why: Every page starts with the TechGeek family's shared bar. How: This renders above the routes.
 import { NotFouCom    } from './pages/not-found/not-found.tsx';  // What: Not Found Component. Why: Every unknown address shows the 404 page. How: The catch-all route renders it.
-import { PAG_LIN_ARR  } from './ui/page-links.ts';               // What: Page Link Array. Why: The bar and the footer link to the site's pages. How: This is the list the root hands them.
+import { PAG_LIN_ARR  } from './ui/page-links.ts';               // What: Page Link Array. Why: The family's shared navigation links to the site's pages. How: This is the list the root hands it.
 import { Route        } from 'react-router';                     // What: Route. Why: Each page is matched to its path. How: This declares one route per page.
 import { Routes       } from 'react-router';                     // What: Routes. Why: Only one page should render for any path. How: This renders the first route whose path matches.
 import { SitFooCom    } from 'techgeek-design/ui/footer.tsx';    // What: Site Footer Component. Why: Every page ends with the TechGeek family's shared footer. How: This renders below the routes.
 import { useLocation  } from 'react-router';                     // What: Use Location. Why: Each page change remounts the page, replaying its entrance. How: This reads the current path for the routes' key.
-import { useScrTopFun } from 'techgeek-design/ui/scroll-top.ts'; // What: Use Scroll Top Function. Why: A new page should open at its top rather than where the last one was scrolled. How: The app root calls it once inside the router.
+import { useScrTopFun } from 'techgeek-design/ui/scroll-top.ts'; // What: Use Scroll Top Function. Why: A new page should open at its top rather than where the last one was scrolled. How: The app root calls it from inside the router.
 
 
 import type { JSX       } from 'react';                            // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.
@@ -50,12 +50,13 @@ import type { SisLinTyp } from 'techgeek-design/ui/link-types.ts'; // What: Sist
 
 // #region Constants
 
-const AVA_LAB_STR = 'Free help, answered within 24 hours';    // What: Availability Label String. Why: The phone menu reassures a visitor on any page that help is free and quick. How: The bar shows it in the drawer's pulsing label.
+const AVA_LAB_STR = 'Free help, answered within 24 hours';    // What: Availability Label String. Why: The phone menu reassures a visitor on any page that help is free and quick. How: The bar shows it in the drawer's label beside its pulsing dot.
 const SIT_EMA_STR = 'contact@techgeek.support';               // What: Site Email String. Why: The phone menu offers the site's contact address. How: The bar links it from the drawer.
-const SIT_TAG_STR = 'Patient tech help for everyday people.'; // What: Site Tagline String. Why: The phone menu and the footer end on the site's tagline. How: The bar and the footer both show it.
+const SIT_TAG_STR = 'Patient tech help for everyday people.'; // What: Site Tagline String. Why: The phone menu ends on the site's tagline, and the footer shows it under its mark. How: The bar and the footer both show it.
 const WOR_END_STR = '.support';                               // What: Wordmark Ending String. Why: The family's wordmark ends in each site's own domain. How: The bar's wordmark and the footer's copyright both show it after TechGeek.
 
-const CTA_LIN_OBJ : PagLinTyp = { labStr : 'Ask a Question', patStr : '/contact' }; // What: Call-To-Action Link Object. Why: The bar's one button invites a visitor to ask a question, the site's main action. How: The bar and the drawer both route it to the Contact page.
+const CTA_LIN_OBJ : PagLinTyp = { labStr : 'Ask a Question', patStr : '/contact' }; // What: Call-To-Action Link Object. Why: The bar's one button invites a visitor to ask a question, the site's main action. How: The bar and the drawer both route it to the Contact page. // What: Label String. Why: The button names its action. How: This reads "Ask a Question". // What: Path String. Why: The button leads to the question form. How: This routes to /contact.
+
 
 
 const SIS_LIN_ARR : SisLinTyp[] = [ // What: Sister Link Array. Why: TechGeek.support is one of three sister sites, and a visitor here may want z4nta0's portfolio or a greeting card. How: The footer links to each row in the same tab.
@@ -84,8 +85,9 @@ const SIS_LIN_ARR : SisLinTyp[] = [ // What: Sister Link Array. Why: TechGeek.su
  * same frame. The routes take the current location and use its path as their
  * key, so moving to another page replaces the old page's tree rather than
  * updating it, which restarts the new page's entrance animation. It calls
- * useScrTopFun so every link opens its page at the top, as a real page load
- * would, while back and forward keep the browser's restored position.
+ * useScrTopFun so a link opens its page at the top, as a real page load
+ * would, or at its section when it names one, while back, forward, and a
+ * reload return the visitor to where they were.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -107,7 +109,7 @@ function AppRooCom () : JSX.Element {
 
 
 
-	useScrTopFun(); // What: Scroll Top Call. Why: Every link to another page should open it at its top, a link with a hash at its section, and back, forward, and a reload where the visitor was. How: This runs the hook once from the root, which stays mounted across every route.
+	useScrTopFun(); // What: Scroll Top Call. Why: Every link to another page should open it at its top, a link with a hash at its section, and back, forward, and a reload where the visitor was. How: This calls the hook from the root, which stays mounted across every route.
 
 
 
@@ -214,7 +216,7 @@ function AppRooCom () : JSX.Element {
 
 // #region Exports
 
-export { AppRooCom }; // What: Named Exports. Why: main.tsx is the sole consumer, mounting this as the site's root. How: This exports AppRooCom.
+export { AppRooCom }; // What: Named Export. Why: The site's root component is mounted from outside this file. How: This exports AppRooCom.
 
 // #endregion Exports
 

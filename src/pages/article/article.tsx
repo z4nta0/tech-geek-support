@@ -3,12 +3,12 @@
 
 // #region Imports
 
-import cssModObj from './article.module.css'; // What: CSS Module Object. Why: The article's header, body, and closing panel are styled in its own module. How: This maps each class name in article.module.css to its hashed module class.
+import cssModObj from './article.module.css'; // What: CSS Module Object. Why: The article page's parts are styled in its own module. How: This maps each class name in article.module.css to its hashed module class.
 
 
 import { ART_REC_ARR  } from '../../ui/articles.ts';                   // What: Article Record Array. Why: The page shows one article from the catalog. How: The page finds it by its address.
 import { artTitFun    } from '../../ui/article-title.ts';              // What: Article Title Function. Why: The article's page title has to match the one its own HTML page and link preview carry. How: The view names the page through it.
-import { Link         } from 'react-router';                           // What: Link. Why: The back link, the closing panel, and links inside articles move without a full page load. How: This renders those links.
+import { Link         } from 'react-router';                           // What: Link. Why: Links within the site move to another page without a full page load. How: This renders them.
 import { NotFouCom    } from '../not-found/not-found.tsx';             // What: Not Found Component. Why: An address naming no article should land on the 404 page. How: The page renders it when no article matches.
 import { TopTagCom    } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: The article shows its topic above its title. How: The header renders it.
 import { usePagDesFun } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: Each article's search description is its own summary. How: The view calls it to swap the one description tag's text while it shows.
@@ -92,8 +92,8 @@ function datForFun ( isoDatStr : string ) : string {
  * Turns one line's pieces into what the page shows: plain text as text, bold
  * as strong, italic as em, and links as links. A link to the site itself
  * (starting with /) moves through the router, and any other address is a
- * plain link that opens in the same tab. Each piece is keyed by its place in
- * the line.
+ * plain link that opens in the same tab. Each bold, italic, or link element is
+ * keyed by its place in the line.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -114,7 +114,7 @@ function renInlFun ( inlTokArr : InlTokTyp[] ) : ReactNode[] {
 	return inlTokArr.map( ( inlTokObj, tokIndNum ) => { // What: Piece Render Map. Why: Each piece renders by its kind. How: This turns each into text or an element.
 
 
-		if ( inlTokObj.kinStr === 'bold' ) return <strong key={ tokIndNum }>{ inlTokObj.texStr }</strong>; // What: Bold Piece Return. Why: Bold marks a label to look for on screen. How: This renders it as strong.
+		if ( inlTokObj.kinStr === 'bold' ) return <strong key={ tokIndNum }>{ inlTokObj.texStr }</strong>; // What: Bold Piece Return. Why: Bold sets a word apart from the text around it, such as a label to look for on screen. How: This renders it as strong.
 
 
 
@@ -131,7 +131,7 @@ function renInlFun ( inlTokArr : InlTokTyp[] ) : ReactNode[] {
 				className={ cssModObj.bodLinAnc }
 
 				to={ inlTokObj.hreStr }
-			>{ inlTokObj.texStr }</Link> // What: Body Site Link. Why: A link inside the article's text can lead to another page of the site. How: This routes there without a reload, styled as a body link.
+			>{ inlTokObj.texStr }</Link> // What: Body Link Anchor Link. Why: A link inside the article's text can lead to another page of the site. How: This routes there without a reload, styled as a body link.
 
 
 		);
@@ -227,7 +227,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 			<div className={ cssModObj.pagEntDiv }>{ /* What: Page Enter Div Element. Why: The page fades up into view as it opens. How: This wraps the article and plays the shared entrance. */ }
 
 
-				<article className={ cssModObj.artBodArt }>{ /* What: Article Body Article Element. Why: The article is one self-contained piece. How: This holds its header, body, and closing panel in a reading column. */ }
+				<article className={ cssModObj.artBodArt }>{ /* What: Article Body Article Element. Why: The article is one self-contained piece. How: This holds its header, body, closing panel, and related articles in a reading column. */ }
 
 
 					<header className={ cssModObj.artHeaHed }>{ /* What: Article Header Header Element. Why: The way back, the topic, the title, and the details sit together above the body. How: This stacks them. */ }
@@ -236,8 +236,8 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 						<Link
 							className={ cssModObj.bacLinAnc }
 
-							to={ `/articles?topic=${ artRecObj.topStr }` } // What: Back Link Address. Why: A reader going back most likely wants more of the same topic. How: This opens the list filtered to the article's topic.
-						><span aria-hidden='true'>←</span> More articles</Link>{ /* What: Back Link. Why: A reader should always see the way back to the list. How: This routes to the Articles page filtered to this topic, its arrow hidden from screen readers so the link reads as its words. */ }
+							to={ `/articles?topic=${ artRecObj.topStr }` } // What: Back Link Address. Why: A reader going back may want more of the same topic. How: This opens the list filtered to the article's topic.
+						><span aria-hidden='true'>←</span> More articles</Link>{ /* What: Back Link Anchor Link. Why: A reader should always see the way back to the list. How: This routes to the Articles page filtered to this topic, its arrow hidden from screen readers so the link reads as its words. */ }
 
 
 
@@ -254,21 +254,21 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 
 
 
-					<div className={ cssModObj.bodTexDiv }>{ /* What: Body Text Div Element. Why: The article's body is long-form prose, styled as a whole. How: This holds every block, which the module styles through their tags. */ }
+					<div className={ cssModObj.bodTexDiv }>{ /* What: Body Text Div Element. Why: The article's body is long-form prose, styled as a whole. How: This holds every block, which the module styles by their tags, except the tip and the media figure, which carry classes of their own. */ }
 
 
-						{ artRecObj.bloRecArr.map( ( bloRecObj, bloIndNum ) => { // What: Block Map Call. Why: Each block renders as its own element. How: This picks the element by the block's kind, keyed by its place in the body.
+						{ artRecObj.bloArr.map( ( bloRecObj, bloIndNum ) => { // What: Block Map Call. Why: Each block renders as its own element. How: This picks the element by the block's kind, keyed by its place in the body.
 
 
-							if ( bloRecObj.kinStr === 'heading' && bloRecObj.levNum === 2 ) return <h2 key={ bloIndNum }>{ renInlFun( bloRecObj.inlTokArr ) }</h2>; // What: Section Heading Return. Why: ## starts a section. How: This renders an h2.
-
-
-
-							if ( bloRecObj.kinStr === 'heading' ) return <h3 key={ bloIndNum }>{ renInlFun( bloRecObj.inlTokArr ) }</h3>; // What: Subsection Heading Return. Why: ### starts a subsection. How: This renders an h3.
+							if ( bloRecObj.kinStr === 'heading' && bloRecObj.levNum === 2 ) return <h2 key={ bloIndNum }>{ renInlFun( bloRecObj.inlArr ) }</h2>; // What: Section Heading Return. Why: ## starts a section. How: This renders an h2.
 
 
 
-							if ( bloRecObj.kinStr === 'paragraph' ) return <p key={ bloIndNum }>{ renInlFun( bloRecObj.inlTokArr ) }</p>; // What: Paragraph Return. Why: Most of the body is paragraphs. How: This renders a p.
+							if ( bloRecObj.kinStr === 'heading' ) return <h3 key={ bloIndNum }>{ renInlFun( bloRecObj.inlArr ) }</h3>; // What: Subsection Heading Return. Why: ### starts a subsection. How: This renders an h3.
+
+
+
+							if ( bloRecObj.kinStr === 'paragraph' ) return <p key={ bloIndNum }>{ renInlFun( bloRecObj.inlArr ) }</p>; // What: Paragraph Return. Why: A paragraph holds the body's running text. How: This renders a p.
 
 
 
@@ -279,7 +279,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 									key={ bloIndNum }
 
 									className={ cssModObj.tipBloAsi }
-								>{ renInlFun( bloRecObj.inlTokArr ) }</aside> // What: Tip Block Aside Element. Why: A tip reads as its own calm note between the steps. How: This holds the tip's text in a pale teal panel.
+								>{ renInlFun( bloRecObj.inlArr ) }</aside> // What: Tip Block Aside Element. Why: A tip reads as its own calm note between the steps. How: This holds the tip's text in a pale teal panel.
 
 
 							);
@@ -292,7 +292,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 								<ol key={ bloIndNum }>{ /* What: Step List Element. Why: Numbered steps are done in order. How: The module counts the items with its own step counter and draws each number in a pale teal circle. */ }
 
 
-									{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => ( // What: Step Map Call. Why: Every step is its own item. How: This renders one li per step.
+									{ bloRecObj.iteArr.map( ( iteTokArr, iteIndNum ) => ( // What: Step Map Call. Why: Every step is its own item. How: This renders one li per step.
 
 
 										<li key={ iteIndNum }>{ renInlFun( iteTokArr ) }</li> // What: Step Item Element. Why: Each step is one thing to do. How: This renders the step's text with its bold, italics, and links.
@@ -314,7 +314,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 								<ul key={ bloIndNum }>{ /* What: Point List Element. Why: Some points have no order. How: The module marks each item with a small teal dot. */ }
 
 
-									{ bloRecObj.iteTokArr.map( ( iteTokArr, iteIndNum ) => ( // What: Point Map Call. Why: Every point is its own item. How: This renders one li per point.
+									{ bloRecObj.iteArr.map( ( iteTokArr, iteIndNum ) => ( // What: Point Map Call. Why: Every point is its own item. How: This renders one li per point.
 
 
 										<li key={ iteIndNum }>{ renInlFun( iteTokArr ) }</li> // What: Point Item Element. Why: Each point stands on its own. How: This renders the point's text with its bold, italics, and links.
@@ -346,10 +346,10 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 										<video
 											controls
 											preload='metadata'
-											src={ artRecObj.medUrlObj[ bloRecObj.souStr ] }
+											src={ artRecObj.medObj[ bloRecObj.souStr ] }
 
 											aria-label={ bloRecObj.altStr }
-										/> // What: Media Video Element. Why: A short video shows steps a photo can't. How: This plays the file with the browser's controls, loading only its details until played, named by its alt text.
+										/> // What: Media Video Element. Why: A short video shows steps a photo can't. How: This plays the file with the browser's controls, asking the browser to load only its details until played, named by its alt text.
 
 
 									) : ( // What: Photo Branch. Why: Any other file is a photo. How: This shows it with its alt text.
@@ -357,10 +357,10 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 
 										<img
 											loading='lazy'
-											src={ artRecObj.medUrlObj[ bloRecObj.souStr ] }
+											src={ artRecObj.medObj[ bloRecObj.souStr ] }
 
 											alt={ bloRecObj.altStr }
-										/> // What: Media Image Element. Why: A photo shows what to look for on screen. How: This shows the file lazily, since most photos start below the fold, with its alt text.
+										/> // What: Media Image Element. Why: A photo shows what to look for on screen. How: This shows the file lazily, with its alt text.
 
 
 									) }
@@ -394,7 +394,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 							className={ cssModObj.butPriAnc }
 
 							to='/contact'
-						>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the next step for anyone still stuck. How: This routes to the question form as an orange button. */ }
+						>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking is the next step for anyone still stuck. How: This "Ask a Question" button routes to the question form, drawn in orange. */ }
 
 
 					</aside>
@@ -414,6 +414,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 							<h2 className={ cssModObj.relTitHea }>More on this topic</h2>{ /* What: Related Title Heading Element. Why: The links need a heading. How: This shows it. */ }
 
 
+
 							<ul className={ cssModObj.relLisUno }>{ /* What: Related List Unordered Element. Why: The links read as a short list. How: This stacks them. */ }
 
 
@@ -427,7 +428,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 											className={ cssModObj.relLinAnc }
 
 											to={ `/articles/${ relArtObj.ideStr }` }
-										>{ relArtObj.titStr }</Link>{ /* What: Related Article Link. Why: The reader can open the related article. How: This routes to it, named by its title. */ }
+										>{ relArtObj.titStr }</Link>{ /* What: Related Link Anchor Link. Why: The reader can open each related article. How: This routes to one of them, named by its title. */ }
 
 
 									</li>
@@ -508,7 +509,7 @@ function ArtPagCom () : JSX.Element {
 
 // #region Exports
 
-export { ArtPagCom }; // What: Named Exports. Why: The router's article route renders the page. How: This exports ArtPagCom.
+export { ArtPagCom }; // What: Named Export. Why: Each article's page renders at its own route. How: This exports ArtPagCom.
 
 // #endregion Exports
 

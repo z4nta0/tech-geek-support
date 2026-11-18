@@ -12,7 +12,9 @@
  * numbered steps (1.), bullet lists (-), tips (> lines), and a photo or video
  * alone on its line (![alt](file "caption")); inside a line it reads bold
  * (**text**), italic (*text*), and links ([text](address)). An HTML comment
- * on lines of its own is skipped, and anything else reads as plain text.
+ * on lines of its own is skipped, and any other line reads as plain text,
+ * except one that starts like a block but matches none, such as a photo line
+ * with a space in its file name, which throws an error quoting the line.
  *
  * Sections:
  *  - Types
@@ -30,14 +32,12 @@
 
 type InlTokTyp = { hreStr? : string, kinStr : 'bold' | 'italic' | 'link' | 'text', texStr : string }; // What: Inline Token Type. Why: A line of text is a run of plain, bold, italic, and linked pieces. How: This types one piece: its kind, its text, and a link's address.
 
-
-
 type BloRecTyp = // What: Block Record Type. Why: An article is a list of blocks of a few kinds. How: This types each kind of block by its kinStr.
-	| { inlTokArr : InlTokTyp[], kinStr : 'heading', levNum : 2 | 3 }          // What: Heading Block. Why: Sections are named by headings. How: This holds the heading's level and text.
-	| { inlTokArr : InlTokTyp[], kinStr : 'paragraph' }                        // What: Paragraph Block. Why: Most text is paragraphs. How: This holds the paragraph's text.
-	| { inlTokArr : InlTokTyp[], kinStr : 'tip' }                              // What: Tip Block. Why: A tip is a paragraph set apart from the steps. How: This holds the tip's text.
-	| { iteTokArr : InlTokTyp[][], kinStr : 'ordered' }                        // What: Ordered List Block. Why: Steps are done in order. How: This holds each step's text.
-	| { iteTokArr : InlTokTyp[][], kinStr : 'unordered' }                      // What: Unordered List Block. Why: Some points have no order. How: This holds each point's text.
+	| { inlArr : InlTokTyp[], kinStr : 'heading', levNum : 2 | 3 }             // What: Heading Block. Why: Sections are named by headings. How: This holds the heading's level and text.
+	| { inlArr : InlTokTyp[], kinStr : 'paragraph' }                           // What: Paragraph Block. Why: A paragraph holds the article's running text. How: This holds the paragraph's text.
+	| { inlArr : InlTokTyp[], kinStr : 'tip' }                                 // What: Tip Block. Why: A tip is a paragraph set apart from the steps. How: This holds the tip's text.
+	| { iteArr : InlTokTyp[][], kinStr : 'ordered' }                           // What: Ordered List Block. Why: Steps are done in order. How: This holds each step's text.
+	| { iteArr : InlTokTyp[][], kinStr : 'unordered' }                         // What: Unordered List Block. Why: Some points have no order. How: This holds each point's text.
 	| { altStr : string, capStr : string, kinStr : 'media', souStr : string }; // What: Media Block. Why: A photo or video stands on its own line. How: This holds its alt text, caption, and file name.
 
 // #endregion Types
@@ -161,7 +161,7 @@ function parInlFun ( texLinStr : string ) : InlTokTyp[] {
  * closing --- lines, as key and value pairs, and the body as a list of
  * blocks. A blank line ends a paragraph, list, or tip; consecutive list
  * items of one kind form one list; and an HTML comment, from a line starting
- * with <!-- to the line ending with -->, is skipped entirely. A file with no
+ * with <!-- to the line containing -->, is skipped entirely. A file with no
  * front matter reads as all body.
  *
  * @author z4nta0 <https://github.com/z4nta0>
@@ -181,10 +181,10 @@ function parInlFun ( texLinStr : string ) : InlTokTyp[] {
 function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj : Record< string, string > } {
 
 
-	const bloRecArr : BloRecTyp[]               = []; // What: Block Record Array. Why: The body's blocks are collected in order. How: This starts empty.
-	const froMatObj : Record< string, string > = {};  // What: Front Matter Object. Why: The front matter's keys are looked up by name. How: This starts empty.
-
 	const linTexArr = filTexStr.replace( /\r\n?/g, '\n' ).split( '\n' ); // What: Line Text Array. Why: Markdown is read line by line, whatever line endings the file was saved with. How: This normalizes Windows endings and splits the text into lines.
+
+	const bloRecArr : BloRecTyp[]              = []; // What: Block Record Array. Why: The body's blocks are collected in order. How: This starts empty.
+	const froMatObj : Record< string, string > = {}; // What: Front Matter Object. Why: The front matter's keys are looked up by name. How: This starts empty.
 
 	let linIndNum = 0; // What: Line Index Number. Why: The reader walks the lines once. How: This points at the line being read.
 
@@ -195,7 +195,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 		linIndNum = 1; // What: Front Matter Start. Why: The opening --- isn't a pair. How: This starts on the line after it.
 
 
-		while ( linIndNum < linTexArr.length && linTexArr[ linIndNum ] !== '---' ) { // What: Front Matter Loop. Why: Every line up to the closing --- is one pair. How: This reads each in turn.
+		while ( linIndNum < linTexArr.length && linTexArr[ linIndNum ] !== '---' ) { // What: Front Matter Loop. Why: The pairs sit on the lines up to the closing ---. How: This reads each line in turn, keeping those with a key before a colon.
 
 
 			const sepIndNum = linTexArr[ linIndNum ].indexOf( ':' ); // What: Separator Index Number. Why: A pair's key ends at its first colon. How: This finds it.
@@ -219,7 +219,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 
 
-	while ( linIndNum < linTexArr.length ) { // What: Body Loop. Why: Every line of the body belongs to a block or is a gap between blocks. How: This reads one block per pass.
+	while ( linIndNum < linTexArr.length ) { // What: Body Loop. Why: The body is read as blocks, the gaps and comments between them skipped. How: This reads one block, gap, or comment per pass.
 
 
 		const curLinStr = linTexArr[ linIndNum ].trim(); // What: Current Line String. Why: Leading and trailing spaces never change what a line means here. How: This trims the line being read.
@@ -266,12 +266,13 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 			bloRecArr.push({ // What: Heading Push. Why: The page needs the heading's level and text. How: This adds a heading block.
 
 
-				inlTokArr : parInlFun( heaMatArr[ 2 ] ),        // What: Inline Token Array. Why: A heading's text may hold bold, italic, or links. How: This splits the text after the hashes into pieces.
-				kinStr    : 'heading',                          // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a heading.
-				levNum    : heaMatArr[ 1 ].length === 2 ? 2 : 3 // What: Level Number. Why: The page picks h2 or h3 by the level. How: This gives 2 for ## and 3 for ###.
+				inlArr : parInlFun( heaMatArr[ 2 ] ),        // What: Inline Array. Why: A heading's text may hold bold, italic, or links. How: This splits the text after the hashes into pieces.
+				kinStr : 'heading',                          // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a heading.
+				levNum : heaMatArr[ 1 ].length === 2 ? 2 : 3 // What: Level Number. Why: The page picks h2 or h3 by the level. How: This gives 2 for ## and 3 for ###.
 
 
 			});
+
 
 			linIndNum += 1; // What: Heading Advance. Why: The next block starts on the next line. How: This moves past the heading.
 
@@ -301,6 +302,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 			});
 
+
 			linIndNum += 1; // What: Media Advance. Why: The next block starts on the next line. How: This moves past the media line.
 
 
@@ -323,6 +325,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 				tipLinArr.push( linTexArr[ linIndNum ].trim().replace( /^>\s?/, '' ) ); // What: Tip Line Push. Why: The tip's text is the line without its marker. How: This drops the > and one space after it.
 
+
 				linIndNum += 1; // What: Tip Line Advance. Why: The next line may continue the tip. How: This moves to it.
 
 
@@ -333,8 +336,8 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 			bloRecArr.push({ // What: Tip Push. Why: The tip reads as one paragraph. How: This adds a tip block.
 
 
-				inlTokArr : parInlFun( tipLinArr.join( ' ' ) ), // What: Inline Token Array. Why: A tip's text may hold bold, italic, or links. How: This joins the tip's lines with spaces and splits them into pieces.
-				kinStr    : 'tip'                               // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a tip.
+				inlArr : parInlFun( tipLinArr.join( ' ' ) ), // What: Inline Array. Why: A tip's text may hold bold, italic, or links. How: This joins the tip's lines with spaces and splits them into pieces.
+				kinStr : 'tip'                               // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a tip.
 
 
 			});
@@ -354,9 +357,9 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 		if ( lisKinStr ) { // What: List Check. Why: Consecutive items of one kind form one list. How: This collects items until a line of another kind.
 
 
-			const iteTokArr : InlTokTyp[][] = []; // What: Item Token Array. Why: Each item is its own run of pieces. How: This collects them in order.
-
 			const iteMarReg = lisKinStr === 'ordered' ? /^\d+\.\s+(.*)$/ : /^-\s+(.*)$/; // What: Item Marker Regular Expression. Why: Only items of the list's own kind continue it. How: This matches a numbered or a bulleted item, capturing its text.
+
+			const iteTokArr : InlTokTyp[][] = []; // What: Item Token Array. Why: Each item is its own run of pieces. How: This collects them in order.
 
 			let iteMatArr = curLinStr.match( iteMarReg ); // What: Item Match Array. Why: The list's first line is its first item. How: This matches it, and each pass of the loop below matches the next line.
 
@@ -365,6 +368,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 
 				iteTokArr.push( parInlFun( iteMatArr[ 1 ] ) ); // What: Item Push. Why: Each item's text keeps its bold, italic, and links. How: This adds the item's pieces.
+
 
 				linIndNum += 1; // What: Item Advance. Why: The next line may be another item. How: This moves to it.
 
@@ -375,7 +379,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 
 
-			bloRecArr.push( lisKinStr === 'ordered' ? { iteTokArr, kinStr : 'ordered' } : { iteTokArr, kinStr : 'unordered' } ); // What: List Push. Why: The page renders the items as one list. How: This adds a numbered or bulleted list block.
+			bloRecArr.push( lisKinStr === 'ordered' ? { iteArr : iteTokArr, kinStr : 'ordered' } : { iteArr : iteTokArr, kinStr : 'unordered' } ); // What: List Push. Why: The page renders the items as one list. How: This adds a numbered or bulleted list block.
 
 
 
@@ -394,6 +398,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 			parLinArr.push( linTexArr[ linIndNum ].trim() ); // What: Paragraph Line Push. Why: The paragraph's lines are joined later. How: This collects the trimmed line.
 
+
 			linIndNum += 1; // What: Paragraph Line Advance. Why: The next line may continue the paragraph. How: This moves to it.
 
 
@@ -401,11 +406,15 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 
 
+		if ( !parLinArr.length ) throw new Error( `Markdown line ${ linIndNum + 1 } isn't a block the reader knows: "${ linTexArr[ linIndNum ].trim() }".` ); // What: Unknown Block Guard. Why: A line that starts like a block but matches none, such as a photo line with a space in its file name, would stop the loop from moving on. How: This throws, quoting the line, so a broken article stops the build instead of hanging it.
+
+
+
 		bloRecArr.push({ // What: Paragraph Push. Why: The lines read as one paragraph. How: This adds a paragraph block.
 
 
-			inlTokArr : parInlFun( parLinArr.join( ' ' ) ), // What: Inline Token Array. Why: A paragraph's text may hold bold, italic, or links. How: This joins the paragraph's lines with spaces and splits them into pieces.
-			kinStr    : 'paragraph'                         // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a paragraph.
+			inlArr : parInlFun( parLinArr.join( ' ' ) ), // What: Inline Array. Why: A paragraph's text may hold bold, italic, or links. How: This joins the paragraph's lines with spaces and splits them into pieces.
+			kinStr : 'paragraph'                         // What: Kind String. Why: The page renders each kind of block its own way. How: This marks it as a paragraph.
 
 
 		});
@@ -428,7 +437,7 @@ function parMarFun ( filTexStr : string ) : { bloRecArr : BloRecTyp[], froMatObj
 
 // #region Exports
 
-export { parMarFun, type BloRecTyp, type InlTokTyp }; // What: Named Exports. Why: The article catalog reads files with the parser, and the article body renders its blocks and pieces. How: This exports the parser and its two types.
+export { parMarFun, type BloRecTyp, type InlTokTyp }; // What: Named Exports. Why: The parser turns an article's Markdown into blocks, and its block and piece types describe what it returns. How: This exports the parser and its two types.
 
 // #endregion Exports
 

@@ -5,7 +5,7 @@
 
 import { expect      } from '@playwright/test';     // What: Expect. Why: Each state passes only when it matches its approved screenshot. How: This compares the page with its baseline.
 import { opeStaFun   } from '../support/states.ts'; // What: Open State Function. Why: Each state is captured settled. How: This loads it and waits for it.
-import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Every page state gets a baseline. How: This lists them.
+import { STA_REC_ARR } from '../support/states.ts'; // What: State Record Array. Why: Each shared state gets a baseline. How: This lists them.
 import { test        } from '@playwright/test';     // What: Test. Why: Each state is its own comparison. How: This declares them.
 
 // #endregion Imports
@@ -16,7 +16,7 @@ import { test        } from '@playwright/test';     // What: Test. Why: Each sta
  * screens.spec.ts = Screens Spec
  *
  * @summary
- * Compares a full-page screenshot of every page state with its approved
+ * Compares a full-page screenshot of each shared state with its approved
  * baseline, in whichever engine the project runs, so a change that shifts the
  * layout or the styling anywhere on a page fails until it's looked at. Each
  * state opens under reduced motion and is captured with animations stopped, so
@@ -52,7 +52,7 @@ const PIX_THR_NUM = 0;                     // What: Pixel Threshold Number. Why:
 
 // #region Module Init
 
-for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every page state has a baseline. How: This declares one comparison per state.
+for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Each shared state has a baseline. How: This declares one comparison per state.
 
 
 	test( `${ staRecObj.ideStr } matches its approved screenshot`, async ( { page : curPagObj } ) => { // What: Screenshot Test. Why: A page should only change how it looks on purpose. How: This opens the state at rest and compares it with its baseline.
@@ -63,7 +63,6 @@ for ( const staRecObj of STA_REC_ARR ) { // What: State Test Loop. Why: Every pa
 		await curPagObj.emulateMedia( { reducedMotion : 'reduce' } ); // What: Reduced Motion Emulation. Why: Entrance animations would otherwise be caught partway. How: This makes the page match prefers-reduced-motion, which turns them off.
 
 		await opeStaFun( curPagObj, staRecObj ); // What: State Open Call. Why: The state is captured settled. How: This loads and settles it.
-
 
 		await expect( curPagObj ).toHaveScreenshot( `${ staRecObj.ideStr }.png`, { // What: Baseline Comparison Assertion. Why: The state should look exactly as approved. How: This captures the whole page with animations stopped and compares it with the state's baseline pixel for pixel, color for color.
 

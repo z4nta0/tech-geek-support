@@ -45,10 +45,11 @@ type SrcProTyp = { className? : string, smaBoo? : boolean }; // What: Signal-Rin
  *
  * @summary
  * Renders the motif as one SVG on a 400 by 400 drawing space, with the class
- * a page passes for its size and placement. Every shape's color, strength,
- * and entrance comes from the module. The small version shows only the middle
- * 300 by 300 and leaves out the outer ring, which that crop would cut into
- * stray arcs, so the bubble reads clearly even at about 80px.
+ * a page passes for its size and placement. Every shape's color comes from
+ * the module, along with the rings' strength and the rings' and sparkle's
+ * entrance. The small version shows only the middle 300 by 300 and leaves out
+ * the outer ring, which that crop would cut into stray arcs, so the bubble
+ * reads clearly even at about 80px.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -78,7 +79,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 			viewBox={ smaBoo ? '50 50 300 300' : '0 0 400 400' } // What: View Box. Why: The small version needs its bubble larger in the same space. How: This crops to the middle 300 units for it, and shows the whole 400 otherwise.
 
 			aria-hidden='true'
-		>{ /* What: Signal Rings SVG Element. Why: The motif is one drawing. How: This holds the rings, the bubble, the sparkle, and the dot on a square drawing space, cropped for the small version, hidden from screen readers. */ }
+		>{ /* What: Signal Rings SVG Element. Why: The motif is one drawing. How: This holds the drawing's rings, speech bubble, and accents on a square drawing space, cropped for the small version, hidden from screen readers. */ }
 
 
 			{ !smaBoo && ( // What: Full Size Check. Why: The small version's crop would cut the outer ring into stray arcs. How: This draws the outer ring only at full size.
@@ -153,7 +154,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 				className={ cssModObj.spaOraPat }
 
 				d='M 326 96 L 332 110 L 346 116 L 332 122 L 326 136 L 320 122 L 306 116 L 320 110 Z'
-			/>{ /* What: Sparkle Orange Path Element. Why: A sparkle adds the touch of fun. How: This draws a four-pointed orange star near the outer ring. */ }
+			/>{ /* What: Sparkle Orange Path Element. Why: A sparkle adds the touch of fun. How: This draws a four-pointed orange star on the middle ring at the upper right. */ }
 
 			<circle
 				className={ cssModObj.dotBluCir }
@@ -180,7 +181,7 @@ function SigRinCom ( { className, smaBoo = false } : SrcProTyp ) : JSX.Element {
 
 // #region Exports
 
-export { SigRinCom }; // What: Named Exports. Why: Home's hero, the Articles page's help card, and the 404 page show the motif. How: This exports SigRinCom.
+export { SigRinCom }; // What: Named Export. Why: The motif is drawn wherever a page shows the signal. How: This exports SigRinCom.
 
 // #endregion Exports
 

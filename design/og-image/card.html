@@ -1,3 +1,6 @@
+
+
+
 <!doctype html><!-- What: Document Type Declaration. Why: Browsers render the page in standards mode only with a doctype. How: This declares HTML5. -->
 
 
@@ -48,7 +51,7 @@
 
 			/* #region sigRinSvg */
 
-			.sigRinSvg { /* What: Signal Rings SVG. Why: The site's rings make the card recognizable, outside the center square some apps crop to. How: This pins the drawing to one side, centered top to bottom, sized by its modifier. */
+			.sigRinSvg { /* What: Signal Rings SVG. Why: The site's rings make the card recognizable, mostly outside the center square some apps crop to. How: This pins the drawing to one side, centered top to bottom, sized by its modifier. */
 
 
 				position  : absolute;
@@ -57,7 +60,7 @@
 
 
 			}
-			.sigRinSvg--lef { /* What: Left Signal Rings SVG. Why: The full drawing, bubble and all, sits on the left. How: This sizes it at the p11 rhythm step, a spacing step in from the left edge. */
+			.sigRinSvg--left { /* What: Signal Rings SVG Left. Why: The full drawing, bubble and all, sits on the left. How: This sizes it at the p11 rhythm step and sets it a horizontal spacing step past the left edge. */
 
 
 				height : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */
@@ -66,12 +69,12 @@
 
 
 			}
-			.sigRinSvg--rig { /* What: Right Signal Rings SVG. Why: An echo of the rings balances the drawing on the left. How: This sizes the rings alone at the p12 rhythm step, half of them running off the right edge. */
+			.sigRinSvg--right { /* What: Signal Rings SVG Right. Why: An echo of the rings balances the drawing on the left. How: This sizes the rings alone at the p12 rhythm step, half of them running off the right edge. */
 
 
-				height : calc( var( --ver-rhy-p12 ) * 1rem );      /* Vertical Rhythm Base Plus 12 ~= 425.590px */
-				right  : calc( var( --ver-rhy-p12 ) * 1rem / -2 ); /* Vertical Rhythm Base Plus 12 ~= -212.795px */ /* What: Half Width Offset. Why: Half the echo should run off the edge, so only its left arcs show. How: This offsets it by half its own width. */
-				width  : calc( var( --ver-rhy-p12 ) * 1rem );      /* Vertical Rhythm Base Plus 12 ~= 425.590px */
+				height : calc( var( --ver-rhy-p12 ) * 1rem );      /* Vertical Rhythm Base Plus 12 ~= 425.596px */
+				right  : calc( var( --ver-rhy-p12 ) * 1rem / -2 ); /* Vertical Rhythm Base Plus 12 ~= -212.798px */ /* What: Half Width Offset. Why: Half the echo should run off the edge, so only its left arcs show. How: This offsets it by half its own width. */
+				width  : calc( var( --ver-rhy-p12 ) * 1rem );      /* Vertical Rhythm Base Plus 12 ~= 425.596px */
 
 
 			}
@@ -277,10 +280,10 @@
 
 
 		<svg
-			class='sigRinSvg sigRinSvg--lef'
+			class='sigRinSvg sigRinSvg--left'
 
 			viewBox='0 0 400 400'
-		><!-- What: Signal Rings SVG Element. Why: The site's motif leads the card from the left. How: This draws the rings, the bubble, the sparkle, and the dot on the site's 400-unit grid. -->
+		><!-- What: Signal Rings SVG Element. Why: The site's motif leads the card from the left. How: This draws the drawing's rings, speech bubble, and accents on the site's 400-unit grid. -->
 
 
 			<circle
@@ -349,7 +352,7 @@
 				class='spaOraPat'
 
 				d='M 326 96 L 332 110 L 346 116 L 332 122 L 326 136 L 320 122 L 306 116 L 320 110 Z'
-			/><!-- What: Sparkle Orange Path Element. Why: A sparkle adds the touch of fun. How: This draws the site's four-pointed orange star near the outer ring. -->
+			/><!-- What: Sparkle Orange Path Element. Why: A sparkle adds the touch of fun. How: This draws the site's four-pointed orange star on the middle ring at the upper right. -->
 
 			<circle
 				class='dotBluCir'
@@ -362,14 +365,13 @@
 
 		</svg>
 
-
 		<div class='carColDiv'><!-- What: Card Column Div Element. Why: The card's lines lead it in its center square. How: This stacks them in one centered column, the site's lines or an article's, as the capture script fills it. -->
 
 
 			<img
 				class='hexMarIma'
 
-				data-site-only
+				data-site-card-part
 
 				src='../../node_modules/techgeek-design/src/assets/brand/favicon.svg'
 
@@ -379,14 +381,14 @@
 			<p
 				class='topLabPar'
 
-				data-article-only
+				data-article-card-part
 				data-element-name-hook='topLabPar'
 			></p><!-- What: Topic Label Paragraph Element. Why: An article's card names its topic first. How: The capture script fills it, and removes it from the site's card. -->
 
 			<h1
 				class='artTitHea'
 
-				data-article-only
+				data-article-card-part
 				data-element-name-hook='artTitHea'
 			></h1><!-- What: Article Title Heading Element. Why: An article's card leads with its title. How: The capture script fills it, and removes it from the site's card. -->
 
@@ -395,15 +397,14 @@
 			<p
 				class='tagLinPar'
 
-				data-site-only
+				data-site-card-part
 			>Free, Friendly Tech Help</p><!-- What: Tag Line Paragraph Element. Why: The site's card says what the site offers. How: This sets it in teal italic under the name, and the capture script removes it from an article's card. -->
 
 
 		</div>
 
-
 		<svg
-			class='sigRinSvg sigRinSvg--rig'
+			class='sigRinSvg sigRinSvg--right'
 
 			viewBox='0 0 400 400'
 		><!-- What: Signal Rings SVG Element. Why: An echo of the rings balances the card on the right. How: This draws the three rings alone, running off the edge. -->

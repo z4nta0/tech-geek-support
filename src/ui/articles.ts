@@ -22,9 +22,10 @@ import type { BloRecTyp } from '../utils/markdown.ts'; // What: Block Record Typ
  * and this module turns each article into a record: its address, title,
  * topic, summary, dates, reading time, body blocks, and the built address of
  * each media file it names. Every article is checked as it's read, and a
- * missing field, an unknown topic, or a media file that isn't there stops
- * the build with a message naming the article, so a broken article never
- * ships. The catalog lists the newest articles first.
+ * missing field, an unknown topic, or a media file that isn't there throws
+ * an error naming the article as the catalog loads, a backstop for the same
+ * checks the build runs (scripts/article-files.ts). The catalog lists the
+ * newest articles first.
  *
  * Sections:
  *  - Constants
@@ -41,7 +42,7 @@ import type { BloRecTyp } from '../utils/markdown.ts'; // What: Block Record Typ
 
 const ART_TEX_OBJ = import.meta.glob< string >( '../articles/*/article.md', { eager : true, import : 'default', query : '?raw' } ); // What: Article Text Object. Why: Every article's text has to be in the build. How: Vite finds each article.md at build time and inlines its text, keyed by its path.
 const MED_URL_OBJ = import.meta.glob< string >( '../articles/*/*.{mp4,webp}', { eager : true, import : 'default' } );               // What: Media URL Object. Why: An article's photos and videos are fingerprinted like every other asset. How: Vite finds each file beside an article and gives its built address, keyed by its path.
-const REA_WOR_NUM = 200; // What: Reading Words Number. Why: An article's reading time is estimated from its length. How: This is a relaxed reading pace of 200 words a minute, a little slower than average, suiting the site's readers.
+const REA_WOR_NUM = 200; // What: Reading Words Number. Why: An article's reading time is estimated from its length. How: This is a relaxed reading pace of 200 words a minute, suiting the site's readers.
 
 // #endregion Constants
 
@@ -49,7 +50,7 @@ const REA_WOR_NUM = 200; // What: Reading Words Number. Why: An article's readin
 
 // #region Helpers
 
-type ArtRecTyp = { bloRecArr : BloRecTyp[], ideStr : string, medUrlObj : Record< string, string >, minNum : number, pubStr : string, sumStr : string, titStr : string, topStr : string, updStr : string }; // What: Article Record Type. Why: Every page that shows an article reads the same fields. How: This types the body blocks, the address, the media addresses, the reading minutes, the published date, the summary, the title, the topic, and the updated date, empty when never revised.
+type ArtRecTyp = { bloArr : BloRecTyp[], ideStr : string, medObj : Record< string, string >, minNum : number, pubStr : string, sumStr : string, titStr : string, topStr : string, updStr : string }; // What: Article Record Type. Why: Every page that shows an article reads the same fields. How: This types the body blocks, the address, the media addresses, the reading minutes, the published date, the summary, the title, the topic, and the updated date, empty when never revised.
 
 // #region artRecFun
 
@@ -75,7 +76,8 @@ type ArtRecTyp = { bloRecArr : BloRecTyp[], ideStr : string, medUrlObj : Record<
  *
  * @example
  * ```ts
- * artRecFun('../articles/why-is-my-wi-fi-so-slow/article.md', filTexStr) // => the Wi-Fi article's record
+ * artRecFun('../articles/why-is-my-wi-fi-so-slow/article.md', filTexStr)
+ * // => the Wi-Fi article's record
  * ```
  *
 */
@@ -83,24 +85,31 @@ type ArtRecTyp = { bloRecArr : BloRecTyp[], ideStr : string, medUrlObj : Record<
 function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 
-	const ideStr = filPatStr.split( '/' ).at( -2 )!; // What: Identifier String. Why: An article's address is its folder's name. How: This takes the path's second-to-last part. // What: Non-Null Note. Why: at() allows undefined for a short array. How: Every glob path ends in a folder and article.md.
+	const artIdeStr = filPatStr.split( '/' ).at( -2 )!; // What: Article Identifier String. Why: An article's address is its folder's name. How: This takes the path's second-to-last part. // What: Non-Null Note. Why: at() allows undefined for a short array. How: Every glob path ends in a folder and article.md.
 
-	const { bloRecArr, froMatObj } = parMarFun( filTexStr ); // What: Block Record Array And Front Matter Object. Why: The article's fields and body come from its file. How: This reads the file.
+	const { bloRecArr, froMatObj } = parMarFun( filTexStr ); // What: Block Record Array. Why: The article's body is its blocks. How: This takes the parser's blocks. // What: Front Matter Object. Why: The article's fields come from its front matter. How: This takes the parser's key and value pairs.
 
+
+
+	// #region Front Matter Checks
 
 	for ( const keyNamStr of [ 'published', 'summary', 'title', 'topic' ] ) { // What: Required Key Loop. Why: Every article needs these four fields to show anywhere. How: This checks each one.
 
 
-		if ( !froMatObj[ keyNamStr ] ) throw new Error( `Article "${ ideStr }" is missing its ${ keyNamStr } in the front matter.` ); // What: Missing Key Guard. Why: A missing field would show as a blank on the site. How: This stops the build, naming the article and the field.
+		if ( !froMatObj[ keyNamStr ] ) throw new Error( `Article "${ artIdeStr }" is missing its ${ keyNamStr } in the front matter.` ); // What: Missing Key Guard. Why: A missing field would show as a blank on the site. How: This throws as the catalog loads, naming the article and the field.
 
 
 	}
 
 
 
-	if ( !TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === froMatObj.topic ) ) throw new Error( `Article "${ ideStr }" has an unknown topic, "${ froMatObj.topic }".` ); // What: Unknown Topic Guard. Why: An article with no real topic would never show under a filter. How: This stops the build, naming the article and its topic.
+	if ( !TOP_REC_ARR.some( ( topRecObj ) => topRecObj.ideStr === froMatObj.topic ) ) throw new Error( `Article "${ artIdeStr }" has an unknown topic, "${ froMatObj.topic }".` ); // What: Unknown Topic Guard. Why: An article with no real topic would never show under a filter. How: This throws as the catalog loads, naming the article and its topic.
+
+	// #endregion Front Matter Checks
 
 
+
+	// #region Media Lookup
 
 	const medUrlObj : Record< string, string > = {}; // What: Media URL Object. Why: The body names its media by file name, and the page needs each one's built address. How: This collects them.
 
@@ -112,10 +121,10 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 
 
-		const medUrlStr = MED_URL_OBJ[ `../articles/${ ideStr }/${ bloRecObj.souStr }` ]; // What: Media URL String. Why: The file's built address comes from Vite's glob. How: This looks it up by its path.
+		const medUrlStr = MED_URL_OBJ[ `../articles/${ artIdeStr }/${ bloRecObj.souStr }` ]; // What: Media URL String. Why: The file's built address comes from Vite's glob. How: This looks it up by its path.
 
 
-		if ( !medUrlStr ) throw new Error( `Article "${ ideStr }" names ${ bloRecObj.souStr }, which isn't in its folder.` ); // What: Missing Media Guard. Why: A missing photo would show as a broken image. How: This stops the build, naming the article and the file.
+		if ( !medUrlStr ) throw new Error( `Article "${ artIdeStr }" names ${ bloRecObj.souStr }, which isn't in its folder.` ); // What: Missing Media Guard. Why: A missing photo would show as a broken image. How: This throws as the catalog loads, naming the article and the file.
 
 
 
@@ -124,20 +133,26 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 
 	}
 
+	// #endregion Media Lookup
 
 
-	const bodTexStr = bloRecArr.map( ( bloRecObj ) => 'iteTokArr' in bloRecObj ? bloRecObj.iteTokArr.flat() : 'inlTokArr' in bloRecObj ? bloRecObj.inlTokArr : [] ).flat().map( ( inlTokObj ) => inlTokObj.texStr ).join( ' ' ); // What: Body Text String. Why: The reading time counts the words a reader reads. How: This gathers the text of every heading, paragraph, tip, and list item.
-	const minNum    = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) ); // What: Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
+
+	// #region Reading Time
+
+	const bodTexStr = bloRecArr.map( ( bloRecObj ) => 'iteArr' in bloRecObj ? bloRecObj.iteArr.flat() : 'inlArr' in bloRecObj ? bloRecObj.inlArr : [] ).flat().map( ( inlTokObj ) => inlTokObj.texStr ).join( ' ' ); // What: Body Text String. Why: The reading time counts the words a reader reads. How: This gathers the text of every heading, paragraph, tip, and list item.
+	const reaMinNum = Math.max( 1, Math.ceil( bodTexStr.split( /\s+/ ).filter( Boolean ).length / REA_WOR_NUM ) );                                                                                                   // What: Reading Minutes Number. Why: Each article shows how long it takes to read. How: This divides the word count by the reading pace, rounding up to at least a minute.
+
+	// #endregion Reading Time
 
 
 
 	return { // What: Article Record Return. Why: Every page reads the article from one record. How: This gathers its fields.
 
 
-		bloRecArr,                       // What: Block Record Array. Why: The article's page renders the body. How: This is the parsed body's blocks.
-		ideStr,                          // What: Identifier String. Why: The article's address is its folder's name. How: This is that name.
-		medUrlObj,                       // What: Media URL Object. Why: The body's media need their built addresses. How: This maps each file name to its address.
-		minNum,                          // What: Minutes Number. Why: The article shows its reading time. How: This is the estimate in whole minutes.
+		bloArr : bloRecArr,              // What: Block Array. Why: The article's page renders the body. How: This is the parsed body's blocks.
+		ideStr : artIdeStr,              // What: Identifier String. Why: The article's address is its folder's name. How: This is that name.
+		medObj : medUrlObj,              // What: Media Object. Why: The body's media need their built addresses. How: This maps each file name to its address.
+		minNum : reaMinNum,              // What: Minutes Number. Why: The article shows its reading time. How: This is the estimate in whole minutes.
 		pubStr : froMatObj.published,    // What: Published String. Why: The article shows when it was published. How: This is the front matter's published date.
 		sumStr : froMatObj.summary,      // What: Summary String. Why: Cards and search listings show the summary. How: This is the front matter's summary.
 		titStr : froMatObj.title,        // What: Title String. Why: The article is named everywhere by its title. How: This is the front matter's title.
@@ -153,7 +168,6 @@ function artRecFun ( filPatStr : string, filTexStr : string ) : ArtRecTyp {
 // #endregion artRecFun
 
 
-
 const ART_REC_ARR = Object.entries( ART_TEX_OBJ ).map( ( [ filPatStr, filTexStr ] ) => artRecFun( filPatStr, filTexStr ) ).sort( ( artOneObj, artTwoObj ) => artTwoObj.pubStr.localeCompare( artOneObj.pubStr ) || artOneObj.titStr.localeCompare( artTwoObj.titStr ) ); // What: Article Record Array. Why: The pages list every article, newest first. How: This builds a record from every file and sorts by published date, newest first, then by title.
 
 // #endregion Helpers
@@ -162,7 +176,7 @@ const ART_REC_ARR = Object.entries( ART_TEX_OBJ ).map( ( [ filPatStr, filTexStr 
 
 // #region Exports
 
-export { ART_REC_ARR, type ArtRecTyp }; // What: Named Exports. Why: Home, the Articles page, and each article's page read the catalog. How: This exports the records and their type.
+export { ART_REC_ARR, type ArtRecTyp }; // What: Named Exports. Why: The article catalog is read from one place. How: This exports the records and their type.
 
 // #endregion Exports
 

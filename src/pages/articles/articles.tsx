@@ -3,16 +3,19 @@
 
 // #region Imports
 
-import cssModObj from './articles.module.css'; // What: CSS Module Object. Why: The Articles page's hero, filter, and list are styled in its own module. How: This maps each class name in articles.module.css to its hashed module class.
+import cssModObj from './articles.module.css'; // What: CSS Module Object. Why: The Articles page's parts are styled in its own module. How: This maps each class name in articles.module.css to its hashed module class.
 
 
 import { ART_REC_ARR     } from '../../ui/articles.ts';                   // What: Article Record Array. Why: The page lists every article. How: The page filters and renders it.
-import { Link            } from 'react-router';                           // What: Link. Why: Each article and the question form open without a full page load. How: This renders those links.
-import { SigRinCom       } from '../../ui/signal-rings.tsx';              // What: Signal Rings Component. Why: The help card beside the list carries the site's motif. How: The page draws the small rings at the card's top.
+import { Link            } from 'react-router';                           // What: Link. Why: Links within the site move to another page without a full page load. How: This renders them.
+import { SigRinCom       } from '../../ui/signal-rings.tsx';              // What: Signal Rings Component. Why: The help card beside the list above 1,024px carries the site's motif. How: The page draws the small rings at the card's top.
 import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // What: Topic Record Array. Why: The filter offers every topic. How: The page renders one button per topic.
 import { TopTagCom       } from '../../ui/topic-tag.tsx';                 // What: Topic Tag Component. Why: Each listed article shows its topic. How: The page renders one tag per article.
+import { useEffect       } from 'react';                                  // What: Use Effect. Why: A router navigation while the page stays open should bring back the router's topic. How: This clears the page's own choice whenever the location key changes.
+import { useLocation     } from 'react-router';                           // What: Use Location. Why: The page has to know when the router navigates. How: This reads the location, whose key changes on every navigation.
 import { usePagDesFun    } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
-import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: The chosen topic lives in the address, so a link can open the page already filtered. How: The page reads and sets the topic parameter through it.
+import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: The chosen topic lives in the address, so a link can open the page already filtered. How: The page reads the topic parameter through it.
+import { useState        } from 'react';                                  // What: Use State. Why: The page keeps its own record of a visitor's choices. How: This holds whether a topic has been chosen yet, for the list's arriving fade, and which topic was pressed.
 
 
 import type { JSX } from 'react'; // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.
@@ -32,9 +35,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * and choosing a topic replaces the address rather than adding to the
  * history, so Back still leaves the page. A topic with no articles yet
  * invites the visitor to ask instead, and a list of articles ends with the
- * same Still Stuck panel an article does. On a wide screen a help card sits
+ * same Still Stuck panel an article does. Above 1,024px a help card sits
  * beside the list, staying in view as it scrolls, so a visitor who can't find
- * their problem always sees how to ask.
+ * their problem sees how to ask.
  *
  * Sections:
  *  - Components
@@ -56,11 +59,12 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * @summary
  * Renders the Articles page with its own title, description, and canonical
  * address, which leaves out the topic so every filtered view counts as one
- * page. The topic comes from the address's topic parameter, and one that
- * isn't a real topic shows every article. Pressing a topic's button puts it
- * in the address, replacing the current entry; pressing All Topics removes
- * it. The count line is a polite live region, so a screen reader announces
- * the new count after each choice.
+ * page. The topic comes from the address's topic parameter, and one that isn't
+ * a real topic shows every article. Pressing a topic's button puts it in the
+ * address, replacing the current entry without a router navigation, so the
+ * page stays where it was rather than jumping to its top; pressing "All
+ * topics" removes it. The count line is a polite live region, so a screen
+ * reader announces the new count after each choice.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -82,12 +86,75 @@ function ArtLisCom () : JSX.Element {
 
 
 
-	const [ seaParObj, setSeaParObj ] = useSearchParams(); // What: Search Parameters Object And Setter. Why: The chosen topic lives in the address. How: This reads the address's parameters and sets new ones.
+	const [ resChoBoo, setResChoBoo ] = useState( false );                 // What: Result Chosen Boolean And Setter. Why: The list should fade in on a choice, not on top of the page's own entrance. How: This starts false and turns true once a topic button is pressed.
+	const [ seaParObj ]               = useSearchParams();                 // What: Search Parameters Object. Why: The address may name a topic when the page opens or the router navigates. How: This reads the address's parameters.
+	const [ topChoStr, setTopChoStr ] = useState< string | null >( null ); // What: Topic Chosen String And Setter. Why: A topic pressed on the page is written to the address without the router, which still holds the old one. How: This holds the pressed topic, an empty string for "All topics", or null to follow the address.
 
-	const rawTopStr = seaParObj.get( 'topic' ) ?? ''; // What: Raw Topic String. Why: The address may name a topic, or nothing. How: This reads the topic parameter, or an empty string.
+	const locCurObj = useLocation(); // What: Location Current Object. Why: A router navigation should take over from a topic pressed on the page. How: This holds the location, whose key changes on each navigation.
+
+
+
+	const rawTopStr = topChoStr ?? seaParObj.get( 'topic' ) ?? '';                                                                                              // What: Raw Topic String. Why: The topic pressed on the page wins over the address the router knows, which may name a topic, or nothing. How: This reads the pressed topic, else the topic parameter, else an empty string.
 	const topRecObj = TOP_REC_ARR.find( ( topCurObj ) => topCurObj.ideStr === rawTopStr );                                                                      // What: Topic Record Object. Why: Only a real topic filters the list. How: This finds the topic the address names, or nothing.
 	const shoArtArr = topRecObj ? ART_REC_ARR.filter( ( artRecObj ) => artRecObj.topStr === topRecObj.ideStr ) : ART_REC_ARR;                                   // What: Shown Article Array. Why: The list shows only the chosen topic's articles. How: This filters the catalog by the topic, or keeps every article when none is chosen.
 	const couTexStr = `Showing ${ shoArtArr.length } ${ shoArtArr.length === 1 ? 'article' : 'articles' }${ topRecObj ? ` about ${ topRecObj.labStr }` : '' }`; // What: Count Text String. Why: The visitor should know how many articles match. How: This counts them, in the right singular or plural, naming the topic when one is chosen.
+	const resKeyStr = shoArtArr.map( ( artRecObj ) => artRecObj.ideStr ).join( ' ' );                                                                           // What: Result Key String. Why: After a choice, the list should fade in only when the articles shown change. How: This joins the shown articles' addresses, which the count and list remount on.
+
+
+
+	useEffect( () => setTopChoStr( null ), [ locCurObj.key ] ); // What: Router Navigation Effect. Why: A router navigation while the page stays open, such as the bar's "Articles" link, should show the address it leads to rather than a topic pressed before it. How: This clears the pressed topic whenever the location key changes, which happens on every router navigation.
+
+
+
+	// #region choTopFun
+
+	/**
+	 * choTopFun = Choose Topic Function
+	 *
+	 * @summary
+	 * Chooses a topic for the list, or every article for an empty string. It
+	 * writes the choice into the address with history.replaceState, keeping
+	 * the router's own history state, so the choice stays shareable and a
+	 * reload keeps it, while the router sees no navigation and its scroll
+	 * hook leaves the page where it was. It then turns on the list's
+	 * arriving fade and holds the choice in the page's own state.
+	 *
+	 * @author z4nta0 <https://github.com/z4nta0>
+	 *
+	 * @param topIdeStr - Topic Identifier String: The topic's identifier, or
+	 *                    an empty string for "All topics".
+	 *
+	 * @returns This function does not return anything.
+	 *
+	 * @example
+	 * ```ts
+	 * choTopFun('scams-safety') // => void
+	 * ```
+	 *
+	*/
+
+	const choTopFun = ( topIdeStr : string ) : void => { // What: Choose Topic Function. Why: A topic button should narrow the list without the page jumping to its top. How: This writes the choice to the address outside the router, then shows it.
+
+
+		const adrUrlObj = new URL( window.location.href ); // What: Address URL Object. Why: The new address keeps the page's path and hash. How: This copies the current address.
+
+
+		if ( topIdeStr ) adrUrlObj.searchParams.set( 'topic', topIdeStr ); // What: Topic Parameter Set Call. Why: A chosen topic stays shareable in the address. How: This sets the topic parameter.
+
+		else adrUrlObj.searchParams.delete( 'topic' ); // What: Topic Parameter Delete Call. Why: "All topics" leaves the address without a topic. How: This removes the parameter.
+
+
+
+		window.history.replaceState( window.history.state, '', adrUrlObj ); // What: Address Replace Call. Why: A router navigation would send the page to its top, and a new history entry per press would crowd the Back button. How: This replaces the current entry's address, keeping the router's state on it.
+
+		setResChoBoo( true ); // What: Result Chosen Setter Call. Why: The new list is the result of the press. How: This turns on the list's arriving fade.
+
+		setTopChoStr( topIdeStr ); // What: Topic Chosen Setter Call. Why: The router still holds the old address, so the page holds the choice itself. How: This stores the pressed topic.
+
+
+	};
+
+	// #endregion choTopFun
 
 
 
@@ -115,7 +182,7 @@ function ArtLisCom () : JSX.Element {
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The hero's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
 
 
-						<p className={ cssModObj.secEyePar }>Help articles</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the page. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>Help articles</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the page. How: This shows it in teal mono capitals. */ }
 
 						<h1 className={ cssModObj.herTitHea }>Step-by-step help, in plain words</h1>{ /* What: Hero Title Heading Element. Why: The heading promises help a visitor can follow. How: This shows the page's h1. */ }
 
@@ -129,7 +196,7 @@ function ArtLisCom () : JSX.Element {
 
 
 
-				<section className={ cssModObj.artLisSec }>{ /* What: Articles List Section Element. Why: The filter and the list belong together. How: This holds the topic buttons, the count, the articles, and the help card beside them on wide screens. */ }
+				<section className={ cssModObj.artLisSec }>{ /* What: Articles List Section Element. Why: The filter and the list belong together. How: This holds the topic buttons, the count, the articles, the help card beside them above 1,024px, and the Still Stuck panel below them. */ }
 
 
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The list sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
@@ -150,8 +217,8 @@ function ArtLisCom () : JSX.Element {
 
 								aria-pressed={ !topRecObj }
 
-								onClick={ () => setSeaParObj( {}, { replace : true } ) } // What: All Topics Click. Why: Choosing All should show every article without adding a history entry. How: This clears the address's parameters, replacing the current entry.
-							>All topics</button>{ /* What: All Topics Button Element. Why: A visitor can go back to every article. How: This clears the filter, marked pressed when no topic is chosen. */ }
+								onClick={ () => choTopFun( '' ) } // What: All Topics Click. Why: Choosing "All topics" should show every article. How: This chooses no topic, passing an empty string.
+							>All topics</button>{ /* What: Filter Pill Button Element. Why: A visitor can go back to every article. How: This "All topics" button clears the filter, marked pressed when no topic is chosen. */ }
 
 							{ TOP_REC_ARR.map( ( topCurObj ) => ( // What: Topic Button Map Call. Why: Every topic gets a filter button. How: This renders one button per topic.
 
@@ -165,8 +232,8 @@ function ArtLisCom () : JSX.Element {
 
 									aria-pressed={ topCurObj.ideStr === topRecObj?.ideStr }
 
-									onClick={ () => setSeaParObj( { topic : topCurObj.ideStr }, { replace : true } ) } // What: Topic Click. Why: Choosing a topic should filter the list and keep the choice shareable, without adding a history entry. How: This puts the topic in the address, replacing the current entry.
-								>{ topCurObj.labStr }</button> // What: Topic Button Element. Why: A visitor narrows the list to one topic. How: This shows the topic's name, marked pressed while it's chosen.
+									onClick={ () => choTopFun( topCurObj.ideStr ) }
+								>{ topCurObj.labStr }</button> // What: Filter Pill Button Element. Why: A visitor narrows the list to one topic. How: This is each topic's own button, showing the topic's name, marked pressed while it's chosen.
 
 
 							))}
@@ -178,17 +245,31 @@ function ArtLisCom () : JSX.Element {
 							className={ cssModObj.couTexPar }
 
 							aria-live='polite'
-						>{ couTexStr }</p>{ /* What: Count Text Paragraph Element. Why: The visitor should see, and hear, how many articles match. How: This shows the count, which a screen reader announces after each change. */ }
+						>{ /* What: Count Text Paragraph Element. Why: The visitor should see, and hear, how many articles match. How: This shows the count, which a screen reader announces after each change. */ }
+
+
+							<span
+								key={ resKeyStr } // What: Count Key. Why: A new count should fade in with its list. How: A new key remounts the span inside the live region, replaying its entrance while the region itself stays.
+
+								className={` ${ cssModObj.couTexSpa }   ${ resChoBoo ? cssModObj.couTexSpaArriving : '' } `}
+							>{ couTexStr }</span>{ /* What: Count Text Span Element. Why: The count changes with the chosen topic. How: This shows the count, fading each new count in once a visitor has chosen a topic. */ }
+
+
+						</p>
 
 
 
-						<div className={ cssModObj.lisLayDiv }>{ /* What: List Layout Div Element. Why: On a wide screen the list's right side was empty, so the help card sits there beside it. How: This lays the list and the help card side by side above 1,024px, and leaves the list alone below that. */ }
+						<div className={ cssModObj.lisLayDiv }>{ /* What: List Layout Div Element. Why: On a wide screen the list's right side was empty, so the help card sits there beside it. How: This lays the list and the help card side by side above 1,024px, and leaves the list alone at 1,024px and below. */ }
 
 
 							{ shoArtArr.length > 0 ? ( // What: Article List Check. Why: A topic may have no articles yet. How: This shows the list when there are articles, and an invitation to ask otherwise.
 
 
-								<ul className={ cssModObj.artLisUno }>{ /* What: Article List Unordered Element. Why: The articles read as a list, one per row. How: This stacks them with even gaps. */ }
+								<ul
+									key={ resKeyStr } // What: List Key. Why: A new list should fade in as a whole. How: A new key remounts the list, replaying its entrance.
+
+									className={` ${ cssModObj.artLisUno }   ${ resChoBoo ? cssModObj.artLisUnoArriving : '' } `}
+								>{ /* What: Article List Unordered Element. Why: The articles read as a list, one per row. How: This stacks them with even gaps. */ }
 
 
 									{ shoArtArr.map( ( artRecObj ) => ( // What: Article Map Call. Why: Every matching article gets a row. How: This renders one list item per article.
@@ -201,7 +282,7 @@ function ArtLisCom () : JSX.Element {
 												className={ cssModObj.artCarAnc }
 
 												to={ `/articles/${ artRecObj.ideStr }` }
-											>{ /* What: Article Card Link. Why: The whole card opens the article. How: This draws a white card with the topic, title, summary, and reading time, lifting on hover. */ }
+											>{ /* What: Article Card Anchor Link. Why: The whole card opens the article. How: This draws each article's white card with the topic, title, summary, and reading time, lifting on hover. */ }
 
 
 												<TopTagCom topIdeStr={ artRecObj.topStr } />{ /* What: Topic Tag Component. Why: The card shows which topic the article belongs to. How: This renders the topic's pill. */ }
@@ -230,7 +311,7 @@ function ArtLisCom () : JSX.Element {
 							) : ( // What: Empty Topic Branch. Why: A topic with no articles yet still deserves a way forward. How: This shows an invitation to ask instead.
 
 
-								<div className={ cssModObj.empMesDiv }>{ /* What: Empty Message Div Element. Why: The invitation reads as one calm block. How: This holds the message and the button. */ }
+								<div className={` ${ cssModObj.empMesDiv }   ${ resChoBoo ? cssModObj.empMesDivArriving : '' } `}>{ /* What: Empty Message Div Element. Why: The invitation reads as one calm block. How: This holds the message and the button. */ }
 
 
 									<p className={ cssModObj.empMesPar }>No articles about this yet, but I'm happy to help directly. Ask your question, and I'll reply within 24 hours.</p>{ /* What: Empty Message Paragraph Element. Why: An empty list shouldn't feel like a dead end. How: This offers to answer directly. */ }
@@ -241,7 +322,7 @@ function ArtLisCom () : JSX.Element {
 										className={ cssModObj.butPriAnc }
 
 										to='/contact'
-									>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the way forward when no article fits. How: This routes to the question form as an orange button. */ }
+									>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking is the way forward when no article fits. How: This "Ask a Question" button in the empty topic's message routes to the question form, drawn in orange. */ }
 
 
 								</div>
@@ -255,7 +336,7 @@ function ArtLisCom () : JSX.Element {
 								className={ cssModObj.helCarAsi }
 
 								aria-label='Ask the Tech Geek'
-							>{ /* What: Help Card Aside Element. Why: A visitor scanning the list who can't find their problem should see how to ask, right where they give up looking. How: This holds the small rings, the invitation, the promise, the button, and a safety note, staying in view as the list scrolls, on wide screens only. */ }
+							>{ /* What: Help Card Aside Element. Why: A visitor scanning the list who can't find their problem should see how to ask without leaving it. How: This holds the small rings, the invitation, the promise, the button, and a safety note, staying in view as the list scrolls, above 1,024px only. */ }
 
 
 								<SigRinCom
@@ -276,7 +357,7 @@ function ArtLisCom () : JSX.Element {
 									className={ cssModObj.butPriAnc }
 
 									to='/contact'
-								>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the site's main action. How: This routes to the question form as an orange button. */ }
+								>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking is the site's main action. How: This "Ask a Question" button in the help card routes to the question form, drawn in orange. */ }
 
 
 
@@ -310,7 +391,7 @@ function ArtLisCom () : JSX.Element {
 									className={ cssModObj.butPriAnc }
 
 									to='/contact'
-								>Ask a Question</Link>{ /* What: Ask Question Link. Why: Asking is the next step for anyone still stuck. How: This routes to the question form as an orange button. */ }
+								>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: Asking is the next step for anyone still stuck. How: This "Ask a Question" button in the Still Stuck panel routes to the question form, drawn in orange. */ }
 
 
 							</aside>
@@ -344,7 +425,7 @@ function ArtLisCom () : JSX.Element {
 
 // #region Exports
 
-export { ArtLisCom }; // What: Named Exports. Why: The router's articles route renders the page. How: This exports ArtLisCom.
+export { ArtLisCom }; // What: Named Export. Why: The Articles page renders at its own route. How: This exports ArtLisCom.
 
 // #endregion Exports
 

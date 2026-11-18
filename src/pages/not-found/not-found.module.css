@@ -6,9 +6,10 @@
  *
  * @summary
  * Styles for NotFouCom: one centered column below the bar, the signal rings
- * at a modest size above a small teal Error 404 label, the heading, a
- * reassuring line, and the three buttons in a centered row. The page fades
- * up as it opens, and every transition holds still under reduced motion.
+ * at a modest size above a teal "Error 404" label, the heading, a
+ * reassuring line, and the three buttons in a centered row, wrapping at
+ * about 645px wide and below. The page fades up as it opens, and every
+ * transition holds still under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -27,7 +28,7 @@
 	flex-direction : column;
 	gap            : var( --spa-ver-bas );                                                                          /* Spacing Vertical Base ~= 14.572px */
 	margin         : 0 auto;
-	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );                                                           /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );                                                           /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding        : calc( var( --nav-bar-hei ) + var( --her-gap-pad ) ) var( --gut-sid-pad ) var( --spa-ver-p07 ); /* Navigation Bar Height ~= 78.751px, Hero Gap Padding, about 59.447px - 138.199px, Gutter Side Padding, about 19.304px - 44.876px, Spacing Vertical Base Plus 7 ~= 104.323px */
 	text-align     : center;
 
@@ -51,12 +52,12 @@
 
 
 	margin-bottom : var( --spa-ver-m02 );                /* Spacing Vertical Base Minus 2 ~= 8.304px */
-	max-width     : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.517px */
+	max-width     : calc( var( --ver-rhy-p10 ) * 1rem ); /* Vertical Rhythm Base Plus 10 ~= 242.522px */
 
 
 }
 
-.notCodPar { /* What: Not Found Code Paragraph. Why: The error number reads as a small label, not a shout. How: This sets it in teal mono capitals. */
+.notCodPar { /* What: Not Found Code Paragraph. Why: The error number reads as a quiet label, not a shout. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
@@ -90,7 +91,7 @@
 
 /* #region notActDiv */
 
-.notActDiv { /* What: Not Found Actions Div. Why: The three ways onward sit together in the center. How: This lines them up in a centered row that wraps, a little apart from the text. */
+.notActDiv { /* What: Not Found Actions Div. Why: The three ways onward sit together in the center. How: This lines them up in a centered row, wrapping at about 645px wide and below, a little apart from the text. */
 
 
 	display         : flex;
@@ -116,7 +117,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : background var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -163,7 +164,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 );       /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : border-color var( --dur-tra-bas ), color var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), color var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }

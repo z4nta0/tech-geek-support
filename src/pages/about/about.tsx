@@ -7,7 +7,7 @@ import cssModObj from './about.module.css';   // What: CSS Module Object. Why: T
 import selPorUrl from './self-portrait.webp'; // What: Self Portrait URL. Why: The hero shows z4nta0's portrait, so a visitor sees who answers. How: Vite resolves this to the image's fingerprinted URL.
 
 
-import { HerFloCom    } from '../../ui/hero-flourish.tsx';             // What: Hero Flourish Component. Why: The stacked hero fills the room beside its portrait. How: The hero sets a drawing on each side of it.
+import { HerFloCom    } from '../../ui/hero-flourish.tsx';             // What: Hero Flourish Component. Why: The stacked hero fills the room beside its portrait. How: The hero sets a drawing on each side of it from 441px to 768px.
 import { Link         } from 'react-router';                           // What: Link. Why: The closing panel moves to the question form without a full page load. How: This renders it as a router link.
 import { usePagDesFun } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
 
@@ -46,30 +46,94 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
 const PRO_REC_ARR = [ // What: Promise Record Array. Why: The page lists the same three promises every visit. How: Each row holds a promise's title and description.
 
 
-	{ desStr : "No jargon and no assumptions. If a term can't be avoided, I explain it the first time it comes up.", titStr : 'Plain words' },      // What: Plain Words Row. Why: Jargon is what makes tech feel hard. How: This promises plain explanations.
-	{ desStr : 'There are no silly questions here. Everyone starts somewhere, and asking is the smart move.', titStr : 'Patience, always' },        // What: Patience Row. Why: Many people are embarrassed to ask. How: This promises no judgment.
-	{ desStr : "If something needs a repair shop or the company that made it, I'll tell you so, and who to ask.", titStr : 'Honest about limits' }  // What: Honest Limits Row. Why: Trust comes from saying what can't be fixed here. How: This promises an honest referral.
+	{ desStr : "No jargon and no assumptions. If a term can't be avoided, I explain it the first time it comes up.", titStr : 'Plain words'         }, // What: Plain Words Row. Why: Jargon is what makes tech feel hard. How: This promises plain explanations.
+	{ desStr : 'There are no silly questions here. Everyone starts somewhere, and asking is the smart move.',        titStr : 'Patience, always'    }, // What: Patience Row. Why: Many people are embarrassed to ask. How: This promises no judgment.
+	{ desStr : "If something needs a repair shop or the company that made it, I'll tell you so, and who to ask.",    titStr : 'Honest about limits' }  // What: Honest Limits Row. Why: Trust comes from saying what can't be fixed here. How: This promises an honest referral.
 
 
 ];
 
 
+
+// #region STO_REC_ARR
+
+/**
+ * STO_REC_ARR = Story Record Array
+ *
+ * @summary
+ * The milestones the story shows, newest last. Every row shares one shape,
+ * so its fields carry no comments of their own:
+ *
+ * - `desStr` (String): Description String, what happened that year.
+ *
+ * - `yeaStr` (String): Year String, the milestone's year, also its React
+ *   key.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
 
 const STO_REC_ARR = [ // What: Story Record Array. Why: The story runs through the same milestones every visit, newest last. How: Each row holds a milestone's year and description.
 
 
-	{ desStr : 'I bought my first computer and started figuring out how everything worked.', yeaStr : '2004' },           // What: First Computer Row. Why: The story starts with the first computer. How: This dates it.
-	{ desStr : 'I started opening computers up, swapping parts, and upgrading them myself.', yeaStr : '2007' },           // What: Tinkering Row. Why: Taking computers apart is how hardware becomes familiar. How: This dates it.
-	{ desStr : 'I wrote my first websites and learned how the web works from the inside.', yeaStr : '2013' },             // What: First Websites Row. Why: Building websites is the other half of the experience. How: This dates it.
-	{ desStr : 'I built my first computer from scratch, part by part.', yeaStr : '2014' },                                // What: Custom Computer Row. Why: Building a whole computer shows the depth of the hardware experience. How: This dates it.
-	{ desStr : 'I built my first website for a client, and have been building them for people since.', yeaStr : '2015' }  // What: Client Website Row. Why: Building for others is where helping people with tech became the work. How: This dates it.
+	{ // What: First Computer Row. Why: The story starts with the first computer. How: This dates it.
+
+
+		yeaStr : '2004',
+
+		desStr : 'I bought my first computer and started figuring out how everything worked.'
+
+
+	},
+
+	{ // What: Tinkering Row. Why: Taking computers apart is how hardware becomes familiar. How: This dates it.
+
+
+		yeaStr : '2007',
+
+		desStr : 'I started opening computers up, swapping parts, and upgrading them myself.'
+
+
+	},
+
+	{ // What: First Websites Row. Why: Building websites is the other half of the experience. How: This dates it.
+
+
+		yeaStr : '2013',
+
+		desStr : 'I wrote my first websites and learned how the web works from the inside.'
+
+
+	},
+
+	{ // What: Custom Computer Row. Why: Building a whole computer shows the depth of the hardware experience. How: This dates it.
+
+
+		yeaStr : '2014',
+
+		desStr : 'I built my first computer from scratch, part by part.'
+
+
+	},
+
+	{ // What: Client Website Row. Why: Building for others is where helping people with tech became the work. How: This dates it.
+
+
+		yeaStr : '2015',
+
+		desStr : 'I built my first website for a client, and have been building them for people since.'
+
+
+	}
 
 
 ];
 
+// #endregion STO_REC_ARR
 
 
-const TIP_URL_STR = 'https://ko-fi.com/techgeekdev'; // What: Tip URL String. Why: The Support section's button opens z4nta0's Ko-fi page, the same address every README links. How: This is the page's public address, written here since it never changes between builds.
+
+const TIP_URL_STR = 'https://ko-fi.com/techgeekdev'; // What: Tip URL String. Why: The Support section's button opens z4nta0's Ko-fi page. How: This is the page's public address, written here since it never changes between builds.
 
 // #endregion Constants
 
@@ -134,7 +198,7 @@ function AboPagCom () : JSX.Element {
 						<div className={ cssModObj.herTexDiv }>{ /* What: Hero Text Div Element. Why: The introduction reads as one column. How: This stacks the eyebrow, heading, and paragraphs. */ }
 
 
-							<p className={ cssModObj.secEyePar }>About</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the page. How: This shows it in teal mono capitals. */ }
+							<p className={ cssModObj.secEyePar }>About</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the page. How: This shows it in teal mono capitals. */ }
 
 							<h1 className={ cssModObj.herTitHea }>Hi, I'm the Tech Geek</h1>{ /* What: Hero Title Heading Element. Why: The page introduces a person, so it says hello, by the friendlier name the site uses rather than the developer name z4nta0. How: This shows the page's h1. */ }
 
@@ -146,18 +210,19 @@ function AboPagCom () : JSX.Element {
 						</div>
 
 
+
 						<div className={ cssModObj.herVisDiv }>{ /* What: Hero Visual Div Element. Why: The portrait and its flourishes form the hero's picture. How: This holds the portrait, beside the introduction on wide screens and above it at 768px and below, where a small drawing fills the room on each side of it down to 441px. */ }
 
 
-							<div className={ cssModObj.porFraDiv }>{ /* What: Portrait Frame Div Element. Why: The portrait sits in a soft frame with the site's rings behind it. How: This holds the photo and draws a pale teal circle behind it. */ }
+							<div className={ cssModObj.porFraDiv }>{ /* What: Portrait Frame Div Element. Why: The portrait sits in a soft frame with a pale teal circle behind it, the rings' color. How: This holds the photo and draws a pale teal circle behind it. */ }
 
 
 								<img
 									className={ cssModObj.porPhoIma }
 
-									height='850' // What: Intrinsic Height. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's height in pixels.
+									height='1251' // What: Intrinsic Height. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's height in pixels.
 									src={ selPorUrl }
-									width='642' // What: Intrinsic Width. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's width in pixels.
+									width='945' // What: Intrinsic Width. Why: The browser reserves the portrait's shape before it loads, so nothing moves. How: This is the encoded portrait's width in pixels.
 
 									alt='The Tech Geek, who answers the questions on TechGeek.support'
 								/>{ /* What: Portrait Photo Image Element. Why: A face makes the help personal. How: This shows z4nta0's portrait. */ }
@@ -198,12 +263,12 @@ function AboPagCom () : JSX.Element {
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The section's content sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
 
 
-						<p className={ cssModObj.secEyePar }>How I help</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>How I help</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Three promises in every answer</h2>{ /* What: Section Title Heading Element. Why: The heading says what the cards are. How: This shows the section's h2. */ }
 
 
-						<ul className={ cssModObj.proGriUno }>{ /* What: Promise Grid Unordered Element. Why: The promises sit side by side as equal cards. How: This lays them out three across, stacking on phones. */ }
+						<ul className={ cssModObj.proGriUno }>{ /* What: Promise Grid Unordered Element. Why: The promises sit side by side as equal cards. How: This lays them out three across, stacking at 768px and below. */ }
 
 
 							{ PRO_REC_ARR.map( ( proRecObj ) => ( // What: Promise Map Call. Why: Every promise gets a card. How: This renders one list item per promise.
@@ -243,7 +308,7 @@ function AboPagCom () : JSX.Element {
 					<div className={ cssModObj.stoInnDiv }>{ /* What: Story Inner Div Element. Why: The story reads best in a narrow column. How: This caps it near a reading width and centers it. */ }
 
 
-						<p className={ cssModObj.secEyePar }>My tech story</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>My tech story</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Twenty years of figuring things out</h2>{ /* What: Section Title Heading Element. Why: The heading sums up the experience. How: This shows the section's h2. */ }
 
@@ -282,7 +347,7 @@ function AboPagCom () : JSX.Element {
 
 
 
-				<section className={ cssModObj.aboClaSec }>{ /* What: About Closing Section Element. Why: A note on privacy and an invitation to ask follow the story. How: This holds the closing panel. */ }
+				<section className={ cssModObj.aboCloSec }>{ /* What: About Closing Section Element. Why: A note on privacy and an invitation to ask follow the story. How: This holds the closing panel. */ }
 
 
 					<div className={ cssModObj.secInnDiv }>{ /* What: Section Inner Div Element. Why: The panel sits in the site's centered column. How: This caps and centers it with the side gutter. */ }
@@ -301,7 +366,7 @@ function AboPagCom () : JSX.Element {
 								className={ cssModObj.butPriAnc }
 
 								to='/contact'
-							>Ask a Question</Link>{ /* What: Ask Question Link. Why: The page ends where help begins. How: This routes to the question form as an orange button. */ }
+							>Ask a Question</Link>{ /* What: Button Primary Anchor Link. Why: The page ends where help begins. How: This "Ask a Question" button in the closing panel routes to the question form, drawn in orange. */ }
 
 
 						</div>
@@ -320,7 +385,7 @@ function AboPagCom () : JSX.Element {
 					<div className={ cssModObj.supInnDiv }>{ /* What: Support Inner Div Element. Why: The invitation sits centered in the page's column. How: This stacks the eyebrow, heading, paragraph, and Ko-fi button. */ }
 
 
-						<p className={ cssModObj.secEyePar }>Support My Work</p>{ /* What: Section Eyebrow Paragraph Element. Why: A small label names the section. How: This shows it in teal mono capitals. */ }
+						<p className={ cssModObj.secEyePar }>Support My Work</p>{ /* What: Section Eyebrow Paragraph Element. Why: A label names the section. How: This shows it in teal mono capitals. */ }
 
 						<h2 className={ cssModObj.secTitHea }>Buy Me a Coffee</h2>{ /* What: Section Title Heading Element. Why: The heading names the invitation. How: This shows the section's h2. */ }
 
@@ -360,7 +425,7 @@ function AboPagCom () : JSX.Element {
 
 // #region Exports
 
-export { AboPagCom }; // What: Named Exports. Why: The router's about route renders the page. How: This exports AboPagCom.
+export { AboPagCom }; // What: Named Export. Why: The About page renders at its own route. How: This exports AboPagCom.
 
 // #endregion Exports
 

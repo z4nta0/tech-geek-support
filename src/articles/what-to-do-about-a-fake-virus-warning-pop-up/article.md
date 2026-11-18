@@ -59,7 +59,7 @@ It's okay. Many smart, careful people have been fooled by these scams. Act quick
 5. **Change your passwords**, starting with your email and bank, from a different, safe device if you can. Change any other account that used the same password.
 6. **Report it** to the Federal Trade Commission at **ReportFraud.ftc.gov**. Reporting helps stop these scammers.
 
-> **Before you start:** If someone had remote control of your computer, it's worth having a trusted person or repair shop check it over, or resetting the computer. Ask us if you're not sure.
+> **Tip:** If someone had remote control of your computer, it's worth having a trusted person or repair shop check it over, or resetting the computer. Ask me if you're not sure.
 
 ## If that didn't work
 

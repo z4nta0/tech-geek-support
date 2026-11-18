@@ -99,7 +99,7 @@
 
 }
 
-.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names each section above its heading. How: This sets it in teal mono capitals. */
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A teal label names each section above its heading. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
@@ -155,7 +155,7 @@
 
 
 }
-@media ( max-width : 768px ) { /* What: Phone Hero Visual Div. Why: In one column the portrait leads the hero, as every sister site's stacked hero opens on its picture. How: This applies at 768px and below. */
+@media ( max-width : 768px ) { /* What: Phone Hero Visual Div. Why: In one column the portrait leads the hero, as the sister sites' stacked heroes do. How: This applies at 768px and below. */
 
 
 	.herVisDiv { /* What: Leading Hero Visual Div. Why: The portrait greets the visitor first, above the introduction. How: This moves the portrait and its flourishes above the text. */
@@ -176,7 +176,7 @@
 
 
 	isolation : isolate;
-	max-width : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.277px */
+	max-width : calc( var( --ver-rhy-p11 ) * 1rem ); /* Vertical Rhythm Base Plus 11 ~= 321.273px */
 	position  : relative;
 	width     : 100%;
 
@@ -188,14 +188,14 @@
 	.porFraDiv { /* What: Smaller Portrait Frame Div. Why: A step smaller, the portrait leaves more of the introduction above the fold, at the same size down to 320px, as TechGeek.dev's About portrait does. How: This caps it at about 183px wide, the p09 step, about 242px tall. */
 
 
-		max-width : calc( var( --ver-rhy-p09 ) * 1rem ); /* Vertical Rhythm Base Plus 9 ~= 183.073px */
+		max-width : calc( var( --ver-rhy-p09 ) * 1rem ); /* Vertical Rhythm Base Plus 9 ~= 183.074px */
 
 
 	}
 
 
 }
-.porFraDiv::before { /* What: Portrait Frame Circle. Why: A soft teal circle behind the photo ties it to the site's motif. How: This draws a pale teal circle reaching past the photo's top right corner, behind it. */
+.porFraDiv::before { /* What: Portrait Frame Div Circle. Why: A soft teal circle behind the photo ties it to the site's motif. How: This draws a pale teal circle reaching past the photo's top right corner, behind it. */
 
 
 	aspect-ratio  : 1;
@@ -216,7 +216,7 @@
 
 	border        : var( --bor-wid-xla ) solid var( --bac-sur-col ); /* Border Width Extra Large ~= 3.572px, Background Surface Color = #FFFFFF */
 	border-radius : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
-	box-shadow    : var( --ele-med-sha );                            /* Elevation Medium Shadow, about 0 4.7px 14.6px plus 0 1.5px 3.6px -1.2px */
+	box-shadow    : var( --ele-med-sha );                            /* Elevation Medium Shadow ~= 0 4.732px 14.572px plus 0 1.536px 3.572px -1.160px */
 	display       : block;
 	height        : auto;
 	width         : 100%;
@@ -244,14 +244,14 @@
 		height   : 100%;
 		position : absolute;
 		top      : 0;
-		width    : calc( ( 100% - var( --ver-rhy-p09 ) * 1rem ) / 2 - var( --spa-hor-p03 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.073px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+		width    : calc( ( 100% - var( --ver-rhy-p09 ) * 1rem ) / 2 - var( --spa-hor-p03 ) ); /* Vertical Rhythm Base Plus 9 ~= 183.074px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 	}
 
 
 }
-@media ( max-width : 440px ) { /* What: Narrow Phone Visual Flourish SVG. Why: Below about 440px the room beside the portrait is too narrow for the drawings at full size, and smaller they read as stray specks. How: This applies at 440px and below. */
+@media ( max-width : 440px ) { /* What: Narrow Phone Visual Flourish SVG. Why: At 440px and below the room beside the portrait is too narrow for the drawings at full size, and smaller they read as stray specks. How: This applies at 440px and below. */
 
 
 	.visFloSvg { /* What: Hidden Visual Flourish SVG. Why: The portrait and its circle fill most of a narrow phone's width on their own. How: This hides the drawings. */
@@ -303,7 +303,7 @@
 
 /* #region secInnDiv */
 
-.secInnDiv { /* What: Section Inner Div. Why: Every section's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
+.secInnDiv { /* What: Section Inner Div. Why: A section's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
 
 
 	margin    : 0 auto;
@@ -359,14 +359,14 @@
 .proIteIte { /* What: Promise Item Item. Why: Each promise is an ivory card that lifts on hover, like the family's other cards. How: This draws the card, stacks its parts, and eases its border and lift. */
 
 
-	background     : var( --bac-pag-col );                                                                   /* Background Page Color = #F5F0E8 */
-	border         : var( --bor-wid-bas ) solid var( --bor-mai-col );                                        /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
-	border-radius  : var( --rad-bor-xla );                                                                   /* Radius Border Extra Large ~= 19.304px */
+	background     : var( --bac-pag-col );                            /* Background Page Color = #F5F0E8 */
+	border         : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius  : var( --rad-bor-xla );                            /* Radius Border Extra Large ~= 19.304px */
 	display        : flex;
 	flex-direction : column;
-	gap            : var( --spa-ver-m01 );                                                                   /* Spacing Vertical Base Minus 1 = 11px */
-	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );                                              /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
-	transition     : border-color var( --dur-tra-bas ), translate var( --dur-tra-bas ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	gap            : var( --spa-ver-m01 );                            /* Spacing Vertical Base Minus 1 = 11px */
+	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );       /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
+	transition     : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), translate var( --dur-tra-bas ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -435,13 +435,15 @@
 
 
 	margin    : 0 auto;
-	max-width : calc( var( --ver-rhy-p14 ) * 1rem ); /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	max-width : calc( var( --ver-rhy-p14 ) * 1rem ); /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding   : 0 var( --gut-sid-pad );              /* Gutter Side Padding, about 19.304px - 44.876px */
 
 
 }
 
-/* What: Section Eyebrow Paragraph And Section Title Heading Pointer. Why: The story's eyebrow and heading share their rules with the other sections'. How: Their rules sit in the herTexDiv and aboProSec regions above. */
+/* What: Section Eyebrow Paragraph Pointer. Why: The story's eyebrow shares its rule with the hero's. How: Its rule sits in the herTexDiv region above. */
+
+/* What: Section Title Heading Pointer. Why: The story's heading shares its rule with the promises section's. How: Its rule sits in the aboProSec region above. */
 
 
 
@@ -475,7 +477,7 @@
 
 
 }
-.stoIteIte::before { /* What: Story Item Dot. Why: Each milestone is a point on the line, the rings' teal in miniature. How: This draws a teal dot ringed in ivory, centered on the line beside the year. */
+.stoIteIte::before { /* What: Story Item Item Dot. Why: Each milestone is a point on the line, the rings' teal in miniature. How: This draws a teal dot ringed in ivory, centered on the line beside the year. */
 
 
 	background    : var( --act-mai-col );                                                /* Accent-Tertiary Main Color = #2A9D8F */
@@ -521,9 +523,9 @@
 
 
 
-/* #region aboClaSec */
+/* #region aboCloSec */
 
-.aboClaSec { /* What: About Closing Section. Why: The closing panel gets room below before the Support band. How: This pads the section's bottom. */
+.aboCloSec { /* What: About Closing Section. Why: The closing panel gets room below before the Support band. How: This pads the section's bottom. */
 
 
 	padding-bottom : var( --spa-ver-p07 ); /* Spacing Vertical Base Plus 7 ~= 104.323px */
@@ -543,14 +545,14 @@
 
 
 	align-items    : flex-start;
-	background     : var( --act-tin-col );                                                        /* Accent-Tertiary Tint Color = #D3EEE9 */
-	border-radius  : var( --rad-bor-xla );                                                        /* Radius Border Extra Large ~= 19.304px */
+	background     : var( --act-tin-col );                                                           /* Accent-Tertiary Tint Color = #D3EEE9 */
+	border-radius  : var( --rad-bor-xla );                                                           /* Radius Border Extra Large ~= 19.304px */
 	display        : flex;
 	flex-direction : column;
-	gap            : var( --spa-ver-bas );                                                        /* Spacing Vertical Base ~= 14.572px */
+	gap            : var( --spa-ver-bas );                                                           /* Spacing Vertical Base ~= 14.572px */
 	margin         : 0 auto;
-	max-width      : calc( var( --cdn-pow-012 ) * var( --fon-siz-p02 ) + var( --spa-hor-p04 ) * 2 ); /* Core-Design-Number to the Power of 12 ~= 29.207, Font Size Base Plus 2 ~= 19.304px, Spacing Horizontal Base Plus 4 ~= 44.876px, about 653.6px in all */ /* What: Text-Fitted Width. Why: The panel exists to hold its paragraph, so it should be no wider than that text plus its own padding. How: This multiplies the paragraph measure's power by the paragraph's font size and adds the padding on both sides. */
-	padding        : var( --spa-ver-p05 ) var( --spa-hor-p04 );                                   /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 4 ~= 44.876px */
+	max-width      : calc( var( --cdn-pow-012 ) * var( --fon-siz-p02 ) + var( --spa-hor-p04 ) * 2 ); /* Core-Design-Number to the Power of 12 ~= 29.207, Font Size Base Plus 2 ~= 19.304px, Spacing Horizontal Base Plus 4 ~= 44.876px, ~= 653.545px in all */ /* What: Text-Fitted Width. Why: The panel exists to hold its paragraph, so it should be no wider than that text plus its own padding. How: This multiplies the paragraph measure's power by the paragraph's font size and adds the padding on both sides. */
+	padding        : var( --spa-ver-p05 ) var( --spa-hor-p04 );                                      /* Spacing Vertical Base Plus 5 ~= 59.447px, Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
@@ -601,7 +603,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : background var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -638,7 +640,7 @@
 
 /* #endregion secInnDiv */
 
-/* #endregion aboClaSec */
+/* #endregion aboCloSec */
 
 
 
@@ -672,7 +674,9 @@
 
 }
 
-/* What: Section Eyebrow Paragraph And Section Title Heading Pointer. Why: The Support section's eyebrow and heading share their rules with the other sections'. How: Their rules sit in the herTexDiv and aboProSec regions above. */
+/* What: Section Eyebrow Paragraph Pointer. Why: The Support section's eyebrow shares its rule with the hero's. How: Its rule sits in the herTexDiv region above. */
+
+/* What: Section Title Heading Pointer. Why: The Support section's heading shares its rule with the promises section's. How: Its rule sits in the aboProSec region above. */
 
 .supTexPar { /* What: Support Text Paragraph. Why: The invitation reads a step larger, like the page's other paragraphs, with room before its button. How: This sets it at the base plus 2 size, capped at the paragraph measure, with a small step below. */
 
@@ -689,7 +693,7 @@
 
 /* What: Button Primary Anchor Pointer. Why: The Ko-fi button shares the closing panel's orange button. How: Its rule sits in the cloPanDiv region above. */
 
-.visHidSpa { /* What: Visually Hidden Span. Why: Screen reader users should hear that the button opens Ko-fi in a new tab, which sighted visitors learn from the text above it. How: This shrinks the note to a clipped 1px box out of the layout, the standard technique that keeps it in the accessibility tree. */
+.visHidSpa { /* What: Visually Hidden Span. Why: Screen reader users should hear that the button opens Ko-fi in a new tab, which the visible label doesn't say. How: This shrinks the note to a clipped 1px box out of the layout, the standard technique that keeps it in the accessibility tree. */
 
 
 	border      : 0;

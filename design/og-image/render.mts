@@ -7,7 +7,7 @@ import { ART_FIL_ARR   } from '../../scripts/article-files.ts'; // What: Article
 import { chromium      } from '@playwright/test';               // What: Chromium. Why: The images are captured in a real browser, in the site's own fonts and tokens. How: This launches Playwright's Chromium.
 import { fileURLToPath } from 'node:url';                       // What: File URL To Path. Why: The output paths are resolved from this script's own location. How: This turns a file URL into a path.
 import { mkdirSync     } from 'node:fs';                        // What: Make Directory Sync. Why: The articles' images go in their own folder, which a fresh checkout may lack. How: This creates it if needed.
-import { statSync      } from 'node:fs';                        // What: Stat Sync. Why: Every image has to stay under the size WhatsApp accepts. How: This reads a saved image's size in bytes.
+import { statSync      } from 'node:fs';                        // What: Stat Sync. Why: Every image has to stay under the site's 300 KB limit. How: This reads a saved image's size in bytes.
 import { TOP_REC_ARR   } from '../../src/ui/topics.ts';         // What: Topic Record Array. Why: Each article's image names its topic. How: The script looks the label up by the article's topic identifier.
 
 // #endregion Imports
@@ -25,10 +25,10 @@ import { TOP_REC_ARR   } from '../../src/ui/topics.ts';         // What: Topic R
  * article's, public/social/<address>.png, shows its topic, its title, and the
  * wordmark instead. Both keep their lines inside the center 630px square some
  * apps crop to, between the signal rings on the left and an echo of them on
- * the right. Every image has to stay under 300 KB, the most WhatsApp will
- * show. Run it with npm run og-images whenever an article is added or
- * retitled, or the site's look changes, and give a changed image a new
- * filename, since apps cache previews.
+ * the right. Every image has to stay under 300 KB, the limit the Social
+ * Previews rule sets. Run it with npm run og-images whenever an article is
+ * added or retitled, or the site's look changes, and give a changed image a
+ * new filename, since apps cache previews.
  *
  * Sections:
  *  - Constants
@@ -43,7 +43,7 @@ import { TOP_REC_ARR   } from '../../src/ui/topics.ts';         // What: Topic R
 // #region Constants
 
 const CAR_URL_STR = new URL( './card.html', import.meta.url ).href;                           // What: Card URL String. Why: The card loads its fonts and styles by paths relative to itself. How: This is card.html's own file URL.
-const MAX_BYT_NUM = 300 * 1024;                                                               // What: Maximum Bytes Number. Why: WhatsApp drops a preview image of 300 KB or more. How: This is the limit every image is checked against.
+const MAX_BYT_NUM = 300 * 1024;                                                               // What: Maximum Bytes Number. Why: The site keeps preview images under 300 KB, the limit the Social Previews rule sets. How: This is the limit every image is checked against.
 const OUT_PAT_STR = fileURLToPath( new URL( '../../public/og-image.png', import.meta.url ) ); // What: Output Path String. Why: The home page's tags point at the site's card in public/. How: This resolves that path from this script's folder.
 const SOC_DIR_STR = fileURLToPath( new URL( '../../public/social/', import.meta.url ) );      // What: Social Directory String. Why: Each article's tags point at its own image in public/social/. How: This resolves that folder from this script's folder.
 
@@ -68,8 +68,7 @@ const capPagObj = await broInsObj.newPage( { viewport : { height : 630, width : 
  * the article lines; for an article's it fills in the topic and title and
  * removes the site's mark and tag line. It waits for the fonts before saving,
  * so no line is captured in a fallback face, and fails the run when the
- * saved image reaches the 300 KB limit, which would drop it from WhatsApp's
- * previews.
+ * saved image reaches the 300 KB limit.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -92,10 +91,11 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 
 	await capPagObj.goto( CAR_URL_STR ); // What: Card Load Call. Why: Each capture starts from a fresh card. How: This opens card.html.
 
+
 	await capPagObj.evaluate( ( filTexArr ) => { // What: Card Fill Call. Why: The same card serves the site and every article. How: This keeps one set of lines, removes the other, and fills an article's topic and title.
 
 
-		document.querySelectorAll( filTexArr ? '[data-site-only]' : '[data-article-only]' ).forEach( ( linCurEle ) => linCurEle.remove() ); // What: Line Removal Call. Why: An article's card has no mark or tag line, and the site's has no topic or title. How: This removes whichever set doesn't belong.
+		document.querySelectorAll( filTexArr ? '[data-site-card-part]' : '[data-article-card-part]' ).forEach( ( linCurEle ) => linCurEle.remove() ); // What: Line Removal Call. Why: An article's card has no mark or tag line, and the site's has no topic or title. How: This removes whichever set doesn't belong.
 
 
 
@@ -109,17 +109,18 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 
 	}, artTexArr ); // What: Card Fill Arguments. Why: The page can't read this script's variables. How: This hands the article's topic and title, or null for the site's card, into the page.
 
-	await capPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text captured before its web font loads would be set in a fallback. How: This waits for every font face.
+
+	await capPagObj.evaluate( () => document.fonts.ready ); // What: Fonts Ready Wait. Why: Text captured before its web font loads would be set in a fallback. How: This waits for the page's fonts.
 
 	await capPagObj.screenshot( { path : imaPatStr, type : 'png' } ); // What: Image Capture Call. Why: This writes the image. How: This saves the page as a PNG.
 
 
 
-	if ( statSync( imaPatStr ).size >= MAX_BYT_NUM ) throw new Error( `${ imaPatStr } is at or over the ${ MAX_BYT_NUM } byte limit.` ); // What: Size Guard. Why: An image over the limit would quietly drop out of WhatsApp previews. How: This fails the run.
+	if ( statSync( imaPatStr ).size >= MAX_BYT_NUM ) throw new Error( `${ imaPatStr } is at or over the ${ MAX_BYT_NUM.toLocaleString( 'en-US' ) } byte limit.` ); // What: Size Guard. Why: An image over the limit breaks the site's 300 KB rule for preview images. How: This fails the run.
 
 
 
-	console.log( `Wrote ${ imaPatStr } (${ statSync( imaPatStr ).size } bytes).` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the path and size.
+	console.log( `Wrote ${ imaPatStr } (${ statSync( imaPatStr ).size.toLocaleString( 'en-US' ) } bytes).` ); // What: Result Log Call. Why: The run should say what it wrote. How: This prints the path and size.
 
 
 }
@@ -127,11 +128,9 @@ async function capImaFun ( imaPatStr : string, artTexArr : [ string, string ] | 
 // #endregion capImaFun
 
 
-
 await capImaFun( OUT_PAT_STR, null ); // What: Site Card Capture Call. Why: The home page and every page but an article's share the site's card. How: This captures it.
 
 mkdirSync( SOC_DIR_STR, { recursive : true } ); // What: Social Folder Creation. Why: The articles' images need their folder. How: This creates it if it's missing.
-
 
 
 for ( const artFilObj of ART_FIL_ARR ) { // What: Article Capture Loop. Why: Every article gets its own preview. How: This captures each in turn, with its topic's label and its title.

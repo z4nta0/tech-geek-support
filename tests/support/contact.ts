@@ -1,0 +1,251 @@
+
+
+
+// #region Imports
+
+import { expect      } from '@playwright/test'; // What: Expect. Why: A send is finished, and a state reached, only once its result shows. How: This waits until the result is visible.
+import { STA_REC_ARR } from './states.ts';      // What: State Record Array. Why: The Contact states a control leads to reuse the Contact page's phone and desktop states. How: This lists the shared states, from which the Contact ones are picked.
+
+
+import type { Page      } from '@playwright/test'; // What: Page. Why: The Contact helpers drive a Playwright page. How: This types their page parameters.
+import type { StaRecTyp } from './states.ts';      // What: State Record Type. Why: The Contact states a control leads to are opened like any other state. How: This types the reachable state lists.
+
+// #endregion Imports
+
+
+
+/**
+ * contact.ts = Contact
+ *
+ * @summary
+ * The Contact page's states a control leads to, for the suites that check
+ * every state a visitor can reach: a help tip open, the form after the browser
+ * refuses an empty send, and the form's sent and failed results, each at the
+ * page's phone and desktop widths, plus the helper that brings a result about
+ * and the error it shows. Netlify isn't there in testing, so the root's POST
+ * is answered here instead, with a 200 for a sent question, which swaps the
+ * form for its thank-you, and any other status for a failed one, which shows
+ * the error. These states stay out of the shared state list, since the
+ * rendering suite captures every state there against a baseline. Adapted from
+ * TechGeek.cards' own.
+ *
+ * Sections:
+ *  - Constants
+ *  - Helpers
+ *  - Exports
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+
+
+// #region Constants
+
+const CON_STA_ARR = STA_REC_ARR.filter( ( staRecObj ) => staRecObj.patStr === '/contact' );                  // What: Contact State Array. Why: Each reachable state is opened at the Contact page's phone and desktop widths. How: This picks the Contact rows from the shared state list.
+const ERR_MES_STR = "Your question didn't send. Please try again, or email it to contact@techgeek.support."; // What: Error Message String. Why: A failed send has to put this message in the alert region. How: This is the error the page shows.
+
+
+
+const INV_STA_ARR : StaRecTyp[] = CON_STA_ARR.map( ( staRecObj ) => ( { // What: Invalid State Array. Why: A send the browser stops for missing fields is a state a visitor reaches too. How: For each Contact state, this copies the state, presses "Send My Question" with the form empty in its action, and names it after the state.
+
+
+	...staRecObj, // What: State Record Spread. Why: The invalid state keeps the Contact state's path and viewport. How: This copies the row.
+
+	ideStr : `${ staRecObj.ideStr }-invalid`, // What: Identifier String. Why: Each test names its width and the refused send. How: This adds invalid to the Contact state's name, such as contact-desktop-invalid.
+
+	actFun : async ( curPagObj : Page ) => { // What: Action Function. Why: The state shows the form after the browser refuses an empty send. How: This presses "Send My Question" and waits until the browser moves focus to the empty name field.
+
+
+		await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: An empty send is what the browser refuses. How: This presses "Send My Question" with every field blank.
+
+		await expect( curPagObj.getByRole( 'main' ).getByLabel( 'Your first name' ) ).toBeFocused(); // What: Refused Send Assertion. Why: The checks read the page only once the browser has refused the send. How: This waits until focus lands on the first empty required field.
+
+
+	}
+
+
+} ) );
+
+
+
+// #region RES_REC_ARR
+
+/**
+ * RES_REC_ARR = Result Record Array
+ *
+ * @summary
+ * The ways a send can end. Every row shares one shape, so its fields carry
+ * no comments of their own:
+ *
+ * - `emaBoo` (Boolean): Email Boolean, whether the form is sent with an email
+ *   address, since the thank-you reads differently without one.
+ *
+ * - `ideStr` (String): Identifier String, the result's name in test titles.
+ *
+ * - `staNum` (Number): Status Number, the status the root's POST answers with.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const RES_REC_ARR = [ // What: Result Record Array. Why: Both thank-yous and the error are states a visitor can reach. How: Each row names a result, whether the form carries an email address, and the status that brings it about.
+
+
+	{ emaBoo : true,  ideStr : 'sent',          staNum : 200 }, // What: Sent Result Row. Why: An OK reply shows the thank-you. How: This sends an address and answers with a 200.
+	{ emaBoo : false, ideStr : 'sent-no-email', staNum : 200 }, // What: Sent Without Email Result Row. Why: Without an address the thank-you says no reply can come, a look of its own. How: This leaves the address empty and answers with a 200.
+	{ emaBoo : true,  ideStr : 'failed',        staNum : 500 }  // What: Failed Result Row. Why: A failed reply shows the error. How: This sends an address and answers with a 500.
+
+
+];
+
+// #endregion RES_REC_ARR
+
+
+
+// #region TIP_REC_ARR
+
+/**
+ * TIP_REC_ARR = Tip Record Array
+ *
+ * @summary
+ * The form's two help tips, whose bubbles open under different fields. Every
+ * row shares one shape, so its fields carry no comments of their own:
+ *
+ * - `butStr` (String): Button String, the tip button's announced name.
+ *
+ * - `ideStr` (String): Identifier String, the tip's name in test titles.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+*/
+
+const TIP_REC_ARR = [ // What: Tip Record Array. Why: Each open bubble is a look of its own, over a different part of the form. How: Each row names a tip and the button that opens it.
+
+
+	{ butStr : 'More about your email address', ideStr : 'email-tip'    }, // What: Email Tip Row. Why: The email tip explains what the address is used for. How: This names its button.
+	{ butStr : 'More about your question',      ideStr : 'question-tip' }  // What: Question Tip Row. Why: The question tip warns against sharing passwords. How: This names its button.
+
+
+];
+
+// #endregion TIP_REC_ARR
+
+
+
+const TIP_STA_ARR : StaRecTyp[] = TIP_REC_ARR.flatMap( ( tipRecObj ) => CON_STA_ARR.map( ( staRecObj ) => ( { // What: Tip State Array. Why: A help tip pinned open stays open until it's dismissed, a state a visitor can stay on. How: For each tip and each Contact state, this copies the state, opens the tip in its action, and names it after both.
+
+
+	...staRecObj, // What: State Record Spread. Why: The tip state keeps the Contact state's path and viewport. How: This copies the row.
+
+	ideStr : `${ staRecObj.ideStr }-${ tipRecObj.ideStr }`, // What: Identifier String. Why: Each test names its width and tip. How: This joins the Contact state's name and the tip's, such as contact-phone-email-tip.
+
+	actFun : async ( curPagObj : Page ) => { // What: Action Function. Why: The state shows the tip's bubble pinned open. How: This presses the tip's button, moves the pointer off it, and waits until the button reports the bubble open.
+
+
+		await curPagObj.getByRole( 'button', { name : tipRecObj.butStr } ).click(); // What: Tip Click Call. Why: A press pins the bubble open, the way a tap does on a phone. How: This presses the tip's button.
+
+		await curPagObj.mouse.move( 0, 0 ); // What: Pointer Move Call. Why: A finger lifts after a tap, and a pinned bubble stays open once the pointer leaves, so the checks shouldn't see the button's hover look. How: This parks the pointer on the bar's empty top-left corner.
+
+		await expect( curPagObj.getByRole( 'button', { name : tipRecObj.butStr } ) ).toHaveAttribute( 'aria-expanded', 'true' ); // What: Tip Open Assertion. Why: The checks read the page only once the bubble is open. How: This waits until the button reports it expanded.
+
+
+	}
+
+
+} ) ) );
+
+// #endregion Constants
+
+
+
+// #region Helpers
+
+// #region senForFun
+
+/**
+ * senForFun = Send Form Function
+ *
+ * @summary
+ * Sends the Contact form and waits for its result: answers the root's POST
+ * with the given status, fills in a first name, an email address unless told
+ * not to, and a question, presses "Send My Question", then waits until the
+ * thank-you's heading shows for a 200, or the error shows in the alert region
+ * for any other status. Any other request to the root falls back to the
+ * page's other route handlers, such as one that adds the security policy's
+ * headers. It expects the Contact page already loaded.
+ *
+ * @author z4nta0 <https://github.com/z4nta0>
+ *
+ * @param curPagObj - Current Page Object: The page showing the form.
+ * @param staCodNum - Status Code Number: The status the root's POST answers
+ *                    with.
+ * @param emaFilBoo - Email Fill Boolean: Whether to fill in an email address,
+ *                    true by default.
+ *
+ * @returns A promise that settles once the result shows, with no value.
+ *
+ * @example
+ * ```ts
+ * senForFun(page, 500) // => Promise<void>
+ * ```
+ *
+*/
+
+async function senForFun ( curPagObj : Page, staCodNum : number, emaFilBoo = true ) : Promise< void > {
+
+
+	await curPagObj.route( ( urlCurObj ) => urlCurObj.pathname === '/', async ( rouCurObj ) => { // What: Root Route Handler. Why: Netlify Forms answers the root's POST on the live site, but not in testing. How: This answers a POST with an empty body at the given status, and hands any other request to the root on to the routes added before it.
+
+
+		if ( rouCurObj.request().method() !== 'POST' ) return rouCurObj.fallback(); // What: Other Request Guard. Why: Only the form's POST needs answering, while a route added earlier, such as the policy's headers, still has to see the rest. How: This passes any other request to the root on to the next handler, or to the network when there's none.
+
+
+
+		await rouCurObj.fulfill( { body : '', status : staCodNum } ); // What: Status Answer Call. Why: The form shows its thank-you only on an OK reply, and its error otherwise. How: This answers with an empty body at the given status.
+
+
+	} );
+
+
+	await curPagObj.getByRole( 'main' ).getByLabel( 'Your first name' ).fill( 'Test' );                                                         // What: Name Fill Call. Why: The name is required. How: This fills in a first name.
+	await curPagObj.getByRole( 'main' ).getByLabel( 'Your email (optional)', { exact : true } ).fill( emaFilBoo ? 'visitor@example.com' : '' ); // What: Email Fill Call. Why: The thank-you differs without an address, so each result says whether it has one. How: This fills in a reserved example address, or leaves the box empty when told to, matched by its whole name since its help tip button shares its label's words.
+	await curPagObj.getByRole( 'main' ).getByLabel( 'Your question', { exact : true } ).fill( 'Hello.' );                                       // What: Question Fill Call. Why: The question is required. How: This fills in a question, matched by its whole name since its help tip button shares its label's words.
+
+	await curPagObj.getByRole( 'button', { name : 'Send My Question' } ).click(); // What: Send Click Call. Why: The filled-in form is submitted. How: This presses "Send My Question".
+
+
+	const resLocObj = staCodNum === 200 ? curPagObj.getByRole( 'heading', { name : 'Question sent!' } ) : curPagObj.getByRole( 'alert' ).getByText( ERR_MES_STR ); // What: Result Locator Object. Why: Each status ends in its own result. How: This finds the thank-you's heading for a 200, or the error inside the alert region otherwise.
+
+
+	await expect( resLocObj ).toBeVisible(); // What: Result Shown Assertion. Why: The checks read the page only once the result is there. How: This waits until the result shows.
+
+
+}
+
+// #endregion senForFun
+
+
+
+const RES_STA_ARR : StaRecTyp[] = RES_REC_ARR.flatMap( ( resRecObj ) => CON_STA_ARR.map( ( staRecObj ) => ( { // What: Result State Array. Why: The suites open each result at the Contact page's phone and desktop widths like any other state. How: For each result and each Contact state, this copies the state, sends the form in its action, and names it after both.
+
+
+	...staRecObj, // What: State Record Spread. Why: The result state keeps the Contact state's path and viewport. How: This copies the row.
+
+	actFun : ( curPagObj : Page ) => senForFun( curPagObj, resRecObj.staNum, resRecObj.emaBoo ), // What: Action Function. Why: The state shows the form's result. How: This sends the form, with or without an address as the result says, and the root's POST answered at the result's status.
+	ideStr : `${ staRecObj.ideStr }-${ resRecObj.ideStr }`                                       // What: Identifier String. Why: Each test names its width and result. How: This joins the Contact state's name and the result's, such as contact-desktop-sent.
+
+
+} ) ) );
+
+// #endregion Helpers
+
+
+
+// #region Exports
+
+export { ERR_MES_STR, INV_STA_ARR, RES_STA_ARR, senForFun, TIP_REC_ARR, TIP_STA_ARR }; // What: Named Exports. Why: The Contact states, the tips, the error message, and the sender are shared across suites. How: This exports the error message, the invalid, result, and tip state lists, the tip list, and the send helper.
+
+// #endregion Exports
+
+

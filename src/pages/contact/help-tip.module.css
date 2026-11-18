@@ -29,7 +29,7 @@
 
 }
 
-.helTipBut { /* What: Help Tip Button. Why: A small, plainly round question mark reads as optional help. How: This draws a dark teal ring with a mono question mark at the p02 rhythm size, a comfortable target, easing its fill, press, and focus. */
+.helTipBut { /* What: Help Tip Button. Why: A small, plainly round question mark reads as optional help. How: This draws a dark teal ring at the p02 rhythm size, a comfortable target, around a mono question mark, easing its fill, press, and focus. */
 
 
 	align-items     : center;
@@ -47,7 +47,7 @@
 	justify-content : center;
 	line-height     : var( --ver-rhy-m01 );                            /* Vertical Rhythm Base Minus 1 = 1 */
 	padding         : 0;
-	transition      : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition      : background var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 	width           : calc( var( --ver-rhy-p02 ) * 1rem );             /* Vertical Rhythm Base Plus 2 ~= 25.572px */
 
 
@@ -87,7 +87,7 @@
 	background    : var( --bac-sur-col );                            /* Background Surface Color = #FFFFFF */
 	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
 	border-radius : var( --rad-bor-sma );                            /* Radius Border Small ~= 8.304px */
-	box-shadow    : var( --ele-med-sha );                            /* Elevation Medium Shadow, about 0 4.7px 14.6px plus 0 1.5px 3.6px -1.2px */
+	box-shadow    : var( --ele-med-sha );                            /* Elevation Medium Shadow ~= 0 4.732px 14.572px plus 0 1.536px 3.572px -1.160px */
 	color         : var( --tex-mai-col );                            /* Text Main Color = #1A1A2E */
 	display       : block;
 	left          : 0;
@@ -102,7 +102,7 @@
 
 
 }
-.helBubSpa::before { /* What: Help Bubble Bridge. Why: A mouse moving from the button down to the bubble crosses a small gap, which would close the tip on the way. How: This stretches an invisible strip of the bubble up across the gap, so the pointer never leaves the tip. */
+.helBubSpa::before { /* What: Help Bubble Span Bridge. Why: A mouse moving from the button down to the bubble crosses a small gap, which would close the tip on the way. How: This stretches an invisible strip of the bubble up across the gap, so the pointer never leaves the tip. */
 
 
 	content  : '';
@@ -119,7 +119,7 @@
 
 	opacity    : 1;
 	transform  : none;
-	transition : opacity var( --dur-tra-bas ) var( --mot-dec-eas ), transform var( --dur-tra-bas ) var( --mot-ove-eas ), visibility 0s; /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
+	transition : opacity var( --dur-tra-bas ) var( --mot-dec-eas ), transform var( --dur-tra-bas ) var( --mot-ove-eas ), visibility 0s linear; /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Motion Overshoot Easing = cubic-bezier( .34, 1.2, .5, 1 ) */
 	visibility : visible;
 
 

@@ -58,7 +58,7 @@
 
 /* #region secInnDiv */
 
-.secInnDiv { /* What: Section Inner Div. Why: Every section's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
+.secInnDiv { /* What: Section Inner Div. Why: A section's content sits in the site's centered column. How: This caps its width, centers it, and pads its sides with the gutter. */
 
 
 	margin    : 0 auto;
@@ -68,7 +68,7 @@
 
 }
 
-.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names the page above its heading. How: This sets it in teal mono capitals. */
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A teal label names the page above its heading. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
@@ -82,7 +82,7 @@
 
 }
 
-.herTitHea { /* What: Hero Title Heading. Why: The heading is the page's loudest line, but a help center's title shouldn't shout. How: This sets it in the main text color at the shared h2 size range instead of the h1's. */
+.herTitHea { /* What: Hero Title Heading. Why: The heading is the page's loudest line, but a help center's title shouldn't shout. How: This sets it in the main text color, scaling with the screen between about 33.9px and 59.4px, below the h1's range. */
 
 
 	color     : var( --tex-mai-col );                                     /* Text Main Color = #1A1A2E */
@@ -110,7 +110,7 @@
 	color                 : var( --acc-dar-col );                   /* Accent Dark Color ~= #bd3000 */
 	text-decoration       : underline;
 	text-underline-offset : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
-	transition            : color var( --dur-tra-bas ), opacity var( --dur-tra-m02 ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Minus 2 ~= 89.9ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition            : color var( --dur-tra-bas ) var( --mot-sta-eas ), opacity var( --dur-tra-m02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Minus 2 ~= 89.9ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -168,7 +168,7 @@
 
 /* #region filRowDiv */
 
-.filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills, each full row reaching both edges of the column like the list and help card below it. How: This lines them up in a row that wraps, spreading each full row's pills across the whole width above 1,024px, where they always fit in two rows. */
+.filRowDiv { /* What: Filter Row Div. Why: The topic buttons read as one wrapping set of pills, each full row reaching both edges of the column, as the list and help card together do below it. How: This lines them up in a row that wraps, spreading each full row's pills across the whole width above 1,024px, where they always fit in two rows. */
 
 
 	display         : flex;
@@ -219,7 +219,7 @@
 	font-size     : var( --fon-siz-p01 );                            /* Font Size Base Plus 1 ~= 14.572px */
 	line-height   : var( --ver-rhy-bas );                            /* Vertical Rhythm Base ~= 1.325 */
 	padding       : var( --spa-ver-m02 ) var( --spa-hor-bas );       /* Spacing Vertical Base Minus 2 ~= 8.304px, Spacing Horizontal Base ~= 14.572px */
-	transition    : background var( --dur-tra-bas ), border-color var( --dur-tra-bas ), color var( --dur-tra-bas ), transform var( --dur-tra-m01 ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Minus 1 ~= 119.2ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition    : background var( --dur-tra-bas ) var( --mot-sta-eas ), border-color var( --dur-tra-bas ) var( --mot-sta-eas ), color var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-m01 ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Minus 1 ~= 119.2ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -272,6 +272,9 @@
 /* #endregion filRowDiv */
 
 
+
+/* #region couTexPar */
+
 .couTexPar { /* What: Count Text Paragraph. Why: The count is a quiet note between the filter and the list. How: This sets it in muted mono, with room above and below. */
 
 
@@ -283,6 +286,50 @@
 
 }
 
+.couTexSpa { /* What: Count Text Span. Why: The count fades as one piece when it changes. How: This makes it an inline block, so its fade can lift it. */
+
+
+	display : inline-block;
+
+
+}
+.couTexSpa--arriving { /* What: Count Text Span Arriving. Why: The count changes with each topic a visitor chooses, and the change should be seen. How: This plays the results' short fade up on the decelerating curve each time the count remounts. */
+
+
+	animation : resultSwapFadeUp var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Count Text Span Arriving. Why: Someone who asked for less motion shouldn't see the count rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.couTexSpa--arriving { /* What: Motionless Count Text Span Arriving. Why: The new count should simply appear. How: This turns the fade off. */
+
+
+		animation : none;
+
+
+	}
+
+
+}
+@keyframes resultSwapFadeUp { /* What: Result Swap Fade Up. Why: A result swapped in place on each choice should arrive softly rather than rise like a whole page. How: This fades the count, the list, or the empty message in from about 3.6px low. */
+
+
+	from {
+
+
+		opacity   : 0;
+		transform : translateY( var( --spa-ver-m05 ) ); /* Spacing Vertical Base Minus 5 ~= 3.572px */
+
+
+	}
+
+
+}
+
+/* #endregion couTexPar */
+
 
 
 /* #region lisLayDiv */
@@ -293,11 +340,11 @@
 	align-items           : start;
 	column-gap            : var( --spa-hor-p06 );                                                                                     /* Spacing Horizontal Base Plus 6 ~= 78.751px */
 	display               : grid;
-	grid-template-columns : minmax( 0, 1fr ) clamp( calc( var( --ver-rhy-p11 ) * 1rem ), 30vw, calc( var( --ver-rhy-p12 ) * 1rem ) ); /* Vertical Rhythm Base Plus 11 ~= 321.277px, Vertical Rhythm Base Plus 12 ~= 425.601px */
+	grid-template-columns : minmax( 0, 1fr ) clamp( calc( var( --ver-rhy-p11 ) * 1rem ), 30vw, calc( var( --ver-rhy-p12 ) * 1rem ) ); /* Vertical Rhythm Base Plus 11 ~= 321.273px, Vertical Rhythm Base Plus 12 ~= 425.596px */
 
 
 }
-@media ( max-width : 1024px ) { /* What: Tablet List Layout Div. Why: Below 1,024px there's no room beside the list, and its lead already says to ask. How: This applies at 1,024px and below. */
+@media ( max-width : 1024px ) { /* What: Tablet List Layout Div. Why: At 1,024px and below there's no room beside the list, and its lead already says to ask. How: This applies at 1,024px and below. */
 
 
 	.lisLayDiv { /* What: Single Column List Layout Div. Why: The list takes the full width on its own. How: This drops the grid, leaving the list as it was. */
@@ -322,8 +369,28 @@
 	gap            : var( --spa-ver-bas );                /* Spacing Vertical Base ~= 14.572px */
 	list-style     : none;
 	margin         : 0;
-	max-width      : calc( var( --ver-rhy-p14 ) * 1rem ); /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	max-width      : calc( var( --ver-rhy-p14 ) * 1rem ); /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding        : 0;
+
+
+}
+.artLisUno--arriving { /* What: Article List Unordered Arriving. Why: The articles change with each topic a visitor chooses, and the new list should be seen arriving. How: This plays the results' short fade up on the decelerating curve each time the list remounts. */
+
+
+	animation : resultSwapFadeUp var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Article List Unordered Arriving. Why: Someone who asked for less motion shouldn't see the list rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.artLisUno--arriving { /* What: Motionless Article List Unordered Arriving. Why: The new list should simply appear. How: This turns the fade off. */
+
+
+		animation : none;
+
+
+	}
 
 
 }
@@ -341,7 +408,7 @@
 	flex-direction : column;
 	gap            : var( --spa-ver-m02 );                            /* Spacing Vertical Base Minus 2 ~= 8.304px */
 	padding        : var( --spa-ver-p02 ) var( --spa-hor-p02 );       /* Spacing Vertical Base Plus 2 ~= 25.572px, Spacing Horizontal Base Plus 2 ~= 25.572px */
-	transition     : border-color var( --dur-tra-bas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
+	transition     : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -379,7 +446,7 @@
 
 	color          : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
 	font-size      : var( --fon-siz-p03 ); /* Font Size Base Plus 3 ~= 25.572px */
-	line-height    : var( --ver-rhy-bas ); /* Vertical Rhythm Base ~= 1.325 */
+	line-height    : var( --ver-rhy-m01 ); /* Vertical Rhythm Base Minus 1 = 1 */
 	pointer-events : none;                 /* What: Pass Through Pointer. Why: WebKit drops the card link's pressed look when a press lands on its text after hovering. How: This lets every press on this child reach the link itself, which this child and anything inside it never need to catch. */
 
 
@@ -459,8 +526,28 @@
 	display        : flex;
 	flex-direction : column;
 	gap            : var( --spa-ver-p01 );                      /* Spacing Vertical Base Plus 1 ~= 19.304px */
-	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );       /* Vertical Rhythm Base Plus 14 ~= 746.866px */
+	max-width      : calc( var( --ver-rhy-p14 ) * 1rem );       /* Vertical Rhythm Base Plus 14 ~= 746.868px */
 	padding        : var( --spa-ver-p03 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Plus 3 ~= 33.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+
+
+}
+.empMesDiv--arriving { /* What: Empty Message Div Arriving. Why: A chosen topic with no articles should be seen arriving like any result. How: This plays the results' short fade up on the decelerating curve. */
+
+
+	animation : resultSwapFadeUp var( --dur-ani-p02 ) var( --mot-dec-eas ) both; /* Duration Animation Base Plus 2 ~= 277.0ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Empty Message Div Arriving. Why: Someone who asked for less motion shouldn't see the message rise. How: This applies only when the reduced-motion preference is set. */
+
+
+	.empMesDiv--arriving { /* What: Motionless Empty Message Div Arriving. Why: The message should simply appear. How: This turns the fade off. */
+
+
+		animation : none;
+
+
+	}
 
 
 }
@@ -489,7 +576,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : background var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -525,6 +612,7 @@
 /* #endregion empMesDiv */
 
 
+
 /* #region helCarAsi */
 
 .helCarAsi { /* What: Help Card Aside. Why: The invitation to ask should read as one calm card that stays in reach while the list scrolls. How: This draws a white card with a quiet border, stacks its parts, and keeps it just below the bar as the page scrolls. */
@@ -543,7 +631,7 @@
 
 
 }
-@media ( max-width : 1024px ) { /* What: Tablet Help Card Aside. Why: Below 1,024px the list needs the whole width, and the hero's lead already says to ask. How: This applies at 1,024px and below. */
+@media ( max-width : 1024px ) { /* What: Tablet Help Card Aside. Why: At 1,024px and below the list needs the whole width, and the hero's lead already says to ask. How: This applies at 1,024px and below. */
 
 
 	.helCarAsi { /* What: Hidden Help Card Aside. Why: The card has no room beside the list. How: This hides it. */
@@ -584,7 +672,7 @@
 
 }
 
-/* What: Button Primary Anchor. Why: The card's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which every button on the page shares. */
+/* What: Button Primary Anchor Pointer. Why: The card's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which the page's other orange buttons share. */
 
 .helSafPar { /* What: Help Safety Paragraph. Why: The safety note is a quiet aside under the button. How: This sets it in the muted color at the base plus 1 size. */
 
@@ -607,14 +695,14 @@
 
 
 	align-items    : flex-start;
-	background     : var( --act-tin-col );                                                        /* Accent-Tertiary Tint Color = #D3EEE9 */
-	border-radius  : var( --rad-bor-xla );                                                        /* Radius Border Extra Large ~= 19.304px */
+	background     : var( --act-tin-col );                                                           /* Accent-Tertiary Tint Color = #D3EEE9 */
+	border-radius  : var( --rad-bor-xla );                                                           /* Radius Border Extra Large ~= 19.304px */
 	display        : flex;
 	flex-direction : column;
-	gap            : var( --spa-ver-bas );                                                        /* Spacing Vertical Base ~= 14.572px */
-	margin         : var( --spa-ver-p06 ) auto 0;                                                 /* Spacing Vertical Base Plus 6 ~= 78.751px */
-	max-width      : calc( var( --cdn-pow-012 ) * var( --fon-siz-p02 ) + var( --spa-hor-p03 ) * 2 ); /* Core-Design-Number to the Power of 12 ~= 29.207, Font Size Base Plus 2 ~= 19.304px, Spacing Horizontal Base Plus 3 ~= 33.876px, about 631.6px in all */ /* What: Text-Fitted Width. Why: The panel exists to hold its paragraph, so it should be no wider than that text plus its own padding. How: This multiplies the paragraph measure's power by the paragraph's font size and adds the padding on both sides. */
-	padding        : var( --spa-ver-p04 ) var( --spa-hor-p03 );                                   /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
+	gap            : var( --spa-ver-bas );                                                           /* Spacing Vertical Base ~= 14.572px */
+	margin         : var( --spa-ver-p06 ) auto 0;                                                    /* Spacing Vertical Base Plus 6 ~= 78.751px */
+	max-width      : calc( var( --cdn-pow-012 ) * var( --fon-siz-p02 ) + var( --spa-hor-p03 ) * 2 ); /* Core-Design-Number to the Power of 12 ~= 29.207, Font Size Base Plus 2 ~= 19.304px, Spacing Horizontal Base Plus 3 ~= 33.876px, ~= 631.545px in all */ /* What: Text-Fitted Width. Why: The panel exists to hold its paragraph, so it should be no wider than that text plus its own padding. How: This multiplies the paragraph measure's power by the paragraph's font size and adds the padding on both sides. */
+	padding        : var( --spa-ver-p04 ) var( --spa-hor-p03 );                                      /* Spacing Vertical Base Plus 4 ~= 44.876px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 
 
 }
@@ -638,7 +726,7 @@
 
 }
 
-/* What: Button Primary Anchor. Why: The panel's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which every button on the page shares. */
+/* What: Button Primary Anchor Pointer. Why: The panel's button looks and behaves like the empty topic message's. How: Its rule sits once in the empMesDiv region above, which the page's other orange buttons share. */
 
 /* #endregion stiStuAsi */
 

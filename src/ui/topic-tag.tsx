@@ -19,9 +19,9 @@ import type { JSX } from 'react'; // What: JSX. Why: The component declares the 
  * topic-tag.tsx = Topic Tag
  *
  * @summary
- * A small pale teal pill naming an article's topic, shown on the Articles
- * page's list and above an article's title. It takes the topic's identifier
- * and shows its name from the topic list.
+ * A small pale teal pill naming an article's topic, shown on article cards
+ * and above an article's title. It takes the topic's identifier and shows
+ * its name from the topic list.
  *
  * Sections:
  *  - Components
@@ -83,7 +83,7 @@ function TopTagCom ( { topIdeStr } : TtcProTyp ) : JSX.Element {
 
 // #region Exports
 
-export { TopTagCom }; // What: Named Exports. Why: The Articles page and each article show their topic. How: This exports TopTagCom.
+export { TopTagCom }; // What: Named Export. Why: The tag is shared by the pages that show an article's topic. How: This exports TopTagCom.
 
 // #endregion Exports
 

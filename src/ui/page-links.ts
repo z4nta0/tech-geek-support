@@ -3,7 +3,7 @@
 
 // #region Imports
 
-import type { PagLinTyp } from 'techgeek-design/ui/link-types.ts'; // What: Page Link Type. Why: The bar and footer from the design package take page links in its shape. How: This types the list.
+import type { PagLinTyp } from 'techgeek-design/ui/link-types.ts'; // What: Page Link Type. Why: The design package's shared navigation takes page links in its shape. How: This types the list.
 
 // #endregion Imports
 
@@ -46,7 +46,7 @@ const PAG_LIN_ARR : PagLinTyp[] = [ // What: Page Link Array. Why: The bar, the 
 
 // #region Exports
 
-export { PAG_LIN_ARR }; // What: Named Exports. Why: The bar, the phone menu, and the footer render their links from this list. How: This exports the list.
+export { PAG_LIN_ARR }; // What: Named Export. Why: The site's page links share one list and one order. How: This exports the list.
 
 // #endregion Exports
 

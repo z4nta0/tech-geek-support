@@ -6,14 +6,14 @@
  *
  * @summary
  * Styles for ConPagCom. A short hero introduces the page, then the question
- * form sits in a white card beside a sidebar of what to expect, stacking
- * under it below 1,024px. The fields are large and roomy, their text a step
- * above the family's body size, each glowing pale teal with a dark teal
- * border while focused. A failed send shows a pale red panel above the
- * button, and a sent question swaps the form for a thank-you whose check
- * pops in. The sidebar's cards are white, and the safety promise sits on
- * pale teal. The page fades up as it opens, and every animation and
- * transition holds still under reduced motion.
+ * form sits in a white card beside a sidebar of what to expect, stacking under
+ * it at 1,024px and below. The fields are large and roomy, their text a step
+ * above the family's body size, each glowing pale teal with a dark teal border
+ * while focused. A failed send shows a pale red panel above the button, and a
+ * sent question swaps the form for a thank-you whose check pops in. The
+ * sidebar's cards are white, and the safety promise sits on pale teal. The
+ * page fades up as it opens, and every animation and transition holds still
+ * under reduced motion.
  *
  * @author z4nta0 <https://github.com/z4nta0>
  *
@@ -69,7 +69,7 @@
 
 }
 
-.secEyePar { /* What: Section Eyebrow Paragraph. Why: A small teal label names the page above its heading. How: This sets it in teal mono capitals. */
+.secEyePar { /* What: Section Eyebrow Paragraph. Why: A teal label names the page above its heading. How: This sets it in teal mono capitals. */
 
 
 	color          : var( --act-dar-col );                   /* Accent-Tertiary Dark Color ~= #007063 */
@@ -253,7 +253,7 @@
 
 
 }
-.sucTitHea:focus { /* What: Focused Success Title Heading. Why: The heading is focused by script, never by a visitor, so a focus ring on it would read as a stray box. How: This drops the outline, since the heading isn't a control. */
+.sucTitHea:focus { /* What: Focused Success Title Heading. Why: The heading is focused by script to be announced rather than as a control, so a focus ring on it would read as a stray box. How: This drops the outline, since the heading isn't a control. */
 
 
 	outline : none;
@@ -273,7 +273,7 @@
 
 /* #region sucActDiv */
 
-.sucActDiv { /* What: Success Actions Div. Why: The two ways onward sit side by side and wrap on a narrow phone. How: This lines them up in a wrapping row, a little apart from the text. */
+.sucActDiv { /* What: Success Actions Div. Why: The two ways onward sit side by side, wrapping onto two lines at about 585px wide and below. How: This lines them up in a wrapping row, a little apart from the text. */
 
 
 	display     : flex;
@@ -300,7 +300,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );          /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 );       /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : border-color var( --dur-tra-bas ), color var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), color var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -348,7 +348,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-m01 ) var( --spa-hor-p03 ); /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : background var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : background var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -400,7 +400,7 @@
 
 }
 
-.forHonPar { /* What: Form Honeypot Paragraph. Why: Bots should find and fill the honeypot while people never see it, and some bots skip fields hidden with display none. How: This moves it off screen into a 1px box instead, the same as TechGeek.dev's. */
+.forHonPar { /* What: Form Honeypot Paragraph. Why: Bots should find and fill the honeypot while people never see it. How: This moves it off screen into a 1px box, the same as TechGeek.dev's. */
 
 
 	height   : 1px;
@@ -459,7 +459,7 @@
 .fieLabLab { /* What: Field Label Label. Why: A label should be easy to read, plainly tied to its field, and on one line even in a half-width field. How: This sets it in the main text color, semibold, at the base plus 2 size, easing down toward the base plus 1 size as the form narrows. */
 
 
-	color       : var( --tex-mai-col );                                      /* Text Main Color = #1A1A2E */
+	color       : var( --tex-mai-col );                                        /* Text Main Color = #1A1A2E */
 	font-size   : clamp( var( --fon-siz-p01 ), 3.8cqi, var( --fon-siz-p02 ) ); /* Font Size Base Plus 1 ~= 14.572px, Font Size Base Plus 2 ~= 19.304px */ /* What: Form-Width Label Size. Why: The email field's width rises and falls with the layout, not the screen, so a viewport unit would shrink labels in the wrong places. How: This reads 3.8% of the form's width, which keeps the email label and its help tip on one line in a half-width field, every label sharing the size. */
 	font-weight : 600;
 
@@ -491,41 +491,20 @@
 /* #endregion fieLabLab */
 
 
-
-/* #region fieHeaDiv */
-
-.fieHeaDiv { /* What: Field Header Div. Why: A label and its help tip read together, and the tip's bubble opens just under them, across the field. How: This lets the tip flow right after the label's last word, positioned so the bubble spans the row's width. */
-
-
-	position : relative;
-
-
-}
-
-
-/* #region fieLabLab */
-
-/* What: Field Label Label. Why: The email and question labels look like every other field's. How: Its rule sits once in the fieLabLab region above, with its optional note. */
-
-/* #endregion fieLabLab */
-
-/* #endregion fieHeaDiv */
-
-
-
 .forConInp,
 .forConSel,
-.forConTex { /* What: Form Control Fields. Why: The inputs, the menu, and the box share one large, friendly look. How: This sets them full width on the ivory with a quiet border, rounded corners, and text at the base plus 2 size, easing their focus border and glow. */
+.forConTex { /* What: Form Control Fields. Why: The inputs, the menu, and the box share one large, friendly look. How: This sets them full width on the ivory with a quiet border, rounded corners, and text at the base plus 2 size, easing their focus border, glow, and outline. */
 
 
-	background    : var( --bac-pag-col );                                               /* Background Page Color = #F5F0E8 */
-	border        : var( --bor-wid-bas ) solid var( --bor-mai-col );                    /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
-	border-radius : var( --rad-bor-sma );                                               /* Radius Border Small ~= 8.304px */
-	color         : var( --tex-mai-col );                                               /* Text Main Color = #1A1A2E */
-	font-family   : var( --fon-fam-mai );                                               /* Font Family Main = 'Syne', sans-serif */
-	font-size     : var( --fon-siz-p02 );                                               /* Font Size Base Plus 2 ~= 19.304px */
-	padding       : var( --spa-ver-m01 ) var( --spa-hor-bas );                          /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
-	transition    : border-color var( --dur-tra-bas ), box-shadow var( --dur-tra-bas ); /* Duration Transition Base ~= 157.8ms */ /* What: Focus Glow Transition. Why: The glow is a spread around the field's rounded edge, which no transform or opacity change can draw. How: This eases the box shadow, a paint-only change on one field. */
+	background    : var( --bac-pag-col );                            /* Background Page Color = #F5F0E8 */
+	border        : var( --bor-wid-bas ) solid var( --bor-mai-col ); /* Border Width Base ~= 1.160px, Border Main Color = #D8CFBE */
+	border-radius : var( --rad-bor-sma );                            /* Radius Border Small ~= 8.304px */
+	color         : var( --tex-mai-col );                            /* Text Main Color = #1A1A2E */
+	font-family   : var( --fon-fam-mai );                            /* Font Family Main = 'Syne', sans-serif */
+	font-size     : var( --fon-siz-p02 );                            /* Font Size Base Plus 2 ~= 19.304px */
+	outline-color : transparent;                                     /* What: Transparent Outline Color. Why: The focused field's outline is transparent, so a resting color would only snap to it. How: This sets the same transparent color at rest, leaving the width and offset to ease. */
+	padding       : var( --spa-ver-m01 ) var( --spa-hor-bas );       /* Spacing Vertical Base Minus 1 = 11px, Spacing Horizontal Base ~= 14.572px */
+	transition    : border-color var( --dur-tra-bas ) var( --mot-sta-eas ), box-shadow var( --dur-tra-bas ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */ /* What: Focus Glow Transition. Why: The glow is a spread around the field's rounded edge, which no transform or opacity change can draw. How: This eases the box shadow, a paint-only change on one field. */
 	width         : 100%;
 
 
@@ -566,18 +545,74 @@
 
 }
 
+
+
+/* #region fieHeaDiv */
+
+.fieHeaDiv { /* What: Field Header Div. Why: A label and its help tip read together, and the tip's bubble opens just under them, across the field. How: This lets the tip flow right after the label's last word, positioned so the bubble spans the row's width. */
+
+
+	position : relative;
+
+
+}
+
+
+/* #region fieLabLab */
+
+/* What: Field Label Label Pointer. Why: The email label looks like every other field's. How: Its rule sits once in the fieLabLab region above. */
+
+/* What: Field Optional Span Pointer. Why: The email label's optional note looks like the other optional note. How: Its rule sits once in the fieLabLab region above. */
+
+/* #endregion fieLabLab */
+
+/* #endregion fieHeaDiv */
+
+/* #endregion forFieDiv */
+
+/* #endregion forRowDiv */
+
+
+
+/* #region forFieDiv */
+
+/* What: Form Field Div Pointer. Why: The topic and question fields share the name and email fields' look. How: Its rule sits once in the forFieDiv region above, with its children's. */
+
+
+/* #region fieLabLab */
+
+/* What: Field Label Label Pointer. Why: The topic label looks like every other field's. How: Its rule sits once in the fieLabLab region above. */
+
+/* What: Field Optional Span Pointer. Why: The topic label's optional note looks like the other optional note. How: Its rule sits once in the fieLabLab region above. */
+
+/* #endregion fieLabLab */
+
+
 .forConSel { /* What: Form Control Select. Why: The menu draws its own arrow in the site's style. How: This removes the native arrow and draws a muted chevron at the right, making room for it. */
 
 
 	appearance          : none;
-	background-image    : url( 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23646482" stroke-width="2.5"%3E%3Cpolyline points="6 9 12 15 18 9"/%3E%3C/svg%3E' ); /* What: Chevron Image. Why: The menu needs an arrow that matches the site. How: This draws a muted chevron as a small SVG written into the stylesheet, which the security policy allows as a data image. */
-	background-position : right var( --spa-hor-bas ) center; /* Spacing Horizontal Base ~= 14.572px */
+	background-image    : url( './select-arrow.svg' );         /* What: Chevron Image. Why: The menu needs an arrow that matches the site. How: This reads select-arrow.svg beside this module, a muted chevron drawn in #646482, the Text Muted Color role's value, written out since an SVG file can't read a custom property. */
+	background-position : right var( --spa-hor-bas ) center;   /* Spacing Horizontal Base ~= 14.572px */
 	background-repeat   : no-repeat;
+	background-size     : calc( var( --ver-rhy-bas ) * 1rem ); /* Vertical Rhythm Base ~= 14.572px */ /* What: Chevron Size. Why: The arrow should follow the visitor's text size like every other length. How: This draws it at the base rhythm step, the nearest to its 14px drawing. */
 	cursor              : pointer;
-	padding-right       : var( --spa-hor-p04 );              /* Spacing Horizontal Base Plus 4 ~= 44.876px */
+	padding-right       : var( --spa-hor-p04 );                /* Spacing Horizontal Base Plus 4 ~= 44.876px */
 
 
 }
+
+
+
+/* #region fieHeaDiv */
+
+/* What: Field Header Div Pointer. Why: The question's label and help tip sit together the way the email's do. How: Its rule sits once in the fieHeaDiv region above. */
+
+/* What: Field Label Label Pointer. Why: The question label looks like every other field's. How: Its rule sits once in the fieLabLab region above. */
+
+/* #endregion fieHeaDiv */
+
+
 
 .forConTex { /* What: Form Control Textarea. Why: A question may be long, and the box should grow with it. How: This lets the visitor drag it taller, never wider, with roomy lines. */
 
@@ -590,17 +625,17 @@
 
 /* #endregion forFieDiv */
 
-/* #endregion forRowDiv */
 
 
+/* #region errAleDiv */
 
-/* #region forFieDiv */
-
-/* What: Form Field Div. Why: The topic and question fields share the name and email fields' look. How: Its rule sits once in the forFieDiv region above, with its children's. */
-
-/* #endregion forFieDiv */
+.errAleDiv:empty { /* What: Empty Error Alert Div. Why: The alert region stays in the form from the first render so a failed send is announced, but as an empty flex item it would still add the form's gap above the button. How: This takes it out of the form's flow while it holds no message, so it takes no space and adds no gap. */
 
 
+	position : absolute;
+
+
+}
 
 .errMesPar { /* What: Error Message Paragraph. Why: A failed send has to stand out, and its arrival should be seen. How: This fades the message up into view with the shared entrance on a pale red panel with a red border and text. */
 
@@ -629,6 +664,12 @@
 
 }
 
+/* #endregion errAleDiv */
+
+
+
+/* #region senQueBut */
+
 .senQueBut { /* What: Send Question Button. Why: Sending is the form's one main action. How: This sets an orange button in mono capitals, easing its color, lift, press, and focus, and dimming while it sends. */
 
 
@@ -644,7 +685,7 @@
 	letter-spacing : calc( var( --cdn-pow-010-rec ) * 1em );    /* Core-Design-Number to the Power of 10 Reciprocal ~= 0.060em */
 	padding        : var( --spa-ver-bas ) var( --spa-hor-p03 ); /* Spacing Vertical Base ~= 14.572px, Spacing Horizontal Base Plus 3 ~= 33.876px */
 	text-transform : uppercase;
-	transition     : background var( --dur-tra-bas ), opacity var( --dur-tra-bas ), transform var( --dur-tra-bas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition     : background var( --dur-tra-bas ) var( --mot-sta-eas ), opacity var( --dur-tra-bas ) var( --mot-sta-eas ), transform var( --dur-tra-bas ) var( --mot-dec-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ), Duration Transition Base Plus 1 ~= 209.1ms */
 
 
 }
@@ -684,6 +725,81 @@
 
 
 }
+
+
+/* #region senLabSpa */
+
+.senLabSpa { /* What: Send Label Span. Why: The ready and sending labels share one place, so the button keeps its width as they cross-fade. How: This sets a single grid cell, sized to the wider label, with both labels centered in it. */
+
+
+	display     : grid;
+	place-items : center;
+
+
+}
+
+.senReaSpa { /* What: Send Ready Span. Why: The ready label says what the button does. How: This places it in the shared cell, line placed since both labels overlap there, and eases its fade on the standard curve. */
+
+
+	grid-area  : 1 / 1;
+	transition : opacity var( --dur-tra-bas ) var( --mot-sta-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease */
+
+
+}
+.senQueBut:disabled .senReaSpa { /* What: Sending Send Ready Span. Why: The ready label gives way while the question sends. How: This fades it out. */
+
+
+	opacity : 0;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Send Ready Span. Why: Someone who asked for less motion shouldn't see the labels fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.senReaSpa { /* What: Motionless Send Ready Span. Why: The label should simply switch. How: This turns the fade off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+.senPenSpa { /* What: Send Pending Span. Why: The sending label waits in the same cell, hidden until the question sends. How: This places it over the ready label, line placed since both labels overlap there, transparent, and eases its fade on the standard curve. */
+
+
+	grid-area  : 1 / 1;
+	opacity    : 0;
+	transition : opacity var( --dur-tra-bas ) var( --mot-sta-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease */
+
+
+}
+.senQueBut:disabled .senPenSpa { /* What: Sending Send Pending Span. Why: A visitor sees the question is on its way. How: This fades the sending label in. */
+
+
+	opacity : 1;
+
+
+}
+@media ( prefers-reduced-motion : reduce ) { /* What: Reduced Motion Send Pending Span. Why: Someone who asked for less motion shouldn't see the labels fade. How: This applies only when the reduced-motion preference is set. */
+
+
+	.senPenSpa { /* What: Motionless Send Pending Span. Why: The label should simply switch. How: This turns the fade off. */
+
+
+		transition : none;
+
+
+	}
+
+
+}
+
+/* #endregion senLabSpa */
+
+/* #endregion senQueBut */
 
 /* #endregion queForFor */
 
@@ -756,7 +872,7 @@
 
 }
 
-.sidTitHea { /* What: Sidebar Title Heading. Why: Each card's heading reads clearly at a small size. How: This sets it in the main text color at the base plus 2 size. */
+.sidTitHea { /* What: Sidebar Title Heading. Why: Each card's heading reads clearly above its text. How: This sets it in the main text color at the base plus 2 size. */
 
 
 	color     : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
@@ -792,7 +908,7 @@
 	overflow-wrap         : anywhere;
 	text-decoration       : underline;
 	text-underline-offset : calc( var( --cdn-pow-006-rec ) * 1em ); /* Core-Design-Number to the Power of 6 Reciprocal ~= 0.185em */
-	transition            : color var( --dur-tra-bas ), opacity var( --dur-tra-m02 ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Duration Transition Base Minus 2 ~= 89.9ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
+	transition            : color var( --dur-tra-bas ) var( --mot-sta-eas ), opacity var( --dur-tra-m02 ) var( --mot-sta-eas ), outline-offset var( --dur-tra-p01 ) var( --mot-dec-eas ), outline-width var( --dur-tra-p01 ) var( --mot-dec-eas ); /* Duration Transition Base ~= 157.8ms, Motion Standard Easing = ease, Duration Transition Base Minus 2 ~= 89.9ms, Duration Transition Base Plus 1 ~= 209.1ms, Motion Decelerate Easing = cubic-bezier( .2, .7, .3, 1 ) */
 
 
 }
@@ -877,18 +993,18 @@
 .safLisUno { /* What: Safety List Unordered. Why: Each thing real help never asks for reads as a point. How: This lists them with small teal dots and room on the left for them. */
 
 
-	color          : var( --tex-mai-col );                /* Text Main Color = #1A1A2E */
+	color          : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
 	display        : flex;
 	flex-direction : column;
-	gap            : var( --spa-ver-m03 );                /* Spacing Vertical Base Minus 3 ~= 6.268px */
+	gap            : var( --spa-ver-m03 ); /* Spacing Vertical Base Minus 3 ~= 6.268px */
 	list-style     : disc;
 	margin         : 0;
-	padding-left   : calc( var( --ver-rhy-p01 ) * 1rem ); /* Vertical Rhythm Base Plus 1 ~= 19.304px */
+	padding-left   : var( --spa-hor-p01 ); /* Spacing Horizontal Base Plus 1 ~= 19.304px */
 
 
 }
 
-.safIteIte::marker { /* What: Safety Item Marker. Why: The dots carry the site's teal. How: This colors each item's marker teal. */
+.safIteIte::marker { /* What: Safety Item Item Marker. Why: The dots carry the site's teal. How: This colors each item's marker teal. */
 
 
 	color : var( --act-mai-col ); /* Accent-Tertiary Main Color = #2A9D8F */
