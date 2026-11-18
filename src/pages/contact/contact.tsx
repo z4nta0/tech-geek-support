@@ -12,7 +12,7 @@ import { TOP_REC_ARR     } from '../../ui/topics.ts';                     // Wha
 import { useEffect       } from 'react';                                  // What: Use Effect. Why: Focus has to follow the form's results as they show. How: Effects move focus once each change has rendered.
 import { usePagDesFun    } from 'techgeek-design/ui/page-description.ts'; // What: Use Page Description Function. Why: The page's search description differs from the home page's. How: The page calls it to swap the one description tag's text while it shows.
 import { useRef          } from 'react';                                  // What: Use Ref. Why: The focus effects need values kept across renders, such as an element focus lands on. How: This holds each of them.
-import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: A link can open the form with its topic already chosen. How: The page reads the topic parameter once.
+import { useSearchParams } from 'react-router';                           // What: Use Search Params. Why: A link can open the form with its topic already chosen. How: The page reads the topic parameter to choose the form's starting topic.
 import { useState        } from 'react';                                  // What: Use State. Why: The page remembers what changes as a visitor uses the form, such as its fields. How: This holds each of those values.
 
 

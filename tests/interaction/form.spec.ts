@@ -77,7 +77,7 @@ async function forOpeFun ( curPagObj : Page ) : Promise< string[] > {
 
 		senBodArr.push( rouCurObj.request().postData() ?? '' ); // What: Sent Body Record. Why: The test checks what the form sent. How: This keeps the POST's body.
 
-		await rouCurObj.fulfill( { body : '', status : 200 } ); // What: Success Answer Call. Why: The form shows its thank-you only on an OK reply. How: This answers with an empty 200, as Netlify does.
+		await rouCurObj.fulfill( { body : '', status : 200 } ); // What: Success Answer Call. Why: The form shows its thank-you only on an OK reply. How: This answers with an empty 200, which the form treats as a send.
 
 
 	} );
