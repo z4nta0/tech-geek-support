@@ -109,7 +109,7 @@ function AppRooCom () : JSX.Element {
 
 
 
-	useScrTopFun(); // What: Scroll Top Call. Why: Every link to another page should open it at its top, a link with a hash at its section, and back, forward, and a reload where the visitor was. How: This runs the hook once from the root, which stays mounted across every route.
+	useScrTopFun(); // What: Scroll Top Call. Why: Every link to another page should open it at its top, a link with a hash at its section, and back, forward, and a reload where the visitor was. How: This calls the hook from the root, which stays mounted across every route.
 
 
 

@@ -349,7 +349,7 @@ function ArtVieCom ( { artRecObj } : AvcProTyp ) : JSX.Element {
 											src={ artRecObj.medObj[ bloRecObj.souStr ] }
 
 											aria-label={ bloRecObj.altStr }
-										/> // What: Media Video Element. Why: A short video shows steps a photo can't. How: This plays the file with the browser's controls, loading only its details until played, named by its alt text.
+										/> // What: Media Video Element. Why: A short video shows steps a photo can't. How: This plays the file with the browser's controls, asking the browser to load only its details until played, named by its alt text.
 
 
 									) : ( // What: Photo Branch. Why: Any other file is a photo. How: This shows it with its alt text.
