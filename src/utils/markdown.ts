@@ -12,7 +12,9 @@
  * numbered steps (1.), bullet lists (-), tips (> lines), and a photo or video
  * alone on its line (![alt](file "caption")); inside a line it reads bold
  * (**text**), italic (*text*), and links ([text](address)). An HTML comment
- * on lines of its own is skipped, and anything else reads as plain text.
+ * on lines of its own is skipped, and any other line reads as plain text,
+ * except one that starts like a block but matches none, such as a photo line
+ * with a space in its file name, which throws an error quoting the line.
  *
  * Sections:
  *  - Types
