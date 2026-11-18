@@ -15,7 +15,7 @@ import { Route        } from 'react-router';                     // What: Route.
 import { Routes       } from 'react-router';                     // What: Routes. Why: Only one page should render for any path. How: This renders the first route whose path matches.
 import { SitFooCom    } from 'techgeek-design/ui/footer.tsx';    // What: Site Footer Component. Why: Every page ends with the TechGeek family's shared footer. How: This renders below the routes.
 import { useLocation  } from 'react-router';                     // What: Use Location. Why: Each page change remounts the page, replaying its entrance. How: This reads the current path for the routes' key.
-import { useScrTopFun } from 'techgeek-design/ui/scroll-top.ts'; // What: Use Scroll Top Function. Why: A new page should open at its top rather than where the last one was scrolled. How: The app root calls it once inside the router.
+import { useScrTopFun } from 'techgeek-design/ui/scroll-top.ts'; // What: Use Scroll Top Function. Why: A new page should open at its top rather than where the last one was scrolled. How: The app root calls it from inside the router.
 
 
 import type { JSX       } from 'react';                            // What: JSX. Why: The component declares the element it returns. How: This types its return as a JSX element.

@@ -162,7 +162,7 @@ function HelTipCom ( { bubIdeStr, butLabStr, tipTexStr } : HtcProTyp ) : JSX.Ele
 
 			className={ cssModObj.helTipSpa }
 
-			onPointerEnter={ ( poiEveObj ) => { if ( poiEveObj.pointerType === 'mouse' ) setHovOpeBoo( true ); } } // What: Mouse Enter Handler. Why: Only a mouse hovers, while a touch reaches the button's click. How: This opens the tip when a mouse enters the wrapper.
+			onPointerEnter={ ( poiEveObj ) => { if ( poiEveObj.pointerType === 'mouse' ) setHovOpeBoo( true ); } } // What: Mouse Enter Handler. Why: A mouse's hover opens the tip, while a touch or a pen reaches the button's click. How: This opens the tip when a mouse enters the wrapper.
 			onPointerLeave={ () => setHovOpeBoo( false ) }
 		>{ /* What: Help Tip Span Element. Why: The button and its bubble share one hover area, so a mouse can move onto the bubble without closing it. How: This holds both, opening the tip while a mouse is over either. */ }
 
