@@ -19,13 +19,13 @@ import type { StaRecTyp } from './states.ts';      // What: State Record Type. W
  *
  * @summary
  * The Contact page's states a control leads to, for the suites that check
- * every state a visitor can reach: a help tip open, the form after the
- * browser refuses an empty send, and the form's sent and failed results, each
- * at the page's phone and desktop widths, plus the helper that brings a
- * result about and the error it shows. Netlify isn't there in testing, so the
- * root's POST is answered here instead, with a 200 for a sent question, which
- * swaps the form for its thank-you, and any other status for a failed one,
- * which shows the error. They're kept out of the shared state list, since the
+ * every state a visitor can reach: a help tip open, the form after the browser
+ * refuses an empty send, and the form's sent and failed results, each at the
+ * page's phone and desktop widths, plus the helper that brings a result about
+ * and the error it shows. Netlify isn't there in testing, so the root's POST
+ * is answered here instead, with a 200 for a sent question, which swaps the
+ * form for its thank-you, and any other status for a failed one, which shows
+ * the error. These states stay out of the shared state list, since the
  * rendering suite captures every state there against a baseline. Adapted from
  * TechGeek.cards' own.
  *

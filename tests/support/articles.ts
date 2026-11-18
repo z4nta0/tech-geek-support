@@ -23,8 +23,8 @@ import type { StaRecTyp } from './states.ts';      // What: State Record Type. W
  * and narrowed to another by an address naming it, the way Home's topic tiles
  * and a shared link open the page, each at the page's phone and desktop
  * widths. Every topic holds at least one article, so the empty topic's
- * invitation is a look no control reaches and isn't listed. They're kept out
- * of the shared state list, since the rendering suite captures every state
+ * invitation is a look no control reaches and isn't listed. These states stay
+ * out of the shared state list, since the rendering suite captures every state
  * there against a baseline.
  *
  * Sections:

@@ -55,7 +55,7 @@ import type { Page } from '@playwright/test'; // What: Page. Why: The head helpe
 // #region Constants
 
 const HOM_DES_STR = 'Free, friendly tech help for phones, computers, Wi-Fi, and more. Ask in plain words and get a real answer within 24 hours.'; // What: Home Description String. Why: The raw page carries the home page's description, and every other indexed page must swap it for its own, while the 404 page keeps it. How: This is the exact text it should hold.
-const LIV_URL_STR = 'https://techgeek.support/';                                                                                                  // What: Live URL String. Why: The canonical links, structured data, robots.txt, and sitemap all name the live site. How: This is its address.
+const LIV_URL_STR = 'https://techgeek.support/';                                                                                                  // What: Live URL String. Why: The addresses the checks expect start from the live site's. How: This is its address.
 
 
 
