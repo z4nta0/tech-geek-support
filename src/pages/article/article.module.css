@@ -244,7 +244,7 @@
 
 }
 
-.bodTexDiv strong { /* What: Body Strong. Why: Bold marks an on-screen label to look for. How: This sets it in the main text color at full weight. */
+.bodTexDiv strong { /* What: Body Strong. Why: Bold sets a word apart from the text around it, such as an on-screen label to look for. How: This sets it in the main text color at full weight. */
 
 
 	color       : var( --tex-mai-col ); /* Text Main Color = #1A1A2E */
